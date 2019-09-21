@@ -10,7 +10,7 @@ public abstract class Entity {
      * @param id
      * @param name
      */
-    public Entity(ID id, String name) {
+    Entity(ID id, String name) {
         this.id = id;
         this.name = name;
     }
