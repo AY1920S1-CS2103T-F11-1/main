@@ -14,4 +14,6 @@ public interface EntityList {
 
     // As above.
     public void add(Entity entity) throws Exception;
+
+    public boolean isContain(ID id);
 }
