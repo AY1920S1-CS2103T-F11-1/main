@@ -1,5 +1,6 @@
 package seedu.address.model.EntityList;
 
+import java.util.List;
 import seedu.address.model.Entity.Entity;
 import seedu.address.model.Entity.ID;
 
@@ -51,6 +52,13 @@ public interface EntityListInterface {
      * @return boolean
      */
     boolean isContain(ID id);
+
+    /**
+     * List the entities.
+     *
+     * @return List<? extends Entity>
+     */
+    List<? extends Entity> list();
 
     /**
      * This generates the id for the next entity object to be created.
