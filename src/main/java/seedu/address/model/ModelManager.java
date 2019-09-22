@@ -4,14 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.EntityList.IssueList;
+import seedu.address.model.EntityList.MentorList;
 import seedu.address.model.EntityList.ParticipantList;
+import seedu.address.model.EntityList.TeamList;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,6 +27,9 @@ public class ModelManager implements Model {
 
     // EntityLists
     private final ParticipantList participantList;
+    private final TeamList teamList;
+    private final IssueList issueList;
+    private final MentorList mentorList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +45,9 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
 
         this.participantList = new ParticipantList();
+        this.teamList = new TeamList();
+        this.issueList = new IssueList();
+        this.mentorList = new MentorList();
     }
 
     public ModelManager() {
@@ -82,89 +89,115 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
-    }
-
-
     //========== EntityListMethods ===============
 
     /**
      * Returns the participant list located in the Model Manager.
      *
-     * @return Participant List
+     * @return ParticipantList
      */
     public ParticipantList getParticipantList() {
         return this.participantList;
     }
 
+    /**
+     * Returns the team list located in the Model Manager.
+     *
+     * @return TeamList
+     */
+    public TeamList getTeamList() {
+        return this.teamList;
+    }
+
+    /**
+     * Returns the issue list located in the Model Manager.
+     *
+     * @return IssueList
+     */
+    public IssueList getIssueList() {
+        return this.issueList;
+    }
+
+    /**
+     * Returns the mentor list located in the Model Manager.
+     *
+     * @return MentorList
+     */
+    public MentorList getMentorList() {
+        return this.mentorList;
+    }
+
+
+    //=========== AddressBook ================================================================================
+
+//    @Override
+//    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+//        this.addressBook.resetData(addressBook);
+//    }
+//
+//    @Override
+//    public ReadOnlyAddressBook getAddressBook() {
+//        return addressBook;
+//    }
+//
+//    @Override
+//    public boolean hasPerson(Person person) {
+//        requireNonNull(person);
+//        return addressBook.hasPerson(person);
+//    }
+//
+//    @Override
+//    public void deletePerson(Person target) {
+//        addressBook.removePerson(target);
+//    }
+//
+//    @Override
+//    public void addPerson(Person person) {
+//        addressBook.addPerson(person);
+//        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+//    }
+//
+//    @Override
+//    public void setPerson(Person target, Person editedPerson) {
+//        requireAllNonNull(target, editedPerson);
+//
+//        addressBook.setPerson(target, editedPerson);
+//    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
-    }
-
+//    /**
+//     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+//     * {@code versionedAddressBook}
+//     */
+//    @Override
+//    public ObservableList<Person> getFilteredPersonList() {
+//        return filteredPersons;
+//    }
+//
+//    @Override
+//    public void updateFilteredPersonList(Predicate<Person> predicate) {
+//        requireNonNull(predicate);
+//        filteredPersons.setPredicate(predicate);
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        // short circuit if same object
+//        if (obj == this) {
+//            return true;
+//        }
+//
+//        // instanceof handles nulls
+//        if (!(obj instanceof ModelManager)) {
+//            return false;
+//        }
+//
+//        // state check
+//        ModelManager other = (ModelManager) obj;
+//        return addressBook.equals(other.addressBook)
+//                && userPrefs.equals(other.userPrefs)
+//                && filteredPersons.equals(other.filteredPersons);
+//    }
 }
