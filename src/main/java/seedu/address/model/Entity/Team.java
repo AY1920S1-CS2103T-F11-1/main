@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class Team extends Entity {
     private List<Participant> participants;
-    private Optional<ID> mentorId;
+    private Optional<Mentor> mentor;
     private SubjectName subject;
     private Score score;
     private Name projectName;
@@ -13,7 +13,7 @@ public class Team extends Entity {
     private Location location;
 
     /**
-     * Constructor without mentor.j
+     * Constructor without mentor.
      *
      * @param teamId
      * @param teamName
@@ -36,7 +36,7 @@ public class Team extends Entity {
     ) {
         super(teamId, teamName);
         this.participants = participants;
-        this.mentorId = Optional.empty();
+        this.mentor = Optional.empty();
         this.subject = subject;
         this.score = score;
         this.projectName = projectName;
@@ -60,7 +60,7 @@ public class Team extends Entity {
             ID teamId,
             Name teamName,
             List<Participant> participants,
-            ID mentorId,
+            Mentor mentor,
             SubjectName subject,
             Score score,
             Name projectName,
@@ -69,7 +69,7 @@ public class Team extends Entity {
     ) {
         super(teamId, teamName);
         this.participants = participants;
-        this.mentorId = Optional.of(mentorId);
+        this.mentor = Optional.of(mentor);
         this.subject = subject;
         this.score = score;
         this.projectName = projectName;
@@ -78,12 +78,13 @@ public class Team extends Entity {
     }
 
     // Getters
+
     public List<Participant> getParticipants() {
         return this.participants;
     }
 
-    public Optional<ID> getMentorId() {
-        return this.mentorId;
+    public Optional<Mentor> getMentor() {
+        return this.mentor;
     }
 
     public SubjectName getSubject() {
@@ -107,12 +108,13 @@ public class Team extends Entity {
     }
 
     // Setters
+
     public void setParticipants(List<Participant> participants) {
         this.participants = participants;
     }
 
-    public void setMentorId(Optional<ID> mentorId) {
-        this.mentorId = mentorId;
+    public void setMentor(Optional<Mentor> mentor) {
+        this.mentor = mentor;
     }
 
     public void setSubject(SubjectName subject) {
