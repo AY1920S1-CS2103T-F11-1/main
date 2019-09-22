@@ -2,21 +2,22 @@ package seedu.address.model.EntityList;
 
 import java.util.ArrayList;
 import java.util.List;
+import seedu.address.model.Entity.Email;
 import seedu.address.model.Entity.Entity;
 import seedu.address.model.Entity.ID;
+import seedu.address.model.Entity.Name;
 import seedu.address.model.Entity.Participant;
+import seedu.address.model.Entity.Phone;
 import seedu.address.model.Entity.PrefixType;
 
-public class ParticipantList implements EntityListInterface {
+public class ParticipantList extends EntityList {
     private List<Participant> participants;
-    private int nextIDSuffix;
 
     /**
      * Constructor.
      */
     public ParticipantList() {
        this.participants = new ArrayList<>();
-       this.nextIDSuffix = 1;
     }
 
     /**
@@ -27,7 +28,7 @@ public class ParticipantList implements EntityListInterface {
      */
     @Override
     public Participant get(ID id) {
-        return new Participant("name", "email", "999", this.generateID());
+        return new Participant(new Name("name"), new Email("email"), new Phone("999"), this.generateID());
     }
 
     /**
@@ -104,11 +105,5 @@ public class ParticipantList implements EntityListInterface {
     @Override
     public ID generateID() {
        return new ID(PrefixType.P, this.getNewIDSuffix());
-    }
-
-    private int getNewIDSuffix() {
-        int next = this.nextIDSuffix;
-        this.nextIDSuffix++;
-        return next;
     }
 }

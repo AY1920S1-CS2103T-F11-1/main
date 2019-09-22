@@ -3,19 +3,26 @@ package seedu.address.model.EntityList;
 import java.util.List;
 import seedu.address.model.Entity.Entity;
 import seedu.address.model.Entity.ID;
+import seedu.address.model.Entity.Participant;
 
 /**
  * This interface serves as the new API for the model.
  * Each child of EntityList should behave as a singleton.
  */
-public interface EntityListInterface {
+public abstract class EntityList {
+    protected int nextIDSuffix;
+
+    EntityList() {
+        nextIDSuffix = 1;
+    }
+
     /**
      * Gets the entity from the entityList.
      *
      * @param id
      * @return Entity
      */
-    Entity get(ID id);
+    abstract Entity get(ID id);
 
     // This exception will be ModelException - Pending Joanna's PR.
 
@@ -25,7 +32,7 @@ public interface EntityListInterface {
      * @param entity
      * @throws Exception
      */
-    void update(Entity entity) throws Exception;
+    abstract void update(Entity entity) throws Exception;
 
     // As above, exception will be generalized.
 
@@ -35,7 +42,7 @@ public interface EntityListInterface {
      * @param id
      * @throws Exception
      */
-    void delete(ID id) throws Exception;
+    abstract void delete(ID id) throws Exception;
 
     /**
      * Adds the entity into the entity list
@@ -43,7 +50,7 @@ public interface EntityListInterface {
      * @param entity
      * @throws Exception
      */
-    void add(Entity entity) throws Exception;
+    abstract void add(Entity entity) throws Exception;
 
     /**
      * Checks if a given entity list contains a certain entity.
@@ -51,17 +58,23 @@ public interface EntityListInterface {
      * @param id
      * @return boolean
      */
-    boolean isContain(ID id);
+    abstract boolean isContain(ID id);
 
     /**
      * List the entities.
      *
      * @return List<? extends Entity>
      */
-    List<? extends Entity> list();
+    abstract List<? extends Entity> list();
 
     /**
      * This generates the id for the next entity object to be created.
      */
-    ID generateID();
+    abstract public ID generateID();
+
+    protected int getNewIDSuffix() {
+        int next = this.nextIDSuffix;
+        this.nextIDSuffix++;
+        return next;
+    }
 }
