@@ -1,6 +1,6 @@
 ## Description
-<!-- 
-Describe the pull request and what it does 
+<!--
+Describe the pull request and what it does
 1. What is this implementing
 2. How is it being implemented
 3. Why is this being implemented
