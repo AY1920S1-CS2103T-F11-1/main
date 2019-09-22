@@ -2,7 +2,7 @@ package seedu.address.model.Entity;
 
 public abstract class Entity {
     protected final ID id; // Note: id is unique and should never be mutable.
-    protected String name;
+    protected Name name;
 
     /**
      * Constructor.
@@ -10,7 +10,7 @@ public abstract class Entity {
      * @param id
      * @param name
      */
-    Entity(ID id, String name) {
+    Entity(ID id, Name name) {
         this.id = id;
         this.name = name;
     }
@@ -22,7 +22,7 @@ public abstract class Entity {
      *
      * @return String
      */
-    public String getName() {
+    public Name getName() {
         return this.name;
     }
 
@@ -42,7 +42,7 @@ public abstract class Entity {
      *
      * @param name
      */
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 }

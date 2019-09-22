@@ -1,12 +1,11 @@
 package seedu.address.model.Entity;
 
 public class Participant extends Entity {
-    // TODO: Use the email and phone classes already provided
-    private String email;
-    private String phone;
+    private Email email;
+    private Phone phone;
     // TODO: Add team as a attribute of participant
 
-    public Participant(String name, String email, String phone, ID id) {
+    public Participant(Name name, Email email, Phone phone, ID id) {
         super(id, name);
         this.email = email;
         this.phone = phone;
@@ -17,18 +16,18 @@ public class Participant extends Entity {
     /**
      * Gets the email.
      *
-     * @return String
+     * @return Email
      */
-    public String getEmail() {
+    public Email getEmail() {
         return this.email;
     }
 
     /**
      * Gets the phone number.
      *
-     * @return String
+     * @return Phone
      */
-    public String getPhone() {
+    public Phone getPhone() {
         return this.phone;
     }
 
@@ -39,7 +38,7 @@ public class Participant extends Entity {
      *
      * @param phone
      */
-    public void setPhone(String phone) {
+    public void setPhone(Phone phone) {
        this.phone = phone;
     }
 
@@ -48,7 +47,7 @@ public class Participant extends Entity {
      *
      * @param email
      */
-    public void setEmail(String email) {
+    public void setEmail(Email email) {
         this.email = email;
     }
 }
