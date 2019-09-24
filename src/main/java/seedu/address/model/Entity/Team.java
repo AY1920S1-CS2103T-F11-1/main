@@ -1,7 +1,11 @@
 package seedu.address.model.Entity;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class Team extends Entity {
     private List<Participant> participants;
@@ -136,4 +140,95 @@ public class Team extends Entity {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    @Override
+    public HashMap<String, String> viewMinimal() {
+        HashMap<String, String> result = new HashMap<>();
+        Stream<String> participantStream = participants.stream()
+                .map(participant -> participant.toString());
+        String participantsString = Arrays.toString(participantStream.toArray());
+        result.put("name", getName().toString());
+        result.put("id", getId().toString());
+        result.put("participants", participantsString);
+        return result;
+    }
+
+    @Override
+    public HashMap<String, String> viewDetailed() {
+        HashMap<String, String> result = new HashMap<>();
+        Stream<String> participantStream = participants.stream()
+                .map(participant -> participant.toString());
+        String participantsString = Arrays.toString(participantStream.toArray());
+        Mentor mentor = getMentor().orElse(null);
+
+        result.put("name", getName().toString());
+        result.put("id", getId().toString());
+        result.put("participants", participantsString);
+        result.put("subject", getSubject().toString());
+        result.put("location", getLocation().toString());
+        result.put("mentor", mentor.toString());
+        result.put("score", score.toString());
+        result.put("projectName", projectName.toString());
+        result.put("projectType", projectType.toString());
+        result.put("participants", participantsString);
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, participants, mentor, subject, score,
+                projectName, projectType, location);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+       if (other == this) {
+           return true;
+       }
+
+       if (!(other instanceof Team)) {
+           return false;
+       }
+
+       Team otherTeam = ((Team) other);
+       return otherTeam.getName() == this.getName()
+               && otherTeam.getId() == this.getId()
+               && otherTeam.getParticipants() == this.getParticipants()
+               && otherTeam.getSubject() == this.getSubject()
+               && otherTeam.getLocation() == this.getLocation()
+               && otherTeam.getMentor() == this.getMentor()
+               && otherTeam.getScore() == this.getScore()
+               && otherTeam.getProjectName() == this.getProjectName()
+               && otherTeam.getProjectType() == this.getProjectType();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        Stream<String> participantStream = participants.stream()
+                .map(participant -> participant.toString());
+        String participantsString = Arrays.toString(participantStream.toArray());
+
+        builder.append(" Name: ")
+                .append(getName())
+                .append(" ID: ")
+                .append(getId())
+                .append(" Subject: ")
+                .append(getSubject())
+                .append(" Location: ")
+                .append(getLocation())
+                .append(" Mentor: ")
+                .append(getMentor().orElse(null))
+                .append(" Score: ")
+                .append(getScore())
+                .append(" Project Name: ")
+                .append(getProjectName())
+                .append(" Project Type: ")
+                .append(getProjectType())
+                .append(" Participants: ")
+                .append(participantsString);
+
+        return builder.toString();
+    }
+
 }

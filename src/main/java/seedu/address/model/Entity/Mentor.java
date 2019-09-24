@@ -1,6 +1,9 @@
 package seedu.address.model.Entity;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Mentor extends Entity {
     private Phone phone;
@@ -79,5 +82,75 @@ public class Mentor extends Entity {
 
     public void setSubject(SubjectName subject) {
         this.subject = subject;
+    }
+
+    @Override
+    public HashMap<String, String> viewMinimal() {
+        HashMap<String, String> result = new HashMap<>();
+        result.put("name", getName().toString());
+        result.put("id", getId().toString());
+        result.put("phone", getPhone().toString());
+        result.put("email", getEmail().toString());
+        return result;
+    }
+
+    @Override
+    public HashMap<String, String> viewDetailed() {
+        HashMap<String, String> result = new HashMap<>();
+        Stream<String> teamStream = teams.stream().map(team -> team.toString());
+        String teamsString = Arrays.toString(teamStream.toArray());
+
+        result.put("name", getName().toString());
+        result.put("id", getId().toString());
+        result.put("phone", getPhone().toString());
+        result.put("email", getEmail().toString());
+        result.put("organization", getOrganization().toString());
+        result.put("subject", getSubject().toString());
+        result.put("teams", teamsString);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        Stream<String> teamStream = teams.stream().map(team -> team.toString());
+        String teamsString = Arrays.toString(teamStream.toArray());
+
+        builder.append(" Name: ")
+                .append(getName())
+                .append(" ID: ")
+                .append(getId())
+                .append(" Phone: ")
+                .append(getPhone())
+                .append(" Email: ")
+                .append(getEmail())
+                .append(" Organization: ")
+                .append(getOrganization())
+                .append(" Subject: ")
+                .append(getSubject())
+                .append(" Teams: ")
+                .append(teamsString);
+
+        return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Mentor)) {
+            return false;
+        }
+
+        Mentor otherMentor = ((Mentor) other);
+        return otherMentor.getName() == this.getName()
+                && otherMentor.getId() == this.getId()
+                && otherMentor.getPhone() == this.getPhone()
+                && otherMentor.getEmail() == this.getEmail()
+                && otherMentor.getOrganization() == this.getOrganization()
+                && otherMentor.getSubject() == this.getSubject()
+                && otherMentor.getTeams() == this.getTeams();
     }
 }
