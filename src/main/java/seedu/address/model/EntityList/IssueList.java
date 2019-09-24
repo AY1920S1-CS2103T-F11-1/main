@@ -3,7 +3,7 @@ package seedu.address.model.EntityList;
 import java.util.ArrayList;
 import java.util.List;
 import seedu.address.model.Entity.Entity;
-import seedu.address.model.Entity.ID;
+import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.Issue;
 import seedu.address.model.Entity.PrefixType;
 
@@ -26,7 +26,7 @@ public class IssueList extends EntityList {
      * @return
      */
     @Override
-    public Issue get(ID id) {
+    public Issue get(Id id) {
         // TODO
         return null;
     }
@@ -61,7 +61,7 @@ public class IssueList extends EntityList {
      * @throws Exception
      */
     @Override
-    public void delete(ID id) throws Exception {
+    public void delete(Id id) throws Exception {
         for (Issue i: this.issues) {
             if (i.getId() == id) {
                 this.issues.remove(i);
@@ -87,7 +87,7 @@ public class IssueList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(ID id) {
+    public boolean isContain(Id id) {
         for (Issue i: this.issues) {
             if (i.getId() == id) {
                 return true;
@@ -102,7 +102,7 @@ public class IssueList extends EntityList {
      * @return ID
      */
     @Override
-    public ID generateID() {
-        return new ID(PrefixType.I, this.getNewIDSuffix());
+    public Id generateID() {
+        return new Id(PrefixType.I, this.getNewIDSuffix());
     }
 }

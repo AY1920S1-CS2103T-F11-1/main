@@ -2,8 +2,7 @@ package seedu.address.model.EntityList;
 
 import java.util.List;
 import seedu.address.model.Entity.Entity;
-import seedu.address.model.Entity.ID;
-import seedu.address.model.Entity.Participant;
+import seedu.address.model.Entity.Id;
 
 /**
  * This interface serves as the new API for the model.
@@ -22,7 +21,7 @@ public abstract class EntityList {
      * @param id
      * @return Entity
      */
-    abstract Entity get(ID id);
+    abstract Entity get(Id id);
 
     // This exception will be ModelException - Pending Joanna's PR.
 
@@ -42,7 +41,7 @@ public abstract class EntityList {
      * @param id
      * @throws Exception
      */
-    abstract void delete(ID id) throws Exception;
+    abstract void delete(Id id) throws Exception;
 
     /**
      * Adds the entity into the entity list
@@ -58,7 +57,7 @@ public abstract class EntityList {
      * @param id
      * @return boolean
      */
-    abstract boolean isContain(ID id);
+    abstract boolean isContain(Id id);
 
     /**
      * List the entities.
@@ -70,7 +69,7 @@ public abstract class EntityList {
     /**
      * This generates the id for the next entity object to be created.
      */
-    abstract public ID generateID();
+    abstract public Id generateID();
 
     protected int getNewIDSuffix() {
         int next = this.nextIDSuffix;

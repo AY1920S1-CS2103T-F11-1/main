@@ -3,7 +3,7 @@ package seedu.address.model.EntityList;
 import java.util.ArrayList;
 import java.util.List;
 import seedu.address.model.Entity.Entity;
-import seedu.address.model.Entity.ID;
+import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.Mentor;
 import seedu.address.model.Entity.PrefixType;
 
@@ -26,7 +26,7 @@ public class MentorList extends EntityList {
      * @return
      */
     @Override
-    public Mentor get(ID id) {
+    public Mentor get(Id id) {
         // TODO
         return null;
     }
@@ -61,7 +61,7 @@ public class MentorList extends EntityList {
      * @throws Exception
      */
     @Override
-    public void delete(ID id) throws Exception {
+    public void delete(Id id) throws Exception {
         for (Mentor m: this.mentors) {
             if (m.getId() == id) {
                 this.mentors.remove(m);
@@ -87,7 +87,7 @@ public class MentorList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(ID id) {
+    public boolean isContain(Id id) {
         for (Mentor m: this.mentors) {
             if (m.getId() == id) {
                 return true;
@@ -102,7 +102,7 @@ public class MentorList extends EntityList {
      * @return ID
      */
     @Override
-    public ID generateID() {
-        return new ID(PrefixType.M, this.getNewIDSuffix());
+    public Id generateID() {
+        return new Id(PrefixType.M, this.getNewIDSuffix());
     }
 }

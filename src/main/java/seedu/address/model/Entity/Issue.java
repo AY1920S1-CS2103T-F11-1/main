@@ -20,7 +20,7 @@ public class Issue extends Entity {
      */
     public Issue(
             Name name,
-            ID id,
+            Id id,
             String description,
             IssueType type,
             boolean isCompleted
@@ -44,7 +44,7 @@ public class Issue extends Entity {
      */
     public Issue(
             Name name,
-            ID id,
+            Id id,
             String description,
             IssueType type,
             Optional<Date> time,

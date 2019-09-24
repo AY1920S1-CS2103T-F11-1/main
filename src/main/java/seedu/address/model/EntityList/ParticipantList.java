@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import seedu.address.model.Entity.Email;
 import seedu.address.model.Entity.Entity;
-import seedu.address.model.Entity.ID;
+import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.Name;
 import seedu.address.model.Entity.Participant;
 import seedu.address.model.Entity.Phone;
@@ -27,7 +27,7 @@ public class ParticipantList extends EntityList {
      * @return
      */
     @Override
-    public Participant get(ID id) {
+    public Participant get(Id id) {
         return new Participant(new Name("name"), new Email("email"), new Phone("999"), this.generateID());
     }
 
@@ -62,7 +62,7 @@ public class ParticipantList extends EntityList {
      * @throws Exception if error while deleting.
      */
     @Override
-    public void delete(ID id) throws Exception {
+    public void delete(Id id) throws Exception {
         for (Participant p: this.participants) {
             if (p.getId() == id) {
                 this.participants.remove(p);
@@ -88,7 +88,7 @@ public class ParticipantList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(ID id) {
+    public boolean isContain(Id id) {
         for (Participant p: this.participants) {
             if (p.getId() == id) {
                 return true;
@@ -103,7 +103,7 @@ public class ParticipantList extends EntityList {
      * @return ID
      */
     @Override
-    public ID generateID() {
-       return new ID(PrefixType.P, this.getNewIDSuffix());
+    public Id generateID() {
+       return new Id(PrefixType.P, this.getNewIDSuffix());
     }
 }

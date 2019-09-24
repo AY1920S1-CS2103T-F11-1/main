@@ -5,7 +5,7 @@ public class Participant extends Entity {
     private Phone phone;
     // TODO: Add team as a attribute of participant
 
-    public Participant(Name name, Email email, Phone phone, ID id) {
+    public Participant(Name name, Email email, Phone phone, Id id) {
         super(id, name);
         this.email = email;
         this.phone = phone;

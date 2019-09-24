@@ -1,7 +1,9 @@
 package seedu.address.model.Entity;
 
+import java.util.HashMap;
+
 public abstract class Entity {
-    protected final ID id; // Note: id is unique and should never be mutable.
+    protected final Id id; // Note: id is unique and should never be mutable.
     protected Name name;
 
     /**
@@ -10,7 +12,7 @@ public abstract class Entity {
      * @param id
      * @param name
      */
-    Entity(ID id, Name name) {
+    Entity(Id id, Name name) {
         this.id = id;
         this.name = name;
     }
@@ -29,9 +31,9 @@ public abstract class Entity {
     /**
      * Gets the id.
      *
-     * @return ID
+     * @return Id
      */
-    public ID getId() {
+    public Id getId() {
         return this.id;
     }
 
@@ -45,4 +47,14 @@ public abstract class Entity {
     public void setName(Name name) {
         this.name = name;
     }
+
+    /**
+     * View the bare details of the entity.
+     */
+    abstract public HashMap<String, String> viewMinimal();
+
+    /**
+     * View the full details of the entity.
+     */
+    abstract public HashMap<String, String> viewDetailed();
 }

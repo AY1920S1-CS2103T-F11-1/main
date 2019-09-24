@@ -3,7 +3,7 @@ package seedu.address.model.EntityList;
 import java.util.ArrayList;
 import java.util.List;
 import seedu.address.model.Entity.Entity;
-import seedu.address.model.Entity.ID;
+import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.PrefixType;
 import seedu.address.model.Entity.Team;
 
@@ -26,7 +26,7 @@ public class TeamList extends EntityList {
      * @return
      */
     @Override
-    public Team get(ID id) {
+    public Team get(Id id) {
         // TODO
         return null;
     }
@@ -61,7 +61,7 @@ public class TeamList extends EntityList {
      * @throws Exception
      */
     @Override
-    public void delete(ID id) throws Exception {
+    public void delete(Id id) throws Exception {
         for (Team t: this.teams) {
             if (t.getId() == id) {
                 this.teams.remove(t);
@@ -87,7 +87,7 @@ public class TeamList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(ID id) {
+    public boolean isContain(Id id) {
         for (Team p: this.teams) {
             if (p.getId() == id) {
                 return true;
@@ -102,7 +102,7 @@ public class TeamList extends EntityList {
      * @return ID
      */
     @Override
-    public ID generateID() {
-        return new ID(PrefixType.T, this.getNewIDSuffix());
+    public Id generateID() {
+        return new Id(PrefixType.T, this.getNewIDSuffix());
     }
 }

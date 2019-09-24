@@ -22,7 +22,7 @@ public class Mentor extends Entity {
      */
     public Mentor(
             Name name,
-            ID id,
+            Id id,
             Phone phone,
             Email email,
             List<Team> teams,

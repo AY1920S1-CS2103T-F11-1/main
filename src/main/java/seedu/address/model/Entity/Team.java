@@ -25,7 +25,7 @@ public class Team extends Entity {
      * @param location
      */
     public Team(
-            ID teamId,
+            Id teamId,
             Name teamName,
             List<Participant> participants,
             SubjectName subject,
@@ -57,7 +57,7 @@ public class Team extends Entity {
      * @param location
      */
     public Team(
-            ID teamId,
+            Id teamId,
             Name teamName,
             List<Participant> participants,
             Mentor mentor,
