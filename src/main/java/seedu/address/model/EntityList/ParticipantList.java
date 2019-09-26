@@ -20,56 +20,54 @@ public class ParticipantList extends EntityList {
        this.participants = new ArrayList<>();
     }
 
-    /**
-     * Gets participant by id.
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public Participant get(Id id) {
-        return new Participant(new Name("name"), new Email("email"), new Phone("999"), this.generateID());
-    }
-
-    /**
-     * Updates participant by id.
-     *
-     * @param participant
-     * @throws Exception if error while updating.
-     */
-    @Override
-    public void update(Entity participant) throws Exception {
-        // TODO: Find by ID then replace.
-        participants.add((Participant) participant);
-    }
-
-    /**
-     * Adds participant to the list.
-     *
-     * @param participant
-     * @throws Exception if there was an error while adding.
-     */
-    @Override
-    public void add(Entity participant) throws Exception {
-        // TODO: Find by ID then replace.
-        participants.add((Participant) participant);
-    }
-
-    /**
-     * Deletes participant by ID.
-     *
-     * @param id
-     * @throws Exception if error while deleting.
-     */
-    @Override
-    public void delete(Id id) throws Exception {
-        for (Participant p: this.participants) {
-            if (p.getId() == id) {
-                this.participants.remove(p);
-                return;
-            }
-        }
-    }
+//    /**
+//     * Gets participant by id.
+//     *
+//     * @param id
+//     * @return
+//     */
+//    @Override
+//    public Participant get(Id id) {
+//        return new Participant(new Name("name"), new Email("email"), new Phone("999"), this.generateID());
+//    }
+//
+//    /**
+//     * Updates participant by id.
+//     *
+//     * @param participant
+//     * @throws Exception if error while updating.
+//     */
+//    @Override
+//    public void update(Entity participant) throws Exception {
+//        participants.add((Participant) participant);
+//    }
+//
+//    /**
+//     * Adds participant to the list.
+//     *
+//     * @param participant
+//     * @throws Exception if there was an error while adding.
+//     */
+//    @Override
+//    public void add(Entity participant) throws Exception {
+//        participants.add((Participant) participant);
+//    }
+//
+//    /**
+//     * Deletes participant by ID.
+//     *
+//     * @param id
+//     * @throws Exception if error while deleting.
+//     */
+//    @Override
+//    public void delete(Id id) throws Exception {
+//        for (Participant p: this.participants) {
+//            if (p.getId() == id) {
+//                this.participants.remove(p);
+//                return;
+//            }
+//        }
+//    }
 
     /**
      * List the participants.

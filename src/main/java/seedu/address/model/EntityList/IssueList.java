@@ -19,56 +19,54 @@ public class IssueList extends EntityList {
         this.issues = new ArrayList<>();
     }
 
-    /**
-     * Gets Issue by ID.
-     *
-     * @param id
-     * @return
-     */
-    @Override
-    public Issue get(Id id) {
-        // TODO
-        return null;
-    }
-
-    /**
-     * Updates Issue by ID.
-     *
-     * @param issue
-     * @throws Exception if error while updating
-     */
-    @Override
-    public void update(Entity issue) throws Exception {
-        // TODO
-        issues.add((Issue) issue);
-    }
-
-    /**
-     * Adds the issue into the list
-     *
-     * @param issue
-     * @throws Exception
-     */
-    @Override
-    public void add(Entity issue) throws Exception {
-        issues.add((Issue) issue);
-    }
-
-    /**
-     * Deletes team by id.
-     *
-     * @param id
-     * @throws Exception
-     */
-    @Override
-    public void delete(Id id) throws Exception {
-        for (Issue i: this.issues) {
-            if (i.getId() == id) {
-                this.issues.remove(i);
-                return;
-            }
-        }
-    }
+//    /**
+//     * Gets Issue by ID.
+//     *
+//     * @param id
+//     * @return
+//     */
+//    @Override
+//    public Issue get(Id id) {
+//        return null;
+//    }
+//
+//    /**
+//     * Updates Issue by ID.
+//     *
+//     * @param issue
+//     * @throws Exception if error while updating
+//     */
+//    @Override
+//    public void update(Entity issue) throws Exception {
+//        issues.add((Issue) issue);
+//    }
+//
+//    /**
+//     * Adds the issue into the list
+//     *
+//     * @param issue
+//     * @throws Exception
+//     */
+//    @Override
+//    public void add(Entity issue) throws Exception {
+//        issues.add((Issue) issue);
+//    }
+//
+//    /**
+//     * Deletes team by id.
+//     *
+//     * @param id
+//     * @throws Exception
+//     */
+//    @Override
+//    public void delete(Id id) throws Exception {
+//        for (Issue i: this.issues) {
+//            if (i.getId() == id) {
+//                this.issues.remove(i);
+//                return;
+//            }
+//        }
+//    }
 
     /**
      * List the issues.

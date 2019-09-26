@@ -107,8 +107,6 @@ public interface Model {
 
     void deleteMentor(Id id) throws AlfredException;
 
-
-
 //    /**
 //     * Replaces address book data with the data in {@code addressBook}.
 //     */
