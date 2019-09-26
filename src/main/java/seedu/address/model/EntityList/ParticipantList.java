@@ -88,7 +88,7 @@ public class ParticipantList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(Id id) {
+    public boolean contains(Id id) {
         for (Participant p: this.participants) {
             if (p.getId() == id) {
                 return true;

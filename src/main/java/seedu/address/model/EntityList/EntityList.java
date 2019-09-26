@@ -15,41 +15,41 @@ public abstract class EntityList {
         nextIDSuffix = 1;
     }
 
-    /**
-     * Gets the entity from the entityList.
-     *
-     * @param id
-     * @return Entity
-     */
-    abstract Entity get(Id id);
-
-    // This exception will be ModelException - Pending Joanna's PR.
-
-    /**
-     * Updates the given entity in the list using the id of the entity argument.
-     *
-     * @param entity
-     * @throws Exception
-     */
-    abstract void update(Entity entity) throws Exception;
-
-    // As above, exception will be generalized.
-
-    /**
-     * Deletes the entity from the entity list using the ID.
-     *
-     * @param id
-     * @throws Exception
-     */
-    abstract void delete(Id id) throws Exception;
-
-    /**
-     * Adds the entity into the entity list
-     *
-     * @param entity
-     * @throws Exception
-     */
-    abstract void add(Entity entity) throws Exception;
+//    /**
+//     * Gets the entity from the entityList.
+//     *
+//     * @param id
+//     * @return Entity
+//     */
+//    abstract Entity get(Id id);
+//
+//    // This exception will be ModelException - Pending Joanna's PR.
+//
+//    /**
+//     * Updates the given entity in the list using the id of the entity argument.
+//     *
+//     * @param entity
+//     * @throws Exception
+//     */
+//    abstract void update(Entity entity) throws Exception;
+//
+//    // As above, exception will be generalized.
+//
+//    /**
+//     * Deletes the entity from the entity list using the ID.
+//     *
+//     * @param id
+//     * @throws Exception
+//     */
+//    abstract void delete(Id id) throws Exception;
+//
+//    /**
+//     * Adds the entity into the entity list
+//     *
+//     * @param entity
+//     * @throws Exception
+//     */
+//    abstract void add(Entity entity) throws Exception;
 
     /**
      * Checks if a given entity list contains a certain entity.
@@ -57,7 +57,7 @@ public abstract class EntityList {
      * @param id
      * @return boolean
      */
-    abstract boolean isContain(Id id);
+    abstract boolean contains(Id id);
 
     /**
      * List the entities.
@@ -68,6 +68,7 @@ public abstract class EntityList {
 
     /**
      * This generates the id for the next entity object to be created.
+     * To reconsider. Might make it a static class instead.
      */
     abstract public Id generateID();
 

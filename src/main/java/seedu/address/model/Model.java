@@ -4,6 +4,10 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.Entity.Id;
+import seedu.address.model.Entity.Mentor;
+import seedu.address.model.Entity.Participant;
+import seedu.address.model.Entity.Team;
 import seedu.address.model.EntityList.IssueList;
 import seedu.address.model.EntityList.MentorList;
 import seedu.address.model.EntityList.ParticipantList;
@@ -66,6 +70,44 @@ public interface Model {
      * Returns the MentorList.
      */
     MentorList getMentorList();
+
+    /* Below is the API exposed for the controllers to call */
+
+    /* Participant methods */
+
+    Participant getParticipant(Id id) throws AlfredException;
+
+    void addParticipant(Participant participant) throws Exception;
+
+    boolean updateParticipant(Id id, Participant participant);
+
+    void deleteParticipant(Id id) throws AlfredException;
+
+    /* Team methods */
+
+    Team getTeam(Id teamId) throws AlfredException;
+
+    Team getTeamByParticipantId(Id participantId) throws AlfredException;
+
+    Team getTeamByMentorId(Id mentorId) throws AlfredException;
+
+    void addTeam(Team team) throws AlfredException;
+
+    boolean updateTeam(Id teamId, Team team);
+
+    void deleteTeam(Id id) throws AlfredException;
+
+    /* Mentor methods */
+
+    Mentor getMentor(Id id) throws AlfredException;
+
+    void addMentor(Mentor mentor) throws AlfredException;
+
+    boolean updateMentor(Id id, Mentor mentor);
+
+    void deleteMentor(Id id) throws AlfredException;
+
+
 
 //    /**
 //     * Replaces address book data with the data in {@code addressBook}.

@@ -87,7 +87,7 @@ public class MentorList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(Id id) {
+    public boolean contains(Id id) {
         for (Mentor m: this.mentors) {
             if (m.getId() == id) {
                 return true;

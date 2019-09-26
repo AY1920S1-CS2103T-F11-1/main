@@ -87,7 +87,7 @@ public class IssueList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(Id id) {
+    public boolean contains(Id id) {
         for (Issue i: this.issues) {
             if (i.getId() == id) {
                 return true;

@@ -87,7 +87,7 @@ public class TeamList extends EntityList {
      * @return boolean
      */
     @Override
-    public boolean isContain(Id id) {
+    public boolean contains(Id id) {
         for (Team p: this.teams) {
             if (p.getId() == id) {
                 return true;
