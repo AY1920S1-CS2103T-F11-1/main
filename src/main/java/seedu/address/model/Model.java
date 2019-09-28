@@ -5,13 +5,8 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Entity.Id;
-import seedu.address.model.Entity.Mentor;
 import seedu.address.model.Entity.Participant;
-import seedu.address.model.Entity.Team;
-import seedu.address.model.EntityList.IssueList;
-import seedu.address.model.EntityList.MentorList;
-import seedu.address.model.EntityList.ParticipantList;
-import seedu.address.model.EntityList.TeamList;
+import seedu.address.model.EntityList.ReadableEntityList;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,22 +49,22 @@ public interface Model {
     /**
      * Returns the ParticipantList.
      */
-    ParticipantList getParticipantList();
+    ReadableEntityList getParticipantList();
 
     /**
      * Returns the TeamList.
      */
-    TeamList getTeamList();
+    ReadableEntityList getTeamList();
 
     /**
      * Returns the IssueList.
      */
-    IssueList getIssueList();
+    ReadableEntityList getIssueList();
 
     /**
      * Returns the MentorList.
      */
-    MentorList getMentorList();
+    ReadableEntityList getMentorList();
 
     /* Below is the API exposed for the controllers to call */
 
@@ -81,31 +76,41 @@ public interface Model {
 
     boolean updateParticipant(Id id, Participant participant);
 
-    void deleteParticipant(Id id) throws AlfredException;
+    Participant deleteParticipant(Id id) throws AlfredException;
 
     /* Team methods */
 
-    Team getTeam(Id teamId) throws AlfredException;
-
-    Team getTeamByParticipantId(Id participantId) throws AlfredException;
-
-    Team getTeamByMentorId(Id mentorId) throws AlfredException;
-
-    void addTeam(Team team) throws AlfredException;
-
-    boolean updateTeam(Id teamId, Team team);
-
-    void deleteTeam(Id id) throws AlfredException;
+//    Team getTeam(Id teamId) throws AlfredException;
+//
+//    Team getTeamByParticipantId(Id participantId) throws AlfredException;
+//
+//    Team getTeamByMentorId(Id mentorId) throws AlfredException;
+//
+//    void addTeam(Team team) throws AlfredException;
+//
+//    boolean updateTeam(Id teamId, Team team);
+//
+//    void deleteTeam(Id id) throws AlfredException;
 
     /* Mentor methods */
 
-    Mentor getMentor(Id id) throws AlfredException;
+//    Mentor getMentor(Id id) throws AlfredException;
+//
+//    void addMentor(Mentor mentor) throws AlfredException;
+//
+//    boolean updateMentor(Id id, Mentor mentor);
+//
+//    void deleteMentor(Id id) throws AlfredException;
 
-    void addMentor(Mentor mentor) throws AlfredException;
+    /* Issue methods */
 
-    boolean updateMentor(Id id, Mentor mentor);
-
-    void deleteMentor(Id id) throws AlfredException;
+//    Issue getIssue(Id id) throws AlfredException;
+//
+//    void addIssue(Id id) throws AlfredException;
+//
+//    boolean updateIssue(Id id, Issue issue);
+//
+//    void deleteIssue(Id id) throws AlfredException;
 
 //    /**
 //     * Replaces address book data with the data in {@code addressBook}.

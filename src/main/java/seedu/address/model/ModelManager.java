@@ -9,9 +9,12 @@ import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.Entity.Id;
+import seedu.address.model.Entity.Participant;
 import seedu.address.model.EntityList.IssueList;
 import seedu.address.model.EntityList.MentorList;
 import seedu.address.model.EntityList.ParticipantList;
+import seedu.address.model.EntityList.ReadableEntityList;
 import seedu.address.model.EntityList.TeamList;
 import seedu.address.model.person.Person;
 
@@ -94,39 +97,82 @@ public class ModelManager implements Model {
     /**
      * Returns the participant list located in the Model Manager.
      *
-     * @return ParticipantList
+     * @return ReadableEntityList
      */
-    public ParticipantList getParticipantList() {
+    public ReadableEntityList getParticipantList() {
         return this.participantList;
     }
 
     /**
      * Returns the team list located in the Model Manager.
      *
-     * @return TeamList
+     * @return ReadableEntityList
      */
-    public TeamList getTeamList() {
+    public ReadableEntityList getTeamList() {
         return this.teamList;
     }
 
     /**
      * Returns the issue list located in the Model Manager.
      *
-     * @return IssueList
+     * @return ReadableEntityList
      */
-    public IssueList getIssueList() {
+    public ReadableEntityList getIssueList() {
         return this.issueList;
     }
 
     /**
      * Returns the mentor list located in the Model Manager.
      *
-     * @return MentorList
+     * @return ReadableEntityList
      */
-    public MentorList getMentorList() {
+    public ReadableEntityList getMentorList() {
         return this.mentorList;
     }
 
+    //========== Entity Methods =============================
+
+    /**
+     * Gets the participant by id.
+     *
+     * @param id
+     * @return Participant Object
+     * @throws AlfredException if the Participant cannot be found.
+     */
+    public Participant getParticipant(Id id) throws AlfredException {
+        return this.participantList.get(id);
+    }
+
+    /**
+     * Adds the participant into the list.
+     *
+     * @param participant
+     * @throws AlfredException
+     */
+    public void addParticipant(Participant participant) throws AlfredException {
+        this.participantList.add(participant);
+    }
+
+    /**
+     * Updates the participant in the list, if any.
+     *
+     * @param id
+     * @param participant
+     * @return boolean
+     */
+    public boolean updateParticipant(Id id, Participant participant) {
+        return this.participantList.update(id, participant);
+    }
+
+    /**
+     * Deletes the participant by id.
+     *
+     * @param id
+     * @return Participant
+     */
+    public Participant deleteParticipant(Id id) throws AlfredException {
+        return this.participantList.delete(id);
+    }
 
     //=========== AddressBook ================================================================================
 
