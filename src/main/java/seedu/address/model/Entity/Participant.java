@@ -15,7 +15,7 @@ public class Participant extends Entity {
      * @param phone
      * @param id
      */
-    public Participant(Name name, Email email, Phone phone, Id id) {
+    public Participant(Name name, Id id, Email email, Phone phone) {
         super(id, name);
         this.email = email;
         this.phone = phone;
