@@ -4,13 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Entity.Id;
+import seedu.address.model.Entity.Issue;
+import seedu.address.model.Entity.Mentor;
 import seedu.address.model.Entity.Participant;
+import seedu.address.model.Entity.Team;
 import seedu.address.model.EntityList.IssueList;
 import seedu.address.model.EntityList.MentorList;
 import seedu.address.model.EntityList.ParticipantList;
@@ -132,6 +137,8 @@ public class ModelManager implements Model {
 
     //========== Entity Methods =============================
 
+    /* Participant Methods */
+
     /**
      * Gets the participant by id.
      *
@@ -173,6 +180,181 @@ public class ModelManager implements Model {
     public Participant deleteParticipant(Id id) throws AlfredException {
         return this.participantList.delete(id);
     }
+
+    /* Team Methods*/
+
+    /**
+     * Gets team by id.
+     *
+     * @param id
+     * @return
+     * @throws AlfredException
+     */
+    public Team getTeam(Id id) throws AlfredException {
+        return this.teamList.get(id);
+    }
+
+    /**
+     * Gets the team by participant id.
+     *
+     * @param participantId
+     * @return Team
+     * @throws AlfredException
+     */
+    public Team getTeamByParticipantId(Id participantId) throws AlfredException {
+        List<Team> teams = this.teamList.getSpecificTypedList();
+        for (Team t: teams) {
+            for (Participant p: t.getParticipants()) {
+                if (p.getId() == participantId) {
+                    return t;
+                }
+            }
+        }
+        throw new AlfredException("Team with said participant cannot be found.");
+    }
+
+    /**
+     * Gets the team by mentor id.
+     *
+     * @param mentorId
+     * @return Team
+     * @throws AlfredException
+     */
+    public Team getTeamByMentorId(Id mentorId) throws AlfredException {
+        List<Team> teams = this.teamList.getSpecificTypedList();
+        for (Team t: teams) {
+            Optional<Mentor> mentor = t.getMentor();
+            if (mentor.isPresent()) {
+                if(mentor.get().getId() == mentorId) {
+                    return t;
+                }
+            }
+        }
+        throw new AlfredException("Team with said participant cannot be found.");
+    }
+
+    /**
+     * Updates the team.
+     *
+     * @param teamId
+     * @param updatedTeam
+     * @return boolean.
+     */
+    public boolean updateTeam(Id teamId, Team updatedTeam) {
+        return this.teamList.update(teamId, updatedTeam);
+    }
+
+    /**
+     * Adds the team.
+     *
+     * @param team
+     * @throws AlfredException
+     */
+    public void addTeam(Team team) throws AlfredException {
+        this.teamList.add(team);
+    }
+
+    /**
+     * Deletes the team.
+     *
+     * @param id
+     * @return Team
+     * @throws AlfredException
+     */
+    public Team deleteTeam(Id id) throws AlfredException {
+        return this.teamList.delete(id);
+    }
+
+    /* Mentor Methods */
+
+    /**
+     * Gets the mentor by id.
+     *
+     * @param id
+     * @return Mentor
+     * @throws AlfredException
+     */
+    public Mentor getMentor(Id id) throws AlfredException {
+        return this.mentorList.get(id);
+    }
+
+    /**
+     * Adds mentor into the list.
+     *
+     * @param mentor
+     * @throws AlfredException
+     */
+    public void addMentor(Mentor mentor) throws AlfredException {
+        this.mentorList.add(mentor);
+    }
+
+    /**
+     * Updates the mentor.
+     *
+     * @param id
+     * @param updatedMentor
+     * @return boolean
+     */
+    public boolean updateMentor(Id id, Mentor updatedMentor) {
+        return this.mentorList.update(id, updatedMentor);
+    }
+
+    /**
+     * Deletes the mentor.
+     *
+     * @param id
+     * @return Mentor that is deleted
+     * @throws AlfredException
+     */
+    public Mentor deleteMentor(Id id) throws AlfredException {
+        return this.mentorList.delete(id);
+    }
+
+    /* Issue Methods */
+
+    /**
+     * Gets issue by Id.
+     *
+     * @param id
+     * @return Issue
+     * @throws AlfredException
+     */
+    public Issue getIssue(Id id) throws AlfredException {
+        return this.issueList.get(id);
+    }
+
+    /**
+     * Adds issue into the list.
+     *
+     * @param issue
+     * @throws AlfredException
+     */
+    public void addIssue(Issue issue) throws AlfredException {
+        this.issueList.add(issue);
+    }
+
+    /**
+     * Updates the issue in the list.
+     *
+     * @param id
+     * @param issue
+     * @return boolean
+     */
+    public boolean updateIssue(Id id, Issue issue) {
+        return this.issueList.update(id, issue);
+    }
+
+    /**
+     * Deletes the issue in the list.
+     *
+     * @param id
+     * @return Issue
+     * @throws AlfredException
+     */
+    public Issue deleteIssue(Id id) throws AlfredException {
+        return this.issueList.delete(id);
+    }
+
 
     //=========== AddressBook ================================================================================
 

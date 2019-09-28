@@ -9,64 +9,87 @@ import seedu.address.model.Entity.PrefixType;
 
 public class MentorList extends EntityList {
     private List<Mentor> mentors;
+    private int lastUsedId;
 
     /**
      * Constructor.
-     *
      */
     public MentorList() {
-        super();
         this.mentors = new ArrayList<>();
+        this.lastUsedId = 0;
     }
 
-//    /**
-//     * Gets Mentor by ID.
-//     *
-//     * @param id
-//     * @return
-//     */
-//    @Override
-//    public Mentor get(Id id) {
-//        return null;
-//    }
-//
-//    /**
-//     * Updates Mentor by ID.
-//     *
-//     * @param mentor
-//     * @throws Exception if error while updating
-//     */
-//    @Override
-//    public void update(Entity mentor) throws Exception {
-//        mentors.add((Mentor) mentor);
-//    }
-//
-//    /**
-//     * Adds the mentor into the list
-//     *
-//     * @param mentor
-//     * @throws Exception
-//     */
-//    @Override
-//    public void add(Entity mentor) throws Exception {
-//        mentors.add((Mentor) mentor);
-//    }
-//
-//    /**
-//     * Deletes team by id.
-//     *
-//     * @param id
-//     * @throws Exception
-//     */
-//    @Override
-//    public void delete(Id id) throws Exception {
-//        for (Mentor m: this.mentors) {
-//            if (m.getId() == id) {
-//                this.mentors.remove(m);
-//                return;
-//            }
-//        }
-//    }
+    /**
+     * Gets Mentor by ID.
+     *
+     * @param id
+     * @return Mentor
+     */
+    public Mentor get(Id id) throws AlfredException {
+        for (Mentor m: this.mentors) {
+            if (m.getId() == id) {
+                return m;
+            }
+        }
+        throw new AlfredException("Mentor to get does not exist");
+    }
+
+    /**
+     * Updates Mentor by ID.
+     *
+     * @param id
+     * @param updatedMentor
+     * @return boolean
+     */
+    public boolean update(Id id, Mentor updatedMentor) {
+        for (int i = 0; i < this.mentors.size(); i++) {
+            if (this.mentors.get(i).getId() == id) {
+                this.mentors.set(i, updatedMentor);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds the mentor into the list.
+     *
+     * @param mentor
+     * @throws AlfredException
+     */
+    public void add(Mentor mentor) throws AlfredException {
+        for (Mentor m: this.mentors) {
+            if (m.getId() == mentor.getId()) {
+                throw new AlfredException("Item to add already exists!");
+            }
+        }
+        this.mentors.add(mentor);
+    }
+
+    /**
+     * Deletes Mentor by id.
+     *
+     * @param id
+     * @throws Exception
+     */
+    public Mentor delete(Id id) throws AlfredException {
+        for (Mentor m: this.mentors) {
+            if (m.getId() == id) {
+                this.mentors.remove(m);
+                return m;
+            }
+        }
+        throw new AlfredException("Mentor to delete does not exist.");
+    }
+
+    /**
+     * Returns a list but with element type Mentor.
+     *
+     * @return List<Mentor>.
+     */
+    public List<Mentor> getSpecificTypedList() {
+        return this.mentors;
+    }
 
     /**
      * List the mentors.
@@ -101,6 +124,7 @@ public class MentorList extends EntityList {
      */
     @Override
     public Id generateID() {
-        return new Id(PrefixType.M, this.getNewIDSuffix());
+        this.lastUsedId++;
+        return new Id(PrefixType.M, this.lastUsedId);
     }
 }

@@ -85,6 +85,15 @@ public class ParticipantList extends EntityList {
     }
 
     /**
+     * Gets the list but with element type Participant.
+     *
+     * @return List<Participant>
+     */
+    public List<Participant> getSpecificTypedList() {
+        return this.participants;
+    }
+
+    /**
      * List the participants.
      *
      * @return List<Participant>
