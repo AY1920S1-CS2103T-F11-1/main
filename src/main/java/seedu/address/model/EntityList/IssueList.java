@@ -9,64 +9,89 @@ import seedu.address.model.Entity.PrefixType;
 
 public class IssueList extends EntityList {
     private List<Issue> issues;
+    private int lastUsedId;
 
     /**
      * Constructor.
      *
      */
     public IssueList() {
-        super();
         this.issues = new ArrayList<>();
+        this.lastUsedId = 0;
     }
 
-//    /**
-//     * Gets Issue by ID.
-//     *
-//     * @param id
-//     * @return
-//     */
-//    @Override
-//    public Issue get(Id id) {
-//        return null;
-//    }
-//
-//    /**
-//     * Updates Issue by ID.
-//     *
-//     * @param issue
-//     * @throws Exception if error while updating
-//     */
-//    @Override
-//    public void update(Entity issue) throws Exception {
-//        issues.add((Issue) issue);
-//    }
-//
-//    /**
-//     * Adds the issue into the list
-//     *
-//     * @param issue
-//     * @throws Exception
-//     */
-//    @Override
-//    public void add(Entity issue) throws Exception {
-//        issues.add((Issue) issue);
-//    }
-//
-//    /**
-//     * Deletes team by id.
-//     *
-//     * @param id
-//     * @throws Exception
-//     */
-//    @Override
-//    public void delete(Id id) throws Exception {
-//        for (Issue i: this.issues) {
-//            if (i.getId() == id) {
-//                this.issues.remove(i);
-//                return;
-//            }
-//        }
-//    }
+    /**
+     * Gets Issue by ID.
+     *
+     * @param id
+     * @return Issue
+     * @throws AlfredException
+     */
+    public Issue get(Id id) throws AlfredException {
+        for (Issue i: this.issues) {
+            if (i.getId() == id) {
+                return i;
+            }
+        }
+        throw AlfredException("Issue to get cannot be found.");
+    }
+
+    /**
+     * Updates Issue by ID.
+     *
+     * @param id
+     * @param updatedIssue
+     * @return boolean;
+     */
+    public boolean update(Id id, Issue updatedIssue) {
+        for (int i = 0; i < this.issues.size(); i++) {
+            if (this.issues.get(i).getId() == id) {
+                this.issues.set(i, updatedIssue);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds the issue into the list
+     *
+     * @param issue
+     * @throws AlfredException
+     */
+    public void add(Issue issue) throws AlfredException {
+        for (Issue i: this.issues) {
+            if (i.getId() == issue.getId()) {
+                throw new AlfredException("Issue to add cannot be found.");
+            }
+        }
+        this.issues.add(issue);
+    }
+
+    /**
+     * Deletes team by id.
+     *
+     * @param id
+     * @throws AlfredException
+     */
+    public Issue delete(Id id) throws AlfredException {
+        for (Issue i: this.issues) {
+            if (i.getId() == id) {
+                this.issues.remove(i);
+                return i;
+            }
+        }
+        throw new AlfredException("Issue to delete cannot be found.");
+    }
+
+    /**
+     * Returns a list but with element type Issue.
+     *
+     * @return List<Issue>
+     */
+    public List<Issue> getSpecificTypedList() {
+        return this.issues;
+    }
 
     /**
      * List the issues.
@@ -101,6 +126,7 @@ public class IssueList extends EntityList {
      */
     @Override
     public Id generateID() {
-        return new Id(PrefixType.I, this.getNewIDSuffix());
+        this.lastUsedId++;
+        return new Id(PrefixType.I, this.lastUsedId);
     }
 }
