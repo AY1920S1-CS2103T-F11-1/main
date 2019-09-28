@@ -2,6 +2,8 @@ package seedu.address.model.EntityList;
 
 import java.util.ArrayList;
 import java.util.List;
+import seedu.address.AlfredException;
+import seedu.address.AlfredRuntimeException;
 import seedu.address.model.Entity.Entity;
 import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.Mentor;
@@ -31,7 +33,7 @@ public class MentorList extends EntityList {
                 return m;
             }
         }
-        throw new AlfredException("Mentor to get does not exist");
+        throw new AlfredRuntimeException("Mentor to get does not exist");
     }
 
     /**
@@ -60,7 +62,7 @@ public class MentorList extends EntityList {
     public void add(Mentor mentor) throws AlfredException {
         for (Mentor m: this.mentors) {
             if (m.getId() == mentor.getId()) {
-                throw new AlfredException("Item to add already exists!");
+                throw new AlfredRuntimeException("Item to add already exists!");
             }
         }
         this.mentors.add(mentor);
@@ -79,7 +81,7 @@ public class MentorList extends EntityList {
                 return m;
             }
         }
-        throw new AlfredException("Mentor to delete does not exist.");
+        throw new AlfredRuntimeException("Mentor to delete does not exist.");
     }
 
     /**

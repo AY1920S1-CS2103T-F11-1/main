@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.transformation.FilteredList;
+import seedu.address.AlfredException;
+import seedu.address.AlfredRuntimeException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Entity.Id;
@@ -210,7 +212,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        throw new AlfredException("Team with said participant cannot be found.");
+        throw new AlfredRuntimeException("Team with said participant cannot be found.");
     }
 
     /**
@@ -230,7 +232,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        throw new AlfredException("Team with said participant cannot be found.");
+        throw new AlfredRuntimeException("Team with said participant cannot be found.");
     }
 
     /**

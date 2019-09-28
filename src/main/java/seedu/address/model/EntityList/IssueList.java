@@ -2,6 +2,8 @@ package seedu.address.model.EntityList;
 
 import java.util.ArrayList;
 import java.util.List;
+import seedu.address.AlfredException;
+import seedu.address.AlfredRuntimeException;
 import seedu.address.model.Entity.Entity;
 import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.Issue;
@@ -33,7 +35,7 @@ public class IssueList extends EntityList {
                 return i;
             }
         }
-        throw AlfredException("Issue to get cannot be found.");
+        throw new AlfredRuntimeException("Issue to get cannot be found.");
     }
 
     /**
@@ -62,7 +64,7 @@ public class IssueList extends EntityList {
     public void add(Issue issue) throws AlfredException {
         for (Issue i: this.issues) {
             if (i.getId() == issue.getId()) {
-                throw new AlfredException("Issue to add cannot be found.");
+                throw new AlfredRuntimeException("Issue to add cannot be found.");
             }
         }
         this.issues.add(issue);
@@ -81,7 +83,7 @@ public class IssueList extends EntityList {
                 return i;
             }
         }
-        throw new AlfredException("Issue to delete cannot be found.");
+        throw new AlfredRuntimeException("Issue to delete cannot be found.");
     }
 
     /**

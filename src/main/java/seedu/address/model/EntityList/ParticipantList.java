@@ -2,6 +2,8 @@ package seedu.address.model.EntityList;
 
 import java.util.ArrayList;
 import java.util.List;
+import seedu.address.AlfredException;
+import seedu.address.AlfredRuntimeException;
 import seedu.address.model.Entity.Entity;
 import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.Participant;
@@ -32,7 +34,7 @@ public class ParticipantList extends EntityList {
                 return p;
             }
         }
-        throw new AlfredException("Participant to get does not exist");
+        throw new AlfredRuntimeException("Participant to get does not exist");
     }
 
     /**
@@ -62,7 +64,7 @@ public class ParticipantList extends EntityList {
     public void add(Participant participant) throws AlfredException {
         for (Participant p: this.participants) {
             if (p.getId() == participant.getId()) {
-                throw new AlfredException("Participant already exists in list");
+                throw new AlfredRuntimeException("Participant already exists in list");
             }
         }
         this.participants.add(participant);
@@ -81,7 +83,7 @@ public class ParticipantList extends EntityList {
                 return p;
             }
         }
-        throw new AlfredException("Participant to delete does not exist");
+        throw new AlfredRuntimeException("Participant to delete does not exist");
     }
 
     /**

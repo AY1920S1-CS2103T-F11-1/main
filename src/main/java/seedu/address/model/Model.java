@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import seedu.address.AlfredException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Entity.Id;
 import seedu.address.model.Entity.Issue;
