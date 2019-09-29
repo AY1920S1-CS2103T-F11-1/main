@@ -1,13 +1,13 @@
-package seedu.address.model.EntityList;
+package seedu.address.model.entitylist;
 
 import java.util.ArrayList;
 import java.util.List;
 import seedu.address.AlfredException;
 import seedu.address.AlfredRuntimeException;
-import seedu.address.model.Entity.Entity;
-import seedu.address.model.Entity.Id;
-import seedu.address.model.Entity.Participant;
-import seedu.address.model.Entity.PrefixType;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.PrefixType;
 
 public class ParticipantList extends EntityList {
     private List<Participant> participants;

@@ -1,8 +1,8 @@
-package seedu.address.model.EntityList;
+package seedu.address.model.entitylist;
 
 import java.util.List;
-import seedu.address.model.Entity.Entity;
-import seedu.address.model.Entity.Id;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.Id;
 
 public interface ReadableEntityList {
     /**

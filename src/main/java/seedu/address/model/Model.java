@@ -5,12 +5,12 @@ import java.util.function.Predicate;
 
 import seedu.address.AlfredException;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.Entity.Id;
-import seedu.address.model.Entity.Issue;
-import seedu.address.model.Entity.Mentor;
-import seedu.address.model.Entity.Participant;
-import seedu.address.model.Entity.Team;
-import seedu.address.model.EntityList.ReadableEntityList;
+import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Issue;
+import seedu.address.model.entity.Mentor;
+import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.Team;
+import seedu.address.model.entitylist.ReadableEntityList;
 import seedu.address.model.person.Person;
 
 /**

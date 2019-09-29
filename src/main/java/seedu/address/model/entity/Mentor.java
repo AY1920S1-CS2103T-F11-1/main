@@ -1,9 +1,6 @@
-package seedu.address.model.Entity;
+package seedu.address.model.entity;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Stream;
 
 public class Mentor extends Entity {
     private Phone phone;

@@ -13,16 +13,16 @@ import seedu.address.AlfredException;
 import seedu.address.AlfredRuntimeException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.Entity.Id;
-import seedu.address.model.Entity.Issue;
-import seedu.address.model.Entity.Mentor;
-import seedu.address.model.Entity.Participant;
-import seedu.address.model.Entity.Team;
-import seedu.address.model.EntityList.IssueList;
-import seedu.address.model.EntityList.MentorList;
-import seedu.address.model.EntityList.ParticipantList;
-import seedu.address.model.EntityList.ReadableEntityList;
-import seedu.address.model.EntityList.TeamList;
+import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Issue;
+import seedu.address.model.entity.Mentor;
+import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.Team;
+import seedu.address.model.entitylist.IssueList;
+import seedu.address.model.entitylist.MentorList;
+import seedu.address.model.entitylist.ParticipantList;
+import seedu.address.model.entitylist.ReadableEntityList;
+import seedu.address.model.entitylist.TeamList;
 import seedu.address.model.person.Person;
 
 /**
