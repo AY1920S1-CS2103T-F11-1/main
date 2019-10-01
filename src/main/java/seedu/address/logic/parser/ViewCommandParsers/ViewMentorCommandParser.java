@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.ListCommandParsers;
+package seedu.address.logic.parser.ViewCommandParsers;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -6,14 +6,14 @@ import java.util.Optional;
 import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class ListIssueCommandParser implements Parser<EditCommand> {
+public class ViewMentorCommandParser implements Parser<EditCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -23,12 +23,12 @@ public class ListIssueCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
 
         // The return type of this command will also have to be corrected
-        // to return a ListIssueCommand object as designed by John instead of an
+        // to return a ViewTeamCommand object as designed by John instead of an
         // EditCommand Object.
 
         /**
          * This is just placeholder code. We will implement proper code
-         * when the Issue class has been finalised.
+         * when the Team class has been finalised.
          */
 
         return null;
@@ -46,7 +46,7 @@ public class ListIssueCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(AlfredParserUtil.parseTags(tagSet));
     }
 
 }

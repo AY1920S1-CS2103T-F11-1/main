@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -42,7 +42,7 @@ public class EditTeamCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(AlfredParserUtil.parseTags(tagSet));
     }
 
 }

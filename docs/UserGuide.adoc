@@ -14,11 +14,13 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master
 
-By: `Team F11-1`      Since: `August 2019`      Licence: `MIT`
+By: `Team F11-1` Since: `August 2019`
+
+Licence: `MIT`
 
 == Introduction
 
-Alfred is a desktop application for helping Human Resource managers organise a Hackathon event.
+Alfred is a desktop application to help Hackathons' Human Resource Managers organise a Hackathon event.
 Hackathons are difficult to manage manually as they involve different groups of individuals, each
 of whom have a different role to play and agenda to fulfill in the Hackathon. Alfred helps streamline
 this organisation and management process, allowing you to quickly get up to speed with the logistics
@@ -33,8 +35,9 @@ Interested? Well, head to <<Quick Start>> to get started. We hope Alfred serves 
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `alfred.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Copy the file to the folder you want to use as the home folder for Alfred.
+.  Double-click the file to start the app. Alternatively, if you use a Mac, type the command `java -jar alfred.jar`
+on terminal in the jar file's directory to open start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
@@ -43,7 +46,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named
+`John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
@@ -53,22 +57,26 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Features
 
 ====
-*Command Format*
+*Prelude - Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add mentor n/NAME`, `NAME` is a parameter which can be used as `add mentor n/John Doe`.
-* Words in {curly braces} indicate values for the command that need to be supplied e.g. in `add {mentor/participant/list}`, you can choose to type `add mentor`, `add participant` or `add team`
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters which you need to supply. For example, in `add mentor n/NAME`,
+`NAME` is a parameter which you need to specify as the mentor's name, as in `add mentor n/John Doe`.
+* Words in {curly braces} indicate values for the command that you need to supply.
+For example in `add {mentor/participant/list}`, you can choose to type `add mentor`, `add participant` or `add team`
+* Parameters can be in any order. For instance, if the command specifies `n/NAME p/PHONE_NUMBER`,
+`p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
 This command displays a help page in a separate pop-up window. Should you require further information,
 the pop-up window also includes links to further references and documentation. +
+
 Format: `help`
 
 === Adding an Entity: `add {participant/mentor/team}`
 
-Adds an entity for Alfred to keep track of +
+Use this command to add an entity for Alfred to keep track of. +
 ****
 * Creates an Entity. Each Entity object will have a unique ID assigned to it.
 * As of version 1.1, all the fields must be provided. There are no optional fields.
