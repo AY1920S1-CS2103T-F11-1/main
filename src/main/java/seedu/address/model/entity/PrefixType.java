@@ -17,14 +17,12 @@ public enum PrefixType {
     }
 
     public boolean isValidPrefix(String test){
-    try{
-        PrefixType result = PrefixType.valueOf(test);
-        return true;
-
-    } catch (IllegalArgumentException e){
-        return false;
-    }
-
+        try{
+            PrefixType result = PrefixType.valueOf(test);
+            return true;
+        } catch (IllegalArgumentException e){
+            return false;
+        }
     }
 
 
