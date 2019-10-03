@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link active" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>AddressBook Level 3 - Developer Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+<p>By: <code>Team Alfred</code>      Since: <code>Sept 2019</code>      Licence: <code>MIT</code></p>
 </div>
 </div>
 <div id="toc" class="toc">
@@ -11,13 +11,14 @@
 <ul class="sectlevel1">
 <li><a href="#setting-up">1. Setting up</a></li>
 <li><a href="#design">2. Design</a>
-<ul class="sectlevel2">
-<li><a href="#Design-Architecture">2.1. Architecture</a></li>
-<li><a href="#Design-Ui">2.2. UI component</a></li>
-<li><a href="#Design-Logic">2.3. Logic component</a></li>
-<li><a href="#Design-Model">2.4. Model component</a></li>
-<li><a href="#Design-Storage">2.5. Storage component</a></li>
-<li><a href="#Design-Commons">2.6. Common classes</a></li>
+<ul class="sectlevel3">
+<li><a href="#note-image-here-to-the-updated-in-the-later-milestones">2.1. Note: Image here to the updated in the later milestones.</a></li>
+<li><a href="#Design-Architecture">2.2. Architecture</a></li>
+<li><a href="#Design-Ui">2.3. UI component</a></li>
+<li><a href="#Design-Logic">2.4. Logic component</a></li>
+<li><a href="#Design-Model">2.5. Model component</a></li>
+<li><a href="#Design-Storage">2.6. Storage component</a></li>
+<li><a href="#Design-Commons">2.7. Common classes</a></li>
 </ul>
 </li>
 <li><a href="#implementation">3. Implementation</a>
@@ -58,8 +59,12 @@
 <div class="sect1">
 <h2 id="design"><a class="link" href="#design">2. Design</a></h2>
 <div class="sectionbody">
+<div class="sect3">
+<h4 id="note-image-here-to-the-updated-in-the-later-milestones"><a class="link" href="#note-image-here-to-the-updated-in-the-later-milestones">2.1. Note: Image here to the updated in the later milestones.</a></h4>
+
+</div>
 <div class="sect2">
-<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">2.1. Architecture</a></h3>
+<h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">2.2. Architecture</a></h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ArchitectureDiagram.png" alt="ArchitectureDiagram">
@@ -147,7 +152,6 @@ The following class plays an important role at the architecture level:</p>
 </div>
 <div class="title">Figure 2. Class Diagram of the Logic Component</div>
 </div>
-<h4 id="how-the-architecture-components-interact-with-each-other" class="discrete">How the architecture components interact with each other</h4>
 <div class="paragraph">
 <p>The <em>Sequence Diagram</em> below shows how the components interact with each other for the scenario where the user issues the command <code>delete 1</code>.</p>
 </div>
@@ -162,7 +166,9 @@ The following class plays an important role at the architecture level:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Design-Ui"><a class="link" href="#Design-Ui">2.2. UI component</a></h3>
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">2.3. UI component</a></h3>
+<div class="sect3">
+<h4 id="note-ui-image-and-description-to-be-updated-with-the-later-milestones"><a class="link" href="#note-ui-image-and-description-to-be-updated-with-the-later-milestones">2.3.1. Note: UI image and description to be updated with the later milestones.</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/UiClassDiagram.png" alt="UiClassDiagram">
@@ -192,8 +198,11 @@ The following class plays an important role at the architecture level:</p>
 </ul>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.3. Logic component</a></h3>
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">2.4. Logic component</a></h3>
+<div class="sect3">
+<h4 id="note-logic-architecture-image-and-description-to-be-updated-with-the-later-milestones"><a class="link" href="#note-logic-architecture-image-and-description-to-be-updated-with-the-later-milestones">2.4.1. Note: Logic Architecture image and description to be updated with the later milestones.</a></h4>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/LogicClassDiagram.png" alt="LogicClassDiagram">
@@ -245,11 +254,12 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 </table>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="Design-Model"><a class="link" href="#Design-Model">2.4. Model component</a></h3>
+<h3 id="Design-Model"><a class="link" href="#Design-Model">2.5. Model component</a></h3>
 <div class="imageblock">
 <div class="content">
-<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
+<img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram">
 </div>
 <div class="title">Figure 7. Structure of the Model Component</div>
 </div>
@@ -265,33 +275,25 @@ The lifeline for <code>DeleteCommandParser</code> should end at the destroy mark
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the lists of our various entities.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>Model is the bridge between Logic and Storage and provides an abstraction of how the data is stored in memory.</p>
 </li>
 <li>
-<p>does not depend on any of the other three components.</p>
+<p>It exposes a <code>ReadableEntityList</code> which only has the list method to remind Logic that the data given should not be modified.
+The UI can be bound to these lists so that it automatically updates when the contents of the list change.</p>
+</li>
+<li>
+<p>The <code>Model</code> interface also serves as an API through which controller can edit the data stored in memory.</p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
-<br>
-<span class="image"><img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram"></span>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
-<h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.5. Storage component</a></h3>
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">2.6. Storage component</a></h3>
+<div class="sect3">
+<h4 id="note-to-be-updated-with-the-later-milestones"><a class="link" href="#note-to-be-updated-with-the-later-milestones">2.6.1. Note: To be updated with the later milestones.</a></h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/StorageClassDiagram.png" alt="StorageClassDiagram">
@@ -315,8 +317,9 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 </ul>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
+<h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.7. Common classes</a></h3>
 <div class="paragraph">
 <p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
 </div>
@@ -475,6 +478,10 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.1.2. Design Considerations</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="note-to-be-updated-with-the-later-milestones-2"><a class="link" href="#note-to-be-updated-with-the-later-milestones-2">3.1.3. Note: To be updated with the later milestones.</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
 <div class="ulist">
@@ -783,15 +790,36 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
 </li>
 <li>
-<p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
-</li>
-<li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
 </li>
+<li>
+<p>The system should not seem sluggish if it contains less than 1500 entities.</p>
+</li>
+<li>
+<p>Project is not intended for use on mobile and only should be used on desktop.</p>
+</li>
+<li>
+<p>The application assumes that the user is comfortable with the concept of the command line.</p>
+</li>
+<li>
+<p>The application is meant to run offline.</p>
+</li>
+<li>
+<p>The application is largely a personnel/HR manager, and is not expected to do anything more than that (eg hackathon finances etc).</p>
+</li>
+<li>
+<p>The application is to be used for a single hackathon only and not for multiple hackathons.</p>
+</li>
+<li>
+<p>The application assumes that the hackathon is a short term affair (no longer than 4 days).</p>
+</li>
+<li>
+<p>The application assumes that this is an English medium hackathon and that no non-English names are expected.</p>
+</li>
+<li>
+<p>The GUI should display the result of commands in an intuitive, organized manner that is readable by the laymen(as part of the organization/ affordability of the application).</p>
+</li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{More to be added}</em></p>
 </div>
 </div>
 </div>
@@ -808,6 +836,26 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <dd>
 <p>A contact detail that is not meant to be shared with others</p>
 </dd>
+<dt class="hdlist1"><a id="logging"></a> Logging</dt>
+<dd>
+<p>Logging uses file(s) containing information about the activity of a computer program for the developers to consult and monitor.</p>
+</dd>
+<dt class="hdlist1"><a id="entity"></a> Entity</dt>
+<dd>
+<p>Entities are the main objects Alfred stores. The Entities are Participant, Mentor and Team as described below.</p>
+</dd>
+<dt class="hdlist1"><a id="participant"></a> Participant</dt>
+<dd>
+<p>It represents a participant taking part in the hackathon</p>
+</dd>
+<dt class="hdlist1"><a id="mentor"></a> Mentor</dt>
+<dd>
+<p>It represents a mentor available for teams to choose</p>
+</dd>
+<dt class="hdlist1"><a id="team"></a> Team</dt>
+<dd>
+<p>Team is the base unit of this project. It contains references to an associated list of participants and an optional mentor.</p>
+</dd>
 </dl>
 </div>
 </div>
@@ -816,10 +864,10 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Product Name</strong></p>
+<p><strong>Google Sheets</strong></p>
 </div>
 <div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
+<p>Author: Google</p>
 </div>
 <div class="paragraph">
 <p>Pros:</p>
@@ -827,10 +875,13 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>&#8230;&#8203;</p>
+<p>This is extremely versatile as Google Sheets come with a list of extremely helpful macros that could help in the storage of participants.</p>
 </li>
 <li>
-<p>&#8230;&#8203;</p>
+<p>The display and UI of Google Sheets is extremely intuitive and will come as second nature to anyone using the web.</p>
+</li>
+<li>
+<p>Convenient and accessible by multiple HR personnel simultaneously.</p>
 </li>
 </ul>
 </div>
@@ -840,10 +891,16 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>&#8230;&#8203;</p>
+<p>Google Sheets has no concept of objects and thus it cannot accurately depict the relationships between our different entities.</p>
 </li>
 <li>
-<p>&#8230;&#8203;</p>
+<p>As above, it is hard to look for relationships between our entities, such as Team/Participant associations.</p>
+</li>
+<li>
+<p>Google Sheets may be useful for storing information, but it does not support command line arguments.</p>
+</li>
+<li>
+<p>Google Sheets is also unable to perform input validation as it lacks the logic to do so.</p>
 </li>
 </ul>
 </div>
@@ -880,7 +937,8 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.<br>
+<em>Note: If you are a OS X user, you might need to run this from your command line instead.</em></p>
 </li>
 </ol>
 </div>
@@ -958,4 +1016,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-03 07:32:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-03 11:30:28 UTC</div></div></div></body></html>
