@@ -353,10 +353,10 @@ _{More to be added}_
 .  The system should not seem sluggish if it contains less than 1500 entities.
 .  Project is not intended for use on mobile and only should be used on desktop.
 .  The application assumes that the user is comfortable with the concept of the command line.
-.  The application is meant to run offline. 
+.  The application is meant to run offline.
 .  The application is largely a personnel/HR manager, and is not expected to do anything more than that (eg hackathon finances etc).
 .  The application is to be used for a single hackathon only and not for multiple hackathons.
-.  The application assumes that the hackathon is a short term affair (no longer than 4 days).   
+.  The application assumes that the hackathon is a short term affair (no longer than 4 days).
 .  The application assumes that this is an English medium hackathon and that no non-English names are expected.
 .  The GUI should display the result of commands in an intuitive, organized manner that is readable by the laymen(as part of the organization/ affordability of the application).
 
@@ -382,7 +382,7 @@ It represents a participant taking part in the hackathon
 It represents a mentor available for teams to choose
 
 [[team]] Team::
-Team is the base unit of this project. It contains references to an associated list of participants and an optional mentor. 
+Team is the base unit of this project. It contains references to an associated list of participants and an optional mentor.
 
 [appendix]
 == Product Survey
@@ -418,7 +418,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum. + 
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum. +
    _Note: If you are a OS X user, you might need to run this from your command line instead._
 . Saving window preferences
 
