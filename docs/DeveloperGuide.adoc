@@ -222,7 +222,8 @@ image::CommitActivityDiagram.png[]
 
 ==== Design Considerations
 
-==== Note: To be updated with the later milestones.
+NOTE: To be updated with the later milestones.
+
 ===== Aspect: How undo & redo executes
 
 * **Alternative 1 (current choice):** Saves the entire address book.
