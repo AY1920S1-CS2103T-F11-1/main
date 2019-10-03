@@ -1,0 +1,552 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Alfred - The Hackathon Butler (User Guide)</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">AddressBook-Level3</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level3"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Alfred - The Hackathon Butler (User Guide)</h1></div><div id="content"><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>By: <code>Team F11-1</code></p>
+</div>
+<div class="paragraph">
+<p>Since: <code>August 2019</code></p>
+</div>
+<div class="paragraph">
+<p>Licence: <code>MIT</code></p>
+</div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#quick-start">2. Quick Start</a></li>
+<li><a href="#Features">3. Features</a>
+<ul class="sectlevel2">
+<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-an-entity-code-add-participant-mentor-team-code">3.2. Adding an Entity: <code>add {participant/mentor/team}</code></a></li>
+<li><a href="#updating-an-entity-code-edit-mentor-participant-team-id-parameters-code">3.3. Updating an Entity: <code>edit {mentor/participant/team} ID [PARAMETERS]</code></a></li>
+<li><a href="#listing-all-entities-code-list-mentor-team-participant-code">3.4. Listing all Entities : <code>list {mentor/team/participant}</code></a></li>
+<li><a href="#deleting-an-entity-code-delete-participant-mentor-team-id-code">3.5. Deleting an Entity: <code>delete {participant/mentor/team} ID</code></a></li>
+<li><a href="#saving-the-data-code-save-code">3.6. Saving the data: <code>save</code></a></li>
+<li><a href="#finding-a-specific-entity-code-find-mentor-team-participant-name-code">3.7. Finding a Specific Entity: <code>find {mentor/team/participant} NAME</code></a></li>
+<li><a href="#judging-and-leaderboard-features">3.8. Judging and Leaderboard Features</a></li>
+<li><a href="#bulk-registration-code-addbulk-path_to_csv_file-code">3.9. Bulk Registration: <code>addBulk PATH_TO_CSV_FILE</code></a></li>
+<li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">3.10. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
+<li><a href="#swag-coming-in-v2-0">3.11. Swag (Coming in v2.0)</a></li>
+<li><a href="#schedule-coming-in-v2-0">3.12. Schedule (Coming in v2.0)</a></li>
+<li><a href="#food-coming-in-v2-0">3.13. Food (Coming in v2.0)</a></li>
+<li><a href="#waitlist-coming-in-v2-0">3.14. Waitlist (Coming in v2.0)</a></li>
+</ul>
+</li>
+<li><a href="#faq">4. FAQ</a></li>
+<li><a href="#command-summary">5. Command Summary</a></li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Alfred is a desktop application to help Hackathons' Human Resource Managers organise a Hackathon event.
+Hackathons are difficult to manage manually as they involve different groups of individuals, each
+of whom have a different role to play and agenda to fulfill in the Hackathon. Alfred helps streamline
+this organisation and management process, allowing you to quickly get up to speed with the logistics
+and administrative details of the Hackathon you are organising.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, Alfred is <strong>optimized for those who prefer to work with a Command Line Interface (CLI)</strong>, while
+maintaining the benefits of having visual responses in a Graphical User Interface.</p>
+</div>
+<div class="paragraph">
+<p>Interested? Well, head to <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. We hope Alfred serves you well!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure you have Java <code>11</code> or above installed in your Computer.</p>
+</li>
+<li>
+<p>Download the latest <code>alfred.jar</code> <a href="https://github.com/se-edu/addressbook-level3/releases">here</a>.</p>
+</li>
+<li>
+<p>Copy the file to the folder you want to use as the home folder for Alfred.</p>
+</li>
+<li>
+<p>Double-click the file to start the app. Alternatively, if you use a Mac, type the command <code>java -jar alfred.jar</code>
+on terminal in the jar file&#8217;s directory to open start the app. The GUI should appear in a few seconds.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui" width="790">
+</div>
+</div>
+</li>
+<li>
+<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
+</li>
+<li>
+<p>Here are some sample commands you can experiment with:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>list teams</code></strong> : lists teams in the hackathon</p>
+</li>
+<li>
+<p><strong><code>add participant n/John Doe p/98765432 e/johnd@example.com</code></strong> : adds a new participant named <code>John Doe</code> to the Hackathon.</p>
+</li>
+<li>
+<p><strong><code>delete mentor 3</code></strong> : removes the mentor with ID 3 from the hackathon.</p>
+</li>
+<li>
+<p><strong><code>exit</code></strong> : exits the app</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Prelude - Command Format</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Words in <code>UPPER_CASE</code> are the parameters which you need to supply. For example, in <code>add mentor n/NAME</code>,
+<code>NAME</code> is a parameter which you need to specify as the mentor&#8217;s name, for example <code>add mentor n/John Doe</code>.</p>
+</li>
+<li>
+<p>You can type the parameters can be in any order. For instance, if the command specifies <code>n/NAME p/PHONE_NUMBER</code>,
+you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still deem it as an acceptable command.</p>
+</li>
+<li>
+<p>Words in {curly braces} indicate values for the command that you need to supply.
+For example in the case of <code>add {mentor/participant/list}</code>, you can choose to type <code>add mentor</code>, <code>add participant</code> or <code>add team</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<div class="paragraph">
+<p>This command displays a help page in a separate pop-up window. Should you require further information,
+the pop-up window also includes links to further references and documentation.<br>
+Format: <code>help</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-an-entity-code-add-participant-mentor-team-code"><a class="link" href="#adding-an-entity-code-add-participant-mentor-team-code">3.2. Adding an Entity: <code>add {participant/mentor/team}</code></a></h3>
+<div class="paragraph">
+<p>Adds an entity for Alfred to keep track of<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Creates an Entity as specified by you. Each Entity object will have a unique ID autmatically assigned to it.</p>
+</li>
+<li>
+<p>As of version 1.1, you must provide all the fields. There are no optional fields.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-participant-code-add-participant-parameters-code"><a class="link" href="#adding-a-participant-code-add-participant-parameters-code">3.2.1. Adding a Participant: <code>add participant [PARAMETERS]</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>add participant n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add participant n/John Doe p/98765432 e/johnd@example.com</code></p>
+</li>
+<li>
+<p><code>add participant n/Betsy Crowe e/betsycrowe@example.com p/1234567</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-mentor-code-add-mentor-parameters-code"><a class="link" href="#adding-a-mentor-code-add-mentor-parameters-code">3.2.2. Adding a Mentor: <code>add mentor [PARAMETERS]</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>add mentor  n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS o/ORGANIZATION s/SPECIALISATION</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add mentor n/Professor Superman p/91236549 e/clarkkent@gmail.com o/Daily Planet s/Artificial Intelligence</code></p>
+</li>
+<li>
+<p><code>add mentor n/Doctor Batman p/91236549 e/bruce@gmail.com o/Google s/Augmented Reality</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="adding-a-team-code-add-team-parameters-code"><a class="link" href="#adding-a-team-code-add-team-parameters-code">3.2.3. Adding a Team: <code>add team [PARAMETERS]</code></a></h4>
+<div class="paragraph">
+<p>Format: <code>add team n/NAME s/SUBJECT pn/PROJECT_NAME pt/PROJECT_TYPE l/LOCATION</code></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add team n/Team01 s/Artificial Intelligence pn/EmotionTrain pt/Public Welfare l/COM1-0210</code></p>
+</li>
+<li>
+<p><code>add team n/HackathonWinners4Sure s/Augmented Reality pn/Path-ify pt/Navigation l/COM2-0102</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="updating-an-entity-code-edit-mentor-participant-team-id-parameters-code"><a class="link" href="#updating-an-entity-code-edit-mentor-participant-team-id-parameters-code">3.3. Updating an Entity: <code>edit {mentor/participant/team} ID [PARAMETERS]</code></a></h3>
+<div class="paragraph">
+<p>Edits an entity based on the supplied parameter values you supply.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Updates the Entity with <code>ID</code> you specified. The ID is a unique identifier for the Entity.</p>
+</li>
+<li>
+<p>You must provide at least one of the optional fields.</p>
+</li>
+<li>
+<p>Existing values will be updated to the input values.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>edit mentor M01 /nNewMentorName</code></p>
+</li>
+<li>
+<p><code>edit team T01 n/NewTeamName</code></p>
+</li>
+<li>
+<p><code>edit participant P01 n/NewParticipantNAme</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-all-entities-code-list-mentor-team-participant-code"><a class="link" href="#listing-all-entities-code-list-mentor-team-participant-code">3.4. Listing all Entities : <code>list {mentor/team/participant}</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all the Entities that Alfred keeps track of<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The fields of the Entity will be displayed on the Graphical User Interface.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list mentor</code> will list all mentors stored within Alfred.</p>
+</li>
+<li>
+<p><code>list participant</code> will list all hackathon participants stored within Alfred.</p>
+</li>
+<li>
+<p><code>list team</code> will list all hackathon teams stored within Alfred.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-entity-code-delete-participant-mentor-team-id-code"><a class="link" href="#deleting-an-entity-code-delete-participant-mentor-team-id-code">3.5. Deleting an Entity: <code>delete {participant/mentor/team} ID</code></a></h3>
+<div class="paragraph">
+<p>Deletes an Entity, so that Alfred will no longer keep track of that Entity.
+This is a permanent operation, so please be careful.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Deletes the Entity with the ID that you specify.</p>
+</li>
+<li>
+<p>As of version 1.1, the delete operation is permanent and irreversible. Be careful.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>delete mentor M01</code> will delete the mentor with ID M01 from Alfred.</p>
+</li>
+<li>
+<p><code>delete participant P01</code> will delete the participant with ID P01 from Alfred.</p>
+</li>
+<li>
+<p><code>delete team T01</code> will delete the team with ID T01 from Alfred.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-the-data-code-save-code"><a class="link" href="#saving-the-data-code-save-code">3.6. Saving the data: <code>save</code></a></h3>
+<div class="paragraph">
+<p>Data in Alfred is saved to the hard disk automatically after any command that changes the data.<br>
+There is no need for you to save the data manually.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-a-specific-entity-code-find-mentor-team-participant-name-code"><a class="link" href="#finding-a-specific-entity-code-find-mentor-team-participant-name-code">3.7. Finding a Specific Entity: <code>find {mentor/team/participant} NAME</code></a></h3>
+<div class="paragraph">
+<p>You may search for Entities via their name, instead of their ID, in case you find that the ID is difficult to keep track of.<br></p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find participant n/John Doe</code> will display a list of all participants in the Hackathon who are named "John Doe", or have "John Doe" in their name.</p>
+</li>
+<li>
+<p><code>find mentor n/Joshua Wong</code> will display a list of all mentors in the Hackathon who are named "Joshua Wong", or have "Joshua Wong" in their name.</p>
+</li>
+<li>
+<p><code>find team n/FutureHackathonWinner</code> will display a list of all teams in the Hackathon that are named "FutureHackathonWinner", or have "FutureHackathonWinner" in their name.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="judging-and-leaderboard-features"><a class="link" href="#judging-and-leaderboard-features">3.8. Judging and Leaderboard Features</a></h3>
+<div class="sect3">
+<h4 id="list-team-ranking-code-showleaderboard-code"><a class="link" href="#list-team-ranking-code-showleaderboard-code">3.8.1. List Team Ranking: <code>showLeaderboard</code></a></h4>
+<div class="paragraph">
+<p>Use this command to display the ranking of the teams in the hackathon in descending order of their points.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="get-the-top-k-teams-code-gettop-number-code"><a class="link" href="#get-the-top-k-teams-code-gettop-number-code">3.8.2. Get the top k teams: <code>getTop NUMBER</code></a></h4>
+<div class="paragraph">
+<p>Use this command to list the top k teams in the leaderboard, where k is the number (NUMBER) which you specify.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>getTop 5</code> will display the top 5 teams with the highest points in the hackathon.</p>
+</li>
+<li>
+<p><code>getTop 20</code> will display the top 20 teams with the highest points in the hackathon.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="update-points-code-updatepoints-team_id-new_points-code"><a class="link" href="#update-points-code-updatepoints-team_id-new_points-code">3.8.3. Update points: <code>updatePoints TEAM_ID NEW_POINTS</code></a></h4>
+<div class="paragraph">
+<p>Update the team with ID TEAM_ID to have points NEW_POINTS.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="update-winner-code-updatewinnercategiry-prize_category-team_id-code"><a class="link" href="#update-winner-code-updatewinnercategiry-prize_category-team_id-code">3.8.4. Update Winner: <code>updateWinnerCategiry PRIZE_CATEGORY TEAM_ID</code></a></h4>
+<div class="paragraph">
+<p>Updates the winner of a particular prize category</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="list-prize-categories-code-listprizes-code"><a class="link" href="#list-prize-categories-code-listprizes-code">3.8.5. List Prize Categories: <code>listPrizes</code></a></h4>
+<div class="paragraph">
+<p>Lists the prize categories and their winners (if any)</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="bulk-registration-code-addbulk-path_to_csv_file-code"><a class="link" href="#bulk-registration-code-addbulk-path_to_csv_file-code">3.9. Bulk Registration: <code>addBulk PATH_TO_CSV_FILE</code></a></h3>
+<div class="paragraph">
+<p>You may add multiple participants at once into Alfred through the specification of a .csv file</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addBulk C:\User\Hackathon2019\participant.csv</code> will import data from the participant.csv file into Alfred.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="seating-code-locate-participant-team-code-coming-in-v2-0"><a class="link" href="#seating-code-locate-participant-team-code-coming-in-v2-0">3.10. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></h3>
+<div class="paragraph">
+<p>Find where a particular participant or team is seated.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>locate n/Brian</code> will tell you where the participant Brian is seated.</p>
+</li>
+<li>
+<p><code>locate n/GenericTeamName</code> will tell you where the team GenericTeamName is seated.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="swag-coming-in-v2-0"><a class="link" href="#swag-coming-in-v2-0">3.11. Swag (Coming in v2.0)</a></h3>
+<div class="sect3">
+<h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">3.11.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
+<div class="paragraph">
+<p>Add swag to inventory
+Examples: <code>add swag Android Plushie 5</code>
+==== Track inventory of available swags: <code>list swag</code>
+List the currently available swag</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="schedule-coming-in-v2-0"><a class="link" href="#schedule-coming-in-v2-0">3.12. Schedule (Coming in v2.0)</a></h3>
+<div class="sect3">
+<h4 id="add-schedule-code-addschedule-time-team_id-mentor_id-code"><a class="link" href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">3.12.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></h4>
+<div class="paragraph">
+<p>Add a schedule for a team</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code"><a class="link" href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">3.12.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></h4>
+<div class="paragraph">
+<p>Update a schedule for a team</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="delete-schedule-code-deleteschedule-schedule_id-code"><a class="link" href="#delete-schedule-code-deleteschedule-schedule_id-code">3.12.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></h4>
+<div class="paragraph">
+<p>Delete a Schedule for a Team</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="food-coming-in-v2-0"><a class="link" href="#food-coming-in-v2-0">3.13. Food (Coming in v2.0)</a></h3>
+<div class="sect3">
+<h4 id="add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code"><a class="link" href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">3.13.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="mark-food-as-received-code-receivefood-company_name-inventory-quantity-code"><a class="link" href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">3.13.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="list-food-inventory-code-list-food-code"><a class="link" href="#list-food-inventory-code-list-food-code">3.13.3. List Food Inventory: <code>list food</code></a></h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="waitlist-coming-in-v2-0"><a class="link" href="#waitlist-coming-in-v2-0">3.14. Waitlist (Coming in v2.0)</a></h3>
+<div class="sect3">
+<h4 id="add-to-waitlist-code-addtowaitlist-user_id-code"><a class="link" href="#add-to-waitlist-code-addtowaitlist-user_id-code">3.14.1. Add to waitlist: <code>addToWaitList USER_ID</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="remove-from-waitlist-code-removefromwaitlist-user_id-code"><a class="link" href="#remove-from-waitlist-code-removefromwaitlist-user_id-code">3.14.2. Remove from waitlist: <code>removeFromWaitList USER_ID</code></a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="list-by-registration-time-code-listwaitlist-code"><a class="link" href="#list-by-registration-time-code-listwaitlist-code">3.14.3. List by Registration Time: <code>listWaitList</code></a></h4>
+
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Add</strong> <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague</code></p>
+</li>
+<li>
+<p><strong>Clear</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>delete INDEX</code><br>
+e.g. <code>delete 3</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
+</li>
+<li>
+<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find James Jake</code></p>
+</li>
+<li>
+<p><strong>List</strong> : <code>list</code></p>
+</li>
+<li>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-03 06:10:20 UTC</div></div></div></body></html>
