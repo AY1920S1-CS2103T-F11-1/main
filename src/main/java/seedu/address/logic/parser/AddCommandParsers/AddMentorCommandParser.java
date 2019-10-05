@@ -31,12 +31,6 @@ public class AddMentorCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMentorCommand parse(String args) throws ParseException {
-
-        /**
-         * Added the below code as a placeholder. We will replace it with proper code
-         * once the Mentor class is finalised.
-         */
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ORGANISATION,
                         PREFIX_SPECIALISATION);

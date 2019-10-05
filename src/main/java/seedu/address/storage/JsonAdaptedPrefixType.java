@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Entity.PrefixType;
+import seedu.address.model.entity.PrefixType;
 import seedu.address.model.person.Person;
 
 public class JsonAdaptedPrefixType {
@@ -26,7 +27,7 @@ public class JsonAdaptedPrefixType {
 
     public PrefixType toModelType() throws IllegalValueException{
         if (prefixType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT));
         }
         if (!PrefixType.isValidPrefix(prefixType)) {
             throw new IllegalValueException(PrefixType.MESSAGE_CONSTRAINTS);
