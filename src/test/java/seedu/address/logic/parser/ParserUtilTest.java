@@ -48,6 +48,7 @@ public class ParserUtilTest {
             -> AlfredParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1), PrefixType.M));
     }
 
+    @Disabled
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces

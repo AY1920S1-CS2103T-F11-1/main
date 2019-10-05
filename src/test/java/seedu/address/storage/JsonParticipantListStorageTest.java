@@ -2,11 +2,12 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Disabled;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
+
+import org.junit.jupiter.api.Disabled;
 
 import seedu.address.AlfredException;
 import seedu.address.model.entity.Email;
