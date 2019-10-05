@@ -1,7 +1,5 @@
 package seedu.address.commons.exceptions;
 
-import seedu.address.AlfredException;
-
 /**
  * Represents an error during conversion of data from one format to another.
  */
