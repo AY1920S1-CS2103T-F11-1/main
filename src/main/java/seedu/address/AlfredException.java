@@ -10,7 +10,7 @@ public abstract class AlfredException extends Exception {
     /**
      * Constructs an instance of {@code AlfredException}.
      *
-     * @paraa message should contain relevant information on the cause of exception.
+     * @param message should contain relevant information on the cause of exception.
      */
     public AlfredException(String message) {
         super(message);
@@ -19,7 +19,7 @@ public abstract class AlfredException extends Exception {
     /**
      * Constructs an instance of {@code AlfredException}.
      *
-     * @paraa message should contain relevant information on the cause of exception.
+     * @param message should contain relevant information on the cause of exception.
      * @param cause {@code Throwable} contain the type of error or exception thrown.
      */
     public AlfredException(String message, Throwable cause) {
