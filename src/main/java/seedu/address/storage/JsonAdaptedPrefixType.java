@@ -4,14 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.Prefix;
-<<<<<<< HEAD
-import seedu.address.model.Entity.PrefixType;
 import seedu.address.model.entity.PrefixType;
-import seedu.address.model.person.Person;
-=======
-
-import seedu.address.model.entity.PrefixType;
->>>>>>> 2da432d0e9545d26af46c9bfe678fa65fb36eaba
 
 public class JsonAdaptedPrefixType {
 

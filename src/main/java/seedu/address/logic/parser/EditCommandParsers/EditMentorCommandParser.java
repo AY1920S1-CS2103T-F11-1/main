@@ -32,11 +32,6 @@ public class EditMentorCommandParser implements Parser<EditCommand> {
                         PREFIX_SPECIALISATION);
         Id id;
 
-
-
-<<<<<<< HEAD
         return null;
     }
-=======
->>>>>>> 2da432d0e9545d26af46c9bfe678fa65fb36eaba
 }
