@@ -1,8 +1,12 @@
 package seedu.address.logic.parser.DeleteCommandParsers;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.deletecommand.DeleteTeamCommand;
+import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entity.Id;
+import seedu.address.model.entity.PrefixType;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
