@@ -1,18 +1,21 @@
 package seedu.address.logic.parser.DeleteCommandParsers;
 
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.deletecommand.DeleteCommand;
 import seedu.address.logic.commands.deletecommand.DeleteTeamCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteTeamCommandParser implements Parser<DeleteCommand> {
+
+    private static final String MESSAGE_USAGE = "Wrong usage.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -25,7 +28,7 @@ public class DeleteTeamCommandParser implements Parser<DeleteCommand> {
             return new DeleteTeamCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
     }
 
