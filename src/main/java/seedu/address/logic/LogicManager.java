@@ -25,12 +25,12 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
-    private final Storage storage;
+//    private final Storage storage;
     private final AddressBookParser addressBookParser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
-        this.storage = storage;
+//        this.storage = storage;
         addressBookParser = new AddressBookParser();
     }
 
@@ -39,14 +39,15 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
+        // TODO: Abhiman to change this to AlfredParser
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }
+//        try {
+//            storage.saveAddressBook(model.getAddressBook());
+//        } catch (IOException ioe) {
+//            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+//        }
 
         return commandResult;
     }
