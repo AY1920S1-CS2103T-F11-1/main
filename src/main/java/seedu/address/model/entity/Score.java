@@ -5,10 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Score {
 
-    private static final String MESSAGE_CONSTRAINTS = "Score should contain only positive integers from 0 to 100";
+    public static final String MESSAGE_CONSTRAINTS = "Score should contain only positive integers from 0 to 100";
     private int score;
-
-
 
     /**
      * Constructs a {@code Score}
@@ -19,6 +17,12 @@ public class Score {
         requireNonNull(score);
         checkArgument(isValidScore(score), MESSAGE_CONSTRAINTS);
         this.score = score;
+    }
+
+    // Getters
+
+    public int getScore() {
+        return this.score;
     }
 
     /**

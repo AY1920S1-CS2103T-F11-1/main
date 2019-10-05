@@ -6,8 +6,15 @@ public enum ProjectType {
 
     private final String projectTypeString;
 
+    public static final String MESSAGE_CONSTRAINTS = "PROJECT_TYPE should be valid.";
+
     private ProjectType(String projectTypeString) {
         this.projectTypeString = projectTypeString;
+    }
+
+    // TODO: Implement
+    public static boolean isValidProjectType(String ProjectType) {
+        return true;
     }
 
     /**

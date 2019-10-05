@@ -101,7 +101,7 @@ public class AlfredParserUtil {
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         int trimmedLocation = Integer.parseInt(location.trim());
-        if (!Location.isValidNumber(trimmedLocation)) {
+        if (!Location.isValidLocation(trimmedLocation)) {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS_INVALID_TABLE_NUMBER);
         }
         return new Location(trimmedLocation);

@@ -23,20 +23,20 @@ public class AlfredStorageManager implements AlfredStorage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ParticipantListStorage pStore;
     private MentorListStorage mStore;
-    private IssueListStorage iStore;
+//    private IssueListStorage iStore;
     private TeamListStorage tStore;
     private UserPrefsStorage userPrefsStorage;
 
 
     public AlfredStorageManager(ParticipantListStorage pStore,
                                 MentorListStorage mStore,
-                                IssueListStorage iStore,
+//                                IssueListStorage iStore,
                                 TeamListStorage tStore,
                                 UserPrefsStorage userPrefsStorage) {
         super();
         this.pStore = pStore;
         this.mStore = mStore;
-        this.iStore = iStore;
+//        this.iStore = iStore;
         this.tStore = tStore;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -114,32 +114,32 @@ public class AlfredStorageManager implements AlfredStorage {
     }
 
     // ================ IssueList methods ==============================
-    @Override
-    public Path getIssueListFilePath() {
-        return iStore.getIssueListFilePath();
-    }
-
-    @Override
-    public Optional<IssueList> readIssueList() throws DataConversionException, IOException {
-        return readIssueList(iStore.getIssueListFilePath());
-    }
-
-    @Override
-    public Optional<IssueList> readIssueList(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return iStore.readIssueList(filePath);
-    }
-
-    @Override
-    public void saveIssueList(IssueList iList) throws IOException {
-        saveIssueList(iList, iStore.getIssueListFilePath());
-    }
-
-    @Override
-    public void saveIssueList(IssueList iList, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        iStore.saveIssueList(iList, filePath);
-    }
+//    @Override
+//    public Path getIssueListFilePath() {
+//        return iStore.getIssueListFilePath();
+//    }
+//
+//    @Override
+//    public Optional<IssueList> readIssueList() throws DataConversionException, IOException {
+//        return readIssueList(iStore.getIssueListFilePath());
+//    }
+//
+//    @Override
+//    public Optional<IssueList> readIssueList(Path filePath) throws DataConversionException, IOException {
+//        logger.fine("Attempting to read data from file: " + filePath);
+//        return iStore.readIssueList(filePath);
+//    }
+//
+//    @Override
+//    public void saveIssueList(IssueList iList) throws IOException {
+//        saveIssueList(iList, iStore.getIssueListFilePath());
+//    }
+//
+//    @Override
+//    public void saveIssueList(IssueList iList, Path filePath) throws IOException {
+//        logger.fine("Attempting to write to data file: " + filePath);
+//        iStore.saveIssueList(iList, filePath);
+//    }
 
     // ================ TeamList methods ==============================
     @Override

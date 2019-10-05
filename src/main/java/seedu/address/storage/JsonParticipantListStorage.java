@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import seedu.address.AlfredException;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -55,9 +56,9 @@ public class JsonParticipantListStorage implements ParticipantListStorage {
         try {
             //Converts to Optional<ParticipantList>
             return Optional.of(jsonParticipantList.get().toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataConversionException(ive);
+        } catch (AlfredException e) {
+            logger.info("Illegal values found in " + filePath + ": " + e.getMessage());
+            throw new DataConversionException(e);
         }
     }
 

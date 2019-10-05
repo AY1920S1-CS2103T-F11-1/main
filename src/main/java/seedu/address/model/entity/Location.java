@@ -26,7 +26,7 @@ public class Location {
      */
     public Location(int tableNumber) {
         requireNonNull(tableNumber);
-        checkArgument(isValidNumber(tableNumber), MESSAGE_CONSTRAINTS_INVALID_TABLE_NUMBER);
+        checkArgument(isValidLocation(tableNumber), MESSAGE_CONSTRAINTS_INVALID_TABLE_NUMBER);
         this.tableNumber = tableNumber;
     }
 
@@ -36,7 +36,7 @@ public class Location {
      * @param tableNumber tableNumber that team is seated on.
      * @return boolean whether test is in valid tableNumber format.
      */
-    public static boolean isValidNumber(int tableNumber){
+    public static boolean isValidLocation(int tableNumber){
         return Integer.toString(tableNumber).matches(TABLE_NUMBER_REGEX);
     }
 
@@ -46,9 +46,7 @@ public class Location {
         return tableNumber;
     }
 
-
     // Setter
-
 
     @Override
     public int hashCode() {

@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.Date;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Issue;
+import seedu.address.model.entity.IssueType;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -60,53 +64,53 @@ class JsonAdaptedIssue {
         idNum = source.getId().getNumber();
     }
 
-    /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Issue} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
-     */
-    public Issue toModelType() throws IllegalValueException {
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
-
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Description"));
-        }
-        final String modelDescription = description;
-
-        if (isCompleted == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "IsCompleted"));
-        }
-        final Boolean modelIsCompleted = isCompleted;
-
-        if (issueType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, IssueType.class.getSimpleName()));
-        }
-        if (!IssueType.isValidIssueType(issueType)) {
-            throw new IllegalValueException(IssueType.MESSAGE_CONSTRAINTS);
-        }
-        final IssueType modelIssueType = IssueType.valueOf(issueType);
-
-        if (prefixTypeStr == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PrefixType.class.getSimpleName()));
-        }
-        if (!PrefixType.isValidPrefixType(prefixTypeStr)) {
-            throw new IllegalValueException(PrefixType.MESSAGE_CONSTRAINTS);
-        }
-        final PrefixType modelPrefixType = PrefixType.valueOf(prefixTypeStr);
-
-        if (!Id.isValidNumber(idNum)) {
-            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS_INVALID_NUMBER);
-        }
-        final int modelIdNum = idNum;
-        final Id modelId = new Id(modelPrefixType, modelIdNum);
-
-        return new Issue(modelName, modelId, modelDescription, modelIssueType, modelIsCompleted);
-    }
+//    /**
+//     * Converts this Jackson-friendly adapted person object into the model's {@code Issue} object.
+//     *
+//     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+//     */
+//    public Issue toModelType() throws IllegalValueException {
+//        if (name == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+//        }
+//        if (!Name.isValidName(name)) {
+//            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+//        }
+//        final Name modelName = new Name(name);
+//
+//        if (description == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Description"));
+//        }
+//        final String modelDescription = description;
+//
+//        if (isCompleted == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "IsCompleted"));
+//        }
+//        final Boolean modelIsCompleted = isCompleted;
+//
+//        if (issueType == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, IssueType.class.getSimpleName()));
+//        }
+//        if (!IssueType.isValidIssueType(issueType)) {
+//            throw new IllegalValueException(IssueType.MESSAGE_CONSTRAINTS);
+//        }
+//        final IssueType modelIssueType = IssueType.valueOf(issueType);
+//
+//        if (prefixTypeStr == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PrefixType.class.getSimpleName()));
+//        }
+//        if (!PrefixType.isValidPrefix(prefixTypeStr)) {
+//            throw new IllegalValueException(PrefixType.MESSAGE_CONSTRAINTS);
+//        }
+//        final PrefixType modelPrefixType = PrefixType.valueOf(prefixTypeStr);
+//
+//        if (!Id.isValidNumber(idNum)) {
+//            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS_INVALID_NUMBER);
+//        }
+//        final int modelIdNum = idNum;
+//        final Id modelId = new Id(modelPrefixType, modelIdNum);
+//
+//        return new Issue(modelName, modelId, modelDescription, modelIssueType, modelIsCompleted);
+//    }
 
 }

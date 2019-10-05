@@ -14,7 +14,7 @@ import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.MentorList;
 
 public interface AlfredStorage extends UserPrefsStorage, TeamListStorage,
-        ParticipantListStorage, IssueListStorage, MentorListStorage {
+        ParticipantListStorage, MentorListStorage {
 
     //=========================== UserPrefs ===========================
     @Override
@@ -44,14 +44,14 @@ public interface AlfredStorage extends UserPrefsStorage, TeamListStorage,
     void saveParticipantList(ParticipantList participantList) throws IOException;
 
     //=========================== IssueList ===========================
-    @Override
-    Path getIssueListFilePath();
-
-    @Override
-    Optional<IssueList> readIssueList() throws DataConversionException, IOException;
-
-    @Override
-    void saveIssueList(IssueList issueList) throws IOException;
+//    @Override
+//    Path getIssueListFilePath();
+//
+//    @Override
+//    Optional<IssueList> readIssueList() throws DataConversionException, IOException;
+//
+//    @Override
+//    void saveIssueList(IssueList issueList) throws IOException;
 
     //=========================== MentorList ===========================
     @Override

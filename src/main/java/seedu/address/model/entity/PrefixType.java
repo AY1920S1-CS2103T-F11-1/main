@@ -16,7 +16,7 @@ public enum PrefixType {
         return this.name();
     }
 
-    public boolean isValidPrefix(String test){
+    public static boolean isValidPrefixType(String test){
     try{
         PrefixType result = PrefixType.valueOf(test);
         return true;
