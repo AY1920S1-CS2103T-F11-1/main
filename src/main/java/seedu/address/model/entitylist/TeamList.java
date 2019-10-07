@@ -67,7 +67,7 @@ public class TeamList extends EntityList {
      */
     public void add(Team team) throws AlfredException {
         for (Team t: this.teams) {
-            if (t.getId() == team.getId()) {
+            if (t.getId().equals(team.getId())) {
                 throw new AlfredRuntimeException("Team to add already exists.");
             }
         }

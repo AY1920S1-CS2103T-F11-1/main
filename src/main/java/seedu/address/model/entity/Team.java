@@ -145,7 +145,7 @@ public class Team extends Entity {
         List<Participant> list = this.getParticipants();
         boolean isParticipantInTeam = false;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId().equals(id)) {
+            if (list.get(i).getId().equals(updatedParticipant.getId())) {
                 list.set(i, updatedParticipant);
                 isParticipantInTeam = true;
             }

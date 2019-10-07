@@ -216,7 +216,7 @@ public class ModelManager implements Model {
         List<Team> teams = this.teamList.getSpecificTypedList();
         for (Team t: teams) {
             for (Participant p: t.getParticipants()) {
-                if (p.getId() == participantId) {
+                if (p.getId().equals(participantId)) {
                     return t;
                 }
             }
@@ -236,7 +236,7 @@ public class ModelManager implements Model {
         for (Team t: teams) {
             Optional<Mentor> mentor = t.getMentor();
             if (mentor.isPresent()) {
-                if (mentor.get().getId() == mentorId) {
+                if (mentor.get().getId().equals(mentorId)) {
                     return t;
                 }
             }
@@ -262,6 +262,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public void addTeam(Team team) throws AlfredException {
+        // TODO: Verify that participants and mentors are in their respective list before adding.
         this.teamList.add(team);
     }
 

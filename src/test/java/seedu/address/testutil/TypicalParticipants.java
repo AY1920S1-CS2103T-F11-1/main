@@ -26,7 +26,12 @@ public class TypicalParticipants {
                                                         new Email("participantA@gmail.com"),
                                                         new Phone("91111111"));
 
-    public static final Participant B = new Participant(new Name("Participant B"),
+    public static final Participant A_UPDATED = new Participant(new Name("Participant McParticipantyface"),
+                                                                new Id(PrefixType.P, 1),
+                                                                new Email("updated@gmail.com"),
+                                                                new Phone("92121212"));
+
+    public static final Participant B = new Participant(new Name("Part B"),
                                                         new Id(PrefixType.P, 2),
                                                         new Email("participantB@hotmail.com"),
                                                         new Phone("822222222"));

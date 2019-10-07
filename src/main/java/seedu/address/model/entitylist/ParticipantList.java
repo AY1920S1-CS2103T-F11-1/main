@@ -35,7 +35,7 @@ public class ParticipantList extends EntityList {
      */
     public Participant get(Id id) throws AlfredException {
         for (Participant p: this.participants) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 return p;
             }
         }

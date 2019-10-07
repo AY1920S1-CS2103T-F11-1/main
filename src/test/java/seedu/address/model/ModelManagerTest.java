@@ -14,9 +14,17 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.AlfredException;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.Prefix;
+import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.PrefixType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalMentors;
+import seedu.address.testutil.TypicalParticipants;
+import seedu.address.testutil.TypicalTeams;
 
 public class ModelManagerTest {
 
@@ -91,6 +99,90 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void addAndGetParticipant_validId_returnsParticipant() {
+        try {
+            modelManager  = new ModelManager();
+            modelManager.addParticipant(TypicalParticipants.A);
+            Participant participant = modelManager.getParticipant(new Id(PrefixType.P, 1));
+            assertTrue(participant.equals(TypicalParticipants.A));
+        } catch (AlfredException e) {
+            // do nothing
+        }
+    }
+
+    @Test
+    public void deleteParticipant_validId_returnsParticipant() {
+        try {
+            modelManager  = new ModelManager();
+            modelManager.addParticipant(TypicalParticipants.A);
+            TypicalTeams.clearTeamA();
+            modelManager.addTeam(TypicalTeams.A);
+            Participant participant = modelManager.deleteParticipant(new Id(PrefixType.P, 1));
+            assertTrue(participant.equals(TypicalParticipants.A));
+        } catch (AlfredException e) {
+            // do nothing
+        }
+    }
+
+    @Test
+    public void updateParticipant_valid_id_returnsTrue() {
+        try {
+            modelManager  = new ModelManager();
+            modelManager.addParticipant(TypicalParticipants.A);
+            TypicalTeams.clearTeamA();
+            modelManager.addTeam(TypicalTeams.A);
+            boolean isSuccessful = modelManager.updateParticipant(new Id(PrefixType.P, 1),
+                    TypicalParticipants.A_UPDATED);
+            assertTrue(isSuccessful);
+        } catch (AlfredException e) {
+            // do nothing
+        }
+    }
+
+    @Test
+    public void getTeamByParticipantId_validId_returnsTeam() {
+        try {
+            modelManager = new ModelManager();
+            TypicalTeams.clearTeamA();
+            modelManager.addTeam(TypicalTeams.A);
+            assertTrue(TypicalTeams.A
+                    .equals(modelManager.getTeamByParticipantId(new Id(PrefixType.P, 1))));
+        } catch (AlfredException e) {
+            // do nothing
+        }
+    }
+
+    @Test
+    public void getTeamByMentorId_validId_returnsMentor() {
+        try {
+            modelManager = new ModelManager();
+            TypicalTeams.clearTeamA();
+            modelManager.addTeam(TypicalTeams.A);
+            assertTrue(TypicalTeams.A
+                    .equals(modelManager.getTeamByMentorId(new Id(PrefixType.M, 3))));
+        } catch (AlfredException e) {
+            // do nothing
+        }
+    }
+
+    @Test
+    public void updateMentor_validMentor_updatesMentor() {
+        try {
+            modelManager = new ModelManager();
+            TypicalTeams.clearTeamA();
+            modelManager.addTeam(TypicalTeams.A);
+            modelManager.addMentor(TypicalMentors.A);
+            modelManager.updateMentor(new Id(PrefixType.M, 3),
+                    TypicalMentors.A_UPDATED);
+            assertTrue(modelManager.getTeamByMentorId(new Id(PrefixType.M, 3))
+                    .equals(TypicalTeams.A));
+
+        } catch (AlfredException e) {
+            // do nothing
+        }
     }
 
     @Test
