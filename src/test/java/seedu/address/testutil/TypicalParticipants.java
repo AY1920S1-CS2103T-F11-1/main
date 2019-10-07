@@ -14,7 +14,11 @@ import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entitylist.ParticipantList;
 
 /**
+<<<<<<< HEAD
  * A utility class containing a list of {@code Participant} objects to be used in tests.
+=======
+ * This provides dummy Participant objects for testing.
+>>>>>>> Fix checkstyle error
  */
 public class TypicalParticipants {
     public static final Participant A = new Participant(new Name("Participant A"),
