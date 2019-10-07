@@ -186,6 +186,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addParticipantToTeam_validParticipant_addsParticipant() {
+        try {
+            modelManager = new ModelManager();
+            TypicalTeams.clearTeamA();
+            modelManager.addTeam(TypicalTeams.A);
+            modelManager.addParticipantToTeam(new Id(PrefixType.T, 1)
+                    , TypicalParticipants.B);
+            assertTrue(modelManager.getTeam(new Id(PrefixType.T, 1))
+                    .getParticipants().size() == 2);
+        } catch (AlfredException e) {
+            // do nothing
+        }
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

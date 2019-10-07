@@ -274,6 +274,7 @@ public class ModelManager implements Model {
      * @throws AlfredException if the team does not exist.
      */
     public void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException {
+        // TODO: Check if participant is in ParticipantList before adding.
         Team targetTeam = this.getTeam(teamId);
         boolean isSuccessful = targetTeam.addParticipant(participant);
         if (!isSuccessful) {
@@ -290,6 +291,7 @@ public class ModelManager implements Model {
      * @throws AlfredException if the team does not exist.
      */
     public void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException {
+        // TODO: Check if Mentor is in MentorList before adding.
         Team targetTeam = this.getTeam(teamId);
         boolean isSuccessful = targetTeam.addMentor(mentor);
         if (!isSuccessful) {
