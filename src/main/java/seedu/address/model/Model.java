@@ -87,6 +87,10 @@ public interface Model {
 
     void addTeam(Team team) throws AlfredException;
 
+    void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException;
+
+    void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException;
+
     boolean updateTeam(Id teamId, Team team);
 
     Team deleteTeam(Id id) throws AlfredException;

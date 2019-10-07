@@ -247,6 +247,39 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Adds the participant to the given team.
+     *
+     * @param teamId
+     * @param participant
+     * @throws AlfredException if the team does not exist.
+     */
+    public void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException {
+        Team targetTeam = this.getTeam(teamId);
+        List<Participant> list = targetTeam.getParticipants();
+        if (list.contains(participant)) {
+            throw new AlfredRuntimeException("Participant already exists in team");
+        }
+        list.add(participant);
+        targetTeam.setParticipants(list);
+    }
+
+    /**
+     * Adds the participant to the given team.
+     *
+     * @param teamId
+     * @param mentor
+     * @throws AlfredException if the team does not exist.
+     */
+    public void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException {
+        Team targetTeam = this.getTeam(teamId);
+        Optional<Mentor> mentorOptional = targetTeam.getMentor();
+        if (!mentorOptional.isEmpty()) {
+            throw new AlfredRuntimeException("Mentor already exists in the team.");
+        }
+        targetTeam.setMentor(Optional.of(mentor));
+    }
+
+    /**
      * Deletes the team.
      *
      * @param id
