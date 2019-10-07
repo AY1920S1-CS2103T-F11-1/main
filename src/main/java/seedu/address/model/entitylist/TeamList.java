@@ -35,7 +35,7 @@ public class TeamList extends EntityList {
      */
     public Team get(Id id) throws AlfredException {
         for (Team t: this.teams) {
-            if (t.getId() == id) {
+            if (t.getId().equals(id)) {
                 return t;
             }
         }
@@ -51,7 +51,7 @@ public class TeamList extends EntityList {
      */
     public boolean update(Id id, Team updatedTeam) {
         for (int i = 0; i < this.teams.size(); i++) {
-            if (this.teams.get(i).getId() == id) {
+            if (this.teams.get(i).getId().equals(id)) {
                 this.teams.set(i, updatedTeam);
                 return true;
             }
@@ -82,7 +82,7 @@ public class TeamList extends EntityList {
      */
     public Team delete(Id id) throws AlfredException {
         for (Team t: this.teams) {
-            if (t.getId() == id) {
+            if (t.getId().equals(id)) {
                 this.teams.remove(t);
                 return t;
             }
@@ -117,7 +117,7 @@ public class TeamList extends EntityList {
     @Override
     public boolean contains(Id id) {
         for (Team p: this.teams) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 return true;
             }
         }

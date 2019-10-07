@@ -34,7 +34,7 @@ public class MentorList extends EntityList {
      */
     public Mentor get(Id id) throws AlfredException {
         for (Mentor m: this.mentors) {
-            if (m.getId() == id) {
+            if (m.getId().equals(id)) {
                 return m;
             }
         }
@@ -50,7 +50,7 @@ public class MentorList extends EntityList {
      */
     public boolean update(Id id, Mentor updatedMentor) {
         for (int i = 0; i < this.mentors.size(); i++) {
-            if (this.mentors.get(i).getId() == id) {
+            if (this.mentors.get(i).getId().equals(id)) {
                 this.mentors.set(i, updatedMentor);
                 return true;
             }
@@ -81,7 +81,7 @@ public class MentorList extends EntityList {
      */
     public Mentor delete(Id id) throws AlfredException {
         for (Mentor m: this.mentors) {
-            if (m.getId() == id) {
+            if (m.getId().equals(id)) {
                 this.mentors.remove(m);
                 return m;
             }
@@ -117,7 +117,7 @@ public class MentorList extends EntityList {
     @Override
     public boolean contains(Id id) {
         for (Mentor m: this.mentors) {
-            if (m.getId() == id) {
+            if (m.getId().equals(id)) {
                 return true;
             }
         }

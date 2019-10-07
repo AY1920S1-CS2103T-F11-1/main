@@ -60,7 +60,7 @@ public class ParticipantList extends EntityList {
          *         return false
          */
         for (int i = 0; i < this.participants.size(); i++) {
-            if (this.participants.get(i).getId() == id) {
+            if (this.participants.get(i).getId().equals(id)) {
                 this.participants.set(i, updatedParticipant);
                 return true;
             }
@@ -77,7 +77,7 @@ public class ParticipantList extends EntityList {
      */
     public void add(Participant participant) throws AlfredException {
         for (Participant p: this.participants) {
-            if (p.getId() == participant.getId()) {
+            if (p.getId().equals(participant.getId())) {
                 throw new AlfredRuntimeException("Participant already exists in list");
             }
         }
@@ -92,7 +92,7 @@ public class ParticipantList extends EntityList {
      */
     public Participant delete(Id id) throws AlfredException {
         for (Participant p: this.participants) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 this.participants.remove(p);
                 return p;
             }
@@ -128,7 +128,7 @@ public class ParticipantList extends EntityList {
     @Override
     public boolean contains(Id id) {
         for (Participant p: this.participants) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 return true;
             }
         }
