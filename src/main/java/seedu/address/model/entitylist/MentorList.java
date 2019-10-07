@@ -2,6 +2,7 @@ package seedu.address.model.entitylist;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredRuntimeException;
 import seedu.address.model.entity.Entity;
