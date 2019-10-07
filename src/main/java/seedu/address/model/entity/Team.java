@@ -173,7 +173,7 @@ public class Team extends Entity {
                && otherTeam.getMentor().equals(this.getMentor())
                && otherTeam.getScore().equals(this.getScore())
                && otherTeam.getProjectName().equals(this.getProjectName())
-               && otherTeam.getProjectType() == this.getProjectType();
+               && otherTeam.getProjectType().equals(this.getProjectType());
     }
 
     @Override
