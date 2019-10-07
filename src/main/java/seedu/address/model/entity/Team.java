@@ -165,14 +165,14 @@ public class Team extends Entity {
         }
 
         Team otherTeam = ((Team) other);
-        return otherTeam.getName() == this.getName()
-               && otherTeam.getId() == this.getId()
-               && otherTeam.getParticipants() == this.getParticipants()
-               && otherTeam.getSubject() == this.getSubject()
-               && otherTeam.getLocation() == this.getLocation()
-               && otherTeam.getMentor() == this.getMentor()
-               && otherTeam.getScore() == this.getScore()
-               && otherTeam.getProjectName() == this.getProjectName()
+        return otherTeam.getName().equals(this.getName())
+               && otherTeam.getId().equals(this.getId())
+               && otherTeam.getParticipants().equals(this.getParticipants())
+               && otherTeam.getSubject().equals(this.getSubject())
+               && otherTeam.getLocation().equals(this.getLocation())
+               && otherTeam.getMentor().equals(this.getMentor())
+               && otherTeam.getScore().equals(this.getScore())
+               && otherTeam.getProjectName().equals(this.getProjectName())
                && otherTeam.getProjectType() == this.getProjectType();
     }
 
