@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.AlfredException;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
@@ -104,7 +103,7 @@ public class ModelManagerTest {
     @Test
     public void addAndGetParticipant_validId_returnsParticipant() {
         try {
-            modelManager  = new ModelManager();
+            modelManager = new ModelManager();
             modelManager.addParticipant(TypicalParticipants.A);
             Participant participant = modelManager.getParticipant(new Id(PrefixType.P, 1));
             assertTrue(participant.equals(TypicalParticipants.A));
@@ -116,7 +115,7 @@ public class ModelManagerTest {
     @Test
     public void deleteParticipant_validId_returnsParticipant() {
         try {
-            modelManager  = new ModelManager();
+            modelManager = new ModelManager();
             modelManager.addParticipant(TypicalParticipants.A);
             TypicalTeams.clearTeamA();
             modelManager.addTeam(TypicalTeams.A);
@@ -128,9 +127,9 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void updateParticipant_valid_id_returnsTrue() {
+    public void updateParticipant_validId_returnsTrue() {
         try {
-            modelManager  = new ModelManager();
+            modelManager = new ModelManager();
             modelManager.addParticipant(TypicalParticipants.A);
             TypicalTeams.clearTeamA();
             modelManager.addTeam(TypicalTeams.A);
@@ -191,8 +190,8 @@ public class ModelManagerTest {
             modelManager = new ModelManager();
             TypicalTeams.clearTeamA();
             modelManager.addTeam(TypicalTeams.A);
-            modelManager.addParticipantToTeam(new Id(PrefixType.T, 1)
-                    , TypicalParticipants.B);
+            modelManager.addParticipantToTeam(new Id(PrefixType.T, 1),
+                    TypicalParticipants.B);
             assertTrue(modelManager.getTeam(new Id(PrefixType.T, 1))
                     .getParticipants().size() == 2);
         } catch (AlfredException e) {
