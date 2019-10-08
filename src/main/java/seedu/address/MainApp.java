@@ -15,14 +15,9 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-//import seedu.address.model.entitylist.MentorList;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 //import seedu.address.storage.AlfredStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -77,36 +72,12 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = new ModelManager(storage, userPrefs);
+        model.initialize();
 
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
-    }
-
-    /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
-     */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        }
-
-        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

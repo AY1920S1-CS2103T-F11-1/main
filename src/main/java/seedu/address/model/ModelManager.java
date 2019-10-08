@@ -24,6 +24,7 @@ import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.entitylist.TeamList;
 import seedu.address.model.person.Person;
+import seedu.address.storage.Storage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -31,14 +32,17 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    // TODO: Remove the null values which are a placeholder due to the multiple constructors.
+    // Also will have to change the relevant attributes to final.
+    private Storage storage = null;
+    private AddressBook addressBook = null;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons = null;
 
     // EntityLists
-    private final ParticipantList participantList;
-    private final TeamList teamList;
-    private final MentorList mentorList;
+    private ParticipantList participantList;
+    private TeamList teamList;
+    private MentorList mentorList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -52,14 +56,44 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-
-        this.participantList = new ParticipantList();
-        this.teamList = new TeamList();
-        this.mentorList = new MentorList();
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    public ModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+        super();
+        this.userPrefs = new UserPrefs(userPrefs);
+        this.storage = storage;
+
+    }
+
+    /**
+     * Initializes the various lists used. If storage contains no data, it defaults to loading
+     * the sample lists provided.
+     */
+    public void initialize() {
+        this.participantList = new ParticipantList();
+        this.teamList = new TeamList();
+        this.mentorList = new MentorList();
+
+        // TODO: reimplement this logic here.
+        // Optional<ReadOnlyAddressBook> addressBookOptional;
+        // ReadOnlyAddressBook initialData;
+        // try {
+        //    addressBookOptional = storage.readAddressBook();
+        //    if (!addressBookOptional.isPresent()) {
+        //        logger.info("Data file not found. Will be starting with a sample AddressBook");
+        //    }
+        //    initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        // } catch (DataConversionException e) {
+        //    logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+        //    initialData = new AddressBook();
+        // } catch (IOException e) {
+        //    logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+        //    initialData = new AddressBook();
+        // }
     }
 
     //=========== UserPrefs ==================================================================================
