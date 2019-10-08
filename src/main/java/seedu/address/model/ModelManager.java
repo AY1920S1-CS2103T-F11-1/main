@@ -21,7 +21,7 @@ import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Team;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
-import seedu.address.model.entitylist.ReadableEntityList;
+import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.entitylist.TeamList;
 import seedu.address.model.person.Person;
 
@@ -104,7 +104,7 @@ public class ModelManager implements Model {
      *
      * @return ReadableEntityList
      */
-    public ReadableEntityList getParticipantList() {
+    public ReadOnlyEntityList getParticipantList() {
         return this.participantList;
     }
 
@@ -113,7 +113,7 @@ public class ModelManager implements Model {
      *
      * @return ReadableEntityList
      */
-    public ReadableEntityList getTeamList() {
+    public ReadOnlyEntityList getTeamList() {
         return this.teamList;
     }
 
@@ -122,7 +122,7 @@ public class ModelManager implements Model {
      *
      * @return ReadableEntityList
      */
-    public ReadableEntityList getMentorList() {
+    public ReadOnlyEntityList getMentorList() {
         return this.mentorList;
     }
 
