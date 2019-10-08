@@ -73,11 +73,12 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = new ModelManager(storage, userPrefs);
-        model.initialize();
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model);
 
         ui = new UiManager(logic);
+
+        model.initialize();
     }
 
     private void initLogging(Config config) {
