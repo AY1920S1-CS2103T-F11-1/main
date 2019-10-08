@@ -25,7 +25,7 @@ public class DeleteParticipantCommandParser implements Parser<DeleteCommand> {
     @Override
     public DeleteParticipantCommand parse(String args) throws ParseException {
         try {
-            Id id = AlfredParserUtil.parseIndex(args, PrefixType.M);
+            Id id = AlfredParserUtil.parseIndex(args, PrefixType.P);
             return new DeleteParticipantCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
