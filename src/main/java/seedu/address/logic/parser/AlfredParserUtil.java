@@ -33,7 +33,7 @@ public class AlfredParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Id parseIndex(String oneBasedIndex, PrefixType prefix) throws ParseException {
-        oneBasedIndex = oneBasedIndex.trim().toLowerCase();
+        oneBasedIndex = oneBasedIndex.trim();
         String trimmedIndex = oneBasedIndex.substring(1);
         String expectedPrefix = prefix.name();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex) || !oneBasedIndex.startsWith(expectedPrefix)) {
