@@ -17,6 +17,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.addcommand.AddParticipantCommand;
 import seedu.address.logic.parser.addcommandparser.AddParticipantCommandParser;
+import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,8 +53,11 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+
+        /* Do you guys mind if I comment the below out until the AB3 stuff is deleted
+            as this causes a problem within the case statements as this and our edit command have the same label.
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(arguments); */
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
@@ -72,6 +76,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandAllocator().getEditCommand(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

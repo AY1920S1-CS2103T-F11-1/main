@@ -5,8 +5,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
 import seedu.address.logic.commands.editcommand.EditCommand;
 import seedu.address.logic.commands.editcommand.EditParticipantCommand;
+import seedu.address.logic.commands.editcommand.EditParticipantCommand.EditParticipantDescriptor;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -18,7 +20,7 @@ import seedu.address.model.entity.PrefixType;
 /**
  * Parses input arguments and creates a new {@link EditParticipantCommand} object.
  */
-public class EditParticipantCommandParser implements Parser<EditCommand> {
+public class EditParticipantCommandParser implements Parser<EditParticipantCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code EditParticipantCommand}
@@ -39,6 +41,18 @@ public class EditParticipantCommandParser implements Parser<EditCommand> {
                     seedu.address.logic.commands.EditCommand.MESSAGE_USAGE), pe);
         }
 
-        return null;
+        EditParticipantDescriptor editParticipantDescriptor = new EditParticipantDescriptor();
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editParticipantDescriptor.setName(AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editParticipantDescriptor.setEmail(AlfredParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editParticipantDescriptor.setPhone(AlfredParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+
+        return new EditParticipantCommand(id, editParticipantDescriptor);
     }
 }

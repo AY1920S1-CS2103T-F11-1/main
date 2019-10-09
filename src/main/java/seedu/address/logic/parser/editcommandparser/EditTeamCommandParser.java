@@ -20,14 +20,14 @@ import seedu.address.model.entity.PrefixType;
 /**
  * Parses input arguments and creates a new {@link EditTeamCommand} object.
  */
-public class EditTeamCommandParser implements Parser<EditCommand> {
+public class EditTeamCommandParser implements Parser<EditTeamCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code EditTeamCommand}
      * and returns an {@code EditTeamCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditTeamCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SUBJECT_NAME, PREFIX_PROJECT_NAME,

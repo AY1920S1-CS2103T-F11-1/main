@@ -17,7 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PROJECT_TYPE = new Prefix("pt/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final String ENTITY_ISSUE = "issue";
-    public static final String ENTITY_MENTOR = "mentor";
-    public static final String ENTITY_PARTICIPANT = "participant";
-    public static final String ENTITY_TEAM = "team";
+    public static final String ENTITY_MENTOR = "M";
+    public static final String ENTITY_PARTICIPANT = "P";
+    public static final String ENTITY_TEAM = "T";
 }

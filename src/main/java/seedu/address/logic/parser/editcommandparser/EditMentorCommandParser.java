@@ -22,7 +22,7 @@ import seedu.address.model.entity.PrefixType;
 /**
  * Parses input arguments and creates a new {@link EditMentorCommand} object.
  */
-public class EditMentorCommandParser implements Parser<EditCommand> {
+public class EditMentorCommandParser implements Parser<EditMentorCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code EditMentorCommand}
