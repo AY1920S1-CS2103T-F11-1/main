@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import seedu.address.AlfredException;
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Location;
 import seedu.address.model.entity.Name;
