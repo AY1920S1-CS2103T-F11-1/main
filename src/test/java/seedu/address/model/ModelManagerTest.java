@@ -14,8 +14,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.AlfredException;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
