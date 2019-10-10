@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.exceptions.AlfredException;
-import seedu.address.commons.exceptions.AlfredRuntimeException;
+import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
@@ -39,7 +39,7 @@ public class TeamList extends EntityList {
                 return t;
             }
         }
-        throw new AlfredRuntimeException("Team to get does not exist!");
+        throw new AlfredModelException("Team to get does not exist!");
     }
 
     /**
@@ -68,7 +68,7 @@ public class TeamList extends EntityList {
     public void add(Team team) throws AlfredException {
         for (Team t: this.teams) {
             if (t.getId().equals(team.getId())) {
-                throw new AlfredRuntimeException("Team to add already exists.");
+                throw new AlfredModelException("Team to add already exists.");
             }
         }
         this.teams.add(team);
@@ -87,7 +87,7 @@ public class TeamList extends EntityList {
                 return t;
             }
         }
-        throw new AlfredRuntimeException("Team to delete cannot be found.");
+        throw new AlfredModelException("Team to delete cannot be found.");
     }
 
     /**

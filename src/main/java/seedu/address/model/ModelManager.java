@@ -14,7 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
-import seedu.address.commons.exceptions.AlfredRuntimeException;
+import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
@@ -186,7 +186,7 @@ public class ModelManager implements Model {
         boolean isSuccessful = targetTeam.deleteParticipant(participantToDelete);
         if (!isSuccessful) {
             logger.warning("Participant does not exist");
-            throw new AlfredRuntimeException("Participant does not exist");
+            throw new AlfredModelException("Participant does not exist");
         }
 
         return this.participantList.delete(id);
@@ -221,7 +221,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        throw new AlfredRuntimeException("Team with said participant cannot be found.");
+        throw new AlfredModelException("Team with said participant cannot be found.");
     }
 
     /**
@@ -241,7 +241,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        throw new AlfredRuntimeException("Team with said participant cannot be found.");
+        throw new AlfredModelException("Team with said participant cannot be found.");
     }
 
     /**
@@ -279,7 +279,7 @@ public class ModelManager implements Model {
         boolean isSuccessful = targetTeam.addParticipant(participant);
         if (!isSuccessful) {
             logger.severe("Participant is already present in team");
-            throw new AlfredRuntimeException("Participant is already present in team");
+            throw new AlfredModelException("Participant is already present in team");
         }
     }
 
@@ -296,7 +296,7 @@ public class ModelManager implements Model {
         boolean isSuccessful = targetTeam.addMentor(mentor);
         if (!isSuccessful) {
             logger.severe("Team already has a mentor");
-            throw new AlfredRuntimeException("Team already has a mentor");
+            throw new AlfredModelException("Team already has a mentor");
         }
     }
 
@@ -370,7 +370,7 @@ public class ModelManager implements Model {
         boolean isSuccessful = targetTeam.deleteMentor(mentorToDelete);
         if (!isSuccessful) {
             logger.severe("Unable to delete the mentor from the team");
-            throw new AlfredRuntimeException("Update to delete the mentor the team");
+            throw new AlfredModelException("Update to delete the mentor the team");
         }
 
         return this.mentorList.delete(id);
