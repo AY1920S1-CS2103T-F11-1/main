@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +25,6 @@ class JsonMentorListStorageTest {
 
         //Save and read participantList to and from JSON
         mStorage.saveMentorList(original);
-        mStorage.saveMentorList(original, Paths.get("data" , "mentorlist.json"));
         Optional<MentorList> returnedList = mStorage.readMentorList();
 
         if (returnedList.isEmpty()) {
