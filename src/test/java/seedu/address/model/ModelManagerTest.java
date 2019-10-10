@@ -133,9 +133,10 @@ public class ModelManagerTest {
             modelManager.addParticipant(TypicalParticipants.A);
             TypicalTeams.clearTeamA();
             modelManager.addTeam(TypicalTeams.A);
-            boolean isSuccessful = modelManager.updateParticipant(new Id(PrefixType.P, 1),
+            modelManager.updateParticipant(new Id(PrefixType.P, 1),
                     TypicalParticipants.A_UPDATED);
-            assertTrue(isSuccessful);
+            assertTrue(TypicalTeams.A.getParticipants().get(0)
+                    .equals(TypicalParticipants.A_UPDATED));
         } catch (AlfredException e) {
             // do nothing
         }

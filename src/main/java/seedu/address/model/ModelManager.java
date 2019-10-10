@@ -156,21 +156,21 @@ public class ModelManager implements Model {
      *
      * @param id
      * @param participant
-     * @return boolean
      */
-    public boolean updateParticipant(Id id, Participant participant) {
+    public void updateParticipant(Id id, Participant participant) throws AlfredException {
+        // TODO: Customize error message.
         try {
             // Update the participant in the team list as well
             Team targetTeam = this.getTeamByParticipantId(id);
             boolean isSuccessful = targetTeam.updateParticipant(participant);
             if (!isSuccessful) {
                 logger.warning("The participant is not in the team provided");
-                return false;
+                return;
             }
 
-            return this.participantList.update(id, participant);
+            this.participantList.update(id, participant);
         } catch (AlfredException e) {
-            return false;
+            return;
         }
     }
 
@@ -181,6 +181,7 @@ public class ModelManager implements Model {
      * @return Participant
      */
     public Participant deleteParticipant(Id id) throws AlfredException {
+        // TODO: Customize error message.
         Team targetTeam = this.getTeamByParticipantId(id);
         Participant participantToDelete = this.getParticipant(id);
         boolean isSuccessful = targetTeam.deleteParticipant(participantToDelete);
@@ -245,14 +246,14 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Updates the team.
+     * Updates the team with the given teamID.
      *
      * @param teamId
      * @param updatedTeam
-     * @return boolean.
+     * @throws AlfredException
      */
-    public boolean updateTeam(Id teamId, Team updatedTeam) {
-        return this.teamList.update(teamId, updatedTeam);
+    public void updateTeam(Id teamId, Team updatedTeam) throws AlfredException {
+        this.teamList.update(teamId, updatedTeam);
     }
 
     /**
@@ -275,6 +276,7 @@ public class ModelManager implements Model {
      */
     public void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException {
         // TODO: Check if participant is in ParticipantList before adding.
+        // TODO: Throw specific error.
         Team targetTeam = this.getTeam(teamId);
         boolean isSuccessful = targetTeam.addParticipant(participant);
         if (!isSuccessful) {
@@ -292,6 +294,7 @@ public class ModelManager implements Model {
      */
     public void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException {
         // TODO: Check if Mentor is in MentorList before adding.
+        // TODO: Throw specific error.
         Team targetTeam = this.getTeam(teamId);
         boolean isSuccessful = targetTeam.addMentor(mentor);
         if (!isSuccessful) {
@@ -339,21 +342,20 @@ public class ModelManager implements Model {
      *
      * @param id
      * @param updatedMentor
-     * @return boolean
      */
-    public boolean updateMentor(Id id, Mentor updatedMentor) {
+    public void updateMentor(Id id, Mentor updatedMentor) throws AlfredException {
+        // TODO: Throw specific exception.
         try {
             Team targetTeam = this.getTeamByMentorId(id);
             boolean isSuccessful = targetTeam.updateMentor(updatedMentor);
             if (!isSuccessful) {
                 logger.severe("Unable to update the mentor in team as it is not the "
                         + "same id");
-                return true;
             }
 
-            return this.mentorList.update(id, updatedMentor);
+            this.mentorList.update(id, updatedMentor);
         } catch (AlfredException e) {
-            return false;
+            return;
         }
     }
 
@@ -365,12 +367,13 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Mentor deleteMentor(Id id) throws AlfredException {
+        // TODO: Throw specific exception.
         Team targetTeam = this.getTeamByMentorId(id);
         Mentor mentorToDelete = this.getMentor(id);
         boolean isSuccessful = targetTeam.deleteMentor(mentorToDelete);
         if (!isSuccessful) {
             logger.severe("Unable to delete the mentor from the team");
-            throw new AlfredModelException("Update to delete the mentor the team");
+            throw new AlfredModelException("Update to delete the mentor from the team");
         }
 
         return this.mentorList.delete(id);

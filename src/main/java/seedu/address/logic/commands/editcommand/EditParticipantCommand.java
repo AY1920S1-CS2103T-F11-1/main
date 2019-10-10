@@ -66,11 +66,12 @@ public class EditParticipantCommand extends EditCommand {
          *     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
          * }
          */
-        if (!model.updateParticipant(this.id, editedParticipant)) {
+        try {
+            model.updateParticipant(this.id, editedParticipant);
+            return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant.toString()));
+        } catch (AlfredException e) {
             return new CommandResult(MESSAGE_DUPLICATE_PARTICIPANT);
         }
-        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant.toString()));
     }
 
     /**
