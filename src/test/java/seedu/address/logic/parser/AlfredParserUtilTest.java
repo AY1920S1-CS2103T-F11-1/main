@@ -9,8 +9,20 @@ import seedu.address.model.entity.PrefixType;
 class AlfredParserUtilTest {
 
     @Test
-    void parseIndex() throws ParseException {
+    void parseIndex_correctIndexFormat_noExceptionThrown() throws ParseException {
         Id id = new Id(PrefixType.P, 2);
-        assertEquals(id, AlfredParserUtil.parseIndex("P2", PrefixType.P));
+        assertEquals(id, AlfredParserUtil.parseIndex("P-2", PrefixType.P));
     }
+
+    @Test
+    void parseIndex_incorrectIndexFormat_parseExceptionThrown() throws ParseException {
+        Id id = new Id(PrefixType.P, 2);
+        try {
+            assertEquals(id, AlfredParserUtil.parseIndex("P2", PrefixType.P));
+        }
+        catch (ParseException pe) {
+            assertEquals(AlfredParserUtil.MESSAGE_INVALID_INDEX, pe.getMessage());
+        }
+    }
+
 }

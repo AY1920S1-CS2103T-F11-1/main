@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT_NAME;
-import seedu.address.logic.commands.editcommand.EditCommand;
+
 import seedu.address.logic.commands.editcommand.EditTeamCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.ArgumentMultimap;

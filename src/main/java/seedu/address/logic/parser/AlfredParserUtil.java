@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,24 +20,26 @@ import seedu.address.model.entity.ProjectType;
 import seedu.address.model.entity.SubjectName;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class AlfredParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final String ID_SEPARATOR_CHARACTER = "-";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Id parseIndex(String oneBasedIndex, PrefixType prefix) throws ParseException {
         oneBasedIndex = oneBasedIndex.trim();
-        String trimmedIndex = oneBasedIndex.substring(1);
+        String trimmedIndex = oneBasedIndex.substring(2);
+        String idSeperator = Character.toString(oneBasedIndex.charAt(1));
         String expectedPrefix = prefix.name();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex) || !oneBasedIndex.startsWith(expectedPrefix)) {
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex) || !oneBasedIndex.startsWith(expectedPrefix)
+                || !idSeperator.equals(ID_SEPARATOR_CHARACTER)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         int id = Integer.parseInt(trimmedIndex);

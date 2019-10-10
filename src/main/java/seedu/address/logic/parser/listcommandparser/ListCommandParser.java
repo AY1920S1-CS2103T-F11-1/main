@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.listcommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.listcommand.ListCommand;
 import seedu.address.logic.commands.listcommand.ListMentorCommand;
 import seedu.address.logic.commands.listcommand.ListParticipantCommand;
@@ -14,11 +15,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ListCommandParser implements Parser<ListCommand> {
 
-    private final String MENTOR_CASE = "mentor";
-    private final String PARTICIPANT_CASE = "participant";
-    private final String TEAM_CASE = "team";
-    private final String USAGE = "List command needs to of format \"list {entity name}\" for example " +
-            "\"list mentors\" or \"list participants\" or \"list teams\"";
+    private static final String MENTOR_CASE = "mentor";
+    private static final String PARTICIPANT_CASE = "participant";
+    private static final String TEAM_CASE = "team";
+    private static final String MESSAGE_USAGE = "List command needs to of format \"list {entity name}\" for example "
+            + "\"list mentors\" or \"list participants\" or \"list teams\"";
 
     /**
      * Parses the given {@code String} of arguments in the context of a ListCommand and returns
@@ -28,7 +29,7 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @return returns a new ListCommand object to be executed.
      * @throws ParseException if the user input does not conform to the expect format.
      */
-    public ListCommand parse(String args) throws ParseException{
+    public ListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim().toLowerCase();
 
         switch(trimmedArgs) {
@@ -44,7 +45,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    USAGE));
+                    MESSAGE_USAGE));
         }
     }
 
