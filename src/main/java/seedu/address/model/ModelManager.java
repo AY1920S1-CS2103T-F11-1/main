@@ -241,7 +241,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        throw new AlfredModelException("Team with said participant cannot be found.");
+        throw new AlfredModelException("Team with said mentor cannot be found.");
     }
 
     /**
