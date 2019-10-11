@@ -16,6 +16,7 @@ import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Phone;
 import seedu.address.model.entity.SubjectName;
+import seedu.address.ui.CommandBox;
 
 /**
  * Edits a {@link Mentor} in Alfred.
@@ -62,18 +63,12 @@ public class EditMentorCommand extends EditCommand {
         Mentor editedMentor = this.createEditedMentor(mentorToEdit,
                 this.editMentorDescriptor);
 
-        // Model should check if there exists duplicates in list
-        /*
-         * i.e
-         * if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-         *     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-         * }
-         */
-        if (!model.updateMentor(this.id, editedMentor)) {
-            return new CommandResult(MESSAGE_DUPLICATE_MENTOR);
+        try {
+            model.updateMentor(this.id, editedMentor);
+            return new CommandResult(String.format(MESSAGE_EDIT_MENTOR_SUCCESS, editedMentor.toString()));
+        } catch (AlfredException e) {
+            throw new CommandException(e.getMessage());
         }
-        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_MENTOR_SUCCESS, editedMentor.toString()));
     }
 
     /**
