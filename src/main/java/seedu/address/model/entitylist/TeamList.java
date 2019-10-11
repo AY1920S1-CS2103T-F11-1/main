@@ -73,16 +73,16 @@ public class TeamList extends EntityList {
      * Deletes team by id.
      *
      * @param id
-     * @throws AlfredException
+     * @throws MissingEntityException if team to delete cannot be found.
      */
-    public Team delete(Id id) throws AlfredException {
+    public Team delete(Id id) throws MissingEntityException {
         for (Team t: this.teams) {
             if (t.getId().equals(id)) {
                 this.teams.remove(t);
                 return t;
             }
         }
-        throw new AlfredModelException("Team to delete cannot be found.");
+        throw new MissingEntityException("Team to delete cannot be found.");
     }
 
     /**

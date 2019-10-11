@@ -260,7 +260,9 @@ public class ModelManager implements Model {
         try {
             targetTeam = this.getTeamByParticipantId(id);
         } catch (MissingEntityException e) {
-            throw e;
+            this.participantList.update(id, participant);
+            this.saveList(PrefixType.P);
+            return;
         }
         boolean isSuccessful = targetTeam.updateParticipant(participant);
         if (!isSuccessful) {
@@ -284,16 +286,17 @@ public class ModelManager implements Model {
         try {
             targetTeam = this.getTeamByParticipantId(id);
         } catch (MissingEntityException e) {
-            throw e;
+            Participant participantToDelete = this.participantList.delete(id);
+            this.saveList(PrefixType.P);
+            return participantToDelete;
         }
-        Participant participantToDelete = this.getParticipant(id);
+        Participant participantToDelete = this.participantList.delete(id);
         boolean isSuccessful = targetTeam.deleteParticipant(participantToDelete);
         if (!isSuccessful) {
             logger.warning("Participant does not exist");
             throw new ModelValidationException("Participant does not exist");
         }
 
-        Participant deletedParticipant = this.participantList.delete(id);
         this.saveList(PrefixType.P);
         this.saveList(PrefixType.T);
         return deletedParticipant;
@@ -478,20 +481,24 @@ public class ModelManager implements Model {
      * @param updatedMentor
      */
     public void updateMentor(Id id, Mentor updatedMentor) throws AlfredException {
-        // TODO: Throw specific exception.
+        Team targetTeam;
         try {
-            Team targetTeam = this.getTeamByMentorId(id);
-            boolean isSuccessful = targetTeam.updateMentor(updatedMentor);
-            if (!isSuccessful) {
-                logger.severe("Unable to update the mentor in team as it is not the "
-                        + "same id");
-            }
-
+            targetTeam = this.getTeamByMentorId(id);
+        } catch (MissingEntityException e) {
             this.mentorList.update(id, updatedMentor);
-        } catch (AlfredException e) {
+            this.saveList(PrefixType.M);
             return;
         }
+
         this.mentorList.update(id, updatedMentor);
+        boolean isSuccessful = targetTeam.updateMentor(updatedMentor);
+        if (!isSuccessful) {
+            logger.severe("Unable to update the mentor in team as it is not the "
+                    + "same id");
+            throw new ModelValidationException("Unable to update the mentor in team as it is not the "
+                    + "same id");
+        }
+
         this.saveList(PrefixType.M);
         this.saveList(PrefixType.T);
     }
@@ -504,7 +511,22 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Mentor deleteMentor(Id id) throws AlfredException {
-        Mentor mentorToDelete = this.mentorList.delete(id);
+        Team targetTeam;
+        try {
+            targetTeam = this.getTeamByMentorId(id);
+        } catch (MissingEntityException e) {
+            Mentor mentorToDelete = this.mentorList.delete(id); 
+            this.saveList(PrefixType.M);
+            return mentorToDelete;
+        }
+
+        Mentor mentorToDelete = this.getMentor(id);
+        boolean isSuccessful = targetTeam.deleteMentor(mentorToDelete);
+        if (!isSuccessful) {
+            logger.severe("Unable to delete the mentor from the team");
+            throw new AlfredModelException("Update to delete the mentor from the team");
+        }
+
         this.saveList(PrefixType.M);
         this.saveList(PrefixType.T);
         return mentorToDelete;
@@ -533,7 +555,6 @@ public class ModelManager implements Model {
         } catch (IOException e) {
             logger.severe("Failed to save the list into storage due to IOException");
         }
-
     }
 
     //=========== Utils ==================================================================
