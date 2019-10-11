@@ -16,7 +16,6 @@ import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Phone;
 import seedu.address.model.entity.SubjectName;
-import seedu.address.ui.CommandBox;
 
 /**
  * Edits a {@link Mentor} in Alfred.
