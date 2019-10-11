@@ -16,6 +16,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
+import seedu.address.commons.exceptions.MissingEntityException;
+import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
@@ -254,21 +256,21 @@ public class ModelManager implements Model {
      * @param participant
      */
     public void updateParticipant(Id id, Participant participant) throws AlfredException {
+        Team targetTeam;
         try {
-            // Update the participant in the team list as well
-            Team targetTeam = this.getTeamByParticipantId(id);
-            boolean isSuccessful = targetTeam.updateParticipant(participant);
-            if (!isSuccessful) {
-                logger.warning("The participant is not in the team provided");
-                return;
-            }
-
-            this.participantList.update(id, participant);
-            this.saveList(PrefixType.P);
-            this.saveList(PrefixType.T);
-        } catch (AlfredException e) {
-            return;
+            targetTeam = this.getTeamByParticipantId(id);
+        } catch (MissingEntityException e) {
+            throw e;
         }
+        boolean isSuccessful = targetTeam.updateParticipant(participant);
+        if (!isSuccessful) {
+            logger.warning("The participant is not in the team provided");
+            throw new ModelValidationException("Participant is not in the team provided");
+        }
+
+        this.participantList.update(id, participant);
+        this.saveList(PrefixType.P);
+        this.saveList(PrefixType.T);
     }
 
     /**
@@ -278,12 +280,17 @@ public class ModelManager implements Model {
      * @return Participant
      */
     public Participant deleteParticipant(Id id) throws AlfredException {
-        Team targetTeam = this.getTeamByParticipantId(id);
+        Team targetTeam;
+        try {
+            targetTeam = this.getTeamByParticipantId(id);
+        } catch (MissingEntityException e) {
+            throw e;
+        }
         Participant participantToDelete = this.getParticipant(id);
         boolean isSuccessful = targetTeam.deleteParticipant(participantToDelete);
         if (!isSuccessful) {
             logger.warning("Participant does not exist");
-            throw new AlfredModelException("Participant does not exist");
+            throw new ModelValidationException("Participant does not exist");
         }
 
         Participant deletedParticipant = this.participantList.delete(id);
@@ -310,9 +317,9 @@ public class ModelManager implements Model {
      *
      * @param participantId
      * @return Team
-     * @throws AlfredException
+     * @throws MissingEntityException if the team to get does not exist.
      */
-    public Team getTeamByParticipantId(Id participantId) throws AlfredException {
+    public Team getTeamByParticipantId(Id participantId) throws MissingEntityException {
         List<Team> teams = this.teamList.getSpecificTypedList();
         for (Team t: teams) {
             for (Participant p: t.getParticipants()) {
@@ -321,7 +328,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        throw new AlfredModelException("Team with said participant cannot be found.");
+        throw new MissingEntityException("Team with said participant cannot be found.");
     }
 
     /**
@@ -329,9 +336,9 @@ public class ModelManager implements Model {
      *
      * @param mentorId
      * @return Team
-     * @throws AlfredException
+     * @throws MissingEntityException if the team to get does not exist.
      */
-    public Team getTeamByMentorId(Id mentorId) throws AlfredException {
+    public Team getTeamByMentorId(Id mentorId) throws MissingEntityException {
         List<Team> teams = this.teamList.getSpecificTypedList();
         for (Team t: teams) {
             Optional<Mentor> mentor = t.getMentor();
@@ -341,7 +348,7 @@ public class ModelManager implements Model {
                 }
             }
         }
-        throw new AlfredModelException("Team with said mentor cannot be found.");
+        throw new MissingEntityException("Team with said mentor cannot be found.");
     }
 
     /**
@@ -349,9 +356,10 @@ public class ModelManager implements Model {
      *
      * @param teamId
      * @param updatedTeam
-     * @throws AlfredException
+     * @throws AlfredException if the update fails
      */
     public void updateTeam(Id teamId, Team updatedTeam) throws AlfredException {
+        this.validateNewTeamObject(updatedTeam);
         this.teamList.update(teamId, updatedTeam);
         this.saveList(PrefixType.T);
     }
@@ -363,6 +371,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public void addTeam(Team team) throws AlfredException {
+        this.validateNewTeamObject(team);
         this.teamList.add(team);
         this.saveList(PrefixType.T);
     }
@@ -375,9 +384,16 @@ public class ModelManager implements Model {
      * @throws AlfredException if the team does not exist.
      */
     public void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException {
-        // TODO: Check if participant is in ParticipantList before adding.
-        // TODO: Throw specific error.
-        Team targetTeam = this.getTeam(teamId);
+        if (!this.participantList.contains(participant.getId())) {
+            throw new ModelValidationException("Participant does not exist in participantList");
+        }
+
+        Team targetTeam;
+        try {
+            targetTeam = this.getTeam(teamId);
+        } catch (MissingEntityException e) {
+            throw e;
+        }
         boolean isSuccessful = targetTeam.addParticipant(participant);
         if (!isSuccessful) {
             logger.severe("Participant is already present in team");
@@ -394,9 +410,16 @@ public class ModelManager implements Model {
      * @throws AlfredException if the team does not exist.
      */
     public void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException {
-        // TODO: Check if Mentor is in MentorList before adding.
-        // TODO: Throw specific error.
-        Team targetTeam = this.getTeam(teamId);
+        if (!this.mentorList.contains(mentor.getId())) {
+            throw new ModelValidationException("Mentor does not exist in mentorList.");
+        }
+
+        Team targetTeam;
+        try {
+            targetTeam = this.getTeam(teamId);
+        } catch (MissingEntityException e) {
+            throw e;
+        }
         boolean isSuccessful = targetTeam.addMentor(mentor);
         if (!isSuccessful) {
             logger.severe("Team already has a mentor");
@@ -410,12 +433,17 @@ public class ModelManager implements Model {
      *
      * @param id
      * @return Team
-     * @throws AlfredException
+     * @throws AlfredException if the deletion of team fails.
      */
     public Team deleteTeam(Id id) throws AlfredException {
+        // First delete the Participant objects
         Team teamToDelete = this.teamList.delete(id);
+        for (Participant p : teamToDelete.getParticipants()) {
+            this.participantList.delete(p.getId());
+        }
         this.saveList(PrefixType.T);
         this.saveList(PrefixType.P);
+
         return teamToDelete;
     }
 
@@ -506,6 +534,29 @@ public class ModelManager implements Model {
             logger.severe("Failed to save the list into storage due to IOException");
         }
 
+    }
+
+    //=========== Utils ==================================================================
+
+    /**
+     * Validates the Participant and Mentor attributes of a CRUD team object.
+     *
+     * @param team
+     * @throws ModelValidationException
+     */
+    private void validateNewTeamObject(Team team) throws ModelValidationException {
+        // Check if the participants are valid, then if mentor is valid.
+        for (Participant p: team.getParticipants()) {
+            if (!this.participantList.contains(p.getId())) {
+                throw new ModelValidationException("Participant in team does not exist in ParticipantList");
+            }
+        }
+        Optional<Mentor> mentor = team.getMentor();
+        if (!mentor.isEmpty()) {
+            if (!this.mentorList.contains(mentor.get().getId())) {
+                throw new ModelValidationException("Mentor in team does not exist in mentorList");
+            }
+        }
     }
 
     //=========== AddressBook ================================================================================
