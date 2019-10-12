@@ -23,12 +23,10 @@ public class LogicManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
-    private final Storage storage;
     private final AlfredParser addressBookParser;
 
     public LogicManager(Model model) {
         this.model = model;
-        this.storage = storage;
         addressBookParser = new AlfredParser();
     }
 

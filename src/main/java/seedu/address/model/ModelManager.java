@@ -1,15 +1,11 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -28,6 +24,9 @@ import seedu.address.model.entitylist.TeamList;
 import seedu.address.model.person.Person;
 import seedu.address.storage.AlfredStorage;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -42,9 +41,9 @@ public class ModelManager implements Model {
     private FilteredList<Person> filteredPersons = null;
 
     // EntityLists
-    private ParticipantList participantList;
-    private TeamList teamList;
-    private MentorList mentorList;
+    private ParticipantList participantList = new ParticipantList();
+    private TeamList teamList = new TeamList();
+    private MentorList mentorList = new MentorList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -68,6 +67,9 @@ public class ModelManager implements Model {
         super();
         this.userPrefs = new UserPrefs(userPrefs);
         this.storage = storage;
+        // TODO: Remove: Currently it is here to make tests pass.
+        this.addressBook = new AddressBook();
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     /**

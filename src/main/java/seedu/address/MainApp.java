@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -19,7 +18,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.AlfredStorage;
+import seedu.address.storage.AlfredStorageManager;
+import seedu.address.storage.JsonMentorListStorage;
+import seedu.address.storage.JsonParticipantListStorage;
+import seedu.address.storage.JsonTeamListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.MentorListStorage;
+import seedu.address.storage.ParticipantListStorage;
+import seedu.address.storage.TeamListStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -49,19 +55,16 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        //TODO: Update this with the 4 different EntityLists
-        // AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        // storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        //TODO: Uncomment this when ready for AlfredStorage integration
-        //ParticipantListStorage pStore = new JsonParticipantListStorage(userPrefs.getParticipantListFilePath());
-        //MentorListStorage mStore = new JsonMentorListStorage(userPrefs.getMentorListFilePath());
-        //TeamListStorage tStore = new JsonTeamListStorage(userPrefs.getTeamListFilePath());
-        //storage = new AlfredStorage(pStore, mStore, tStore, userPrefsStorage);
+        ParticipantListStorage pStore = new JsonParticipantListStorage(userPrefs.getParticipantListFilePath());
+        MentorListStorage mStore = new JsonMentorListStorage(userPrefs.getMentorListFilePath());
+        TeamListStorage tStore = new JsonTeamListStorage(userPrefs.getTeamListFilePath());
+        storage = new AlfredStorageManager(pStore, mStore, tStore, userPrefsStorage);
 
         initLogging(config);
 
         model = new ModelManager(storage, userPrefs);
+        model.initialize();
 
         logic = new LogicManager(model);
 
