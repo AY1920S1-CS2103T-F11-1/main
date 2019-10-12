@@ -259,10 +259,10 @@ public class ModelManager implements Model {
             throw new AlfredModelException("Participant does not exist");
         }
 
-        Participant participantToDelete = this.participantList.delete(id);
+        Participant deletedParticipant = this.participantList.delete(id);
         this.saveList(PrefixType.P);
         this.saveList(PrefixType.T);
-        return participantToDelete;
+        return deletedParticipant;
     }
 
     /* Team Methods*/
@@ -356,6 +356,7 @@ public class ModelManager implements Model {
             logger.severe("Participant is already present in team");
             throw new AlfredModelException("Participant is already present in team");
         }
+        this.saveList(PrefixType.T);
     }
 
     /**
@@ -374,6 +375,7 @@ public class ModelManager implements Model {
             logger.severe("Team already has a mentor");
             throw new AlfredModelException("Team already has a mentor");
         }
+        this.saveList(PrefixType.T);
     }
 
     /**
@@ -384,9 +386,10 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Team deleteTeam(Id id) throws AlfredException {
+        Team teamToDelete = this.teamList.delete(id);
         this.saveList(PrefixType.T);
         this.saveList(PrefixType.P);
-        return this.teamList.delete(id);
+        return teamToDelete;
     }
 
     /* Mentor Methods */
@@ -409,8 +412,8 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public void addMentor(Mentor mentor) throws AlfredException {
-        this.saveList(PrefixType.M);
         this.mentorList.add(mentor);
+        this.saveList(PrefixType.M);
     }
 
     /**
