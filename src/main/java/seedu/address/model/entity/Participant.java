@@ -125,7 +125,7 @@ public class Participant extends Entity {
         }
 
         return this.name.equals(otherParticipant.getName())
-                || (this.phone.equals(otherParticipant.getPhone())
-                    && this.email.equals(otherParticipant.getEmail()));
+                && (this.phone.equals(otherParticipant.getPhone())
+                    || this.email.equals(otherParticipant.getEmail()));
     }
 }
