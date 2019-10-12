@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
+import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Team;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
@@ -119,6 +121,14 @@ public interface Model {
     void updateMentor(Id id, Mentor mentor) throws AlfredException;
 
     Mentor deleteMentor(Id id) throws AlfredException;
+
+    /* Find commands */
+
+    List<Participant> findParticipant(String name);
+
+    List<Team> findTeam(String name);
+
+    List<Mentor> findMentor(String name);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
