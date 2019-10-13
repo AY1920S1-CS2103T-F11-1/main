@@ -1,4 +1,4 @@
-package seedu.address.ui.EntityListPanel;
+package seedu.address.ui.entitylistpanel;
 
 import java.util.logging.Logger;
 
@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Team;
 import seedu.address.ui.EntityCard;
 

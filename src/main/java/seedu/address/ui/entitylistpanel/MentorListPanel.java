@@ -1,4 +1,4 @@
-package seedu.address.ui.EntityListPanel;
+package seedu.address.ui.entitylistpanel;
 
 import java.util.logging.Logger;
 
