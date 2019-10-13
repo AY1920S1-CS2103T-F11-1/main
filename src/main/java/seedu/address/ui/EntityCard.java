@@ -74,10 +74,10 @@ public class EntityCard extends UiPart<Region> {
             this.type = PrefixType.M;
         } else {
             Team team = (Team) entity;
-            FlowPane participantPane = new FlowPane()l
+            FlowPane participantPane = new FlowPane();
             team.getParticipants().stream()
                     .sorted(Comparator.comparing(pt -> pt.getName().toString()))
-                    .forEach(p -> participantPane.getChildren().add(new Label(p.getName().toString()));
+                    .forEach(p -> participantPane.getChildren().add(new Label(p.getName().toString())));
             Optional<Mentor> teamMentor = team.getMentor();
             cards.getChildren().add(new Label(teamMentor.isEmpty()? "Mentor not assigned": teamMentor.get().getName().toString()));
             cards.getChildren().add(new Label(team.getSubject().toString()));

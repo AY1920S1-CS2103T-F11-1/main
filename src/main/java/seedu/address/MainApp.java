@@ -23,7 +23,7 @@ import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AlfredStorage;
 import seedu.address.storage.AlfredStorageManager;
-import seedu.address.storage.JsonAddressBookStorage;
+
 import seedu.address.storage.AlfredStorage;
 import seedu.address.storage.AlfredStorageManager;
 import seedu.address.storage.JsonMentorListStorage;
@@ -32,8 +32,8 @@ import seedu.address.storage.JsonTeamListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.MentorListStorage;
 import seedu.address.storage.ParticipantListStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
+
+
 import seedu.address.storage.TeamListStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
@@ -70,10 +70,10 @@ public class MainApp extends Application {
         //Initialise EntityList Storage and AlfredStorage
         ParticipantListStorage participantListStorage = new JsonParticipantListStorage(userPrefs.getParticipantListFilePath());
         MentorListStorage mentorListStorage = new JsonMentorListStorage(userPrefs.getMentorListFilePath());
-        TeamListStorage teamListStorage = new JsonTeamListStorage(userPrefs.getTeamListFilePath();
-         AlfredStorage alfredStorage = new AlfredStorageManager(participantListStorage, mentorListStorage, teamListStorage, userPrefsStorage);
+        TeamListStorage teamListStorage = new JsonTeamListStorage(userPrefs.getTeamListFilePath());
+        AlfredStorage alfredStorage = new AlfredStorageManager(participantListStorage, mentorListStorage, teamListStorage, userPrefsStorage);
 
-         initLogging(config);
+        initLogging(config);
 
         model = initModelManager(alfredStorage, userPrefs);
 

@@ -13,7 +13,7 @@ import seedu.address.ui.EntityCard;
 /**
  * Panel containing the list of persons.
  */
-public class MentorListPanel extends EntityListPanel{
+public class MentorListPanel extends EntityListPanel {
     private static final String FXML = "MentorListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ParticipantListPanel.class);
 
@@ -22,9 +22,10 @@ public class MentorListPanel extends EntityListPanel{
 
     public MentorListPanel(ObservableList<Mentor> mentorList) {
         super(FXML);
-       mentorListView.setItems(mentorList);
+        mentorListView.setItems(mentorList);
         mentorListView.setCellFactory(listView -> new MentorListViewCell());
     }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
@@ -41,4 +42,5 @@ public class MentorListPanel extends EntityListPanel{
             }
         }
     }
+}
 

@@ -19,7 +19,7 @@ import seedu.address.model.entity.PrefixType;
  */
 class JsonAdaptedParticipant {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Participant's %s field is missing!";
-    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private static final Logger logger = LogsCenter.getLogger(AlfredStorageManager.class);
 
     private final String name;
     private final String phone;

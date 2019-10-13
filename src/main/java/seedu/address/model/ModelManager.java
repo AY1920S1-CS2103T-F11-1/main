@@ -43,7 +43,7 @@ public class ModelManager implements Model {
         requireAllNonNull(initialData, userPrefs);
 
 
-        logger.fine("Initializing with Participant List: " + initialData.getParticipantList())
+        logger.fine("Initializing with Participant List: " + initialData.getParticipantList());
         logger.fine("Initializing with Mentor List" + initialData.getMentorList());
         logger.fine("Initializing with Team List: " + teamFilteredList);
         logger.fine("Initializing with UserPrefs: " + userPrefs);
@@ -159,16 +159,19 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
-    @Override
-    public Path getAddressBookFilePath() {
+
+    /*public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
+*/
 
-    @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+
+    /*public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
+    */
+
 
     // ========== EntityListMethods ===============
 

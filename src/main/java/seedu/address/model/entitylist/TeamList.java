@@ -84,7 +84,7 @@ public class TeamList extends EntityList {
                 throw new AlfredModelException("Team to add already exists.");
             }
         }
-        this.teams.add(team);
+        this.teamObservableList.add(team);
     }
 
     /**

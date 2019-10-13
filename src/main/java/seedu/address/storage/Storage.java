@@ -1,4 +1,4 @@
-package seedu.address.storage;
+/*package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,7 +11,7 @@ import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
- */
+ *
 public interface Storage extends AddressBookStorage, UserPrefsStorage {
 
     @Override
@@ -30,4 +30,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
 }
+*/
 

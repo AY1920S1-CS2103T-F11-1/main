@@ -20,7 +20,7 @@ public class ListMentorCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        model.getMentorFilteredList().list().forEach(this::listEntity);
+        model.getMentorFilteredList().forEach(this::listEntity);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }

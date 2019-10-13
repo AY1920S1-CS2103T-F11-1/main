@@ -14,7 +14,7 @@ import seedu.address.ui.EntityCard;
 /**
  * Panel containing the list of persons.
  */
-public class TeamListPanel extends EntityListPanel{
+public class TeamListPanel extends EntityListPanel {
     private static final String FXML = "TeamListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ParticipantListPanel.class);
 
@@ -24,8 +24,9 @@ public class TeamListPanel extends EntityListPanel{
     public TeamListPanel(ObservableList<Team> teamList) {
         super(FXML);
         teamListView.setItems(teamList);
-        teamListView.setCellFactory(listView -> new TeamListViewCell();
+        teamListView.setCellFactory(listView -> new TeamListViewCell());
     }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
@@ -42,4 +43,5 @@ public class TeamListPanel extends EntityListPanel{
             }
         }
     }
+}
 
