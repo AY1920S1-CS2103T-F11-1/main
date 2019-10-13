@@ -28,7 +28,7 @@ public interface Model {
     /**
      * Initializes the model.
      */
-    void initialize();
+
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

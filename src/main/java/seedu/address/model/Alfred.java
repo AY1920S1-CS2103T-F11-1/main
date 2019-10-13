@@ -24,6 +24,8 @@ import seedu.address.model.entitylist.TeamList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.storage.AlfredStorage;
+import seedu.address.storage.AlfredStorageManager;
+import seedu.address.storage.JsonParticipantListStorage;
 
 /**
  * Wraps all data at the alfred level
@@ -32,16 +34,11 @@ import seedu.address.storage.AlfredStorage;
 public class Alfred implements ReadOnlyAlfred {
     private static final Logger logger = LogsCenter.getLogger(Alfred.class);
 
+    private final AlfredStorage alfredStorage;
     private final ParticipantList participantList;
     private final MentorList mentorList;
     private final TeamList teamList;
 
-
-    public Alfred() {
-        participantList = new ParticipantList();
-        teamList = new TeamList();
-        mentorList = new MentorList();
-    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -75,7 +72,6 @@ public class Alfred implements ReadOnlyAlfred {
             }
 
 
-
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty list of entries.");
 
@@ -86,6 +82,7 @@ public class Alfred implements ReadOnlyAlfred {
             this.participantList = (ParticipantList) participantList;
             this.teamList = (TeamList) teamList;
             this.mentorList = (MentorList) mentorList;
+            this.alfredStorage = alfredStorage;
         }
     }
 
@@ -111,6 +108,7 @@ public class Alfred implements ReadOnlyAlfred {
      */
     public void addParticipant(Participant participant) throws AlfredException {
         this.participantList.add(participant);
+        this.saveList(PrefixType.P);
 
     }
 
@@ -121,20 +119,19 @@ public class Alfred implements ReadOnlyAlfred {
      * @param participant
      */
     public void updateParticipant(Id id, Participant participant) throws AlfredException {
-
-            // Update the participant in the team list as well
-            Team targetTeam = this.getTeamByParticipantId(id);
-            boolean isSuccessful = targetTeam.updateParticipant(participant);
-            if (!isSuccessful) {
-                logger.warning("The participant is not in the team provided");
-                return;
-            }
-
-            this.participantList.update(id, participant);
-
-        } catch (AlfredException e) {
+        // Update the participant in the team list as well
+        Team targetTeam = this.getTeamByParticipantId(id);
+        boolean isSuccessful = targetTeam.updateParticipant(participant);
+        if (!isSuccessful) {
+            logger.warning("The participant is not in the team provided");
             return;
         }
+
+        this.participantList.update(id, participant);
+        this.saveList(PrefixType.P);
+        this.saveList(PrefixType.T);
+
+
     }
 
     /**
@@ -153,6 +150,8 @@ public class Alfred implements ReadOnlyAlfred {
         }
 
         Participant deletedParticipant = this.participantList.delete(id);
+        this.saveList(PrefixType.P);
+        this.saveList(PrefixType.T);
         return deletedParticipant;
     }
 
@@ -177,7 +176,7 @@ public class Alfred implements ReadOnlyAlfred {
      * @throws AlfredException
      */
     public Team getTeamByParticipantId(Id participantId) throws AlfredException {
-        for (Team t : teamList) {
+        for (Team t : teamList.getSpecificTypedList()) {
             for (Participant p : t.getParticipants()) {
                 if (p.getId().equals(participantId)) {
                     return t;
@@ -225,6 +224,7 @@ public class Alfred implements ReadOnlyAlfred {
      */
     public void updateTeam(Id teamId, Team updatedTeam) throws AlfredException {
         this.teamList.update(teamId, updatedTeam);
+        this.saveList(PrefixType.T);
 
     }
 
@@ -236,6 +236,7 @@ public class Alfred implements ReadOnlyAlfred {
      */
     public void addTeam(Team team) throws AlfredException {
         this.teamList.add(team);
+        this.saveList(PrefixType.T);
 
     }
 
@@ -255,6 +256,7 @@ public class Alfred implements ReadOnlyAlfred {
             logger.severe("Participant is already present in team");
             throw new AlfredModelException("Participant is already present in team");
         }
+        this.saveList(PrefixType.T);
 
     }
 
@@ -274,7 +276,7 @@ public class Alfred implements ReadOnlyAlfred {
             logger.severe("Team already has a mentor");
             throw new AlfredModelException("Team already has a mentor");
         }
-
+        this.saveList(PrefixType.T);
     }
 
     /**
@@ -286,6 +288,8 @@ public class Alfred implements ReadOnlyAlfred {
      */
     public Team deleteTeam(Id id) throws AlfredException {
         Team teamToDelete = this.teamList.delete(id);
+        this.saveList(PrefixType.T);
+        this.saveList(PrefixType.P);
         return teamToDelete;
     }
 
@@ -310,6 +314,7 @@ public class Alfred implements ReadOnlyAlfred {
      */
     public void addMentor(Mentor mentor) throws AlfredException {
         this.mentorList.add(mentor);
+        this.saveList(PrefixType.M);
 
     }
 
@@ -319,7 +324,7 @@ public class Alfred implements ReadOnlyAlfred {
      * @param id
      * @param updatedMentor
      */
-    public void updateMentor(Id id, Mentor updatedMentor) throws AlfredException {
+    public void updateMentor(Id id, Mentor updatedMentor) {
         // TODO: Throw specific exception.
         try {
             Team targetTeam = this.getTeamByMentorId(id);
@@ -333,6 +338,8 @@ public class Alfred implements ReadOnlyAlfred {
             return;
         }
         this.mentorList.update(id, updatedMentor);
+        this.saveList(PrefixType.M);
+        this.saveList(PrefixType.T);
 
     }
 
@@ -345,7 +352,8 @@ public class Alfred implements ReadOnlyAlfred {
      */
     public Mentor deleteMentor(Id id) throws AlfredException {
         Mentor mentorToDelete = this.mentorList.delete(id);
-
+        this.saveList(PrefixType.M);
+        this.saveList(PrefixType.T);
         return mentorToDelete;
     }
     //// list overwrite operations
@@ -365,13 +373,51 @@ public class Alfred implements ReadOnlyAlfred {
     public ObservableList<Mentor> getMentorList() {
         return mentorList.getSpecificTypedList();
     }
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AlfredStorage // instanceof handles nulls
-                && participantList.equals(((Alfred) other).participantList)
-                && teamList.equals(((Alfred) other).teamList)
-                && mentorList.equals(((Alfred) other).mentorList));
+
+    /**
+     * Helper function to save the lists.
+     *
+     * @param type
+     */
+    private void saveList(PrefixType type) {
+        try {
+            switch (type) {
+                case T:
+                    this.alfredStorage.saveTeamList(this.teamList);
+                    break;
+                case M:
+                    this.alfredStorage.saveMentorList(this.mentorList);
+                    break;
+                case P:
+                    this.alfredStorage.saveParticipantList(this.participantList);
+                    break;
+                default:
+            }
+        } catch (IOException e) {
+            logger.severe("Failed to save the list into storage due to IOException");
+        }
+
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof Alfred)) {
+            return false;
+        }
+
+        // state check
+        Alfred other = (Alfred) obj;
+        return participantList.equals(other.participantList)
+                && teamList.equals(other.teamList) && mentorList.equals(other.mentorList)
+                && alfredStorage.equals(other.alfredStorage);
+
+    }
+
 
 }
