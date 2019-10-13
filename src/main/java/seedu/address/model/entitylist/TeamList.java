@@ -3,10 +3,13 @@ package seedu.address.model.entitylist;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
@@ -17,13 +20,15 @@ import seedu.address.model.entity.Team;
 public class TeamList extends EntityList {
     private static int lastUsedId = 0;
 
-    private List<Team> teams;
+    private final ObservableList<Team> teams = FXCollections.observableArrayList();
+    private final ObservableList<Team> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(teams);
 
     /**
      * Constructor.
      */
     public TeamList() {
-        this.teams = new ArrayList<>();
+
     }
 
     /**
@@ -95,8 +100,8 @@ public class TeamList extends EntityList {
      *
      * @return List of Teams.
      */
-    public List<Team> getSpecificTypedList() {
-        return this.teams;
+    public ObservableList<Team> getSpecificTypedList() {
+        return this.internalUnmodifiableList;
     }
 
     /**
@@ -104,8 +109,8 @@ public class TeamList extends EntityList {
      *
      * @return List of Teams.
      */
-    public List<? extends Entity> list() {
-        return this.teams;
+    public ObservableList<? extends Entity> list() {
+        return this.internalUnmodifiableList;
     }
 
     /**

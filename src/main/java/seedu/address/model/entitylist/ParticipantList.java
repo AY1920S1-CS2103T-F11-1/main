@@ -3,12 +3,17 @@ package seedu.address.model.entitylist;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+import java.util.Optional;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
+import seedu.address.model.person.Person;
 
 /**
  * This interface serves as the new API for the model.
@@ -17,13 +22,16 @@ import seedu.address.model.entity.PrefixType;
 public class ParticipantList extends EntityList {
     private static int lastUsedId = 0;
 
-    private List<Participant> participants;
+    private final ObservableList<Participant> participants = FXCollections.observableArrayList();
+    private final ObservableList<Participant> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(participants);
+
 
     /**
      * Constructor.
      */
     public ParticipantList() {
-        this.participants = new ArrayList<>();
+
     }
 
     /**
@@ -34,12 +42,17 @@ public class ParticipantList extends EntityList {
      * @throws AlfredException if the participant to get does not exist.
      */
     public Participant get(Id id) throws AlfredException {
-        for (Participant p: this.participants) {
+        requireNonNull(id);
+        Optional<Participant> resultParticipant = participants.stream().filter(p -> (p.getId()).equals(id)).findFirst();
+        return resultParticipant.orElseThrow(() -> new AlfredModelException("Participant to get does not exist"));
+
+       /* for (Participant p: this.participants) {
             if (p.getId().equals(id)) {
                 return p;
             }
         }
         throw new AlfredModelException("Participant to get does not exist");
+        */
     }
 
     /**
@@ -105,8 +118,8 @@ public class ParticipantList extends EntityList {
      *
      * @return List of Participants.
      */
-    public List<Participant> getSpecificTypedList() {
-        return this.participants;
+    public ObservableList<Participant> getSpecificTypedList() {
+        return this.internalUnmodifiableList;
     }
 
     /**
@@ -115,8 +128,8 @@ public class ParticipantList extends EntityList {
      * @return List of Participants.
      */
     @Override
-    public List<? extends Entity> list() {
-        return this.participants;
+    public ObservableList<? extends Entity> list() {
+        return this.internalUnmodifiableList;
     }
 
     /**

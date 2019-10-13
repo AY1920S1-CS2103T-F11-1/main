@@ -3,12 +3,15 @@ package seedu.address.model.entitylist;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entity.Team;
 
 /**
  * This interface serves as the new API for the model.
@@ -17,13 +20,15 @@ import seedu.address.model.entity.PrefixType;
 public class MentorList extends EntityList {
     private static int lastUsedId = 0;
 
-    private List<Mentor> mentors;
+    private final ObservableList<Mentor> mentors = FXCollections.observableArrayList();
+    private final ObservableList<Mentor> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(mentors);
 
     /**
      * Constructor.
      */
     public MentorList() {
-        this.mentors = new ArrayList<>();
+
     }
 
     /**
@@ -94,8 +99,8 @@ public class MentorList extends EntityList {
      *
      * @return List of Mentors.
      */
-    public List<Mentor> getSpecificTypedList() {
-        return this.mentors;
+    public ObservableList<Mentor> getSpecificTypedList() {
+        return this.internalUnmodifiableList;
     }
 
     /**
@@ -104,8 +109,8 @@ public class MentorList extends EntityList {
      * @return List of Mentors.
      */
     @Override
-    public List<? extends Entity> list() {
-        return this.mentors;
+    public ObservableList<? extends Entity> list() {
+        return this.internalUnmodifiableList;
     }
 
     /**

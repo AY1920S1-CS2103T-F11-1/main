@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.person.Person;
+import seedu.address.storage.AlfredStorage;
 
 /**
  * The main LogicManager of the app.
@@ -32,7 +33,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, AlfredStorage alfredStorage) {
         this.model = model;
         this.alfredStorage = alfredStorage;
-        addressBookParser = new AddressBookParser();
+        this.addressBookParser = new AlfredParser();
     }
 
     @Override
@@ -44,11 +45,6 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         return commandResult;
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
     }
 
     @Override
@@ -66,10 +62,6 @@ public class LogicManager implements Logic {
         return model.getTeamList();
     }
 
-    @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
-    }
 
     @Override
     public GuiSettings getGuiSettings() {

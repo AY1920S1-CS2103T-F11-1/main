@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -49,7 +50,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
-    protected AlfredStorage storage;
+    protected AlfredStorage alfredStorage;
     protected Model model;
     protected Config config;
 
@@ -70,7 +71,7 @@ public class MainApp extends Application {
         ParticipantListStorage participantListStorage = new JsonParticipantListStorage(userPrefs.getParticipantListFilePath());
         MentorListStorage mentorListStorage = new JsonMentorListStorage(userPrefs.getMentorListFilePath());
         TeamListStorage teamListStorage = new JsonTeamListStorage(userPrefs.getTeamListFilePath();
-         alfredStorage = new AlfredStorageManager(participantListStorage, mentorListStorage, teamListStorage, userPrefsStorage);
+         AlfredStorage alfredStorage = new AlfredStorageManager(participantListStorage, mentorListStorage, teamListStorage, userPrefsStorage);
 
          initLogging(config);
 

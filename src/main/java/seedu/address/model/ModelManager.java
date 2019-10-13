@@ -28,8 +28,8 @@ import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.entitylist.TeamList;
-import seedu.address.model.person.Person;<<<<<<<HEAD
-import seedu.address.model.util.SampleDataUtil;=======>>>>>>>upstream/master
+
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AlfredStorage;
 
 /**
@@ -38,23 +38,15 @@ import seedu.address.storage.AlfredStorage;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    <<<<<<<HEAD
+
 
     private final UserPrefs userPrefs;
-
-    =======
-    // TODO: Remove the null values which are a placeholder due to the multiple
-    // constructors.
-    // Also will have to change the relevant attributes to final.
     private AlfredStorage storage = null;
-    private AddressBook addressBook = null;
-    private final UserPrefs userPrefs;
-    private FilteredList<Person> filteredPersons = null;>>>>>>>upstream/master
 
     // EntityLists
-    private ParticipantList participantList = new ParticipantList();
-    private TeamList teamList = new TeamList();
-    private MentorList mentorList = new MentorList();
+    private FilteredList<Participant> participantList;
+    private FilteredList<Team> teamList;
+    private FilteredList<Mentor> mentorList;
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
@@ -111,33 +103,22 @@ public class ModelManager implements Model {
 
 
         this.userPrefs = new UserPrefs(userPrefs);
-<<<<<<< HEAD
-
-        this.participantList = addAllParticipants(new ParticipantList(), participantList);
-        this.teamList = addAllTeams(new TeamList(), teamList);
-        this.mentorList = addAllMentors(new MentorList, mentorList);
-=======
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
->>>>>>> upstream/master
+        this.participantList = new FilteredList<Participant>(((ParticipantList)participantList).getSpecificTypedList());
+        this.teamList = new FilteredList<Team>(((TeamList)teamList).getSpecificTypedList());
+        this.mentorList = new FilteredList<Mentor>(((MentorList)mentorList).getSpecificTypedList());
     }
 
     public ModelManager() throws AlfredException {
         this(new ParticipantList(), new MentorList(), new TeamList(), new UserPrefs());
     }
 
-    public ModelManager(AlfredStorage storage, ReadOnlyUserPrefs userPrefs) {
-        super();
-        this.userPrefs = new UserPrefs(userPrefs);
-        this.storage = storage;
-        // TODO: Remove: Currently it is here to make tests pass.
-        this.addressBook = new AddressBook();
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-    }
 
     /**
      * Initializes the various lists used. If storage contains no data, it defaults
      * to loading the sample lists provided.
      */
+    //We have two methods to initialize model manager, which one do you want to use?
+    /*
     public void initialize() {
         // Try loading the 3 lists into memory.
         try {
@@ -196,6 +177,8 @@ public class ModelManager implements Model {
         // initialData = new AddressBook();
         // }
     }
+    */
+
 
     // =========== UserPrefs
     // ==================================================================================
@@ -251,7 +234,7 @@ public class ModelManager implements Model {
 
         List newTeamList = newList.list();
         for (int i = 0; i < newTeamList.size(); i++) {
-            currList.add((Team) newTeamList.get(i));
+            currList.add((Team)newTeamList.get(i));
         }
         return currList;
     }
@@ -384,8 +367,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Team getTeamByParticipantId(Id participantId) throws AlfredException {
-        List<Team> teams = this.teamList.getSpecificTypedList();
-        for (Team t : teams) {
+        for (Team t : teamList) {
             for (Participant p : t.getParticipants()) {
                 if (p.getId().equals(participantId)) {
                     return t;
@@ -395,16 +377,25 @@ public class ModelManager implements Model {
         throw new AlfredModelException("Team with said participant cannot be found.");
     }
 
-    /**
-     * Gets the team by mentor id.
-     *
-     * @param mentorId
-     * @return Team
-     * @throws AlfredException
-     */
+    /* OR KIV: this.teamList.setPredicate(t -> {
+                   for (Participant p : t.getParticipants()) {
+                       if (p.getId().equals(participantId)) {
+                           return true;
+                       }
+                   }
+                   return false;
+                   }
+                   );
+
+   /**
+    * Gets the team by mentor id.
+    *
+    * @param mentorId
+    * @return Team
+    * @throws AlfredException
+    */
     public Team getTeamByMentorId(Id mentorId) throws AlfredException {
-        List<Team> teams = this.teamList.getSpecificTypedList();
-        for (Team t : teams) {
+        for (Team t : teamList) {
             Optional<Mentor> mentor = t.getMentor();
             if (mentor.isPresent()) {
                 if (mentor.get().getId().equals(mentorId)) {

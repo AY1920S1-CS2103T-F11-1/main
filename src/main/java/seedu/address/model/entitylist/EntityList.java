@@ -2,6 +2,7 @@ package seedu.address.model.entitylist;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 
@@ -48,5 +49,5 @@ public abstract class EntityList implements ReadOnlyEntityList {
 
     public abstract boolean contains(Id id);
 
-    public abstract List<? extends Entity> list();
+    public abstract ObservableList<? extends Entity> list();
 }
