@@ -1,6 +1,5 @@
 package seedu.address.logic;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
@@ -11,14 +10,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.AlfredParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.person.Person;
-import seedu.address.storage.AlfredStorage;
-import seedu.address.storage.Storage;
 
 /**
  * The main LogicManager of the app.
@@ -29,8 +26,8 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final AlfredStorage alfredStorage;
-    //Will this be changed to alfredParser?
-    private final AddressBookParser addressBookParser;
+    // Will this be changed to alfredParser?
+    private final AlfredParser addressBookParser;
 
     public LogicManager(Model model, AlfredStorage alfredStorage) {
         this.model = model;
@@ -45,12 +42,6 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }
 
         return commandResult;
     }

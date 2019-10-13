@@ -4,8 +4,8 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.AlfredException;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
@@ -23,6 +23,11 @@ public interface Model {
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+
+    /**
+     * Initializes the model.
+     */
+    void initialize();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -68,7 +73,7 @@ public interface Model {
 
     void addParticipant(Participant participant) throws AlfredException;
 
-    boolean updateParticipant(Id id, Participant participant);
+    void updateParticipant(Id id, Participant participant) throws AlfredException;
 
     Participant deleteParticipant(Id id) throws AlfredException;
 
@@ -82,7 +87,11 @@ public interface Model {
 
     void addTeam(Team team) throws AlfredException;
 
-    boolean updateTeam(Id teamId, Team team);
+    void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException;
+
+    void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException;
+
+    void updateTeam(Id teamId, Team team) throws AlfredException;
 
     Team deleteTeam(Id id) throws AlfredException;
 
@@ -92,7 +101,7 @@ public interface Model {
 
     void addMentor(Mentor mentor) throws AlfredException;
 
-    boolean updateMentor(Id id, Mentor mentor);
+    void updateMentor(Id id, Mentor mentor) throws AlfredException;
 
     Mentor deleteMentor(Id id) throws AlfredException;
 

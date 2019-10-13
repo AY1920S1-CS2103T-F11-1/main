@@ -23,12 +23,4 @@ public interface ReadOnlyEntityList {
      * @return List<? extends Entity>
      */
     List<? extends Entity> list();
-
-    /**
-     * This generates the id for the next entity object to be created.
-     *
-     * @return Id
-     */
-    Id generateId();
-
 }

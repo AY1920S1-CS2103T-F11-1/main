@@ -3,8 +3,8 @@ package seedu.address.model.entitylist;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.AlfredException;
-import seedu.address.AlfredRuntimeException;
+import seedu.address.commons.exceptions.AlfredException;
+import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
@@ -15,15 +15,15 @@ import seedu.address.model.entity.PrefixType;
  * {@code ParticipantList} should behave as a singleton.
  */
 public class ParticipantList extends EntityList {
+    private static int lastUsedId = 0;
+
     private List<Participant> participants;
-    private int lastUsedId;
 
     /**
      * Constructor.
      */
     public ParticipantList() {
         this.participants = new ArrayList<>();
-        this.lastUsedId = 0;
     }
 
     /**
@@ -35,11 +35,11 @@ public class ParticipantList extends EntityList {
      */
     public Participant get(Id id) throws AlfredException {
         for (Participant p: this.participants) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 return p;
             }
         }
-        throw new AlfredRuntimeException("Participant to get does not exist");
+        throw new AlfredModelException("Participant to get does not exist");
     }
 
     /**
@@ -50,8 +50,17 @@ public class ParticipantList extends EntityList {
      * @return boolean
      */
     public boolean update(Id id, Participant updatedParticipant) {
+        // Also check if new Participant with updated details exists already
+        // i.e. update John to Joshua, but list already contains Joshua
+        // AB3 had a isSamePerson() method
+        // so maybe we can have a isSameParticipant() in the Participant class (and rest of the entities)
+        /*
+         * for each p in this.participants
+         *     if p.isSameParticipant(updatedParticipant)
+         *         return false
+         */
         for (int i = 0; i < this.participants.size(); i++) {
-            if (this.participants.get(i).getId() == id) {
+            if (this.participants.get(i).getId().equals(id)) {
                 this.participants.set(i, updatedParticipant);
                 return true;
             }
@@ -68,8 +77,8 @@ public class ParticipantList extends EntityList {
      */
     public void add(Participant participant) throws AlfredException {
         for (Participant p: this.participants) {
-            if (p.getId() == participant.getId()) {
-                throw new AlfredRuntimeException("Participant already exists in list");
+            if (p.getId().equals(participant.getId())) {
+                throw new AlfredModelException("Participant already exists in list");
             }
         }
         this.participants.add(participant);
@@ -83,12 +92,12 @@ public class ParticipantList extends EntityList {
      */
     public Participant delete(Id id) throws AlfredException {
         for (Participant p: this.participants) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 this.participants.remove(p);
                 return p;
             }
         }
-        throw new AlfredRuntimeException("Participant to delete does not exist");
+        throw new AlfredModelException("Participant to delete does not exist");
     }
 
     /**
@@ -119,7 +128,7 @@ public class ParticipantList extends EntityList {
     @Override
     public boolean contains(Id id) {
         for (Participant p: this.participants) {
-            if (p.getId() == id) {
+            if (p.getId().equals(id)) {
                 return true;
             }
         }
@@ -131,9 +140,17 @@ public class ParticipantList extends EntityList {
      *
      * @return ID
      */
-    @Override
-    public Id generateId() {
-        this.lastUsedId++;
-        return new Id(PrefixType.P, this.lastUsedId);
+    public static Id generateId() {
+        lastUsedId++;
+        return new Id(PrefixType.P, lastUsedId);
+    }
+
+    /**
+     * Sets the lastUsedId class attribute.
+     *
+     * @param number
+     */
+    public static void setLastUsedId(int number) {
+        lastUsedId = number;
     }
 }

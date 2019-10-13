@@ -5,8 +5,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.address.AlfredException;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -16,7 +16,7 @@ import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.TeamList;
 
 /**
- * Manages storage of Entity (Participant, Mentor, Issue, Team) and UserPref data in local storage.
+ * Manages storage of Entity (Participant, Mentor, Team) and UserPref data in local storage.
  */
 public class AlfredStorageManager implements AlfredStorage {
 
@@ -25,7 +25,6 @@ public class AlfredStorageManager implements AlfredStorage {
     private MentorListStorage mStore;
     private TeamListStorage tStore;
     private UserPrefsStorage userPrefsStorage;
-
 
     public AlfredStorageManager(ParticipantListStorage pStore,
                                 MentorListStorage mStore,

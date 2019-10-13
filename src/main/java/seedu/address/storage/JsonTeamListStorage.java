@@ -7,8 +7,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.address.AlfredException;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
@@ -58,6 +58,9 @@ public class JsonTeamListStorage implements TeamListStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
+        } catch (IllegalArgumentException iae) {
+            logger.info("Illegal arguments found in " + filePath + ": " + iae.getMessage());
+            throw new DataConversionException(iae);
         }
     }
 

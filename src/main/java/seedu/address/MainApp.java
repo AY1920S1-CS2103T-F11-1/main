@@ -15,17 +15,16 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AlfredStorage;
 import seedu.address.storage.AlfredStorageManager;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.AlfredStorage;
+import seedu.address.storage.AlfredStorageManager;
 import seedu.address.storage.JsonMentorListStorage;
 import seedu.address.storage.JsonParticipantListStorage;
 import seedu.address.storage.JsonTeamListStorage;
@@ -50,7 +49,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
-    protected AlfredStorage alfredStorage;
+    protected AlfredStorage storage;
     protected Model model;
     protected Config config;
 
@@ -82,12 +81,11 @@ public class MainApp extends Application {
         ui = new UiManager(logic);
     }
 
-    //Feels like Single responsibility principle is violated if I moved the initialisation phase over to ModelManager?
-    protected Model initModelManager(AlfredStorage alfredStorage, UserPrefs userPrefs) throws AlfredException{
+    // Feels like Single responsibility principle is violated if I moved the
+    // initialisation phase over to ModelManager?
+    protected Model initModelManager(AlfredStorage alfredStorage, UserPrefs userPrefs) throws AlfredException {
         return ModelManager.initModelManager(alfredStorage, userPrefs);
     }
-
-
 
     private void initLogging(Config config) {
         LogsCenter.init(config);
@@ -120,7 +118,8 @@ public class MainApp extends Application {
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -130,9 +129,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
-     * or a new {@code UserPrefs} with default configuration if errors occur when
-     * reading from the file.
+     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs
+     * file path, or a new {@code UserPrefs} with default configuration if errors
+     * occur when reading from the file.
      */
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
@@ -151,7 +150,8 @@ public class MainApp extends Application {
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
