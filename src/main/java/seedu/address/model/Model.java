@@ -24,11 +24,9 @@ public interface Model {
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-
     /**
      * Initializes the model.
      */
-
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -50,7 +48,6 @@ public interface Model {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-
     /**
      * Returns the ParticipantList.
      */
@@ -65,6 +62,14 @@ public interface Model {
      * Returns the MentorList.
      */
     FilteredList<Mentor> getMentorFilteredList();
+
+    /* Get the filtered lists */
+
+    FilteredList<Participant> getFilteredParticipantList();
+
+    FilteredList<Team> getFilteredTeamList();
+
+    FilteredList<Mentor> getFilteredMentorList();
 
     /* Below is the API exposed for the controllers to call */
 

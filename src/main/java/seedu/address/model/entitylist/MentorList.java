@@ -17,20 +17,21 @@ import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
 /**
- * This interface serves as the new API for the model.
- * {@code MentorList} should behave as a singleton.
+ * This interface serves as the new API for the model. {@code MentorList} should
+ * behave as a singleton.
  */
 public class MentorList extends EntityList {
     private static int lastUsedId = 0;
 
     private final ObservableList<Mentor> mentorObservableList = FXCollections.observableArrayList();
-    private final ObservableList<Mentor> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(mentorObservableList);
+    private final ObservableList<Mentor> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(mentorObservableList);
 
     /**
      * Constructor.
      */
-    public MentorList() {}
+    public MentorList() {
+    }
 
     /**
      * Gets Mentor by ID.
@@ -43,14 +44,11 @@ public class MentorList extends EntityList {
         Optional<Mentor> resultMentor = mentorObservableList.stream().filter(p -> (p.getId()).equals(id)).findFirst();
         return resultMentor.orElseThrow(() -> new AlfredModelException("Participant to get does not exist"));
 
-        /* for (Mentor m: this.mentors) {
-            if (m.getId().equals(id)) {
-                return m;
-            }
-        }
-        throw new AlfredModelException("Mentor to get does not exist");
-
-        */
+        /*
+         * for (Mentor m: this.mentors) { if (m.getId().equals(id)) { return m; } }
+         * throw new AlfredModelException("Mentor to get does not exist");
+         * 
+         */
     }
 
     /**
@@ -77,7 +75,7 @@ public class MentorList extends EntityList {
      * @throws AlfredException
      */
     public void add(Mentor mentor) throws AlfredException {
-        for (Mentor m: this.mentorObservableList) {
+        for (Mentor m : this.mentorObservableList) {
             if (m.getId() == mentor.getId()) {
                 throw new AlfredModelException("Item to add already exists!");
             }
@@ -92,7 +90,7 @@ public class MentorList extends EntityList {
      * @throws Exception
      */
     public Mentor delete(Id id) throws AlfredException {
-        for (Mentor m: this.mentorObservableList) {
+        for (Mentor m : this.mentorObservableList) {
             if (m.getId().equals(id)) {
                 this.mentorObservableList.remove(m);
                 return m;
@@ -121,6 +119,16 @@ public class MentorList extends EntityList {
     }
 
     /**
+     * Get the unmodifiable list of mentors.
+     *
+     * @return Observable List of Mentors
+     */
+    @Override
+    public ObservableList<? extends Entity> getUnmodifiableList() {
+        return this.unmodifiableMentors;
+    }
+
+    /**
      * Checks if a given ID exists.
      *
      * @param id
@@ -128,7 +136,7 @@ public class MentorList extends EntityList {
      */
     @Override
     public boolean contains(Id id) {
-        for (Mentor m: this.mentorObservableList) {
+        for (Mentor m : this.mentorObservableList) {
             if (m.getId().equals(id)) {
                 return true;
             }

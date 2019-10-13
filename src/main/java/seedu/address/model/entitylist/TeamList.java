@@ -16,15 +16,15 @@ import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
 /**
- * This interface serves as the new API for the model.
- * {@code TeamList} should behave as a singleton.
+ * This interface serves as the new API for the model. {@code TeamList} should
+ * behave as a singleton.
  */
 public class TeamList extends EntityList {
     private static int lastUsedId = 0;
 
-    private final ObservableList<Team> teamObservableList= FXCollections.observableArrayList();
-    private final ObservableList<Team> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(teamObservableList);
+    private final ObservableList<Team> teamObservableList = FXCollections.observableArrayList();
+    private final ObservableList<Team> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(teamObservableList);
 
     /**
      * Constructor.
@@ -45,13 +45,10 @@ public class TeamList extends EntityList {
         Optional<Team> resultTeam = teamObservableList.stream().filter(p -> (p.getId()).equals(id)).findFirst();
         return resultTeam.orElseThrow(() -> new AlfredModelException("Participant to get does not exist"));
 
-        /*for (Team t: this.teams) {
-            if (t.getId().equals(id)) {
-                return t;
-            }
-        }
-        throw new AlfredModelException("Team to get does not exist!");
-
+        /*
+         * for (Team t: this.teams) { if (t.getId().equals(id)) { return t; } } throw
+         * new AlfredModelException("Team to get does not exist!");
+         * 
          */
     }
 
@@ -79,7 +76,7 @@ public class TeamList extends EntityList {
      * @throws AlfredException
      */
     public void add(Team team) throws AlfredException {
-        for (Team t: this.teamObservableList) {
+        for (Team t : this.teamObservableList) {
             if (t.getId().equals(team.getId())) {
                 throw new AlfredModelException("Team to add already exists.");
             }
@@ -94,7 +91,7 @@ public class TeamList extends EntityList {
      * @throws AlfredException
      */
     public Team delete(Id id) throws AlfredException {
-        for (Team t: this.teamObservableList) {
+        for (Team t : this.teamObservableList) {
             if (t.getId().equals(id)) {
                 this.teamObservableList.remove(t);
                 return t;
@@ -122,6 +119,16 @@ public class TeamList extends EntityList {
     }
 
     /**
+     * List the unmodifiable team of mentors.
+     *
+     * @return {@code ObservableList<? extends Entity>}
+     */
+    @Override
+    public ObservableList<? extends Entity> getUnmodifiableList() {
+        return this.unmodifiableTeams;
+    }
+
+    /**
      * Checks if a given ID exists.
      *
      * @param id
@@ -129,7 +136,7 @@ public class TeamList extends EntityList {
      */
     @Override
     public boolean contains(Id id) {
-        for (Team p: this.teamObservableList) {
+        for (Team p : this.teamObservableList) {
             if (p.getId().equals(id)) {
                 return true;
             }
