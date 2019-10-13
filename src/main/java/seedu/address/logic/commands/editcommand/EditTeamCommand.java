@@ -10,7 +10,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Location;
 import seedu.address.model.entity.Mentor;
@@ -55,12 +55,12 @@ public class EditTeamCommand extends EditCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         Team teamToEdit;
         try {
-            teamToEdit = model.getTeam(this.id);
+            teamToEdit = alfredModel.getTeam(this.id);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
         }
@@ -68,7 +68,7 @@ public class EditTeamCommand extends EditCommand {
                 this.editTeamDescriptor);
 
         try {
-            model.updateTeam(this.id, editedTeam);
+            alfredModel.updateTeam(this.id, editedTeam);
             return new CommandResult(String.format(MESSAGE_EDIT_TEAM_SUCCESS, editedTeam.toString()));
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());

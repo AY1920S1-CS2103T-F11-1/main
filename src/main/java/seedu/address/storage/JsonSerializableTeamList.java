@@ -45,7 +45,7 @@ class JsonSerializableTeamList {
     }
 
     /**
-     * Converts this address book into the model's {@code TeamList} object.
+     * Converts this address book into the alfredModel's {@code TeamList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

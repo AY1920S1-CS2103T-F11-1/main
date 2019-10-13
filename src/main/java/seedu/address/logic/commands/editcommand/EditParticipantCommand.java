@@ -9,7 +9,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Name;
@@ -47,12 +47,12 @@ public class EditParticipantCommand extends EditCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         Participant participantToEdit;
         try {
-            participantToEdit = model.getParticipant(this.id);
+            participantToEdit = alfredModel.getParticipant(this.id);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
         }
@@ -60,7 +60,7 @@ public class EditParticipantCommand extends EditCommand {
                                                                      this.editParticipantDescriptor);
 
         try {
-            model.updateParticipant(this.id, editedParticipant);
+            alfredModel.updateParticipant(this.id, editedParticipant);
             return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant.toString()));
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());

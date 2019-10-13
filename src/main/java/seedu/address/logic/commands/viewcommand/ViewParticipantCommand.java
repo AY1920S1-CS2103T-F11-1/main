@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
 
@@ -28,12 +28,12 @@ public class ViewParticipantCommand extends ViewCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         Participant participantToView;
         try {
-            participantToView = model.getParticipant(this.id);
+            participantToView = alfredModel.getParticipant(this.id);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
         }

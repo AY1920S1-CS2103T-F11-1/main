@@ -1,10 +1,10 @@
-//package seedu.address.model.person;
+//package seedu.address.alfredModel.person;
 //
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+//import static seedu.address.alfredLogic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+//import static seedu.address.alfredLogic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 //import static seedu.address.testutil.Assert.assertThrows;
 //import static seedu.address.testutil.TypicalPersons.ALICE;
 //import static seedu.address.testutil.TypicalPersons.BOB;
@@ -15,8 +15,8 @@
 //
 //import org.junit.jupiter.api.Test;
 //
-//import seedu.address.model.person.exceptions.DuplicatePersonException;
-//import seedu.address.model.person.exceptions.PersonNotFoundException;
+//import seedu.address.alfredModel.person.exceptions.DuplicatePersonException;
+//import seedu.address.alfredModel.person.exceptions.PersonNotFoundException;
 //import seedu.address.testutil.PersonBuilder;
 //
 //public class UniquePersonListTest {

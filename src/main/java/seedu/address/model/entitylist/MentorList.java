@@ -17,7 +17,7 @@ import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
 /**
- * This interface serves as the new API for the model. {@code MentorList} should
+ * This interface serves as the new API for the alfredModel. {@code MentorList} should
  * behave as a singleton.
  */
 public class MentorList extends EntityList {
@@ -125,7 +125,7 @@ public class MentorList extends EntityList {
      */
     @Override
     public ObservableList<? extends Entity> getUnmodifiableList() {
-        return this.unmodifiableMentors;
+        return this.internalUnmodifiableList;
     }
 
     /**

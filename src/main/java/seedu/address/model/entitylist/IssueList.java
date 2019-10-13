@@ -1,13 +1,13 @@
-// package seedu.address.model.entitylist;
+// package seedu.address.alfredModel.entitylist;
 
 // import java.util.ArrayList;
 // import java.util.List;
 // import seedu.address.commons.exceptions.AlfredException;
 // import seedu.address.commons.exceptions.AlfredRuntimeException;
-// import seedu.address.model.entity.Entity;
-// import seedu.address.model.entity.Id;
-// import seedu.address.model.entity.Issue;
-// import seedu.address.model.entity.PrefixType;
+// import seedu.address.alfredModel.entity.Entity;
+// import seedu.address.alfredModel.entity.Id;
+// import seedu.address.alfredModel.entity.Issue;
+// import seedu.address.alfredModel.entity.PrefixType;
 
 // public class IssueList extends EntityList {
 //     private List<Issue> issues;

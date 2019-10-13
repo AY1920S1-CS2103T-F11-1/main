@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Team;
 
@@ -27,12 +27,12 @@ public class DeleteTeamCommand extends DeleteCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         Team teamToBeDeleted;
         try {
-            teamToBeDeleted = model.deleteTeam(this.id);
+            teamToBeDeleted = alfredModel.deleteTeam(this.id);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
         }

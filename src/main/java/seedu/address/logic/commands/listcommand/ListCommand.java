@@ -8,7 +8,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Team;
@@ -26,15 +26,15 @@ public class ListCommand extends Command {
     // TODO: Message Usage
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         // Team: <Team Name> (Mentor: <Mentor Name>)
         // Participants:
         //    <Participant 1> (in this team)
         //    ...
         //    <Participant n>
-        model.getTeamFilteredList().list()
+        alfredModel.getTeamFilteredList()
                 .forEach(t -> {
                     Team team = (Team) t;
                     String teamName = team.getName().toString();

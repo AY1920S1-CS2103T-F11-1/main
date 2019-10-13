@@ -14,18 +14,14 @@ import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.address.logic.AlfredLogic;
+import seedu.address.logic.AlfredLogicManager;
+import seedu.address.model.AlfredModel;
+import seedu.address.model.AlfredModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.entitylist.MentorList;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AlfredStorage;
 import seedu.address.storage.AlfredStorageManager;
 
-import seedu.address.storage.AlfredStorage;
-import seedu.address.storage.AlfredStorageManager;
 import seedu.address.storage.JsonMentorListStorage;
 import seedu.address.storage.JsonParticipantListStorage;
 import seedu.address.storage.JsonTeamListStorage;
@@ -49,9 +45,9 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected Logic logic;
+    protected AlfredLogic alfredLogic;
     protected AlfredStorage alfredStorage;
-    protected Model model;
+    protected AlfredModel alfredModel;
     protected Config config;
 
     @Override
@@ -75,17 +71,17 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        model = initModelManager(alfredStorage, userPrefs);
+        alfredModel = initModelManager(alfredStorage, userPrefs);
 
-        logic = new LogicManager(model, alfredStorage);
+        alfredLogic = new AlfredLogicManager(alfredModel, alfredStorage);
 
-        ui = new UiManager(logic);
+        ui = new UiManager(alfredLogic);
     }
 
     // Feels like Single responsibility principle is violated if I moved the
-    // initialisation phase over to ModelManager?
-    protected Model initModelManager(AlfredStorage alfredStorage, UserPrefs userPrefs) throws AlfredException {
-        return ModelManager.initModelManager(alfredStorage, userPrefs);
+    // initialisation phase over to AlfredModelManager?
+    protected AlfredModel initModelManager(AlfredStorage alfredStorage, UserPrefs userPrefs) throws AlfredException {
+        return AlfredModelManager.initModelManager(alfredStorage, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -172,7 +168,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
-            alfredStorage.saveUserPrefs(model.getUserPrefs());
+            alfredStorage.saveUserPrefs(alfredModel.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

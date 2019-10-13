@@ -13,10 +13,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
-import seedu.address.logic.Logic;
+import seedu.address.logic.AlfredLogic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.EntityListPanel.EntityListPanel;
 import seedu.address.ui.EntityListPanel.ParticipantListPanel;
 
@@ -31,7 +29,7 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private Logic logic;
+    private AlfredLogic alfredLogic;
 
     // Independent Ui parts residing in this Ui container
     private EntityListPanel entityListPanel;
@@ -53,15 +51,15 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, AlfredLogic alfredLogic) {
         super(FXML, primaryStage);
 
         // Set dependencies
         this.primaryStage = primaryStage;
-        this.logic = logic;
+        this.alfredLogic = alfredLogic;
 
         // Configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        setWindowDefaultSize(alfredLogic.getGuiSettings());
 
         setAccelerators();
 
@@ -110,14 +108,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        entityListPanel = new ParticipantListPanel(logic.getFilteredParticipantList()); //
+        entityListPanel = new ParticipantListPanel(alfredLogic.getFilteredParticipantList()); //
         entityListPanelPlaceholder.getChildren().add(entityListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        //TODO: Chnage status bar footer
+        //StatusBarFooter statusBarFooter = new StatusBarFooter(alfredLogic.getAddressBookFilePath());
+       //statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -158,7 +157,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
-        logic.setGuiSettings(guiSettings);
+        alfredLogic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -170,11 +169,11 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result, in result display.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see AlfredLogic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, AlfredException {
+    private CommandResult executeCommand(String commandText) throws AlfredException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = alfredLogic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -187,8 +186,8 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-            //TODO: Check if AlfredException is thrown during logic#execute
-        } catch (CommandException  e) {
+            //TODO: Check if AlfredException is thrown during alfredLogic#execute
+        } catch (AlfredException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

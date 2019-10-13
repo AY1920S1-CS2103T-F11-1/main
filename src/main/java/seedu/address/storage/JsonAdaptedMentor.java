@@ -60,7 +60,7 @@ class JsonAdaptedMentor {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Mentor} object.
+     * Converts this Jackson-friendly adapted person object into the alfredModel's {@code Mentor} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */

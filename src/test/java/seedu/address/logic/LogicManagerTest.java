@@ -39,7 +39,7 @@ public class LogicManagerTest {
     public Path temporaryFolder;
 
     private Model model = new ModelManager();
-    private Logic logic;
+    private AlfredLogic logic;
 
     @BeforeEach
     public void setUp() {
@@ -47,7 +47,7 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model);
+        //alfredLogic = new AlfredLogicManager(model, storage);
     }
 
     @Test
@@ -70,13 +70,13 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+        // Setup AlfredLogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model);
+        logic = new AlfredLogicManager(model, storage);
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
@@ -84,7 +84,7 @@ public class LogicManagerTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        String expectedMessage = AlfredLogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
@@ -143,7 +143,7 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage, Model expectedModel) {
         // TODO: Reinstate this test later
-        // assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+        // assertThrows(expectedException, expectedMessage, () -> alfredLogic.execute(inputCommand));
         // assertEquals(expectedModel, model);
     }
 

@@ -3,7 +3,7 @@ package seedu.address.logic.commands.listcommand;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Team;
 
 /**
@@ -17,10 +17,10 @@ public class ListTeamCommand extends ListCommand {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) {
+        requireNonNull(alfredModel);
 
-        model.getTeamFilteredList().list().forEach(this::listEntity);
+        alfredModel.getTeamFilteredList().forEach(this::listEntity);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }

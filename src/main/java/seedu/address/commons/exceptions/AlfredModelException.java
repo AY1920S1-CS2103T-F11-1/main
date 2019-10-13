@@ -1,7 +1,7 @@
 package seedu.address.commons.exceptions;
 
 /**
- * Wrapper class for Model Exceptions.
+ * Wrapper class for AlfredModel Exceptions.
  */
 public class AlfredModelException extends AlfredException {
     /**

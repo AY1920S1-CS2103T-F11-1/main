@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
+import seedu.address.logic.AlfredLogic;
 
 /**
  * The manager of the UI component.
@@ -22,12 +22,12 @@ public class UiManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/alfred_icon.png";
 
-    private Logic logic;
+    private AlfredLogic alfredLogic;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic) {
+    public UiManager(AlfredLogic alfredLogic) {
         super();
-        this.logic = logic;
+        this.alfredLogic = alfredLogic;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, alfredLogic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

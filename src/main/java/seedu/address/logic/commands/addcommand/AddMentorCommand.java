@@ -6,7 +6,7 @@ import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Mentor;
 
 /**
@@ -47,8 +47,8 @@ public class AddMentorCommand extends AddCommand {
      */
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         // if (this.teamName != null) {
         //     find mentor (or throw Exception) and retrieve ID
@@ -58,7 +58,7 @@ public class AddMentorCommand extends AddCommand {
         // }
 
         try {
-            model.addMentor(this.mentor);
+            alfredModel.addMentor(this.mentor);
         } catch (AlfredException e) {
             // Should I return new CommandResult(MESSAGE_DUPLICATE_MENTOR) instead?
             throw new CommandException(MESSAGE_DUPLICATE_MENTOR);

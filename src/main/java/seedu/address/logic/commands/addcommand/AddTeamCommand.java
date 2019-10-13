@@ -6,7 +6,7 @@ import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.model.Model;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.entity.Team;
 
 /**
@@ -37,11 +37,11 @@ public class AddTeamCommand extends AddCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         try {
-            model.addTeam(this.team);
+            alfredModel.addTeam(this.team);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TEAM);
         }

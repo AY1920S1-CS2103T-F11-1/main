@@ -1,5 +1,7 @@
 package seedu.address.model.entitylist;
 
+import static java.util.Objects.requireNonNull;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.AlfredException;
@@ -11,7 +13,7 @@ import seedu.address.model.entity.PrefixType;
 import seedu.address.model.person.Person;
 
 /**
- * This interface serves as the new API for the model. {@code ParticipantList}
+ * This interface serves as the new API for the alfredModel. {@code ParticipantList}
  * should behave as a singleton.
  */
 public class ParticipantList extends EntityList {
