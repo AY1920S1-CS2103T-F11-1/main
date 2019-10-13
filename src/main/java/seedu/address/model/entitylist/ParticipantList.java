@@ -22,9 +22,9 @@ import seedu.address.model.person.Person;
 public class ParticipantList extends EntityList {
     private static int lastUsedId = 0;
 
-    private final ObservableList<Participant> participants = FXCollections.observableArrayList();
+    private final ObservableList<Participant> participantObservableList = FXCollections.observableArrayList();
     private final ObservableList<Participant> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(participants);
+            FXCollections.unmodifiableObservableList(participantObservableList);
 
 
     /**
@@ -43,7 +43,7 @@ public class ParticipantList extends EntityList {
      */
     public Participant get(Id id) throws AlfredException {
         requireNonNull(id);
-        Optional<Participant> resultParticipant = participants.stream().filter(p -> (p.getId()).equals(id)).findFirst();
+        Optional<Participant> resultParticipant = participantObservableList.stream().filter(p -> (p.getId()).equals(id)).findFirst();
         return resultParticipant.orElseThrow(() -> new AlfredModelException("Participant to get does not exist"));
 
        /* for (Participant p: this.participants) {
@@ -72,9 +72,10 @@ public class ParticipantList extends EntityList {
          *     if p.isSameParticipant(updatedParticipant)
          *         return false
          */
-        for (int i = 0; i < this.participants.size(); i++) {
-            if (this.participants.get(i).getId().equals(id)) {
-                this.participants.set(i, updatedParticipant);
+
+        for (int i = 0; i < this.participantObservableList.size(); i++) {
+            if (this.participantObservableList.get(i).getId().equals(id)) {
+                this.participantObservableList.set(i, updatedParticipant);
                 return true;
             }
         }
@@ -89,12 +90,12 @@ public class ParticipantList extends EntityList {
      * @throws AlfredException if there was an error while adding.
      */
     public void add(Participant participant) throws AlfredException {
-        for (Participant p: this.participants) {
+        for (Participant p: this.participantObservableList) {
             if (p.getId().equals(participant.getId())) {
                 throw new AlfredModelException("Participant already exists in list");
             }
         }
-        this.participants.add(participant);
+        this.participantObservableList.add(participant);
     }
 
     /**
@@ -104,9 +105,9 @@ public class ParticipantList extends EntityList {
      * @throws AlfredException if error while deleting.
      */
     public Participant delete(Id id) throws AlfredException {
-        for (Participant p: this.participants) {
+        for (Participant p: this.participantObservableList) {
             if (p.getId().equals(id)) {
-                this.participants.remove(p);
+                this.participantObservableList.remove(p);
                 return p;
             }
         }
@@ -140,7 +141,7 @@ public class ParticipantList extends EntityList {
      */
     @Override
     public boolean contains(Id id) {
-        for (Participant p: this.participants) {
+        for (Participant p: this.participantObservableList) {
             if (p.getId().equals(id)) {
                 return true;
             }

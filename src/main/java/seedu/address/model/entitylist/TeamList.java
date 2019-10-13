@@ -3,6 +3,8 @@ package seedu.address.model.entitylist;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.AlfredException;
@@ -20,9 +22,9 @@ import seedu.address.model.entity.Team;
 public class TeamList extends EntityList {
     private static int lastUsedId = 0;
 
-    private final ObservableList<Team> teams = FXCollections.observableArrayList();
+    private final ObservableList<Team> teamObservableList= FXCollections.observableArrayList();
     private final ObservableList<Team> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(teams);
+            FXCollections.unmodifiableObservableList(teamObservableList);
 
     /**
      * Constructor.
@@ -39,12 +41,18 @@ public class TeamList extends EntityList {
      * @throws AlfredException
      */
     public Team get(Id id) throws AlfredException {
-        for (Team t: this.teams) {
+        requireNonNull(id);
+        Optional<Team> resultTeam = teamObservableList.stream().filter(p -> (p.getId()).equals(id)).findFirst();
+        return resultTeam.orElseThrow(() -> new AlfredModelException("Participant to get does not exist"));
+
+        /*for (Team t: this.teams) {
             if (t.getId().equals(id)) {
                 return t;
             }
         }
         throw new AlfredModelException("Team to get does not exist!");
+
+         */
     }
 
     /**
@@ -55,9 +63,9 @@ public class TeamList extends EntityList {
      * @return boolean
      */
     public boolean update(Id id, Team updatedTeam) {
-        for (int i = 0; i < this.teams.size(); i++) {
-            if (this.teams.get(i).getId().equals(id)) {
-                this.teams.set(i, updatedTeam);
+        for (int i = 0; i < this.teamObservableList.size(); i++) {
+            if (this.teamObservableList.get(i).getId().equals(id)) {
+                this.teamObservableList.set(i, updatedTeam);
                 return true;
             }
         }
@@ -71,7 +79,7 @@ public class TeamList extends EntityList {
      * @throws AlfredException
      */
     public void add(Team team) throws AlfredException {
-        for (Team t: this.teams) {
+        for (Team t: this.teamObservableList) {
             if (t.getId().equals(team.getId())) {
                 throw new AlfredModelException("Team to add already exists.");
             }
@@ -86,9 +94,9 @@ public class TeamList extends EntityList {
      * @throws AlfredException
      */
     public Team delete(Id id) throws AlfredException {
-        for (Team t: this.teams) {
+        for (Team t: this.teamObservableList) {
             if (t.getId().equals(id)) {
-                this.teams.remove(t);
+                this.teamObservableList.remove(t);
                 return t;
             }
         }
@@ -121,7 +129,7 @@ public class TeamList extends EntityList {
      */
     @Override
     public boolean contains(Id id) {
-        for (Team p: this.teams) {
+        for (Team p: this.teamObservableList) {
             if (p.getId().equals(id)) {
                 return true;
             }

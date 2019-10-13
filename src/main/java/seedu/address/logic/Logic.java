@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import java.util.List;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,9 +40,9 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     //TODO: will change this to return an ObservableList later on
-    public ReadOnlyEntityList getFilteredParticipantList();
-    public ReadOnlyEntityList getFilteredTeamList();
-    public ReadOnlyEntityList getFilteredMentorList();
+    public FilteredList<Participant> getFilteredParticipantList();
+    public FilteredList<Team> getFilteredTeamList();
+    public FilteredList<Mentor> getFilteredMentorList();
     /**
      * Returns the user prefs' address book file path.
      */

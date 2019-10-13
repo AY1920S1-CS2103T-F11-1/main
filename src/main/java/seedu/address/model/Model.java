@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
@@ -53,17 +54,17 @@ public interface Model {
     /**
      * Returns the ParticipantList.
      */
-    ReadOnlyEntityList getParticipantList();
+    FilteredList<Participant> getParticipantFilteredList();
 
     /**
      * Returns the TeamList.
      */
-    ReadOnlyEntityList getTeamList();
+    FilteredList<Team> getTeamFilteredList();
 
     /**
      * Returns the MentorList.
      */
-    ReadOnlyEntityList getMentorList();
+    FilteredList<Mentor> getMentorFilteredList();
 
     /* Below is the API exposed for the controllers to call */
 

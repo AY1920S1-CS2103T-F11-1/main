@@ -2,18 +2,13 @@ package seedu.address.model;
 
 import java.io.IOException;
 import static java.util.Objects.requireNonNull;
-import javax.swing.RowFilter;
 import seedu.address.commons.exceptions.DataConversionException;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -29,7 +24,6 @@ import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.entitylist.TeamList;
 
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AlfredStorage;
 
 /**
@@ -41,12 +35,12 @@ public class ModelManager implements Model {
 
 
     private final UserPrefs userPrefs;
-    private AlfredStorage storage = null;
+    private final Alfred alfred;
 
     // EntityLists
-    private FilteredList<Participant> participantList;
-    private FilteredList<Team> teamList;
-    private FilteredList<Mentor> mentorList;
+    private FilteredList<Participant> participantFilteredList;
+    private FilteredList<Team> teamFilteredList;
+    private FilteredList<Mentor> mentorFilteredList;
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
@@ -54,62 +48,35 @@ public class ModelManager implements Model {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     public static Model initModelManager(AlfredStorage alfredStorage, ReadOnlyUserPrefs userPrefs) throws AlfredException {
-        Optional<ParticipantList> optionalParticipantList;
-        Optional<MentorList> optionalMentorList;
-        Optional<TeamList> optionalTeamList;
+        ReadOnlyAlfred initialData = new Alfred( alfredStorage, userPrefs);
 
-        ReadOnlyEntityList participantList;
-        ReadOnlyEntityList mentorList;
-        ReadOnlyEntityList teamList;
-        try {
-            optionalParticipantList = alfredStorage.readParticipantList();
-            optionalMentorList = alfredStorage.readMentorList();
-            optionalTeamList = alfredStorage.readTeamList();
-            //If participant list is not present, sample data is used instead.
-            //System will be unable to proceed without participantList
-            if (!optionalParticipantList.isPresent() || optionalMentorList.isPresent() || optionalTeamList.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample list of entries.");
-            }
-            //TODO: Create sample entries
-            participantList = optionalParticipantList.orElseGet(SampleDataUtil::getSampleParticipantList);
-            mentorList = optionalParticipantList.orElseGet(SampleDataUtil::getSampleMentorList;
-            teamList = optionalParticipantList.orElseGet(SampleDataUtil::getSampleTeamList;
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty list of entries.");
-            participantList = new ParticipantList();
-            mentorList = new MentorList();
-            teamList = new TeamList();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty list of entries.");
-            participantList = new ParticipantList();
-            mentorList = new MentorList();
-            teamList = new TeamList();
-        }
 
-        return new ModelManager(participantList, mentorList, teamList, userPrefs);
+        return new ModelManager(initialData, userPrefs);
     }
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    private ModelManager(ReadOnlyEntityList participantList, ReadOnlyEntityList mentorList, ReadOnlyEntityList teamList, ReadOnlyUserPrefs userPrefs) throws AlfredException {
+    private ModelManager(ReadOnlyAlfred initialData, ReadOnlyUserPrefs userPrefs) throws AlfredException {
         super();
-        requireAllNonNull(participantList, teamList, mentorList, userPrefs);
+        requireAllNonNull(initialData, userPrefs);
 
-        logger.fine("Initializing with Participant List: " + participantList
-                logger.fine("Initializing with Mentor List" + mentorList);
-        logger.fine("Initializing with Team List: " + teamList);
+
+        logger.fine("Initializing with Participant List: " + initialData.getParticipantList())
+        logger.fine("Initializing with Mentor List" + initialData.getMentorList());
+        logger.fine("Initializing with Team List: " + teamFilteredList);
         logger.fine("Initializing with UserPrefs: " + userPrefs);
 
 
         this.userPrefs = new UserPrefs(userPrefs);
-        this.participantList = new FilteredList<Participant>(((ParticipantList)participantList).getSpecificTypedList());
-        this.teamList = new FilteredList<Team>(((TeamList)teamList).getSpecificTypedList());
-        this.mentorList = new FilteredList<Mentor>(((MentorList)mentorList).getSpecificTypedList());
+        this.alfred = (Alfred)initialData;
+        this.participantFilteredList = new FilteredList<Participant>(initialData.getParticipantList());
+        this.teamFilteredList = new FilteredList<Team>((initialData.getTeamList()));
+        this.mentorFilteredList = new FilteredList<Mentor>(initialData.getMentorList());
     }
 
     public ModelManager() throws AlfredException {
-        this(new ParticipantList(), new MentorList(), new TeamList(), new UserPrefs());
+        this(new Alfred(), new UserPrefs());
     }
 
 
@@ -218,43 +185,14 @@ public class ModelManager implements Model {
 
     // ========== EntityListMethods ===============
 
-    // Tried to use streams, but streams cannot throw checked exceptions
-    public ParticipantList addAllParticipants(ParticipantList currList, ReadOnlyEntityList newList)
-            throws AlfredException {
-
-        List newParticipantList = newList.list();
-        for (int i = 0; i < newParticipantList.size(); i++) {
-            currList.add((Participant) newParticipantList.get(i));
-        }
-
-        return currList;
-    }
-
-    public TeamList addAllTeams(TeamList currList, ReadOnlyEntityList newList) throws AlfredException {
-
-        List newTeamList = newList.list();
-        for (int i = 0; i < newTeamList.size(); i++) {
-            currList.add((Team)newTeamList.get(i));
-        }
-        return currList;
-    }
-
-    public MentorList addAllMentors(MentorList currList, ReadOnlyEntityList newList) throws AlfredException {
-
-        List newTeamList = newList.list();
-        for (int i = 0; i < newTeamList.size(); i++) {
-            currList.add((Mentor) newTeamList.get(i));
-        }
-        return currList;
-    }
 
     /**
      * Returns the participant list located in the Model Manager.
      *
      * @return ReadableEntityList
      */
-    public ReadOnlyEntityList getParticipantList() {
-        return this.participantList;
+    public FilteredList<Participant> getParticipantFilteredList() {
+        return this.participantFilteredList;
     }
 
     /**
@@ -262,8 +200,8 @@ public class ModelManager implements Model {
      *
      * @return ReadableEntityList
      */
-    public ReadOnlyEntityList getTeamList() {
-        return this.teamList;
+    public FilteredList<Team> getTeamFilteredList() {
+        return this.teamFilteredList;
     }
 
     /**
@@ -271,8 +209,8 @@ public class ModelManager implements Model {
      *
      * @return ReadableEntityList
      */
-    public ReadOnlyEntityList getMentorList() {
-        return this.mentorList;
+    public FilteredList<Mentor> getMentorFilteredList() {
+        return this.mentorFilteredList;
     }
 
     // ========== Entity Methods =============================
@@ -287,7 +225,7 @@ public class ModelManager implements Model {
      * @throws AlfredException if the Participant cannot be found.
      */
     public Participant getParticipant(Id id) throws AlfredException {
-        return this.participantList.get(id);
+        return alfred.getParticipant(id);
     }
 
     /**
@@ -297,7 +235,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public void addParticipant(Participant participant) throws AlfredException {
-        this.participantList.add(participant);
+        this.alfred.addParticipant(participant);
         this.saveList(PrefixType.P);
     }
 
@@ -317,7 +255,7 @@ public class ModelManager implements Model {
                 return;
             }
 
-            this.participantList.update(id, participant);
+            this.participantFilteredList.update(id, participant);
             this.saveList(PrefixType.P);
             this.saveList(PrefixType.T);
         } catch (AlfredException e) {
@@ -340,7 +278,7 @@ public class ModelManager implements Model {
             throw new AlfredModelException("Participant does not exist");
         }
 
-        Participant deletedParticipant = this.participantList.delete(id);
+        Participant deletedParticipant = this.participantFilteredList.delete(id);
         this.saveList(PrefixType.P);
         this.saveList(PrefixType.T);
         return deletedParticipant;
@@ -356,7 +294,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Team getTeam(Id id) throws AlfredException {
-        return this.teamList.get(id);
+        return this.teamFilteredList.get(id);
     }
 
     /**
@@ -367,7 +305,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Team getTeamByParticipantId(Id participantId) throws AlfredException {
-        for (Team t : teamList) {
+        for (Team t : teamFilteredList) {
             for (Participant p : t.getParticipants()) {
                 if (p.getId().equals(participantId)) {
                     return t;
@@ -395,7 +333,7 @@ public class ModelManager implements Model {
     * @throws AlfredException
     */
     public Team getTeamByMentorId(Id mentorId) throws AlfredException {
-        for (Team t : teamList) {
+        for (Team t : teamFilteredList) {
             Optional<Mentor> mentor = t.getMentor();
             if (mentor.isPresent()) {
                 if (mentor.get().getId().equals(mentorId)) {
@@ -414,7 +352,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public void updateTeam(Id teamId, Team updatedTeam) throws AlfredException {
-        this.teamList.update(teamId, updatedTeam);
+        this.teamFilteredList.update(teamId, updatedTeam);
         this.saveList(PrefixType.T);
     }
 
@@ -425,7 +363,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public void addTeam(Team team) throws AlfredException {
-        this.teamList.add(team);
+        this.teamFilteredList.add(team);
         this.saveList(PrefixType.T);
     }
 
@@ -475,7 +413,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Team deleteTeam(Id id) throws AlfredException {
-        Team teamToDelete = this.teamList.delete(id);
+        Team teamToDelete = this.teamFilteredList.delete(id);
         this.saveList(PrefixType.T);
         this.saveList(PrefixType.P);
         return teamToDelete;
@@ -491,7 +429,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Mentor getMentor(Id id) throws AlfredException {
-        return this.mentorList.get(id);
+        return this.mentorFilteredList.get(id);
     }
 
     /**
@@ -501,7 +439,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public void addMentor(Mentor mentor) throws AlfredException {
-        this.mentorList.add(mentor);
+        this.mentorFilteredList.add(mentor);
         this.saveList(PrefixType.M);
     }
 
@@ -520,11 +458,11 @@ public class ModelManager implements Model {
                 logger.severe("Unable to update the mentor in team as it is not the " + "same id");
             }
 
-            this.mentorList.update(id, updatedMentor);
+            this.mentorFilteredList.update(id, updatedMentor);
         } catch (AlfredException e) {
             return;
         }
-        this.mentorList.update(id, updatedMentor);
+        this.mentorFilteredList.update(id, updatedMentor);
         this.saveList(PrefixType.M);
         this.saveList(PrefixType.T);
     }
@@ -537,7 +475,7 @@ public class ModelManager implements Model {
      * @throws AlfredException
      */
     public Mentor deleteMentor(Id id) throws AlfredException {
-        Mentor mentorToDelete = this.mentorList.delete(id);
+        Mentor mentorToDelete = this.mentorFilteredList.delete(id);
         this.saveList(PrefixType.M);
         this.saveList(PrefixType.T);
         return mentorToDelete;
@@ -555,13 +493,13 @@ public class ModelManager implements Model {
         try {
             switch (type) {
             case T:
-                this.storage.saveTeamList(this.teamList);
+                this.storage.saveTeamList(this.teamFilteredList);
                 break;
             case M:
-                this.storage.saveMentorList(this.mentorList);
+                this.storage.saveMentorList(this.mentorFilteredList);
                 break;
             case P:
-                this.storage.saveParticipantList(this.participantList);
+                this.storage.saveParticipantList(this.participantFilteredList);
                 break;
             default:
             }
@@ -585,8 +523,8 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return userPrefs.equals(other.userPrefs) && participantList.equals(other.participantList)
-                && teamList.equals(other.teamList) && mentorList.equals(other.mentorList);
+        return userPrefs.equals(other.userPrefs) && participantFilteredList.equals(other.participantFilteredList)
+                && teamFilteredList.equals(other.teamFilteredList) && mentorFilteredList.equals(other.mentorFilteredList);
 
     }
 }

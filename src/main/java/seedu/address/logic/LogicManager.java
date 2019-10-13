@@ -1,10 +1,8 @@
 package seedu.address.logic;
 
-import java.nio.file.Path;
-import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -13,9 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AlfredParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.entitylist.ReadOnlyEntityList;
-import seedu.address.model.person.Person;
+import seedu.address.model.entity.Mentor;
+import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.Team;
 import seedu.address.storage.AlfredStorage;
 
 /**
@@ -48,18 +46,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyEntityList getFilteredParticipantList() {
-        return model.getParticipantList();
+    public FilteredList<Participant> getFilteredParticipantList() {
+        return model.getParticipantFilteredList();
     }
 
     @Override
-    public ReadOnlyEntityList getFilteredMentorList() {
-        return model.getMentorList();
+    public FilteredList<Mentor> getFilteredMentorList() {
+        return model.getMentorFilteredList();
     }
 
     @Override
-    public ReadOnlyEntityList getFilteredTeamList() {
-        return model.getTeamList();
+    public FilteredList<Team> getFilteredTeamList() {
+        return model.getTeamFilteredList();
     }
 
 

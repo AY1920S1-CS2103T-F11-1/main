@@ -3,6 +3,8 @@ package seedu.address.model.entitylist;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.AlfredException;
@@ -10,6 +12,7 @@ import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
+import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
@@ -20,16 +23,14 @@ import seedu.address.model.entity.Team;
 public class MentorList extends EntityList {
     private static int lastUsedId = 0;
 
-    private final ObservableList<Mentor> mentors = FXCollections.observableArrayList();
+    private final ObservableList<Mentor> mentorObservableList = FXCollections.observableArrayList();
     private final ObservableList<Mentor> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(mentors);
+            FXCollections.unmodifiableObservableList(mentorObservableList);
 
     /**
      * Constructor.
      */
-    public MentorList() {
-
-    }
+    public MentorList() {}
 
     /**
      * Gets Mentor by ID.
@@ -38,12 +39,18 @@ public class MentorList extends EntityList {
      * @return Mentor
      */
     public Mentor get(Id id) throws AlfredException {
-        for (Mentor m: this.mentors) {
+        requireNonNull(id);
+        Optional<Mentor> resultMentor = mentorObservableList.stream().filter(p -> (p.getId()).equals(id)).findFirst();
+        return resultMentor.orElseThrow(() -> new AlfredModelException("Participant to get does not exist"));
+
+        /* for (Mentor m: this.mentors) {
             if (m.getId().equals(id)) {
                 return m;
             }
         }
         throw new AlfredModelException("Mentor to get does not exist");
+
+        */
     }
 
     /**
@@ -54,9 +61,9 @@ public class MentorList extends EntityList {
      * @return boolean
      */
     public boolean update(Id id, Mentor updatedMentor) {
-        for (int i = 0; i < this.mentors.size(); i++) {
-            if (this.mentors.get(i).getId().equals(id)) {
-                this.mentors.set(i, updatedMentor);
+        for (int i = 0; i < this.mentorObservableList.size(); i++) {
+            if (this.mentorObservableList.get(i).getId().equals(id)) {
+                this.mentorObservableList.set(i, updatedMentor);
                 return true;
             }
         }
@@ -70,12 +77,12 @@ public class MentorList extends EntityList {
      * @throws AlfredException
      */
     public void add(Mentor mentor) throws AlfredException {
-        for (Mentor m: this.mentors) {
+        for (Mentor m: this.mentorObservableList) {
             if (m.getId() == mentor.getId()) {
                 throw new AlfredModelException("Item to add already exists!");
             }
         }
-        this.mentors.add(mentor);
+        this.mentorObservableList.add(mentor);
     }
 
     /**
@@ -85,9 +92,9 @@ public class MentorList extends EntityList {
      * @throws Exception
      */
     public Mentor delete(Id id) throws AlfredException {
-        for (Mentor m: this.mentors) {
+        for (Mentor m: this.mentorObservableList) {
             if (m.getId().equals(id)) {
-                this.mentors.remove(m);
+                this.mentorObservableList.remove(m);
                 return m;
             }
         }
@@ -121,7 +128,7 @@ public class MentorList extends EntityList {
      */
     @Override
     public boolean contains(Id id) {
-        for (Mentor m: this.mentors) {
+        for (Mentor m: this.mentorObservableList) {
             if (m.getId().equals(id)) {
                 return true;
             }

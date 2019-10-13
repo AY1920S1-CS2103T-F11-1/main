@@ -34,7 +34,7 @@ public class ListCommand extends Command {
         //    <Participant 1> (in this team)
         //    ...
         //    <Participant n>
-        model.getTeamList().list()
+        model.getTeamFilteredList().list()
                 .forEach(t -> {
                     Team team = (Team) t;
                     String teamName = team.getName().toString();

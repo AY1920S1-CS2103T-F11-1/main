@@ -20,7 +20,7 @@ public class ListTeamCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        model.getTeamList().list().forEach(this::listEntity);
+        model.getTeamFilteredList().list().forEach(this::listEntity);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
