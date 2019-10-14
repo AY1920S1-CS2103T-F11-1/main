@@ -10,23 +10,26 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
+import seedu.address.logic.AlfredLogic;
+import seedu.address.logic.AlfredLogicManager;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.AlfredModelManager;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.AlfredStorage;
 import seedu.address.storage.AlfredStorageManager;
+
 import seedu.address.storage.JsonMentorListStorage;
 import seedu.address.storage.JsonParticipantListStorage;
 import seedu.address.storage.JsonTeamListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.MentorListStorage;
 import seedu.address.storage.ParticipantListStorage;
+
+
 import seedu.address.storage.TeamListStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
@@ -42,9 +45,9 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected Logic logic;
-    protected AlfredStorage storage;
-    protected Model model;
+    protected AlfredLogic alfredLogic;
+    protected AlfredStorage alfredStorage;
+    protected AlfredModel alfredModel;
     protected Config config;
 
     @Override
@@ -55,24 +58,30 @@ public class MainApp extends Application {
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
 
+        //Initialise UserPrefs
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
 
-        ParticipantListStorage pStore = new JsonParticipantListStorage(userPrefs.getParticipantListFilePath());
-        MentorListStorage mStore = new JsonMentorListStorage(userPrefs.getMentorListFilePath());
-        TeamListStorage tStore = new JsonTeamListStorage(userPrefs.getTeamListFilePath());
-        storage = new AlfredStorageManager(pStore, mStore, tStore, userPrefsStorage);
+
+        //Initialise EntityList Storage and AlfredStorage
+        ParticipantListStorage participantListStorage = new JsonParticipantListStorage(userPrefs.getParticipantListFilePath());
+        MentorListStorage mentorListStorage = new JsonMentorListStorage(userPrefs.getMentorListFilePath());
+        TeamListStorage teamListStorage = new JsonTeamListStorage(userPrefs.getTeamListFilePath());
+        AlfredStorage alfredStorage = new AlfredStorageManager(participantListStorage, mentorListStorage, teamListStorage, userPrefsStorage);
 
         initLogging(config);
 
-        model = new AlfredModelManager(storage, userPrefs);
+        alfredModel = initModelManager(alfredStorage, userPrefs);
 
+        alfredLogic = new AlfredLogicManager(alfredModel, alfredStorage);
 
-        logic = new LogicManager(model);
+        ui = new UiManager(alfredLogic);
+    }
 
-        ui = new UiManager(logic);
-
-
+    // Feels like Single responsibility principle is violated if I moved the
+    // initialisation phase over to AlfredModelManager?
+    protected AlfredModel initModelManager(AlfredStorage alfredStorage, UserPrefs userPrefs) throws AlfredException {
+        return AlfredModelManager.initModelManager(alfredStorage, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -106,7 +115,8 @@ public class MainApp extends Application {
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -116,9 +126,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
-     * or a new {@code UserPrefs} with default configuration if errors occur when
-     * reading from the file.
+     * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs
+     * file path, or a new {@code UserPrefs} with default configuration if errors
+     * occur when reading from the file.
      */
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
@@ -137,7 +147,8 @@ public class MainApp extends Application {
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are
+        // new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
@@ -157,7 +168,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            alfredStorage.saveUserPrefs(alfredModel.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
