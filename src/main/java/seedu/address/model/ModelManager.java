@@ -581,29 +581,6 @@ public class ModelManager implements Model {
         }
     }
 
-    //=========== Utils ==================================================================
-
-    /**
-     * Validates the Participant and Mentor attributes of a CRUD team object.
-     *
-     * @param team
-     * @throws ModelValidationException
-     */
-    private void validateNewTeamObject(Team team) throws ModelValidationException {
-        // Check if the participants are valid, then if mentor is valid.
-        for (Participant p: team.getParticipants()) {
-            if (!this.participantList.contains(p.getId())) {
-                throw new ModelValidationException("Participant in team does not exist in ParticipantList");
-            }
-        }
-        Optional<Mentor> mentor = team.getMentor();
-        if (!mentor.isEmpty()) {
-            if (!this.mentorList.contains(mentor.get().getId())) {
-                throw new ModelValidationException("Mentor in team does not exist in mentorList");
-            }
-        }
-    }
-
     //=========== AddressBook ================================================================================
 
     @Override
