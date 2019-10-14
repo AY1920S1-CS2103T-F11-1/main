@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new {@link FindTeamCommand} object.
  */
-public class FindTeamParser implements Parser<FindTeamCommand> {
+public class FindTeamCommandParser implements Parser<FindTeamCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the code {@code FindTeamCommand}
      * and returns a {@FindTeamCommand} object for execution.
