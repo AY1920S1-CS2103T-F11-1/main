@@ -15,7 +15,6 @@ import seedu.address.ui.EntityCard;
  */
 public class MentorListPanel extends EntityListPanel {
     private static final String FXML = "MentorListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(ParticipantListPanel.class);
 
     @FXML
     private ListView<Mentor> mentorListView;
@@ -31,10 +30,10 @@ public class MentorListPanel extends EntityListPanel {
      */
     class MentorListViewCell extends ListCell<Mentor> {
         @Override
-        protected void updateItem(Mentor mentor, boolean empty) {
-            super.updateItem(mentor, empty);
+        protected void updateItem(Mentor mentor, boolean isEmpty) {
+            super.updateItem(mentor, isEmpty);
 
-            if (empty || mentor == null) {
+            if (isEmpty || mentor == null) {
                 setGraphic(null);
                 setText(null);
             } else {

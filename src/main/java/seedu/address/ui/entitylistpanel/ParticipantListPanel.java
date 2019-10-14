@@ -32,10 +32,10 @@ public class ParticipantListPanel extends EntityListPanel {
      */
     class ParticipantListViewCell extends ListCell<Participant> {
         @Override
-        protected void updateItem(Participant participant, boolean empty) {
-            super.updateItem(participant, empty);
+        protected void updateItem(Participant participant, boolean isEmpty) {
+            super.updateItem(participant, isEmpty);
 
-            if (empty || participant == null) {
+            if (isEmpty || participant == null) {
                 setGraphic(null);
                 setText(null);
             } else {

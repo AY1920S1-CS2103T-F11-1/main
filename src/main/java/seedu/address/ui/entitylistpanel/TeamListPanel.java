@@ -31,10 +31,10 @@ public class TeamListPanel extends EntityListPanel {
      */
     class TeamListViewCell extends ListCell<Team> {
         @Override
-        protected void updateItem(Team team, boolean empty) {
-            super.updateItem(team, empty);
+        protected void updateItem(Team team, boolean isEmpty) {
+            super.updateItem(team, isEmpty);
 
-            if (empty || team == null) {
+            if (isEmpty || team == null) {
                 setGraphic(null);
                 setText(null);
             } else {

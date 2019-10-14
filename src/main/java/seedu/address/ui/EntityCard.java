@@ -49,6 +49,37 @@ public class EntityCard extends UiPart<Region> {
     @FXML
     private Label id;
 
+    private void generateParticipantCard(Entity entity) {
+        Participant participant = (Participant) entity;
+        cards.getChildren().add(new Label(participant.getPhone().value));
+        cards.getChildren().add(new Label(participant.getEmail().value));
+        this.type = PrefixType.P;
+    }
+
+    private void generateMentorCard(Entity entity) {
+        Mentor mentor = (Mentor) entity;
+        cards.getChildren().add(new Label(mentor.getOrganization().toString()));
+        cards.getChildren().add(new Label(mentor.getSubject().toString()));
+        this.type = PrefixType.M;
+    }
+
+    private void generateTeamCard(Entity entity) {
+        Team team = (Team) entity;
+        FlowPane participantPane = new FlowPane();
+        team.getParticipants().stream()
+                .sorted(Comparator.comparing(pt -> pt.getName().toString()))
+                .forEach(p -> participantPane.getChildren().add(new Label(p.getName().toString())));
+        Optional<Mentor> teamMentor = team.getMentor();
+        cards.getChildren().add(
+                new Label(teamMentor.isEmpty() ? "Mentor not assigned" : teamMentor.get().getName().toString()));
+        cards.getChildren().add(new Label(team.getSubject().toString()));
+        cards.getChildren().add(new Label(team.getProjectName().toString()));
+        cards.getChildren().add(new Label(team.getProjectType().toString()));
+        cards.getChildren().add(new Label(team.getLocation().toString()));
+        cards.getChildren().add(new Label(team.getScore().toString()));
+        this.type = PrefixType.T;
+
+    }
 
     public EntityCard(Entity entity, int displayedIndex) {
         super(FXML);
@@ -58,33 +89,16 @@ public class EntityCard extends UiPart<Region> {
         name.setText(entity.getName().toString());
 
         if (entity instanceof Participant) {
-            Participant participant = (Participant) entity;
-            cards.getChildren().add(new Label(participant.getPhone().value));
-            cards.getChildren().add(new Label(participant.getEmail().value));
-            this.type = PrefixType.P;
+           this.generateParticipantCard(entity);
         } else if (entity instanceof Mentor) {
-            Mentor mentor = (Mentor) entity;
-            cards.getChildren().add(new Label(mentor.getOrganization().toString()));
-            cards.getChildren().add(new Label(mentor.getSubject().toString()));
-            this.type = PrefixType.M;
+           this.generateMentorCard(entity);
         } else {
-            Team team = (Team) entity;
-            FlowPane participantPane = new FlowPane();
-            team.getParticipants().stream()
-                    .sorted(Comparator.comparing(pt -> pt.getName().toString()))
-                    .forEach(p -> participantPane.getChildren().add(new Label(p.getName().toString())));
-            Optional<Mentor> teamMentor = team.getMentor();
-            cards.getChildren().add(
-                    new Label(teamMentor.isEmpty() ? "Mentor not assigned" : teamMentor.get().getName().toString()));
-            cards.getChildren().add(new Label(team.getSubject().toString()));
-            cards.getChildren().add(new Label(team.getProjectName().toString()));
-            cards.getChildren().add(new Label(team.getProjectType().toString()));
-            cards.getChildren().add(new Label(team.getLocation().toString()));
-            cards.getChildren().add(new Label(team.getScore().toString()));
-            this.type = PrefixType.T;
+            this.generateTeamCard(entity);
 
         }
     }
+
+
 
     @Override
     public boolean equals(Object other) {
