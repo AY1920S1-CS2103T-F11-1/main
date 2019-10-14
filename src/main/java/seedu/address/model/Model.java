@@ -11,7 +11,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
-import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Team;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
@@ -124,11 +123,11 @@ public interface Model {
 
     /* Find commands */
 
-    List<Participant> findParticipant(String name);
+    List<Participant> findParticipantByName(String name);
 
-    List<Team> findTeam(String name);
+    List<Team> findTeamByName(String name);
 
-    List<Mentor> findMentor(String name);
+    List<Mentor> findMentorByName(String name);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

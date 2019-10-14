@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
@@ -21,7 +22,6 @@ import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
-import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
@@ -44,9 +44,12 @@ public class ModelManager implements Model {
     protected TeamList teamList = new TeamList();
     protected MentorList mentorList = new MentorList();
 
-    protected FilteredList<Participant> filteredParticipantList = null;
-    protected FilteredList<Team> filteredTeamList = null;
-    protected FilteredList<Mentor> filteredMentorList = null;
+    protected FilteredList<Participant> filteredParticipantList =
+            new FilteredList<>(this.participantList.getSpecificTypedList());
+    protected FilteredList<Team> filteredTeamList =
+            new FilteredList<>(this.teamList.getSpecificTypedList());
+    protected FilteredList<Mentor> filteredMentorList =
+            new FilteredList<>(this.mentorList.getSpecificTypedList());
 
     // TODO: Remove the null values which are a placeholder due to the multiple constructors.
     // Also will have to change the relevant attributes to final.
@@ -80,6 +83,16 @@ public class ModelManager implements Model {
         // TODO: Remove: Currently it is here to make tests pass.
         this.addressBook = new AddressBook();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        // TODO: Make final
+        this.participantList = new ParticipantList();
+        this.teamList = new TeamList();
+        this.mentorList = new MentorList();
+        this.filteredParticipantList =
+                new FilteredList<>(this.participantList.getSpecificTypedList());
+        this.filteredMentorList =
+                new FilteredList<>(this.mentorList.getSpecificTypedList());
+        this.filteredTeamList =
+                new FilteredList<>(this.teamList.getSpecificTypedList());
     }
 
     /**
@@ -592,13 +605,15 @@ public class ModelManager implements Model {
      * @param name
      * @return {@code List<Participant>}
      */
-    public List<Participant> findParticipant(String name) {
+    public List<Participant> findParticipantByName(String name) {
         List<Participant> results = new ArrayList<>();
         for (Participant p: this.participantList.getSpecificTypedList()) {
             if (p.getName().toString().contains(name)) {
                 results.add(p);
             }
         }
+        this.filteredParticipantList.setPredicate(
+                Predicates.getPredicateFindEntityByName(name));
         return results;
     }
 
@@ -608,13 +623,15 @@ public class ModelManager implements Model {
      * @param name
      * @return {@code List<Team>}
      */
-    public List<Team> findTeam(String name) {
+    public List<Team> findTeamByName(String name) {
         List<Team> results = new ArrayList<>();
         for (Team t: this.teamList.getSpecificTypedList()) {
             if (t.getName().toString().contains(name)) {
                 results.add(t);
             }
         }
+        this.filteredTeamList.setPredicate(
+                Predicates.getPredicateFindEntityByName(name));
         return results;
     }
 
@@ -624,13 +641,15 @@ public class ModelManager implements Model {
      * @param name
      * @return {@code List<Mentor>}
      */
-    public List<Mentor> findMentor(String name) {
+    public List<Mentor> findMentorByName(String name) {
         List<Mentor> results = new ArrayList<>();
         for (Mentor m: this.mentorList.getSpecificTypedList()) {
             if (m.getName().toString().contains(name)) {
                 results.add(m);
             }
         }
+        this.filteredMentorList.setPredicate(
+                Predicates.getPredicateFindEntityByName(name));
         return results;
     }
 
