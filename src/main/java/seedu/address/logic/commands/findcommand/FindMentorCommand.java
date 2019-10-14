@@ -16,7 +16,7 @@ public class FindMentorCommand extends FindCommand {
     public static final String COMMAND_WORD = "find mentor";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Finds the mentor by the name "
             + "given. Parameters: name to search for "
-            + "Example: " + COMMAND_WORD + " John Doe";
+            + "Example: " + COMMAND_WORD + " n/John Doe";
     public static final String MESSAGE_SUCCESS = "Successfully ran the find command.";
 
     private String name;
