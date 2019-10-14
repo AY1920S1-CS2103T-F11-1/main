@@ -9,6 +9,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
@@ -50,12 +51,12 @@ public class EditMentorCommand extends EditCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
+        requireNonNull(alfredModel);
 
         Mentor mentorToEdit;
         try {
-            mentorToEdit = model.getMentor(this.id);
+            mentorToEdit = alfredModel.getMentor(this.id);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX);
         }
@@ -63,7 +64,7 @@ public class EditMentorCommand extends EditCommand {
                 this.editMentorDescriptor);
 
         try {
-            model.updateMentor(this.id, editedMentor);
+            alfredModel.updateMentor(this.id, editedMentor);
             return new CommandResult(String.format(MESSAGE_EDIT_MENTOR_SUCCESS, editedMentor.toString()));
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());

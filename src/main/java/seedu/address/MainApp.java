@@ -15,6 +15,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.model.AlfredModelManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -64,14 +65,14 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        model = new ModelManager(storage, userPrefs);
-        model.initialize();
+        model = new AlfredModelManager(storage, userPrefs);
+
 
         logic = new LogicManager(model);
 
         ui = new UiManager(logic);
 
-        model.initialize();
+
     }
 
     private void initLogging(Config config) {

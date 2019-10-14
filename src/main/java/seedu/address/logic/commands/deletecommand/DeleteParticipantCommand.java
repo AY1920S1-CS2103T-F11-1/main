@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Name;
@@ -36,7 +37,7 @@ public class DeleteParticipantCommand extends DeleteCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
         requireNonNull(model);
 
         if (this.teamName != null) {
@@ -47,7 +48,7 @@ public class DeleteParticipantCommand extends DeleteCommand {
 
         Participant participantToBeDeleted;
         try {
-            participantToBeDeleted = model.deleteParticipant(this.id);
+            participantToBeDeleted = alfredModel.deleteParticipant(this.id);
         } catch (AlfredException e) {
             // Model checking if index is invalid?
             throw new CommandException(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);

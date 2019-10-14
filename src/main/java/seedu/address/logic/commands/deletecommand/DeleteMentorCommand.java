@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AlfredModel;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
@@ -35,7 +36,7 @@ public class DeleteMentorCommand extends DeleteCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(AlfredModel alfredModel) throws CommandException {
         requireNonNull(model);
 
         if (this.teamName != null) {
@@ -46,7 +47,7 @@ public class DeleteMentorCommand extends DeleteCommand {
 
         Mentor mentorToBeDeleted;
         try {
-            mentorToBeDeleted = model.deleteMentor(this.id);
+            mentorToBeDeleted = alfredModel.deleteMentor(this.id);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX);
         }
