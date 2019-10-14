@@ -299,7 +299,7 @@ public class ModelManager implements Model {
 
         this.saveList(PrefixType.P);
         this.saveList(PrefixType.T);
-        return deletedParticipant;
+        return participantToDelete;
     }
 
     /* Team Methods*/
@@ -515,7 +515,7 @@ public class ModelManager implements Model {
         try {
             targetTeam = this.getTeamByMentorId(id);
         } catch (MissingEntityException e) {
-            Mentor mentorToDelete = this.mentorList.delete(id); 
+            Mentor mentorToDelete = this.mentorList.delete(id);
             this.saveList(PrefixType.M);
             return mentorToDelete;
         }
