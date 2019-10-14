@@ -49,6 +49,35 @@ public class EntityCard extends UiPart<Region> {
     @FXML
     private Label id;
 
+    /**
+     * Constructs a new instance of Entity Card.
+     *
+     * @param entity Entity to make a card out of.
+     * @param displayedIndex the index of the card.
+     */
+    public EntityCard(Entity entity, int displayedIndex) {
+        super(FXML);
+
+        this.entity = entity;
+        id.setText(displayedIndex + ". ");
+        name.setText(entity.getName().toString());
+
+        if (entity instanceof Participant) {
+            this.generateParticipantCard(entity);
+        } else if (entity instanceof Mentor) {
+            this.generateMentorCard(entity);
+        } else {
+            this.generateTeamCard(entity);
+
+        }
+    }
+
+
+    /**
+     * Generates participant Card according to entity type.
+     *
+     * @param entity type of Entity.
+     */
     private void generateParticipantCard(Entity entity) {
         Participant participant = (Participant) entity;
         cards.getChildren().add(new Label(participant.getPhone().value));
@@ -56,6 +85,11 @@ public class EntityCard extends UiPart<Region> {
         this.type = PrefixType.P;
     }
 
+    /**
+     * Generates Mentor Card according to entity type.
+     *
+     * @param entity type of Entity.
+     */
     private void generateMentorCard(Entity entity) {
         Mentor mentor = (Mentor) entity;
         cards.getChildren().add(new Label(mentor.getOrganization().toString()));
@@ -63,6 +97,11 @@ public class EntityCard extends UiPart<Region> {
         this.type = PrefixType.M;
     }
 
+    /**
+     * Generates Team Card according to entity type.
+     *
+     * @param entity type of Entity.
+     */
     private void generateTeamCard(Entity entity) {
         Team team = (Team) entity;
         FlowPane participantPane = new FlowPane();
@@ -80,25 +119,6 @@ public class EntityCard extends UiPart<Region> {
         this.type = PrefixType.T;
 
     }
-
-    public EntityCard(Entity entity, int displayedIndex) {
-        super(FXML);
-
-        this.entity = entity;
-        id.setText(displayedIndex + ". ");
-        name.setText(entity.getName().toString());
-
-        if (entity instanceof Participant) {
-           this.generateParticipantCard(entity);
-        } else if (entity instanceof Mentor) {
-           this.generateMentorCard(entity);
-        } else {
-            this.generateTeamCard(entity);
-
-        }
-    }
-
-
 
     @Override
     public boolean equals(Object other) {
