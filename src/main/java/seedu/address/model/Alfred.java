@@ -1,13 +1,11 @@
 package seedu.address.model;
 
 import java.io.IOException;
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
 import java.util.Optional;
 import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
@@ -21,11 +19,8 @@ import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.entitylist.TeamList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.storage.AlfredStorage;
-import seedu.address.storage.AlfredStorageManager;
-import seedu.address.storage.JsonParticipantListStorage;
+
 
 /**
  * Wraps all data at the alfred level
@@ -382,16 +377,16 @@ public class Alfred implements ReadOnlyAlfred {
     private void saveList(PrefixType type) {
         try {
             switch (type) {
-                case T:
-                    this.alfredStorage.saveTeamList(this.teamList);
-                    break;
-                case M:
-                    this.alfredStorage.saveMentorList(this.mentorList);
-                    break;
-                case P:
-                    this.alfredStorage.saveParticipantList(this.participantList);
-                    break;
-                default:
+            case T:
+                this.alfredStorage.saveTeamList(this.teamList);
+                break;
+            case M:
+                this.alfredStorage.saveMentorList(this.mentorList);
+                break;
+            case P:
+                this.alfredStorage.saveParticipantList(this.participantList);
+                break;
+            default:
             }
         } catch (IOException e) {
             logger.severe("Failed to save the list into storage due to IOException");

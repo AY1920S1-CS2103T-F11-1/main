@@ -41,7 +41,7 @@ public class AddTeamCommand extends AddCommand {
         requireNonNull(model);
 
         try {
-` `            model.addTeam(this.team);
+            model.addTeam(this.team);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_DUPLICATE_TEAM);
         }
