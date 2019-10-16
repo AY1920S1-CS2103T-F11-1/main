@@ -9,6 +9,7 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.PrefixType;
 
 /**
  * Adds a {@link Participant} to Alfred.
@@ -62,7 +63,7 @@ public class AddParticipantCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PARTICIPANT);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.participant.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.participant.toString()), PrefixType.P);
     }
 
 }

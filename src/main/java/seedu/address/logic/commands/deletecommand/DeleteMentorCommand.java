@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Name;
+import seedu.address.model.entity.PrefixType;
 
 /**
  * Deletes a {@link Mentor} in Alfred.
@@ -52,7 +53,7 @@ public class DeleteMentorCommand extends DeleteCommand {
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_MENTOR_SUCCESS,
-                mentorToBeDeleted.toString()));
+                mentorToBeDeleted.toString()), PrefixType.M);
     }
 
 }

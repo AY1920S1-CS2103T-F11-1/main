@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Mentor;
+import seedu.address.model.entity.PrefixType;
 
 /**
  * Adds a {@link Mentor} to Alfred.
@@ -28,6 +29,7 @@ public class AddMentorCommand extends AddCommand {
             + CliSyntax.PREFIX_NAME + "Bruce Wayne "
             + CliSyntax.PREFIX_PHONE + "+6591239123 "
             + CliSyntax.PREFIX_EMAIL + "customercare@batmail.com "
+            + CliSyntax.PREFIX_SUBJECT_NAME + "Artificial Intelligence "
             + CliSyntax.PREFIX_ORGANISATION + "Wayne Enterprise, Inc";
 
     private Mentor mentor;
@@ -65,7 +67,7 @@ public class AddMentorCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_MENTOR);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.mentor.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.mentor.toString()), PrefixType.M);
     }
 
 }

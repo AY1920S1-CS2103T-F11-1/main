@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.PrefixType;
 
 /**
  * Deletes a {@link Participant} in Alfred.
@@ -54,7 +55,7 @@ public class DeleteParticipantCommand extends DeleteCommand {
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PARTICIPANT_SUCCESS,
-                                               participantToBeDeleted.toString()));
+                                               participantToBeDeleted.toString()), PrefixType.P);
     }
 
 }

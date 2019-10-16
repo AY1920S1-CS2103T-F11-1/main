@@ -16,6 +16,7 @@ import seedu.address.model.entity.Location;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.ProjectType;
 import seedu.address.model.entity.Score;
 import seedu.address.model.entity.SubjectName;
@@ -68,7 +69,7 @@ public class EditTeamCommand extends EditCommand {
 
         try {
             model.updateTeam(this.id, editedTeam);
-            return new CommandResult(String.format(MESSAGE_EDIT_TEAM_SUCCESS, editedTeam.toString()));
+            return new CommandResult(String.format(MESSAGE_EDIT_TEAM_SUCCESS, editedTeam.toString()), PrefixType.T);
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
         }

@@ -15,6 +15,7 @@ import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Phone;
+import seedu.address.model.entity.PrefixType;
 
 /**
  * Edits a {@link Participant} in Alfred.
@@ -55,11 +56,12 @@ public class EditParticipantCommand extends EditCommand {
             throw new CommandException(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
         }
         Participant editedParticipant = this.createEditedParticipant(participantToEdit,
-                                                                     this.editParticipantDescriptor);
+                this.editParticipantDescriptor);
 
         try {
             model.updateParticipant(this.id, editedParticipant);
-            return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant.toString()));
+            return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS,
+                    editedParticipant.toString()), PrefixType.P);
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
         }
@@ -69,7 +71,7 @@ public class EditParticipantCommand extends EditCommand {
      * Creates and returns a new {@code Participant} with the details {@code participantToEdit}
      * edited with {@code editParticipantDescriptor}.
      *
-     * @param participantToEdit {@code Participant} that will be updated.
+     * @param participantToEdit         {@code Participant} that will be updated.
      * @param editParticipantDescriptor Descriptor with the details to edit {@code participantToEdit}.
      * @return Updated {@code Participant}.
      */
@@ -95,7 +97,8 @@ public class EditParticipantCommand extends EditCommand {
         private Email email;
         private Phone phone;
 
-        public EditParticipantDescriptor() {}
+        public EditParticipantDescriptor() {
+        }
 
         public EditParticipantDescriptor(EditParticipantDescriptor toCopy) {
             super(toCopy);

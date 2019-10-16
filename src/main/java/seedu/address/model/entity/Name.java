@@ -15,8 +15,8 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should adhere to the following constraints:\n"
-            + "1. It should contain alphabets, spaces, and these special characters, excluding"
-            + "the parentheses, (" + SPECIAL_CHARACTERS + "). \n"
+            + "1. It should contain alphabets, spaces, and these special characters, excluding "
+            + "the parentheses (" + SPECIAL_CHARACTERS + "). \n"
             + "2.Contain at least one character";
 
 
