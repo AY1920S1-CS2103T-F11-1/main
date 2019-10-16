@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT_NAME;
+import static seedu.address.logic.commands.editcommand.EditTeamCommand.EditTeamDescriptor;
 
 import seedu.address.logic.commands.editcommand.EditTeamCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
@@ -42,7 +43,27 @@ public class EditTeamCommandParser implements Parser<EditTeamCommand> {
                     seedu.address.logic.commands.EditCommand.MESSAGE_USAGE), pe);
         }
 
-        return null;
+        EditTeamDescriptor editTeamDescriptor = new EditTeamDescriptor();
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editTeamDescriptor.setName(AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SUBJECT_NAME).isPresent()) {
+            editTeamDescriptor.
+                    setSubject(AlfredParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PROJECT_NAME).isPresent()) {
+            editTeamDescriptor.setName(AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_PROJECT_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PROJECT_TYPE).isPresent()) {
+            editTeamDescriptor.
+                    setProjectType(AlfredParserUtil.parseProjectType(argMultimap.getValue(PREFIX_PROJECT_TYPE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
+            editTeamDescriptor.setLocation(AlfredParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+        }
+
+        return new EditTeamCommand(id, editTeamDescriptor);
     }
 
 }

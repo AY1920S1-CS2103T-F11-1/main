@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT_NAME;
+import static seedu.address.logic.commands.editcommand.EditMentorCommand.EditMentorDescriptor;
 
 import seedu.address.logic.commands.editcommand.EditMentorCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
@@ -41,6 +42,25 @@ public class EditMentorCommandParser implements Parser<EditMentorCommand> {
                     seedu.address.logic.commands.EditCommand.MESSAGE_USAGE), pe);
         }
 
-        return null;
+        EditMentorDescriptor editMentorDescriptor = new EditMentorDescriptor();
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editMentorDescriptor.setName(AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editMentorDescriptor.setPhone(AlfredParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editMentorDescriptor.setEmail(AlfredParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ORGANISATION).isPresent()) {
+            editMentorDescriptor.
+                    setOrganization(AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_ORGANISATION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SUBJECT_NAME).isPresent()) {
+            editMentorDescriptor.
+                    setSubject(AlfredParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT_NAME).get()));
+        }
+        return new EditMentorCommand(id, editMentorDescriptor);
     }
 }
