@@ -329,7 +329,7 @@ public class Team extends Entity {
         }
 
         if(this.name.equals(otherTeam.getName())){
-            logger.severe("same naem");
+            logger.severe("same name " + this.name + " and " + otherTeam.getName());
             return true;
         }
 

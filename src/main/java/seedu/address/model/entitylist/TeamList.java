@@ -44,6 +44,16 @@ public class TeamList extends EntityList {
     }
 
     /**
+     * Returns the size of ObservableList<Team>.
+     * Used to set the lastUsedId during the intialization of model in ModelManager#intialize.
+     * During the intialization, TeamList is set the the TeamList gotten from storage.
+     * @return size Number of Teams in TeamList
+     */
+    public int getSize() {
+        return this.teams.size();
+    }
+
+    /**
      * Updates team by ID.
      *
      * @param id
@@ -78,7 +88,7 @@ public class TeamList extends EntityList {
     public void add(Team team) throws AlfredModelException {
         for (Team t: this.teams) {
             if (t.isSameTeam(team)) {
-                logger.severe("The same team already exist in TeamList of Model.");
+                logger.severe("The same team already exist in TeamList of Model." + this.teams);
                 throw new AlfredModelException("Team to add already exists.");
             }
         }

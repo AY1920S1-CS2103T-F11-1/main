@@ -93,6 +93,7 @@ public class ModelManager implements Model {
                 this.teamList = new TeamList();
             } else {
                 this.teamList = storageTeamList.get();
+                this.teamList.setLastUsedId(this.teamList.getSize());
             }
         } catch (IOException | AlfredException e) {
             logger.warning("TeamList is empty in storage. Writing a new one.");
