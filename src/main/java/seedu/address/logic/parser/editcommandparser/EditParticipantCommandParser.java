@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import seedu.address.logic.commands.editcommand.EditMentorCommand;
 import seedu.address.logic.commands.editcommand.EditParticipantCommand;
 import seedu.address.logic.commands.editcommand.EditParticipantCommand.EditParticipantDescriptor;
 import seedu.address.logic.parser.AlfredParserUtil;
