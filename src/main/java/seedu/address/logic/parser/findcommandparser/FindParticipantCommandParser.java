@@ -26,7 +26,7 @@ public class FindParticipantCommandParser implements Parser<FindParticipantComma
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         if (!AlfredParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_NAME)
-                || argumentMultimap.getPreamble().isEmpty()) {
+                || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindParticipantCommand.MESSAGE_USAGE));
         }

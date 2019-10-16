@@ -41,7 +41,7 @@ public abstract class FindCommand extends Command {
         for (int i = 0; i < results.size(); i++) {
             Entity result = results.get(i);
             System.out.println(
-                    String.format("%d. Name: %s, ID: ", i, result.getName(), result.getId()));
+                    String.format("%d. Name: %s, ID: %s", i, result.getName(), result.getId()));
         }
     }
 }
