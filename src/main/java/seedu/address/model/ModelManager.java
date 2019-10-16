@@ -42,9 +42,9 @@ public class ModelManager implements Model {
     protected TeamList teamList = new TeamList();
     protected MentorList mentorList = new MentorList();
 
-    protected FilteredList<Participant> filteredParticipantList = null;
-    protected FilteredList<Team> filteredTeamList = null;
-    protected FilteredList<Mentor> filteredMentorList = null;
+    protected FilteredList<Participant> filteredParticipantList;
+    protected FilteredList<Team> filteredTeamList;
+    protected FilteredList<Mentor> filteredMentorList;
 
     // TODO: Remove the null values which are a placeholder due to the multiple constructors.
     // Also will have to change the relevant attributes to final.
@@ -78,6 +78,7 @@ public class ModelManager implements Model {
         // TODO: Remove: Currently it is here to make tests pass.
         this.addressBook = new AddressBook();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
     }
 
     /**
@@ -175,6 +176,21 @@ public class ModelManager implements Model {
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getParticipantListFilePath() {
+        return userPrefs.getParticipantListFilePath();
+    }
+
+    @Override
+    public Path getTeamListFilePath() {
+        return userPrefs.getTeamListFilePath();
+    }
+
+    @Override
+    public Path getMentorListFilePath() {
+        return userPrefs.getMentorListFilePath();
     }
 
     @Override

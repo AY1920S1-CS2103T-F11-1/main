@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import java.util.logging.Logger;
+import seedu.address.commons.core.LogsCenter;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -29,6 +31,7 @@ public class AlfredParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    private final Logger logger = LogsCenter.getLogger(AlfredParser.class);
     /**
      * Parses user input into command for execution.
      *
@@ -44,6 +47,8 @@ public class AlfredParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        logger.info("Finding command type of " + commandWord);
         switch (commandWord) {
 
         case AddParticipantCommand.COMMAND_WORD:
@@ -74,6 +79,7 @@ public class AlfredParser {
             return new HelpCommand();
 
         default:
+            logger.info("Unknown command type: " + commandWord);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
