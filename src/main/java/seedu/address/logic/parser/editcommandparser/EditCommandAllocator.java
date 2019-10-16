@@ -4,14 +4,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.editcommand.EditCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Allocates the user's edit command input to the correct parser in order to
- * call the appropriate entity's parser.
+ * call the appropriate entity's edit parser.
  */
 public class EditCommandAllocator {
 

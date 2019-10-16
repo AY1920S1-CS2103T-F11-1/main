@@ -2,12 +2,12 @@ package seedu.address.logic.parser.editcommandparser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.editcommand.EditTeamCommand.EditTeamDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT_NAME;
-import static seedu.address.logic.commands.editcommand.EditTeamCommand.EditTeamDescriptor;
 
 import seedu.address.logic.commands.editcommand.EditTeamCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
@@ -49,15 +49,15 @@ public class EditTeamCommandParser implements Parser<EditTeamCommand> {
             editTeamDescriptor.setName(AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_SUBJECT_NAME).isPresent()) {
-            editTeamDescriptor.
-                    setSubject(AlfredParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT_NAME).get()));
+            editTeamDescriptor
+            .setSubject(AlfredParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PROJECT_NAME).isPresent()) {
             editTeamDescriptor.setName(AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_PROJECT_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PROJECT_TYPE).isPresent()) {
-            editTeamDescriptor.
-                    setProjectType(AlfredParserUtil.parseProjectType(argMultimap.getValue(PREFIX_PROJECT_TYPE).get()));
+            editTeamDescriptor
+            .setProjectType(AlfredParserUtil.parseProjectType(argMultimap.getValue(PREFIX_PROJECT_TYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             editTeamDescriptor.setLocation(AlfredParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));

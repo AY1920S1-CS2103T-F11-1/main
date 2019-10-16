@@ -1,20 +1,13 @@
 package seedu.address.logic.parser.viewcommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
 
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.viewcommand.ViewMentorCommand;
 import seedu.address.logic.commands.viewcommand.ViewParticipantCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -31,8 +24,7 @@ public class ViewParticipantCommandParser implements Parser<ViewParticipantComma
 
         try {
             id = AlfredParserUtil.parseIndex(args, PrefixType.P);
-        }
-        catch (ParseException p) {
+        } catch (ParseException p) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewParticipantCommand.MESSAGE_USAGE), p);
         }

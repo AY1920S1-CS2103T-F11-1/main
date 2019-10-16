@@ -136,7 +136,7 @@ public class AlfredParserUtil {
             throw new ParseException(SubjectName.MESSAGE_CONSTRAINTS);
         }
         for (SubjectName subjectName : SubjectName.values()) {
-            if (subjectName.toString().equals(trimmedSubject)){
+            if (subjectName.toString().equals(trimmedSubject)) {
                 return subjectName;
             }
         }
