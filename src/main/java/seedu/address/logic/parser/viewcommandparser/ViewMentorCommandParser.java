@@ -25,7 +25,7 @@ public class ViewMentorCommandParser implements Parser<ViewMentorCommand> {
         try {
             id = AlfredParserUtil.parseIndex(args, PrefixType.M);
         } catch (ParseException p) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewMentorCommand.MESSAGE_USAGE), p);
+            throw new ParseException(String.format(ViewMentorCommand.MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX), p);
         }
         return new ViewMentorCommand(id);
     }

@@ -25,8 +25,7 @@ public class ViewTeamCommandParser implements Parser<ViewTeamCommand> {
         try {
             id = AlfredParserUtil.parseIndex(args, PrefixType.T);
         } catch (ParseException p) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewTeamCommand.MESSAGE_USAGE), p);
+            throw new ParseException(ViewTeamCommand.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX, p);
         }
         return new ViewTeamCommand(id);
     }

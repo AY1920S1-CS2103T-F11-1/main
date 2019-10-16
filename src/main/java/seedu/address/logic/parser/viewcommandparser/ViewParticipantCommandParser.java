@@ -25,8 +25,8 @@ public class ViewParticipantCommandParser implements Parser<ViewParticipantComma
         try {
             id = AlfredParserUtil.parseIndex(args, PrefixType.P);
         } catch (ParseException p) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewParticipantCommand.MESSAGE_USAGE), p);
+            throw new ParseException(String.format(ViewParticipantCommand
+                    .MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX), p);
         }
         return new ViewParticipantCommand(id);
     }
