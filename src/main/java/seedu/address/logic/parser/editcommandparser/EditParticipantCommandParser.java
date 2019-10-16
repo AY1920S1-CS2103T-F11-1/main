@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import seedu.address.logic.commands.editcommand.EditMentorCommand;
 import seedu.address.logic.commands.editcommand.EditParticipantCommand;
 import seedu.address.logic.commands.editcommand.EditParticipantCommand.EditParticipantDescriptor;
 import seedu.address.logic.parser.AlfredParserUtil;
@@ -50,6 +51,9 @@ public class EditParticipantCommandParser implements Parser<EditParticipantComma
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             editParticipantDescriptor.setPhone(AlfredParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (!editParticipantDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditParticipantCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditParticipantCommand(id, editParticipantDescriptor);

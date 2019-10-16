@@ -29,7 +29,7 @@ public class DeleteParticipantCommandParser implements Parser<DeleteCommand> {
             return new DeleteParticipantCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
+                    String.format(DeleteParticipantCommand.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX), pe);
         }
     }
 

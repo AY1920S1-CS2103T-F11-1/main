@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT_NAME;
 
+import seedu.address.logic.commands.editcommand.EditMentorCommand;
 import seedu.address.logic.commands.editcommand.EditTeamCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -61,6 +62,9 @@ public class EditTeamCommandParser implements Parser<EditTeamCommand> {
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
             editTeamDescriptor.setLocation(AlfredParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+        }
+        if (!editTeamDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditTeamCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditTeamCommand(id, editTeamDescriptor);

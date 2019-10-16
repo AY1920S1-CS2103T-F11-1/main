@@ -29,7 +29,7 @@ public class DeleteTeamCommandParser implements Parser<DeleteCommand> {
             return new DeleteTeamCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
+                    String.format(DeleteTeamCommand.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX), pe);
         }
     }
 
