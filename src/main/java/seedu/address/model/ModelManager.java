@@ -93,7 +93,7 @@ public class ModelManager implements Model {
                 this.teamList = new TeamList();
             } else {
                 this.teamList = storageTeamList.get();
-                this.teamList.setLastUsedId(this.teamList.getSize());
+                this.teamList.setLastUsedId(this.teamList.getSize() - 1);
             }
         } catch (IOException | AlfredException e) {
             logger.warning("TeamList is empty in storage. Writing a new one.");
@@ -107,6 +107,7 @@ public class ModelManager implements Model {
                 this.participantList = new ParticipantList();
             } else {
                 this.participantList = storageParticipantList.get();
+                this.participantList.setLastUsedId(this.participantList.getSize() - 1);
             }
         } catch (IOException | AlfredException e) {
             logger.warning("ParticipantList is empty in storage. Writing a new one.");
@@ -119,6 +120,7 @@ public class ModelManager implements Model {
                 this.mentorList = new MentorList();
             } else {
                 this.mentorList = storageMentorList.get();
+                this.mentorList.setLastUsedId(this.mentorList.getSize() - 1);
             }
         } catch (IOException | AlfredException e) {
             logger.warning("MentorList is empty in storage. Writing a new one.");

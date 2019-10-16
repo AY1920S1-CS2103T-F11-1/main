@@ -74,11 +74,11 @@ public class AlfredParser {
             //Dummy cases so that GUI works
         case AddTeamCommand.COMMAND_WORD:
             logger.info("Adding a new Team...");
-             return new AddTeamCommandParser().parse(arguments);
+            return new AddTeamCommandParser().parse(arguments);
 
         case AddMentorCommand.COMMAND_WORD:
             logger.info("Adding a new Mentor...");
-                return new AddMentorCommandParser().parse(arguments);
+            return new AddMentorCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             logger.info("Add a new person(in old AddressBook...");

@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
+
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -279,14 +280,14 @@ public class Team extends Entity {
 
         Team otherTeam = ((Team) other);
         return otherTeam.getName().equals(this.getName())
-               && otherTeam.getId().equals(this.getId())
-               && otherTeam.getParticipants().equals(this.getParticipants())
-               && otherTeam.getSubject().equals(this.getSubject())
-               && otherTeam.getLocation().equals(this.getLocation())
-               && otherTeam.getMentor().equals(this.getMentor())
-               && otherTeam.getScore().equals(this.getScore())
-               && otherTeam.getProjectName().equals(this.getProjectName())
-               && otherTeam.getProjectType().equals(this.getProjectType());
+                && otherTeam.getId().equals(this.getId())
+                && otherTeam.getParticipants().equals(this.getParticipants())
+                && otherTeam.getSubject().equals(this.getSubject())
+                && otherTeam.getLocation().equals(this.getLocation())
+                && otherTeam.getMentor().equals(this.getMentor())
+                && otherTeam.getScore().equals(this.getScore())
+                && otherTeam.getProjectName().equals(this.getProjectName())
+                && otherTeam.getProjectType().equals(this.getProjectType());
     }
 
     @Override
@@ -320,6 +321,7 @@ public class Team extends Entity {
 
     /**
      * This offers a looser definition of equality for Team.
+     *
      * @param otherTeam
      * @return boolean
      */
@@ -328,17 +330,17 @@ public class Team extends Entity {
             return true;
         }
 
-        if(this.name.equals(otherTeam.getName())){
+        if (this.name.equals(otherTeam.getName())) {
             logger.severe("same name " + this.name + " and " + otherTeam.getName());
             return true;
         }
 
-        if(this.projectName.equals(otherTeam.getProjectName())){
+        if (this.projectName.equals(otherTeam.getProjectName())) {
             logger.severe("same pn" + this.projectName + " and " + otherTeam.getProjectName());
-             return true;
+            return true;
         }
 
-        if(this.id.equals(otherTeam.getId())){
+        if (this.id.equals(otherTeam.getId())) {
             logger.severe("same id:" + this.id + " and " + otherTeam.getId());
             return true;
         }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands.addcommand;
 import static java.util.Objects.requireNonNull;
 
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
@@ -16,7 +17,6 @@ import seedu.address.model.entity.Team;
  */
 public class AddTeamCommand extends AddCommand {
 
-    private final Logger logger = LogsCenter.getLogger(AddTeamCommand.class);
     public static final String COMMAND_WORD = "addTeam";
     public static final String MESSAGE_SUCCESS = "New team added: %s";
     public static final String MESSAGE_DUPLICATE_TEAM = "This team already exists in this Hackathon";
@@ -35,6 +35,7 @@ public class AddTeamCommand extends AddCommand {
             + CliSyntax.PREFIX_LOCATION + "1 ";
 
     private Team team;
+    private final Logger logger = LogsCenter.getLogger(AddTeamCommand.class);
 
     public AddTeamCommand(Team team) {
         requireNonNull(team);

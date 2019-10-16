@@ -19,7 +19,7 @@ public class DeleteTeamCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_TEAM_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a team by ID shown in the list of teams.\n"
-            + "Format: " +  COMMAND_WORD + " ID\n"
+            + "Format: " + COMMAND_WORD + " ID\n"
             + "Example: " + COMMAND_WORD + " T-1";
 
     public DeleteTeamCommand(Id id) {
