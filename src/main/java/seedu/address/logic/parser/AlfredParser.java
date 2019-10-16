@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -18,9 +17,11 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.addcommand.AddMentorCommand;
 import seedu.address.logic.commands.addcommand.AddParticipantCommand;
 import seedu.address.logic.commands.addcommand.AddTeamCommand;
+import seedu.address.logic.commands.deletecommand.DeleteCommand;
 import seedu.address.logic.parser.addcommandparser.AddMentorCommandParser;
 import seedu.address.logic.parser.addcommandparser.AddParticipantCommandParser;
 import seedu.address.logic.parser.addcommandparser.AddTeamCommandParser;
+import seedu.address.logic.parser.deletecommandparser.DeleteCommandAllocator;
 import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -60,18 +61,11 @@ public class AlfredParser {
         case AddTeamCommand.COMMAND_WORD:
             return new AddTeamCommandParser().parse(arguments);
 
-
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-
-        /* Do you guys mind if I comment the below out until the AB3 stuff is deleted
-            as this causes a problem within the case statements as this and our edit command have the same label.
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments); */
-
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandAllocator().getDeleteCommand(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

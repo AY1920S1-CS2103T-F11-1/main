@@ -166,6 +166,13 @@ public class AlfredParserUtil {
         return tagSet;
     }
 
+    public static String getIdPrefix(String args) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
+        String id = argMultimap.getPreamble();
+        return Character.toString(id.charAt(0));
+    }
+
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.

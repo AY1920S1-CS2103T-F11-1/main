@@ -3,6 +3,7 @@ package seedu.address.logic.parser.editcommandparser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.editcommand.EditCommand;
+import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.CliSyntax;
@@ -23,9 +24,7 @@ public class EditCommandAllocator {
      * @throws ParseException if the format of the edit command is incorrect.
      */
     public EditCommand getEditCommand(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
-        String id = argMultimap.getPreamble();
-        String idPrefix = Character.toString(id.charAt(0));
+        String idPrefix = AlfredParserUtil.getIdPrefix(args);
 
         switch (idPrefix) {
 

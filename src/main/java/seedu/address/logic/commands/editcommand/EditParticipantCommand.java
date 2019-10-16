@@ -58,6 +58,7 @@ public class EditParticipantCommand extends EditCommand {
         }
         Participant editedParticipant = this.createEditedParticipant(participantToEdit,
                                                                      this.editParticipantDescriptor);
+        System.out.println(editedParticipant.toString());
 
         try {
             model.updateParticipant(this.id, editedParticipant);
