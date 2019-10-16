@@ -22,7 +22,7 @@ public class TeamListPanel extends EntityListPanel {
 
     public TeamListPanel(ObservableList<Team> teamList) {
         super(FXML);
-            teamListView.setItems(teamList);
+        teamListView.setItems(teamList);
         teamListView.setCellFactory(listView -> new TeamListViewCell());
     }
 
