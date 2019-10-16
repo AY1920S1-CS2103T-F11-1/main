@@ -334,7 +334,7 @@ public class Team extends Entity {
         }
 
         if(this.projectName.equals(otherTeam.getProjectName())){
-            logger.severe("same pn");
+            logger.severe("same pn" + this.projectName + " and " + otherTeam.getProjectName());
              return true;
         }
 
