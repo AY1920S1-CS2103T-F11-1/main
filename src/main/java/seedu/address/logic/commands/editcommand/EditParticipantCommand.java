@@ -21,7 +21,6 @@ import seedu.address.model.entity.Phone;
  */
 public class EditParticipantCommand extends EditCommand {
 
-    public static final String COMMAND_WORD = "edit participant";
     public static final String MESSAGE_EDIT_PARTICIPANT_SUCCESS = "Edited Participant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX =

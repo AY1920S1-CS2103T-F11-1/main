@@ -135,7 +135,12 @@ public class AlfredParserUtil {
         if (!SubjectName.isValidSubjectName(trimmedSubject)) {
             throw new ParseException(SubjectName.MESSAGE_CONSTRAINTS);
         }
-        return SubjectName.SOCIAL;
+        for (SubjectName subjectName : SubjectName.values()) {
+            if (subjectName.toString().equals(trimmedSubject)){
+                return subjectName;
+            }
+        }
+        throw new ParseException(SubjectName.MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -151,6 +156,11 @@ public class AlfredParserUtil {
         if (!SubjectName.isValidSubjectName(trimmedType)) {
             throw new ParseException(SubjectName.MESSAGE_CONSTRAINTS);
         }
+        /*for (ProjectType projectType : ProjectType.values()) {
+            if (projectType.toString().equals(trimmedType)){
+                return projectType;
+            }
+        }*/
         return ProjectType.PLACEHOLDER;
     }
 
