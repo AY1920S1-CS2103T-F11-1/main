@@ -17,17 +17,18 @@ public class AddMentorCommand extends AddCommand {
     public static final String COMMAND_WORD = "addMentor";
     public static final String MESSAGE_SUCCESS = "New mentor added: %s";
     public static final String MESSAGE_DUPLICATE_MENTOR = "This mentor already exists in this Hackathon";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a mentor to Alfred. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a mentor to Alfred.\n"
+            + "Format: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_NAME + "NAME "
             + CliSyntax.PREFIX_PHONE + "PHONE "
             + CliSyntax.PREFIX_EMAIL + "EMAIL "
+            + CliSyntax.PREFIX_SUBJECT_NAME + "SUBJECT_NAME "
             + CliSyntax.PREFIX_ORGANISATION + "ORGANIZATION\n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_NAME + "John Doe "
-            + CliSyntax.PREFIX_PHONE + "98765432 "
-            + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
-            + CliSyntax.PREFIX_ORGANISATION + "Fill it up for me idk what this is...";
+            + CliSyntax.PREFIX_NAME + "Bruce Wayne "
+            + CliSyntax.PREFIX_PHONE + "+6591239123 "
+            + CliSyntax.PREFIX_EMAIL + "customercare@batmail.com "
+            + CliSyntax.PREFIX_ORGANISATION + "Wayne Enterprise, Inc";
 
     private Mentor mentor;
     // private Name mentorName;

@@ -13,7 +13,7 @@ public class ListTeamCommand extends ListCommand {
 
     public static final String COMMAND_WORD = "list team";
     public static final String MESSAGE_SUCCESS = "Listed all teams";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all of the mentors.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all of the teams.\n"
             + "Example: " + COMMAND_WORD;
 
     @Override

@@ -35,7 +35,7 @@ public class AddParticipantCommandParser implements Parser<AddParticipantCommand
         if (!AlfredParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    seedu.address.logic.commands.AddCommand.MESSAGE_USAGE));
+                    AddParticipantCommand.MESSAGE_USAGE));
         }
 
         Name name = AlfredParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

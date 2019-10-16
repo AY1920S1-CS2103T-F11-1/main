@@ -19,8 +19,8 @@ public class DeleteParticipantCommand extends DeleteCommand {
     public static final String MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX = "The participant ID provided is invalid";
     public static final String MESSAGE_DELETE_PARTICIPANT_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the participant identified by the ID used in the displayed participant list.\n"
-            + "Parameters: participant ID\n"
+            + ": Deletes a participant by ID shown in the list of participants.\n"
+            + "Format: " + COMMAND_WORD + " ID\n"
             + "Example: " + COMMAND_WORD + " P-1";
 
     private Name teamName;

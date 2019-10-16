@@ -1,7 +1,9 @@
 package seedu.address.model.entitylist;
 
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.commons.exceptions.MissingEntityException;
@@ -16,6 +18,7 @@ import seedu.address.model.entity.Team;
  * {@code TeamList} should behave as a singleton.
  */
 public class TeamList extends EntityList {
+    private final Logger logger = LogsCenter.getLogger(TeamList.class);
     public static final String SIMILAR_TEAM_MSG = "A similar Team already exists.";
 
     private static int lastUsedId = 0;
@@ -74,11 +77,13 @@ public class TeamList extends EntityList {
      */
     public void add(Team team) throws AlfredModelException {
         for (Team t: this.teams) {
-            if (t.isSameTeam(team) || t.getId().equals(team.getId())) {
+            if (t.isSameTeam(team)) {
+                logger.severe("The same team already exist in TeamList of Model.");
                 throw new AlfredModelException("Team to add already exists.");
             }
         }
         this.teams.add(team);
+        this.lastUsedId++;
     }
 
     /**

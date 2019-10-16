@@ -17,8 +17,24 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.addcommand.AddMentorCommand;
 import seedu.address.logic.commands.addcommand.AddParticipantCommand;
+import seedu.address.logic.commands.addcommand.AddTeamCommand;
+import seedu.address.logic.commands.deletecommand.DeleteMentorCommand;
+import seedu.address.logic.commands.deletecommand.DeleteParticipantCommand;
+import seedu.address.logic.commands.deletecommand.DeleteTeamCommand;
+import seedu.address.logic.commands.editcommand.EditMentorCommand;
+import seedu.address.logic.commands.editcommand.EditParticipantCommand;
+import seedu.address.logic.commands.editcommand.EditTeamCommand;
+import seedu.address.logic.parser.addcommandparser.AddMentorCommandParser;
 import seedu.address.logic.parser.addcommandparser.AddParticipantCommandParser;
+import seedu.address.logic.parser.addcommandparser.AddTeamCommandParser;
+import seedu.address.logic.parser.deletecommandparser.DeleteMentorCommandParser;
+import seedu.address.logic.parser.deletecommandparser.DeleteParticipantCommandParser;
+import seedu.address.logic.parser.deletecommandparser.DeleteTeamCommandParser;
+import seedu.address.logic.parser.editcommandparser.EditMentorCommandParser;
+import seedu.address.logic.parser.editcommandparser.EditParticipantCommandParser;
+import seedu.address.logic.parser.editcommandparser.EditTeamCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,15 +68,52 @@ public class AlfredParser {
         switch (commandWord) {
 
         case AddParticipantCommand.COMMAND_WORD:
+            logger.info("Adding a new Participant...");
             return new AddParticipantCommandParser().parse(arguments);
 
+            //Dummy cases so that GUI works
+        case AddTeamCommand.COMMAND_WORD:
+            logger.info("Adding a new Team...");
+             return new AddTeamCommandParser().parse(arguments);
+
+        case AddMentorCommand.COMMAND_WORD:
+            logger.info("Adding a new Mentor...");
+                return new AddMentorCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
+            logger.info("Add a new person(in old AddressBook...");
             return new AddCommandParser().parse(arguments);
 
+        case EditParticipantCommand.COMMAND_WORD:
+            logger.info("Editing an existing Participant...");
+            return new EditParticipantCommandParser().parse(arguments);
+
+        case EditTeamCommand.COMMAND_WORD:
+            logger.info("Editing an existing Team...");
+            return new EditTeamCommandParser().parse(arguments);
+
+        case EditMentorCommand.COMMAND_WORD:
+            logger.info("Editing an existing mentor...");
+            return new EditMentorCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
+            logger.info("Editing an existing person(in old AddressBook)..");
             return new EditCommandParser().parse(arguments);
 
+        case DeleteParticipantCommand.COMMAND_WORD:
+            logger.info("Deleting an existing Participant...");
+            return new DeleteParticipantCommandParser().parse(arguments);
+
+        case DeleteTeamCommand.COMMAND_WORD:
+            logger.info("Deleting an existing Team...");
+            return new DeleteTeamCommandParser().parse(arguments);
+
+        case DeleteMentorCommand.COMMAND_WORD:
+            logger.info("Deleting an existing Mentor...");
+            return new DeleteMentorCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
+            logger.info("Deleting an existing person(in old AddressBook)..");
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:

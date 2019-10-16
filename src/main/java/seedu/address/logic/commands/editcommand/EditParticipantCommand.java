@@ -26,16 +26,15 @@ public class EditParticipantCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX =
             "The participant index provided is invalid";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the participant identified "
-            + "by the index number used in the displayed participant list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the participant by ID.\n "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: participant ID "
+            + "Format: " + "ID"
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL]\n"
             + "Example: " + COMMAND_WORD + " P-1 "
-            + CliSyntax.PREFIX_PHONE + "91234567 "
-            + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
+            + CliSyntax.PREFIX_PHONE + "+659456 9789 "
+            + CliSyntax.PREFIX_EMAIL + "alfred@butler.com";
 
     private EditParticipantDescriptor editParticipantDescriptor;
 

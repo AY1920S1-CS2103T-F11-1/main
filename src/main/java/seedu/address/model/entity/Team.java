@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Team is the main entity of this system.
  */
 public class Team extends Entity {
+    //dummy logger, to be deleted
+    private final Logger logger = LogsCenter.getLogger(Team.class);
     private List<Participant> participants;
     private Optional<Mentor> mentor;
     private SubjectName subject;
@@ -324,7 +328,27 @@ public class Team extends Entity {
             return true;
         }
 
-        return this.name.equals(otherTeam.getName())
-                || this.projectName.equals(otherTeam.getProjectName());
+        if(this.name.equals(otherTeam.getName())){
+            logger.severe("same naem");
+            return true;
+        }
+
+        if(this.projectName.equals(otherTeam.getProjectName())){
+            logger.severe("same pn");
+             return true;
+        }
+
+        if(this.id.equals(otherTeam.getId())){
+            logger.severe("same id:" + this.id + " and " + otherTeam.getId());
+            return true;
+        }
+        return false;
+
+
+        /*return this.name.equals(otherTeam.getName())
+                || this.projectName.equals(otherTeam.getProjectName())
+                || this.id.equals(otherTeam.getId());
+                */
+
     }
 }

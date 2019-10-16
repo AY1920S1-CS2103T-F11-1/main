@@ -16,7 +16,6 @@ import seedu.address.model.entity.PrefixType;
  */
 public class DeleteTeamCommandParser implements Parser<DeleteCommand> {
 
-    private static final String MESSAGE_USAGE = "Wrong usage.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code DeleteTeamCommand}
@@ -29,7 +28,7 @@ public class DeleteTeamCommandParser implements Parser<DeleteCommand> {
             return new DeleteTeamCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTeamCommand.MESSAGE_USAGE), pe);
         }
     }
 
