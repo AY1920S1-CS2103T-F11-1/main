@@ -17,7 +17,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.addcommand.AddMentorCommand;
 import seedu.address.logic.commands.addcommand.AddParticipantCommand;
 import seedu.address.logic.commands.addcommand.AddTeamCommand;
@@ -113,20 +112,9 @@ public class AlfredParser {
 
         case FindTeamCommand.COMMAND_WORD:
             return new FindTeamCommandParser().parse(arguments);
-
-        case DeleteParticipantCommand.COMMAND_WORD:
-            logger.info("Deleting an existing Participant...");
-            return new DeleteParticipantCommandParser().parse(arguments);
-
-        case DeleteTeamCommand.COMMAND_WORD:
-            logger.info("Deleting an existing Team...");
-            return new DeleteTeamCommandParser().parse(arguments);
-
-        case DeleteMentorCommand.COMMAND_WORD:
-            logger.info("Deleting an existing Mentor...");
-            return new DeleteMentorCommandParser().parse(arguments);
-
+                
         case DeleteCommand.COMMAND_WORD:
+            logger.info("Deleting an existing Participant...");
             return new DeleteCommandAllocator().getDeleteCommand(arguments);
 
 
