@@ -58,7 +58,7 @@ public class EditParticipantCommand extends EditCommand {
 
         try {
             model.updateParticipant(this.id, editedParticipant);
-           model.updateHistory();
+            model.updateHistory();
             return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS,
                     editedParticipant.toString()), PrefixType.P);
         } catch (AlfredException e) {
