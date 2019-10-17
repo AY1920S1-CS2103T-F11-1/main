@@ -661,7 +661,6 @@ public class ModelManager implements Model {
     }
 
     //========== ModelHistory Methods ===============
-
     /**
      * This method will update the ModelHistoryManager object with the current state of the model.
      * This method is expected to be called during the `execute()` method of each Command, right after

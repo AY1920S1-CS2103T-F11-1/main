@@ -16,14 +16,25 @@ public class ModelHistoryRecord {
     private int mListId;
     private int tListId;
 
+    /**
+     * Constructor for ModelHistoryRecord. Important to note that a deep copy will be made of
+     * each of the EntityLists passed in, so that the EntityLists stored in ModelHistoryRecord
+     * will not be modified by subsequent commands.
+     * @param pList ParticipantList (current state)
+     * @param pListId Current lastUsedId of Participantlist
+     * @param mList MentorList (current state)
+     * @param mListId Current lastUsedId of MentorList
+     * @param tList TeamList (current state)
+     * @param tListId Current lastUsedId of TeamList
+     */
     public ModelHistoryRecord(ParticipantList pList, int pListId,
                               MentorList mList, int mListId,
                               TeamList tList, int tListId) {
-        this.pList = pList;
+        this.pList = pList.copy();
         this.pListId = pListId;
-        this.mList = mList;
+        this.mList = mList.copy();
         this.mListId = mListId;
-        this.tList = tList;
+        this.tList = tList.copy();
         this.tListId = tListId;
     }
 
