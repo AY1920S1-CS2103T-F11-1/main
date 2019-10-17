@@ -257,7 +257,6 @@ public class ModelManagerTest {
         assertEquals(modelManager.getTeamList().list().size(), 1);
         assertEquals(modelManager.findTeamByName("A").size(), 1);
     }
-    
     @Disabled
     @Test
     public void findMentorByName_validName_correctResult() {
