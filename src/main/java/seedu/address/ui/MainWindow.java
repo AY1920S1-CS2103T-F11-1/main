@@ -193,6 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             PrefixType type = commandResult.getType();
+            logger.info("CommandResult has the prefix: " + type);
             //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
             switch (type) {
             case M:

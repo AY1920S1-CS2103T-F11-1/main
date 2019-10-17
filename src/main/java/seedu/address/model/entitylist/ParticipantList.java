@@ -92,6 +92,7 @@ public class ParticipantList extends EntityList {
             }
         }
         this.participants.add(participant);
+        lastUsedId++;
     }
 
     /**

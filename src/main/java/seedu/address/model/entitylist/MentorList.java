@@ -90,6 +90,7 @@ public class MentorList extends EntityList {
             }
         }
         this.mentors.add(mentor);
+        lastUsedId++;
     }
 
     /**

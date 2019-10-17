@@ -55,6 +55,7 @@ public class AlfredParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
+            logger.severe("Name is not in the valid format: " + name);
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
