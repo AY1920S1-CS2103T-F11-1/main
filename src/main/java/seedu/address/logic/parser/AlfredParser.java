@@ -102,7 +102,7 @@ public class AlfredParser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-            
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandAllocator().getEditCommand(arguments);
 
