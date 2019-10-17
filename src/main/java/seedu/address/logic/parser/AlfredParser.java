@@ -19,6 +19,9 @@ import seedu.address.logic.commands.deletecommand.DeleteCommand;
 import seedu.address.logic.commands.listcommand.ListCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.addcommandparser.AddMentorCommandParser;
+import seedu.address.logic.commands.findcommand.FindMentorCommand;
+import seedu.address.logic.commands.findcommand.FindParticipantCommand;
+import seedu.address.logic.commands.findcommand.FindTeamCommand;
 import seedu.address.logic.parser.addcommandparser.AddParticipantCommandParser;
 import seedu.address.logic.parser.addcommandparser.AddTeamCommandParser;
 import seedu.address.logic.parser.deletecommandparser.DeleteCommandAllocator;
@@ -26,6 +29,9 @@ import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.listcommandparser.ListCommandParser;
 import seedu.address.logic.parser.viewcommandparser.ViewCommandAllocator;
+import seedu.address.logic.parser.findcommandparser.FindMentorCommandParser;
+import seedu.address.logic.parser.findcommandparser.FindParticipantCommandParser;
+import seedu.address.logic.parser.findcommandparser.FindTeamCommandParser;
 
 /**
  * Parses user input.
@@ -59,6 +65,15 @@ public class AlfredParser {
 
         case AddMentorCommand.COMMAND_WORD:
             return new AddMentorCommandParser().parse(arguments);
+
+        case FindParticipantCommand.COMMAND_WORD:
+            return new FindParticipantCommandParser().parse(arguments);
+
+        case FindMentorCommand.COMMAND_WORD:
+            return new FindMentorCommandParser().parse(arguments);
+
+        case FindTeamCommand.COMMAND_WORD:
+            return new FindTeamCommandParser().parse(arguments);
 
         case AddTeamCommand.COMMAND_WORD:
             return new AddTeamCommandParser().parse(arguments);
