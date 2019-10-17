@@ -12,7 +12,6 @@ import seedu.address.model.entity.PrefixType;
  */
 public class ListParticipantCommand extends ListCommand {
 
-    public static final String COMMAND_WORD = "list participant";
     public static final String MESSAGE_SUCCESS = "Listed all participants";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all of the participants.\n"
             + "Example: " + COMMAND_WORD;
@@ -22,7 +21,7 @@ public class ListParticipantCommand extends ListCommand {
         requireNonNull(model);
 
         this.displayParticipants(model);
-
+        model.updateHistory();
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.P);
     }
 

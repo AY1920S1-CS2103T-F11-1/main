@@ -31,7 +31,7 @@ public class AddMentorCommand extends AddCommand {
             + CliSyntax.PREFIX_EMAIL + "customercare@batmail.com "
             + CliSyntax.PREFIX_SUBJECT_NAME + "Artificial Intelligence "
             + CliSyntax.PREFIX_ORGANISATION + "Wayne Enterprise, Inc";
-
+  
     private Mentor mentor;
     // private Name mentorName;
     // private Name teamName;
@@ -62,6 +62,7 @@ public class AddMentorCommand extends AddCommand {
 
         try {
             model.addMentor(this.mentor);
+            model.updateHistory();
         } catch (AlfredException e) {
             // Should I return new CommandResult(MESSAGE_DUPLICATE_MENTOR) instead?
             throw new CommandException(MESSAGE_DUPLICATE_MENTOR);

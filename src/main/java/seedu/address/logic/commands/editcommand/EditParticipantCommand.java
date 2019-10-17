@@ -22,9 +22,7 @@ import seedu.address.model.entity.PrefixType;
  */
 public class EditParticipantCommand extends EditCommand {
 
-    public static final String COMMAND_WORD = "edit participant";
     public static final String MESSAGE_EDIT_PARTICIPANT_SUCCESS = "Edited Participant: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX =
             "The participant index provided is invalid";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the participant by ID.\n "
@@ -60,6 +58,7 @@ public class EditParticipantCommand extends EditCommand {
 
         try {
             model.updateParticipant(this.id, editedParticipant);
+           model.updateHistory();
             return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS,
                     editedParticipant.toString()), PrefixType.P);
         } catch (AlfredException e) {

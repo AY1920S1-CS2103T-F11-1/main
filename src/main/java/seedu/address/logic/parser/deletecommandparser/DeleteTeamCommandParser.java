@@ -1,7 +1,5 @@
 package seedu.address.logic.parser.deletecommandparser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.logic.commands.deletecommand.DeleteCommand;
 import seedu.address.logic.commands.deletecommand.DeleteTeamCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
@@ -28,7 +26,7 @@ public class DeleteTeamCommandParser implements Parser<DeleteCommand> {
             return new DeleteTeamCommand(id);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTeamCommand.MESSAGE_USAGE), pe);
+              String.format(DeleteTeamCommand.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX), pe);
         }
     }
 

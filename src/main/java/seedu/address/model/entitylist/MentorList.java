@@ -81,7 +81,7 @@ public class MentorList extends EntityList {
      * Adds the mentor into the list.
      *
      * @param mentor
-     * @throws AlfredException
+     * @throws AlfredModelException
      */
     public void add(Mentor mentor) throws AlfredException {
         for (Mentor m : this.mentors) {
@@ -115,7 +115,7 @@ public class MentorList extends EntityList {
      * @return List of Mentors.
      */
     public ObservableList<Mentor> getSpecificTypedList() {
-        return this.mentors;
+        return this.unmodifiableMentors;
     }
 
     /**
@@ -173,11 +173,31 @@ public class MentorList extends EntityList {
     }
 
     /**
+     * Gets the lastUsedId class attribute.
+     * @return lastUsedId
+     */
+    public static int getLastUsedId() {
+        return lastUsedId;
+    }
+
+    /**
      * Sets the lastUsedId class attribute.
      *
      * @param number
      */
     public static void setLastUsedId(int number) {
         lastUsedId = number;
+    }
+
+    /**
+     * Provides a deep copy of the MentorList
+     * @return Deep copy of MentorList
+     */
+    public MentorList copy() throws AlfredModelException {
+        MentorList newMList = new MentorList();
+        for (Mentor m: this.mentors) {
+            newMList.add(m.copy());
+        }
+        return newMList;
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -135,6 +136,14 @@ public interface Model {
 
     Mentor deleteMentor(Id id) throws AlfredException;
 
+    /* Find commands */
+
+    List<Participant> findParticipantByName(String name);
+
+    List<Team> findTeamByName(String name);
+
+    List<Mentor> findMentorByName(String name);
+
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
@@ -175,4 +184,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the history of entity states with the current state (after execution of a command)
+     */
+    void updateHistory();
 }

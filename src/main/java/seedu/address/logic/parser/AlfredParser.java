@@ -7,11 +7,12 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -35,7 +36,27 @@ import seedu.address.logic.parser.deletecommandparser.DeleteTeamCommandParser;
 import seedu.address.logic.parser.editcommandparser.EditMentorCommandParser;
 import seedu.address.logic.parser.editcommandparser.EditParticipantCommandParser;
 import seedu.address.logic.parser.editcommandparser.EditTeamCommandParser;
+import seedu.address.logic.commands.addcommand.AddMentorCommand;
+import seedu.address.logic.commands.addcommand.AddParticipantCommand;
+import seedu.address.logic.commands.addcommand.AddTeamCommand;
+import seedu.address.logic.commands.deletecommand.DeleteCommand;
+import seedu.address.logic.commands.findcommand.FindMentorCommand;
+import seedu.address.logic.commands.findcommand.FindParticipantCommand;
+import seedu.address.logic.commands.findcommand.FindTeamCommand;
+import seedu.address.logic.commands.listcommand.ListCommand;
+import seedu.address.logic.commands.viewcommand.ViewCommand;
+import seedu.address.logic.parser.addcommandparser.AddMentorCommandParser;
+import seedu.address.logic.parser.addcommandparser.AddParticipantCommandParser;
+import seedu.address.logic.parser.addcommandparser.AddTeamCommandParser;
+import seedu.address.logic.parser.deletecommandparser.DeleteCommandAllocator;
+import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
+
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.findcommandparser.FindMentorCommandParser;
+import seedu.address.logic.parser.findcommandparser.FindParticipantCommandParser;
+import seedu.address.logic.parser.findcommandparser.FindTeamCommandParser;
+import seedu.address.logic.parser.listcommandparser.ListCommandParser;
+import seedu.address.logic.parser.viewcommandparser.ViewCommandAllocator;
 
 /**
  * Parses user input.
@@ -67,38 +88,30 @@ public class AlfredParser {
         logger.info("Finding command type of " + commandWord);
         switch (commandWord) {
 
-        case AddParticipantCommand.COMMAND_WORD:
-            logger.info("Adding a new Participant...");
-            return new AddParticipantCommandParser().parse(arguments);
-
-            //Dummy cases so that GUI works
-        case AddTeamCommand.COMMAND_WORD:
-            logger.info("Adding a new Team...");
-            return new AddTeamCommandParser().parse(arguments);
-
-        case AddMentorCommand.COMMAND_WORD:
-            logger.info("Adding a new Mentor...");
-            return new AddMentorCommandParser().parse(arguments);
-
         case AddCommand.COMMAND_WORD:
             logger.info("Add a new person(in old AddressBook...");
             return new AddCommandParser().parse(arguments);
+            
+        case AddParticipantCommand.COMMAND_WORD:
+            logger.info("Adding a new Participant...");
+            return new AddParticipantCommandParser().parse(arguments)
+   
+        case AddMentorCommand.COMMAND_WORD:
+            logger.info("Adding a new Mentor...");
+            return new AddMentorCommandParser().parse(arguments);
+            
+        case AddTeamCommand.COMMAND_WORD:
+            logger.info("Adding a new Team...");
+            return new AddTeamCommandParser().parse(arguments)
 
-        case EditParticipantCommand.COMMAND_WORD:
-            logger.info("Editing an existing Participant...");
-            return new EditParticipantCommandParser().parse(arguments);
+        case FindParticipantCommand.COMMAND_WORD:
+            return new FindParticipantCommandParser().parse(arguments);
 
-        case EditTeamCommand.COMMAND_WORD:
-            logger.info("Editing an existing Team...");
-            return new EditTeamCommandParser().parse(arguments);
+        case FindMentorCommand.COMMAND_WORD:
+            return new FindMentorCommandParser().parse(arguments);
 
-        case EditMentorCommand.COMMAND_WORD:
-            logger.info("Editing an existing mentor...");
-            return new EditMentorCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            logger.info("Editing an existing person(in old AddressBook)..");
-            return new EditCommandParser().parse(arguments);
+        case FindTeamCommand.COMMAND_WORD:
+            return new FindTeamCommandParser().parse(arguments);
 
         case DeleteParticipantCommand.COMMAND_WORD:
             logger.info("Deleting an existing Participant...");
@@ -113,8 +126,8 @@ public class AlfredParser {
             return new DeleteMentorCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            logger.info("Deleting an existing person(in old AddressBook)..");
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandAllocator().getDeleteCommand(arguments);
+
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -123,13 +136,20 @@ public class AlfredParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandAllocator().getViewCommand(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EditCommand.COMMAND_WORD:
+             logger.info("Editing an existing Entity...");
+            return new EditCommandAllocator().getEditCommand(arguments);
 
         default:
             logger.info("Unknown command type: " + commandWord);

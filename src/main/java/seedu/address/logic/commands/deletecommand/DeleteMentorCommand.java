@@ -15,9 +15,8 @@ import seedu.address.model.entity.PrefixType;
  * Deletes a {@link Mentor} in Alfred.
  */
 public class DeleteMentorCommand extends DeleteCommand {
-
-    public static final String COMMAND_WORD = "delete mentor";
-    public static final String MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX = "The mentor ID provided is invalid";
+    public static final String MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX = "The mentor ID provided is "
+            + "invalid or does not exist.";
     public static final String MESSAGE_DELETE_MENTOR_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the mentor by the ID shown in the list of mentors.\n"
@@ -48,6 +47,7 @@ public class DeleteMentorCommand extends DeleteCommand {
         Mentor mentorToBeDeleted;
         try {
             mentorToBeDeleted = model.deleteMentor(this.id);
+            model.updateHistory();
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX);
         }
