@@ -90,7 +90,7 @@ public class ModelHistoryManager implements ModelHistory {
     }
 
     /**
-     * Actually performs an undo operation and returns a ModelHistoryRecord that stores
+     * Performs an undo operation and returns a ModelHistoryRecord that stores
      * the state of the EntityLists and last used IDs after a command is undone.
      * @return ModelHistoryRecord with state after command is undone
      * @throws AlfredModelHistoryException
@@ -109,7 +109,7 @@ public class ModelHistoryManager implements ModelHistory {
     }
 
     /**
-     * Actually performs a redo operation and returns a ModelHistoryRecord that stores
+     * Performs a redo operation and returns a ModelHistoryRecord that stores
      * the state of the EntityLists and last used IDs after a command is redone.
      * @return ModelHistoryRecord with state after command is redone
      * @throws AlfredModelHistoryException
