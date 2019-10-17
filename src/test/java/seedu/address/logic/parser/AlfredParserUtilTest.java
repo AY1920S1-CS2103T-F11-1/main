@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
@@ -26,8 +26,7 @@ class AlfredParserUtilTest {
         Id id = new Id(PrefixType.P, 2);
         try {
             assertEquals(id, AlfredParserUtil.parseIndex("P2", PrefixType.P));
-        }
-        catch (ParseException pe) {
+        } catch (ParseException pe) {
             assertEquals(Messages.MESSAGE_INVALID_INDEX, pe.getMessage());
         }
     }
