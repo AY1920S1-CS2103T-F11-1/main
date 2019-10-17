@@ -95,7 +95,7 @@ public class AlfredParser {
             
         case AddParticipantCommand.COMMAND_WORD:
             logger.info("Adding a new Participant...");
-            return new AddParticipantCommandParser().parse(arguments)
+            return new AddParticipantCommandParser().parse(arguments);
    
         case AddMentorCommand.COMMAND_WORD:
             logger.info("Adding a new Mentor...");
@@ -103,7 +103,7 @@ public class AlfredParser {
             
         case AddTeamCommand.COMMAND_WORD:
             logger.info("Adding a new Team...");
-            return new AddTeamCommandParser().parse(arguments)
+            return new AddTeamCommandParser().parse(arguments);
 
         case FindParticipantCommand.COMMAND_WORD:
             return new FindParticipantCommandParser().parse(arguments);
