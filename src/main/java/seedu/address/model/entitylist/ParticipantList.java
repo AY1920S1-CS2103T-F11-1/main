@@ -8,6 +8,7 @@ import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 
@@ -163,11 +164,31 @@ public class ParticipantList extends EntityList {
     }
 
     /**
+     * Gets the lastUsedId class attribute.
+     * @return lastUsedId
+     */
+    public static int getLastUsedId() {
+        return lastUsedId;
+    }
+
+    /**
      * Sets the lastUsedId class attribute.
      *
      * @param number
      */
     public static void setLastUsedId(int number) {
         lastUsedId = number;
+    }
+
+    /**
+     * Provides a deep copy of the ParticipantList
+     * @return Deep copy of ParticipantList
+     */
+    public ParticipantList copy() throws AlfredException {
+        ParticipantList newPList = new ParticipantList();
+        for (Participant p: this.participants) {
+            newPList.add(p.copy());
+        }
+        return newPList;
     }
 }

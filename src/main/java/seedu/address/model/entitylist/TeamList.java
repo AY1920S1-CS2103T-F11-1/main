@@ -8,6 +8,7 @@ import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
@@ -160,11 +161,31 @@ public class TeamList extends EntityList {
     }
 
     /**
+     * Gets the lastUsedId class attribute.
+     * @return lastUsedId
+     */
+    public static int getLastUsedId() {
+        return lastUsedId;
+    }
+
+    /**
      * Sets the lastUsedId class attribute.
      *
      * @param number
      */
     public static void setLastUsedId(int number) {
         lastUsedId = number;
+    }
+
+    /**
+     * Provides a deep copy of the TeamList
+     * @return Deep copy of TeamList
+     */
+    public TeamList copy() throws AlfredException {
+        TeamList newTList = new TeamList();
+        for (Team t: this.teams) {
+            newTList.add(t.copy());
+        }
+        return newTList;
     }
 }

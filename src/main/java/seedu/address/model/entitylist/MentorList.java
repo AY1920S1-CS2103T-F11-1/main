@@ -161,11 +161,31 @@ public class MentorList extends EntityList {
     }
 
     /**
+     * Gets the lastUsedId class attribute.
+     * @return lastUsedId
+     */
+    public static int getLastUsedId() {
+        return lastUsedId;
+    }
+
+    /**
      * Sets the lastUsedId class attribute.
      *
      * @param number
      */
     public static void setLastUsedId(int number) {
         lastUsedId = number;
+    }
+
+    /**
+     * Provides a deep copy of the MentorList
+     * @return Deep copy of MentorList
+     */
+    public MentorList copy() throws AlfredException {
+        MentorList newMList = new MentorList();
+        for (Mentor m: this.mentors) {
+            newMList.add(m.copy());
+        }
+        return newMList;
     }
 }

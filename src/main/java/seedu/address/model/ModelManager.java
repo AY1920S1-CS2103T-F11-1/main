@@ -49,6 +49,7 @@ public class ModelManager implements Model {
     // TODO: Remove the null values which are a placeholder due to the multiple constructors.
     // Also will have to change the relevant attributes to final.
     private AlfredStorage storage = null;
+    private ModelHistoryManager history = null;
     private AddressBook addressBook = null;
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons = null;
@@ -122,6 +123,10 @@ public class ModelManager implements Model {
             logger.warning("MentorList is empty in storage. Writing a new one.");
             this.mentorList = new MentorList();
         }
+
+        this.history = new ModelHistoryManager(this.participantList, ParticipantList.getLastUsedId(),
+                                               this.mentorList, MentorList.getLastUsedId(),
+                                               this.teamList, TeamList.getLastUsedId());
 
         this.filteredParticipantList =
                 new FilteredList<>(this.participantList.getSpecificTypedList());
@@ -653,5 +658,10 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    //========== ModelHistory Methods ===============
+    public updateHistory() {
+        this.history.updateHistory()
     }
 }
