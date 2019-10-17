@@ -70,9 +70,9 @@ public class MentorList extends EntityList {
      * Adds the mentor into the list.
      *
      * @param mentor
-     * @throws AlfredException
+     * @throws AlfredModelException
      */
-    public void add(Mentor mentor) throws AlfredException {
+    public void add(Mentor mentor) throws AlfredModelException {
         for (Mentor m: this.mentors) {
             if (m.isSameMentor(mentor) || m.getId().equals(mentor.getId())) {
                 throw new AlfredModelException("Item to add already exists!");
@@ -103,7 +103,7 @@ public class MentorList extends EntityList {
      * @return List of Mentors.
      */
     public ObservableList<Mentor> getSpecificTypedList() {
-        return this.mentors;
+        return this.unmodifiableMentors;
     }
 
     /**
@@ -181,7 +181,7 @@ public class MentorList extends EntityList {
      * Provides a deep copy of the MentorList
      * @return Deep copy of MentorList
      */
-    public MentorList copy() throws AlfredException {
+    public MentorList copy() throws AlfredModelException {
         MentorList newMList = new MentorList();
         for (Mentor m: this.mentors) {
             newMList.add(m.copy());
