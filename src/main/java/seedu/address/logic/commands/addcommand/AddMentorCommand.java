@@ -31,7 +31,6 @@ public class AddMentorCommand extends AddCommand {
             + CliSyntax.PREFIX_EMAIL + "customercare@batmail.com "
             + CliSyntax.PREFIX_SUBJECT_NAME + "Artificial Intelligence "
             + CliSyntax.PREFIX_ORGANISATION + "Wayne Enterprise, Inc";
-  
     private Mentor mentor;
     // private Name mentorName;
     // private Name teamName;
