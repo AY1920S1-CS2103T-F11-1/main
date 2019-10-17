@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,7 +39,4 @@ class AlfredParserUtilTest {
         assertEquals(SubjectName.HEALTH, AlfredParserUtil.parseSubject("Health"));
         assertEquals(SubjectName.EDUCATION, AlfredParserUtil.parseSubject("Education"));
     }
-
-
-
 }
