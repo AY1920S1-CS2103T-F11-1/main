@@ -70,7 +70,7 @@ public class TeamList extends EntityList {
      * Adds the team into the list.
      *
      * @param team
-     * @throws AlfredException
+     * @throws AlfredModelException
      */
     public void add(Team team) throws AlfredModelException {
         for (Team t: this.teams) {
@@ -180,7 +180,7 @@ public class TeamList extends EntityList {
      * Provides a deep copy of the TeamList
      * @return Deep copy of TeamList
      */
-    public TeamList copy() throws AlfredException {
+    public TeamList copy() throws AlfredModelException {
         TeamList newTList = new TeamList();
         for (Team t: this.teams) {
             newTList.add(t.copy());
