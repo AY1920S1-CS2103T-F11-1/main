@@ -661,6 +661,12 @@ public class ModelManager implements Model {
     }
 
     //========== ModelHistory Methods ===============
+
+    /**
+     * This method will update the ModelHistoryManager object with the current state of the model.
+     * This method is expected to be called during the `execute()` method of each Command, right after
+     * any transformations/mutations have been made to the data in Model.
+     */
     public void updateHistory() {
         this.history.updateHistory(this.participantList, ParticipantList.getLastUsedId(),
                                    this.mentorList, MentorList.getLastUsedId(),
