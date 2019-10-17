@@ -91,33 +91,30 @@ public class AlfredParser {
         case AddCommand.COMMAND_WORD:
             logger.info("Add a new person(in old AddressBook...");
             return new AddCommandParser().parse(arguments);
-            
         case AddParticipantCommand.COMMAND_WORD:
             logger.info("Adding a new Participant...");
             return new AddParticipantCommandParser().parse(arguments);
-   
+                
         case AddMentorCommand.COMMAND_WORD:
             logger.info("Adding a new Mentor...");
             return new AddMentorCommandParser().parse(arguments);
-            
+                
         case AddTeamCommand.COMMAND_WORD:
             logger.info("Adding a new Team...");
             return new AddTeamCommandParser().parse(arguments);
-
+                
         case FindParticipantCommand.COMMAND_WORD:
             return new FindParticipantCommandParser().parse(arguments);
-
+                
         case FindMentorCommand.COMMAND_WORD:
             return new FindMentorCommandParser().parse(arguments);
-
+                
         case FindTeamCommand.COMMAND_WORD:
             return new FindTeamCommandParser().parse(arguments);
                 
         case DeleteCommand.COMMAND_WORD:
             logger.info("Deleting an existing Participant...");
             return new DeleteCommandAllocator().getDeleteCommand(arguments);
-
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
