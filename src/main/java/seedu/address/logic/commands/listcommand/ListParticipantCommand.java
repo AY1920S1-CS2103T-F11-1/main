@@ -22,6 +22,7 @@ public class ListParticipantCommand extends ListCommand {
 
         this.displayParticipants(model);
 
+        model.updateHistory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

@@ -661,7 +661,9 @@ public class ModelManager implements Model {
     }
 
     //========== ModelHistory Methods ===============
-    public updateHistory() {
-        this.history.updateHistory()
+    public void updateHistory() {
+        this.history.updateHistory(this.participantList, ParticipantList.getLastUsedId(),
+                                   this.mentorList, MentorList.getLastUsedId(),
+                                   this.teamList, TeamList.getLastUsedId());
     }
 }

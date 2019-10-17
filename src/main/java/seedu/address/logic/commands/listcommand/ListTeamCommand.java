@@ -22,6 +22,7 @@ public class ListTeamCommand extends ListCommand {
 
         this.displayTeams(model);
 
+        model.updateHistory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

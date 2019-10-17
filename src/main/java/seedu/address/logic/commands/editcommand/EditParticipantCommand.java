@@ -60,6 +60,7 @@ public class EditParticipantCommand extends EditCommand {
 
         try {
             model.updateParticipant(this.id, editedParticipant);
+            model.updateHistory();
             return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant.toString()));
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
