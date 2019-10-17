@@ -47,7 +47,7 @@ public class ModelManager implements Model {
 
     protected FilteredList<Participant> filteredParticipantList;
     protected FilteredList<Team> filteredTeamList;
-    protected FilteredList<Mentor> filteredMentorList
+    protected FilteredList<Mentor> filteredMentorList;
 
     // TODO: Remove the null values which are a placeholder due to the multiple constructors.
     // Also will have to change the relevant attributes to final.
