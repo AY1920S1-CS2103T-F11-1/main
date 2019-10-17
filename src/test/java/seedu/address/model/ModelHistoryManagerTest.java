@@ -85,22 +85,34 @@ class ModelHistoryManagerTest {
     }
 
     @Test
-    void undo() throws AlfredException {
-        //TODO: Update this in v1.3-1.4
+    void undo_testEqualityOfLists_success() throws AlfredException {
         pList.add(newP);
+        hm.updateHistory(pList, ParticipantList.getLastUsedId(),
+                         mList, MentorList.getLastUsedId(),
+                         tList, TeamList.getLastUsedId());
+        hm.updateHistory(pList, ParticipantList.getLastUsedId(),
+                         mList, MentorList.getLastUsedId(),
+                         tList, TeamList.getLastUsedId());
 
-        hm.updateHistory(pList, ParticipantList.getLastUsedId(),
-                         mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
-        hm.updateHistory(pList, ParticipantList.getLastUsedId(),
-                         mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
         assertTrue(hm.canUndo());
         ModelHistoryRecord hr = hm.undo();
         ParticipantList historyPList = hr.getParticipantList();
         assertEquals(pList.getSpecificTypedList(), historyPList.getSpecificTypedList());
-        //TODO: Check that updateID
-        assertEquals()
+    }
+
+    @Test
+    void undo_testLastUsedIdSetting_success() throws AlfredModelHistoryException, AlfredException {
+        int lastUsedIdBefore = ParticipantList.getLastUsedId();
+        hm.updateHistory(pList, ParticipantList.getLastUsedId(),
+                         mList, MentorList.getLastUsedId(),
+                         tList, TeamList.getLastUsedId());
+        pList.add(newP);
+        hm.updateHistory(pList, ParticipantList.getLastUsedId(),
+                         mList, MentorList.getLastUsedId(),
+                         tList, TeamList.getLastUsedId());
+        ModelHistoryRecord hr = hm.undo();
+        assertEquals(lastUsedIdBefore, hr.getParticipantListLastUsedId());
+        assertEquals(hr.getParticipantListLastUsedId(), ParticipantList.getLastUsedId());
     }
 
     @Test
