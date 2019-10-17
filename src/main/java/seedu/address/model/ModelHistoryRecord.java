@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.TeamList;
@@ -29,7 +30,7 @@ public class ModelHistoryRecord {
      */
     public ModelHistoryRecord(ParticipantList pList, int pListId,
                               MentorList mList, int mListId,
-                              TeamList tList, int tListId) {
+                              TeamList tList, int tListId) throws AlfredException {
         this.pList = pList.copy();
         this.pListId = pListId;
         this.mList = mList.copy();

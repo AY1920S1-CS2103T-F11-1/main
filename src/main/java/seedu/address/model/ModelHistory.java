@@ -5,10 +5,13 @@ import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.TeamList;
 
+/**
+ * API for ModelHistoryManager
+ */
 public interface ModelHistory {
     public void updateHistory(ParticipantList pList, int pListId,
                               MentorList mList, int mListId,
-                              TeamList tList, int tListId);
+                              TeamList tList, int tListId) throws AlfredModelHistoryException;
 
     public boolean canUndo();
 

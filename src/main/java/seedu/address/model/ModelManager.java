@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
+import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Id;
@@ -124,9 +125,13 @@ public class ModelManager implements Model {
             this.mentorList = new MentorList();
         }
 
-        this.history = new ModelHistoryManager(this.participantList, ParticipantList.getLastUsedId(),
-                                               this.mentorList, MentorList.getLastUsedId(),
-                                               this.teamList, TeamList.getLastUsedId());
+        try {
+            this.history = new ModelHistoryManager(this.participantList, ParticipantList.getLastUsedId(),
+                    this.mentorList, MentorList.getLastUsedId(),
+                    this.teamList, TeamList.getLastUsedId());
+        } catch (AlfredModelHistoryException e) {
+            logger.severe("Unable to initialise ModelHistoryManager.");
+        }
 
         this.filteredParticipantList =
                 new FilteredList<>(this.participantList.getSpecificTypedList());
@@ -667,8 +672,12 @@ public class ModelManager implements Model {
      * any transformations/mutations have been made to the data in Model.
      */
     public void updateHistory() {
-        this.history.updateHistory(this.participantList, ParticipantList.getLastUsedId(),
-                                   this.mentorList, MentorList.getLastUsedId(),
-                                   this.teamList, TeamList.getLastUsedId());
+        try {
+            this.history.updateHistory(this.participantList, ParticipantList.getLastUsedId(),
+                    this.mentorList, MentorList.getLastUsedId(),
+                    this.teamList, TeamList.getLastUsedId());
+        } catch (AlfredModelHistoryException e) {
+            logger.warning("Problem encountered updating model state history.");
+        }
     }
 }
