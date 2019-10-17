@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
@@ -41,7 +43,7 @@ public class ModelManager implements Model {
     protected ParticipantList participantList = new ParticipantList();
     protected TeamList teamList = new TeamList();
     protected MentorList mentorList = new MentorList();
-
+  
     protected FilteredList<Participant> filteredParticipantList;
     protected FilteredList<Team> filteredTeamList;
     protected FilteredList<Mentor> filteredMentorList;
@@ -78,7 +80,6 @@ public class ModelManager implements Model {
         // TODO: Remove: Currently it is here to make tests pass.
         this.addressBook = new AddressBook();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-
     }
 
     /**
@@ -596,6 +597,62 @@ public class ModelManager implements Model {
                 throw new ModelValidationException("Mentor in team does not exist in mentorList");
             }
         }
+    }
+
+    //=========== Find methods ==================================================================
+
+    /**
+     * This method searches for all participants whose name matches the param.
+     *
+     * @param name
+     * @return {@code List<Participant>}
+     */
+    public List<Participant> findParticipantByName(String name) {
+        List<Participant> results = new ArrayList<>();
+        for (Participant p: this.participantList.getSpecificTypedList()) {
+            if (p.getName().toString().contains(name)) {
+                results.add(p);
+            }
+        }
+        this.filteredParticipantList.setPredicate(
+                Predicates.getPredicateFindEntityByName(name));
+        return results;
+    }
+
+    /**
+     * This method searches for all teams whose name matches the param.
+     *
+     * @param name
+     * @return {@code List<Team>}
+     */
+    public List<Team> findTeamByName(String name) {
+        List<Team> results = new ArrayList<>();
+        for (Team t: this.teamList.getSpecificTypedList()) {
+            if (t.getName().toString().contains(name)) {
+                results.add(t);
+            }
+        }
+        this.filteredTeamList.setPredicate(
+                Predicates.getPredicateFindEntityByName(name));
+        return results;
+    }
+
+    /**
+     * This method searches for all mentors whose name matches the param.
+     *
+     * @param name
+     * @return {@code List<Mentor>}
+     */
+    public List<Mentor> findMentorByName(String name) {
+        List<Mentor> results = new ArrayList<>();
+        for (Mentor m: this.mentorList.getSpecificTypedList()) {
+            if (m.getName().toString().contains(name)) {
+                results.add(m);
+            }
+        }
+        this.filteredMentorList.setPredicate(
+                Predicates.getPredicateFindEntityByName(name));
+        return results;
     }
 
     //=========== AddressBook ================================================================================
