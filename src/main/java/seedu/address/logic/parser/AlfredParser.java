@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 
@@ -17,24 +16,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.addcommand.AddMentorCommand;
-import seedu.address.logic.commands.addcommand.AddParticipantCommand;
-import seedu.address.logic.commands.addcommand.AddTeamCommand;
-import seedu.address.logic.commands.deletecommand.DeleteMentorCommand;
-import seedu.address.logic.commands.deletecommand.DeleteParticipantCommand;
-import seedu.address.logic.commands.deletecommand.DeleteTeamCommand;
-import seedu.address.logic.commands.editcommand.EditMentorCommand;
-import seedu.address.logic.commands.editcommand.EditParticipantCommand;
-import seedu.address.logic.commands.editcommand.EditTeamCommand;
-import seedu.address.logic.parser.addcommandparser.AddMentorCommandParser;
-import seedu.address.logic.parser.addcommandparser.AddParticipantCommandParser;
-import seedu.address.logic.parser.addcommandparser.AddTeamCommandParser;
-import seedu.address.logic.parser.deletecommandparser.DeleteMentorCommandParser;
-import seedu.address.logic.parser.deletecommandparser.DeleteParticipantCommandParser;
-import seedu.address.logic.parser.deletecommandparser.DeleteTeamCommandParser;
-import seedu.address.logic.parser.editcommandparser.EditMentorCommandParser;
-import seedu.address.logic.parser.editcommandparser.EditParticipantCommandParser;
-import seedu.address.logic.parser.editcommandparser.EditTeamCommandParser;
 import seedu.address.logic.commands.addcommand.AddMentorCommand;
 import seedu.address.logic.commands.addcommand.AddParticipantCommand;
 import seedu.address.logic.commands.addcommand.AddTeamCommand;
@@ -69,6 +50,7 @@ public class AlfredParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     private final Logger logger = LogsCenter.getLogger(AlfredParser.class);
+
     /**
      * Parses user input into command for execution.
      *
@@ -94,24 +76,24 @@ public class AlfredParser {
         case AddParticipantCommand.COMMAND_WORD:
             logger.info("Adding a new Participant...");
             return new AddParticipantCommandParser().parse(arguments);
-                
+
         case AddMentorCommand.COMMAND_WORD:
             logger.info("Adding a new Mentor...");
             return new AddMentorCommandParser().parse(arguments);
-                
+
         case AddTeamCommand.COMMAND_WORD:
             logger.info("Adding a new Team...");
             return new AddTeamCommandParser().parse(arguments);
-                
+
         case FindParticipantCommand.COMMAND_WORD:
             return new FindParticipantCommandParser().parse(arguments);
-                
+
         case FindMentorCommand.COMMAND_WORD:
             return new FindMentorCommandParser().parse(arguments);
-                
+
         case FindTeamCommand.COMMAND_WORD:
             return new FindTeamCommandParser().parse(arguments);
-                
+
         case DeleteCommand.COMMAND_WORD:
             logger.info("Deleting an existing Participant...");
             return new DeleteCommandAllocator().getDeleteCommand(arguments);
@@ -137,7 +119,7 @@ public class AlfredParser {
             return new UndoCommand();
 
         case EditCommand.COMMAND_WORD:
-             logger.info("Editing an existing Entity...");
+            logger.info("Editing an existing Entity...");
             return new EditCommandAllocator().getEditCommand(arguments);
 
         default:
