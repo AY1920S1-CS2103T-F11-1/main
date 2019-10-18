@@ -92,7 +92,6 @@ class JsonAdaptedMentor {
      */
     public Mentor toModelType() throws IllegalValueException {
         if (isOptionalMentor()) {
-            System.out.println("toModelType(): is optional mentor");
             return null;
         }
 
@@ -153,7 +152,6 @@ class JsonAdaptedMentor {
         final int modelIdNum = idNum;
         final Id modelId = new Id(modelPrefixType, modelIdNum);
 
-        System.out.println("ToModelType(): Not an optional mentor");
         return new Mentor(modelName, modelId, modelPhone, modelEmail, modelOrganization, modelSubjectName);
     }
 
