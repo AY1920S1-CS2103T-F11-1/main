@@ -99,8 +99,9 @@ public class ModelManager implements Model {
                 this.participantList = storageParticipantList.get();
                 this.participantList.setLastUsedId(this.participantList.getSize() - 1);
             }
-        } catch (IOException | AlfredException e) {
-            logger.warning("ParticipantList is empty in storage. Writing a new one.");
+        } catch (AlfredException e) {
+            logger.warning("Initialising new ParticipantList. "
+                           + "Problem encountered reading ParticipantList from storage: " + e.getMessage());
             this.participantList = new ParticipantList();
         }
 
@@ -112,8 +113,9 @@ public class ModelManager implements Model {
                 this.mentorList = storageMentorList.get();
                 this.mentorList.setLastUsedId(this.mentorList.getSize() - 1);
             }
-        } catch (IOException | AlfredException e) {
-            logger.warning("MentorList is empty in storage. Writing a new one.");
+        } catch (AlfredException e) {
+            logger.warning("Initialising new MentorList. "
+                           + "Problem encountered reading MentorList from storage: " + e.getMessage());
             this.mentorList = new MentorList();
         }
 
@@ -125,8 +127,9 @@ public class ModelManager implements Model {
                 this.teamList = storageTeamList.get();
                 this.teamList.setLastUsedId(this.teamList.getSize() - 1);
             }
-        } catch (IOException | AlfredException e) {
-            logger.warning("TeamList is empty in storage. Writing a new one.");
+        } catch (AlfredException e) {
+            logger.warning("Initialising new TeamList. "
+                           + "Problem encountered reading TeamList from storage: " + e.getMessage());
             this.teamList = new TeamList();
         }
 
