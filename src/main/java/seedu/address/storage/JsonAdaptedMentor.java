@@ -19,12 +19,6 @@ import seedu.address.model.entity.SubjectName;
 class JsonAdaptedMentor {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Mentor's %s field is missing!";
-    public static final Mentor OPTIONAL_MENTOR = new Mentor(null,
-                                                            null,
-                                                            null,
-                                                            null,
-                                                            null,
-                                                            null);
 
     private final String name;
     private final String phone;
@@ -57,6 +51,7 @@ class JsonAdaptedMentor {
      */
     public JsonAdaptedMentor(Mentor source) {
         if (source == null) {
+            //Handles the case for Optional<Mentor>
             name = null;
             phone = null;
             email = null;
@@ -65,6 +60,7 @@ class JsonAdaptedMentor {
             prefixTypeStr = null;
             idNum = -1;
         } else {
+            //Handles actual Mentor object
             name = source.getName().toStorageValue();
             phone = source.getPhone().toStorageValue();
             email = source.getEmail().toStorageValue();
@@ -75,6 +71,10 @@ class JsonAdaptedMentor {
         }
     }
 
+    /**
+     * Checks that the current object represents a Optional Mentor to be saved in Storage.
+     * @return boolean indicating whether the JsonAdaptedMentor object represents an Optional mentor.
+     */
     private boolean isOptionalMentor() {
         return name == null
                 && phone == null
@@ -91,6 +91,7 @@ class JsonAdaptedMentor {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Mentor toModelType() throws IllegalValueException {
+        //Handles the case when the JsonAdaptedMentor object represents an Optional<Mentor>
         if (isOptionalMentor()) {
             return null;
         }
