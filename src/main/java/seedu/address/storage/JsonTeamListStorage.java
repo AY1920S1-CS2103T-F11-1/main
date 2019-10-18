@@ -49,6 +49,7 @@ public class JsonTeamListStorage implements TeamListStorage {
         Optional<JsonSerializableTeamList> jsonTeamList = JsonUtil.readJsonFile(
                 filePath, JsonSerializableTeamList.class);
         if (!jsonTeamList.isPresent()) {
+            System.out.println("Reading TeamList | From: " + filePath + "NOT PRESENT");
             return Optional.empty();
         }
 
