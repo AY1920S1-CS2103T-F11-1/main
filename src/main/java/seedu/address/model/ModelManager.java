@@ -134,7 +134,7 @@ public class ModelManager implements Model {
         }
 
         //The following try-catch block is necessary to ensure that the teamList loaded is valid
-        //and the data has not been tempered with.
+        //and the data has not been tampered with.
         try {
             for (Team t: this.teamList.getSpecificTypedList()) {
                 validateNewTeamObject(t);
