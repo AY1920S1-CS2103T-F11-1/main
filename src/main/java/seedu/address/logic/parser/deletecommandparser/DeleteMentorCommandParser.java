@@ -22,6 +22,7 @@ public class DeleteMentorCommandParser implements Parser<DeleteCommand> {
      */
     @Override
     public DeleteMentorCommand parse(String args) throws ParseException {
+
         try {
             Id id = AlfredParserUtil.parseIndex(args, PrefixType.M);
             return new DeleteMentorCommand(id);

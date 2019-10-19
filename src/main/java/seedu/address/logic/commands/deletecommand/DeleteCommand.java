@@ -15,6 +15,10 @@ public abstract class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String MESSAGE_USAGE = "Delete command must specify the entity being deleted "
+            + "along with its ID. \n"
+            + "For example: delete participant P-1";
+
     protected Id id;
 
     protected DeleteCommand(Id id) {

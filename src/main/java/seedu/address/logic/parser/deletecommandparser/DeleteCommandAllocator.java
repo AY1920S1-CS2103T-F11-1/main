@@ -14,31 +14,29 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommandAllocator implements CommandAllocator<DeleteCommand> {
 
-    /**
-     * Parses the ID specified by the user in the delete command input to determine
-     * which entity is being deleted, and accordingly calls the appropriate parser to parse
-     * the user input and returns the respective DeleteCommand.
-     * @param args the user input.
-     * @return the appropriate EditCommand based on which entity is being edited.
-     * @throws ParseException if the format of the edit command is incorrect.
-     */
-    public DeleteCommand allocate(String args) throws ParseException {
-        String idPrefix = AlfredParserUtil.getIdPrefix(args);
+    public DeleteCommand allocate(String userInput) throws ParseException {
 
-        switch (idPrefix) {
+        String entity = AlfredParserUtil.getEntityFromCommand(userInput, DeleteCommand.MESSAGE_USAGE);
+        String args = AlfredParserUtil.getArgumentsFromCommand(userInput, DeleteCommand.MESSAGE_USAGE);
 
-        case CliSyntax.PREFIX_ENTITY_PARTICIPANT:
+        if (args.equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        switch (entity) {
+
+        case CliSyntax.ENTITY_PARTICIPANT:
             return new DeleteParticipantCommandParser().parse(args);
 
-        case CliSyntax.PREFIX_ENTITY_MENTOR:
+        case CliSyntax.ENTITY_MENTOR:
             return new DeleteMentorCommandParser().parse(args);
 
-        case CliSyntax.PREFIX_ENTITY_TEAM:
+        case CliSyntax.ENTITY_TEAM:
             return new DeleteTeamCommandParser().parse(args);
 
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    seedu.address.logic.commands.DeleteCommand.MESSAGE_USAGE));
+                    DeleteCommand.MESSAGE_USAGE));
         }
     }
 }

@@ -45,15 +45,21 @@ public class AlfredParserUtil {
      */
     public static Id parseIndex(String oneBasedIndex, PrefixType prefix) throws ParseException {
         oneBasedIndex = oneBasedIndex.trim();
-        String trimmedIndex = oneBasedIndex.substring(2);
-        String idSeperator = Character.toString(oneBasedIndex.charAt(1));
-        String expectedPrefix = prefix.name();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex) || !oneBasedIndex.startsWith(expectedPrefix)
-                || !idSeperator.equals(ID_SEPARATOR_CHARACTER)) {
+        String trimmedIndex;
+        String idSeparator;
+        try {
+            trimmedIndex = oneBasedIndex.substring(2);
+            idSeparator = Character.toString(oneBasedIndex.charAt(1));
+        } catch (StringIndexOutOfBoundsException e) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        int id = Integer.parseInt(trimmedIndex);
-        return new Id(prefix, id);
+        String expectedPrefix = prefix.name();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex) || !oneBasedIndex.startsWith(expectedPrefix)
+                || !idSeparator.equals(ID_SEPARATOR_CHARACTER)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        int idNumber = Integer.parseInt(trimmedIndex);
+        return new Id(prefix, idNumber);
     }
 
     public static String getEntityFromCommand(String userInput, String errorMessage) throws ParseException {
