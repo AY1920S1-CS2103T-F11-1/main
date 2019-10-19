@@ -94,10 +94,18 @@ public class TypicalTeams {
                                           ProjectType.PLACEHOLDER,
                                           new Location(5));
 
+    /**
+     * Retrieves a List of Typical Teams.
+     * @return List of Typical Teams
+     */
     public static List<Team> getTypicalTeams() {
         return new ArrayList<>(Arrays.asList(A, B, C));
     }
 
+    /**
+     * Retrieves a typical TeamList.
+     * @return typical TeamList
+     */
     public static TeamList getTypicalTeamList() throws AlfredModelException {
         TeamList tList = new TeamList();
         for (Team t: getTypicalTeams()) {
@@ -106,10 +114,18 @@ public class TypicalTeams {
         return tList;
     }
 
+    /**
+     * Retrieves a List of Teams with a single Team that contains an Optional Mentor.
+     * @return List of Teams with a single Team that contains an Optional Mentor
+     */
     public static List<Team> getTypicalTeamsWithOptionalMentor() {
-        return new ArrayList<>(Arrays.asList(A, B, D));
+        return new ArrayList<>(Arrays.asList(A, B, D)); //D contains the Optional Mentor
     }
 
+    /**
+     * Retrieves a TeamList with a single Team that contains an Optional Mentor.
+     * @return TeamList with a single Team that contains an Optional Mentor
+     */
     public static TeamList getTeamListWithOptionalMentor() throws AlfredModelException {
         TeamList tList = new TeamList();
         for (Team t: getTypicalTeamsWithOptionalMentor()) {
@@ -118,10 +134,18 @@ public class TypicalTeams {
         return tList;
     }
 
+    /**
+     * Retrieves a List of Teams with a single Team that contains an empty ParticipantList.
+     * @return List of Teams with a single Team that contains an empty ParticipantList
+     */
     public static List<Team> getTypicalTeamsWithEmptyParticipantList() {
-        return new ArrayList<>(Arrays.asList(A, B, E));
+        return new ArrayList<>(Arrays.asList(A, B, E)); //E contains the empty ParticipantList
     }
 
+    /**
+     * Retrieves a TeamList with a single Team that contains an empty ParticipantList.
+     * @return TeamList with a single Team that contains an empty ParticipantList
+     */
     public static TeamList getTeamListWithEmptyParticipantList() throws AlfredModelException {
         TeamList tList = new TeamList();
         for (Team t: getTypicalTeamsWithEmptyParticipantList()) {

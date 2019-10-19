@@ -63,56 +63,18 @@ class JsonTeamListStorageTest {
 
     @Test
     void readAndSaveTeamList_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempTeamList.json");
-        TeamList original = TypicalTeams.getTypicalTeamList();
-        JsonTeamListStorage tStorage = new JsonTeamListStorage(filePath);
-
-        //Save and read participantList to and from JSON
-        tStorage.saveTeamList(original);
-        Optional<TeamList> returnedList = tStorage.readTeamList();
-
-        if (returnedList.isEmpty()) {
-            fail("Team List read from storage is empty. Optional<TeamList> is empty.");
-        } else {
-            List<Team> returnedTeamList = returnedList.get().getSpecificTypedList();
-            assertEquals(returnedTeamList, TypicalTeams.getTypicalTeams());
-        }
+        saveAndCompareTeamList(TypicalTeams.getTypicalTeamList(),
+                               TypicalTeams.getTypicalTeams());
     }
 
     @Test
     void readAndSaveTeamList_withOptionalMentor_success() throws Exception {
-        Path filePath = testFolder.resolve("TempTeamList.json");
-        TeamList original = TypicalTeams.getTeamListWithOptionalMentor();
-        JsonTeamListStorage tStorage = new JsonTeamListStorage(filePath);
-
-        //Save and read participantList to and from JSON
-        tStorage.saveTeamList(original);
-        Optional<TeamList> returnedList = tStorage.readTeamList();
-
-        if (returnedList.isEmpty()) {
-            fail("Team List read from storage is empty. Optional<TeamList> is empty.");
-        } else {
-            List<Team> returnedTeamList = returnedList.get().getSpecificTypedList();
-            assertEquals(returnedTeamList, TypicalTeams.getTypicalTeamsWithOptionalMentor());
-        }
+        saveAndCompareTeamList(TypicalTeams.getTeamListWithOptionalMentor(),
+                               TypicalTeams.getTypicalTeamsWithOptionalMentor());
     }
 
     @Test
     void readAndSaveTeamList_withEmptyParticipantList_success() throws Exception {
-        //Path filePath = testFolder.resolve("TempTeamList.json");
-        //TeamList original = TypicalTeams.getTeamListWithEmptyParticipantList();
-        //JsonTeamListStorage tStorage = new JsonTeamListStorage(filePath);
-        //
-        ////Save and read participantList to and from JSON
-        //tStorage.saveTeamList(original);
-        //Optional<TeamList> returnedList = tStorage.readTeamList();
-        //
-        //if (returnedList.isEmpty()) {
-        //    fail("Team List read from storage is empty. Optional<TeamList> is empty.");
-        //} else {
-        //    List<Team> returnedTeamList = returnedList.get().getSpecificTypedList();
-        //    assertEquals(returnedTeamList, TypicalTeams.getTypicalTeamsWithEmptyParticipantList());
-        //}
         saveAndCompareTeamList(TypicalTeams.getTeamListWithEmptyParticipantList(),
                                TypicalTeams.getTypicalTeamsWithEmptyParticipantList());
     }
