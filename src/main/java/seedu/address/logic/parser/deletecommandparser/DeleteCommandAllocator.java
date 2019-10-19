@@ -5,13 +5,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.logic.commands.deletecommand.DeleteCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.CommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Allocates the user's delete command input to the correct parser in order to
  * call the appropriate entity's delete parser.
  */
-public class DeleteCommandAllocator {
+public class DeleteCommandAllocator implements CommandAllocator<DeleteCommand> {
 
     /**
      * Parses the ID specified by the user in the delete command input to determine
@@ -21,7 +22,7 @@ public class DeleteCommandAllocator {
      * @return the appropriate EditCommand based on which entity is being edited.
      * @throws ParseException if the format of the edit command is incorrect.
      */
-    public DeleteCommand getDeleteCommand(String args) throws ParseException {
+    public DeleteCommand allocate(String args) throws ParseException {
         String idPrefix = AlfredParserUtil.getIdPrefix(args);
 
         switch (idPrefix) {
