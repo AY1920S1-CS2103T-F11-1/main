@@ -101,7 +101,7 @@ public class ModelManager implements Model {
                 int largestIdUsed = participantList.list().stream()
                         .map(participant -> ((Entity) participant).getId().getNumber())
                         .max(Integer::compare).get();
-                this.participantList.setLastUsedId(largestIdUsed);
+                participantList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
             logger.warning("Initialising new ParticipantList. "
