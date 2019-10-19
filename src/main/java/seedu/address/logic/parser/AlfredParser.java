@@ -66,7 +66,6 @@ public class AlfredParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            //logger.info("Adding a new Entity...");
             return new AddCommandAllocator().allocate(arguments);
 
         case FindParticipantCommand.COMMAND_WORD:
