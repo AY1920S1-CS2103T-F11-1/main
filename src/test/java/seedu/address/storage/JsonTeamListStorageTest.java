@@ -69,7 +69,6 @@ class JsonTeamListStorageTest {
 
         //Save and read participantList to and from JSON
         tStorage.saveTeamList(original);
-        tStorage.saveTeamList(original, Paths.get("data" , "teamlist.json"));
         Optional<TeamList> returnedList = tStorage.readTeamList();
 
         if (returnedList.isEmpty()) {
