@@ -1,16 +1,20 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
@@ -26,6 +30,9 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class AlfredParserUtil {
+
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<entity>\\S+)(?<arguments>.*)");
+
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     private static final Logger logger = LogsCenter.getLogger(AlfredParserUtil.class);
     private static final String ID_SEPARATOR_CHARACTER = "-";
@@ -47,6 +54,24 @@ public class AlfredParserUtil {
         }
         int id = Integer.parseInt(trimmedIndex);
         return new Id(prefix, id);
+    }
+
+    public static String getEntityFromCommand(String userInput, String errorMessage) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+        }
+        String entity = matcher.group("entity");
+        return entity;
+    }
+
+    public static String getArgumentsFromCommand(String userInput, String errorMessage) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+        }
+        String args = matcher.group("arguments");
+        return args;
     }
 
     /**
