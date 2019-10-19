@@ -24,7 +24,6 @@ import seedu.address.logic.commands.listcommand.ListCommand;
 import seedu.address.logic.commands.undocommand.UndoCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.addcommandparser.AddCommandAllocator;
-import seedu.address.logic.parser.addcommandparser.AddParticipantCommandParser;
 import seedu.address.logic.parser.deletecommandparser.DeleteCommandAllocator;
 import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
 

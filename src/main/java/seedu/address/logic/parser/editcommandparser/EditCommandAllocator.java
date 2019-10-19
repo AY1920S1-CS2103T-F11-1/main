@@ -14,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class EditCommandAllocator implements CommandAllocator<EditCommand> {
 
+    @Override
     public EditCommand allocate(String userInput) throws ParseException {
 
         String entity = AlfredParserUtil.getEntityFromCommand(userInput, EditCommand.MESSAGE_USAGE);

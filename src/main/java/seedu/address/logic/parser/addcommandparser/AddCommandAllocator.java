@@ -1,14 +1,17 @@
 package seedu.address.logic.parser.addcommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.addcommand.AddCommand;
-import seedu.address.logic.commands.addcommand.AddParticipantCommand;
-import seedu.address.logic.commands.addcommand.AddTeamCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.CommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Allocates the user's add command input to the correct parser in order to
+ * call the appropriate entity's add parser.
+ */
 public class AddCommandAllocator implements CommandAllocator<AddCommand> {
 
     @Override
@@ -25,10 +28,10 @@ public class AddCommandAllocator implements CommandAllocator<AddCommand> {
             return new AddMentorCommandParser().parse(args);
 
         case CliSyntax.ENTITY_PARTICIPANT:
-                return new AddParticipantCommandParser().parse(args);
+            return new AddParticipantCommandParser().parse(args);
 
         case CliSyntax.ENTITY_TEAM:
-                return new AddTeamCommandParser().parse(args);
+            return new AddTeamCommandParser().parse(args);
 
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

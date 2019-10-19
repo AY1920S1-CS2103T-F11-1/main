@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,7 +13,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
@@ -32,8 +30,7 @@ import seedu.address.model.tag.Tag;
 public class AlfredParserUtil {
 
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<entity>\\S+)(?<arguments>.*)");
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     private static final Logger logger = LogsCenter.getLogger(AlfredParserUtil.class);
     private static final String ID_SEPARATOR_CHARACTER = "-";
 

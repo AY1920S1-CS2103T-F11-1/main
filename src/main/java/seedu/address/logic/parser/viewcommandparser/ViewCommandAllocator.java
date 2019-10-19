@@ -2,7 +2,6 @@ package seedu.address.logic.parser.viewcommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.deletecommand.DeleteCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.CliSyntax;
@@ -15,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ViewCommandAllocator implements CommandAllocator<ViewCommand> {
 
+    @Override
     public ViewCommand allocate(String userInput) throws ParseException {
 
         String entity = AlfredParserUtil.getEntityFromCommand(userInput, ViewCommand.MESSAGE_USAGE);

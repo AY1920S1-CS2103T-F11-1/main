@@ -14,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteCommandAllocator implements CommandAllocator<DeleteCommand> {
 
+    @Override
     public DeleteCommand allocate(String userInput) throws ParseException {
 
         String entity = AlfredParserUtil.getEntityFromCommand(userInput, DeleteCommand.MESSAGE_USAGE);

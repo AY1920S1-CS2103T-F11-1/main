@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT_NAME;
 
-import seedu.address.logic.commands.editcommand.EditCommand;
 import seedu.address.logic.commands.editcommand.EditMentorCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
