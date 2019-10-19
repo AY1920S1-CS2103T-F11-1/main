@@ -19,10 +19,6 @@ public class DeleteCommandAllocator implements CommandAllocator<DeleteCommand> {
         String entity = AlfredParserUtil.getEntityFromCommand(userInput, DeleteCommand.MESSAGE_USAGE);
         String args = AlfredParserUtil.getArgumentsFromCommand(userInput, DeleteCommand.MESSAGE_USAGE);
 
-        if (args.equals("")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-
         switch (entity) {
 
         case CliSyntax.ENTITY_PARTICIPANT:
