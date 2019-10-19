@@ -20,8 +20,8 @@ public class DeleteMentorCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_MENTOR_SUCCESS = "Deleted Mentor: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the mentor by the ID shown in the list of mentors.\n"
-            + "Format: " + COMMAND_WORD + " ID\n"
-            + "Example: " + COMMAND_WORD + " M-1";
+            + "Format: " + COMMAND_WORD + " mentor ID\n"
+            + "Example: " + COMMAND_WORD + " mentor M-1";
 
     private Name teamName;
 

@@ -13,8 +13,6 @@ import seedu.address.model.entity.PrefixType;
  */
 public class DeleteMentorCommandParser implements Parser<DeleteCommand> {
 
-
-
     /**
      * Parses the given {@code String} of arguments in the context of the {@code DeleteMentorCommand}
      * and returns a {@code DeleteMentorCommand} object for execution.

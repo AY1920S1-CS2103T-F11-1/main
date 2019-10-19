@@ -7,6 +7,10 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Represents a CommandAllocator that is able to call the appropriate Parser
+ * depending on the user input and returns a {@code Command} of type {@code T}.
+ */
 public interface CommandAllocator<T extends Command> {
 
     /**

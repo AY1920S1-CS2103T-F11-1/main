@@ -21,8 +21,8 @@ public class DeleteParticipantCommand extends DeleteCommand {
     public static final String MESSAGE_DELETE_PARTICIPANT_SUCCESS = "Deleted Participant: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a participant by ID shown in the list of participants.\n"
-            + "Format: " + COMMAND_WORD + " ID\n"
-            + "Example: " + COMMAND_WORD + " P-1";
+            + "Format: " + COMMAND_WORD + " participant ID\n"
+            + "Example: " + COMMAND_WORD + " participant P-1";
 
     private Name teamName;
 

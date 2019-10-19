@@ -27,7 +27,7 @@ public class EditParticipantCommand extends EditCommand {
             "The participant index provided is invalid";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the participant by ID.\n "
             + "Existing values will be overwritten by the input values.\n"
-            + "Format: " + "ID"
+            + "Format: " + "edit participant [participant ID]"
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL]\n"
