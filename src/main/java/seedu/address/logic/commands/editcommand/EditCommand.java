@@ -24,7 +24,7 @@ public abstract class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Edit command must specify the entity being edited "
             + "along with its ID and the corresponding fields you wish to edit. \n"
-            + "Format: edit [entity] [entity ID] [entity fields to edit]"
+            + "Format: edit [entity] [entity ID] [entity fields to edit] \n"
             + "For example: edit participant P-1 n/NEW_NAME e/NEW_EMAIL";
 
     protected Id id;
