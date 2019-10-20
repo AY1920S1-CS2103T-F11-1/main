@@ -16,9 +16,15 @@ public class EditCommandAllocator implements CommandAllocator<EditCommand> {
 
     @Override
     public EditCommand allocate(String userInput) throws ParseException {
+        String entity;
+        String args;
 
-        String entity = AlfredParserUtil.getEntityFromCommand(userInput, EditCommand.MESSAGE_USAGE);
-        String args = AlfredParserUtil.getArgumentsFromCommand(userInput, EditCommand.MESSAGE_USAGE);
+        try {
+            entity = AlfredParserUtil.getEntityFromCommand(userInput);
+            args = AlfredParserUtil.getArgumentsFromCommand(userInput);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(pe.getMessage(), EditCommand.MESSAGE_USAGE));
+        }
 
         switch (entity) {
 
