@@ -42,6 +42,7 @@ class AddMentorCommandParserTest {
 
     private AddMentorCommandParser parser = new AddMentorCommandParser();
 
+    @Disabled
     @Test
     void parse_allFieldsPresent_success() {
         Mentor expectedMentor = new MentorBuilder(BOB).build();
