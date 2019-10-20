@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -28,29 +30,35 @@ import seedu.address.testutil.EditTeamDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Amy Bee used as a Participant and Mentor
     public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_PHONE_AMY = "11111111";
+    public static final String VALID_PHONE_AMY = "+611111111";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_ORGANIZATION_AMY = "Amy Org";
     public static final String VALID_SUBJECT_AMY = "Environmental";
+
+    // Bob Choo used as a Participant and Mentor
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_BOB = "+622222222";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ORGANIZATION_BOB = "Bob Org";
     public static final String VALID_SUBJECT_BOB = "Social";
+
+    // Alfred used as a Team
     public static final String VALID_NAME_ALFRED = "Alfred";
     public static final String VALID_SUBJECT_ALFRED = "Health";
     public static final int VALID_SCORE_ALFRED = 100;
     public static final String VALID_PROJECT_NAME_ALFRED = "Hackathon Butler";
     public static final String VALID_PROJECT_TYPE_ALFRED = "Placeholder"; //TODO: update later
     public static final int VALID_LOCATION_ALFRED = 1;
+
+    //Bruce used as a Team
     public static final String VALID_NAME_BRUCE = "Bruce";
     public static final String VALID_SUBJECT_BRUCE = "Education";
     public static final int VALID_SCORE_BRUCE = 99;
     public static final String VALID_PROJECT_NAME_BRUCE = "Hackathon Batman";
     public static final String VALID_PROJECT_TYPE_BRUCE = "Placeholder"; //TODO: update later
     public static final int VALID_LOCATION_BRUCE = 2;
-
 
     public static final EditMentorDescriptor MENTOR_DESC_AMY;
     public static final EditMentorDescriptor MENTOR_DESC_BOB;
@@ -91,6 +99,12 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String ORGANIZATION_DESC_AMY = " " + PREFIX_ORGANISATION + VALID_ORGANIZATION_AMY;
+    public static final String ORGANIZATION_DESC_BOB = " " + PREFIX_ORGANISATION + VALID_ORGANIZATION_BOB;
+    public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT_NAME + VALID_SUBJECT_AMY;
+    public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT_NAME + VALID_SUBJECT_BOB;
+
+    // Redundant and can be deleted
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
