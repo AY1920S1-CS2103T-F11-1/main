@@ -62,7 +62,7 @@ public class AlfredParserUtil {
     public static String getEntityFromCommand(String userInput, String errorMessage) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         String entity = matcher.group("entity");
         return entity;
@@ -71,7 +71,7 @@ public class AlfredParserUtil {
     public static String getArgumentsFromCommand(String userInput, String errorMessage) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         String args = matcher.group("arguments");
         return args;

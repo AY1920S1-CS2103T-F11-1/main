@@ -22,11 +22,14 @@ public class AddCommandAllocator implements CommandAllocator<AddCommand> {
 
     @Override
     public AddCommand allocate(String userInput) throws ParseException {
-
-        String entity = AlfredParserUtil.getEntityFromCommand(userInput, AddCommand.MESSAGE_USAGE);
-        String args = AlfredParserUtil.getArgumentsFromCommand(userInput, AddCommand.MESSAGE_USAGE);
-
-        System.out.println(entity);
+        String entity;
+        String args;
+        try {
+            entity = AlfredParserUtil.getEntityFromCommand(userInput, AddCommand.MESSAGE_USAGE);
+            args = AlfredParserUtil.getArgumentsFromCommand(userInput, AddCommand.MESSAGE_USAGE);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(pe.getMessage(), AddCommand.MESSAGE_USAGE));
+        }
 
         switch (entity) {
 
@@ -46,8 +49,6 @@ public class AddCommandAllocator implements CommandAllocator<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         }
-
-
     }
 
 }
