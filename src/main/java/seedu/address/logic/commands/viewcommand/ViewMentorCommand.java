@@ -18,7 +18,8 @@ public class ViewMentorCommand extends ViewCommand {
     public static final String COMMAND_WORD = "view mentor";
     public static final String MESSAGE_SUCCESS = "Showed specified mentor";
     public static final String MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX = "The mentor index provided is invalid";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows details of the mentor with specified ID. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " mentor"
+            + ": shows details of the mentor with specified ID. \n"
             + "Format: view mentor [mentor ID] \n"
             + "Example: " + COMMAND_WORD + " mentor M-1";
 
