@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.viewcommand.ViewMentorCommand;
 import seedu.address.logic.commands.viewcommand.ViewTeamCommand;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
@@ -31,5 +30,4 @@ class ViewTeamCommandParserTest {
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTeamCommand.MESSAGE_USAGE));
     }
-
 }

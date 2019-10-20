@@ -30,5 +30,4 @@ class ViewMentorCommandParserTest {
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewMentorCommand.MESSAGE_USAGE));
     }
-
 }

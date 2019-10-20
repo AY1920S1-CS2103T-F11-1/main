@@ -10,13 +10,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_TYPE_AL
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_TYPE_BRUCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ALFRED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BRUCE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Location;

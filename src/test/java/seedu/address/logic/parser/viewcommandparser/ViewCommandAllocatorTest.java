@@ -42,5 +42,4 @@ class ViewCommandAllocatorTest {
         assertAllocatorFailure(viewCommandAllocator, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
-
 }

@@ -30,5 +30,4 @@ class DeleteTeamCommandParserTest {
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTeamCommand.MESSAGE_USAGE));
     }
-
 }

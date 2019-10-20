@@ -30,5 +30,4 @@ class DeleteMentorCommandParserTest {
         assertParseFailure(parser, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMentorCommand.MESSAGE_USAGE));
     }
-
 }
