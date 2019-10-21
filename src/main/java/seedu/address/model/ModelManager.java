@@ -19,6 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Entity;
@@ -426,11 +427,38 @@ public class ModelManager implements Model {
         this.saveList(PrefixType.T);
     }
 
+    /**
+     * Updates the given team's score with the given score.
+     *
+     * @param team the team who's score is to be updated.
+     * @param score the score to which the team's score will be updated.
+     * @throws AlfredException if the update fails.
+     */
     public void updateTeamScore(Team team, Score score) throws AlfredException {
         team.setScore(score);
-        this.validateNewTeamObject(team);
-        this.teamList.update(team.getId(), team);
-        this.saveList(PrefixType.T);
+        updateTeam(team.getId(), team);
+    }
+
+    /**
+     * Adds to the given team's score the given score.
+     *
+     * @param team the team who's score is to be added to.
+     * @param score the score by which the team's score will be increased.
+     * @throws AlfredException if the update fails.
+     */
+    public void addTeamScore(Team team, Score score) throws AlfredException {
+        int currentScore = Integer.parseInt(team.getScore().toString());
+        int scoreToAdd = Integer.parseInt(score.toString());
+
+        if (currentScore == Score.MAX_SCORE) {
+            throw new IllegalValueException(Score.MAX_SCORE_MESSAGE);
+        } else if (currentScore + scoreToAdd > 100) {
+            team.setScore(new Score(100));
+        } else {
+            Score newScore = new Score(currentScore + scoreToAdd);
+            team.setScore(newScore);
+        }
+        updateTeam(team.getId(), team);
     }
 
     /**

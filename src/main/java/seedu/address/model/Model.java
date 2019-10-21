@@ -128,6 +128,10 @@ public interface Model {
 
     void updateTeamScore(Team team, Score score) throws AlfredException;
 
+    void addTeamScore(Team team, Score score) throws AlfredException;
+
+    void subtractTeamScore(Team team, Score score) throws AlfredException;
+
     Team deleteTeam(Id id) throws AlfredException;
 
     /* Mentor methods */

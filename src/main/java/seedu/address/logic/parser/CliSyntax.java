@@ -23,4 +23,7 @@ public class CliSyntax {
     public static final String ENTITY_MENTOR = "mentor";
     public static final String ENTITY_PARTICIPANT = "participant";
     public static final String ENTITY_TEAM = "team";
+    public static final String SCORE_UPDATE = "update";
+    public static final String SCORE_ADD = "add";
+    public static final String SCORE_SUBTRACT = "sub";
 }

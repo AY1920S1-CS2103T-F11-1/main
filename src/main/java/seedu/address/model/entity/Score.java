@@ -13,7 +13,14 @@ import java.util.Objects;
 public class Score {
 
     public static final String MESSAGE_CONSTRAINTS = "Score should contain only positive integers from 0 to 100";
+    public static final int MAX_SCORE = 100;
+    public static final int MIN_SCORE = 0;
     private int score;
+
+    public static final String MAX_SCORE_MESSAGE = "The given team's score is already " + MAX_SCORE
+            + " which is the maximum allowed.";
+
+
 
     /**
      * Constructs a {@code Score}

@@ -115,6 +115,9 @@ public class AlfredParserUtil {
     }
 
     private static void validateScore(String score) throws ParseException {
+        if (score.equals("")) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
         try {
             int scoreValue = Integer.parseInt(score);
         } catch (NumberFormatException e) {

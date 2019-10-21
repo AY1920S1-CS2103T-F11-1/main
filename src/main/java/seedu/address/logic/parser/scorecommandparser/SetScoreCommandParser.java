@@ -1,7 +1,9 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.scorecommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.scorecommand.SetScoreCommand;
+import seedu.address.logic.parser.AlfredParserUtil;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;

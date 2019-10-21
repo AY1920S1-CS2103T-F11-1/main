@@ -11,19 +11,22 @@ import seedu.address.model.entity.Score;
  */
 public abstract class ScoreCommand extends Command {
 
-    public static final int MAXIMUM_SCORE = 100;
     public static final String COMMAND_WORD = "score";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " updates, adds or subtracts the given score "
+            + "to the specified team's score."
+            + "Format: " + COMMAND_WORD + " update/add/sub Team-Id Score \n"
+            + "For example: score add T-4 25";
+
     public static final String MESSAGE_SCORE_NOT_MENTIONED = "The score to update with or update to "
             + "must be mentioned.";
-    public static final String INVALID_SCORE = "The score must be an Integer between 0 and 100.";
 
     protected Id id;
     protected Score score;
 
-    public ScoreCommand(Id id, Score score) {
-        requireNonNull(id);
+    public ScoreCommand(Id TeamId, Score score) {
+        requireNonNull(TeamId);
         requireNonNull(score);
-        this.id = id;
+        this.id = TeamId;
         this.score = score;
     }
 }

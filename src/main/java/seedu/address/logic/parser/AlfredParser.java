@@ -33,6 +33,8 @@ import seedu.address.logic.parser.findcommandparser.FindMentorCommandParser;
 import seedu.address.logic.parser.findcommandparser.FindParticipantCommandParser;
 import seedu.address.logic.parser.findcommandparser.FindTeamCommandParser;
 import seedu.address.logic.parser.listcommandparser.ListCommandParser;
+import seedu.address.logic.parser.scorecommandparser.AddScoreCommandParser;
+import seedu.address.logic.parser.scorecommandparser.ScoreCommandAllocator;
 import seedu.address.logic.parser.viewcommandparser.ViewCommandAllocator;
 
 /**
@@ -83,7 +85,7 @@ public class AlfredParser {
             return new DeleteCommandAllocator().allocate(arguments);
 
         case ScoreCommand.COMMAND_WORD:
-            return new SetScoreCommandParser().parse(arguments);
+            return new ScoreCommandAllocator().allocate(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
