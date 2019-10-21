@@ -19,7 +19,7 @@ import static seedu.address.testutil.TypicalTeams.BRUCE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.addcommand.AddCommand;
-import seedu.address.logic.commands.addcommand.AddMentorCommand;
+// import seedu.address.logic.commands.addcommand.AddMentorCommand;
 import seedu.address.logic.commands.addcommand.AddParticipantCommand;
 import seedu.address.logic.commands.addcommand.AddTeamCommand;
 import seedu.address.model.entity.Mentor;
@@ -40,8 +40,8 @@ class AddCommandAllocatorTest {
         Participant expectedParticipant = new ParticipantBuilder(TypicalParticipants.BOB).build();
         Team expectedTeam = new TeamBuilder(BRUCE).withScore(0).build();
 
-        assertAllocatorSuccess(addCommandAllocator, "mentor " + NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + SUBJECT_DESC_BOB + ORGANIZATION_DESC_BOB, new AddMentorCommand(expectedMentor));
+        //assertAllocatorSuccess(addCommandAllocator, "mentor " + NAME_DESC_BOB + PHONE_DESC_BOB
+        //        + EMAIL_DESC_BOB + SUBJECT_DESC_BOB + ORGANIZATION_DESC_BOB, new AddMentorCommand(expectedMentor));
 
         assertAllocatorSuccess(addCommandAllocator, "participant " + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB, new AddParticipantCommand(expectedParticipant));
