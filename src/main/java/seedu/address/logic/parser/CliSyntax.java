@@ -26,4 +26,5 @@ public class CliSyntax {
     public static final String SCORE_UPDATE = "update";
     public static final String SCORE_ADD = "add";
     public static final String SCORE_SUBTRACT = "sub";
+    public static final String SCORE_RESET = "reset";
 }

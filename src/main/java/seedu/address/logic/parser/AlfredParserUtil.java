@@ -63,7 +63,7 @@ public class AlfredParserUtil {
     public static String getEntityFromCommand(String userInput, String errorMessage) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         String entity = matcher.group("entity");
         return entity;
@@ -72,7 +72,7 @@ public class AlfredParserUtil {
     public static String getArgumentsFromCommand(String userInput, String errorMessage) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         String args = matcher.group("arguments");
         return args;
@@ -105,24 +105,13 @@ public class AlfredParserUtil {
     public static Score parseScore(String score) throws ParseException {
         requireNonNull(score);
         String trimmedScore = score.trim();
-        validateScore(trimmedScore);
+        StringUtil.validateScore(trimmedScore);
         int scoreValue = Integer.parseInt(trimmedScore);
         if (!Score.isValidScore(scoreValue)) {
             logger.severe("Score is not in the valid format: " + scoreValue);
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
         return new Score(scoreValue);
-    }
-
-    private static void validateScore(String score) throws ParseException {
-        if (score.equals("")) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
-        }
-        try {
-            int scoreValue = Integer.parseInt(score);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
-        }
     }
 
     /**
@@ -187,7 +176,7 @@ public class AlfredParserUtil {
             }
             return new Location(trimmedLocation);
         } catch (NumberFormatException e) {
-            logger.severe("Integer cannot be parsed from location:" + location);
+            logger.severe("Integer cannot be parsed from location: " + location);
             throw new ParseException(Location.MESSAGE_CONSTRAINTS_INVALID_TABLE_NUMBER);
         }
 

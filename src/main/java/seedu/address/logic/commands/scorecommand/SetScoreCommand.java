@@ -13,7 +13,7 @@ import seedu.address.model.entity.Team;
 
 public class SetScoreCommand extends ScoreCommand {
 
-    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Updated %1$s's score to : %2$s";
+    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Changed %1$s's score to : %2$s";
     public static final String COMMAND_WORD = "score update";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": updates the specified team's score to match the score mentioned. \n"
