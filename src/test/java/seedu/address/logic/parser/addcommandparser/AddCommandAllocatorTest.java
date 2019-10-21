@@ -16,7 +16,6 @@ import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocato
 import static seedu.address.testutil.TypicalMentors.BOB;
 import static seedu.address.testutil.TypicalTeams.BRUCE;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.addcommand.AddCommand;
@@ -35,7 +34,6 @@ class AddCommandAllocatorTest {
 
     private AddCommandAllocator addCommandAllocator = new AddCommandAllocator();
 
-    @Disabled
     @Test
     void allocate_correctUserInput_success() {
         Mentor expectedMentor = new MentorBuilder(BOB).build();

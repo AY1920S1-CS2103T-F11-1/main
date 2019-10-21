@@ -28,21 +28,21 @@ public class AddCommandAllocator implements CommandAllocator<AddCommand> {
             entity = AlfredParserUtil.getSpecifierFromCommand(userInput);
             args = AlfredParserUtil.getArgumentsFromCommand(userInput);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(pe.getMessage(), AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         switch (entity) {
 
         case CliSyntax.ENTITY_MENTOR:
-            logger.info("Adding a new Mentor...");
+            //logger.info("Adding a new Mentor...");
             return new AddMentorCommandParser().parse(args);
 
         case CliSyntax.ENTITY_PARTICIPANT:
-            logger.info("Adding a new Participant...");
+            //logger.info("Adding a new Participant...");
             return new AddParticipantCommandParser().parse(args);
 
         case CliSyntax.ENTITY_TEAM:
-            logger.info("Adding a new Team...");
+            //logger.info("Adding a new Team...");
             return new AddTeamCommandParser().parse(args);
 
         default:
