@@ -26,6 +26,7 @@ import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
@@ -422,6 +423,13 @@ public class ModelManager implements Model {
     public void updateTeam(Id teamId, Team updatedTeam) throws AlfredException {
         this.validateNewTeamObject(updatedTeam);
         this.teamList.update(teamId, updatedTeam);
+        this.saveList(PrefixType.T);
+    }
+
+    public void updateTeamScore(Team team, Score score) throws AlfredException {
+        team.setScore(score);
+        this.validateNewTeamObject(team);
+        this.teamList.update(team.getId(), team);
         this.saveList(PrefixType.T);
     }
 

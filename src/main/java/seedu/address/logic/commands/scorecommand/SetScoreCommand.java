@@ -1,8 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.scorecommand;
 
 import static java.util.Objects.requireNonNull;
 import seedu.address.commons.exceptions.AlfredException;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Score;
@@ -10,7 +12,7 @@ import seedu.address.model.entity.Team;
 
 public class SetScoreCommand extends ScoreCommand {
 
-    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Updated %1$s 's score to : %2$s";
+    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Updated %1$s's score to : %2$s";
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX =
             "The team index provided is invalid";
     public static final String COMMAND_WORD = "score update";
@@ -26,7 +28,6 @@ public class SetScoreCommand extends ScoreCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         Team teamToScore;
 
         try {
@@ -35,7 +36,11 @@ public class SetScoreCommand extends ScoreCommand {
             throw new CommandException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
         }
 
-        teamToScore.setScore(score);
+        try {
+            model.updateTeamScore(teamToScore, score);
+        } catch (AlfredException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
                 teamToScore.getName().toString(), score.toString()));

@@ -1,7 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.scorecommand;
 
 
 import static java.util.Objects.requireNonNull;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Score;
 

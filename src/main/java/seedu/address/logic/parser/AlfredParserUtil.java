@@ -21,6 +21,7 @@ import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Phone;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.ProjectType;
+import seedu.address.model.entity.Score;
 import seedu.address.model.entity.SubjectName;
 import seedu.address.model.tag.Tag;
 
@@ -91,6 +92,34 @@ public class AlfredParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String score} into a {@code Score}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param score the string score inputted by the user.
+     * @return a Score object representing the score inputted by the user.
+     * @throws ParseException if the score is of invalid format.
+     */
+    public static Score parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedScore = score.trim();
+        validateScore(trimmedScore);
+        int scoreValue = Integer.parseInt(trimmedScore);
+        if (!Score.isValidScore(scoreValue)) {
+            logger.severe("Score is not in the valid format: " + scoreValue);
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+        return new Score(scoreValue);
+    }
+
+    private static void validateScore(String score) throws ParseException {
+        try {
+            int scoreValue = Integer.parseInt(score);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
