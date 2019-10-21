@@ -8,21 +8,17 @@ import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 
-public class SetScoreCommand extends Command {
+public class SetScoreCommand extends ScoreCommand {
 
-    public static final String MESSAGE_EDIT_TEAM_SUCCESS = "Updated %1$s 's score to : %2$s";
+    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Updated %1$s 's score to : %2$s";
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX =
             "The team index provided is invalid";
     public static final String COMMAND_WORD = "setScore";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":  "
             + "Parameters: ";
 
-    private Score score;
-    private Id id;
-
     public SetScoreCommand(Id id, Score score) {
-        this.id = id;
-        this.score = score;
+        super(id, score);
     }
 
     @Override
@@ -39,7 +35,7 @@ public class SetScoreCommand extends Command {
 
         teamToScore.setScore(score);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_TEAM_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
                 teamToScore.getName().toString(), score.toString()));
 
 
