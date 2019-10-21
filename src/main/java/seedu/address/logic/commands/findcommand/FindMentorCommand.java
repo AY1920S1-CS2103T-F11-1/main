@@ -2,8 +2,13 @@ package seedu.address.logic.commands.findcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+
+import seedu.address.commons.Predicates;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Mentor;
@@ -19,17 +24,40 @@ public class FindMentorCommand extends FindCommand {
             + "Example: " + COMMAND_WORD + " n/John Doe";
     public static final String MESSAGE_SUCCESS = "Successfully ran the find command.";
 
-    private String name;
+    private Predicate<Mentor> findPredicate;
 
-    public FindMentorCommand(String name) {
-        this.name = name;
+    public FindMentorCommand(
+            Optional<String> name,
+            Optional<String> phone,
+            Optional<String> email,
+            Optional<String> organization
+    ) {
+        List<Predicate<Mentor>> filterPredicates = new ArrayList<>();
+        if (name.isPresent()) {
+            filterPredicates.add(Predicates.getPredicateFindMentorByName(name.get()));
+        }
+
+        if (phone.isPresent()) {
+            filterPredicates.add(Predicates.getPredicateFindMentorByPhone(phone.get()));
+        }
+
+        if (email.isPresent()) {
+            filterPredicates.add(Predicates.getPredicateFindMentorByEmail(email.get()));
+        }
+
+        if (organization.isPresent()) {
+            filterPredicates.add(
+                    Predicates.getPredicateFindMentorByOrganization(organization.get()));
+        }
+
+        this.findPredicate = Predicates.predicateReducer(filterPredicates);
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        List<Mentor> results = model.findMentorByName(name);
+        List<Mentor> results = model.findMentor(this.findPredicate);
         listResults(results, PrefixType.P);
         model.updateHistory(this);
         return new CommandResult(MESSAGE_SUCCESS);
