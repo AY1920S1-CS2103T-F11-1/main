@@ -10,9 +10,11 @@ import seedu.address.model.entity.Score;
  */
 public abstract class ScoreCommand extends Command {
 
+    public static final int MAXIMUM_SCORE = 100;
     public static final String COMMAND_WORD = "score";
     public static final String MESSAGE_SCORE_NOT_MENTIONED = "The score to update with or update to "
             + "must be mentioned.";
+    public static final String INVALID_SCORE = "The score must be an Integer between 0 and 100.";
 
     protected Id id;
     protected Score score;
@@ -23,8 +25,4 @@ public abstract class ScoreCommand extends Command {
         this.id = id;
         this.score = score;
     }
-
-
-
-
 }

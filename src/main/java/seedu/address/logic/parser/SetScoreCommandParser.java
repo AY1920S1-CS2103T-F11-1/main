@@ -17,15 +17,7 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
     @Override
     public SetScoreCommand parse(String args) throws ParseException {
 
-        Id id;
-        ArgumentMultimap argMultimap = new ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ORGANISATION,
-                PREFIX_SUBJECT_NAME);
-        try {
-            id = AlfredParserUtil.parseIndex(argMultimap.getPreamble(), PrefixType.M);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    seedu.address.logic.commands.EditCommand.MESSAGE_USAGE), pe);
-        }
+
 
     }
 }
