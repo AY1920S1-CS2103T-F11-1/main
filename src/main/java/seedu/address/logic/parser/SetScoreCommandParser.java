@@ -17,6 +17,7 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
     @Override
     public SetScoreCommand parse(String args) throws ParseException {
 
+        String id = AlfredParserUtil.getEntityFromCommand()
 
 
     }
