@@ -25,7 +25,7 @@ public class AddCommandAllocator implements CommandAllocator<AddCommand> {
         String entity;
         String args;
         try {
-            entity = AlfredParserUtil.getEntityFromCommand(userInput);
+            entity = AlfredParserUtil.getSpecifierFromCommand(userInput);
             args = AlfredParserUtil.getArgumentsFromCommand(userInput);
         } catch (ParseException pe) {
             throw new ParseException(String.format(pe.getMessage(), AddCommand.MESSAGE_USAGE));

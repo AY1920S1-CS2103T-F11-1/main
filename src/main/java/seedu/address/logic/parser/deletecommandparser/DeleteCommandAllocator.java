@@ -20,7 +20,7 @@ public class DeleteCommandAllocator implements CommandAllocator<DeleteCommand> {
         String args;
 
         try {
-            entity = AlfredParserUtil.getEntityFromCommand(userInput);
+            entity = AlfredParserUtil.getSpecifierFromCommand(userInput);
             args = AlfredParserUtil.getArgumentsFromCommand(userInput);
         } catch (ParseException pe) {
             throw new ParseException(String.format(pe.getMessage(), DeleteCommand.MESSAGE_USAGE));

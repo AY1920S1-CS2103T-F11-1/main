@@ -20,7 +20,7 @@ public class ViewCommandAllocator implements CommandAllocator<ViewCommand> {
         String args;
 
         try {
-            entity = AlfredParserUtil.getEntityFromCommand(userInput);
+            entity = AlfredParserUtil.getSpecifierFromCommand(userInput);
             args = AlfredParserUtil.getArgumentsFromCommand(userInput);
         } catch (ParseException pe) {
             throw new ParseException(String.format(pe.getMessage(), ViewCommand.MESSAGE_USAGE));

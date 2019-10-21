@@ -20,7 +20,7 @@ public class EditCommandAllocator implements CommandAllocator<EditCommand> {
         String args;
 
         try {
-            entity = AlfredParserUtil.getEntityFromCommand(userInput);
+            entity = AlfredParserUtil.getSpecifierFromCommand(userInput);
             args = AlfredParserUtil.getArgumentsFromCommand(userInput);
         } catch (ParseException pe) {
             throw new ParseException(String.format(pe.getMessage(), EditCommand.MESSAGE_USAGE));
