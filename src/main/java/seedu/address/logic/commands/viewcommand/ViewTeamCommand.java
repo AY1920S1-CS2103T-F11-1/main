@@ -7,6 +7,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
 /**
@@ -18,9 +19,10 @@ public class ViewTeamCommand extends ViewCommand {
     public static final String MESSAGE_SUCCESS = "Showed specified team";
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX =
             "The team index provided is invalid";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows details of the team with specified ID. "
-            + "Parameters: team ID\n"
-            + "Example: " + COMMAND_WORD + " T-1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " team"
+            + ": shows details of the team with specified ID. \n"
+            + "Format: view team [team ID] \n"
+            + "For example: " + COMMAND_WORD + " team T-1";
 
     public ViewTeamCommand(Id id) {
         super(id);
@@ -33,12 +35,13 @@ public class ViewTeamCommand extends ViewCommand {
         Team teamToView;
         try {
             teamToView = model.getTeam(this.id);
+            model.updateHistory();
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
         }
         viewEntity(teamToView);
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, PrefixType.T);
     }
 
 }

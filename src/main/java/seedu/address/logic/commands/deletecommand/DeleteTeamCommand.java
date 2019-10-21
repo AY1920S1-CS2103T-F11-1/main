@@ -7,20 +7,21 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
 
 /**
- * Deletes a {@link Team} in Alfred.
+ * Deletes a {@link Team} in Alfred and all the {@code Participant}s in it.
  */
 public class DeleteTeamCommand extends DeleteCommand {
 
     public static final String MESSAGE_INVALID_TEAM_DISPLAYED_INDEX = "The team ID provided is invalid or"
             + "does not exist.";
-    public static final String MESSAGE_DELETE_TEAM_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the team identified by the ID used in the displayed team list.\n"
-            + "Parameters: team ID\n"
-            + "Example: " + COMMAND_WORD + " T-1";
+    public static final String MESSAGE_DELETE_TEAM_SUCCESS = "Deleted Team: %1$s";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " team"
+            + ": Deletes a team by ID shown in the list of teams.\n"
+            + "Format: " + COMMAND_WORD + " team ID\n"
+            + "Example: " + COMMAND_WORD + " team T-1";
 
     public DeleteTeamCommand(Id id) {
         super(id);
@@ -33,12 +34,13 @@ public class DeleteTeamCommand extends DeleteCommand {
         Team teamToBeDeleted;
         try {
             teamToBeDeleted = model.deleteTeam(this.id);
+            model.updateHistory();
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_TEAM_SUCCESS,
-                teamToBeDeleted.toString()));
+                teamToBeDeleted.toString()), PrefixType.T);
     }
 
 }
