@@ -17,6 +17,8 @@ public class SubtractScoreCommandParser implements Parser<SubtractScoreCommand> 
         Id teamId;
         Score teamScore;
 
+        System.out.println(args);
+
         try {
             id = AlfredParserUtil.getEntityFromCommand(args, "Won't be here.");
             score = AlfredParserUtil.getArgumentsFromCommand(args, "Won't be here.");

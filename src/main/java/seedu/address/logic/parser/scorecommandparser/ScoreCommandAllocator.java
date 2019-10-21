@@ -3,6 +3,7 @@ package seedu.address.logic.parser.scorecommandparser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.scorecommand.ScoreCommand;
+import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.CommandAllocator;
@@ -24,7 +25,7 @@ public class ScoreCommandAllocator implements CommandAllocator<ScoreCommand> {
                 return new SetScoreCommandParser().parse(args);
 
             case CliSyntax.SCORE_SUBTRACT:
-                return null;
+                return new SubtractScoreCommandParser().parse(args);
 
             default:
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

@@ -462,6 +462,29 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Subtracts the given score from the given team's current score.
+     *
+     * @param team the team who's score is to be subtracted from.
+     * @param score the score which will be subtracted from the team's current score.
+     * @throws AlfredException if the update fails.
+     */
+    @Override
+    public void subtractTeamScore(Team team, Score score) throws AlfredException {
+        int currentScore = Integer.parseInt(team.getScore().toString());
+        int scoreToSub = Integer.parseInt(score.toString());
+
+        if (currentScore == Score.MIN_SCORE) {
+            throw new IllegalValueException(Score.MIN_SCORE_MESSAGE);
+        } else if (currentScore - scoreToSub < 0) {
+            team.setScore(new Score(0));
+        } else {
+            Score newScore = new Score(currentScore - scoreToSub);
+            team.setScore(newScore);
+        }
+        updateTeam(team.getId(), team);
+    }
+
+    /**
      * Adds the team.
      *
      * @param team

@@ -19,7 +19,8 @@ public class Score {
 
     public static final String MAX_SCORE_MESSAGE = "The given team's score is already " + MAX_SCORE
             + " which is the maximum allowed.";
-
+    public static final String MIN_SCORE_MESSAGE = "The given team's score is already " + MIN_SCORE
+            + " which is the minimum allowed.";
 
 
     /**
