@@ -14,7 +14,7 @@ public abstract class ScoreCommand extends Command {
     public static final String COMMAND_WORD = "score";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": updates, adds or subtracts the given score "
             + "to the specified team's score. \n"
-            + "Format: " + COMMAND_WORD + " update/add/sub Team-Id Score \n"
+            + "Format: " + COMMAND_WORD + " set/add/sub/reset Team-Id newScore \n"
             + "For example: score add T-4 25";
 
     // The reset score command doesn't need its own command class since it is simply an implementation
