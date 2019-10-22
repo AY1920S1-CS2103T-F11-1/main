@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -89,13 +90,15 @@ public interface Model {
      */
     ReadOnlyEntityList getMentorList();
 
-    /* Get the filtered lists */
+    /* Get the filtered and sorted lists */
 
     FilteredList<Participant> getFilteredParticipantList();
 
     FilteredList<Team> getFilteredTeamList();
 
     FilteredList<Mentor> getFilteredMentorList();
+
+    SortedList<Team> getSortedTeamList();
 
     /* Below is the API exposed for the controllers to call */
 
@@ -144,6 +147,8 @@ public interface Model {
     List<Team> findTeamByName(String name);
 
     List<Mentor> findMentorByName(String name);
+
+    List<Team> getLeaderboard();
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

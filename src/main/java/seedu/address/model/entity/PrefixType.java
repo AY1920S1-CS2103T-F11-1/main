@@ -8,7 +8,7 @@ public enum PrefixType {
     P, // Participant
     M, // Mentor
     T, // Team
-    I; // Issue
+    L; // Leaderboard
 
     // Constants
     public static final String MESSAGE_CONSTRAINTS =

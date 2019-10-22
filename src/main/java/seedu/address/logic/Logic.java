@@ -45,6 +45,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of Teams */
     ObservableList<Mentor> getFilteredMentorList();
 
+    /** Returns an unmodifiable view of the sorted list of Teams */
+    ObservableList<Team> getSortedTeamList();
     /**
      * Returns the user prefs' address book file path.
      */

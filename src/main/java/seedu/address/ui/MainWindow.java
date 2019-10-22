@@ -206,6 +206,11 @@ public class MainWindow extends UiPart<Stage> {
                 entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
                 break;
 
+            case L:
+                listPanel = new TeamListPanel(logic.getSortedTeamList());
+                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                break;
+
             case P:
                 listPanel = new ParticipantListPanel(logic.getFilteredParticipantList());
                 entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
