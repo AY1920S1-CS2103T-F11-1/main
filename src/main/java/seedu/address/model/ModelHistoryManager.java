@@ -87,7 +87,7 @@ public class ModelHistoryManager implements ModelHistory {
      * @return boolean indicating whether an undo is possible.
      */
     public boolean canUndo() {
-        if (this.history.size() > 1) {
+        if (this.history.indexOf(this.current) > 0) {
             return true;
         } else {
             return false;
