@@ -34,7 +34,7 @@ public class DeleteTeamCommand extends DeleteCommand {
         Team teamToBeDeleted;
         try {
             teamToBeDeleted = model.deleteTeam(this.id);
-            model.updateHistory();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
         }
@@ -43,4 +43,8 @@ public class DeleteTeamCommand extends DeleteCommand {
                 teamToBeDeleted.toString()), PrefixType.T);
     }
 
+    @Override
+    public String toString() {
+        return "DeleteTeamCommand";
+    }
 }

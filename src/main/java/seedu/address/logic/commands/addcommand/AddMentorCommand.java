@@ -61,7 +61,7 @@ public class AddMentorCommand extends AddCommand {
 
         try {
             model.addMentor(this.mentor);
-            model.updateHistory();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             // Should I return new CommandResult(MESSAGE_DUPLICATE_MENTOR) instead?
             throw new CommandException(MESSAGE_DUPLICATE_MENTOR);
@@ -70,4 +70,8 @@ public class AddMentorCommand extends AddCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.mentor.toString()), PrefixType.M);
     }
 
+    @Override
+    public String toString() {
+        return "AddMentorCommand";
+    }
 }

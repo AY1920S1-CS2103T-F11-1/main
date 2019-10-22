@@ -21,8 +21,12 @@ public class ListTeamCommand extends ListCommand {
         requireNonNull(model);
 
         this.displayTeams(model);
-        model.updateHistory();
+        model.updateHistory(this);
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.T);
     }
 
+    @Override
+    public String toString() {
+        return "ListTeamCommand";
+    }
 }

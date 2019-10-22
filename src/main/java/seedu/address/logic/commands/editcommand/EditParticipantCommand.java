@@ -59,7 +59,7 @@ public class EditParticipantCommand extends EditCommand {
 
         try {
             model.updateParticipant(this.id, editedParticipant);
-            model.updateHistory();
+            model.updateHistory(this);
             return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS,
                     editedParticipant.toString()), PrefixType.P);
         } catch (AlfredException e) {
@@ -155,4 +155,8 @@ public class EditParticipantCommand extends EditCommand {
         }
     }
 
+    @Override
+    public String toString() {
+        return "EditParticipantCommand";
+    }
 }

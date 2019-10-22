@@ -63,7 +63,7 @@ public class EditMentorCommand extends EditCommand {
 
         try {
             model.updateMentor(this.id, editedMentor);
-            model.updateHistory();
+            model.updateHistory(this);
             return new CommandResult(String.format(MESSAGE_EDIT_MENTOR_SUCCESS, editedMentor.toString()), PrefixType.M);
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
@@ -180,4 +180,8 @@ public class EditMentorCommand extends EditCommand {
         }
     }
 
+    @Override
+    public String toString() {
+        return "EditMentorCommand";
+    }
 }

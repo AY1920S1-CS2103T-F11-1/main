@@ -58,12 +58,17 @@ public class AddParticipantCommand extends AddCommand {
 
         try {
             model.addParticipant(this.participant);
-            model.updateHistory();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PARTICIPANT);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.participant.toString()), PrefixType.P);
+    }
+
+    @Override
+    public String toString() {
+        return "AddParticipantCommand";
     }
 
 }

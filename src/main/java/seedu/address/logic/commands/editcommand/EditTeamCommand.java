@@ -67,7 +67,7 @@ public class EditTeamCommand extends EditCommand {
 
         try {
             model.updateTeam(this.id, editedTeam);
-            model.updateHistory();
+            model.updateHistory(this);
             return new CommandResult(String.format(MESSAGE_EDIT_TEAM_SUCCESS, editedTeam.toString()), PrefixType.T);
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
@@ -214,6 +214,11 @@ public class EditTeamCommand extends EditCommand {
                     && getProjectType().equals(e.getProjectType())
                     && getLocation().equals(e.getLocation());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "EditTeamCommand";
     }
 
 }

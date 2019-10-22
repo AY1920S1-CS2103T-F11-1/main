@@ -21,6 +21,7 @@ import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
@@ -773,11 +774,11 @@ public class ModelManager implements Model {
      * This method is expected to be called during the `execute()` method of each Command, right after
      * any transformations/mutations have been made to the data in Model.
      */
-    public void updateHistory() {
+    public void updateHistory(Command c) {
         try {
             this.history.updateHistory(this.participantList, ParticipantList.getLastUsedId(),
                     this.mentorList, MentorList.getLastUsedId(),
-                    this.teamList, TeamList.getLastUsedId());
+                    this.teamList, TeamList.getLastUsedId(), c);
         } catch (AlfredModelHistoryException e) {
             logger.warning("Problem encountered updating model state history.");
         }

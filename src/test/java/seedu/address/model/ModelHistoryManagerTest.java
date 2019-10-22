@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.AlfredException;
@@ -51,7 +52,7 @@ class ModelHistoryManagerTest {
         pList.add(newP);
         hm.updateHistory(pList, ParticipantList.getLastUsedId(),
                          mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
+                         tList, TeamList.getLastUsedId(), null);
         assertEquals(2, hm.getLengthOfHistory());
         assertTrue(hm.canUndo());
     }
@@ -60,7 +61,7 @@ class ModelHistoryManagerTest {
     void updateHistory_noEntityChange_success() throws AlfredModelHistoryException {
         hm.updateHistory(pList, ParticipantList.getLastUsedId(),
                          mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
+                         tList, TeamList.getLastUsedId(), null);
         assertEquals(2, hm.getLengthOfHistory());
         assertTrue(hm.canUndo());
     }
@@ -74,7 +75,7 @@ class ModelHistoryManagerTest {
     void canUndo_entityChange_true() throws AlfredModelHistoryException {
         hm.updateHistory(pList, ParticipantList.getLastUsedId(),
                          mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
+                         tList, TeamList.getLastUsedId(), null);
         assertTrue(hm.canUndo());
     }
 
@@ -89,10 +90,10 @@ class ModelHistoryManagerTest {
         pList.add(newP);
         hm.updateHistory(pList, ParticipantList.getLastUsedId(),
                          mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
+                         tList, TeamList.getLastUsedId(), null);
         hm.updateHistory(pList, ParticipantList.getLastUsedId(),
                          mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
+                         tList, TeamList.getLastUsedId(), null);
 
         assertTrue(hm.canUndo());
         ModelHistoryRecord hr = hm.undo();
@@ -105,11 +106,11 @@ class ModelHistoryManagerTest {
         int lastUsedIdBefore = ParticipantList.getLastUsedId();
         hm.updateHistory(pList, ParticipantList.getLastUsedId(),
                          mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
+                         tList, TeamList.getLastUsedId(), null);
         pList.add(newP);
         hm.updateHistory(pList, ParticipantList.getLastUsedId(),
                          mList, MentorList.getLastUsedId(),
-                         tList, TeamList.getLastUsedId());
+                         tList, TeamList.getLastUsedId(), null);
         ModelHistoryRecord hr = hm.undo();
         assertEquals(lastUsedIdBefore, hr.getParticipantListLastUsedId());
         assertEquals(hr.getParticipantListLastUsedId(), ParticipantList.getLastUsedId());

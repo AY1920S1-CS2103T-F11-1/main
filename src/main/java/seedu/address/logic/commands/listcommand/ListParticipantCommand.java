@@ -21,8 +21,13 @@ public class ListParticipantCommand extends ListCommand {
         requireNonNull(model);
 
         this.displayParticipants(model);
-        model.updateHistory();
+        model.updateHistory(this);
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.P);
+    }
+
+    @Override
+    public String toString() {
+        return "ListParticipantCommand";
     }
 
 }

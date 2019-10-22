@@ -49,7 +49,7 @@ public class DeleteParticipantCommand extends DeleteCommand {
         Participant participantToBeDeleted;
         try {
             participantToBeDeleted = model.deleteParticipant(this.id);
-            model.updateHistory();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             // Model checking if index is invalid?
             throw new CommandException(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
@@ -59,4 +59,8 @@ public class DeleteParticipantCommand extends DeleteCommand {
                                                participantToBeDeleted.toString()), PrefixType.P);
     }
 
+    @Override
+    public String toString() {
+        return "DeleteParticipantCommand";
+    }
 }
