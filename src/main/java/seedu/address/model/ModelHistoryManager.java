@@ -116,24 +116,28 @@ public class ModelHistoryManager implements ModelHistory {
             ParticipantList.setLastUsedId(this.current.getParticipantListLastUsedId());
             MentorList.setLastUsedId(this.current.getMentorListLastUsedId());
             TeamList.setLastUsedId(this.current.getTeamListLastUsedId());
-            displayCommandHistory(); //DEBUG STATEMENT
+            System.out.println(getCommandHistory()); //DEBUG
             return this.current;
         } else {
             throw new AlfredModelHistoryException("Unable to undo any further!");
         }
     }
 
-    private void displayCommandHistory() {
+    public String getCommandHistory() {
         int index = 1;
+        String commandHistory = "";
         for (int j = this.history.indexOf(this.current); j >= 0; j--) {
             Command histCommand = this.history.get(j).getCommand();
             if (histCommand == null) {
-                System.out.println("*: Initialised State. Cannot undo");
+                commandHistory += "*: Initialised State. Cannot undo.\n";
+                //System.out.println("*: Initialised State. Cannot undo");
             } else {
-                System.out.println(index + ": " + histCommand);
+                commandHistory += (index + ": " + histCommand + "\n");
+                //System.out.println(index + ": " + histCommand);
             }
             index++;
         }
+        return commandHistory;
     }
 
     /**

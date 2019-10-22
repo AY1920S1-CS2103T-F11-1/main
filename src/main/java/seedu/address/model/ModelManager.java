@@ -814,4 +814,12 @@ public class ModelManager implements Model {
             throw new AlfredModelHistoryException("Unable to undo.");
         }
     }
+
+    /**
+     * Gets a String detailing the previously executed commands that can be undone by the user.
+     * @return String representing the previously executed commands that can be undone by the user.
+     */
+    public String getCommandHistory() {
+        return this.history.getCommandHistory();
+    }
 }

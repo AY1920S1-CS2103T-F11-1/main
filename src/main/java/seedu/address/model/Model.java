@@ -197,4 +197,10 @@ public interface Model {
      * prior to the execution of the command.
      */
     void undo() throws AlfredModelHistoryException;
+
+    /**
+     * Gets a String detailing the previously executed commands that can be undone by the user.
+     * @return String representing the previously executed commands that can be undone by the user.
+     */
+    String getCommandHistory();
 }
