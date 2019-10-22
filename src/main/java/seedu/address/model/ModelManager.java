@@ -254,6 +254,7 @@ public class ModelManager implements Model {
      * @return ReadableEntityList
      */
     public ReadOnlyEntityList getParticipantList() {
+        this.resetFilteredLists();
         return this.participantList;
     }
 
@@ -263,6 +264,7 @@ public class ModelManager implements Model {
      * @return ReadableEntityList
      */
     public ReadOnlyEntityList getTeamList() {
+        this.resetFilteredLists();
         return this.teamList;
     }
 
@@ -272,6 +274,7 @@ public class ModelManager implements Model {
      * @return ReadableEntityList
      */
     public ReadOnlyEntityList getMentorList() {
+        this.resetFilteredLists();
         return this.mentorList;
     }
 
@@ -285,6 +288,15 @@ public class ModelManager implements Model {
 
     public FilteredList<Team> getFilteredTeamList() {
         return this.filteredTeamList;
+    }
+
+    /**
+     * Resets the filtered lists to display all entities in the list.
+     */
+    private void resetFilteredLists() {
+        this.filteredTeamList.setPredicate(team -> true);
+        this.filteredMentorList.setPredicate(mentor -> true);
+        this.filteredParticipantList.setPredicate(participant -> true);
     }
 
     //========== Entity Methods =============================
@@ -311,6 +323,7 @@ public class ModelManager implements Model {
     public void addParticipant(Participant participant) throws AlfredException {
         this.participantList.add(participant);
         this.saveList(PrefixType.P);
+        this.resetFilteredLists();
     }
 
     /**
@@ -442,6 +455,7 @@ public class ModelManager implements Model {
         this.validateNewTeamObject(team);
         this.teamList.add(team);
         this.saveList(PrefixType.T);
+        this.resetFilteredLists();
     }
 
     /**
@@ -537,6 +551,7 @@ public class ModelManager implements Model {
     public void addMentor(Mentor mentor) throws AlfredException {
         this.mentorList.add(mentor);
         this.saveList(PrefixType.M);
+        this.resetFilteredLists();
     }
 
     /**
