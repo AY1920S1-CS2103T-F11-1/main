@@ -253,6 +253,16 @@ public class ModelManagerStub extends ModelManager {
     /**
      * Placeholder method simulating the updating of ModelHistory
      */
-    public void updateHistory(Command c) {
+    @Override
+    public void updateHistory() {
+
+    }
+
+    /**
+     * Placeholder method to simulating reseting of FilteredList
+     */
+    @Override
+    public void resetFilteredLists() {
+
     }
 }

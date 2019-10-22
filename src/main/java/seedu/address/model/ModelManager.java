@@ -293,7 +293,7 @@ public class ModelManager implements Model {
     /**
      * Resets the filtered lists to display all entities in the list.
      */
-    private void resetFilteredLists() {
+    public void resetFilteredLists() {
         this.filteredTeamList.setPredicate(team -> true);
         this.filteredMentorList.setPredicate(mentor -> true);
         this.filteredParticipantList.setPredicate(participant -> true);
