@@ -1,4 +1,4 @@
-= Alfred - The Hackathon Butler (User Guide)
+= Alfred - The Hackathon Butler User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -66,7 +66,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * You can type the parameters in any order. For instance, if the command specifies `n/NAME p/PHONE_NUMBER`,
 you may input `p/PHONE_NUMBER n/NAME` and Alfred will still deem it as an acceptable command.
 * Words in {curly braces} indicate values for the command that you need to select and provide.
-For example in the case of `add {mentor/participant/list}`, you can choose to type `add mentor`, `add participant` or `add team`
+** For example in the case of `add {mentor/participant/list}`, you can choose to type `add mentor`, `add participant` or `add team`
+* Words in [brackets] indicate values that are optional for the command.
+** For example, in the case of `export [CSV_FILE_PATH]`, you can choose to leave out the file path.
 * Whenever you need to specify an ID, the ID will be prefixed with an alphabet indicating the type of the Entity (e.g. M for Mentors, P for Participants, T for Teams).
 * Type your commands in the textbox displayed on the Alfred UI. After you are done typing the command, press ENTER on your keyboard to execute the command.
 ====
@@ -78,14 +80,16 @@ There is no need for you to save the data manually.
 
 === Viewing help : `help` (Coming in v1.3)
 
-This command displays a help page in a separate pop-up window. Should you require further information,
+If at anytime you don't understand how to do a certain thing on Alfred, use this command to display a
+help page in a separate pop-up window. Should you require further information,
 the pop-up window also includes links to further references and documentation. +
 
 Format: `help`
 
 === Adding an Entity: `add {participant/mentor/team}`
 
-Use this command to add an entity for Alfred to keep track of. +
+Use this command to add a new entity for Alfred to keep track of. +
+
 ****
 * Creates an Entity as specified by you. Each Entity object will have a unique ID automatically assigned to it.
 * As of version 1.1, you must provide all the fields. There are no optional fields.
@@ -114,6 +118,7 @@ Use this command to add a new Mentor to Alfred to keep track of for your hackath
 * Mentors also have a field called "Organization", which refers to the organization for which they work.
 * Mentors also have a field called "Specialisation", which refers which is the field of work they specialise in. The Specialisation must be chosen from the predetermined list of specialisations given in Section (some number).
 ****
+
 Format: `add mentor  n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS o/ORGANIZATION s/SPECIALISATION`
 
 Examples:
@@ -137,13 +142,14 @@ Examples:
 
 * `add team n/HackathonWinners4Sure s/Augmented Reality pn/Path-ify pt/Navigation l/23`
 
-=== Updating an Entity: `edit {mentor/participant/team} ID [PARAMETERS]`
+=== Updating an Entity: `edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]`
 
-Edits an entity based on the supplied parameter values you supply.
+Edits an entity based on the parameter values you supply. Use this command in case you want to make changes to an entity you have already created within Alfred.
 
 ****
-* Updates the fields of the Entity with the `ID` you specified to the new fields you type in as the parameter. The ID is the unique identifier for the particular Entity you wish to edit.
+* Updates the fields of the Entity with the `ENTITY_ID` you specified to the new fields you type in as the parameter. The ID is the unique identifier for the particular Entity you wish to edit.
 * You must provide at least one of the optional fields.
+* The fields you provide must pertain to the specified entity in order for the edit to be successful. For instance, you cannot add a field "pn/NewProjectName" for a participant as a participant doesn't have a project name.
 * Existing values will be updated to the input values you provide.
 ****
 
@@ -155,12 +161,12 @@ Examples:
 
 * `edit participant P-1 n/NewParticipantNAme`
 
-=== Listing all Entities : `list {mentors/teams/participants}`
+=== Listing all Entities : `list {mentors/participants/teams}`
 
 Shows a list of all the entities corresponding to the entity you specified that Alfred keeps track of.
 
 ****
-* The fields of the Entity will be displayed on the Graphical User Interface.
+* The fields of the Entity will be displayed on Alfred's Graphical User Interface.
 ****
 
 Examples:
@@ -171,7 +177,7 @@ Examples:
 
 * `list teams` will list all hackathon teams stored within Alfred.
 
-=== Deleting an Entity: `delete {participant/mentor/team} ID`
+=== Deleting an Entity: `delete {mentor/participant/team} ID`
 Deletes an Entity, so that Alfred will no longer keep track of that Entity.
 
 ****
@@ -194,9 +200,9 @@ Searches for Entities by their name, instead of their ID, in case you find that 
 
 Examples:
 
-* `find participant n/John Doe` will display a list of all participants in the Hackathon who are named "John Doe", or have "John Doe" in their name.
-
 * `find mentor n/Joshua Wong` will display a list of all mentors in the Hackathon who are named "Joshua Wong", or have "Joshua Wong" in their name.
+
+* `find participant n/John Doe` will display a list of all participants in the Hackathon who are named "John Doe", or have "John Doe" in their name.
 
 * `find team n/FutureHackathonWinner` will display a list of all teams in the Hackathon that are named "FutureHackathonWinner", or have "FutureHackathonWinner" in their name.
 
@@ -263,12 +269,16 @@ Use this command to list the top k teams in the leaderboard, where k is a number
 * If you input "k" as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon.
 ****
 
+****
+
+* If you input `NUMBER` as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon in descending order of their points.
+****
+
 Example:
 
 * `getTop 5` will display the top 5 teams with the highest points in the hackathon.
 
 * `getTop 20` will display the top 20 teams with the highest points in the hackathon.
-
 
 ==== Add points: `score add TEAM_ID POINTS`
 Adds the value of POINTS to the current score of the team with ID TEAM_ID.
@@ -286,7 +296,9 @@ Example:
 * `score add T-5 60` will add 60 points to the score of the team with ID T-5.
 
 ==== Subtract points: `score sub TEAM_ID NEW_POINTS`
+
 Deducts the value of POINTS from the current score of the team with ID TEAM_ID.
+
 ****
 * Use this command when you want to take away a certain amount of points from a particular team.
 * If you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message. If the subtraction of points makes the team's total go below the minimum (which is set to 0 points), the score will simply be set to 0.
@@ -312,12 +324,98 @@ Example:
 
 * `score set T-5 10` will set the score of the team with ID T-5 as 10.
 
-=== Bulk Registration: `addBulk PATH_TO_CSV_FILE`
-You may add multiple participants at once into Alfred through the specification of a .csv file
+Do note that if you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message. If the subtraction of points makes the team's total go below the minimum (which is set to 0 points), the score will simply be set to 0.
+
+=== Bulk Registration: `import fp/PATH_TO_CSV_FILE`
+You may import multiple entities at once into Alfred through the specification of a CSV file.
 
 Example:
 
-* `addBulk C:\User\Hackathon2019\participant.csv` will import data from the participant.csv file into Alfred.
+* `import fp/C:/User/Hackathon2019/participant.csv` will import data from the participant.csv file into Alfred.
+* `import fp/Hackathon2019/participant.csv` will look for the CSV file in your current directory (or the folder where alfred.jar is downloaded).
+
+==== CSV File Formatting
+In order for the contents of the CSV file to be correctly loaded into Alfred, the file has to be in the correct format.
+
+****
+`EntityType` - single capital letter representing the entity type
+
+* **Mentor:** M
+* **Participant:** P
+* **Team:** T
+
+`ID` - the ID of the entity (optional)
+
+* **Mentor:** M-`d`, where `d` can be any positive integer
+* **Participant:** P-`d`, where `d` can be any positive integer
+* **Team:** T-`d`, where `d` can be any positive integer
+** You can also express `ID` as only a positive integer.
+
+`Name`, `Organization`, `ProjectName` - can be any combination of spaces, letters, and these special characters (,.-')
+
+`Phone` - can be any combination of numbers and country code may be included
+
+`Email` - must include an address and an email domain
+
+`SubjectName` - the subject a mentor or team will be focusing on in the Hackathon +
+Must be one of the values below:
+
+* Environmental
+* Social
+* Health
+* Education
+
+`Score` - must be an integer ranging from 0 to 100
+
+`Location` - must be an integer ranging from 0 to 1000
+****
+
+===== Mentor Data
+Header: `EntityType,ID,Name,Phone,Email,Organization,SubjectName`
+
+Example:
+
+* M,M-1,Alfred the Mentor,12345678,alfred@batcave.com,Batcave Corp.,Education
+* M,1,Alfred the Mentor,+6512345678,alfred@batcave.com,Batcave Corp.,EDUCATION
+* M,,Alfred the Mentor,+65 12345678,alfred@batcave.com,Batcave Corp.,Education
+
+===== Participant Data
+Header: `EntityType,ID,Name,Phone,Email`
+
+Example:
+
+* P,P-1,Bruce Wayne,23456789,wbruce@wayne.ent,Wayne Ent.,Health
+* P,1,Bruce Wayne,+6523456789,wbruce@wayne.ent,Wayne Ent.,HEALTH
+* P,,Bruce Wayne,+65 23456789,wbruce@wayne.ent,Wayne Ent.,Health
+
+===== Team Data
+Header: `EntityType,ID,Name,Participants,Mentor,SubjectName,Score,ProjectName,ProjectType,Location`
+
+****
+`Participants` - A list of participant IDs in the team. +
+This field is optional, but if it is included, participants with given ID must exist in Alfred.
+
+`Mentor` - An ID of the mentor associated with the team. +
+This field is also optional, but if it is included, mentor with given ID must exist in Alfred.
+
+If you are importing multiple entity data at once, don't worry! Alfred will make sure Participant and Mentor data are loaded before Team data.
+
+See example usage down below.
+****
+
+Example:
+
+* T,T-1,Justice League,,,Social,100,Save the Earth,PLACEHOLDER,1
+* T,1,Justice League,[P-1|P-2|P-3],M-1,Social,100,Save the Earth,Placeholder,1
+* T,,Justice League,[P-1|P-2|P-3],M-1,Social,100,Save the Earth,Placeholder,1
+
+=== Export Data: `export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]`
+You may export Alfred data to an external CSV file. If the desired CSV file path is left empty, Alfred will create a CSV file at the default location (`./AlfredData/Alfred_Data.csv`).
+
+Example:
+
+* `export` will export all entities' data in Alfred to `/AlfredData/Alfred_Data.csv`.
+* `export mentor fp/data/Alfred.csv` will export all mentor data in Alfred to `/data/Alfred.csv`. If the any folders do not happen to exist, Alfred will create them for you.
 
 === Help command (Coming in v1.3)
 
@@ -340,6 +438,7 @@ Examples:
 ==== Add Swag: `add swag DESCRIPTION QUANTITY`
 Add swag to inventory
 Examples: `add swag Android Plushie 5`
+
 ==== Track inventory of available swags: `list swag`
 List the currently available swag
 
