@@ -71,6 +71,7 @@ public class AddParticipantCommand extends AddCommand {
         return "AddParticipantCommand";
     }
 
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddParticipantCommand // instanceof handles nulls

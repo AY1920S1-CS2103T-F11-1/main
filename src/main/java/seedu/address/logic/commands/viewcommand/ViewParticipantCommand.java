@@ -50,6 +50,7 @@ public class ViewParticipantCommand extends ViewCommand {
         return "ViewParticipantCommand";
     }
 
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewParticipantCommand // instanceof handles nulls

@@ -76,6 +76,7 @@ public class AddMentorCommand extends AddCommand {
         return "AddMentorCommand";
     }
 
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddMentorCommand // instanceof handles nulls
