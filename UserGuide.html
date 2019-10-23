@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Alfred - The Hackathon Butler (User Guide)</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Alfred - The Hackathon Butler User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Alfred</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103T-F11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Alfred - The Hackathon Butler (User Guide)</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">Alfred</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103T-F11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Alfred - The Hackathon Butler User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>Team F11-1</code></p>
@@ -21,7 +21,7 @@
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code-coming-in-v1-3">3.1. Viewing help : <code>help</code> (Coming in v1.3)</a></li>
 <li><a href="#adding-an-entity-code-add-participant-mentor-team-code">3.2. Adding an Entity: <code>add {participant/mentor/team}</code></a></li>
-<li><a href="#updating-an-entity-code-edit-mentor-participant-team-id-parameters-code">3.3. Updating an Entity: <code>edit {mentor/participant/team} ID [PARAMETERS]</code></a></li>
+<li><a href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">3.3. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></li>
 <li><a href="#listing-all-entities-code-list-mentors-teams-participants-code">3.4. Listing all Entities : <code>list {mentors/teams/participants}</code></a></li>
 <li><a href="#deleting-an-entity-code-delete-participant-mentor-team-id-code">3.5. Deleting an Entity: <code>delete {participant/mentor/team} ID</code></a></li>
 <li><a href="#saving-the-data-code-save-code">3.6. Saving the data: <code>save</code></a></li>
@@ -145,7 +145,8 @@ For example in the case of <code>add {mentor/participant/list}</code>, you can c
 <div class="sect2">
 <h3 id="viewing-help-code-help-code-coming-in-v1-3"><a class="link" href="#viewing-help-code-help-code-coming-in-v1-3">3.1. Viewing help : <code>help</code> (Coming in v1.3)</a></h3>
 <div class="paragraph">
-<p>This command displays a help page in a separate pop-up window. Should you require further information,
+<p>If at anytime you don&#8217;t understand how to do a certain thing on Alfred, use this command to display a
+help page in a separate pop-up window. Should you require further information,
 the pop-up window also includes links to further references and documentation.<br></p>
 </div>
 <div class="paragraph">
@@ -155,7 +156,7 @@ the pop-up window also includes links to further references and documentation.<b
 <div class="sect2">
 <h3 id="adding-an-entity-code-add-participant-mentor-team-code"><a class="link" href="#adding-an-entity-code-add-participant-mentor-team-code">3.2. Adding an Entity: <code>add {participant/mentor/team}</code></a></h3>
 <div class="paragraph">
-<p>Use this command to add an entity for Alfred to keep track of.<br></p>
+<p>Use this command to add a new entity for Alfred to keep track of.<br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -174,7 +175,7 @@ the pop-up window also includes links to further references and documentation.<b
 <div class="sect3">
 <h4 id="adding-a-participant-code-add-participant-parameters-code"><a class="link" href="#adding-a-participant-code-add-participant-parameters-code">3.2.1. Adding a Participant: <code>add participant [PARAMETERS]</code></a></h4>
 <div class="paragraph">
-<p>Use this command to add a new Participant to Alfred to keep track of for your hackathon. Participants have the fields "Name", "Phone number" and "Email address" which you must provide. The format of the command for adding a new Participant is as described below.</p>
+<p>Use this command to add a new Participant to Alfred to keep track of for your hackathon. Participants have the parameters "Name", "Phone number" and "Email address" which you must provide. The format of the command for adding a new Participant is as described below.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>add participant n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS</code></p>
@@ -192,11 +193,13 @@ the pop-up window also includes links to further references and documentation.<b
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="adding-a-mentor-code-add-mentor-parameters-code"><a class="link" href="#adding-a-mentor-code-add-mentor-parameters-code">3.2.2. Adding a Mentor: <code>add mentor [PARAMETERS]</code></a></h4>
+<div class="sect4">
+<h5 id="adding-a-mentor-code-add-mentor-parameters-code"><a class="link" href="#adding-a-mentor-code-add-mentor-parameters-code">Adding a Mentor: <code>add mentor [PARAMETERS]</code></a></h5>
 <div class="paragraph">
-<p>Use this command to add a new Mentor to Alfred to keep track of for your hackathon. Mentors have the fields "Name", "Phone number" and "Email address" which you must provide. Additionally, they have field called "Organization" which is the organization for which they work, and a field called "Specialisation" which is the area they specialise in. The Specialisation must be chosen from the predetermined list of specialisations given in Section (some number). The format of the command for adding a new Mentor is as described below.</p>
+<p>Use this command to add a new Mentor to Alfred to keep track of for your hackathon. Mentors have the parameters "Name", "Phone number" and "Email address" which you must provide.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, they have the parameters "Organization" which is the organization for which they work, and "Specialisation" which is the area they specialise in. The Specialisation must be chosen from the predetermined list of specialisations given in Section (some number). The format of the command for adding a new Mentor is as described below.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>add mentor  n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS o/ORGANIZATION s/SPECIALISATION</code></p>
@@ -215,10 +218,14 @@ the pop-up window also includes links to further references and documentation.<b
 </ul>
 </div>
 </div>
+</div>
 <div class="sect3">
-<h4 id="adding-a-team-code-add-team-parameters-code"><a class="link" href="#adding-a-team-code-add-team-parameters-code">3.2.3. Adding a Team: <code>add team [PARAMETERS]</code></a></h4>
+<h4 id="adding-a-team-code-add-team-parameters-code"><a class="link" href="#adding-a-team-code-add-team-parameters-code">3.2.2. Adding a Team: <code>add team [PARAMETERS]</code></a></h4>
 <div class="paragraph">
-<p>Use this command to add a new Team to Alfred to keep track of for your hackathon. Teams have the fields "Name", "Project name" and "Table Number" which you must provide. Additionally, they have a field called "Subject" which is the area the team&#8217;s project focusses on, and must be chosen from the predetermined list of subjects given in Section (some number). The format of the command for adding a new Team is as described below.</p>
+<p>Use this command to add a new Team to Alfred to keep track of for your hackathon. Teams have the parameters "Name", "Project name" and "Table Number" which you must provide.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, they have the parameters "Subject" which is the area the team&#8217;s project focuses on, and must be chosen from the predetermined list of subjects given in Section (some number). The format of the command for adding a new Team is as described below.</p>
 </div>
 <div class="paragraph">
 <p>Format: <code>add team n/NAME s/SUBJECT pn/PROJECT_NAME pt/PROJECT_TYPE l/TABLE_NUMBER</code></p>
@@ -239,19 +246,22 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-an-entity-code-edit-mentor-participant-team-id-parameters-code"><a class="link" href="#updating-an-entity-code-edit-mentor-participant-team-id-parameters-code">3.3. Updating an Entity: <code>edit {mentor/participant/team} ID [PARAMETERS]</code></a></h3>
+<h3 id="updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code"><a class="link" href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">3.3. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></h3>
 <div class="paragraph">
-<p>Edits an entity based on the supplied parameter values you supply.</p>
+<p>Edits an entity based on the parameter values you supply. Use this command in case you want to make changes to an entity you have already created within Alfred.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Updates the fields of the Entity with the <code>ID</code> you specified to the new fields you type in as the parameter. The ID is the unique identifier for the particular Entity you wish to edit.</p>
+<p>Updates the fields of the Entity with the <code>ENTITY_ID</code> you specified to the new fields you type in as the parameter. The ID is the unique identifier for the particular Entity you wish to edit.</p>
 </li>
 <li>
 <p>You must provide at least one of the optional fields.</p>
+</li>
+<li>
+<p>The fields you provide must pertain to the specified entity in order for the edit to be successful. For instance, you cannot add a field "pn/NewProjectName" for a participant as a participant doesn&#8217;t have a project name.</p>
 </li>
 <li>
 <p>Existing values will be updated to the input values you provide.</p>
@@ -266,13 +276,13 @@ the pop-up window also includes links to further references and documentation.<b
 <div class="ulist">
 <ul>
 <li>
-<p>`edit mentor M01 n/NewMentorName `</p>
+<p><code>edit mentor M-1 n/NewMentorName</code> sets the name of the mentor with ID M-1 to "NewMentorName"</p>
 </li>
 <li>
-<p><code>edit team T01 n/NewTeamName pn/New Project Name</code></p>
+<p><code>edit team T-1 n/NewTeamName pn/New Project Name</code> sets the name of the team with ID T-1 to "NewTeamName" and their project name to "New Project Name"</p>
 </li>
 <li>
-<p><code>edit participant P01 n/NewParticipantNAme</code></p>
+<p><code>edit participant P-1 n/NewParticipantNAme</code> sets the name of the participant with ID P-1 to "NewParticipantName"</p>
 </li>
 </ul>
 </div>
@@ -287,17 +297,14 @@ the pop-up window also includes links to further references and documentation.<b
 <div class="ulist">
 <ul>
 <li>
-<p>The fields of the Entity will be displayed on the Graphical User Interface.</p>
+<p>The fields of the Entity will be displayed on Alfred&#8217;s Graphical User Interface.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Examples:
-* <code>list mentors</code>
-* <code>list participant</code>
-* <code>list team</code></p>
+<p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -316,7 +323,7 @@ the pop-up window also includes links to further references and documentation.<b
 <div class="sect2">
 <h3 id="deleting-an-entity-code-delete-participant-mentor-team-id-code"><a class="link" href="#deleting-an-entity-code-delete-participant-mentor-team-id-code">3.5. Deleting an Entity: <code>delete {participant/mentor/team} ID</code></a></h3>
 <div class="paragraph">
-<p>Deletes an Entity, so that Alfred will no longer keep track of that Entity.
+<p>Use this command to delete an Entity, so that Alfred no longer keeps track of that Entity.
 This is a permanent operation, so please be careful.</p>
 </div>
 <div class="sidebarblock">
@@ -379,7 +386,7 @@ There is no need for you to save the data manually.</p>
 <div class="sect2">
 <h3 id="judging-and-leaderboard-features"><a class="link" href="#judging-and-leaderboard-features">3.8. Judging and Leaderboard Features</a></h3>
 <div class="sect3">
-<h4 id="list-team-ranking-code-leaderboard-code"><a class="link" href="#list-team-ranking-code-leaderboard-code">3.8.1. List Team Ranking: <code>leaderboard</code></a></h4>
+<h4 id="show-team-ranking-code-leaderboard-code"><a class="link" href="#show-team-ranking-code-leaderboard-code">3.8.1. Show Team Ranking: <code>leaderboard</code></a></h4>
 <div class="paragraph">
 <p>Use this command to display the ranking of the teams in the hackathon in descending order of their points. Once you run this command, Alfred&#8217;s UI will display a list of all the teams stored within Alfred sorted in descending order of their points.</p>
 </div>
@@ -388,6 +395,17 @@ There is no need for you to save the data manually.</p>
 <h4 id="get-the-top-k-teams-code-gettop-number-code"><a class="link" href="#get-the-top-k-teams-code-gettop-number-code">3.8.2. Get the top k teams: <code>getTop NUMBER</code></a></h4>
 <div class="paragraph">
 <p>Use this command to list the top k teams in the leaderboard, where k is a number (NUMBER) which you specify. Essentially, this command will show you a cropped version of the leaderboard. Upon running this command, Alfed&#8217;s UI will display a list of top "k" teams based on their current score.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If you input <code>NUMBER</code> as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon in descending order of their points.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -402,17 +420,25 @@ There is no need for you to save the data manually.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Do note that if you input "k" as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon.</p>
-</div>
 </div>
 <div class="sect3">
 <h4 id="add-points-code-score-add-team_id-points-code"><a class="link" href="#add-points-code-score-add-team_id-points-code">3.8.3. Add points: <code>score add TEAM_ID POINTS</code></a></h4>
 <div class="paragraph">
 <p>Adds the value of POINTS to the current score of the team with ID TEAM_ID. Use this command when you want to award a particular team a certain amount of points.</p>
 </div>
-<div class="paragraph">
-<p>Do note that if you try to award more than the maximum amount of points (which is set to 100 points as default), Alfred will not allow it and will display an error message. If the addition of points makes the team&#8217;s total exceed the maximum, the score will simply be set to the maximum score.</p>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If you try to award more than the maximum amount of points (which is set to 100 points as default), Alfred will not allow it and will display an error message.</p>
+</li>
+<li>
+<p>If the addition of points makes the team&#8217;s total exceed the maximum, the score will simply be set to the maximum score.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -433,8 +459,19 @@ There is no need for you to save the data manually.</p>
 <div class="paragraph">
 <p>Deducts the value of POINTS from the current score of the team with ID TEAM_ID. Use this command when you want to take away a certain amount of points from a particular team.</p>
 </div>
-<div class="paragraph">
-<p>Do note that if you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message. If the subtraction of points makes the team&#8217;s total go below the minimum (which is set to 0 points), the score will simply be set to 0.</p>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.</p>
+</li>
+<li>
+<p>If the subtraction of points makes the team&#8217;s total go below the minimum (which is set to 0 points), the score will simply be set to 0.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -455,8 +492,19 @@ There is no need for you to save the data manually.</p>
 <div class="paragraph">
 <p>Sets the score of the team with ID TEAM_ID to a new score NEW_POINTS, regardless of the team&#8217;s current score. Use this command when you want to set a team&#8217;s score to an exact score, rather than adding or subtracting points from their current score.</p>
 </div>
-<div class="paragraph">
-<p>Do note that if you try to set more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.</p>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>If you try to set more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.</p>
+</li>
+<li>
+<p>If you try to set less than the minimum amount of points (which is set to 0 as default), Alfred will not allow it and will display an error message.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -524,9 +572,13 @@ application properly!</p>
 <h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">3.12.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Add swag to inventory
-Examples: <code>add swag Android Plushie 5</code>
-==== Track inventory of available swags: <code>list swag</code>
-List the currently available swag</p>
+Examples: <code>add swag Android Plushie 5</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="track-inventory-of-available-swags-code-list-swag-code"><a class="link" href="#track-inventory-of-available-swags-code-list-swag-code">3.12.2. Track inventory of available swags: <code>list swag</code></a></h4>
+<div class="paragraph">
+<p>List the currently available swag</p>
 </div>
 </div>
 </div>
@@ -625,4 +677,4 @@ e.g. <code>find James Jake</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 15:31:30 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 15:48:37 UTC</div></div></div></body></html>
