@@ -10,6 +10,9 @@ import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
 
+/**
+ * Parses input arguments and creates a new {@link SubtractScoreCommand} object.
+ */
 public class SubtractScoreCommandParser implements Parser<SubtractScoreCommand> {
 
     @Override

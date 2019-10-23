@@ -1,12 +1,14 @@
 package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Score;
 

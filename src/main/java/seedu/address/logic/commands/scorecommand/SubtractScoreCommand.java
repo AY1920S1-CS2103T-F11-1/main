@@ -2,6 +2,7 @@ package seedu.address.logic.commands.scorecommand;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX;
+
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -11,6 +12,9 @@ import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 
+/**
+ * Subtracts a score from a team's current score.
+ */
 public class SubtractScoreCommand extends ScoreCommand {
 
     public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Subtracted %1$s points from %2$s's score";

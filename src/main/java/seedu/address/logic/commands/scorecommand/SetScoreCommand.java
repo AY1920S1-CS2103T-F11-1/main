@@ -12,6 +12,9 @@ import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 
+/**
+ * Sets the specified team's score to match the given score.
+ */
 public class SetScoreCommand extends ScoreCommand {
 
     public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Changed %1$s's score to : %2$s";

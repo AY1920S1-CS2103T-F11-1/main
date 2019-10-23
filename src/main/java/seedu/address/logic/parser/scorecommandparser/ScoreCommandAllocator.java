@@ -8,6 +8,10 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.CommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Allocates the user's score command input to the correct parser in order to
+ * call the appropriate score command parser depending on the scenario.
+ */
 public class ScoreCommandAllocator implements CommandAllocator<ScoreCommand> {
 
     @Override
@@ -22,20 +26,20 @@ public class ScoreCommandAllocator implements CommandAllocator<ScoreCommand> {
         String args = AlfredParserUtil.getArgumentsFromCommand(userInput);
 
         switch (type) {
-            case CliSyntax.SCORE_ADD:
-                return new AddScoreCommandParser().parse(args);
+        case CliSyntax.SCORE_ADD:
+            return new AddScoreCommandParser().parse(args);
 
-            case CliSyntax.SCORE_UPDATE:
-                return new SetScoreCommandParser().parse(args);
+        case CliSyntax.SCORE_UPDATE:
+            return new SetScoreCommandParser().parse(args);
 
-            case CliSyntax.SCORE_SUBTRACT:
-                return new SubtractScoreCommandParser().parse(args);
+        case CliSyntax.SCORE_SUBTRACT:
+            return new SubtractScoreCommandParser().parse(args);
 
-            case CliSyntax.SCORE_RESET:
-                return new ResetScoreCommandParser().parse(args);
+        case CliSyntax.SCORE_RESET:
+            return new ResetScoreCommandParser().parse(args);
 
-            default:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ScoreCommand.MESSAGE_USAGE));
         }
     }

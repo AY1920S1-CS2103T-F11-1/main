@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.scorecommand;
 
-
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Score;
@@ -32,10 +32,10 @@ public abstract class ScoreCommand extends Command {
     protected Id id;
     protected Score score;
 
-    public ScoreCommand(Id TeamId, Score score) {
-        requireNonNull(TeamId);
+    public ScoreCommand(Id teamId, Score score) {
+        requireNonNull(teamId);
         requireNonNull(score);
-        this.id = TeamId;
+        this.id = teamId;
         this.score = score;
     }
 }

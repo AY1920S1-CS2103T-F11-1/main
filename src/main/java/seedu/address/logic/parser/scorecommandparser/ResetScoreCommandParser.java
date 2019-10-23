@@ -11,6 +11,9 @@ import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
 
+/**
+ * Parses input arguments and creates a new {@link SetScoreCommand} object to set the score to 0.
+ */
 public class ResetScoreCommandParser implements Parser<ScoreCommand> {
 
     @Override
