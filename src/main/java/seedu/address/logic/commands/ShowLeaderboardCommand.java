@@ -25,12 +25,4 @@ public class ShowLeaderboardCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.L);
     }
 
-    private void listResults(List<Team> results) {
-        for (int i = 0; i < results.size(); i++) {
-            Team result = results.get(i);
-            System.out.println(
-                    String.format("%d. Name: %s, ID: %s " + result.getScore().getScore(), i + 1, result.getName(), result.getId()));
-        }
-    }
-
 }

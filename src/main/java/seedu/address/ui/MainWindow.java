@@ -211,6 +211,11 @@ public class MainWindow extends UiPart<Stage> {
                 entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
                 break;
 
+            case K:
+                listPanel = new TeamListPanel(logic.getTopKTeams());
+                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                break;
+
             case P:
                 listPanel = new ParticipantListPanel(logic.getFilteredParticipantList());
                 entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
@@ -219,8 +224,6 @@ public class MainWindow extends UiPart<Stage> {
             default:
                 logger.info("The command does not edit any of the list of Entity");
                 break;
-
-
             }
 
             return commandResult;

@@ -14,6 +14,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetTopTeamsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ShowLeaderboardCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
@@ -81,6 +82,7 @@ public class AlfredParser {
         case DeleteCommand.COMMAND_WORD:
             logger.info("Deleting an existing Participant...");
             return new DeleteCommandAllocator().allocate(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -92,6 +94,9 @@ public class AlfredParser {
 
         case ShowLeaderboardCommand.COMMAND_WORD:
             return new ShowLeaderboardCommand();
+
+        case GetTopTeamsCommand.COMMAND_WORD:
+            return new GetTopTeamsCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandAllocator().allocate(arguments);
