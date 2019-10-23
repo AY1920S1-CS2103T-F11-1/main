@@ -60,4 +60,10 @@ public class DeleteMentorCommand extends DeleteCommand {
     public String toString() {
         return "DeleteMentorCommand";
     }
+
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteMentorCommand // instanceof handles nulls
+                && id.equals(((DeleteMentorCommand) other).id));
+    }
 }

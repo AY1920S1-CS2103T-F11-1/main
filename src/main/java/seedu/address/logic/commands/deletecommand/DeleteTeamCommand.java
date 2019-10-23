@@ -47,4 +47,10 @@ public class DeleteTeamCommand extends DeleteCommand {
     public String toString() {
         return "DeleteTeamCommand";
     }
+
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteTeamCommand // instanceof handles nulls
+                && id.equals(((DeleteTeamCommand) other).id));
+    }
 }

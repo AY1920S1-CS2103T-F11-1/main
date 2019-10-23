@@ -71,4 +71,9 @@ public class AddParticipantCommand extends AddCommand {
         return "AddParticipantCommand";
     }
 
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddParticipantCommand // instanceof handles nulls
+                && participant.equals(((AddParticipantCommand) other).participant));
+    }
 }

@@ -48,4 +48,10 @@ public class ViewTeamCommand extends ViewCommand {
     public String toString() {
         return "ViewTeamCommand";
     }
+
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewTeamCommand // instanceof handles nulls
+                && id.equals(((ViewTeamCommand) other).id));
+    }
 }

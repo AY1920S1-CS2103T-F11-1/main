@@ -49,4 +49,10 @@ public class ViewParticipantCommand extends ViewCommand {
     public String toString() {
         return "ViewParticipantCommand";
     }
+
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewParticipantCommand // instanceof handles nulls
+                && id.equals(((ViewParticipantCommand) other).id));
+    }
 }

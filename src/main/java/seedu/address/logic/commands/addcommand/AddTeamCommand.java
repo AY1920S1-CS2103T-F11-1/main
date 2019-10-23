@@ -63,4 +63,11 @@ public class AddTeamCommand extends AddCommand {
     public String toString() {
         return "AddTeamCommand";
     }
+
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddTeamCommand // instanceof handles nulls
+                && team.equals(((AddTeamCommand) other).team));
+    }
+K
 }

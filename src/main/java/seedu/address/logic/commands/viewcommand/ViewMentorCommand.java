@@ -47,4 +47,10 @@ public class ViewMentorCommand extends ViewCommand {
     public String toString() {
         return "ViewMentorCommand";
     }
+
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewMentorCommand // instanceof handles nulls
+                && id.equals(((ViewMentorCommand) other).id));
+    }
 }
