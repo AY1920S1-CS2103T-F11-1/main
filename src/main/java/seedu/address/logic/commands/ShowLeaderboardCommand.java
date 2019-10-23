@@ -2,18 +2,19 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.PrefixType;
-import seedu.address.model.entity.Team;
 
+/**
+ * Shows the full leader board as it currently stands based
+ * on the teams' scores.
+ */
 public class ShowLeaderboardCommand extends Command {
 
     public static final String COMMAND_WORD = "leaderboard";
-    private static final String MESSAGE_LEADERBOARD_HEADER = "Current Standings of Teams: ";
     public static final String MESSAGE_SUCCESS = "Showing Leaderboard as it Stands.";
+    private static final String MESSAGE_LEADERBOARD_HEADER = "Current Standings of Teams: ";
 
 
     @Override

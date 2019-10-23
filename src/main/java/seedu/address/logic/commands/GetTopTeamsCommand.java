@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.PrefixType;
 
+/**
+ * Shows the Top K teams currently in the leader board, where K is
+ * an integer the user inputs.
+ */
 public class GetTopTeamsCommand extends Command {
 
     public static final String COMMAND_WORD = "getTop";
