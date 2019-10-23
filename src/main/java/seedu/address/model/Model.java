@@ -100,6 +100,8 @@ public interface Model {
 
     SortedList<Team> getSortedTeamList();
 
+    SortedList<Team> getTopKTeams();
+
     /* Below is the API exposed for the controllers to call */
 
     /* Participant methods */
@@ -148,7 +150,9 @@ public interface Model {
 
     List<Mentor> findMentorByName(String name);
 
-    List<Team> getLeaderboard();
+    void getLeaderboard();
+
+    void getTopK(int k);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

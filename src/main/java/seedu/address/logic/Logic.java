@@ -47,6 +47,10 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the sorted list of Teams */
     ObservableList<Team> getSortedTeamList();
+
+    /** Returns an unmodifiable view of the sorted list of the top K Teams */
+    ObservableList<Team> getTopKTeams();
+
     /**
      * Returns the user prefs' address book file path.
      */

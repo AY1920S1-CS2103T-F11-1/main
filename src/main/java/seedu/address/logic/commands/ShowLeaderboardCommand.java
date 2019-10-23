@@ -19,12 +19,7 @@ public class ShowLeaderboardCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        List<Team> sortedLeaderboard = model.getLeaderboard();
-
-        //System.out.println(sortedLeaderboard);
-
-        listResults(sortedLeaderboard);
+        model.getLeaderboard();
 
         System.out.println(MESSAGE_LEADERBOARD_HEADER);
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.L);

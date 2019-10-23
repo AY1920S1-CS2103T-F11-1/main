@@ -11,11 +11,13 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+
+import seedu.address.commons.Comparators;
 import seedu.address.commons.Predicates;
-import seedu.address.commons.TeamRankingComparator;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
@@ -53,6 +55,7 @@ public class ModelManager implements Model {
     protected FilteredList<Mentor> filteredMentorList;
 
     protected SortedList<Team> sortedTeam;
+    protected SortedList<Team> topKTeams;
 
     // TODO: Remove the null values which are a placeholder due to the multiple constructors.
     // Also will have to change the relevant attributes to final.
@@ -289,6 +292,12 @@ public class ModelManager implements Model {
     public SortedList<Team> getSortedTeamList() {
         return this.sortedTeam;
     }
+
+    public SortedList<Team> getTopKTeams() {
+        return this.topKTeams;
+    }
+
+
 
     //========== Entity Methods =============================
 
@@ -650,15 +659,23 @@ public class ModelManager implements Model {
 
     //=========== Leader-Board methods ==================================================================
 
-    public List<Team> getLeaderboard() {
-        List<Team> results = new ArrayList<>();
-        for (Team t : this.teamList.getSpecificTypedList()) {
-            results.add(t);
-        }
-        results.sort(new TeamRankingComparator());
-        System.out.println(results);
-        this.sortedTeam.setComparator(new TeamRankingComparator());
-        return results;
+    /**
+     * Sets the sortedTeam's comparator to a {@code TeamRankingComparator} in order
+     * for the teams to be ranked by their score in the sortedTeam list.
+     */
+    public void getLeaderboard() {
+        this.sortedTeam.setComparator(Comparators.rankByScore());
+    }
+
+    /**
+     * Sorts the sortedTeam list by the value of the team's score and
+     */
+    public void getTopK(int k) {
+        this.sortedTeam.setComparator(Comparators.rankByScore());
+        int maxIndex =  this.teamList.getSpecificTypedList().size();
+        ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
+        teams.remove(k, maxIndex);
+        this.topKTeams = new SortedList<>(teams);
     }
 
 
