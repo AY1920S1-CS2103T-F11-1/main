@@ -799,9 +799,13 @@ public class ModelManager implements Model {
             TeamList.setLastUsedId(hr.getTeamListLastUsedId());
 
             //Update each of the EntityLists to the state in the ModelHistoryRecord hr
-            this.participantList = hr.getParticipantList();
-            this.mentorList = hr.getMentorList();
-            this.teamList = hr.getTeamList();
+            try {
+                this.participantList = hr.getParticipantList().copy();
+                this.mentorList = hr.getMentorList().copy();
+                this.teamList = hr.getTeamList().copy();
+            } catch (AlfredModelException e) {
+                throw new AlfredModelHistoryException("Unable to copy EntityLists from ModelHistoryRecord");
+            }
 
             //Update each of the filteredEntityLists
             this.filteredParticipantList =

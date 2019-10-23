@@ -23,6 +23,7 @@ import seedu.address.testutil.TypicalMentors;
 import seedu.address.testutil.TypicalParticipants;
 import seedu.address.testutil.TypicalTeams;
 
+//@Disabled
 class ModelHistoryManagerTest {
     private ParticipantList pList;
     private MentorList mList;

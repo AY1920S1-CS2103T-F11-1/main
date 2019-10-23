@@ -1,10 +1,13 @@
 package seedu.address.model;
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.Command;
+import seedu.address.model.entity.Participant;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.TeamList;
@@ -41,19 +44,39 @@ public class ModelHistoryManager implements ModelHistory {
                                                                    null); //Command is initialised to null
             this.current = initRecord;
             this.history = new LinkedList<ModelHistoryRecord>();
-            addToHistory(initRecord);
+            this.history.add(this.current);
         } catch (AlfredException e) {
             throw new AlfredModelHistoryException("Problem encountered making deep copy of EntityLists");
         }
     }
 
     private void addToHistory(ModelHistoryRecord r) {
-        if (this.history.size() <= ModelHistoryManager.capacity) {
-            this.history.add(r);
-        } else {
+        //if (this.history.size() <= ModelHistoryManager.capacity) {
+        //    int currentIndex = this.history.indexOf(this.current);
+        //    if (currentIndex != this.history.size() - 1) {
+        //        //Current state has possible redos. Adding a new command to history invalidates the future redos.
+        //        this.history = new LinkedList(this.history.subList(0, currentIndex + 1)); //toIndex is exclusive
+        //    }
+        //    this.history.add(r);
+        //} else {
+        //    this.history.remove(0);
+        //    this.history.add(r);
+        //}
+        //This method's logic is responsible for ensuring a valid sequence of commands for Undo/Redo
+        if (this.history.size() >= ModelHistoryManager.capacity) {
+            System.out.println("In greater than capacity");
             this.history.remove(0);
-            this.history.add(r);
         }
+
+        int currentIndex = this.history.indexOf(this.current);
+        System.out.println("Current index: " + currentIndex); //DEBUG
+        if (currentIndex != this.history.size() - 1) {
+            System.out.println("In invalidation of redos command history");
+            //Current state has possible redos. Adding a new command to history invalidates the future redos.
+            this.history = new LinkedList(this.history.subList(0, currentIndex + 1)); //toIndex is exclusive
+        }
+        this.history.add(r);
+        this.current = r;
     }
 
     /**
@@ -75,7 +98,6 @@ public class ModelHistoryManager implements ModelHistory {
                                                                   mList, mListId,
                                                                   tList, tListId,
                                                                   c);
-            this.current = newRecord;
             addToHistory(newRecord);
         } catch (AlfredException e) {
             throw new AlfredModelHistoryException("Problem encountered making deep copy of EntityLists");
@@ -99,8 +121,11 @@ public class ModelHistoryManager implements ModelHistory {
      * @return boolean indicating whether an redo is possible.
      */
     public boolean canRedo() {
-        //TODO: Update this in v1.3-4
-        return false;
+        if (this.history.indexOf(this.current) == this.history.size() - 1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -116,7 +141,6 @@ public class ModelHistoryManager implements ModelHistory {
             ParticipantList.setLastUsedId(this.current.getParticipantListLastUsedId());
             MentorList.setLastUsedId(this.current.getMentorListLastUsedId());
             TeamList.setLastUsedId(this.current.getTeamListLastUsedId());
-            System.out.println(getCommandHistory()); //DEBUG
             return this.current;
         } else {
             throw new AlfredModelHistoryException("Unable to undo any further!");
@@ -124,16 +148,22 @@ public class ModelHistoryManager implements ModelHistory {
     }
 
     public String getCommandHistory() {
-        int index = 1;
         String commandHistory = "";
+        int currentIndex = this.history.indexOf(this.current);
+        System.out.println("Current Index: " + currentIndex);
+        for (int j = this.history.size() - 1; j > currentIndex; j--) {
+            Command futureCommand = this.history.get(j).getCommand();
+            commandHistory += ((j - currentIndex) + ": " + futureCommand + "\n");
+        }
+        commandHistory += "=============================================================\n";
+
+        int index = 1;
         for (int j = this.history.indexOf(this.current); j >= 0; j--) {
             Command histCommand = this.history.get(j).getCommand();
             if (histCommand == null) {
                 commandHistory += "*: Initialised State. Cannot undo.\n";
-                //System.out.println("*: Initialised State. Cannot undo");
             } else {
                 commandHistory += (index + ": " + histCommand + "\n");
-                //System.out.println(index + ": " + histCommand);
             }
             index++;
         }
