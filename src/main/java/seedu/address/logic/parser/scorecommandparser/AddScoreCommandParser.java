@@ -1,5 +1,7 @@
 package seedu.address.logic.parser.scorecommandparser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.scorecommand.AddScoreCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.Parser;
@@ -16,7 +18,6 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         String id;
         Id teamId;
         Score teamScore;
-        System.out.println(args);
 
         try {
             id = AlfredParserUtil.getSpecifierFromCommand(args);
@@ -24,7 +25,7 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
             teamId = AlfredParserUtil.parseIndex(id, PrefixType.T);
             teamScore = AlfredParserUtil.parseScore(score);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(pe.getMessage(), AddScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
         }
         return new AddScoreCommand(teamId, teamScore);
     }

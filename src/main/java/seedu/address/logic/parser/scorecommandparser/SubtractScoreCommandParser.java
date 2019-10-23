@@ -1,5 +1,7 @@
 package seedu.address.logic.parser.scorecommandparser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.Parser;
@@ -17,15 +19,14 @@ public class SubtractScoreCommandParser implements Parser<SubtractScoreCommand> 
         Id teamId;
         Score teamScore;
 
-        System.out.println(args);
-
         try {
             id = AlfredParserUtil.getSpecifierFromCommand(args);
             score = AlfredParserUtil.getArgumentsFromCommand(args);
             teamId = AlfredParserUtil.parseIndex(id, PrefixType.T);
             teamScore = AlfredParserUtil.parseScore(score);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(pe.getMessage(), SubtractScoreCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SubtractScoreCommand.MESSAGE_USAGE));
         }
 
         return new SubtractScoreCommand(teamId, teamScore);
