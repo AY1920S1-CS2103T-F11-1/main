@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+
     private Stage primaryStage;
     private Logic logic;
 
@@ -39,6 +41,8 @@ public class MainWindow extends UiPart<Stage> {
     private EntityListPanel listPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -67,8 +71,10 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+
         helpWindow = new HelpWindow();
     }
+
 
     public Stage getPrimaryStage() {
         return primaryStage;

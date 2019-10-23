@@ -1,5 +1,7 @@
 package seedu.address.logic.parser.addcommandparser;
 
+import java.util.logging.Logger;
+import seedu.address.commons.core.LogsCenter;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -33,6 +35,8 @@ import seedu.address.model.entitylist.TeamList;
  */
 public class AddTeamCommandParser implements Parser<AddTeamCommand> {
 
+    private final Logger logger = new LogsCenter().getLogger(AddTeamCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -45,6 +49,7 @@ public class AddTeamCommandParser implements Parser<AddTeamCommand> {
 
         if (!AlfredParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PROJECT_NAME, PREFIX_PROJECT_TYPE,
                 PREFIX_LOCATION, PREFIX_SUBJECT_NAME) || !argMultimap.getPreamble().isEmpty()) {
+            logger.severe("Parse exceptiion is thrown");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTeamCommand.MESSAGE_USAGE));
         }
@@ -61,6 +66,7 @@ public class AddTeamCommandParser implements Parser<AddTeamCommand> {
 
         Team team = new Team(id, name, participants, mentor, subject, score, projectName, projectType, location);
 
+        logger.info("New team added with the following information: " + team.toString());
         return new AddTeamCommand(team);
     }
 }

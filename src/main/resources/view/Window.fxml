@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.StackPane?>
+<AnchorPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.Window">
+   <children>
+      <BorderPane prefHeight="700.0" prefWidth="700.0">
+         <left>
+            <AnchorPane fx:id="sidebar" prefHeight="555.0" prefWidth="160.0" style="-fx-background-color: f0f7ff;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutY="-2.0" prefHeight="700.0" prefWidth="35.0" style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </AnchorPane>
+                  <JFXButton fx:id="participantButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0" layoutY="8.0" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="160.0" text="Participants">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3083cc" glyphName="USER" size="17" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="teamButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0" layoutY="68.0" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="160.0" text="Teams">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3083cc" glyphName="USERS" size="17" textAlignment="JUSTIFY" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="mentorButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0" layoutY="128.0" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="160.0" text="Mentors">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3083cc" glyphName="USER_SECRET" size="17" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="leaderboardButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0" layoutY="230.0" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="160.0" text="Leaderboard">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3083cc" glyphName="TROPHY" size="17" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="foodButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="5.0" layoutY="322.0" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="160.0" text="Food">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3083cc" glyphName="CUTLERY" size="17" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="swagButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0" layoutY="382.0" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="160.0" text="Swag">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3083cc" glyphName="SHOPPING_BASKET" size="17" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="inventoryButton" alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0" layoutY="442.0" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="160.0" text="Inventory">
+                     <graphic>
+                        <FontAwesomeIconView fill="#3083cc" glyphName="ARCHIVE" size="17" text="" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </AnchorPane>
+         </left>
+         <center>
+             <AnchorPane prefHeight="555.0" prefWidth="520.0" BorderPane.alignment="CENTER">
+                 <StackPane fx:id="entityListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+
+            </AnchorPane>
+         </center>
+         <bottom>
+            <VBox prefHeight="120.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="50.0" prefWidth="700.0">
+                     <children>
+                         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+                             <padding>
+                                 <Insets top="5" right="10" bottom="5" left="10" />
+                             </padding>
+                         </StackPane>
+                        <JFXButton fx:id="sendButton" alignment="BOTTOM_CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="30.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="#3083cc" glyphName="PAPER_PLANE" size="25" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                   <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                              minHeight="100" prefHeight="100" maxHeight="100">
+                       <padding>
+                           <Insets top="5" right="10" bottom="5" left="10" />
+                       </padding>
+                   </StackPane>
+                   <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+               </children>
+            </VBox>
+         </bottom>
+         <top>
+            <MenuBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="700.0" style="-fx-background-color: #e5e8e8;" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu fx:id="fileButton" mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu fx:id="helpMenuItem" mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu fx:id="aboutButton" mnemonicParsing="false" text="About">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+                  <Menu fx:id="closeButton" mnemonicParsing="false" text="Close">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+              </menus>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </MenuBar>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
