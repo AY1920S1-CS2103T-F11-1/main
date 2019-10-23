@@ -19,8 +19,8 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
         System.out.println(args);
 
         try {
-            id = AlfredParserUtil.getEntityFromCommand(args, "Won't be here.");
-            score = AlfredParserUtil.getArgumentsFromCommand(args, "Won't be here.");
+            id = AlfredParserUtil.getSpecifierFromCommand(args);
+            score = AlfredParserUtil.getArgumentsFromCommand(args);
             teamId = AlfredParserUtil.parseIndex(id, PrefixType.T);
             teamScore = AlfredParserUtil.parseScore(score);
         } catch (ParseException pe) {

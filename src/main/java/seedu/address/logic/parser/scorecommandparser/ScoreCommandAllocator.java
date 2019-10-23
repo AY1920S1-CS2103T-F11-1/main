@@ -12,16 +12,16 @@ public class ScoreCommandAllocator implements CommandAllocator<ScoreCommand> {
 
     @Override
     public ScoreCommand allocate(String userInput) throws ParseException {
-        String entity;
+        String type;
         try {
-            entity = AlfredParserUtil.getEntityFromCommand(userInput, ScoreCommand.MESSAGE_USAGE);
+            type = AlfredParserUtil.getSpecifierFromCommand(userInput);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScoreCommand.MESSAGE_USAGE));
         }
 
-        String args = AlfredParserUtil.getArgumentsFromCommand(userInput, ScoreCommand.MESSAGE_USAGE);
+        String args = AlfredParserUtil.getArgumentsFromCommand(userInput);
 
-        switch (entity) {
+        switch (type) {
             case CliSyntax.SCORE_ADD:
                 return new AddScoreCommandParser().parse(args);
 

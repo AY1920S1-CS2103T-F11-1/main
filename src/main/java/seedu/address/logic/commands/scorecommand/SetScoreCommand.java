@@ -8,13 +8,14 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 
 public class SetScoreCommand extends ScoreCommand {
 
     public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Changed %1$s's score to : %2$s";
-    public static final String COMMAND_WORD = "score update";
+    public static final String COMMAND_WORD = "score set";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": updates the specified team's score to match the score mentioned. \n"
             + "Format: " + COMMAND_WORD + " [teamID] [new score] \n"
@@ -42,7 +43,7 @@ public class SetScoreCommand extends ScoreCommand {
         }
 
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
-                teamToScore.getName().toString(), score.toString()));
+                teamToScore.getName().toString(), score.toString()), PrefixType.T);
     }
 
     @Override

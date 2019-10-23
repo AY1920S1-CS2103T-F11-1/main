@@ -7,6 +7,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
+import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 
@@ -42,7 +43,7 @@ public class SubtractScoreCommand extends ScoreCommand {
         }
 
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
-                score.toString(), teamToScore.getName().toString()));
+                score.toString(), teamToScore.getName().toString()), PrefixType.T);
     }
 
     @Override
