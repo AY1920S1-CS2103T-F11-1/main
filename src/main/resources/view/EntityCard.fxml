@@ -13,12 +13,12 @@
 <?import javafx.scene.image.Image?>
 <?import java.net.URL?>
 <?import javafx.scene.layout.StackPane?>
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="20" prefWidth="200"/>
         </columnConstraints>
-        <VBox id="labels" fx:id="labels" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+        <VBox id="labels" fx:id="labels" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" >
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15"/>
             </padding>
@@ -26,7 +26,7 @@
                 <Label id="index" fx:id="index"></Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
             </HBox>
-            <FlowPane fx:id="tags"/>
+            <FlowPane id="tags"/>
         </VBox>
         <StackPane alignment="CENTER">
             <children>

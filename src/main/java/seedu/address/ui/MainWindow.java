@@ -1,10 +1,10 @@
 package seedu.address.ui;
 
+import com.jfoenix.controls.JFXButton;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -19,9 +19,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.ui.entitylistpanel.EntityListPanel;
-import seedu.address.ui.entitylistpanel.MentorListPanel;
-import seedu.address.ui.entitylistpanel.ParticipantListPanel;
-import seedu.address.ui.entitylistpanel.TeamListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -58,6 +55,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private JFXButton participantsButton, teamsButton, mentorsButton, leaderboardButton;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         //Displays the list of teams during application start up
-        listPanel = new TeamListPanel(logic.getFilteredTeamList());
+        listPanel = new EntityListPanel(logic.getFilteredTeamList());
         entityListPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -174,9 +174,56 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void displayParticipantList() {
+        listPanel = new EntityListPanel(logic.getFilteredParticipantList());
+
+        entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+        entityListPanelPlaceholder.setStyle("-fx-background-color: #5d6d7e");
+        logger.info("Color of entity list placeholder is: " + entityListPanelPlaceholder.getStyle());
+    }
+
+    @FXML
+    private void displayTeamList() {
+        listPanel = new EntityListPanel(logic.getFilteredTeamList());
+        entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+        entityListPanelPlaceholder.setStyle("-fx-background-color:#abb2b9");
+        logger.info("Color of entity list placeholder is: " + entityListPanelPlaceholder.getStyle());
+
+    }
+
+    @FXML
+    private void displayMentorList() {
+        listPanel = new EntityListPanel(logic.getFilteredMentorList());
+        entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+        entityListPanelPlaceholder.setStyle("-fx-background-color: #17202a");
+        logger.info("Color of entity list placeholder is: " + entityListPanelPlaceholder.getStyle());
+
+    }
+
     public EntityListPanel getListPanel() {
         return listPanel;
     }
+
+    /**
+     * Disarms or resets all buttons so that a new command can be carried out.
+     * The new command will arm a new button.
+     */
+    private void disarmAllButton() {
+        //TODO: shorten this
+        //Any ideas on how to shorten this method?
+        if (participantsButton.isArmed()) {
+            participantsButton.disarm();
+        }
+        if (teamsButton.isArmed()) {
+            teamsButton.disarm();
+        }
+        if (mentorsButton.isArmed()) {
+           mentorsButton.disarm();
+        }
+
+    }
+
 
     /**
      * Executes the command and returns the result.
@@ -203,19 +250,23 @@ public class MainWindow extends UiPart<Stage> {
             //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
             switch (type) {
             case M:
-                listPanel = new MentorListPanel(logic.getFilteredMentorList());
-                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                disarmAllButton();
+                this.mentorsButton.arm();
+                this.mentorsButton.fire();
                 break;
 
             case T:
-                listPanel = new TeamListPanel(logic.getFilteredTeamList());
-                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                disarmAllButton();
+                this.teamsButton.arm();
+                this.teamsButton.fire();
                 break;
 
             case P:
-                listPanel = new ParticipantListPanel(logic.getFilteredParticipantList());
-                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                disarmAllButton();
+                this.participantsButton.arm();
+               this.participantsButton.fire();
                 break;
+
 
             default:
                 logger.info("The command does not edit any of the list of Entity");

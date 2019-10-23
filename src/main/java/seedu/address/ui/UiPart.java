@@ -67,7 +67,7 @@ public abstract class UiPart<T> {
     private void loadFxmlFile(URL location, T root) {
         requireNonNull(location);
         fxmlLoader.setLocation(location);
-        fxmlLoader.setController(MainWindow.class);
+        fxmlLoader.setController(this);
         fxmlLoader.setRoot(root);
         try {
             fxmlLoader.load();
