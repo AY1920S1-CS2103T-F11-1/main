@@ -60,11 +60,6 @@ public class AddTeamCommand extends AddCommand {
     }
 
     @Override
-    public String toString() {
-        return "AddTeamCommand";
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddTeamCommand // instanceof handles nulls

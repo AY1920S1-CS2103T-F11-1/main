@@ -72,11 +72,6 @@ public class AddMentorCommand extends AddCommand {
     }
 
     @Override
-    public String toString() {
-        return "AddMentorCommand";
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddMentorCommand // instanceof handles nulls

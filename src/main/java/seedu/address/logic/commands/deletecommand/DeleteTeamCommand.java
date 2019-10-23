@@ -44,11 +44,6 @@ public class DeleteTeamCommand extends DeleteCommand {
     }
 
     @Override
-    public String toString() {
-        return "DeleteTeamCommand";
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteTeamCommand // instanceof handles nulls

@@ -132,7 +132,7 @@ public class ModelHistoryManager implements ModelHistory {
         int currentIndex = this.history.indexOf(this.current);
         for (int j = this.history.size() - 1; j > currentIndex; j--) {
             Command futureCommand = this.history.get(j).getCommand();
-            commandHistory += ((j - currentIndex) + ": " + futureCommand + "\n");
+            commandHistory += ((j - currentIndex) + ": " + futureCommand.getClass().getSimpleName() + "\n");
         }
 
         //Delimiter
@@ -145,7 +145,7 @@ public class ModelHistoryManager implements ModelHistory {
             if (histCommand == null) {
                 commandHistory += "*: Initialised State. Cannot undo.\n";
             } else {
-                commandHistory += (index + ": " + histCommand + "\n");
+                commandHistory += (index + ": " + histCommand.getClass().getSimpleName() + "\n");
             }
             index++;
         }

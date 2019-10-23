@@ -34,9 +34,4 @@ public class FindMentorCommand extends FindCommand {
         model.updateHistory(this);
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
-    @Override
-    public String toString() {
-        return "FindMentorCommand";
-    }
 }

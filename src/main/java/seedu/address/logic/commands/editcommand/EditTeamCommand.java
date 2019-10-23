@@ -215,10 +215,4 @@ public class EditTeamCommand extends EditCommand {
                     && getLocation().equals(e.getLocation());
         }
     }
-
-    @Override
-    public String toString() {
-        return "EditTeamCommand";
-    }
-
 }

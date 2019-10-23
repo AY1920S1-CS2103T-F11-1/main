@@ -44,11 +44,6 @@ public class ViewMentorCommand extends ViewCommand {
     }
 
     @Override
-    public String toString() {
-        return "ViewMentorCommand";
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewMentorCommand // instanceof handles nulls

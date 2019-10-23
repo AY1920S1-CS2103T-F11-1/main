@@ -154,9 +154,4 @@ public class EditParticipantCommand extends EditCommand {
                     && getEmail().equals(e.getEmail());
         }
     }
-
-    @Override
-    public String toString() {
-        return "EditParticipantCommand";
-    }
 }

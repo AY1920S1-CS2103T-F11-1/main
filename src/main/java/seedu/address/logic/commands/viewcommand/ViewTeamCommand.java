@@ -45,11 +45,6 @@ public class ViewTeamCommand extends ViewCommand {
     }
 
     @Override
-    public String toString() {
-        return "ViewTeamCommand";
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewTeamCommand // instanceof handles nulls

@@ -25,9 +25,4 @@ public class ListMentorCommand extends ListCommand {
         model.updateHistory(this);
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.M);
     }
-
-    @Override
-    public String toString() {
-        return "ListMentorCommand";
-    }
 }

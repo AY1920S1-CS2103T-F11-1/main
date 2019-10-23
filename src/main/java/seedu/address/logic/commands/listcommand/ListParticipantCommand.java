@@ -24,10 +24,4 @@ public class ListParticipantCommand extends ListCommand {
         model.updateHistory(this);
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.P);
     }
-
-    @Override
-    public String toString() {
-        return "ListParticipantCommand";
-    }
-
 }

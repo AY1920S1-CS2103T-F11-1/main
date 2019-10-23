@@ -179,9 +179,4 @@ public class EditMentorCommand extends EditCommand {
                     && getSubject().equals(e.getSubject());
         }
     }
-
-    @Override
-    public String toString() {
-        return "EditMentorCommand";
-    }
 }

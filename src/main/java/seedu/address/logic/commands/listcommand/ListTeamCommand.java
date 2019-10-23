@@ -24,9 +24,4 @@ public class ListTeamCommand extends ListCommand {
         model.updateHistory(this);
         return new CommandResult(MESSAGE_SUCCESS, PrefixType.T);
     }
-
-    @Override
-    public String toString() {
-        return "ListTeamCommand";
-    }
 }
