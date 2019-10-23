@@ -210,7 +210,7 @@ Example:
 * `getTop 20` will display the top 20 teams with the highest points in the hackathon.
 
 ==== Add points: `score add TEAM_ID POINTS`
-Adds the value of POINTS to the current score of the team with ID TEAM_ID. Use this command when you want to award a particular team a certain amount of points. 
+Adds the value of POINTS to the current score of the team with ID TEAM_ID. Use this command when you want to award a particular team a certain amount of points.
 
 ****
 :tip-caption:
@@ -225,7 +225,7 @@ Example:
 * `score add T-5 60` will add 60 points to the score of the team with ID T-5.
 
 ==== Subtract points: `score sub TEAM_ID NEW_POINTS`
-Deducts the value of POINTS from the current score of the team with ID TEAM_ID. Use this command when you want to take away a certain amount of points from a particular team. 
+Deducts the value of POINTS from the current score of the team with ID TEAM_ID. Use this command when you want to take away a certain amount of points from a particular team.
 
 ****
 * If you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.
@@ -239,7 +239,7 @@ Example:
 * `score sub T-5 10` will subtract 10 points from the score of the team with ID T-5.
 
 ==== Set points: `score set TEAM_ID NEW_POINTS`
-Sets the score of the team with ID TEAM_ID to a new score NEW_POINTS, regardless of the team's current score. Use this command when you want to set a team's score to an exact score, rather than adding or subtracting points from their current score. 
+Sets the score of the team with ID TEAM_ID to a new score NEW_POINTS, regardless of the team's current score. Use this command when you want to set a team's score to an exact score, rather than adding or subtracting points from their current score.
 
 ****
 * If you try to set more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.
