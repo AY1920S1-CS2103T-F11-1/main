@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.undocommand;
 
-import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;

@@ -1,13 +1,10 @@
 package seedu.address.model;
 
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.Command;
-import seedu.address.model.entity.Participant;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.TeamList;
@@ -50,35 +47,6 @@ public class ModelHistoryManager implements ModelHistory {
         }
     }
 
-    private void addToHistory(ModelHistoryRecord r) {
-        //if (this.history.size() <= ModelHistoryManager.capacity) {
-        //    int currentIndex = this.history.indexOf(this.current);
-        //    if (currentIndex != this.history.size() - 1) {
-        //        //Current state has possible redos. Adding a new command to history invalidates the future redos.
-        //        this.history = new LinkedList(this.history.subList(0, currentIndex + 1)); //toIndex is exclusive
-        //    }
-        //    this.history.add(r);
-        //} else {
-        //    this.history.remove(0);
-        //    this.history.add(r);
-        //}
-        //This method's logic is responsible for ensuring a valid sequence of commands for Undo/Redo
-        if (this.history.size() >= ModelHistoryManager.capacity) {
-            System.out.println("In greater than capacity");
-            this.history.remove(0);
-        }
-
-        int currentIndex = this.history.indexOf(this.current);
-        System.out.println("Current index: " + currentIndex); //DEBUG
-        if (currentIndex != this.history.size() - 1) {
-            System.out.println("In invalidation of redos command history");
-            //Current state has possible redos. Adding a new command to history invalidates the future redos.
-            this.history = new LinkedList(this.history.subList(0, currentIndex + 1)); //toIndex is exclusive
-        }
-        this.history.add(r);
-        this.current = r;
-    }
-
     /**
      * Generates a new ModelHistoryRecord to record the current state of the EntityLists and their last
      * used IDs.
@@ -105,6 +73,25 @@ public class ModelHistoryManager implements ModelHistory {
     }
 
     /**
+     * Adds a ModelHistoryRecord to command history. This method checks for capacity constraints of the
+     * ModelHisxtoryManager and is responsible for ensuring a valid sequence of commands in history for Undo/Redo.
+     * @param r
+     */
+    private void addToHistory(ModelHistoryRecord r) {
+        if (this.history.size() >= ModelHistoryManager.capacity) {
+            this.history.remove(0);
+        }
+
+        int currentIndex = this.history.indexOf(this.current);
+        if (currentIndex != this.history.size() - 1) {
+            //Current state has possible redos. Adding a new command to history invalidates the future redos.
+            this.history = new LinkedList<ModelHistoryRecord>(this.history.subList(0, currentIndex + 1));
+        }
+        this.history.add(r);
+        this.current = r;
+    }
+
+    /**
      * Returns a boolean indicating whether the model can return to a previous backward state.
      * @return boolean indicating whether an undo is possible.
      */
@@ -113,18 +100,6 @@ public class ModelHistoryManager implements ModelHistory {
             return true;
         } else {
             return false;
-        }
-    }
-
-    /**
-     * Returns a boolean indicating whether the model can go a previous forward state.
-     * @return boolean indicating whether an redo is possible.
-     */
-    public boolean canRedo() {
-        if (this.history.indexOf(this.current) == this.history.size() - 1) {
-            return false;
-        } else {
-            return true;
         }
     }
 
@@ -147,16 +122,23 @@ public class ModelHistoryManager implements ModelHistory {
         }
     }
 
+    /**
+     * Returns a String representing undo-able and redo-able Command History, separated by `=` delimiter.
+     * @return String representing undo-able and redo-able Command History.
+     */
     public String getCommandHistory() {
         String commandHistory = "";
+        //Obtain Redo-able Command History
         int currentIndex = this.history.indexOf(this.current);
-        System.out.println("Current Index: " + currentIndex);
         for (int j = this.history.size() - 1; j > currentIndex; j--) {
             Command futureCommand = this.history.get(j).getCommand();
             commandHistory += ((j - currentIndex) + ": " + futureCommand + "\n");
         }
+
+        //Delimiter
         commandHistory += "=============================================================\n";
 
+        //Obtain Undo-able Command History
         int index = 1;
         for (int j = this.history.indexOf(this.current); j >= 0; j--) {
             Command histCommand = this.history.get(j).getCommand();
@@ -167,7 +149,20 @@ public class ModelHistoryManager implements ModelHistory {
             }
             index++;
         }
+
         return commandHistory;
+    }
+
+    /**
+     * Returns a boolean indicating whether the model can go a previous forward state.
+     * @return boolean indicating whether an redo is possible.
+     */
+    public boolean canRedo() {
+        if (this.history.indexOf(this.current) == this.history.size() - 1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
