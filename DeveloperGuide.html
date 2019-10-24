@@ -38,8 +38,8 @@
 <li><a href="#use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team">C.1. Use case: Find an Entity of a specific Entity Type(Participant, Mentor, Team)</a></li>
 <li><a href="#use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team">C.2. Use case: Create an Entity of a specific Entity Type(Participant, Mentor, Team)</a></li>
 <li><a href="#use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team">C.3. Use case: Update an Entity of a specific Entity Type(Participant, Mentor, Team)</a></li>
-<li><a href="#use-case-find-the-top-scoring-teams-for-each-category">C.4. Use case: Find the top scoring Teams for each category</a></li>
-<li><a href="#use-case-find-the-top-scoring-teams-for-each-category-2">C.5. Use case: Find the top scoring Teams for each category</a></li>
+<li><a href="#use-case-find-the-top-scoring-k-teams">C.4. Use case: Find the top scoring K Teams</a></li>
+<li><a href="#use-case-find-the-ranking-of-all-teams">C.5. Use case: Find the ranking of all Teams</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
@@ -48,7 +48,7 @@
 <li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
+<li><a href="#deleting-a-participant">G.2. Deleting a Participant</a></li>
 <li><a href="#saving-data">G.3. Saving data</a></li>
 </ul>
 </li>
@@ -204,7 +204,7 @@ UI image and description to be updated with the later milestones.
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>EntityListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -218,7 +218,7 @@ UI image and description to be updated with the later milestones.
 <p>Executes user commands using the <code>Logic</code> component.</p>
 </li>
 <li>
-<p>Listens for changes to <code>Model</code> data so that the UI can be updated with the modified data.</p>
+<p>Looks at the prefix type given in the CommandResult(returned after every Command is executed), as displays the specific EntityListPanel respectively.</p>
 </li>
 </ul>
 </div>
@@ -1080,11 +1080,40 @@ Steps 1a1-1a2 are repeated until the index is found in the list of Entities.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-find-the-top-scoring-teams-for-each-category"><a class="link" href="#use-case-find-the-top-scoring-teams-for-each-category">C.4. Use case: Find the top scoring Teams for each category</a></h3>
-
+<h3 id="use-case-find-the-top-scoring-k-teams"><a class="link" href="#use-case-find-the-top-scoring-k-teams">C.4. Use case: Find the top scoring K Teams</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong>
+1. User requests the top scoring K Teams, with K being the user input.
+2. HackathonManager displays the top K teams with their respective scores.
+Use case ends.</p>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The user input K is more than total number of Teams or a negative or invalid integer.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager shows an error message.</p>
+</li>
+<li>
+<p>1a2. User re-enters command with new user input of value K.
+Steps 1a1-1a2 are repeated until K is within the total number of Teams.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="use-case-find-the-top-scoring-teams-for-each-category-2"><a class="link" href="#use-case-find-the-top-scoring-teams-for-each-category-2">C.5. Use case: Find the top scoring Teams for each category</a></h3>
+<h3 id="use-case-find-the-ranking-of-all-teams"><a class="link" href="#use-case-find-the-ranking-of-all-teams">C.5. Use case: Find the ranking of all Teams</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -1309,7 +1338,7 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.2. Deleting a person</a></h3>
+<h3 id="deleting-a-participant"><a class="link" href="#deleting-a-participant">G.2. Deleting a Participant</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1359,4 +1388,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 00:07:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 00:26:32 UTC</div></div></div></body></html>
