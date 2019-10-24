@@ -254,7 +254,7 @@ public class ModelManagerStub extends ModelManager {
      * Placeholder method simulating the updating of ModelHistory
      */
     @Override
-    public void updateHistory() {
+    public void updateHistory(Command c) {
 
     }
 
