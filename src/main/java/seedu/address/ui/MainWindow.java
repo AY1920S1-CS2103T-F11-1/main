@@ -1,16 +1,19 @@
 package seedu.address.ui;
 
-import com.jfoenix.controls.JFXButton;
 import java.util.logging.Logger;
+
+import com.jfoenix.controls.JFXButton;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -57,7 +60,14 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private JFXButton participantsButton, teamsButton, mentorsButton, leaderboardButton;
+    private JFXButton participantsButton;
+
+    @FXML
+    private JFXButton teamsButton;
+
+    @FXML
+    private JFXButton mentorsButton;
+
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -174,6 +184,9 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Displays the list of Participants in Model and Storage on Graphical User Interface.
+     */
     @FXML
     private void displayParticipantList() {
         listPanel = new EntityListPanel(logic.getFilteredParticipantList());
@@ -183,6 +196,9 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Color of entity list placeholder is: " + entityListPanelPlaceholder.getStyle());
     }
 
+    /**
+     * Displays the list of Teams in Model and Storage on Graphical User Interface.
+     */
     @FXML
     private void displayTeamList() {
         listPanel = new EntityListPanel(logic.getFilteredTeamList());
@@ -192,6 +208,9 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
+    /**
+     * Displays the list of Mentors in Model and Storage on Graphical User Interface.
+     */
     @FXML
     private void displayMentorList() {
         listPanel = new EntityListPanel(logic.getFilteredMentorList());
@@ -219,9 +238,15 @@ public class MainWindow extends UiPart<Stage> {
             teamsButton.disarm();
         }
         if (mentorsButton.isArmed()) {
-           mentorsButton.disarm();
+            mentorsButton.disarm();
         }
 
+    }
+
+    private void fireButton(Button button) {
+        disarmAllButton();
+        button.arm();
+        button.fire();
     }
 
 
@@ -250,21 +275,15 @@ public class MainWindow extends UiPart<Stage> {
             //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
             switch (type) {
             case M:
-                disarmAllButton();
-                this.mentorsButton.arm();
-                this.mentorsButton.fire();
+                this.fireButton(mentorsButton);
                 break;
 
             case T:
-                disarmAllButton();
-                this.teamsButton.arm();
-                this.teamsButton.fire();
+                this.fireButton(teamsButton);
                 break;
 
             case P:
-                disarmAllButton();
-                this.participantsButton.arm();
-               this.participantsButton.fire();
+                this.fireButton(participantsButton);
                 break;
 
 

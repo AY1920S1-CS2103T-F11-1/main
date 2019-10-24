@@ -1,10 +1,14 @@
 package seedu.address.ui;
 
+import static seedu.address.Paths.MENTOR_ICON;
+import static seedu.address.Paths.STUDENT_ICON;
+import static seedu.address.Paths.TEAM_ICON;
+
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
-
 import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,7 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.MainApp;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Mentor;
@@ -27,10 +31,12 @@ import seedu.address.model.entity.Team;
  */
 public class EntityCard extends UiPart<Region> {
 
-
-    //The FXML file will be based on Entity type.
     private static final String FXML = "EntityCard.fxml";
+
+    public final Entity entity;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
+
 
 
     /**
@@ -40,8 +46,6 @@ public class EntityCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public final Entity entity;
 
     private PrefixType type;
 
@@ -90,7 +94,7 @@ public class EntityCard extends UiPart<Region> {
      * @param entity type of Entity.
      */
     private void generateParticipantCard(Entity entity) {
-        this.idIcon.setImage(getImage("/images/student_icon.png"));
+        this.idIcon.setImage(getImage(STUDENT_ICON));
         logger.info("The participant icon has been changed to: " + idIcon);
         Participant participant = (Participant) entity;
         labels.getChildren().add(new Label(participant.getPhone().value));
@@ -104,7 +108,7 @@ public class EntityCard extends UiPart<Region> {
      * @param entity type of Entity.
      */
     private void generateMentorCard(Entity entity) {
-        this.idIcon.setImage(getImage("/images/mentor_icon.png"));
+        this.idIcon.setImage(getImage(MENTOR_ICON));
         Mentor mentor = (Mentor) entity;
         labels.getChildren().add(new Label(mentor.getOrganization().toString()));
         labels.getChildren().add(new Label(mentor.getSubject().toString()));
@@ -117,7 +121,7 @@ public class EntityCard extends UiPart<Region> {
      * @param entity type of Entity.
      */
     private void generateTeamCard(Entity entity) {
-        this.idIcon.setImage(getImage("/images/team_icon.png"));
+        this.idIcon.setImage(getImage(TEAM_ICON));
         Team team = (Team) entity;
         FlowPane participantPane = new FlowPane();
         team.getParticipants().stream()

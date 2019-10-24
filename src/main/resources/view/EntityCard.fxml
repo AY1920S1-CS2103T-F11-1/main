@@ -40,8 +40,6 @@
             </children>
         </StackPane>
     </GridPane>
-    <stylesheets>
-        <URL value="@EntityCard.css" />
-    </stylesheets>
+
 
 </HBox>
