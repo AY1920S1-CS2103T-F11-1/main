@@ -3,9 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +19,6 @@ import seedu.address.model.entity.Phone;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.ProjectType;
 import seedu.address.model.entity.SubjectName;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
