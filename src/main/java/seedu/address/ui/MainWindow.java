@@ -209,9 +209,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isHistory()) {
-                handleHistory();
-            }
+            handleHistory(); //DEBUG
 
             PrefixType type = commandResult.getType();
             if (type != null) {

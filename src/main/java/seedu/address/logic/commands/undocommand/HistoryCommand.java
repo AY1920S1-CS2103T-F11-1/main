@@ -22,6 +22,6 @@ public class HistoryCommand extends Command {
      */
     public CommandResult execute(Model model) throws CommandException {
         String commandHistory = model.getCommandHistoryString();
-        return new CommandResult(commandHistory, false, false, true);
+        return new CommandResult(commandHistory, PrefixType.P);
     }
 }
