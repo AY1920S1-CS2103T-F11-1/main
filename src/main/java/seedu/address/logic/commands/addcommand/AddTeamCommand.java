@@ -50,7 +50,7 @@ public class AddTeamCommand extends AddCommand {
 
         try {
             model.addTeam(this.team);
-            model.updateHistory();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             logger.severe("The same team already exist in model");
             throw new CommandException(MESSAGE_DUPLICATE_TEAM);
@@ -59,4 +59,10 @@ public class AddTeamCommand extends AddCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.team.toString()), PrefixType.T);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddTeamCommand // instanceof handles nulls
+                && team.equals(((AddTeamCommand) other).team));
+    }
 }
