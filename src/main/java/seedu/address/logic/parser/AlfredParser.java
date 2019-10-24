@@ -83,11 +83,9 @@ public class AlfredParser {
         case DeleteCommand.COMMAND_WORD:
             logger.info("Deleting an existing Participant...");
             return new DeleteCommandAllocator().allocate(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
