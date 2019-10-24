@@ -37,12 +37,12 @@ public class EntityListPanel extends UiPart<Region> {
             if (firstItem instanceof Participant) {
                 prefix = PrefixType.P;
                 entityListView.setCellFactory(listView -> new ParticipantListViewCell());
-               panelContainer.setStyle("-fx-background-color: #5d6d7e");
+                panelContainer.setStyle("-fx-background-color: #5d6d7e");
 
             } else if (firstItem instanceof Team) {
                 prefix = PrefixType.T;
                 entityListView.setCellFactory(listView -> new TeamListViewCell());
-               panelContainer.setStyle("-fx-background-color:#abb2b9");
+                panelContainer.setStyle("-fx-background-color:#abb2b9");
             } else if (firstItem instanceof Mentor) {
                 prefix = PrefixType.M;
                 entityListView.setCellFactory(listView -> new MentorListViewCell());
