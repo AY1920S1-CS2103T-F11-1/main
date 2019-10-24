@@ -87,8 +87,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Initializes the various lists used. If storage contains no data, it defaults to loading
-     * the sample lists provided.
+     * Initializes the various lists used. If storage contains no data, empty lists are initialized.
      */
     public void initialize() {
         // Try loading the 3 lists into memory.
