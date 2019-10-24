@@ -124,7 +124,6 @@ public class ModelManagerTest {
             Mockito.doNothing().when(storage).saveParticipantList(any());
             Mockito.doNothing().when(storage).saveTeamList(any());
             Mockito.doNothing().when(storage).saveMentorList(any());
-            Mockito.doNothing().when(modelManager).resetFilteredLists();
             modelManager.addParticipant(TypicalParticipants.A);
             Participant participant = modelManager.getParticipant(new Id(PrefixType.P, 1));
             assertTrue(participant.equals(TypicalParticipants.A));
@@ -139,7 +138,6 @@ public class ModelManagerTest {
             Mockito.doNothing().when(storage).saveParticipantList(any());
             Mockito.doNothing().when(storage).saveTeamList(any());
             Mockito.doNothing().when(storage).saveMentorList(any());
-            Mockito.doNothing().when(modelManager).resetFilteredLists();
             modelManager.addParticipant(TypicalParticipants.A);
             modelManager.addTeam(TypicalTeams.A);
             Participant participant = modelManager.deleteParticipant(new Id(PrefixType.P, 1));
@@ -253,7 +251,6 @@ public class ModelManagerTest {
             Mockito.doNothing().when(storage).saveParticipantList(any());
             Mockito.doNothing().when(storage).saveTeamList(any());
             Mockito.doNothing().when(storage).saveMentorList(any());
-            Mockito.doNothing().when(modelManager).resetFilteredLists();
             modelManager.addParticipant(TypicalParticipants.A);
             modelManager.addMentor(TypicalMentors.A);
             modelManager.addTeam(TypicalTeams.A);
