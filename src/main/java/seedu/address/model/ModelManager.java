@@ -54,7 +54,7 @@ public class ModelManager implements Model {
     // TODO: Remove the null values which are a placeholder due to the multiple constructors.
     // Also will have to change the relevant attributes to final.
     private AlfredStorage storage = null;
-    private ModelHistoryManager history = null;
+    private ModelHistory history = null;
     private AddressBook addressBook = null;
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons = null;
@@ -101,7 +101,7 @@ public class ModelManager implements Model {
                 this.participantList = storageParticipantList.get();
                 int largestIdUsed = participantList.list().stream()
                         .map(participant -> ((Entity) participant).getId().getNumber())
-                        .max(Integer::compare).get();
+                        .max(Integer::compare).orElse(0);
                 participantList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
@@ -118,7 +118,7 @@ public class ModelManager implements Model {
                 this.mentorList = storageMentorList.get();
                 int largestIdUsed = mentorList.list().stream()
                         .map(mentor -> ((Entity) mentor).getId().getNumber())
-                        .max(Integer::compare).get();
+                        .max(Integer::compare).orElse(0);
                 mentorList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
@@ -135,7 +135,7 @@ public class ModelManager implements Model {
                 this.teamList = storageTeamList.get();
                 int largestIdUsed = teamList.list().stream()
                         .map(team -> ((Entity) team).getId().getNumber())
-                        .max(Integer::compare).get();
+                        .max(Integer::compare).orElse(0);
                 teamList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
@@ -828,9 +828,22 @@ public class ModelManager implements Model {
 
     /**
      * Gets a String detailing the previously executed commands that can be undone by the user.
-     * @return String representing the previously executed commands that can be undone by the user.
      */
-    public String getCommandHistory() {
-        return this.history.getCommandHistory();
+    public String getCommandHistoryString() {
+        return this.history.getCommandHistoryString();
+    }
+
+    /**
+     * Returns a List of Strings describing the commands that can be undone.
+     */
+    public List<String> getUndoCommandHistory() {
+        return this.history.getUndoCommandHistory();
+    }
+
+    /**
+     * Returns a List of Strings describing the commands that can be redone.
+     */
+    public List<String> getRedoCommandHistory() {
+        return this.history.getRedoCommandHistory();
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -98,5 +99,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public List<String> getUndoCommandHistory() {
+        return model.getUndoCommandHistory();
+    }
+
+    @Override
+    public List<String> getRedoCommandHistory() {
+        return model.getRedoCommandHistory();
     }
 }

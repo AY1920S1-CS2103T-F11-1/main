@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -168,6 +169,22 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Handles the display of Command History in the GUI.
+     */
+    private void handleHistory() {
+        List<String> undoHistory = logic.getUndoCommandHistory();
+        List<String> redoHistory = logic.getRedoCommandHistory();
+        System.out.println("Inside handleHistory: printing");
+        for (String h: redoHistory) {
+            System.out.println(h);
+        }
+        System.out.println("=====================<< Current State >>=====================");
+        for (String h: undoHistory) {
+            System.out.println(h);
+        }
+    }
+
     public EntityListPanel getListPanel() {
         return listPanel;
     }
@@ -192,30 +209,34 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isHistory()) {
+                handleHistory();
+            }
+
             PrefixType type = commandResult.getType();
-            logger.info("CommandResult has the prefix: " + type);
-            //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
-            switch (type) {
-            case M:
-                listPanel = new MentorListPanel(logic.getFilteredMentorList());
-                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
-                break;
+            if (type != null) {
+                logger.info("CommandResult has the prefix: " + type);
+                //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
+                switch (type) {
+                case M:
+                    listPanel = new MentorListPanel(logic.getFilteredMentorList());
+                    entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                    break;
 
-            case T:
-                listPanel = new TeamListPanel(logic.getFilteredTeamList());
-                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
-                break;
+                case T:
+                    listPanel = new TeamListPanel(logic.getFilteredTeamList());
+                    entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                    break;
 
-            case P:
-                listPanel = new ParticipantListPanel(logic.getFilteredParticipantList());
-                entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
-                break;
+                case P:
+                    listPanel = new ParticipantListPanel(logic.getFilteredParticipantList());
+                    entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
+                    break;
 
-            default:
-                logger.info("The command does not edit any of the list of Entity");
-                break;
-
-
+                default:
+                    logger.info("The command does not edit any of the list of Entity");
+                    break;
+                }
             }
 
             return commandResult;
