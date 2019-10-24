@@ -29,18 +29,12 @@ public class CommandResult {
     private final PrefixType type;
 
     /**
-     * Boolean indicating if the CommandResult contains command history data.
-     */
-    private final boolean isHistory;
-
-    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isHistory) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.isHistory = isHistory;
         this.type = null;
     }
 
@@ -52,7 +46,6 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.type = type;
-        this.isHistory = false;
     }
 
     /**
@@ -60,7 +53,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false);
     }
 
     /**
@@ -81,10 +74,6 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
-    }
-
-    public boolean isHistory() {
-        return isHistory;
     }
 
     public PrefixType getType() {
