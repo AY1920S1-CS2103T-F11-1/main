@@ -21,7 +21,13 @@
 <ul class="sectlevel2">
 <li><a href="#saving-the-data">3.1. Saving the data:</a></li>
 <li><a href="#viewing-help-code-help-code-coming-in-v1-3">3.2. Viewing help : <code>help</code> (Coming in v1.3)</a></li>
-<li><a href="#adding-an-entity-code-add-participant-mentor-team-code">3.3. Adding an Entity: <code>add {participant/mentor/team}</code></a></li>
+<li><a href="#adding-an-entity-code-add-participant-mentor-team-code">3.3. Adding an Entity: <code>add {participant/mentor/team}</code></a>
+<ul class="sectlevel3">
+<li><a href="#adding-a-participant-code-add-participant-parameters-code">3.3.1. Adding a Participant: <code>add participant [PARAMETERS]</code></a></li>
+<li><a href="#adding-a-mentor-code-add-mentor-parameters-code">3.3.2. Adding a Mentor: <code>add mentor [PARAMETERS]</code></a></li>
+<li><a href="#adding-a-team-code-add-team-parameters-code">3.3.3. Adding a Team: <code>add team [PARAMETERS]</code></a></li>
+</ul>
+</li>
 <li><a href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">3.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></li>
 <li><a href="#listing-all-entities-code-list-mentors-participants-teams-code">3.5. Listing all Entities : <code>list {mentors/participants/teams}</code></a></li>
 <li><a href="#deleting-an-entity-code-delete-mentor-participant-team-id-code">3.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></a></li>
@@ -29,15 +35,56 @@
 <li><a href="#show-command-history-code-history-code">3.8. Show Command History: <code>history</code></a></li>
 <li><a href="#undo-previous-commands-code-undo-code">3.9. Undo Previous Commands: <code>undo</code></a></li>
 <li><a href="#redo-previous-commands-code-redo-code">3.10. Redo Previous Commands: <code>redo</code></a></li>
-<li><a href="#judging-and-leaderboard-features">3.11. Judging and Leaderboard Features</a></li>
-<li><a href="#bulk-registration-code-import-fp-path_to_csv_file-code">3.12. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE</code></a></li>
+<li><a href="#judging-and-leaderboard-features">3.11. Judging and Leaderboard Features</a>
+<ul class="sectlevel3">
+<li><a href="#list-team-ranking-code-leaderboard-code">3.11.1. List Team Ranking: <code>leaderboard</code></a></li>
+<li><a href="#get-the-top-k-teams-code-gettop-number-code">3.11.2. Get the top k teams: <code>getTop NUMBER</code></a></li>
+<li><a href="#add-points-code-score-add-team_id-points-code">3.11.3. Add points: <code>score add TEAM_ID POINTS</code></a></li>
+<li><a href="#subtract-points-code-score-sub-team_id-new_points-code">3.11.4. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#set-points-code-score-set-team_id-new_points-code">3.11.5. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></li>
+</ul>
+</li>
+<li><a href="#bulk-registration-code-import-fp-path_to_csv_file-code">3.12. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE</code></a>
+<ul class="sectlevel3">
+<li><a href="#csv-file-formatting">3.12.1. CSV File Formatting</a>
+<ul class="sectlevel4">
+<li><a href="#mentor-data">Mentor Data</a></li>
+<li><a href="#participant-data">Participant Data</a></li>
+<li><a href="#team-data">Team Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">3.13. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
 <li><a href="#help-command-coming-in-v1-3">3.14. Help command (Coming in v1.3)</a></li>
 <li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">3.15. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
-<li><a href="#swag-coming-in-v2-0">3.16. Swag (Coming in v2.0)</a></li>
-<li><a href="#schedule-coming-in-v2-0">3.17. Schedule (Coming in v2.0)</a></li>
-<li><a href="#food-coming-in-v2-0">3.18. Food (Coming in v2.0)</a></li>
-<li><a href="#waitlist-coming-in-v2-0">3.19. Waitlist (Coming in v2.0)</a></li>
+<li><a href="#swag-coming-in-v2-0">3.16. Swag (Coming in v2.0)</a>
+<ul class="sectlevel3">
+<li><a href="#add-swag-code-add-swag-description-quantity-code">3.16.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
+<li><a href="#track-inventory-of-available-swags-code-list-swag-code">3.16.2. Track inventory of available swags: <code>list swag</code></a></li>
+</ul>
+</li>
+<li><a href="#schedule-coming-in-v2-0">3.17. Schedule (Coming in v2.0)</a>
+<ul class="sectlevel3">
+<li><a href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">3.17.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">3.17.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#delete-schedule-code-deleteschedule-schedule_id-code">3.17.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
+</ul>
+</li>
+<li><a href="#food-coming-in-v2-0">3.18. Food (Coming in v2.0)</a>
+<ul class="sectlevel3">
+<li><a href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">3.18.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">3.18.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#list-food-inventory-code-list-food-code">3.18.3. List Food Inventory: <code>list food</code></a></li>
+</ul>
+</li>
+<li><a href="#waitlist-coming-in-v2-0">3.19. Waitlist (Coming in v2.0)</a>
+<ul class="sectlevel3">
+<li><a href="#add-to-waitlist-code-addtowaitlist-participant_id-code">3.19.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">3.19.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#list-by-registration-time-code-listwaitlist-code">3.19.3. List by Registration Time: <code>listWaitList</code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -1058,52 +1105,143 @@ Examples: <code>add swag Android Plushie 5</code></p>
 <div class="sect1">
 <h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Add</strong> <code>add {participant/mentor/team} [PARAMETERS]</code><br>
-e.g. <code>add participant n/James Ho p/97654321 e/jamesho@example.com</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit {participant/mentor/team} ID [PARAMETERS]</code><br>
-e.g. <code>edit participant P-1 n/NewName</code></p>
-</li>
-<li>
-<p><strong>List</strong> : <code>list {participants/mentors/teams}</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete {participant/mentor/team} ID</code><br>
-e.g. <code>delete participant P-1</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find{Participant/Mentor/Team} [KEYWORD]</code><br>
-e.g. <code>findParticipant n/James</code></p>
-</li>
-<li>
-<p><strong>Command History</strong> <code>history</code></p>
-</li>
-<li>
-<p><strong>Undo</strong> <code>undo</code></p>
-</li>
-<li>
-<p><strong>Redo</strong> <code>redo</code></p>
-</li>
-<li>
-<p><strong>Team Ranking</strong> <code>leaderboard</code></p>
-</li>
-<li>
-<p><strong>Get Top Teams</strong> <code>getTop NUMBER</code></p>
-</li>
-<li>
-<p><strong>Add Points</strong> <code>score add TEAM_ID POINTS</code></p>
-</li>
-<li>
-<p><strong>Bulk Registration</strong> <code>addBulk PATH_TO_CSV_FILE</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 1.0416%;">
+<col style="width: 26.0416%;">
+<col style="width: 26.0416%;">
+<col style="width: 46.8752%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Function</th>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add an Entity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add an Entity for Alfred to keep track</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add participant n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Participant:</strong> <code>add participant n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update an Entity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Edits an entity based on the supplied parameter values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit {mentor/participant/team} ID [PARAMETERS]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Participant:</strong> <code>edit participant P01 n/NewParticipantName</code> <strong>Team:</strong> <code>edit team T01 n/NewTeamName pn/New Project Name</code> <strong>Mentor:</strong> <code>edit participant P01 n/NewMentorName</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List all Entities</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows a list of all the entities corresponding to the entity type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list {mentors/teams/participants}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Participant:</strong> <code>list participants</code> <strong>Team:</strong> <code>list teams</code> <strong>Mentor:</strong> <code>list mentors</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deleting an Entity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes an Entity, so that Alfred will no longer keep track of that Entity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete {participant/mentor/team} ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Participant:</strong> <code>delete participant P-1</code> <strong>Team:</strong> <code>delete team T-1</code> <strong>Mentor:</strong> <code>delete mentor M-1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finding an Entity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Searches for Entities by their name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>find {mentor/team/participant} NAME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Participant:</strong> <code>find participant n/John Doe</code> <strong>Team:</strong> <code>find team n/FutureHackathonWinner</code> <strong>Mentor:</strong> <code>find mentor n/Joshua Wong</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List Team rankings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays the ranking of the teams in the Hackathon in descending order of their points</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>leaderboard</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Team:</strong> <code>leaderboard</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get the top k teams</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the top k teams in the leaderboard, where k is a number (NUMBER) which you specify</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getTop NUMBER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Team:</strong> <code>getTop 5</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add points to a Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the value of POINTS to the current score of the team with TEAM_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>score add TEAM_ID POINTS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Team:</strong> <code>score add T-1 20</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subtracts points from a Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deducts the value of POINTS from the current score of the team with TEAM_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>score sub TEAM_ID NEW_POINTS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Team:</strong> <code>score sub T-1 15</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets points of a Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets the score of the team with TEAM_ID to a new score NEW_POINT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>score sub TEAM_ID NEW_POINTS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Team:</strong> <code>score set T-1 15</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bulk registration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds multiple participants at once into Alfred through the specification of a .csv file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addBulk PATH_TO_CSV_FILE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addBulk C:\User\Hackathon2019\participant.csv</code> will import data from the participant.csv file into Alfred</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add a schedule for a Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a time slot where the Team of TEAM_ID meets with Mentor of MENTOR_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addSchedule TIME TEAM_ID MENTOR_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addSchedule 1/2/2019 1400 T-1 M-1</code> the specified Mentor will meet with Team on 1st February 2019 2pm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update schedule of a Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates the existing schedule of SCHEDULE_ID of a Team of  TEAM_ID. New schedule will be added if the Team does not have an existing schedule of SCHEDULE_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>updateSchedule S01 1/2/2019 1400 T-1 M-1</code> Schedule S01 of T-1 will be updated to meet with Mentor M-1 at 1st February 2pm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete a schedule for a Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes a time slot where the of SCHEDULE_ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteSchedule SCHEDULE_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteSchedule S-1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add addFoodCompany and Inventory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a Food with COMPANY_NAME, INVENTORY_QUANTITY and CATERING_TIME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addFoodCompany cn/COMPANY_NAME pax/INVENTORY QUANTITY t/CATERING_TIME</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addFood cn/Neo&#8217;s Garden pax/100 t/1/2/2019 1400</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marked Food as received</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marks a Food with COMPANY_NAME and CATERING_TIME as received</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>receivedFood cn/COMPANY_NAME pax/INVENTORY_QUANTITY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>receiveFood cn/Neo&#8217;s Garden pax/100</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List all Food</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists the inventory of Food</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list food</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list food</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add User to WaitList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a prospective Participant by USER_ID to Waitlist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addToWaitList USER_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addToWaitList U-1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove a User from WaitList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Removes a prospective Participant by USER_ID from Waitlist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>removeFromWaitList USER_ID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>removeFromWaitList U-1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List all User in WaitList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists all prospective Participant in Waitlist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listWaitList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>listWaitList</code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-23 17:03:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-24 00:07:56 UTC</div></div></div></body></html>
