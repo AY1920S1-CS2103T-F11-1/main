@@ -2,16 +2,17 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.jupiter.api.Disabled;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.net.URL;
 import java.nio.file.Path;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import javafx.fxml.FXML;
+
 import seedu.address.MainApp;
 
 public class UiPartTest {
