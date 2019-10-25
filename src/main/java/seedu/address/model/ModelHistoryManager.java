@@ -131,7 +131,7 @@ public class ModelHistoryManager implements ModelHistory {
      * @return String representing undo-able and redo-able Command History.
      */
     public String getCommandHistoryString() {
-        String commandHistory = "-------------<< Cannot Undo Beyond This Point >>-------------\n";
+        String commandHistory = "-------------<< Cannot Redo Beyond This Point >>-------------\n";
         //Obtain Redo-able Command History
         int currentIndex = this.history.indexOf(this.current);
         for (int j = this.history.size() - 1; j > currentIndex; j--) {
@@ -149,7 +149,7 @@ public class ModelHistoryManager implements ModelHistory {
             commandHistory += (index + ": " + histCommand.getClass().getSimpleName() + "\n");
             index++;
         }
-        commandHistory += "-------------<< Cannot Redo Beyond This Point >>-------------\n";
+        commandHistory += "-------------<< Cannot Undo Beyond This Point >>-------------\n";
 
         return commandHistory;
     }
