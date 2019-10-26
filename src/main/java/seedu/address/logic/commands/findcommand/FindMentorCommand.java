@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.Predicates;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.PrefixType;
 
@@ -21,7 +22,7 @@ public class FindMentorCommand extends FindCommand {
     public static final String COMMAND_WORD = "find mentor";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the mentor by the name "
             + "given. Parameters: name to search for "
-            + "and/or phone and/or email to search for "
+            + "and/or phone and/or email and/or organization to search for "
             + "Example: " + COMMAND_WORD + " n/John Doe";
     public static final String MESSAGE_SUCCESS = "Successfully ran the find command.";
 
@@ -29,8 +30,8 @@ public class FindMentorCommand extends FindCommand {
 
     public FindMentorCommand(
             Optional<String> name,
-            Optional<String> phone,
             Optional<String> email,
+            Optional<String> phone,
             Optional<String> organization
     ) {
         List<Predicate<Mentor>> filterPredicates = new ArrayList<>();
@@ -61,6 +62,6 @@ public class FindMentorCommand extends FindCommand {
         List<Mentor> results = model.findMentor(this.findPredicate);
         listResults(results, PrefixType.P);
         model.updateHistory(this);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.M);
     }
 }

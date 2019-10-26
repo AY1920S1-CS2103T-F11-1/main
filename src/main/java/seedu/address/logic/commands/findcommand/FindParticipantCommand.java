@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.Predicates;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 
@@ -58,6 +59,6 @@ public class FindParticipantCommand extends FindCommand {
         List<Participant> results = model.findParticipant(this.findPredicate);
         listResults(results, PrefixType.P);
         model.updateHistory(this);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.P);
     }
 }

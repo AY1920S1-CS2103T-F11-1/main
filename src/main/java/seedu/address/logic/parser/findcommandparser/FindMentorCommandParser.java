@@ -43,7 +43,7 @@ public class FindMentorCommandParser implements Parser<FindMentorCommand> {
                     FindMentorCommand.MESSAGE_USAGE));
         }
 
-        return new FindMentorCommand(name, phone, email, organization);
+        return new FindMentorCommand(name, email, phone, organization);
     }
 }
 

@@ -40,6 +40,6 @@ public class FindParticipantCommandParser implements Parser<FindParticipantComma
                     FindParticipantCommand.MESSAGE_USAGE));
         }
 
-        return new FindParticipantCommand(name, phone, email);
+        return new FindParticipantCommand(name, email, phone);
     }
 }
