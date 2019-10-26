@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
@@ -36,5 +38,14 @@ public class HelpCommandBox extends UiPart<Region> {
 
         commandTitle.setText(this.title);
         commandDescription.setText(this.description);
+        commandTitle.setFont(Font.font("Verdana", FontWeight.BOLD, 13));
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

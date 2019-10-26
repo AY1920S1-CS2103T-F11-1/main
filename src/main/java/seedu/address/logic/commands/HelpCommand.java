@@ -17,8 +17,7 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         // Print out all the add command message.
-        System.out.println("Add command");
-
+        
 
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }

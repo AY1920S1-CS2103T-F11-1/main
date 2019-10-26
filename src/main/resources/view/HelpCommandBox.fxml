@@ -9,12 +9,10 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
 <VBox id="card" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane VBox.vgrow="NEVER">
-        <padding>
-            <Insets topRightBottomLeft="5"/>
-        </padding>
-        <Label fx:id="commandTitle"/>
-        <Text fx:id="commandDescription"/>
-    </GridPane>
+    <padding>
+        <Insets topRightBottomLeft="5"/>
+    </padding>
+    <Label fx:id="commandTitle" style="-fx-font-weight: bold;"/>
+    <Text fx:id="commandDescription"/>
 </VBox>
 
