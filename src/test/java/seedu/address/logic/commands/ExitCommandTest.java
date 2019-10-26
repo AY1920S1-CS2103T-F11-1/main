@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.mockito.Mockito.mock;
+
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
@@ -10,8 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class ExitCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private Model model = mock(ModelManager.class);
+    private Model expectedModel = mock(ModelManager.class);
 
     @Disabled
     @Test
