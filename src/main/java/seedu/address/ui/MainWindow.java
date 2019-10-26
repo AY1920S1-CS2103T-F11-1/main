@@ -14,15 +14,16 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entity.CommandType;
 import seedu.address.ui.entitylistpanel.EntityListPanel;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,16 +35,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private EntityListPanel listPanel;
+    private EntityListPanel entityListPanel;
+    private CommandListPanel commandListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
-
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -52,7 +51,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane entityListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -68,6 +67,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private JFXButton mentorsButton;
+
+    @FXML
+    private JFXButton historyButton;
 
 
     public MainWindow(Stage primaryStage, Logic logic) {
@@ -85,7 +87,6 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
     }
-
 
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -131,8 +132,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         //Displays the list of teams during application start up
-        listPanel = new EntityListPanel(logic.getFilteredTeamList());
-        entityListPanelPlaceholder.getChildren().add(listPanel.getRoot());
+        entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
+        listPanelPlaceholder.getChildren().add(entityListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -206,11 +207,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void displayParticipantList() {
-        listPanel = new EntityListPanel(logic.getFilteredParticipantList());
+        entityListPanel = new EntityListPanel(logic.getFilteredParticipantList());
 
-        entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
-        entityListPanelPlaceholder.setStyle("-fx-background-color: #5d6d7e");
-        logger.info("Color of entity list placeholder is: " + entityListPanelPlaceholder.getStyle());
+        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        listPanelPlaceholder.setStyle("-fx-background-color: #5d6d7e");
+        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
     }
 
     /**
@@ -218,10 +219,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void displayTeamList() {
-        listPanel = new EntityListPanel(logic.getFilteredTeamList());
-        entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
-        entityListPanelPlaceholder.setStyle("-fx-background-color:#abb2b9");
-        logger.info("Color of entity list placeholder is: " + entityListPanelPlaceholder.getStyle());
+        entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
+        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        listPanelPlaceholder.setStyle("-fx-background-color:#abb2b9");
+        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
 
     }
 
@@ -230,15 +231,27 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void displayMentorList() {
-        listPanel = new EntityListPanel(logic.getFilteredMentorList());
-        entityListPanelPlaceholder.getChildren().set(0, listPanel.getRoot());
-        entityListPanelPlaceholder.setStyle("-fx-background-color: #17202a");
-        logger.info("Color of entity list placeholder is: " + entityListPanelPlaceholder.getStyle());
+        entityListPanel = new EntityListPanel(logic.getFilteredMentorList());
+        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        listPanelPlaceholder.setStyle("-fx-background-color: #17202a");
+        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
 
     }
 
-    public EntityListPanel getListPanel() {
-        return listPanel;
+    /**
+     * Displays the Command History on Graphical User Interface.
+     */
+    @FXML
+    private void displayHistory() throws AlfredModelHistoryException {
+        commandListPanel = new CommandListPanel(logic.getCommandHistory());
+        listPanelPlaceholder.getChildren().set(0, commandListPanel.getRoot());
+        listPanelPlaceholder.setStyle("-fx-background-color: #17202a");
+        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
+
+    }
+
+    public EntityListPanel getEntityListPanel() {
+        return entityListPanel;
     }
 
     /**
@@ -260,12 +273,11 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
-    private void fireButton(Button button) {
+    private void fireButton(Button button) throws AlfredModelHistoryException {
         disarmAllButton();
         button.arm();
         button.fire();
     }
-
 
     /**
      * Executes the command and returns the result.
@@ -273,7 +285,8 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     @SuppressWarnings("checkstyle:Regexp")
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText)
+            throws CommandException, ParseException, AlfredModelHistoryException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -282,36 +295,34 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
             if (commandResult.isExit()) {
                 handleExit();
             }
 
-            handleHistory();//DEBUG 
-
-            PrefixType type = commandResult.getType();
-            logger.info("CommandResult has the prefix: " + type);
+            handleHistory; //DEBUG
+            
+            CommandType commandType = commandResult.getCommandType();
+            logger.info("CommandResult has the prefix: " + commandType);
             //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
-            switch (type) {
+            switch (commandType) {
             case M:
                 this.fireButton(mentorsButton);
                 break;
-
             case T:
                 this.fireButton(teamsButton);
                 break;
-
             case P:
                 this.fireButton(participantsButton);
                 break;
-
-
+            case H:
+                this.fireButton(historyButton);
+                break;
             default:
                 logger.info("The command does not edit any of the list of Entity");
                 break;
             }
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | AlfredModelHistoryException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

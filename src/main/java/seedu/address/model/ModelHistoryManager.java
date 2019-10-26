@@ -1,10 +1,12 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.TrackableState;
 import seedu.address.model.entitylist.MentorList;
@@ -127,6 +129,41 @@ public class ModelHistoryManager implements ModelHistory {
     }
 
     /**
+     * Returns a List of CommandRecords representing undo-able and redo-able Command History.
+     * @return List of CommandRecords representing undo-able and redo-able Command History.
+     */
+    public ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException {
+        ArrayList<CommandRecord> commandHistory = new ArrayList<>();
+        //Obtain Redo-able Command History
+        int currentIndex = this.history.indexOf(this.current);
+        for (int j = this.history.size() - 1; j > currentIndex; j--) {
+            Command futureCommand = this.history.get(j).getCommand();
+            commandHistory.add(new CommandRecord((j - currentIndex),
+                    futureCommand.getClass().getSimpleName(), CommandRecord.CommandType.FUTURE));
+        }
+
+        Command currCommand = this.history.get(currentIndex).getCommand();
+        commandHistory.add(new CommandRecord(currentIndex,
+                currCommand.getClass().getSimpleName(), CommandRecord.CommandType.CURR));
+
+        //Obtain Undo-able Command History
+        int index = 1;
+        for (int j = this.history.indexOf(this.current) - 1; j >= 0; j--) {
+            Command histCommand = this.history.get(j).getCommand();
+            if (histCommand == null) {
+                commandHistory.add(new CommandRecord(CommandRecord.CommandType.END));
+            } else {
+                commandHistory.add(new CommandRecord(index,
+                        histCommand.getClass().getSimpleName(),
+                        CommandRecord.CommandType.FUTURE));
+            }
+            index++;
+        }
+
+        return commandHistory;
+    }
+
+    /**
      * Returns a String representing undo-able and redo-able Command History, separated by `=` delimiter.
      * @return String representing undo-able and redo-able Command History.
      */
@@ -136,7 +173,8 @@ public class ModelHistoryManager implements ModelHistory {
         int currentIndex = this.history.indexOf(this.current);
         for (int j = this.history.size() - 1; j > currentIndex; j--) {
             Command futureCommand = this.history.get(j).getCommand();
-            commandHistory += ((j - currentIndex) + ": " + futureCommand.getClass().getSimpleName() + "\n");
+            commandHistory.add(new CommandRecord((j - currentIndex),
+                    futureCommand.getClass().getSimpleName(), CommandRecord.CommandType.FUTURE));
         }
 
         //Delimiter

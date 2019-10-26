@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -11,6 +12,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.Command;
+import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
@@ -147,11 +149,14 @@ public interface Model {
 
     /* Find commands */
 
-    List<Participant> findParticipantByName(String name);
+    List<Participant> findParticipant(Predicate<Participant> predicate);
 
-    List<Team> findTeamByName(String name);
+    List<Team> findTeam(Predicate<Team> predicate);
 
-    List<Mentor> findMentorByName(String name);
+    List<Mentor> findMentor(Predicate<Mentor> predicate);
+
+    /* View Command */
+    void viewEntity(Entity entity);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -220,4 +225,10 @@ public interface Model {
      * Returns a List of Strings describing the commands that can be redone.
      */
     List<String> getRedoCommandHistory();
+
+    /**
+     * Returns a List of CommandsRecords describing the commands that can be undone/redone
+     * @throws AlfredModelHistoryException
+     */
+    ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException;
 }

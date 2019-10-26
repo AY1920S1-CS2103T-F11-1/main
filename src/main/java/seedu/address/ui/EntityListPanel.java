@@ -55,12 +55,10 @@ public class EntityListPanel extends UiPart<Region> {
             }
             logger.info("EntityListView has prefix type: " + this.prefix);
         }
-
-
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Mentor} using an {@code EntityCard}.
      */
     class MentorListViewCell extends ListCell<Entity> {
         @Override
@@ -80,7 +78,7 @@ public class EntityListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Participant} using an {@code EntityCard}.
      */
     class ParticipantListViewCell extends ListCell<Entity> {
         @Override
@@ -100,7 +98,7 @@ public class EntityListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Team} using an {@code EntityCard}.
      */
     class TeamListViewCell extends ListCell<Entity> {
         @Override
@@ -118,5 +116,5 @@ public class EntityListPanel extends UiPart<Region> {
             }
         }
     }
-}
 
+}
