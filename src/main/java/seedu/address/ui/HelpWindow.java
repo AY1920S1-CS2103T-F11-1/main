@@ -1,14 +1,17 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.addcommand.AddCommand;
 
 /**
  * Controller for a help page
@@ -21,11 +24,21 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
+    private final HelpCommandBox[] helpCommandBoxes = new HelpCommandBox[]{
+            new HelpCommandBox(
+                    "Add Command",
+                    AddCommand.MESSAGE_USAGE
+            )
+    };
+
     @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private ListView<HelpCommandBox> helpCommandsListView;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +48,8 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        // Arrays.stream(this.helpCommandBoxes).forEach(box ->
+        //        { helpCommandsListView.getItems().add(box); });
     }
 
     /**
