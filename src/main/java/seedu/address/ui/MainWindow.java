@@ -198,7 +198,9 @@ public class MainWindow extends UiPart<Stage> {
         System.out.println("=====================<< Current State >>=====================");
         for (String h: undoHistory) {
             System.out.println(h);
+        }
     }
+
     /**
      * Displays the list of Participants in Model and Storage on Graphical User Interface.
      */
@@ -286,7 +288,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             handleHistory();//DEBUG 
-            
+
             PrefixType type = commandResult.getType();
             logger.info("CommandResult has the prefix: " + type);
             //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
@@ -307,7 +309,7 @@ public class MainWindow extends UiPart<Stage> {
             default:
                 logger.info("The command does not edit any of the list of Entity");
                 break;
-
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
