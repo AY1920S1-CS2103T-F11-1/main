@@ -1,21 +1,19 @@
 package seedu.address.logic.parser.findcommandparser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocatorFailure;
+import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocatorSuccess;
+
 import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.deletecommand.DeleteCommand;
-import seedu.address.logic.commands.deletecommand.DeleteMentorCommand;
-import seedu.address.logic.commands.deletecommand.DeleteParticipantCommand;
-import seedu.address.logic.commands.deletecommand.DeleteTeamCommand;
+
 import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.logic.commands.findcommand.FindMentorCommand;
 import seedu.address.logic.commands.findcommand.FindParticipantCommand;
 import seedu.address.logic.commands.findcommand.FindTeamCommand;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocatorFailure;
-import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocatorSuccess;
 
 public class FindCommandAllocatorTest {
     private Id mentorId = new Id(PrefixType.M, 1);
