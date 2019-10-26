@@ -6,9 +6,9 @@ import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
-import seedu.address.model.entity.PrefixType;
 
 /**
  * Shows detailed view of the {@link Participant} at specified ID.
@@ -16,7 +16,7 @@ import seedu.address.model.entity.PrefixType;
 public class ViewParticipantCommand extends ViewCommand {
 
     public static final String COMMAND_WORD = "view participant";
-    public static final String MESSAGE_SUCCESS = "Showed specified participant";
+    public static final String MESSAGE_SUCCESS = "Showing participant with ID: %s"; // %s -> Id
     public static final String MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX =
             "The participant index provided is invalid";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " participant"
@@ -40,9 +40,10 @@ public class ViewParticipantCommand extends ViewCommand {
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
         }
-        viewEntity(participantToView);
+        model.viewEntity(participantToView);
+        this.displayDetailedEntity(participantToView);
 
-        return new CommandResult(MESSAGE_SUCCESS, PrefixType.P);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.P);
     }
 
     @Override

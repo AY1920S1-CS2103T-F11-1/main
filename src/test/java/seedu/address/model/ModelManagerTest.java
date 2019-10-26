@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
+import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
@@ -41,7 +43,7 @@ public class ModelManagerTest {
 
     @BeforeEach
     public void clearTeamA() {
-        modelManager = new ModelManager(storage, new UserPrefs());
+        modelManager = spy(new ModelManager(storage, new UserPrefs()));
         TypicalTeams.clearTeamA();
     }
 
@@ -235,8 +237,10 @@ public class ModelManagerTest {
             modelManager.addParticipant(TypicalParticipants.A);
             modelManager.addParticipant(TypicalParticipants.B);
             assertEquals(modelManager.getParticipantList().list().size(), 2);
-            assertEquals(modelManager.findParticipantByName("A").size(), 1);
-            assertEquals(modelManager.findParticipantByName("Part B").size(), 1);
+            assertEquals(modelManager.findParticipant(
+                    Predicates.getPredicateFindParticipantByName("A")).size(), 1);
+            assertEquals(modelManager.findParticipant(
+                    Predicates.getPredicateFindParticipantByName("Part B")).size(), 1);
         } catch (AlfredException | IOException e) {
             // do nothing
         }
@@ -256,7 +260,8 @@ public class ModelManagerTest {
             // do nothing
         }
         assertEquals(modelManager.getTeamList().list().size(), 1);
-        assertEquals(modelManager.findTeamByName("A").size(), 1);
+        assertEquals(modelManager.findTeam(
+                Predicates.getPredicateFindTeamByName("A")).size(), 1);
     }
     @Disabled
     @Test
@@ -271,7 +276,8 @@ public class ModelManagerTest {
             // do nothing
         }
         assertEquals(modelManager.getMentorList().list().size(), 2);
-        assertEquals(modelManager.findMentorByName("Mentor").size(), 2);
+        assertEquals(modelManager.findMentor(
+                Predicates.getPredicateFindMentorByName("B")).size(), 2);
     }
 
     @Test

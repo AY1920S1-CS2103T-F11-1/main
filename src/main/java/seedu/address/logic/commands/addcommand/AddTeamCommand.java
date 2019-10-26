@@ -10,7 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
-import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Team;
 
 /**
@@ -50,13 +50,14 @@ public class AddTeamCommand extends AddCommand {
 
         try {
             model.addTeam(this.team);
+            model.resetFilteredLists();
             model.updateHistory(this);
         } catch (AlfredException e) {
             logger.severe("The same team already exist in model");
             throw new CommandException(MESSAGE_DUPLICATE_TEAM);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.team.toString()), PrefixType.T);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.team.toString()), CommandType.T);
     }
 
     @Override
