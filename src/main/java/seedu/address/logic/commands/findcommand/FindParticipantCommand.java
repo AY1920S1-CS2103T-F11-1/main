@@ -18,7 +18,7 @@ import seedu.address.model.entity.PrefixType;
  * Implements the find command for participants.
  */
 public class FindParticipantCommand extends FindCommand {
-    public static final String COMMAND_WORD = "findParticipant";
+    public static final String COMMAND_WORD = "find participant";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the participant by the name "
             + "given. Parameters: name to search for "
             + "Example: " + COMMAND_WORD + " n/John Doe";
