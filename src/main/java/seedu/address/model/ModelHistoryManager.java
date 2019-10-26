@@ -132,34 +132,31 @@ public class ModelHistoryManager implements ModelHistory {
      * Returns a List of CommandRecords representing undo-able and redo-able Command History.
      * @return List of CommandRecords representing undo-able and redo-able Command History.
      */
-    public ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException {
+    public ArrayList<CommandRecord> getCommandHistory() {
         ArrayList<CommandRecord> commandHistory = new ArrayList<>();
         //Obtain Redo-able Command History
+        commandHistory.add(CommandRecord.getRedoEndPoint());
         int currentIndex = this.history.indexOf(this.current);
         for (int j = this.history.size() - 1; j > currentIndex; j--) {
             Command futureCommand = this.history.get(j).getCommand();
             commandHistory.add(new CommandRecord((j - currentIndex),
-                    futureCommand.getClass().getSimpleName(), CommandRecord.CommandType.FUTURE));
+                                                 futureCommand.getClass().getSimpleName(),
+                                                 CommandRecord.CommandType.REDO));
         }
 
-        Command currCommand = this.history.get(currentIndex).getCommand();
-        commandHistory.add(new CommandRecord(currentIndex,
-                currCommand.getClass().getSimpleName(), CommandRecord.CommandType.CURR));
+        //Set Current Delimiter
+        commandHistory.add(CommandRecord.getCurrentStatePoint());
 
         //Obtain Undo-able Command History
         int index = 1;
-        for (int j = this.history.indexOf(this.current) - 1; j >= 0; j--) {
+        for (int j = this.history.indexOf(this.current); j >= 1; j--) {
             Command histCommand = this.history.get(j).getCommand();
-            if (histCommand == null) {
-                commandHistory.add(new CommandRecord(CommandRecord.CommandType.END));
-            } else {
-                commandHistory.add(new CommandRecord(index,
-                        histCommand.getClass().getSimpleName(),
-                        CommandRecord.CommandType.FUTURE));
-            }
+            commandHistory.add(new CommandRecord(index,
+                                                 histCommand.getClass().getSimpleName(),
+                                                 CommandRecord.CommandType.UNDO));
             index++;
         }
-
+        commandHistory.add(CommandRecord.getUndoEndPoint());
         return commandHistory;
     }
 
@@ -173,8 +170,7 @@ public class ModelHistoryManager implements ModelHistory {
         int currentIndex = this.history.indexOf(this.current);
         for (int j = this.history.size() - 1; j > currentIndex; j--) {
             Command futureCommand = this.history.get(j).getCommand();
-            commandHistory.add(new CommandRecord((j - currentIndex),
-                    futureCommand.getClass().getSimpleName(), CommandRecord.CommandType.FUTURE));
+            commandHistory += ((j - currentIndex) + ": " + futureCommand.getClass().getSimpleName());
         }
 
         //Delimiter

@@ -298,9 +298,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+            handleHistory(); //DEBUG
 
-            handleHistory; //DEBUG
-            
             CommandType commandType = commandResult.getCommandType();
             logger.info("CommandResult has the prefix: " + commandType);
             //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
