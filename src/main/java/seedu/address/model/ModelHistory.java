@@ -31,5 +31,5 @@ public interface ModelHistory {
 
     public List<String> getRedoCommandHistory();
 
-    public ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException;
+    public ArrayList<CommandRecord> getCommandHistory();
 }

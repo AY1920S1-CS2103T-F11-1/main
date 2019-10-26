@@ -245,7 +245,7 @@ public class MainWindow extends UiPart<Stage> {
      * Displays the Command History on Graphical User Interface.
      */
     @FXML
-    private void displayHistory() throws AlfredModelHistoryException {
+    private void displayHistory() {
         commandListPanel = new CommandListPanel(logic.getCommandHistory());
         listPanelPlaceholder.getChildren().set(0, commandListPanel.getRoot());
         listPanelPlaceholder.setStyle("-fx-background-color: #17202a");

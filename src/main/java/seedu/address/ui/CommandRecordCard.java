@@ -32,7 +32,6 @@ public class CommandRecordCard extends UiPart<Region> {
     @FXML
     private Label index;
 
-
     /**
      * Constructs a new instance of Command Record Card.
      *
@@ -46,7 +45,8 @@ public class CommandRecordCard extends UiPart<Region> {
         commandString.setText(commandRecord.getCommandString());
         CommandRecord.CommandType commandType = commandRecord.getCommandType();
 
-        if (!((commandType.equals(CommandRecord.CommandType.END)) || (commandType.equals(CommandRecord.CommandType.CURR)))) {
+        if (!((commandType.equals(CommandRecord.CommandType.END))
+                || (commandType.equals(CommandRecord.CommandType.CURR)))) {
             index.setText(commandRecord.getIndex().toString());
         }
 
@@ -70,7 +70,6 @@ public class CommandRecordCard extends UiPart<Region> {
             logger.severe("CommandRecord has incorrect CommandType");
         }
     }
-
 
     @Override
     public boolean equals(Object other) {

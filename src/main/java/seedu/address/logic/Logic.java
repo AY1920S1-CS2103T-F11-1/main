@@ -1,12 +1,10 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
-import java.util.ArrayList;
-
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.CommandResult;
@@ -52,7 +50,7 @@ public interface Logic {
     ObservableList<Mentor> getFilteredMentorList();
 
     /** Returns the Record of all Commands entered by User */
-    ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException;
+    ArrayList<CommandRecord> getCommandHistory();
 
     /**
      * Returns the user prefs' address book file path.

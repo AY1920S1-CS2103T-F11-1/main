@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import seedu.address.commons.exceptions.AlfredModelHistoryException;
-import seedu.address.logic.commands.Command;
 import seedu.address.ui.EntityCard;
 
 /**
@@ -28,15 +26,21 @@ public class CommandRecord {
     }
 
     public static CommandRecord getUndoEndPoint() {
-        return new CommandRecord(null, "=============<< Cannot Undo Beyond This Point >>=============", CommandType.END);
+        return new CommandRecord(null,
+                   "=============<< Cannot Undo Beyond This Point >>=============",
+                                 CommandType.END);
     }
 
     public static CommandRecord getRedoEndPoint() {
-        return new CommandRecord(null, "=============<< Cannot Redo Beyond This Point >>=============", CommandType.END);
+        return new CommandRecord(null,
+                   "=============<< Cannot Redo Beyond This Point >>=============",
+                                 CommandType.END);
     }
 
     public static CommandRecord getCurrentStatePoint() {
-        return new CommandRecord(null, "=====================<< Current State >>=====================", CommandType.CURR);
+        return new CommandRecord(null,
+                   "=====================<< Current State >>=====================",
+                                 CommandType.CURR);
     }
 
     public String getCommandString() {

@@ -226,5 +226,5 @@ public interface Model {
      * Returns a List of CommandsRecords describing the commands that can be undone/redone
      * @throws AlfredModelHistoryException
      */
-    ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException;
+    ArrayList<CommandRecord> getCommandHistory();
 }
