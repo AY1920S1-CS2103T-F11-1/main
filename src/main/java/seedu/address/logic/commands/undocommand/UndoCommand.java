@@ -25,7 +25,7 @@ public class UndoCommand extends Command {
         try {
             model.undo();
             return new CommandResult(String.format(MESSAGE_SUCCESS),
-                    CommandType.P); //Debug: Check PrefixType
+                    CommandType.H); //Debug: Check PrefixType
         } catch (AlfredModelHistoryException e) {
             throw new CommandException(e.getMessage());
         }
