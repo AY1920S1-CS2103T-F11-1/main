@@ -80,7 +80,7 @@ public class ModelHistoryManager implements ModelHistory {
 
     /**
      * Adds a ModelHistoryRecord to command history. This method checks for capacity constraints of the
-     * ModelHisxtoryManager and is responsible for ensuring a valid sequence of commands in history for Undo/Redo.
+     * ModelHistoryManager and is responsible for ensuring a valid sequence of commands in history for Undo/Redo.
      * @param r
      */
     private void addToHistory(ModelHistoryRecord r) {
