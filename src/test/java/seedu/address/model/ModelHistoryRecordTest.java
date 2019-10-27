@@ -28,11 +28,11 @@ import seedu.address.testutil.TypicalTeams;
 class ModelHistoryRecordTest {
     private ModelHistoryRecord hr;
     private ParticipantList pList;
-    int pListId;
+    private int pListId;
     private MentorList mList;
-    int mListId;
+    private int mListId;
     private TeamList tList;
-    int tListId;
+    private int tListId;
     private Participant newP;
     private Command c;
 

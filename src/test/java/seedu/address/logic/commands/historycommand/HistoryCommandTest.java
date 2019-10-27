@@ -10,7 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.entity.CommandType;
 import seedu.address.stub.ModelManagerStub;
 
-class RedoCommandTest {
+class HistoryCommandTest {
     private ModelManagerStub modelStub;
 
     @BeforeEach
@@ -20,9 +20,9 @@ class RedoCommandTest {
 
     @Test
     void execute_success() throws AlfredException {
-        CommandResult commandResult = new RedoCommand().execute(modelStub);
+        CommandResult commandResult = new HistoryCommand().execute(modelStub);
 
-        assertEquals(RedoCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+        assertEquals(HistoryCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
         assertEquals(CommandType.H, commandResult.getCommandType());
     }
 }
