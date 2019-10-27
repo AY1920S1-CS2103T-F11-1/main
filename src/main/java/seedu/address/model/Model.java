@@ -95,13 +95,11 @@ public interface Model {
 
     FilteredList<Mentor> getFilteredMentorList();
 
-<<<<<<< HEAD
     SortedList<Team> getSortedTeamList();
 
     SortedList<Team> getTopKTeams();
-=======
+
     void resetFilteredLists();
->>>>>>> master
 
     /* Below is the API exposed for the controllers to call */
 

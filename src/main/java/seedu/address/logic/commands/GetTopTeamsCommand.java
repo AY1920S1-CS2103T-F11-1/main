@@ -2,8 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.PrefixType;
 
 /**
@@ -18,6 +21,7 @@ public class GetTopTeamsCommand extends Command {
             + " where K is an integer value you type in. \n"
             + "Format: " + COMMAND_WORD + " K \n"
             + "For example: " + COMMAND_WORD + " 5";
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     private int topTeams;
 
@@ -29,8 +33,8 @@ public class GetTopTeamsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.getTopK(this.topTeams);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, topTeams), PrefixType.K);
+        logger.info("Showing Top " + this.topTeams + " Teams.");
+        return new CommandResult(String.format(MESSAGE_SUCCESS, topTeams), CommandType.K);
     }
 
 }

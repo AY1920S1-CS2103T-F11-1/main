@@ -11,11 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-<<<<<<< HEAD
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetTopTeamsCommand;
-=======
->>>>>>> master
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ShowLeaderboardCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;

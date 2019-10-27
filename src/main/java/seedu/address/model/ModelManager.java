@@ -12,17 +12,12 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-<<<<<<< HEAD
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 
 import seedu.address.commons.Comparators;
-=======
-import javafx.collections.transformation.FilteredList;
-
->>>>>>> master
 import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -291,7 +286,6 @@ public class ModelManager implements Model {
         return this.filteredTeamList;
     }
 
-<<<<<<< HEAD
     public SortedList<Team> getSortedTeamList() {
         return this.sortedTeam;
     }
@@ -300,9 +294,6 @@ public class ModelManager implements Model {
         return this.topKTeams;
     }
 
-
-
-=======
     /**
      * Resets the filtered lists to display all entities in the list.
      */
@@ -312,7 +303,6 @@ public class ModelManager implements Model {
         this.filteredParticipantList.setPredicate(participant -> true);
     }
 
->>>>>>> master
     //========== Entity Methods =============================
 
     /* Participant Methods */
