@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-//import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -11,12 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -153,12 +151,10 @@ public class MainWindow extends UiPart<Stage> {
     private void setCommandNavigationHandler() {
         this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.UP) {
-                System.out.println("Up Key Pressed");
                 commandBox.setTextField(logic.getPrevCommandString());
             }
 
             if (event.getCode() == KeyCode.DOWN) {
-                System.out.println("Down Key Pressed");
                 commandBox.setTextField(logic.getNextCommandString());
             }
         });
