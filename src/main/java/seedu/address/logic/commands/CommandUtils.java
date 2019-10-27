@@ -11,8 +11,9 @@ import seedu.address.logic.commands.csvcommand.ImportCommand;
 import seedu.address.logic.commands.deletecommand.DeleteCommand;
 import seedu.address.logic.commands.editcommand.EditCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.historycommand.RedoCommand;
+import seedu.address.logic.commands.historycommand.UndoCommand;
 import seedu.address.logic.commands.listcommand.ListCommand;
-import seedu.address.logic.commands.undocommand.UndoCommand;
 
 /**
  * Utils for the commands.
@@ -51,6 +52,10 @@ public class CommandUtils {
             new Tuple<String>(
                     "Undo Command",
                     UndoCommand.MESSAGE_USAGE
+            ),
+            new Tuple<String>(
+                    "Redo Command",
+                    RedoCommand.MESSAGE_USAGE
             ),
             new Tuple<String>(
                     "Help Command",
