@@ -1,16 +1,18 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
+import seedu.address.logic.commands.Command;
+import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
@@ -51,11 +53,6 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
-
-    /**
      * Returns the user prefs' ParticipantList file path.
      */
     Path getParticipantListFilePath();
@@ -71,9 +68,9 @@ public interface Model {
     Path getMentorListFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Checks if there exists any {@code Entity} in this {@code Model}.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    boolean isEmpty();
 
     /**
      * Returns the ParticipantList.
@@ -98,9 +95,13 @@ public interface Model {
 
     FilteredList<Mentor> getFilteredMentorList();
 
+<<<<<<< HEAD
     SortedList<Team> getSortedTeamList();
 
     SortedList<Team> getTopKTeams();
+=======
+    void resetFilteredLists();
+>>>>>>> master
 
     /* Below is the API exposed for the controllers to call */
 
@@ -144,65 +145,60 @@ public interface Model {
 
     /* Find commands */
 
-    List<Participant> findParticipantByName(String name);
+    List<Participant> findParticipant(Predicate<Participant> predicate);
 
-    List<Team> findTeamByName(String name);
+    List<Team> findTeam(Predicate<Team> predicate);
 
-    List<Mentor> findMentorByName(String name);
+    List<Mentor> findMentor(Predicate<Mentor> predicate);
 
     void getLeaderboard();
 
     void getTopK(int k);
 
+    /* View command */
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Sets the predicate to show detailed information of {@code entity}.
+     *
+     * @param entity {@code Entity} to view.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasPerson(Person person);
+    void viewEntity(Entity entity);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Updates the history of entity states with the current state (after execution of Command c)
      */
-    void deletePerson(Person target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addPerson(Person person);
-
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Updates the history of entity states with the current state (after execution of a command)
-     */
-    void updateHistory();
+    void updateHistory(Command c);
 
     /**
      * Undoes the effects of the previous command and returns the model to the state
      * prior to the execution of the command.
      */
     void undo() throws AlfredModelHistoryException;
+
+    /**
+     * Redoes the effects of the previously executed command and returns the model to the state
+     * after the execution of the command.
+     */
+    void redo() throws AlfredModelHistoryException;
+
+    /**
+     * Gets a String detailing the previously executed commands that can be undone by the user.
+     * @return String representing the previously executed commands that can be undone by the user.
+     */
+    String getCommandHistoryString();
+
+    /**
+     * Returns a List of Strings describing the commands that can be undone.
+     */
+    List<String> getUndoCommandHistory();
+
+    /**
+     * Returns a List of Strings describing the commands that can be redone.
+     */
+    List<String> getRedoCommandHistory();
+
+    /**
+     * Returns a List of CommandsRecords describing the commands that can be undone/redone
+     * @throws AlfredModelHistoryException
+     */
+    ArrayList<CommandRecord> getCommandHistory();
 }

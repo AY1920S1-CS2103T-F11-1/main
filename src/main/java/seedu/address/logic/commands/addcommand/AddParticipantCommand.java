@@ -3,13 +3,14 @@ package seedu.address.logic.commands.addcommand;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.exceptions.AlfredException;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
-import seedu.address.model.entity.Name;
+import seedu.address.model.entity.CommandType;
+import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
-import seedu.address.model.entity.PrefixType;
 
 /**
  * Adds a {@link Participant} to Alfred.
@@ -29,21 +30,19 @@ public class AddParticipantCommand extends AddCommand {
             + CliSyntax.PREFIX_PHONE + "+6591239123";
 
     private Participant participant;
-    private Name participantName;
-    private Name teamName;
+    private Id participantId;
+    private Id teamId;
 
     public AddParticipantCommand(Participant participant) {
         requireNonNull(participant);
         this.participant = participant;
     }
 
-    /*
-     * public AddParticipantCommand(Name participantName, Name teamName) {
-     *     CollectionUtil.requireAllNonNull(participantName, teamName);
-     *     this.participantName = participantName;
-     *     this.teamName = teamName;
-     * }
-     */
+    public AddParticipantCommand(Id participantId, Id teamId) {
+        CollectionUtil.requireAllNonNull(participantId, teamId);
+        this.participantId = participantId;
+        this.teamId = teamId;
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -58,12 +57,13 @@ public class AddParticipantCommand extends AddCommand {
 
         try {
             model.addParticipant(this.participant);
-            model.updateHistory();
+            model.resetFilteredLists();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PARTICIPANT);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.participant.toString()), PrefixType.P);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.participant.toString()), CommandType.P);
     }
 
     @Override
@@ -72,5 +72,4 @@ public class AddParticipantCommand extends AddCommand {
                 || (other instanceof AddParticipantCommand // instanceof handles nulls
                 && participant.equals(((AddParticipantCommand) other).participant));
     }
-
 }

@@ -5,15 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static org.mockito.Mockito.spy;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -21,12 +19,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
+import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.storage.AlfredStorage;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.TypicalMentors;
@@ -41,7 +39,7 @@ public class ModelManagerTest {
 
     @BeforeEach
     public void clearTeamA() {
-        modelManager = new ModelManager(storage, new UserPrefs());
+        modelManager = spy(new ModelManager(storage, new UserPrefs()));
         TypicalTeams.clearTeamA();
     }
 
@@ -49,7 +47,6 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
     }
 
     @Test
@@ -83,39 +80,6 @@ public class ModelManagerTest {
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
-    @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
-    }
-
-    @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
-    }
-
-    @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
-    }
-
-    @Disabled
-    @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
-    }
-
-    @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
-    }
-
-    @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
-    }
 
     @Test
     public void addAndGetParticipant_validId_returnsParticipant() {
@@ -235,8 +199,10 @@ public class ModelManagerTest {
             modelManager.addParticipant(TypicalParticipants.A);
             modelManager.addParticipant(TypicalParticipants.B);
             assertEquals(modelManager.getParticipantList().list().size(), 2);
-            assertEquals(modelManager.findParticipantByName("A").size(), 1);
-            assertEquals(modelManager.findParticipantByName("Part B").size(), 1);
+            assertEquals(modelManager.findParticipant(
+                    Predicates.getPredicateFindParticipantByName("A")).size(), 1);
+            assertEquals(modelManager.findParticipant(
+                    Predicates.getPredicateFindParticipantByName("Part B")).size(), 1);
         } catch (AlfredException | IOException e) {
             // do nothing
         }
@@ -256,7 +222,8 @@ public class ModelManagerTest {
             // do nothing
         }
         assertEquals(modelManager.getTeamList().list().size(), 1);
-        assertEquals(modelManager.findTeamByName("A").size(), 1);
+        assertEquals(modelManager.findTeam(
+                Predicates.getPredicateFindTeamByName("A")).size(), 1);
     }
     @Disabled
     @Test
@@ -271,7 +238,8 @@ public class ModelManagerTest {
             // do nothing
         }
         assertEquals(modelManager.getMentorList().list().size(), 2);
-        assertEquals(modelManager.findMentorByName("Mentor").size(), 2);
+        assertEquals(modelManager.findMentor(
+                Predicates.getPredicateFindMentorByName("B")).size(), 2);
     }
 
     @Test
@@ -299,11 +267,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-
-        // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

@@ -22,27 +22,17 @@ public class Team extends Entity {
     private SubjectName subject;
     private Score score;
     private Name projectName;
-    private ProjectType projectType;
     private Location location;
-
-    // Should we have a 'default' constructor that takes in ID and name only?
-    /*
-     * public Team(Id teamId, Name teamName) {
-     *     super(teamId, teamName);
-     *     // Initialize other fields through add/edit commands
-     * }
-     */
 
     /**
      * Constructor with mentor.
      *
-     * @param teamId
+     *  @param teamId
      * @param teamName
      * @param participants
      * @param subject
      * @param score
      * @param projectName
-     * @param projectType
      * @param location
      */
     public Team(
@@ -53,7 +43,6 @@ public class Team extends Entity {
             SubjectName subject,
             Score score,
             Name projectName,
-            ProjectType projectType,
             Location location
     ) {
         super(teamId, teamName);
@@ -62,7 +51,6 @@ public class Team extends Entity {
         this.subject = subject;
         this.score = score;
         this.projectName = projectName;
-        this.projectType = projectType;
         this.location = location;
     }
 
@@ -86,10 +74,6 @@ public class Team extends Entity {
 
     public Name getProjectName() {
         return this.projectName;
-    }
-
-    public ProjectType getProjectType() {
-        return this.projectType;
     }
 
     public Location getLocation() {
@@ -116,10 +100,6 @@ public class Team extends Entity {
 
     public void setProjectName(Name projectName) {
         this.projectName = projectName;
-    }
-
-    public void setProjectType(ProjectType projectType) {
-        this.projectType = projectType;
     }
 
     public void setLocation(Location location) {
@@ -258,7 +238,6 @@ public class Team extends Entity {
         result.put("mentor", mentor.toString());
         result.put("score", score.toString());
         result.put("projectName", projectName.toString());
-        result.put("projectType", projectType.toString());
         result.put("participants", participantsString);
         return result;
     }
@@ -266,7 +245,7 @@ public class Team extends Entity {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, participants, mentor, subject, score,
-                projectName, projectType, location);
+                projectName, location);
     }
 
     @Override
@@ -287,8 +266,7 @@ public class Team extends Entity {
                 && otherTeam.getLocation().equals(this.getLocation())
                 && otherTeam.getMentor().equals(this.getMentor())
                 && otherTeam.getScore().equals(this.getScore())
-                && otherTeam.getProjectName().equals(this.getProjectName())
-                && otherTeam.getProjectType().equals(this.getProjectType());
+                && otherTeam.getProjectName().equals(this.getProjectName());
     }
 
     @Override
@@ -300,21 +278,19 @@ public class Team extends Entity {
 
         builder.append(" Name: ")
                 .append(getName())
-                .append(" ID: ")
+                .append(", ID: ")
                 .append(getId())
-                .append(" Subject: ")
+                .append(", Subject: ")
                 .append(getSubject())
-                .append(" Location: ")
+                .append(", Location: ")
                 .append(getLocation())
-                .append(" Mentor: ")
+                .append(", Mentor: ")
                 .append(getMentor().orElse(null))
-                .append(" Score: ")
+                .append(", Score: ")
                 .append(getScore())
-                .append(" Project Name: ")
+                .append(", Project Name: ")
                 .append(getProjectName())
-                .append(" Project Type: ")
-                .append(getProjectType())
-                .append(" Participants: ")
+                .append(", Participants: ")
                 .append(participantsString);
 
         return builder.toString();
@@ -372,15 +348,21 @@ public class Team extends Entity {
             copiedMentor = Optional.of(this.mentor.get().copy());
         }
 
-        Team copy = new Team(this.id.copy(),
-                             this.name.copy(),
-                             pListCopy,
-                             copiedMentor,
-                             this.subject,
-                             this.score.copy(),
-                             this.projectName.copy(),
-                             this.projectType,
-                             this.location.copy());
+        Team copy = new Team(
+                this.id.copy(),
+                this.name.copy(),
+                pListCopy,
+                copiedMentor,
+                this.subject,
+                this.score.copy(),
+                this.projectName.copy(),
+                this.location.copy()
+        );
         return copy;
+    }
+
+    @Override
+    public PrefixType getPrefix() {
+        return PrefixType.T;
     }
 }

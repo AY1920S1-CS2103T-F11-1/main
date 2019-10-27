@@ -3,10 +3,12 @@ package seedu.address.stub;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.ModelManager;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
@@ -23,6 +25,12 @@ public class ModelManagerStub extends ModelManager {
     public ModelManagerStub() {
         // TODO: user constructor for Alfred later
         super();
+        this.filteredParticipantList =
+                new FilteredList<>(this.participantList.getSpecificTypedList());
+        this.filteredMentorList =
+                new FilteredList<>(this.mentorList.getSpecificTypedList());
+        this.filteredTeamList =
+                new FilteredList<>(this.teamList.getSpecificTypedList());
     }
 
     //========== Entity Methods =============================
@@ -235,10 +243,46 @@ public class ModelManagerStub extends ModelManager {
         return mentorToDelete;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof ModelManagerStub)) {
+            return false;
+        }
+        ModelManagerStub model = (ModelManagerStub) other;
+        return this.participantList.equals(model.participantList)
+                && this.mentorList.equals(model.mentorList)
+                && this.teamList.equals(model.teamList);
+    }
+
     /**
      * Placeholder method simulating the updating of ModelHistory
      */
-    public void updateHistory() {
+    @Override
+    public void updateHistory(Command c) {
+    }
+
+    /**
+     * Placeholder method simulating the undoing of a command in ModelHistory
+     */
+    @Override
+    public void undo() {
+    }
+
+    /**
+     * Placeholder method simulating the redoing of a command in ModelHistory
+     */
+    @Override
+    public void redo() {
+    }
+
+    /**
+     * Placeholder method to simulating reseting of FilteredList
+     */
+    @Override
+    public void resetFilteredLists() {
 
     }
 }
