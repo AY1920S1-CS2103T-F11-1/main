@@ -47,7 +47,7 @@ public class SubtractScoreCommand extends ScoreCommand {
         }
 
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
-                score.toString(), teamToScore.getName().toString()), CommandType.M);
+                score.toString(), teamToScore.getName().toString()), CommandType.T);
     }
 
     @Override

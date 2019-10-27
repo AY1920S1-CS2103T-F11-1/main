@@ -6,6 +6,7 @@ import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
@@ -25,12 +26,13 @@ public class SubtractScoreCommandParser implements Parser<SubtractScoreCommand> 
         try {
             id = AlfredParserUtil.getSpecifierFromCommand(args);
             score = AlfredParserUtil.getArgumentsFromCommand(args);
-            teamId = AlfredParserUtil.parseIndex(id, PrefixType.T);
-            teamScore = AlfredParserUtil.parseScore(score);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SubtractScoreCommand.MESSAGE_USAGE));
         }
+
+        teamId = AlfredParserUtil.parseIndex(id, PrefixType.T);
+        teamScore = AlfredParserUtil.parseScore(score);
 
         return new SubtractScoreCommand(teamId, teamScore);
     }
