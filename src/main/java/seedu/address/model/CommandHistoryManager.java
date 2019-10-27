@@ -1,41 +1,46 @@
 package seedu.address.model;
 
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class CommandHistoryManager implements CommandHistory {
-    private Stack<String> prev;
-    private Stack<String> next;
+    private LinkedList<String> history;
+    private int currIndex;
 
     public CommandHistoryManager() {
-        this.prev = new Stack<>();
-        this.next = new Stack<>();
+        this.history = new LinkedList<>();
+        this.currIndex = 0;
     }
 
     public void saveCommandExecutionString(String commandInputString) {
-        this.next.clear();
-        this.prev.push(commandInputString);
-        System.out.println("PrevStack: " + this.prev.size() + " | NextStack: " + this.next.size());
+        //Every execution of a new command will cause the currIndex to be reset
+        //to the right-most index of the `history` + 1
+        this.history.add(commandInputString);
+        this.currIndex = this.history.size();
     }
 
     public String getPrevCommandString() {
-        if (!this.prev.empty()) {
-            this.next.push(this.prev.peek());
-            System.out.println("PrevStack: " + this.prev.size() + " | NextStack: " + this.next.size());
-            return this.prev.pop();
-        } else {
-            System.out.println("PrevStack: " + this.prev.size() + " | NextStack: " + this.next.size());
-            return this.next.peek();
+        if (this.history.size() == 0) {
+            return "";
         }
+
+        if (this.currIndex <= 0) {
+            return this.history.get(0);
+        }
+
+        this.currIndex -= 1;
+        return this.history.get(this.currIndex);
     }
 
     public String getNextCommandString() {
-        if (!this.next.empty()) {
-            this.prev.push(this.next.peek());
-            System.out.println("PrevStack: " + this.prev.size() + " | NextStack: " + this.next.size());
-            return this.next.pop();
-        } else {
-            System.out.println("PrevStack: " + this.prev.size() + " | NextStack: " + this.next.size());
+        if (this.history.size() == 0) {
             return "";
         }
+
+        if (this.currIndex >= (this.history.size()-1)) {
+            return "";
+        }
+
+        this.currIndex += 1;
+        return this.history.get(this.currIndex);
     }
 }
