@@ -144,6 +144,14 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
+    /* View command */
+    /**
+     * Sets the predicate to show detailed information of {@code entity}.
+     *
+     * @param entity {@code Entity} to view.
+     */
+    void viewEntity(Entity entity);
+
     /**
      * Updates the history of entity states with the current state (after execution of Command c)
      */
