@@ -6,7 +6,6 @@ import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
