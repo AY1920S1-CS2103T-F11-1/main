@@ -1,7 +1,5 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -72,6 +70,10 @@ class ModelHistoryRecordTest {
             Participant copiedParticipant = copiedPList.get(i);
             Participant origParticipant = origPList.get(i);
             assertTrue(copiedParticipant != origParticipant);
+            assertTrue(copiedParticipant.getEmail() != origParticipant.getEmail());
+            assertTrue(copiedParticipant.getPhone() != origParticipant.getPhone());
+            assertTrue(copiedParticipant.getId() != origParticipant.getId());
+            assertTrue(copiedParticipant.getName() != origParticipant.getName());
         }
     }
 
@@ -84,6 +86,12 @@ class ModelHistoryRecordTest {
             Mentor copiedMentor = copiedMList.get(i);
             Mentor origMentor = origMList.get(i);
             assertTrue(copiedMentor != origMentor);
+            assertTrue(copiedMentor.getName() != origMentor.getName());
+            assertTrue(copiedMentor.getId() != origMentor.getId());
+            assertTrue(copiedMentor.getPhone() != origMentor.getPhone());
+            assertTrue(copiedMentor.getEmail() != origMentor.getEmail());
+            assertTrue(copiedMentor.getOrganization() != origMentor.getOrganization());
+            assertTrue(copiedMentor.getSubject() == origMentor.getSubject()); //Subject is an Enum
         }
     }
 
@@ -96,6 +104,14 @@ class ModelHistoryRecordTest {
             Team copiedTeam = copiedTList.get(i);
             Team origTeam = origTList.get(i);
             assertTrue(copiedTeam != origTeam);
+            assertTrue(copiedTeam.getId() != origTeam.getId());
+            assertTrue(copiedTeam.getName() != origTeam.getName());
+            assertTrue(copiedTeam.getParticipants() != origTeam.getParticipants());
+            assertTrue(copiedTeam.getMentor() != origTeam.getMentor());
+            assertTrue(copiedTeam.getSubject() == origTeam.getSubject()); //Subject is an Enum
+            assertTrue(copiedTeam.getScore() != origTeam.getScore());
+            assertTrue(copiedTeam.getProjectName() != origTeam.getProjectName());
+            assertTrue(copiedTeam.getLocation() != origTeam.getLocation());
         }
     }
 }
