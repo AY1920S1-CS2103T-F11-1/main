@@ -119,9 +119,6 @@ public class ModelHistoryManager implements ModelHistory {
         if (this.canUndo()) {
             int currentIndex = this.history.indexOf(this.current); //Get prev state pointer index
             this.current = this.history.get(currentIndex - 1); //Update the current state pointer
-            ParticipantList.setLastUsedId(this.current.getParticipantListLastUsedId());
-            MentorList.setLastUsedId(this.current.getMentorListLastUsedId());
-            TeamList.setLastUsedId(this.current.getTeamListLastUsedId());
             return this.current;
         } else {
             throw new AlfredModelHistoryException("Unable to undo any further!");
@@ -233,9 +230,6 @@ public class ModelHistoryManager implements ModelHistory {
         if (this.canRedo()) {
             int currentIndex = this.history.indexOf(this.current);
             this.current = this.history.get(currentIndex + 1);
-            ParticipantList.setLastUsedId(this.current.getParticipantListLastUsedId());
-            MentorList.setLastUsedId(this.current.getMentorListLastUsedId());
-            TeamList.setLastUsedId(this.current.getTeamListLastUsedId());
             return this.current;
         } else {
             throw new AlfredModelHistoryException("Unable to redo any further!");
