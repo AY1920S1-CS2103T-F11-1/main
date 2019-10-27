@@ -6,10 +6,10 @@ import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
-import seedu.address.model.entity.PrefixType;
 
 /**
  * Deletes a {@link Participant} in Alfred.
@@ -49,14 +49,14 @@ public class DeleteParticipantCommand extends DeleteCommand {
         Participant participantToBeDeleted;
         try {
             participantToBeDeleted = model.deleteParticipant(this.id);
-            model.updateHistory();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             // Model checking if index is invalid?
             throw new CommandException(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PARTICIPANT_SUCCESS,
-                                               participantToBeDeleted.toString()), PrefixType.P);
+                                               participantToBeDeleted.toString()), CommandType.P);
     }
 
     @Override
@@ -65,5 +65,4 @@ public class DeleteParticipantCommand extends DeleteCommand {
                 || (other instanceof DeleteParticipantCommand // instanceof handles nulls
                 && id.equals(((DeleteParticipantCommand) other).id));
     }
-
 }

@@ -10,12 +10,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Phone;
-import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.SubjectName;
 
 /**
@@ -63,8 +63,9 @@ public class EditMentorCommand extends EditCommand {
 
         try {
             model.updateMentor(this.id, editedMentor);
-            model.updateHistory();
-            return new CommandResult(String.format(MESSAGE_EDIT_MENTOR_SUCCESS, editedMentor.toString()), PrefixType.M);
+            model.updateHistory(this);
+            return new CommandResult(String.format(MESSAGE_EDIT_MENTOR_SUCCESS, editedMentor.toString()),
+                    CommandType.M);
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
         }
@@ -91,6 +92,25 @@ public class EditMentorCommand extends EditCommand {
 
         return new Mentor(updatedName, id, updatedPhone, updatedEmail, updatedOrganization, updatedSubject);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditMentorCommand)) {
+            return false;
+        }
+
+        // state check
+        EditMentorCommand e = (EditMentorCommand) other;
+        return id.equals(e.id)
+                && editMentorDescriptor.equals(e.editMentorDescriptor);
+    }
+
 
     /**
      * Stores the details to edit the {@code Mentor} with. Each non-empty field value will replace the
@@ -179,5 +199,4 @@ public class EditMentorCommand extends EditCommand {
                     && getSubject().equals(e.getSubject());
         }
     }
-
 }

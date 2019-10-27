@@ -32,7 +32,6 @@ public class AddCommandAllocator implements CommandAllocator<AddCommand> {
         }
 
         switch (entity) {
-
         case CliSyntax.ENTITY_MENTOR:
             //logger.info("Adding a new Mentor...");
             return new AddMentorCommandParser().parse(args);

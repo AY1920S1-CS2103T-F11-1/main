@@ -6,10 +6,10 @@ import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Name;
-import seedu.address.model.entity.PrefixType;
 
 /**
  * Deletes a {@link Mentor} in Alfred.
@@ -47,13 +47,13 @@ public class DeleteMentorCommand extends DeleteCommand {
         Mentor mentorToBeDeleted;
         try {
             mentorToBeDeleted = model.deleteMentor(this.id);
-            model.updateHistory();
+            model.updateHistory(this);
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_MENTOR_SUCCESS,
-                mentorToBeDeleted.toString()), PrefixType.M);
+                mentorToBeDeleted.toString()), CommandType.M);
     }
 
     @Override
@@ -62,5 +62,4 @@ public class DeleteMentorCommand extends DeleteCommand {
                 || (other instanceof DeleteMentorCommand // instanceof handles nulls
                 && id.equals(((DeleteMentorCommand) other).id));
     }
-
 }

@@ -10,12 +10,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
+import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Name;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Phone;
-import seedu.address.model.entity.PrefixType;
 
 /**
  * Edits a {@link Participant} in Alfred.
@@ -59,12 +59,30 @@ public class EditParticipantCommand extends EditCommand {
 
         try {
             model.updateParticipant(this.id, editedParticipant);
-            model.updateHistory();
+            model.updateHistory(this);
             return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS,
-                    editedParticipant.toString()), PrefixType.P);
+                    editedParticipant.toString()), CommandType.P);
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditParticipantCommand)) {
+            return false;
+        }
+
+        // state check
+        EditParticipantCommand e = (EditParticipantCommand) other;
+        return id.equals(e.id)
+                && editParticipantDescriptor.equals(e.editParticipantDescriptor);
     }
 
     /**
@@ -154,5 +172,4 @@ public class EditParticipantCommand extends EditCommand {
                     && getEmail().equals(e.getEmail());
         }
     }
-
 }
