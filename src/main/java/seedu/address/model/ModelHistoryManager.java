@@ -230,16 +230,8 @@ public class ModelHistoryManager implements ModelHistory {
      * @throws AlfredModelHistoryException
      */
     public ModelHistoryRecord redo() throws AlfredModelHistoryException {
-        if (this.canRedo()) {
-            int currentIndex = this.history.indexOf(this.current);
-            this.current = this.history.get(currentIndex + 1);
-            ParticipantList.setLastUsedId(this.current.getParticipantListLastUsedId());
-            MentorList.setLastUsedId(this.current.getMentorListLastUsedId());
-            TeamList.setLastUsedId(this.current.getTeamListLastUsedId());
-            return this.current;
-        } else {
-            throw new AlfredModelHistoryException("Unable to redo any further!");
-        }
+        //TODO: Update this in v1.3-1.4
+        throw new AlfredModelHistoryException("Not yet implemented");
     }
 
     /**
