@@ -42,8 +42,8 @@ public class AddScoreCommand extends ScoreCommand {
 
         try {
             model.addTeamScore(teamToScore, score);
-        } catch (AlfredException e) {
-            throw new CommandException(e.getMessage());
+        } catch (AlfredException ae) {
+            throw new CommandException(ae.getMessage());
         }
 
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
