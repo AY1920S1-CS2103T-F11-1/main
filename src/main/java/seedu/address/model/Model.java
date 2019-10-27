@@ -12,7 +12,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.Command;
-import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
@@ -155,9 +154,6 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
-    /* View Command */
-    void viewEntity(Entity entity);
-
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
@@ -214,5 +210,21 @@ public interface Model {
      * Gets a String detailing the previously executed commands that can be undone by the user.
      * @return String representing the previously executed commands that can be undone by the user.
      */
-    ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException;
+    String getCommandHistoryString();
+
+    /**
+     * Returns a List of Strings describing the commands that can be undone.
+     */
+    List<String> getUndoCommandHistory();
+
+    /**
+     * Returns a List of Strings describing the commands that can be redone.
+     */
+    List<String> getRedoCommandHistory();
+
+    /**
+     * Returns a List of CommandsRecords describing the commands that can be undone/redone
+     * @throws AlfredModelHistoryException
+     */
+    ArrayList<CommandRecord> getCommandHistory();
 }
