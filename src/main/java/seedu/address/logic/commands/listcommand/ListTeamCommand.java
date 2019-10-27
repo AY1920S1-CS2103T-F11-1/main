@@ -23,6 +23,7 @@ public class ListTeamCommand extends ListCommand {
         this.displayTeams(model);
         model.resetFilteredLists();
         model.updateHistory(this);
+        model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(MESSAGE_SUCCESS, CommandType.T);
     }
 }

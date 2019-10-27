@@ -23,6 +23,7 @@ public class ListParticipantCommand extends ListCommand {
         this.displayParticipants(model);
         model.resetFilteredLists();
         model.updateHistory(this);
+        model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(MESSAGE_SUCCESS, CommandType.P);
     }
 }

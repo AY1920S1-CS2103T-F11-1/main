@@ -91,18 +91,6 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
     }
 
-    private void setCommandHistoryHandlers() {
-        this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.UP) {
-                System.out.println("Up Key Pressed");
-                commandBox.setTextField("Up Key Pressed");
-                //this.commandBoxPlaceholder.getChildren.get(0).
-                //System.out.println(this.commandBoxPlaceholder.getChildren().get(0).getChildren());
-            }
-        });
-    }
-
-
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -159,7 +147,21 @@ public class MainWindow extends UiPart<Stage> {
 
         commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-        setCommandHistoryHandlers();
+        setCommandNavigationHandler();
+    }
+
+    private void setCommandNavigationHandler() {
+        this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.UP) {
+                System.out.println("Up Key Pressed");
+                commandBox.setTextField(logic.getPrevCommandString());
+            }
+
+            if (event.getCode() == KeyCode.DOWN) {
+                System.out.println("Down Key Pressed");
+                commandBox.setTextField(logic.getNextCommandString());
+            }
+        });
     }
 
     /**

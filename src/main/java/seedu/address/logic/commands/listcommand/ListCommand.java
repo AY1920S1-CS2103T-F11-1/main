@@ -61,6 +61,8 @@ public class ListCommand extends Command {
             this.displayMentors(model);
             this.displayParticipants(model);
         }
+        model.updateHistory(this);
+        model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

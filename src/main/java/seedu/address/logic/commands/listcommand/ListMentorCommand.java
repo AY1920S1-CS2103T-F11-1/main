@@ -23,6 +23,7 @@ public class ListMentorCommand extends ListCommand {
         this.displayMentors(model);
         model.resetFilteredLists();
         model.updateHistory(this);
+        model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(MESSAGE_SUCCESS, CommandType.M);
     }
 }
