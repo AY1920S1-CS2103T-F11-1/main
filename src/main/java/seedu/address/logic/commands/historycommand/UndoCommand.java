@@ -24,7 +24,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         try {
             model.undo();
-            return new CommandResult(MESSAGE_SUCCESS, CommandType.H);
+            return new CommandResult(String.format(MESSAGE_SUCCESS), CommandType.H);
         } catch (AlfredModelHistoryException e) {
             throw new CommandException(e.getMessage());
         }
