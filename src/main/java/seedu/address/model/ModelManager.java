@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.Predicates;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
@@ -54,7 +54,7 @@ public class ModelManager implements Model {
     // TODO: Remove the null values which are a placeholder due to the multiple constructors.
     // Also will have to change the relevant attributes to final.
     private AlfredStorage storage = null;
-    private ModelHistoryManager history = null;
+    private ModelHistory history = null;
     private AddressBook addressBook = null;
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons = null;
@@ -214,11 +214,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
-    }
-
-    @Override
     public Path getParticipantListFilePath() {
         return userPrefs.getParticipantListFilePath();
     }
@@ -231,12 +226,6 @@ public class ModelManager implements Model {
     @Override
     public Path getMentorListFilePath() {
         return userPrefs.getMentorListFilePath();
-    }
-
-    @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
     //========== EntityListMethods ===============
@@ -659,152 +648,37 @@ public class ModelManager implements Model {
     /**
      * This method searches for all participants whose name matches the param.
      *
-     * @param name
+     * @param predicate
      * @return {@code List<Participant>}
      */
-    public List<Participant> findParticipantByName(String name) {
-        List<Participant> results = new ArrayList<>();
-        for (Participant p: this.participantList.getSpecificTypedList()) {
-            if (p.getName().toString().contains(name)) {
-                results.add(p);
-            }
-        }
-        this.filteredParticipantList.setPredicate(
-                Predicates.getPredicateFindEntityByName(name));
-        return results;
+    public List<Participant> findParticipant(Predicate<Participant> predicate) {
+        this.filteredParticipantList.setPredicate(predicate);
+        return this.participantList.getSpecificTypedList().stream()
+                .filter(predicate).collect(Collectors.toList());
     }
 
     /**
      * This method searches for all teams whose name matches the param.
      *
-     * @param name
+     * @param predicate
      * @return {@code List<Team>}
      */
-    public List<Team> findTeamByName(String name) {
-        List<Team> results = new ArrayList<>();
-        for (Team t: this.teamList.getSpecificTypedList()) {
-            if (t.getName().toString().contains(name)) {
-                results.add(t);
-            }
-        }
-        this.filteredTeamList.setPredicate(
-                Predicates.getPredicateFindEntityByName(name));
-        return results;
+    public List<Team> findTeam(Predicate<Team> predicate) {
+        this.filteredTeamList.setPredicate(predicate);
+        return this.teamList.getSpecificTypedList().stream()
+                .filter(predicate).collect(Collectors.toList());
     }
 
     /**
      * This method searches for all mentors whose name matches the param.
      *
-     * @param name
+     * @param predicate
      * @return {@code List<Mentor>}
      */
-    public List<Mentor> findMentorByName(String name) {
-        List<Mentor> results = new ArrayList<>();
-        for (Mentor m: this.mentorList.getSpecificTypedList()) {
-            if (m.getName().toString().contains(name)) {
-                results.add(m);
-            }
-        }
-        this.filteredMentorList.setPredicate(
-                Predicates.getPredicateFindEntityByName(name));
-        return results;
-    }
-
-    /**
-     * Sets the predicate to show detailed information of {@code entity}.
-     *
-     * @param entity {@code Entity} to view.
-     */
-    public void viewEntity(Entity entity) {
-        PrefixType entityType = entity.getPrefix();
-        Predicate<Entity> predicate = Predicates.viewSpecifiedEntity(entity);
-        switch (entityType) {
-        case M:
-            this.filteredMentorList.setPredicate(predicate);
-            return;
-        case P:
-            this.filteredParticipantList.setPredicate(predicate);
-            return;
-        case T:
-            this.filteredTeamList.setPredicate(predicate);
-            return;
-        default:
-            // should never reach here
-            throw new RuntimeException();
-        }
-    }
-
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
-    }
-
-
-    // =========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+    public List<Mentor> findMentor(Predicate<Mentor> predicate) {
+        this.filteredMentorList.setPredicate(predicate);
+        return this.mentorList.getSpecificTypedList().stream()
+                .filter(predicate).collect(Collectors.toList());
     }
 
     //========== ModelHistory Methods ===============
@@ -831,38 +705,79 @@ public class ModelManager implements Model {
     public void undo() throws AlfredModelHistoryException {
         if (this.history.canUndo()) {
             ModelHistoryRecord hr = this.history.undo();
-
-            //Set Last Used IDs for each of the EntityLists
-            ParticipantList.setLastUsedId(hr.getParticipantListLastUsedId());
-            MentorList.setLastUsedId(hr.getMentorListLastUsedId());
-            TeamList.setLastUsedId(hr.getTeamListLastUsedId());
-
-            //Update each of the EntityLists to the state in the ModelHistoryRecord hr
-            try {
-                this.participantList = hr.getParticipantList().copy();
-                this.mentorList = hr.getMentorList().copy();
-                this.teamList = hr.getTeamList().copy();
-            } catch (AlfredModelException e) {
-                throw new AlfredModelHistoryException("Unable to copy EntityLists from ModelHistoryRecord");
-            }
-
-            //Update each of the filteredEntityLists
-            this.filteredParticipantList =
-                    new FilteredList<>(this.participantList.getSpecificTypedList());
-            this.filteredMentorList =
-                    new FilteredList<>(this.mentorList.getSpecificTypedList());
-            this.filteredTeamList =
-                    new FilteredList<>(this.teamList.getSpecificTypedList());
+            updateModelState(hr);
         } else {
             throw new AlfredModelHistoryException("Unable to undo.");
         }
     }
 
     /**
-     * Gets a String detailing the previously executed commands that can be undone by the user.
-     * @return String representing the previously executed commands that can be undone by the user.
+     * This method will return the ModelManager to the state where the previous command executed is redone.
+     * @throws AlfredModelHistoryException
      */
-    public ArrayList<CommandRecord> getCommandHistory() throws AlfredModelHistoryException {
+    public void redo() throws AlfredModelHistoryException {
+        if (this.history.canRedo()) {
+            ModelHistoryRecord hr = this.history.redo();
+            updateModelState(hr);
+        } else {
+            throw new AlfredModelHistoryException("Unable to redo.");
+        }
+    }
+
+    /**
+     * Updates the current Model state (for each of the EntityLists and their lastUsedIDs) using a ModelHistoryRecord.
+     * @param hr ModelHistoryRecord containing the state of each of the EntityLists and their lastUsedIDs.
+     * @throws AlfredModelHistoryException
+     */
+    private void updateModelState(ModelHistoryRecord hr) throws AlfredModelHistoryException {
+        //Set Last Used IDs for each of the EntityLists
+        ParticipantList.setLastUsedId(hr.getParticipantListLastUsedId());
+        MentorList.setLastUsedId(hr.getMentorListLastUsedId());
+        TeamList.setLastUsedId(hr.getTeamListLastUsedId());
+
+        //Update each of the EntityLists to the state in the ModelHistoryRecord hr
+        try {
+            this.participantList = hr.getParticipantList().copy();
+            this.mentorList = hr.getMentorList().copy();
+            this.teamList = hr.getTeamList().copy();
+        } catch (AlfredModelException e) {
+            throw new AlfredModelHistoryException("Unable to copy EntityLists from ModelHistoryRecord");
+        }
+
+        //Update each of the filteredEntityLists
+        this.filteredParticipantList =
+                new FilteredList<>(this.participantList.getSpecificTypedList());
+        this.filteredMentorList =
+                new FilteredList<>(this.mentorList.getSpecificTypedList());
+        this.filteredTeamList =
+                new FilteredList<>(this.teamList.getSpecificTypedList());
+    }
+
+    /**
+     * Gets a String detailing the previously executed commands that can be undone by the user.
+     */
+    public String getCommandHistoryString() {
+        return this.history.getCommandHistoryString();
+    }
+
+    /**
+     * Returns a List of Strings describing the commands that can be undone.
+     */
+    public List<String> getUndoCommandHistory() {
+        return this.history.getUndoCommandHistory();
+    }
+
+    /**
+     * Returns a List of Strings describing the commands that can be redone.
+     */
+    public List<String> getRedoCommandHistory() {
+        return this.history.getRedoCommandHistory();
+    }
+
+    /**
+     * Returns a List of CommandRecords describing the commands that can be undone/redone
+     */
+    public ArrayList<CommandRecord> getCommandHistory() {
         return this.history.getCommandHistory();
     }
 }

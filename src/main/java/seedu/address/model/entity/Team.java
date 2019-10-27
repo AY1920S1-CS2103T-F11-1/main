@@ -26,6 +26,7 @@ public class Team extends Entity {
 
     /**
      * Constructor with mentor.
+     *
      *  @param teamId
      * @param teamName
      * @param participants
@@ -277,19 +278,19 @@ public class Team extends Entity {
 
         builder.append(" Name: ")
                 .append(getName())
-                .append(" ID: ")
+                .append(", ID: ")
                 .append(getId())
-                .append(" Subject: ")
+                .append(", Subject: ")
                 .append(getSubject())
-                .append(" Location: ")
+                .append(", Location: ")
                 .append(getLocation())
-                .append(" Mentor: ")
+                .append(", Mentor: ")
                 .append(getMentor().orElse(null))
-                .append(" Score: ")
+                .append(", Score: ")
                 .append(getScore())
-                .append(" Project Name: ")
+                .append(", Project Name: ")
                 .append(getProjectName())
-                .append(" Participants: ")
+                .append(", Participants: ")
                 .append(participantsString);
 
         return builder.toString();
