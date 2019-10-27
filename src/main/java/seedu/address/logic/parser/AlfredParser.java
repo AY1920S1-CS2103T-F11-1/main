@@ -64,7 +64,6 @@ public class AlfredParser {
 
         logger.info("Finding command type of " + commandWord);
         switch (commandWord) {
-            
         case AddCommand.COMMAND_WORD:
             return new AddCommandAllocator().allocate(arguments);
 
