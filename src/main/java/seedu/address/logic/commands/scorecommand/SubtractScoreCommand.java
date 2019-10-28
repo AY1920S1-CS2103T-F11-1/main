@@ -1,11 +1,16 @@
 package seedu.address.logic.commands.scorecommand;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AlfredParser;
 import seedu.address.model.Model;
 import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;
@@ -24,6 +29,7 @@ public class SubtractScoreCommand extends ScoreCommand {
             + "If the team's new score goes below " + Score.MIN_SCORE + " it will be set to " + Score.MIN_SCORE + "\n"
             + "Format: " + COMMAND_WORD + " teamID score \n"
             + "For example: " + COMMAND_WORD + " T-5 15";
+    private final Logger logger = LogsCenter.getLogger(AlfredParser.class);
 
     public SubtractScoreCommand(Id teamId, Score score) {
         super(teamId, score);
@@ -46,6 +52,7 @@ public class SubtractScoreCommand extends ScoreCommand {
             throw new CommandException(e.getMessage());
         }
 
+        logger.info("Subtracting " + this.score + " from Score of Team " + this.id);
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
                 score.toString(), teamToScore.getName().toString()), CommandType.T);
     }
