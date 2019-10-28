@@ -26,6 +26,7 @@ import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
+import seedu.address.commons.util.LeaderboardUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
@@ -676,12 +677,11 @@ public class ModelManager implements Model {
      */
     public void getTopK(int k) {
         this.sortedTeam.setComparator(Comparators.rankByScore());
-        int maxIndex = this.teamList.getSpecificTypedList().size();
 
         // Create a copy of the sorted teams from which teams can be removed without
         // damaging the original sorted teams list.
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
-        teams.remove(k, maxIndex);
+        teams = LeaderboardUtil.topKWithTie(teams, k);
         this.topKTeams = new SortedList<>(teams);
     }
 
