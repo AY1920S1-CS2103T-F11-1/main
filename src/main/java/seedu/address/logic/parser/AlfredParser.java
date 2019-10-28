@@ -66,19 +66,22 @@ public class AlfredParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            logger.info("Allocating add command to appropriate parser.");
             return new AddCommandAllocator().allocate(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandAllocator().allocate(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            logger.info("Deleting an existing Participant...");
+            logger.info("Allocating delete command to appropriate parser.");
             return new DeleteCommandAllocator().allocate(arguments);
 
         case ListCommand.COMMAND_WORD:
+            logger.info("Showing list of a particular entity...");
             return new ListCommandParser().parse(arguments);
 
         case ShowLeaderboardCommand.COMMAND_WORD:
+            logger.info("Executing leaderboard command...");
             return new ShowLeaderboardCommand();
 
         case GetTopTeamsCommand.COMMAND_WORD:

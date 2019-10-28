@@ -296,7 +296,6 @@ public class MainWindow extends UiPart<Stage> {
         if (mentorsButton.isArmed()) {
             mentorsButton.disarm();
         }
-
     }
 
     private void fireButton(Button button) throws AlfredModelHistoryException {
@@ -346,6 +345,9 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case L:
                 this.fireButton(leaderboardButton);
+                break;
+            case K:
+                displayTopK();
                 break;
             default:
                 logger.info("The command does not edit any of the list of Entity");
