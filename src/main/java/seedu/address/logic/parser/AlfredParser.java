@@ -86,7 +86,7 @@ public class AlfredParser {
 
         case ShowLeaderboardCommand.COMMAND_WORD:
             logger.info("Executing leaderboard command...");
-            return new ShowLeaderboardCommand();
+            return new ShowLeaderBoardCommandParser().parse(arguments);
 
         case GetTopTeamsCommand.COMMAND_WORD:
             return new GetTopTeamsCommandParser().parse(arguments);

@@ -1,5 +1,6 @@
 package seedu.address.commons;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.address.model.entity.Team;
@@ -9,6 +10,11 @@ import seedu.address.model.entity.Team;
  * rank teams by score.
  */
 public class Comparators {
+
+    public static final String MORE_PARTICIPANTS = "moreParticipants";
+    public static final String LESS_PARTICIPANTS = "lessParticipants";
+    public static final String HIGHER_ID = "higherId";
+    public static final String LOWER_ID = "lowerId";
 
     /**
      * Creates a new comparator used to sort teams by their score
@@ -28,22 +34,12 @@ public class Comparators {
     }
 
     /**
-     * Creates a new comparator used to sort teams by their score
-     * in ascending order, mainly for the loser board.
-     *
-     * @return a new Comparator for Teams.
-     */
-    public static Comparator<Team> rankByScoreReverse() {
-        return rankByScore().reversed();
-    }
-
-    /**
      * Creates a new comparator used to sort teams by the number of participants
      * they have in ascending order, for use to break ties.
      *
      * @return a new Comparator for Teams.
      */
-    public static Comparator<Team> rankByParticipants() {
+    public static Comparator<Team> rankByParticipantsDescending() {
         return new Comparator<Team>() {
             @Override
             public int compare(Team o1, Team o2) {
@@ -60,8 +56,8 @@ public class Comparators {
      *
      * @return a new Comparator for Teams.
      */
-    public static Comparator<Team> rankByParticipantsReverse() {
-        return rankByParticipants().reversed();
+    public static Comparator<Team> rankByParticipantsAscending() {
+        return rankByParticipantsDescending().reversed();
     }
 
     /**
@@ -70,7 +66,7 @@ public class Comparators {
      *
      * @return a new Comparator for Teams.
      */
-    public static Comparator<Team> rankById() {
+    public static Comparator<Team> rankByIdDescending() {
         return new Comparator<Team>() {
             @Override
             public int compare(Team o1, Team o2) {
@@ -81,4 +77,13 @@ public class Comparators {
         };
     }
 
+    /**
+     * Creates a new comparator used to sort teams by their id
+     * in ascending order, for use to break ties.
+     *
+     * @return a new Comparator for Teams.
+     */
+    public static Comparator<Team> rankByIdAscending() {
+        return rankByIdDescending().reversed();
+    }
 }

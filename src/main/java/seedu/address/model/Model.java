@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -156,9 +157,13 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
-    void getLeaderboard();
+    void getLeaderboardWithRandom();
+
+    void getLeaderboardWithComparators(Comparator<Team> ... comparators);
 
     void getTopK(int k);
+
+    void getTopKRandom(int k);
 
     /* View command */
     /**

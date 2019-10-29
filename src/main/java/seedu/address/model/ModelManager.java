@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -723,11 +724,26 @@ public class ModelManager implements Model {
 
     //=========== Leader-Board methods ==================================================================
 
+    private void initialiseSortedList() {
+        this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
+    }
+
+    public void getLeaderboardWithRandom() {
+        initialiseSortedList();
+        this.sortedTeam.setComparator(Comparators.rankByScore());
+        getTopKRandom(this.sortedTeam.size());
+    }
+
     /**
-     * Sets the sortedTeam's comparator to a {@code TeamRankingComparator} in order
-     * for the teams to be ranked by their score in the sortedTeam list.
+     * Arranges the sorted team list {@code sortedTeam} to sort the current teams in stored
+     * in Alfred in descending order of their score. Implements additional Comparators {@param comparators}
+     * for tie-breaking if specified by the user.
      */
-    public void getLeaderboard() {
+    public void getLeaderboardWithComparators(Comparator<Team> ... comparators) {
+        initialiseSortedList();
+        for (Comparator<Team> comparator : comparators) {
+            this.sortedTeam.setComparator(comparator);
+        }
         this.sortedTeam.setComparator(Comparators.rankByScore());
     }
 
@@ -740,7 +756,14 @@ public class ModelManager implements Model {
         // Create a copy of the sorted teams from which teams can be removed without
         // damaging the original sorted teams list.
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
-        teams = LeaderboardUtil.topKWithTie(teams, k);
+        teams = LeaderboardUtil.topKAbsolute(teams, k);
+        this.topKTeams = new SortedList<>(teams);
+    }
+
+    public void getTopKRandom(int k) {
+        this.sortedTeam.setComparator(Comparators.rankByScore());
+        ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
+        teams = LeaderboardUtil.randomWinnersGenerator(teams, k);
         this.topKTeams = new SortedList<>(teams);
     }
 

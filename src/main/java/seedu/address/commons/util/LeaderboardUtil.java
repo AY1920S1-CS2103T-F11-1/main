@@ -63,7 +63,7 @@ public class LeaderboardUtil {
      *
      * @return a new ObservableList object containing the randomly generated winners in order.
      */
-    public static ObservableList<Team> randomWinnerGenerator(ObservableList<Team> currentStanding, int k) {
+    public static ObservableList<Team> randomWinnersGenerator(ObservableList<Team> currentStanding, int k) {
         ObservableList<Team> finalTeams = FXCollections.observableArrayList();
         ArrayList<Team> temp = new ArrayList<>();
         Score currentScore = currentStanding.get(0).getScore();
