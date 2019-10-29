@@ -89,7 +89,7 @@ public class SuggestionTemplates {
     private final Text ORGANIZATION_PREFIX = new Text("o/");
     private final Text SPECIALISATION_PREFIX = new Text("s/ ");
     private final Text PROJECT_NAME_PREFIX = new Text("pn/ ");
-    private final Text PROJECT_TYPE_PREFIX = new Text("pt/ ");
+    private final Text SUBJECT_PREFIX = new Text("s/ ");
     private final Text LOCATION_PREFIX = new Text("l/ ");
     private final Text FILEPATH_PREFIX = new Text("fp/ ");
 
@@ -108,7 +108,7 @@ public class SuggestionTemplates {
     private final Text ORGANIZATION = new Text("ORGANIZATION ");
     private final Text SPECIALISATION = new Text("SPECIALISATION ");
     private final Text PROJECT_NAME = new Text("PROJECT_NAME ");
-    private final Text PROJECT_TYPE = new Text("PROJECT_TYPE ");
+    private final Text SUBJECT = new Text("SUBJECT ");
     private final Text TABLE = new Text("TABLE_NUMBER ");
     private final Text FILE_PATH = new Text("PATH_TO_CSV_FILE ");
     private final Text ENTITY = new Text("[{team/mentor/participant}] ");
@@ -159,7 +159,9 @@ public class SuggestionTemplates {
     public SuggestionTemplates() {
         initialize();
         //ADD Commands
-        ADD_PARTICIPANT_TEMPLATE = new TextFlow(ADD_PARTICIPANT, NAME_PREFIX,
+        ADD_PARTICIPANT_TEMPLATE = new TextFlow(ADD_PARTICIPANT, NAME_PREFIX, NAME,
+                PHONE_PREFIX, PHONE,
+                EMAIL_PREFIX, EMAIL,
                 ADD_PARTICIPANT_INSTRUCTION);
 
         ADD_MENTOR_TEMPLATE = new TextFlow(ADD_MENTOR, NAME_PREFIX, NAME,
@@ -172,7 +174,7 @@ public class SuggestionTemplates {
 
         ADD_TEAM_TEMPLATE = new TextFlow(ADD_TEAM, NAME_PREFIX, NAME,
                 PROJECT_NAME_PREFIX, PROJECT_NAME,
-                PROJECT_TYPE_PREFIX, PROJECT_TYPE,
+                SUBJECT_PREFIX, SUBJECT,
                 LOCATION_PREFIX, TABLE,
                 ADD_TEAM_INSTRUCTION
         );
