@@ -56,4 +56,12 @@ public class Predicates {
     public static Predicate<Entity> viewSpecifiedEntity(Entity entityToView) {
         return (entity) -> entity.equals(entityToView);
     }
+
+    public static Predicate<Team> isParticipantNumberEqual(Team team) {
+        return team1 -> team1.getParticipants().size() == team.getParticipants().size();
+    }
+
+    public static Predicate<Team> isScoreEqual(Team team) {
+        return team1 -> team1.getScore().equals(team.getScore());
+    }
 }

@@ -756,7 +756,7 @@ public class ModelManager implements Model {
         // Create a copy of the sorted teams from which teams can be removed without
         // damaging the original sorted teams list.
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
-        teams = LeaderboardUtil.topKAbsolute(teams, k);
+        teams = LeaderboardUtil.topKWithTie(teams, k);
         this.topKTeams = new SortedList<>(teams);
     }
 

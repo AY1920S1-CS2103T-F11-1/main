@@ -205,6 +205,12 @@ public class AlfredParserUtil {
         throw new ParseException(SubjectName.MESSAGE_CONSTRAINTS);
     }
 
+    /**
+     * Returns a new comparator based on the tie-break {@param method} specified by the users.
+     *
+     * @return new comparator for Team objects.
+     * @throws ParseException if the tie-break method specified is invalid.
+     */
     public static Comparator<Team> getAppropriateComparator(String method) throws ParseException {
         method = method.trim();
         switch(method) {

@@ -11,6 +11,7 @@ import seedu.address.model.entity.Team;
  */
 public class Comparators {
 
+    // Reference names for available comparators
     public static final String MORE_PARTICIPANTS = "moreParticipants";
     public static final String LESS_PARTICIPANTS = "lessParticipants";
     public static final String HIGHER_ID = "higherId";

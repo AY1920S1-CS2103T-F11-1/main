@@ -1,10 +1,14 @@
 package seedu.address.commons.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import seedu.address.commons.Comparators;
+import seedu.address.commons.Predicates;
 import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 
@@ -22,21 +26,22 @@ public class LeaderboardUtil {
      */
     public static ObservableList<Team> topKWithTie(ObservableList<Team> currentStanding, int k) {
         ObservableList<Team> teams = FXCollections.observableArrayList(currentStanding.get(0));
-        Score currentScore = currentStanding.get(0).getScore();
+        Team currentTeam = currentStanding.get(0);
         int currentTeamIndex = 1;
         int distinctTeams = 1;
 
-        while (distinctTeams != k && currentTeamIndex < currentStanding.size()) {
-            Team currentTeam = currentStanding.get(currentTeamIndex);
-            if (isScoreEqual(currentTeam, currentScore)) {
-                teams.add(currentTeam);
+        while (distinctTeams <= k && currentTeamIndex < currentStanding.size()) {
+            Team team = currentStanding.get(currentTeamIndex);
+            if (allMatch(currentTeam, team, Comparators.rankByParticipantsDescending())) {
+                teams.add(team);
             } else {
-                teams.add(currentTeam);
-                currentScore = currentTeam.getScore();
+                teams.add(team);
+                currentTeam = team;
                 distinctTeams++;
             }
             currentTeamIndex++;
         }
+        teams.remove(teams.size() - 1); // The above algorithm adds one redundant team at the end of the list.
         return teams;
     }
 
@@ -51,6 +56,11 @@ public class LeaderboardUtil {
         int listSize = currentStanding.size();
         currentStanding.remove(k, listSize);
         return currentStanding;
+    }
+
+    private static boolean allMatch(Team team1, Team team2, Comparator<Team> ... comparators) {
+        return Arrays.stream(comparators)
+                .allMatch(comparator -> comparator.compare(team1, team2) == 0);
     }
 
     private static boolean isScoreEqual(Team team1, Score currentScore) {
