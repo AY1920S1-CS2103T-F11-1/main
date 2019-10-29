@@ -13,6 +13,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
+import seedu.address.logic.commands.assigncommand.AssignCommand;
 import seedu.address.logic.commands.csvcommand.ExportCommand;
 import seedu.address.logic.commands.csvcommand.ImportCommand;
 import seedu.address.logic.commands.deletecommand.DeleteCommand;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.listcommand.ListCommand;
 import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.addcommandparser.AddCommandAllocator;
+import seedu.address.logic.parser.assigncommandparser.AssignCommandAllocator;
 import seedu.address.logic.parser.csvcommandparser.ExportCommandParser;
 import seedu.address.logic.parser.csvcommandparser.ImportCommandParser;
 import seedu.address.logic.parser.deletecommandparser.DeleteCommandAllocator;
@@ -107,6 +109,10 @@ public class AlfredParser {
         case EditCommand.COMMAND_WORD:
             logger.info("Editing an existing Entity...");
             return new EditCommandAllocator().allocate(arguments);
+
+        case AssignCommand.COMMAND_WORD:
+            logger.info("Assigning Entity(Mentor/Participant) to a Team");
+            return new AssignCommandAllocator().allocate(arguments);
 
         default:
             logger.info("Unknown command type: " + commandWord);
