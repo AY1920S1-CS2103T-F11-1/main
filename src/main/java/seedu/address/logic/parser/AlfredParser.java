@@ -23,6 +23,7 @@ import seedu.address.logic.commands.historycommand.HistoryCommand;
 import seedu.address.logic.commands.historycommand.RedoCommand;
 import seedu.address.logic.commands.historycommand.UndoCommand;
 import seedu.address.logic.commands.listcommand.ListCommand;
+import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.addcommandparser.AddCommandAllocator;
 import seedu.address.logic.parser.csvcommandparser.ExportCommandParser;
@@ -32,6 +33,7 @@ import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.findcommandparser.FindCommandAllocator;
 import seedu.address.logic.parser.listcommandparser.ListCommandParser;
+import seedu.address.logic.parser.scorecommandparser.ScoreCommandAllocator;
 import seedu.address.logic.parser.viewcommandparser.ViewCommandAllocator;
 
 /**
@@ -64,7 +66,6 @@ public class AlfredParser {
 
         logger.info("Finding command type of " + commandWord);
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
             logger.info("Allocating add command to appropriate parser.");
             return new AddCommandAllocator().allocate(arguments);
@@ -75,6 +76,9 @@ public class AlfredParser {
         case DeleteCommand.COMMAND_WORD:
             logger.info("Allocating delete command to appropriate parser.");
             return new DeleteCommandAllocator().allocate(arguments);
+
+        case ScoreCommand.COMMAND_WORD:
+            return new ScoreCommandAllocator().allocate(arguments);
 
         case ListCommand.COMMAND_WORD:
             logger.info("Showing list of a particular entity...");

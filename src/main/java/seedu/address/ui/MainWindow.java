@@ -73,7 +73,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private JFXButton historyButton;
 
-
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
@@ -85,7 +84,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
 
         helpWindow = new HelpWindow();
     }
@@ -349,6 +347,7 @@ public class MainWindow extends UiPart<Stage> {
             case K:
                 displayTopK();
                 break;
+
             default:
                 logger.info("The command does not edit any of the list of Entity");
                 break;
