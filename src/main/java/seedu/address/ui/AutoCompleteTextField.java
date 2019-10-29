@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -58,8 +59,6 @@ public class AutoCompleteTextField extends TextField {
     );
 
 
-
-
     /**
      * Represents a popup for user to select a command that is suggested.
      */
@@ -70,13 +69,13 @@ public class AutoCompleteTextField extends TextField {
      */
     public AutoCompleteTextField() {
         super();
-       suggestionTemplates = new SuggestionTemplates();
+        suggestionTemplates = new SuggestionTemplates();
         commandSuggestionSet.addAll(commandSuggestionList);
         commandsPopup = new ContextMenu();
         textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldString, String newString) {
-               //Guard clause
+                //Guard clause
                 if (getText().length() == 0) {
                     commandsPopup.hide();
                     return;
@@ -106,7 +105,8 @@ public class AutoCompleteTextField extends TextField {
             }
         });
 
-        //Set the commandsPopup to be hidden if the text field is out of focus or whenever focus value is changes/clicked.
+        //Set the commandsPopup to be hidden if the text field is out of focus
+        // or whenever focus value is changes/clicked.
         focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -117,6 +117,7 @@ public class AutoCompleteTextField extends TextField {
 
     /**
      * Populate the content of the commandsPopup with elements in List of Strings.
+     *
      * @param finalSuggestionResults List of Strings to populate content of commandsPopup.
      */
     private void populatePopup(List<String> finalSuggestionResults) {
@@ -130,16 +131,16 @@ public class AutoCompleteTextField extends TextField {
             TextFlow suggestionTemplate = getSuggestionTemplate(suggestion);
             logger.info("Suggestion template is: " + suggestionTemplate.toString());
             CustomMenuItem item = new CustomMenuItem(suggestionTemplate, true);
-                    item.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            setText(SuggestionTemplates.getString(suggestionTemplate));
-                            positionCaret(100);
-                            //commandsPopup hides after user picks a suggestion
-                            commandsPopup.hide();
-                        }
-                    });
-                    menuItems.add(item);
+            item.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    setText(SuggestionTemplates.getString(suggestionTemplate));
+                    positionCaret(100);
+                    //commandsPopup hides after user picks a suggestion
+                    commandsPopup.hide();
+                }
+            });
+            menuItems.add(item);
         }
         //Clears all current menu items in popup, and adds new items.
         commandsPopup.getItems().clear();
@@ -172,7 +173,7 @@ public class AutoCompleteTextField extends TextField {
         return getOtherTemplate(suggestion);
     }
 
-    private TextFlow getAddTemplate (String suggestion) {
+    private TextFlow getAddTemplate(String suggestion) {
         switch (suggestion) {
 
         case "add participant":
@@ -191,7 +192,7 @@ public class AutoCompleteTextField extends TextField {
         }
     }
 
-    private TextFlow getListTemplate (String suggestion) {
+    private TextFlow getListTemplate(String suggestion) {
         switch (suggestion) {
 
         case "list participants":
@@ -210,7 +211,7 @@ public class AutoCompleteTextField extends TextField {
         }
     }
 
-    private TextFlow getEditTemplate (String suggestion) {
+    private TextFlow getEditTemplate(String suggestion) {
         switch (suggestion) {
 
         case "edit participant":
@@ -229,7 +230,7 @@ public class AutoCompleteTextField extends TextField {
         }
     }
 
-    private TextFlow getDeleteTemplate (String suggestion) {
+    private TextFlow getDeleteTemplate(String suggestion) {
         switch (suggestion) {
 
         case "delete participant":
@@ -248,7 +249,7 @@ public class AutoCompleteTextField extends TextField {
         }
     }
 
-    private TextFlow getFindTemplate (String suggestion) {
+    private TextFlow getFindTemplate(String suggestion) {
         switch (suggestion) {
 
         case "find participant":
@@ -268,7 +269,7 @@ public class AutoCompleteTextField extends TextField {
         }
     }
 
-    private TextFlow getScoreTemplate (String suggestion) {
+    private TextFlow getScoreTemplate(String suggestion) {
         switch (suggestion) {
 
         case "score add":
@@ -287,7 +288,7 @@ public class AutoCompleteTextField extends TextField {
     }
 
     private TextFlow getOtherTemplate(String suggestion) {
-        switch(suggestion) {
+        switch (suggestion) {
         case "undo":
             return suggestionTemplates.UNDO_TEMPLATE;
 
