@@ -275,6 +275,7 @@ public class AutoCompleteTextField extends TextField {
 
         default:
             return null;
+                
         }
     }
 
