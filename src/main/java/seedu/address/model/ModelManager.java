@@ -724,14 +724,12 @@ public class ModelManager implements Model {
 
     //=========== Leader-Board methods ==================================================================
 
+    /**
+     * Clears up any formatting and sorting from the sorted list and resets it to its
+     * original form.
+     */
     private void initialiseSortedList() {
         this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
-    }
-
-    public void getLeaderboardWithRandom() {
-        initialiseSortedList();
-        this.sortedTeam.setComparator(Comparators.rankByScore());
-        getTopKRandom(this.sortedTeam.size());
     }
 
     /**
@@ -739,7 +737,7 @@ public class ModelManager implements Model {
      * in Alfred in descending order of their score. Implements additional Comparators {@param comparators}
      * for tie-breaking if specified by the user.
      */
-    public void getLeaderboardWithComparators(Comparator<Team> ... comparators) {
+    public void setSimpleLeaderboard(Comparator<Team> ... comparators) {
         initialiseSortedList();
         for (Comparator<Team> comparator : comparators) {
             this.sortedTeam.setComparator(comparator);
@@ -747,16 +745,23 @@ public class ModelManager implements Model {
         this.sortedTeam.setComparator(Comparators.rankByScore());
     }
 
+    public void setLeaderboardWithRandom(Comparator<Team> ... comparators) {
+        setSimpleLeaderboard(comparators);
+        ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
+        teams = LeaderboardUtil.randomWinnersGenerator(teams, teams.size(), comparators);
+        this.sortedTeam = new SortedList<>(teams);
+    }
+
     /**
-     * Sorts the sortedTeam list by the value of the team's score and
+     * Sorts the sortedTeam list by the value of the team's score and.
      */
-    public void getTopK(int k) {
+    public void getTopK(int k, Comparator<Team> ... comparators) {
         this.sortedTeam.setComparator(Comparators.rankByScore());
 
         // Create a copy of the sorted teams from which teams can be removed without
         // damaging the original sorted teams list.
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
-        teams = LeaderboardUtil.topKWithTie(teams, k);
+        teams = LeaderboardUtil.topKWithTie(teams, k, comparators);
         this.topKTeams = new SortedList<>(teams);
     }
 
@@ -766,7 +771,6 @@ public class ModelManager implements Model {
         teams = LeaderboardUtil.randomWinnersGenerator(teams, k);
         this.topKTeams = new SortedList<>(teams);
     }
-
 
     //=========== Find methods ==================================================================
 

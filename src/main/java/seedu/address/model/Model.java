@@ -157,11 +157,11 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
-    void getLeaderboardWithRandom();
+    void setLeaderboardWithRandom(Comparator<Team> ... comparators);
 
-    void getLeaderboardWithComparators(Comparator<Team> ... comparators);
+    void setSimpleLeaderboard(Comparator<Team> ... comparators);
 
-    void getTopK(int k);
+    void getTopK(int k, Comparator<Team> ... comparators);
 
     void getTopKRandom(int k);
 

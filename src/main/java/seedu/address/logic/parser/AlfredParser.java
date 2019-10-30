@@ -13,7 +13,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.GetTopTeamsCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ShowLeaderboardCommand;
+import seedu.address.logic.commands.ShowSimpleLeaderboardCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
 import seedu.address.logic.commands.csvcommand.ExportCommand;
 import seedu.address.logic.commands.csvcommand.ImportCommand;
@@ -84,7 +84,7 @@ public class AlfredParser {
             logger.info("Showing list of a particular entity...");
             return new ListCommandParser().parse(arguments);
 
-        case ShowLeaderboardCommand.COMMAND_WORD:
+        case ShowSimpleLeaderboardCommand.COMMAND_WORD:
             logger.info("Executing leaderboard command...");
             return new ShowLeaderBoardCommandParser().parse(arguments);
 

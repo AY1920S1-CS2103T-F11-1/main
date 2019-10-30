@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -11,8 +12,9 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.Comparators;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.LeaderboardUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ShowLeaderboardCommand;
+import seedu.address.logic.commands.ShowSimpleLeaderboardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
@@ -224,8 +226,23 @@ public class AlfredParserUtil {
             return Comparators.rankByParticipantsAscending();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ShowLeaderboardCommand.INVALID_TIE_BREAK + method));
+                    LeaderboardUtil.INVALID_TIE_BREAK + method));
         }
+    }
+
+    public static boolean isRandomPresent(String[] methods) throws ParseException {
+        if (!Arrays.asList(methods).contains(LeaderboardUtil.RANDOM)) {
+            return false;
+        } else if (randomAtCorrectPlace(methods)) {
+            return true;
+        } else {
+            throw new ParseException(LeaderboardUtil.RANDOM_USAGE_WARNING);
+        }
+    }
+
+    private static boolean randomAtCorrectPlace(String[] methods) {
+        int size = methods.length;
+        return methods[size - 1].equals(LeaderboardUtil.RANDOM);
     }
 
     /**
