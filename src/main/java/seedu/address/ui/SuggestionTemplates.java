@@ -157,8 +157,6 @@ public class SuggestionTemplates {
     private static final Text FILE_PATH = new Text("PATH_TO_CSV_FILE ");
     private static final Text ENTITY = new Text("[{team/mentor/participant}] ");
 
-
-
     /**
      * Constructs a {@codeSuggestionTemplates} that provides a list of Templates for each Command.
      * Each of these templates will be displaed as a suggestion to user  when they type,
