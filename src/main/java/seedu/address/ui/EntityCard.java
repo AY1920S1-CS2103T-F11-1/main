@@ -9,7 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.Flow;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -29,7 +28,6 @@ import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
-
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -70,7 +68,7 @@ public class EntityCard extends UiPart<Region> {
     /**
      * Constructs a new instance of Entity Card.
      *
-     * @param entity Entity to make a card out of.
+     * @param entity         Entity to make a card out of.
      * @param displayedIndex the index of the card.
      */
     public EntityCard(Entity entity, int displayedIndex) {
@@ -131,10 +129,12 @@ public class EntityCard extends UiPart<Region> {
                 .forEach(p -> participantPane.getChildren().add(new Label(p.getName().toString())));
         Optional<Mentor> teamMentor = team.getMentor();
         labels.getChildren().add(
-                new Label(teamMentor.isEmpty() ? "Mentor not assigned" : "Mentor: " + teamMentor.get().getName().toString() ));
+                new Label(
+                        teamMentor.isEmpty()
+                                ? "Mentor not assigned" : "Mentor: " + teamMentor.get().getName().toString()));
         labels.getChildren().add(new Label("Subject: " + team.getSubject().toString()));
         labels.getChildren().add(new Label("Type: " + team.getProjectName().toString()));
-        labels.getChildren().add(new Label("Project: "+ team.getLocation().toString()));
+        labels.getChildren().add(new Label("Project: " + team.getLocation().toString()));
         List<Participant> participants = team.getParticipants();
         logger.info("Number of Members in team: " + participants.size());
         membersPane.getChildren().add(new Label("Members: "));
@@ -145,6 +145,11 @@ public class EntityCard extends UiPart<Region> {
         addScoreIcon(team);
     }
 
+    /**
+     * Adds a new Score Icon to GUI, with "SCORE:" label and actual Score value.
+     *
+     * @param team Team of which score will be displayed.
+     */
     private void addScoreIcon(Team team) {
         StackPane scoreIcon = new StackPane();
         scoreIcon.setAlignment(Pos.CENTER);
