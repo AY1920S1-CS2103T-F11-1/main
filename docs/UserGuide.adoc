@@ -301,8 +301,14 @@ where `METHOD_N` is one of the following currently available tie-break methods:
 ****
 * You may choose one or more methods from the above list to break the tie. You need to precede the tie-break methods with the prefix `tb/` and separate each method with a single space for Alfred to properly understand them.
 * Do note that the tie-break methods will be applied in the order in which you state them. That is, first METHOD_1 will be applied to break the ties, and only then will METHOD_2 be applied to break any remaining ties, if the command `leaderboard tb/METHOD_1 METHOD_2` is called.
+* The `getTop NUMBER` command may still display teams more than the value of `NUMBER` if Alfred was still unsuccessful in breaking certain ties despite applying the tie-break methods you stated.
 * When using the `random` method, it must be the last stated tie-break method if it is being used alongside other tie-break methods.
 ****
+
+Example:
+
+* `leaderboard tb/moreParticipants lowerId` will display the leaderboard on the UI with Alfred breaking the tie between teams with equals scores based on which team has more participants, and if the number of participants is equal then by which team has the lower ID.
+* `getTop 3 tb/lessParticipants random` will display the top 3 teams on the UI with Alfred breaking the tie between teams with equals scores based on which team has fewer participants, and if the number of participants is equal then Alfred will randomly pick the winners for the tie.
 
 ==== Add points: `score add TEAM_ID POINTS`
 
