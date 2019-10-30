@@ -270,17 +270,7 @@ Use this command to list the top k teams in the leaderboard, where k is a number
 ****
 * This command will show you a cropped version of the leaderboard.
 * Alfed's UI will display a list of top "k" teams based on their current score.
-* If you input "k" as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon.
-****
-
-****
-
-* If you input `NUMBER` as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon in descending order of their points.
-****
-
-****
-
-* If you input `NUMBER` as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon in descending order of their points.
+* If you input `NUMBER` as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon.
 ****
 
 Example:
