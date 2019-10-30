@@ -1,6 +1,7 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.leaderboardcommand;
 
 import java.util.Comparator;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.entity.Team;
 
 public abstract class LeaderboardCommand extends Command {

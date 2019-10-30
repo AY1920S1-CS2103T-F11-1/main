@@ -30,7 +30,7 @@ public class LeaderboardUtil {
      */
     public static ObservableList<Team> topKWithTie(ObservableList<Team> currentStanding, int k,
                                                    Comparator<Team> ... comparators) {
-        ObservableList<Team> teams = FXCollections.observableArrayList(currentStanding.get(0));
+        ObservableList<Team> teams = FXCollections.observableArrayList(currentStanding.get(0)); // Pre-add first team.
         Team currentTeam = currentStanding.get(0);
         int currentTeamIndex = 1;
         int distinctTeams = 1;
@@ -46,8 +46,17 @@ public class LeaderboardUtil {
             }
             currentTeamIndex++;
         }
-        teams.remove(teams.size() - 1); // The above algorithm adds one redundant team at the end of the list.
-        return teams;
+        return returnAppropriateSizedList(k, distinctTeams, teams);
+    }
+
+    private static ObservableList<Team> returnAppropriateSizedList(int k, int distinctTeams,
+                                                                   ObservableList<Team> teams) {
+        if (distinctTeams > k) {
+            teams.remove(teams.size() - 1); // The above algorithm adds one extra team at the end of the list.
+            return teams;
+        } else {
+            return teams;
+        }
     }
 
     /**

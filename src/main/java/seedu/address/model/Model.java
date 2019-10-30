@@ -161,9 +161,9 @@ public interface Model {
 
     void setSimpleLeaderboard(Comparator<Team> ... comparators);
 
-    void getTopK(int k, Comparator<Team> ... comparators);
+    void setTopK(int k, Comparator<Team> ... comparators);
 
-    void getTopKRandom(int k);
+    void setTopKRandom(int k, Comparator<Team> ... comparators);
 
     /* View command */
     /**

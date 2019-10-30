@@ -14,7 +14,6 @@ import seedu.address.commons.Comparators;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.LeaderboardUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ShowSimpleLeaderboardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;

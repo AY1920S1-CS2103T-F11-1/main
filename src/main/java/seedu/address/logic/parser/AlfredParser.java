@@ -11,9 +11,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.GetTopTeamsCommand;
+import seedu.address.logic.commands.SimpleTopTeamsCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ShowSimpleLeaderboardCommand;
+import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
 import seedu.address.logic.commands.csvcommand.ExportCommand;
 import seedu.address.logic.commands.csvcommand.ImportCommand;
@@ -88,7 +88,7 @@ public class AlfredParser {
             logger.info("Executing leaderboard command...");
             return new ShowLeaderBoardCommandParser().parse(arguments);
 
-        case GetTopTeamsCommand.COMMAND_WORD:
+        case SimpleTopTeamsCommand.COMMAND_WORD:
             return new GetTopTeamsCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:

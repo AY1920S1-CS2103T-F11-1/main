@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import seedu.address.commons.util.LeaderboardUtil;
-import seedu.address.logic.commands.LeaderboardCommand;
-import seedu.address.logic.commands.ShowSimpleLeaderboardCommand;
-import seedu.address.logic.commands.ShowLeaderboardWithRandomCommand;
+import seedu.address.logic.commands.leaderboardcommand.LeaderboardCommand;
+import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
+import seedu.address.logic.commands.leaderboardcommand.ShowLeaderboardWithRandomCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Team;
 

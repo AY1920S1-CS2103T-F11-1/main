@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import java.util.Comparator;
+import seedu.address.model.entity.Team;
 
 public abstract class TopTeamsCommand extends Command {
 
@@ -11,9 +11,11 @@ public abstract class TopTeamsCommand extends Command {
     public static final String INVALID_VALUE_WARNING = "The value of K inputted is not a valid integer.";
 
     protected int numberOfTeams;
+    protected Comparator<Team>[] comparators;
 
-    public TopTeamsCommand(int k) {
+    public TopTeamsCommand(int k, Comparator<Team> ... comparators) {
         this.numberOfTeams = k;
+        this.comparators = comparators;
     }
 
 }

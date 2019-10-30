@@ -715,7 +715,7 @@ public class ModelManager implements Model {
             }
         }
         Optional<Mentor> mentor = team.getMentor();
-        if (!mentor.isEmpty()) {
+        if (mentor.isPresent()) {
             if (!this.mentorList.contains(mentor.get().getId())) {
                 throw new ModelValidationException("Mentor in team does not exist in mentorList");
             }
@@ -733,7 +733,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Arranges the sorted team list {@code sortedTeam} to sort the current teams in stored
+     * Arranges the sorted team list {@code sortedTeam} to sort the current teams stored
      * in Alfred in descending order of their score. Implements additional Comparators {@param comparators}
      * for tie-breaking if specified by the user.
      */
@@ -745,6 +745,13 @@ public class ModelManager implements Model {
         this.sortedTeam.setComparator(Comparators.rankByScore());
     }
 
+    /**
+     * Arranges the sorted team list {@code sortedTeam} to sort the current teams stored in Alfred
+     * in descending order of their score, implementing additional Comparators {@param comparators}
+     * for tie-breaking if specified by the user. Randomly selects the winner if two teams are still
+     * tied after the additional comparators.
+     *
+     */
     public void setLeaderboardWithRandom(Comparator<Team> ... comparators) {
         setSimpleLeaderboard(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
@@ -753,9 +760,16 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Sorts the sortedTeam list by the value of the team's score and.
+     * Sorts the sortedTeam list by the value of the team's score and additional Comparators {@param comparators}
+     * if specified by the user, and filters the top {@param k} teams, inclusive of ties,
+     * into {@code topKTeams} list.
+     *
      */
-    public void getTopK(int k, Comparator<Team> ... comparators) {
+    public void setTopK(int k, Comparator<Team> ... comparators) {
+        initialiseSortedList();
+        for (Comparator<Team> comparator : comparators) {
+            this.sortedTeam.setComparator(comparator);
+        }
         this.sortedTeam.setComparator(Comparators.rankByScore());
 
         // Create a copy of the sorted teams from which teams can be removed without
@@ -765,10 +779,16 @@ public class ModelManager implements Model {
         this.topKTeams = new SortedList<>(teams);
     }
 
-    public void getTopKRandom(int k) {
-        this.sortedTeam.setComparator(Comparators.rankByScore());
+    /**
+     * Sorts the sortedTeam list by the value of the team's score and additional Comparators {@param comparators}
+     * if specified by the user, and filters the top {@param k} teams into {@code topKTeams} list, resolving ties
+     * on a random basis.
+     *
+     */
+    public void setTopKRandom(int k, Comparator<Team> ... comparators) {
+        setSimpleLeaderboard(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
-        teams = LeaderboardUtil.randomWinnersGenerator(teams, k);
+        teams = LeaderboardUtil.randomWinnersGenerator(teams, k, comparators);
         this.topKTeams = new SortedList<>(teams);
     }
 
