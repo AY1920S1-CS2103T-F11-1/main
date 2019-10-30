@@ -8,11 +8,15 @@ import java.util.Comparator;
 
 import seedu.address.commons.util.LeaderboardUtil;
 import seedu.address.logic.commands.leaderboardcommand.LeaderboardCommand;
-import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
 import seedu.address.logic.commands.leaderboardcommand.ShowLeaderboardWithRandomCommand;
+import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Team;
 
+/**
+ * Parses the user's leaderboard command in the context of a
+ * {@code LeaderboardCommand} command.
+ */
 public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> {
 
     private static final String METHOD_SPLIT_REGEX = "\\s+";

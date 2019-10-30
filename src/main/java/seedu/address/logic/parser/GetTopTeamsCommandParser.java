@@ -12,10 +12,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.LeaderboardUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.SimpleTopTeamsCommand;
-import seedu.address.logic.commands.TopTeamsRandomCommand;
 import seedu.address.logic.commands.TopTeamsCommand;
-import seedu.address.logic.commands.leaderboardcommand.ShowLeaderboardWithRandomCommand;
-import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
+import seedu.address.logic.commands.TopTeamsRandomCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Team;
 

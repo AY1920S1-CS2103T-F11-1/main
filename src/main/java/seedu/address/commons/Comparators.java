@@ -1,6 +1,5 @@
 package seedu.address.commons;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.address.model.entity.Team;

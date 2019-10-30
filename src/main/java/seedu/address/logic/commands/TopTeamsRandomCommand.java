@@ -1,17 +1,21 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Team;
 
+/**
+ * Displays the top specified number of teams on the UI, breaking the tie
+ * based on random selection.
+ */
 public class TopTeamsRandomCommand extends TopTeamsCommand {
-
-    public static final String APPLY_WORD = "random";
     public static final String MESSAGE_SUCCESS = "Showing Current Top %1$s with Random Winners";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows the top K teams with the teams with equal"
             + " scores separated on a random basis, and where K is an integer value you type in. \n"

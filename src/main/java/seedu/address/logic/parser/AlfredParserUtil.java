@@ -207,7 +207,7 @@ public class AlfredParserUtil {
     }
 
     /**
-     * Returns a new comparator based on the tie-break {@param method} specified by the users.
+     * Returns a new comparator based on the tie-break {@code method} specified by the users.
      *
      * @return new comparator for Team objects.
      * @throws ParseException if the tie-break method specified is invalid.
@@ -229,6 +229,13 @@ public class AlfredParserUtil {
         }
     }
 
+    /**
+     * Checks if the user specified the tiebreaking method "random" correctly.
+     *
+     * @param methods the string array containing every user inputted tie-breaking method.
+     * @return {@code true} if "random" is mentioned as one of the methods and is the last in the list.
+     * @throws ParseException if the method specification format is incorrect.
+     */
     public static boolean isRandomPresent(String[] methods) throws ParseException {
         if (!Arrays.asList(methods).contains(LeaderboardUtil.RANDOM)) {
             return false;

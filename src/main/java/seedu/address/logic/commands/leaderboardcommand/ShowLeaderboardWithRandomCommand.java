@@ -1,18 +1,19 @@
 package seedu.address.logic.commands.leaderboardcommand;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.leaderboardcommand.LeaderboardCommand;
 import seedu.address.model.Model;
 import seedu.address.model.entity.CommandType;
 
 /**
- * Shows the full leader board as it currently stands based
- * on the teams' scores.
+ * Shows the full leaderboard as it currently stands based
+ * on the teams' scores, with ties broken on random selection.
  */
 public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
 
