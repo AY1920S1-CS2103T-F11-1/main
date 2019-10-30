@@ -13,8 +13,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AlfredParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.CommandRecord;
 import seedu.address.model.Model;
+import seedu.address.model.Statistics;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Team;
@@ -99,5 +101,26 @@ public class LogicManager implements Logic {
     @Override
     public List<String> getRedoCommandHistory() {
         return model.getRedoCommandHistory();
+    }
+
+    @Override
+    public Statistics getStatistics() {
+        Statistics result = new Statistics();
+
+        result.setTotalParticipants(model.getParticipantListSize());
+        result.setTotalTeams(model.getTeamListSize());
+        result.setTotalMentors(model.getMentorListSize());
+
+        result.setEduTeams(model.getEduTeamSize());
+        result.setEnvTeams(model.getEnvTeamSize());
+        result.setSocialTeams(model.getSocialTeamSize());
+        result.setHealthTeams(model.getHealthTeamSize());
+
+        result.setEduMentors(model.getEduMentorSize());
+        result.setEnvMentors(model.getEnvMentorSize());
+        result.setSocialMentors(model.getSocialMentorSize());
+        result.setHealthMentors(model.getHealthMentorSize());
+
+        return result;
     }
 }

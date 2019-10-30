@@ -23,6 +23,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.CommandType;
+import seedu.address.ui.listpanel.EntityListPanel;
+import seedu.address.ui.listpanel.StatisticsListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -38,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private StatisticsListPanel statisticListPanel;
     private EntityListPanel entityListPanel;
     private CommandListPanel commandListPanel;
     private ResultDisplay resultDisplay;
@@ -69,6 +72,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private JFXButton historyButton;
+
+    @FXML
+    private JFXButton homeButton;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -129,8 +135,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         //Displays the list of teams during application start up
-        entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
-        listPanelPlaceholder.getChildren().add(entityListPanel.getRoot());
+        statisticListPanel = new StatisticsListPanel(logic.getStatistics());
+        listPanelPlaceholder.getChildren().add(statisticListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -199,6 +205,14 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    @FXML
+    private void displayStatistics() {
+        logger.info("Statistics object gotten from Logic is: " + logic.getStatistics());
+        logger.info("Statistics panel to be assigned is: " + new StatisticsListPanel(logic.getStatistics()));
+       statisticListPanel = new StatisticsListPanel(logic.getStatistics());
+       listPanelPlaceholder.getChildren().set(0, statisticListPanel.getRoot());
+    }
+
     /**
      * Displays the list of Participants in Model and Storage on Graphical User Interface.
      */
@@ -207,7 +221,6 @@ public class MainWindow extends UiPart<Stage> {
         entityListPanel = new EntityListPanel(logic.getFilteredParticipantList());
 
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color: #5d6d7e");
         logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
     }
 
@@ -218,7 +231,6 @@ public class MainWindow extends UiPart<Stage> {
     private void displayTeamList() {
         entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color:#abb2b9");
         logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
 
     }
@@ -230,7 +242,6 @@ public class MainWindow extends UiPart<Stage> {
     private void displayMentorList() {
         entityListPanel = new EntityListPanel(logic.getFilteredMentorList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color: #17202a");
         logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
 
     }
@@ -242,7 +253,6 @@ public class MainWindow extends UiPart<Stage> {
     private void displayHistory() {
         commandListPanel = new CommandListPanel(logic.getCommandHistory());
         listPanelPlaceholder.getChildren().set(0, commandListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color: #17202a");
         logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
 
     }
@@ -258,6 +268,9 @@ public class MainWindow extends UiPart<Stage> {
     private void disarmAllButton() {
         //TODO: shorten this
         //Any ideas on how to shorten this method?
+        if (homeButton.isArmed()) {
+            homeButton.disarm();
+        }
         if (participantsButton.isArmed()) {
             participantsButton.disarm();
         }
@@ -266,6 +279,9 @@ public class MainWindow extends UiPart<Stage> {
         }
         if (mentorsButton.isArmed()) {
             mentorsButton.disarm();
+        }
+        if (historyButton.isArmed()) {
+            historyButton.disarm();
         }
 
     }
@@ -297,6 +313,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
             handleHistory(); //DEBUG
 
             CommandType commandType = commandResult.getCommandType();
@@ -314,6 +331,9 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case H:
                 this.fireButton(historyButton);
+                break;
+            case HM:
+                this.fireButton(homeButton);
                 break;
 
             default:

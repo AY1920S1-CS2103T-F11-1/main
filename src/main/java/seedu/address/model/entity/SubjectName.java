@@ -47,4 +47,19 @@ public enum SubjectName {
         return this.name();
     }
 
+
+    public boolean equals(SubjectName other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof SubjectName)) {
+            return false;
+        }
+
+
+        SubjectName otherSubject = ((SubjectName) other);
+        return otherSubject.toString().equals(this.toString());
+    }
+
 }

@@ -250,6 +250,16 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns the size of participant list located in the Model Manager.
+     *
+     * @return size Number of Participants
+     */
+    public int getParticipantListSize() {
+        return this.participantList.getSize();
+    }
+
+
+    /**
      * Returns the team list located in the Model Manager.
      *
      * @return ReadableEntityList
@@ -259,6 +269,52 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns the size of team list located in the Model Manager.
+     *
+     * @return size Number of Teams
+     */
+    public int getTeamListSize() {
+        return this.teamList.getSize();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Education.
+     *
+     * @return number Number of Mentors
+     */
+    public long getEduTeamSize() {
+        return this.teamList.getEduTeam();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Environment.
+     *
+     * @return number Number of Mentors
+     */
+    public long getEnvTeamSize() {
+        return this.teamList.getEnvTeam();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Social.
+     *
+     * @return number Number of Mentors
+     */
+    public long getSocialTeamSize() {
+        return this.teamList.getSocialTeam();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Health.
+     *
+     * @return number Number of Mentors
+     */
+    public long getHealthTeamSize() {
+        return this.teamList.getHealthTeam();
+    }
+
+
+    /**
      * Returns the mentor list located in the Model Manager.
      *
      * @return ReadableEntityList
@@ -266,6 +322,52 @@ public class ModelManager implements Model {
     public ReadOnlyEntityList getMentorList() {
         return this.mentorList;
     }
+
+    /**
+     * Returns the size of Mentor list located in the Model Manager.
+     *
+     * @return size Number of Mentors
+     */
+    public int getMentorListSize() {
+        return this.mentorList.getSize();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Education.
+     *
+     * @return number Number of Mentors
+     */
+    public long getEduMentorSize() {
+        return this.mentorList.getEduMentor();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Environment.
+     *
+     * @return number Number of Mentors
+     */
+    public long getEnvMentorSize() {
+        return this.mentorList.getEnvMentor();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Social.
+     *
+     * @return number Number of Mentors
+     */
+    public long getSocialMentorSize() {
+        return this.mentorList.getSocialMentor();
+    }
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Health.
+     *
+     * @return number Number of Mentors
+     */
+    public long getHealthMentorSize() {
+        return this.mentorList.getHealthMentor();
+    }
+
 
     public FilteredList<Participant> getFilteredParticipantList() {
         return this.filteredParticipantList;

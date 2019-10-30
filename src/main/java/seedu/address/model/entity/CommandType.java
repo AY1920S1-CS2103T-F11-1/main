@@ -8,7 +8,8 @@ public enum CommandType {
     P, // Participant
     M, // Mentor
     T, // Team
-    H; // History
+    H,
+    HM;// History
 
     // Constants
     public static final String MESSAGE_CONSTRAINTS =
@@ -16,7 +17,8 @@ public enum CommandType {
                     + "P: to indicate that a command is of type Participant\n"
                     + "M: to indicate that a command is of type Mentor\n"
                     + "T: to indicate that a command is of type Team\n"
-                    + "H: to indicate that a command is of type History\n";
+                    + "H: to indicate that a command is of type History\n"
+                    + "HM: to indicate that a command is of type Home(Brings user to homepage).\n";
 
     /**
      * Returns if a given string is a valid CommandType.

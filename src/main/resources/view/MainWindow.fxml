@@ -27,7 +27,7 @@
     </icons>
     <scene>
         <Scene>
-            <AnchorPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: transparent;">
+            <AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: transparent;">
                 <children>
                     <BorderPane prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0"
                                 AnchorPane.rightAnchor="0.0"
@@ -41,13 +41,18 @@
                                     <AnchorPane layoutY="-2.0" prefHeight="700.0" prefWidth="35.0"
                                                 style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="0.0"
                                                 AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                        <effect>
-                                            <DropShadow/>
-                                        </effect>
                                     </AnchorPane>
-                                    <JFXButton fx:id="participantsButton" id="participantsButton"
+                                    <JFXButton fx:id="homeButton" id="homeButton"
                                                alignment="BASELINE_LEFT" graphicTextGap="40.0"
                                                layoutX="3.0" layoutY="8.0" prefHeight="60.0"
+                                               prefWidth="160.0" text="Home" onAction="#displayStatistics">
+                                        <graphic>
+                                            <FontAwesomeIconView fill="#3083cc" glyphName="HOME" size="17"/>
+                                        </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="participantsButton" id="participantsButton"
+                                               alignment="BASELINE_LEFT" graphicTextGap="40.0"
+                                               layoutX="3.0" layoutY="68.0" prefHeight="60.0"
                                                prefWidth="160.0" text="Participants" onAction="#displayParticipantList">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="USER" size="17"/>
@@ -55,7 +60,7 @@
                                     </JFXButton>
                                     <JFXButton fx:id="teamsButton" id="teamsButton" alignment="BASELINE_LEFT"
                                                graphicTextGap="40.0" layoutX="3.0"
-                                               layoutY="68.0" prefHeight="60.0" prefWidth="160.0"
+                                               layoutY="128.0" prefHeight="60.0" prefWidth="160.0"
                                                text="Teams" onAction="#displayTeamList">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="USERS" size="17"
@@ -64,14 +69,14 @@
                                     </JFXButton>
                                     <JFXButton fx:id="mentorsButton" id="mentorsButton" alignment="BASELINE_LEFT"
                                                graphicTextGap="40.0" layoutX="3.0"
-                                               layoutY="128.0" prefHeight="60.0" prefWidth="160.0"
+                                               layoutY="188.0" prefHeight="60.0" prefWidth="160.0"
                                                text="Mentors" onAction="#displayMentorList">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="USER_SECRET" size="17"/>
                                         </graphic>
                                     </JFXButton>
                                     <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0"
-                                               layoutX="3.0" layoutY="230.0" prefHeight="60.0"
+                                               layoutX="3.0" layoutY="248.0" prefHeight="60.0"
                                                prefWidth="160.0" text="Leaderboard">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="TROPHY" size="17"/>
@@ -79,37 +84,35 @@
                                     </JFXButton>
                                     <JFXButton fx:id="historyButton" id="historyButton" alignment="BASELINE_LEFT"
                                                graphicTextGap="40.0"
-                                               layoutX="3.0" layoutY="290.0" prefHeight="60.0"
+                                               layoutX="3.0" layoutY="308.0" prefHeight="60.0"
                                                prefWidth="160.0" text="History" onAction="#displayHistory">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="CLONE" size="17"/>
                                         </graphic>
                                     </JFXButton>
                                     <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="5.0"
-                                               layoutY="322.0" prefHeight="60.0" prefWidth="160.0"
+                                               layoutY="368.0" prefHeight="60.0" prefWidth="160.0"
                                                text="Food">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="CUTLERY" size="17"/>
                                         </graphic>
                                     </JFXButton>
                                     <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0"
-                                               layoutY="382.0" prefHeight="60.0" prefWidth="160.0"
+                                               layoutY="428.0" prefHeight="60.0" prefWidth="160.0"
                                                text="Swag">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="SHOPPING_BASKET" size="17"/>
                                         </graphic>
                                     </JFXButton>
                                     <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0"
-                                               layoutY="442.0" prefHeight="60.0" prefWidth="160.0"
+                                               layoutY="488.0" prefHeight="60.0" prefWidth="160.0"
                                                text="Inventory">
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="ARCHIVE" size="17" text=""/>
                                         </graphic>
                                     </JFXButton>
                                 </children>
-                                <effect>
-                                    <DropShadow/>
-                                </effect>
+
                             </AnchorPane>
                         </left>
                         <center>

@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.listpanel;
 
 import java.util.logging.Logger;
 
@@ -14,6 +14,8 @@ import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Team;
+import seedu.address.ui.EntityCard;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing the list of persons.

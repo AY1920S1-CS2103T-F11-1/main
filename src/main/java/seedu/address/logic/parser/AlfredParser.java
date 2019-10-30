@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
 import seedu.address.logic.commands.csvcommand.ExportCommand;
 import seedu.address.logic.commands.csvcommand.ImportCommand;
@@ -108,6 +109,8 @@ public class AlfredParser {
             logger.info("Editing an existing Entity...");
             return new EditCommandAllocator().allocate(arguments);
 
+        case HomeCommand.COMMAND_WORD:
+            return new HomeCommand();
         default:
             logger.info("Unknown command type: " + commandWord);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

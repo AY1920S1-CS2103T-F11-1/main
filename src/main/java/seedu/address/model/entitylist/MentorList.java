@@ -10,6 +10,7 @@ import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entity.SubjectName;
 
 /**
  * This interface serves as the new API for the model.
@@ -218,6 +219,22 @@ public class MentorList extends EntityList {
             newMList.add(m.copy());
         }
         return newMList;
+    }
+
+    public long getEduMentor() {
+       return mentors.stream().filter(m -> m.getSubject().equals(SubjectName.EDUCATION)).count();
+    }
+
+    public long getEnvMentor() {
+        return mentors.stream().filter(m -> m.getSubject().equals(SubjectName.ENVIRONMENTAL)).count();
+    }
+
+    public long getSocialMentor() {
+        return mentors.stream().filter(m -> m.getSubject().equals(SubjectName.SOCIAL)).count();
+    }
+
+    public long getHealthMentor() {
+       return mentors.stream().filter(m -> m.getSubject().equals(SubjectName.HEALTH)).count();
     }
 
     @Override

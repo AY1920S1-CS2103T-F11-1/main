@@ -24,7 +24,9 @@ import seedu.address.model.person.Person;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -152,6 +154,7 @@ public interface Model {
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
     /* View command */
+
     /**
      * Sets the predicate to show detailed information of {@code entity}.
      *
@@ -178,6 +181,7 @@ public interface Model {
 
     /**
      * Gets a String detailing the previously executed commands that can be undone by the user.
+     *
      * @return String representing the previously executed commands that can be undone by the user.
      */
     String getCommandHistoryString();
@@ -194,7 +198,85 @@ public interface Model {
 
     /**
      * Returns a List of CommandsRecords describing the commands that can be undone/redone
+     *
      * @throws AlfredModelHistoryException
      */
     ArrayList<CommandRecord> getCommandHistory();
+
+    /**
+     * Returns the size of participant list located in the Model Manager.
+     *
+     * @return size Number of Participants
+     */
+    int getParticipantListSize();
+
+    /**
+     * Returns the size of team list located in the Model Manager.
+     *
+     * @return size Number of Teams
+     */
+    int getTeamListSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Education.
+     *
+     * @return number Number of Mentors
+     */
+    long getEduTeamSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Environment.
+     *
+     * @return number Number of Mentors
+     */
+    long getEnvTeamSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Social.
+     *
+     * @return number Number of Mentors
+     */
+    long getSocialTeamSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Health.
+     *
+     * @return number Number of Mentors
+     */
+    long getHealthTeamSize();
+
+    /**
+     * Returns the size of Mentor list located in the Model Manager.
+     *
+     * @return size Number of Mentors
+     */
+    int getMentorListSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Education.
+     *
+     * @return number Number of Mentors
+     */
+    long getEduMentorSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Environment.
+     *
+     * @return number Number of Mentors
+     */
+    long getEnvMentorSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Social.
+     *
+     * @return number Number of Mentors
+     */
+    long getSocialMentorSize();
+
+    /**
+     * Returns the number of Mentors who specialises in the field of Health.
+     *
+     * @return number Number of Mentors
+     */
+    long getHealthMentorSize();
 }

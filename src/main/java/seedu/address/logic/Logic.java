@@ -10,7 +10,9 @@ import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.CommandRecord;
+import seedu.address.model.Statistics;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Team;
@@ -74,4 +76,6 @@ public interface Logic {
      * Returns a List of Strings describing the commands that can be redone.
      */
     List<String> getRedoCommandHistory();
+
+    public Statistics getStatistics();
 }
