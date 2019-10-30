@@ -26,7 +26,7 @@
                 <Label id="index" fx:id="index"></Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
             </HBox>
-            <FlowPane id="tags"/>
+            <FlowPane fx:id="membersPane" maxWidth="${labels.width}"/>
         </VBox>
         <StackPane alignment="CENTER">
             <children>

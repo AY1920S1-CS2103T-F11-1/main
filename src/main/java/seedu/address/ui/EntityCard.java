@@ -1,21 +1,26 @@
 package seedu.address.ui;
 
 import static seedu.address.Paths.MENTOR_ICON;
+import static seedu.address.Paths.SCORE_ICON;
 import static seedu.address.Paths.STUDENT_ICON;
 import static seedu.address.Paths.TEAM_ICON;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.Flow;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import seedu.address.commons.core.LogsCenter;
@@ -59,6 +64,8 @@ public class EntityCard extends UiPart<Region> {
     private Label id;
     @FXML
     private ImageView idIcon;
+    @FXML
+    private FlowPane membersPane; //Only initialised for TeamCards, when there are members
 
     /**
      * Constructs a new instance of Entity Card.
@@ -115,6 +122,7 @@ public class EntityCard extends UiPart<Region> {
      * @param entity type of Entity.
      */
     private void generateTeamCard(Entity entity) {
+
         this.idIcon.setImage(getImage(TEAM_ICON));
         Team team = (Team) entity;
         FlowPane participantPane = new FlowPane();
@@ -123,12 +131,44 @@ public class EntityCard extends UiPart<Region> {
                 .forEach(p -> participantPane.getChildren().add(new Label(p.getName().toString())));
         Optional<Mentor> teamMentor = team.getMentor();
         labels.getChildren().add(
-                new Label(teamMentor.isEmpty() ? "Mentor not assigned" : teamMentor.get().getName().toString()));
-        labels.getChildren().add(new Label(team.getSubject().toString()));
-        labels.getChildren().add(new Label(team.getProjectName().toString()));
-        labels.getChildren().add(new Label(team.getLocation().toString()));
-        labels.getChildren().add(new Label("Score: " + team.getScore().toString()));
+                new Label(teamMentor.isEmpty() ? "Mentor not assigned" : "Mentor: " + teamMentor.get().getName().toString() ));
+        labels.getChildren().add(new Label("Subject: " + team.getSubject().toString()));
+        labels.getChildren().add(new Label("Type: " + team.getProjectName().toString()));
+        labels.getChildren().add(new Label("Project: "+ team.getLocation().toString()));
+        List<Participant> participants = team.getParticipants();
+        logger.info("Number of Members in team: " + participants.size());
+        membersPane.getChildren().add(new Label("Members: "));
+        logger.info("Size of membersPane before adding Participants: " + membersPane.getChildren().size());
+        participants.stream().forEach(p -> membersPane.getChildren().add(new Label(p.getName().toString() + ", ")));
         this.type = PrefixType.T;
+
+        addScoreIcon(team);
+    }
+
+    private void addScoreIcon(Team team) {
+        StackPane scoreIcon = new StackPane();
+        scoreIcon.setAlignment(Pos.CENTER);
+
+        //VBox to set labels for score(score title and score value).
+        VBox scoreLabels = new VBox(new Label("SCORE:"), new Label(team.getScore().toString()));
+        scoreLabels.setAlignment(Pos.CENTER);
+        scoreLabels.setPrefHeight(70.0);
+        scoreLabels.setPrefWidth(70.0);
+
+        //Image for icon
+        ImageView icon = new ImageView();
+        icon.setImage(getImage(SCORE_ICON));
+        icon.setFitHeight(100.0);
+        icon.setFitWidth(130.0);
+        icon.setOpacity(0.65);
+
+        //Initialise scoreIcon StackPane
+        scoreIcon.getChildren().add(icon);
+        //Add scoreLabels
+        scoreIcon.getChildren().add(scoreLabels);
+
+        //Place Score Icon inside Card
+        cardPane.getChildren().add(scoreIcon);
     }
 
     private Image getImage(String imagePath) {
