@@ -138,6 +138,7 @@ public class AutoCompleteTextField extends TextField {
                     commandsPopup.hide();
                 }
             });
+            
             menuItems.add(item);
         }
         //Clears all current menu items in popup, and adds new items.
