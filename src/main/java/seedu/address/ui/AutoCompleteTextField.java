@@ -127,9 +127,7 @@ public class AutoCompleteTextField extends TextField {
 
         for (int j = 0; j < numSuggestion; j++) {
             String suggestion = finalSuggestionResults.get(j);
-            logger.info("Command type suggested is: " + suggestion);
             TextFlow suggestionTemplate = getSuggestionTemplate(suggestion);
-            logger.info("Suggestion template is: " + suggestionTemplate.toString());
             CustomMenuItem item = new CustomMenuItem(suggestionTemplate, true);
             item.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -144,7 +142,6 @@ public class AutoCompleteTextField extends TextField {
         }
         //Clears all current menu items in popup, and adds new items.
         commandsPopup.getItems().clear();
-        logger.info("Number of menu items to be added in pop-up box: " + menuItems.size());
         commandsPopup.getItems().addAll(menuItems);
         logger.info("number of items in commandsPopup: " + commandsPopup.getItems().size());
     }
@@ -177,7 +174,6 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "add participant":
-            logger.info("Add participant template is shown on GUI");
             return suggestionTemplates.ADD_PARTICIPANT_TEMPLATE;
 
         case "add team":
@@ -187,7 +183,6 @@ public class AutoCompleteTextField extends TextField {
             return suggestionTemplates.ADD_MENTOR_TEMPLATE;
 
         default:
-            logger.info("ADD Command Template is null");
             return null;
         }
     }
@@ -205,7 +200,6 @@ public class AutoCompleteTextField extends TextField {
             return suggestionTemplates.LIST_MENTOR_TEMPLATE;
 
         default:
-            logger.info("LIST Command Template is null");
             return null;
 
         }
@@ -224,7 +218,6 @@ public class AutoCompleteTextField extends TextField {
             return suggestionTemplates.EDIT_MENTOR_TEMPLATE;
 
         default:
-            logger.info("EDIT Command Template is null");
             return null;
 
         }
@@ -243,7 +236,6 @@ public class AutoCompleteTextField extends TextField {
             return suggestionTemplates.DELETE_MENTOR_TEMPLATE;
 
         default:
-            logger.info("DELETE Command Template is null");
             return null;
 
         }
@@ -262,7 +254,6 @@ public class AutoCompleteTextField extends TextField {
             return suggestionTemplates.FIND_MENTOR_TEMPLATE;
 
         default:
-            logger.info("FIND Command Template is null");
             return null;
 
 
@@ -282,7 +273,6 @@ public class AutoCompleteTextField extends TextField {
             return suggestionTemplates.SCORE_SET_TEMPLATE;
 
         default:
-            logger.info("SCORE Command Template is null");
             return null;
         }
     }
@@ -314,7 +304,6 @@ public class AutoCompleteTextField extends TextField {
             return suggestionTemplates.HELP_TEMPLATE;
 
         default:
-            logger.info("Other Template is null");
             return null;
         }
     }
