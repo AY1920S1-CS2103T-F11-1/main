@@ -270,7 +270,7 @@ public class SuggestionTemplates {
 
         HELP_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
 
-        //Sett the template guides to Gray
+        //Set the template guides to Gray
         NAME.setFill(Color.GREY);
         PHONE.setFill(Color.GREY);
         EMAIL.setFill(Color.GREY);
