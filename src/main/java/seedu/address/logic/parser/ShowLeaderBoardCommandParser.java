@@ -27,7 +27,7 @@ public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> 
         ArrayList<Comparator<Team>> comparators = new ArrayList<>();
 
         if (!argumentMultimap.getValue(PREFIX_TIE_BREAK).isPresent()) {
-            return new ShowSimpleLeaderboardCommand();
+            return new ShowSimpleLeaderboardCommand(comparators);
         }
 
         String[] tieBreakMethods = argumentMultimap.getValue(PREFIX_TIE_BREAK).get().split(METHOD_SPLIT_REGEX);
@@ -42,7 +42,7 @@ public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> 
         Collections.reverse(comparators);
 
         return AlfredParserUtil.isRandomPresent(tieBreakMethods)
-                ? new ShowLeaderboardWithRandomCommand(comparators.toArray(new Comparator[comparators.size()]))
-                : new ShowSimpleLeaderboardCommand(comparators.toArray(new Comparator[comparators.size()]));
+                ? new ShowLeaderboardWithRandomCommand(comparators)
+                : new ShowSimpleLeaderboardCommand(comparators);
     }
 }

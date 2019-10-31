@@ -40,7 +40,7 @@ public class GetTopTeamsCommandParser implements Parser<TopTeamsCommand> {
         int topK = Integer.parseInt(numberOfTeams);
 
         if (!argumentMultimap.getValue(PREFIX_TIE_BREAK).isPresent()) {
-            return new SimpleTopTeamsCommand(topK);
+            return new SimpleTopTeamsCommand(topK, comparators);
         }
 
         String[] tieBreakMethods = argumentMultimap.getValue(PREFIX_TIE_BREAK).get().split(METHOD_SPLIT_REGEX);
@@ -54,8 +54,8 @@ public class GetTopTeamsCommandParser implements Parser<TopTeamsCommand> {
         // Reverse the order of comparators for them to applied in the order users specified.
         Collections.reverse(comparators);
         return AlfredParserUtil.isRandomPresent(tieBreakMethods)
-                ? new TopTeamsRandomCommand(topK, comparators.toArray(new Comparator[comparators.size()]))
-                : new SimpleTopTeamsCommand(topK, comparators.toArray(new Comparator[comparators.size()]));
+                ? new TopTeamsRandomCommand(topK, comparators)
+                : new SimpleTopTeamsCommand(topK, comparators);
 
     }
 }

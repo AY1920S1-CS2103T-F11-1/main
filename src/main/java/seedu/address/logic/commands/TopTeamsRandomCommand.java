@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ public class TopTeamsRandomCommand extends TopTeamsCommand {
             + "For example: " + COMMAND_WORD + " 5";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    public TopTeamsRandomCommand(int k, Comparator<Team>... comparators) {
+    public TopTeamsRandomCommand(int k, ArrayList<Comparator<Team>> comparators) {
         super(k, comparators);
     }
 

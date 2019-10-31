@@ -28,11 +28,11 @@ public class LeaderboardUtil {
      * @return an ObservableList object containing the current top K teams.
      */
     public static ObservableList<Team> topKWithTie(ObservableList<Team> currentStanding, int k,
-                                                   Comparator<Team> ... comparators) {
-        ObservableList<Team> teams = FXCollections.observableArrayList(currentStanding.get(0)); // Pre-add first team.
+                                                   ArrayList<Comparator<Team>> comparators) {
+        ObservableList<Team> teams = FXCollections.observableArrayList();
         Team currentTeam = currentStanding.get(0);
-        int currentTeamIndex = 1;
-        int distinctTeams = 1;
+        int currentTeamIndex = 0;
+        int distinctTeams = 1; // The first team is a distinct team always so the value starts at 1.
 
         while (distinctTeams <= k && currentTeamIndex < currentStanding.size()) {
             Team team = currentStanding.get(currentTeamIndex);
@@ -85,7 +85,7 @@ public class LeaderboardUtil {
      * @return a new ObservableList object containing the randomly generated winners in order.
      */
     public static ObservableList<Team> randomWinnersGenerator(ObservableList<Team> currentStanding, int k,
-                                                              Comparator<Team> ... comparators) {
+                                                              ArrayList<Comparator<Team>> comparators) {
         ObservableList<Team> finalTeams = FXCollections.observableArrayList();
         ArrayList<Team> temp = new ArrayList<>();
         Team currentTeam = currentStanding.get(0);
@@ -110,12 +110,9 @@ public class LeaderboardUtil {
      *
      * @return a boolean value depending on whether the all conditions are met.
      */
-    @SafeVarargs
-    private static boolean allMatch(Team team1, Team team2, Comparator<Team> ... comparators) {
-        ArrayList<Comparator<Team>> allComparators = new ArrayList<>();
-        Collections.addAll(allComparators, comparators);
-        allComparators.add(Comparators.rankByScore());
-        return allComparators.stream()
+    private static boolean allMatch(Team team1, Team team2, ArrayList<Comparator<Team>> comparators) {
+        comparators.add(Comparators.rankByScore());
+        return comparators.stream()
                 .allMatch(comparator -> comparator.compare(team1, team2) == 0);
     }
 

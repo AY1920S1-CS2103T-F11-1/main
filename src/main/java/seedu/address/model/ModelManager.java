@@ -737,8 +737,7 @@ public class ModelManager implements Model {
      * in Alfred in descending order of their score. Implements additional Comparators {@code comparators}
      * for tie-breaking if specified by the user.
      */
-    @SafeVarargs
-    public final void setSimpleLeaderboard(Comparator<Team>... comparators) {
+    public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators) {
         initialiseSortedList();
         for (Comparator<Team> comparator : comparators) {
             this.sortedTeam.setComparator(comparator);
@@ -753,8 +752,7 @@ public class ModelManager implements Model {
      * tied after the additional comparators.
      *
      */
-    @SafeVarargs
-    public final void setLeaderboardWithRandom(Comparator<Team>... comparators) {
+    public void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators) {
         setSimpleLeaderboard(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, teams.size(), comparators);
@@ -767,8 +765,7 @@ public class ModelManager implements Model {
      * into {@code topKTeams} list.
      *
      */
-    @SafeVarargs
-    public final void setTopK(int k, Comparator<Team>... comparators) {
+    public final void setTopK(int k, ArrayList<Comparator<Team>> comparators) {
         initialiseSortedList();
         for (Comparator<Team> comparator : comparators) {
             this.sortedTeam.setComparator(comparator);
@@ -788,8 +785,7 @@ public class ModelManager implements Model {
      * on a random basis.
      *
      */
-    @SafeVarargs
-    public final void setTopKRandom(int k, Comparator<Team>... comparators) {
+    public final void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators) {
         setSimpleLeaderboard(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, k, comparators);

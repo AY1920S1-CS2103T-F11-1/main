@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.address.model.entity.Team;
@@ -10,12 +11,12 @@ import seedu.address.model.entity.Team;
 public abstract class TopTeamsCommand extends Command {
 
     public static final String COMMAND_WORD = "getTop";
-    public static final String INVALID_VALUE_WARNING = "The value of K inputted is not a valid integer.";
+    public static final String INVALID_VALUE_WARNING = "The value of K inputted is not a valid positive integer.";
 
     protected int numberOfTeams;
-    protected Comparator<Team>[] comparators;
+    protected ArrayList<Comparator<Team>> comparators;
 
-    public TopTeamsCommand(int k, Comparator<Team> ... comparators) {
+    public TopTeamsCommand(int k, ArrayList<Comparator<Team>> comparators) {
         this.numberOfTeams = k;
         this.comparators = comparators;
     }

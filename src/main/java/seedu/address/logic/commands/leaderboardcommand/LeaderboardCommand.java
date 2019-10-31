@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.leaderboardcommand;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.address.logic.commands.Command;
@@ -12,9 +13,9 @@ public abstract class LeaderboardCommand extends Command {
 
     public static final String COMMAND_WORD = "leaderboard";
 
-    protected Comparator<Team>[] comparators;
+    protected ArrayList<Comparator<Team>> comparators;
 
-    public LeaderboardCommand(Comparator<Team> ... comparators) {
+    public LeaderboardCommand(ArrayList<Comparator<Team>> comparators) {
         this.comparators = comparators;
     }
 
