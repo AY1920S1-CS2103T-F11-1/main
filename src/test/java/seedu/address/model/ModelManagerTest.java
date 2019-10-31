@@ -172,7 +172,7 @@ public class ModelManagerTest {
             // do nothing
         }
     }
-
+    names of each Entity, and does not search in other fields.
     @Test
     public void addParticipantToTeam_validParticipant_addsParticipant() {
         try {
