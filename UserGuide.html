@@ -59,32 +59,33 @@
 </ul>
 </li>
 <li><a href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">4.14. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
-<li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">4.15. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
-<li><a href="#swag-coming-in-v2-0">4.16. Swag (Coming in v2.0)</a>
+<li><a href="#help-command">4.15. Help command</a></li>
+<li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">4.16. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
+<li><a href="#swag-coming-in-v2-0">4.17. Swag (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-swag-code-add-swag-description-quantity-code">4.16.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
-<li><a href="#track-inventory-of-available-swags-code-list-swag-code">4.16.2. Track inventory of available swags: <code>list swag</code></a></li>
+<li><a href="#add-swag-code-add-swag-description-quantity-code">4.17.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
+<li><a href="#track-inventory-of-available-swags-code-list-swag-code">4.17.2. Track inventory of available swags: <code>list swag</code></a></li>
 </ul>
 </li>
-<li><a href="#schedule-coming-in-v2-0">4.17. Schedule (Coming in v2.0)</a>
+<li><a href="#schedule-coming-in-v2-0">4.18. Schedule (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">4.17.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">4.17.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#delete-schedule-code-deleteschedule-schedule_id-code">4.17.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
+<li><a href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">4.18.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">4.18.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#delete-schedule-code-deleteschedule-schedule_id-code">4.18.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
 </ul>
 </li>
-<li><a href="#food-coming-in-v2-0">4.18. Food (Coming in v2.0)</a>
+<li><a href="#food-coming-in-v2-0">4.19. Food (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">4.18.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">4.18.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#list-food-inventory-code-list-food-code">4.18.3. List Food Inventory: <code>list food</code></a></li>
+<li><a href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">4.19.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">4.19.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#list-food-inventory-code-list-food-code">4.19.3. List Food Inventory: <code>list food</code></a></li>
 </ul>
 </li>
-<li><a href="#waitlist-coming-in-v2-0">4.19. Waitlist (Coming in v2.0)</a>
+<li><a href="#waitlist-coming-in-v2-0">4.20. Waitlist (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-to-waitlist-code-addtowaitlist-participant_id-code">4.19.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">4.19.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#list-by-registration-time-code-listwaitlist-code">4.19.3. List by Registration Time: <code>listWaitList</code></a></li>
+<li><a href="#add-to-waitlist-code-addtowaitlist-participant_id-code">4.20.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">4.20.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#list-by-registration-time-code-listwaitlist-code">4.20.3. List by Registration Time: <code>listWaitList</code></a></li>
 </ul>
 </li>
 </ul>
@@ -1238,7 +1239,7 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 <div class="ulist">
 <ul>
 <li>
-<p><code>export</code> will export all entities' data in Alfred to <code>/AlfredData/Alfred_Data.csv</code>.</p>
+<p><code>export</code> will export all entities' data in Alfred to the default file path: <code>/AlfredData/Alfred_Data.csv</code>.</p>
 </li>
 <li>
 <p><code>export mentor fp/data/Alfred.csv</code> will export all mentor data in Alfred to <code>/data/Alfred.csv</code>. If the any folders do not happen to exist, Alfred will create them for you.</p>
@@ -1247,7 +1248,17 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 <div class="sect2">
-<h3 id="seating-code-locate-participant-team-code-coming-in-v2-0"><a class="link" href="#seating-code-locate-participant-team-code-coming-in-v2-0">4.15. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></h3>
+<h3 id="help-command"><a class="link" href="#help-command">4.15. Help command</a></h3>
+<div class="paragraph">
+<p>The help command will list all the commands you need to use this
+application properly!</p>
+</div>
+<div class="paragraph">
+<p>Simply run <code>help</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="seating-code-locate-participant-team-code-coming-in-v2-0"><a class="link" href="#seating-code-locate-participant-team-code-coming-in-v2-0">4.16. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></h3>
 <div class="paragraph">
 <p>Find where a particular participant or team is seated.</p>
 </div>
@@ -1266,79 +1277,79 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 <div class="sect2">
-<h3 id="swag-coming-in-v2-0"><a class="link" href="#swag-coming-in-v2-0">4.16. Swag (Coming in v2.0)</a></h3>
+<h3 id="swag-coming-in-v2-0"><a class="link" href="#swag-coming-in-v2-0">4.17. Swag (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">4.16.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
+<h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">4.17.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Add swag to inventory
 Examples: <code>add swag Android Plushie 5</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="track-inventory-of-available-swags-code-list-swag-code"><a class="link" href="#track-inventory-of-available-swags-code-list-swag-code">4.16.2. Track inventory of available swags: <code>list swag</code></a></h4>
+<h4 id="track-inventory-of-available-swags-code-list-swag-code"><a class="link" href="#track-inventory-of-available-swags-code-list-swag-code">4.17.2. Track inventory of available swags: <code>list swag</code></a></h4>
 <div class="paragraph">
 <p>List the currently available swag</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="schedule-coming-in-v2-0"><a class="link" href="#schedule-coming-in-v2-0">4.17. Schedule (Coming in v2.0)</a></h3>
+<h3 id="schedule-coming-in-v2-0"><a class="link" href="#schedule-coming-in-v2-0">4.18. Schedule (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-schedule-code-addschedule-time-team_id-mentor_id-code"><a class="link" href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">4.17.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></h4>
+<h4 id="add-schedule-code-addschedule-time-team_id-mentor_id-code"><a class="link" href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">4.18.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></h4>
 <div class="paragraph">
 <p>Add a schedule for a team</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code"><a class="link" href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">4.17.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></h4>
+<h4 id="update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code"><a class="link" href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">4.18.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></h4>
 <div class="paragraph">
 <p>Update a schedule for a team</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="delete-schedule-code-deleteschedule-schedule_id-code"><a class="link" href="#delete-schedule-code-deleteschedule-schedule_id-code">4.17.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></h4>
+<h4 id="delete-schedule-code-deleteschedule-schedule_id-code"><a class="link" href="#delete-schedule-code-deleteschedule-schedule_id-code">4.18.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></h4>
 <div class="paragraph">
 <p>Delete a Schedule for a Team</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="food-coming-in-v2-0"><a class="link" href="#food-coming-in-v2-0">4.18. Food (Coming in v2.0)</a></h3>
+<h3 id="food-coming-in-v2-0"><a class="link" href="#food-coming-in-v2-0">4.19. Food (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code"><a class="link" href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">4.18.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+<h4 id="add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code"><a class="link" href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">4.19.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Add a Food Company and it associated food item inventory</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mark-food-as-received-code-receivefood-company_name-inventory-quantity-code"><a class="link" href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">4.18.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+<h4 id="mark-food-as-received-code-receivefood-company_name-inventory-quantity-code"><a class="link" href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">4.19.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Mark the inventory as received</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-food-inventory-code-list-food-code"><a class="link" href="#list-food-inventory-code-list-food-code">4.18.3. List Food Inventory: <code>list food</code></a></h4>
+<h4 id="list-food-inventory-code-list-food-code"><a class="link" href="#list-food-inventory-code-list-food-code">4.19.3. List Food Inventory: <code>list food</code></a></h4>
 <div class="paragraph">
 <p>List the food inventory and its current status (e.g. delivering, received)</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="waitlist-coming-in-v2-0"><a class="link" href="#waitlist-coming-in-v2-0">4.19. Waitlist (Coming in v2.0)</a></h3>
+<h3 id="waitlist-coming-in-v2-0"><a class="link" href="#waitlist-coming-in-v2-0">4.20. Waitlist (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-to-waitlist-code-addtowaitlist-participant_id-code"><a class="link" href="#add-to-waitlist-code-addtowaitlist-participant_id-code">4.19.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></h4>
+<h4 id="add-to-waitlist-code-addtowaitlist-participant_id-code"><a class="link" href="#add-to-waitlist-code-addtowaitlist-participant_id-code">4.20.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></h4>
 <div class="paragraph">
 <p>Add a participant to a waitlist when the number of participants exceeds a stipulated capacity.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="remove-from-waitlist-code-removefromwaitlist-participant_id-code"><a class="link" href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">4.19.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></h4>
+<h4 id="remove-from-waitlist-code-removefromwaitlist-participant_id-code"><a class="link" href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">4.20.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></h4>
 <div class="paragraph">
 <p>Remove a participant from the waitlist.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-by-registration-time-code-listwaitlist-code"><a class="link" href="#list-by-registration-time-code-listwaitlist-code">4.19.3. List by Registration Time: <code>listWaitList</code></a></h4>
+<h4 id="list-by-registration-time-code-listwaitlist-code"><a class="link" href="#list-by-registration-time-code-listwaitlist-code">4.20.3. List by Registration Time: <code>listWaitList</code></a></h4>
 <div class="paragraph">
 <p>Go through the waitlist and list the participants in the waitlist in ascending orger of registration time.</p>
 </div>
@@ -1526,4 +1537,4 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 15:17:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 15:21:32 UTC</div></div></div></body></html>

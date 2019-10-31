@@ -36,11 +36,14 @@
 <li><a href="#user-stories">Appendix B: User Stories</a></li>
 <li><a href="#use-cases">Appendix C: Use Cases</a>
 <ul class="sectlevel2">
-<li><a href="#use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team">C.1. Use case: Find an Entity of a specific Entity Type(Participant, Mentor, Team)</a></li>
-<li><a href="#use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team">C.2. Use case: Create an Entity of a specific Entity Type(Participant, Mentor, Team)</a></li>
-<li><a href="#use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team">C.3. Use case: Update an Entity of a specific Entity Type(Participant, Mentor, Team)</a></li>
-<li><a href="#use-case-find-the-top-scoring-k-teams">C.4. Use case: Find the top scoring K Teams</a></li>
-<li><a href="#use-case-find-the-ranking-of-all-teams">C.5. Use case: Find the ranking of all Teams</a></li>
+<li><a href="#use-case-delete-an-entity-type-participant-mentor-team">C.1. Use case: Delete an Entity Type (Participant, Mentor, Team)</a></li>
+<li><a href="#use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team">C.2. Use case: Find an Entity of a specific Entity Type (Participant, Mentor, Team)</a></li>
+<li><a href="#use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team">C.3. Use case: Create an Entity of a specific Entity Type(Participant, Mentor, Team)</a></li>
+<li><a href="#use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team">C.4. Use case: Update an Entity of a specific Entity Type (Participant, Mentor, Team)</a></li>
+<li><a href="#use-case-import-external-data-through-a-csv-file">C.5. Use case: Import external data through a CSV file</a></li>
+<li><a href="#use-case-export-data-to-an-external-csv-file">C.6. Use case: Export data to an external CSV file.</a></li>
+<li><a href="#use-case-find-the-top-scoring-k-teams">C.7. Use case: Find the top scoring K Teams</a></li>
+<li><a href="#use-case-find-the-ranking-of-all-teams">C.8. Use case: Find the ranking of all Teams</a></li>
 </ul>
 </li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
@@ -736,7 +739,8 @@ The <code>ModelHistoryManager</code> object keeps track of the state of the data
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>HackathonManager</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-an-entity-type-participant-mentor-team" class="discrete">Use case: Delete an Entity Type(Participant, Mentor, Team)</h3>
+<div class="sect2">
+<h3 id="use-case-delete-an-entity-type-participant-mentor-team"><a class="link" href="#use-case-delete-an-entity-type-participant-mentor-team">C.1. Use case: Delete an Entity Type (Participant, Mentor, Team)</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -785,8 +789,9 @@ The <code>ModelHistoryManager</code> object keeps track of the state of the data
 </li>
 </ul>
 </div>
+</div>
 <div class="sect2">
-<h3 id="use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team">C.1. Use case: Find an Entity of a specific Entity Type(Participant, Mentor, Team)</a></h3>
+<h3 id="use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team">C.2. Use case: Find an Entity of a specific Entity Type (Participant, Mentor, Team)</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -825,7 +830,7 @@ The <code>ModelHistoryManager</code> object keeps track of the state of the data
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team">C.2. Use case: Create an Entity of a specific Entity Type(Participant, Mentor, Team)</a></h3>
+<h3 id="use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team">C.3. Use case: Create an Entity of a specific Entity Type(Participant, Mentor, Team)</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -844,7 +849,7 @@ The <code>ModelHistoryManager</code> object keeps track of the state of the data
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team">C.3. Use case: Update an Entity of a specific Entity Type(Participant, Mentor, Team)</a></h3>
+<h3 id="use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team">C.4. Use case: Update an Entity of a specific Entity Type (Participant, Mentor, Team)</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -860,8 +865,10 @@ The <code>ModelHistoryManager</code> object keeps track of the state of the data
 <p>User requests to update a specific entity in the list by name or index</p>
 </li>
 <li>
-<p>HackathonManager updates the person
-Use case ends.</p>
+<p>HackathonManager updates the entity</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
 </li>
 </ol>
 </div>
@@ -878,8 +885,10 @@ Use case ends.</p>
 <p>1a1. HackathonManager shows an error message.</p>
 </li>
 <li>
-<p>1a2. User enters new name.
-Steps 1a1-1a2 are repeated until the index or name is found in the list of Entities.</p>
+<p>1a2. User enters new name.</p>
+<div class="paragraph">
+<p>Steps 1a1-1a2 are repeated until the index or name is found in the list of Entities.</p>
+</div>
 <div class="paragraph">
 <p>Use case resumes from step 4.</p>
 </div>
@@ -892,11 +901,13 @@ Steps 1a1-1a2 are repeated until the index or name is found in the list of Entit
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a1. HackathonManager shows an error message.</p>
+<p>1b1. HackathonManager shows an error message.</p>
 </li>
 <li>
-<p>1a2. User enters new index.
-Steps 1a1-1a2 are repeated until the index is found in the list of Entities.</p>
+<p>1b2. User enters new index.</p>
+<div class="paragraph">
+<p>Steps 1b1 - 1b2 are repeated until the index is found in the list of Entities.</p>
+</div>
 <div class="paragraph">
 <p>Use case resumes from step 4.</p>
 </div>
@@ -908,12 +919,222 @@ Steps 1a1-1a2 are repeated until the index is found in the list of Entities.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-find-the-top-scoring-k-teams"><a class="link" href="#use-case-find-the-top-scoring-k-teams">C.4. Use case: Find the top scoring K Teams</a></h3>
+<h3 id="use-case-import-external-data-through-a-csv-file"><a class="link" href="#use-case-import-external-data-through-a-csv-file">C.5. Use case: Import external data through a CSV file</a></h3>
 <div class="paragraph">
-<p><strong>MSS</strong>
-1. User requests the top scoring K Teams, with K being the user input.
-2. HackathonManager displays the top K teams with their respective scores.
-Use case ends.</p>
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User writes a CSV file with Entity data.</p>
+</li>
+<li>
+<p>User requests to import the CSV file located at user specified path into the HackathonManager.</p>
+</li>
+<li>
+<p>HackathonManager finds and retrieves the CSV file.</p>
+</li>
+<li>
+<p>HackathonManager adds each Entity in the CSV field.</p>
+</li>
+<li>
+<p>HackathonManager displays original updated list of Entities.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. User does not specify the path to the CSV file.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager asks the user to specify the file path.</p>
+</li>
+<li>
+<p>2a2. User specifies the file path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. User also requests that the HackathonManager create an error file.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a. HackathonManager cannot find the file or the path contains illegal characters (note that illegal path characters may vary from OS to OS).</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. HackathonManager informs user of failure of execution.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a. User specified CSV file contains invalid formatting</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1. HackathonManager imports the valid lines only.</p>
+</li>
+<li>
+<p>4a2. HackathonManager informs the user which lines were invalid and why.</p>
+<div class="paragraph">
+<p>Use case resumes from step 5 if user did not request for an error file.</p>
+</div>
+</li>
+<li>
+<p>4a3. HackathonManager creates a CSV file with the invalid lines at user specified path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 5.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-export-data-to-an-external-csv-file"><a class="link" href="#use-case-export-data-to-an-external-csv-file">C.6. Use case: Export data to an external CSV file.</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests that the HackathonManager export all of its data to an external CSV file at specified path.</p>
+</li>
+<li>
+<p>HackathonManager exports its data to the file at specified path.</p>
+</li>
+<li>
+<p>HackathonManager indicates success.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The user specifies which Entity Type data the HackathonManager should export.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager exports all of the data of the specified Entity Type to the file at specified path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b. The user does not specify the path of the external file.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. The HackathonManager exports its data to the default file path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The user specified path contains nonexistent directories and/or file.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager creates user specified directories and/or file.</p>
+</li>
+<li>
+<p>2a2. HackathonManager exports its data to the file at specified path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. The user specified path contains illegal characters (Note that illegal path characters may vary from OS to OS).</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b1. HackathonManager notifies user of the failure of execution.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-the-top-scoring-k-teams"><a class="link" href="#use-case-find-the-top-scoring-k-teams">C.7. Use case: Find the top scoring K Teams</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests the top scoring K Teams, with K being the user input.</p>
+</li>
+<li>
+<p>HackathonManager displays the top K teams with their respective scores.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p><strong>Extensions</strong></p>
@@ -941,14 +1162,14 @@ Steps 1a1-1a2 are repeated until K is within the total number of Teams.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="use-case-find-the-ranking-of-all-teams"><a class="link" href="#use-case-find-the-ranking-of-all-teams">C.5. Use case: Find the ranking of all Teams</a></h3>
+<h3 id="use-case-find-the-ranking-of-all-teams"><a class="link" href="#use-case-find-the-ranking-of-all-teams">C.8. Use case: Find the ranking of all Teams</a></h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests a for the top scorers of a specific category</p>
+<p>User requests for the top scorers of a specific category</p>
 </li>
 <li>
 <p>HackathonManager shows the leaderboard of the category, with respective score of each team.
@@ -962,7 +1183,7 @@ Use case ends.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1a. The catergory is not found.</p>
+<p>1a. The category is not found.</p>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -1216,4 +1437,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 15:17:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 15:21:32 UTC</div></div></div></body></html>
