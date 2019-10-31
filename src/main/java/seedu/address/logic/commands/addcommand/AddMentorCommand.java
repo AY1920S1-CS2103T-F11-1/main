@@ -64,6 +64,7 @@ public class AddMentorCommand extends AddCommand {
             model.addMentor(this.mentor);
             model.resetFilteredLists();
             model.updateHistory(this);
+            model.recordCommandExecution(this.getCommandInputString());
         } catch (AlfredException e) {
             // Should I return new CommandResult(MESSAGE_DUPLICATE_MENTOR) instead?
             throw new CommandException(MESSAGE_DUPLICATE_MENTOR);
@@ -74,8 +75,13 @@ public class AddMentorCommand extends AddCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddMentorCommand // instanceof handles nulls
-                && mentor.equals(((AddMentorCommand) other).mentor));
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof AddMentorCommand)) {
+            return false;
+        }
+        AddMentorCommand addMentorCommand = (AddMentorCommand) other;
+        return this.mentor.equals(addMentorCommand.mentor);
     }
 }

@@ -64,6 +64,7 @@ public class EditMentorCommand extends EditCommand {
         try {
             model.updateMentor(this.id, editedMentor);
             model.updateHistory(this);
+            model.recordCommandExecution(this.getCommandInputString());
             return new CommandResult(String.format(MESSAGE_EDIT_MENTOR_SUCCESS, editedMentor.toString()),
                     CommandType.M);
         } catch (AlfredException e) {
@@ -92,6 +93,25 @@ public class EditMentorCommand extends EditCommand {
 
         return new Mentor(updatedName, id, updatedPhone, updatedEmail, updatedOrganization, updatedSubject);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditMentorCommand)) {
+            return false;
+        }
+
+        // state check
+        EditMentorCommand e = (EditMentorCommand) other;
+        return id.equals(e.id)
+                && editMentorDescriptor.equals(e.editMentorDescriptor);
+    }
+
 
     /**
      * Stores the details to edit the {@code Mentor} with. Each non-empty field value will replace the
