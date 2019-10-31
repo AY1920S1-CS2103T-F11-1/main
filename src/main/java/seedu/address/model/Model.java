@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
 
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -87,13 +89,17 @@ public interface Model {
      */
     ReadOnlyEntityList getMentorList();
 
-    /* Get the filtered lists */
+    /* Get the filtered and sorted lists */
 
     FilteredList<Participant> getFilteredParticipantList();
 
     FilteredList<Team> getFilteredTeamList();
 
     FilteredList<Mentor> getFilteredMentorList();
+
+    SortedList<Team> getSortedTeamList();
+
+    SortedList<Team> getTopKTeams();
 
     void resetFilteredLists();
 
@@ -121,7 +127,11 @@ public interface Model {
 
     void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException;
 
+    void removeParticipantFromTeam(Id teamId, Participant participant) throws AlfredException;
+
     void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException;
+
+    void removeMentorFromTeam(Id teamId, Mentor mentor) throws AlfredException;
 
     void updateTeam(Id teamId, Team team) throws AlfredException;
 
@@ -150,6 +160,14 @@ public interface Model {
     List<Team> findTeam(Predicate<Team> predicate);
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
+
+    void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators);
+
+    void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators);
+
+    void setTopK(int k, ArrayList<Comparator<Team>> comparators);
+
+    void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators);
 
     /* View command */
     /**

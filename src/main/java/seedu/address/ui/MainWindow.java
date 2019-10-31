@@ -42,8 +42,9 @@ public class MainWindow extends UiPart<Stage> {
     private CommandListPanel commandListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    private JFXButton lastFired;
     private CommandBox commandBox;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private JFXButton participantsButton;
+
+    @FXML
+    private JFXButton leaderboardButton;
 
     @FXML
     private JFXButton teamsButton;
@@ -230,6 +234,30 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Displays the leaderboard on the Graphical User Interface.
+     */
+    @FXML
+    private void displayLeaderboard() {
+        entityListPanel = new EntityListPanel(logic.getSortedTeamList());
+
+        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        listPanelPlaceholder.setStyle("-fx-background-color: #5d6d7e");
+        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
+    }
+
+    /**
+     * Displays the top K teams on the Graphical User Interface.
+     */
+    @FXML
+    private void displayTopK() {
+        entityListPanel = new EntityListPanel(logic.getTopKTeams());
+
+        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        listPanelPlaceholder.setStyle("-fx-background-color: #5d6d7e");
+        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
+    }
+
+    /**
      * Displays the list of Teams in Model and Storage on Graphical User Interface.
      */
     @FXML
@@ -285,7 +313,6 @@ public class MainWindow extends UiPart<Stage> {
         if (mentorsButton.isArmed()) {
             mentorsButton.disarm();
         }
-
     }
 
     private void fireButton(Button button) throws AlfredModelHistoryException {
@@ -323,15 +350,25 @@ public class MainWindow extends UiPart<Stage> {
             switch (commandType) {
             case M:
                 this.fireButton(mentorsButton);
+                lastFired = mentorsButton;
                 break;
             case T:
                 this.fireButton(teamsButton);
+                lastFired = mentorsButton;
                 break;
             case P:
                 this.fireButton(participantsButton);
+                lastFired = mentorsButton;
                 break;
             case H:
                 this.fireButton(historyButton);
+                lastFired = mentorsButton;
+                break;
+            case L:
+                this.fireButton(leaderboardButton);
+                break;
+            case K:
+                displayTopK();
                 break;
 
             default:
@@ -340,6 +377,7 @@ public class MainWindow extends UiPart<Stage> {
             }
             return commandResult;
         } catch (CommandException | ParseException | AlfredModelHistoryException e) {
+            this.fireButton(lastFired);
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
