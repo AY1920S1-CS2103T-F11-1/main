@@ -265,6 +265,8 @@ Use this command to display the ranking of the teams in the hackathon in descend
 * By default Alfred sorts teams with equal points in the order they were added into Alfred, based on their ID.
 ****
 
+Format: `leaderboard`
+
 ==== Get the top k teams: `getTop NUMBER`
 Use this command to list the top k teams in the leaderboard, where k is a number (NUMBER) which you specify.
 
@@ -274,8 +276,10 @@ Use this command to list the top k teams in the leaderboard, where k is a number
 * Do note that this command does not discriminate between teams of the same score - Teams with equal scores will be
 counted as one. Essentially, the command "getTop 1" may show more than 1 team if there are more than 1 teams with the
 same high score.
-* If you input `NUMBER` as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon.
+* If you input `NUMBER` as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon, in desceding order of their points.
 ****
+
+Format: `getTop NUMBER`
 
 Example:
 
