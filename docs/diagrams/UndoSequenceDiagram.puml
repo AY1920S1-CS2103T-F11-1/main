@@ -2,52 +2,95 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":Logic" as Logic LOGIC_COLOR
+participant ":AlfredParser" as AlfredParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":ModelHistory" as ModelHistory MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
-activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+[-> Logic : execute("undo")
+activate Logic
+
+Logic -> AlfredParser : parseCommand("undo")
+activate AlfredParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+AlfredParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> AlfredParser : u
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
-
-LogicManager -> UndoCommand : execute()
+AlfredParser -> UndoCommand : setCommandInputString("undo")
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand --> AlfredParser
+deactivate UndoCommand
+
+AlfredParser --> Logic : u
+deactivate AlfredParser
+
+Logic -> UndoCommand : execute(model)
+activate UndoCommand
+
+UndoCommand -> Model : undo()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> ModelHistory : undo()
+activate ModelHistory
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+ModelHistory --> Model : historyRecord
+deactivate ModelHistory
+
+Model -> Model : updateModelState(historyRecord)
+activate Model
+
+Model --> Model
+deactivate Model
+
+note right Model
+This method will set the ParticipantList,
+MentorList, TeamList and their respective
+static IDs, so that Model will have the
+state of its data updated
+end note
 
 Model --> UndoCommand
 deactivate Model
 
-UndoCommand --> LogicManager : result
-deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
-destroy UndoCommand
+UndoCommand -> Model : updateHistory(this)
+activate Model
 
-[<--LogicManager
-deactivate LogicManager
+Model --> UndoCommand
+deactivate Model
+
+UndoCommand -> UndoCommand : getCommandInputString()
+activate UndoCommand
+
+UndoCommand --> UndoCommand : s
+deactivate UndoCommand
+
+UndoCommand -> Model : recordCommandExecution(s)
+activate Model
+
+Model --> UndoCommand
+deactivate Model
+
+create CommandResult
+UndoCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UndoCommand
+deactivate CommandResult
+
+UndoCommand --> Logic
+deactivate UndoCommand
+
+[<--Logic
+deactivate Logic
 @enduml

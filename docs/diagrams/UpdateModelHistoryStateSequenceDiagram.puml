@@ -12,7 +12,9 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant ":ModelHistory" as ModelHistory MODEL_COLOR
 participant ":CommandHistory" as CommandHistory MODEL_COLOR
+participant ":ModelHistoryRecord" as ModelHistoryRecord MODEL_COLOR
 end box
 
 [-> Logic : execute("delete participant P-1")
@@ -78,6 +80,33 @@ deactivate Model
 
 DeleteParticipantCommand -> Model : updateHistory(this)
 activate Model
+
+Model -> ModelHistory : updateHistory(pList, pListId, mList, mListId, tList, tListId, c)
+activate ModelHistory
+
+create ModelHistoryRecord
+ModelHistory -> ModelHistoryRecord
+activate ModelHistoryRecord
+
+ModelHistoryRecord --> ModelHistory : newRecord
+deactivate ModelHistoryRecord
+
+ModelHistory -> ModelHistory : addToHistory(newRecord)
+activate ModelHistory
+
+note right of ModelHistory
+This stores a copy of the
+ParticipantList, MentorList,
+TeamList and the static IDs in
+ModelHistory, ready to be retrieved
+when an undo/redo command is executed.
+end note
+
+ModelHistory --> ModelHistory
+deactivate ModelHistory
+
+ModelHistory --> Model
+deactivate ModelHistory
 
 Model --> DeleteParticipantCommand
 deactivate Model
