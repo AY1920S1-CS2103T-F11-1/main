@@ -43,6 +43,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private JFXButton lastFired;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -305,15 +307,19 @@ public class MainWindow extends UiPart<Stage> {
             switch (commandType) {
             case M:
                 this.fireButton(mentorsButton);
+                lastFired = mentorsButton;
                 break;
             case T:
                 this.fireButton(teamsButton);
+                lastFired = mentorsButton;
                 break;
             case P:
                 this.fireButton(participantsButton);
+                lastFired = mentorsButton;
                 break;
             case H:
                 this.fireButton(historyButton);
+                lastFired = mentorsButton;
                 break;
 
             default:
@@ -322,6 +328,7 @@ public class MainWindow extends UiPart<Stage> {
             }
             return commandResult;
         } catch (CommandException | ParseException | AlfredModelHistoryException e) {
+            this.fireButton(lastFired);
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;

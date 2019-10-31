@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -61,7 +62,11 @@ public class EntityCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label score;
+    @FXML
     private ImageView idIcon;
+    @FXML
+    private GridPane internalPane;
     @FXML
     private FlowPane membersPane; //Only initialised for TeamCards, when there are members
 
@@ -141,7 +146,6 @@ public class EntityCard extends UiPart<Region> {
         logger.info("Size of membersPane before adding Participants: " + membersPane.getChildren().size());
         participants.stream().forEach(p -> membersPane.getChildren().add(new Label(p.getName().toString() + ", ")));
         this.type = PrefixType.T;
-
         addScoreIcon(team);
     }
 
@@ -173,7 +177,7 @@ public class EntityCard extends UiPart<Region> {
         scoreIcon.getChildren().add(scoreLabels);
 
         //Place Score Icon inside Card
-        cardPane.getChildren().add(scoreIcon);
+        internalPane.add(scoreIcon, 2, 0);
     }
 
     private Image getImage(String imagePath) {
