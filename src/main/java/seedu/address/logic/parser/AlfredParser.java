@@ -21,6 +21,7 @@ import seedu.address.logic.commands.historycommand.HistoryCommand;
 import seedu.address.logic.commands.historycommand.RedoCommand;
 import seedu.address.logic.commands.historycommand.UndoCommand;
 import seedu.address.logic.commands.listcommand.ListCommand;
+import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.addcommandparser.AddCommandAllocator;
 import seedu.address.logic.parser.csvcommandparser.ExportCommandParser;
@@ -30,6 +31,7 @@ import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.findcommandparser.FindCommandAllocator;
 import seedu.address.logic.parser.listcommandparser.ListCommandParser;
+import seedu.address.logic.parser.scorecommandparser.ScoreCommandAllocator;
 import seedu.address.logic.parser.viewcommandparser.ViewCommandAllocator;
 
 /**
@@ -63,7 +65,6 @@ public class AlfredParser {
         logger.info("Finding command type of " + commandWord);
         Command c;
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
             c = new AddCommandAllocator().allocate(arguments);
             break;
@@ -76,6 +77,9 @@ public class AlfredParser {
             logger.info("Deleting an existing Participant...");
             c = new DeleteCommandAllocator().allocate(arguments);
             break;
+
+        case ScoreCommand.COMMAND_WORD:
+            return new ScoreCommandAllocator().allocate(arguments);
 
         case ListCommand.COMMAND_WORD:
             c = new ListCommandParser().parse(arguments);

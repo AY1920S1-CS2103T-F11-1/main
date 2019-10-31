@@ -32,7 +32,7 @@ public class ExportTeamCommand extends ExportCommand {
             model.updateHistory(this);
             model.recordCommandExecution(this.getCommandInputString());
         } catch (IOException ioe) {
-            throw new CommandException(String.format(MESSAGE_IO_EXCEPTION, ioe.toString()));
+            throw new CommandException(MESSAGE_IO_EXCEPTION);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.csvFilePath.toString()));
     }
