@@ -325,12 +325,12 @@ public class Team extends Entity {
      * @return Deep copy of the Team object
      */
     public Team copy() {
-        List<Participant> pListCopy = new ArrayList<>();
+        List<Participant> pListCopy = new ArrayList<Participant>();
         for (Participant p: this.participants) {
             pListCopy.add(p.copy());
         }
 
-        Optional<Mentor> copiedMentor;
+        Optional<Mentor> copiedMentor = null;
         if (this.mentor.isEmpty()) {
             copiedMentor = Optional.empty();
         } else {
