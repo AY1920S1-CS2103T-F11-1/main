@@ -16,37 +16,39 @@
 <div id="toctitle"></div>
 <ul class="sectlevel1">
 <li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#quick-start">2. Quick Start</a></li>
-<li><a href="#Features">3. Features</a>
+<li><a href="#about">2. About</a></li>
+<li><a href="#quick-start">3. Quick Start</a></li>
+<li><a href="#Features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#saving-the-data">3.1. Saving the data:</a></li>
-<li><a href="#viewing-help-code-help-code-coming-in-v1-3">3.2. Viewing help : <code>help</code> (Coming in v1.3)</a></li>
-<li><a href="#adding-an-entity-code-add-participant-mentor-team-code">3.3. Adding an Entity: <code>add {participant/mentor/team}</code></a>
+<li><a href="#saving-the-data">4.1. Saving the data:</a></li>
+<li><a href="#viewing-help-code-help-code">4.2. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-an-entity-code-add-participant-mentor-team-code">4.3. Adding an Entity: <code>add {participant/mentor/team}</code></a>
 <ul class="sectlevel3">
-<li><a href="#adding-a-participant-code-add-participant-parameters-code">3.3.1. Adding a Participant: <code>add participant PARAMETERS</code></a></li>
-<li><a href="#adding-a-mentor-code-add-mentor-parameters-code">3.3.2. Adding a Mentor: <code>add mentor PARAMETERS</code></a></li>
-<li><a href="#adding-a-team-code-add-team-parameters-code">3.3.3. Adding a Team: <code>add team PARAMETERS</code></a></li>
+<li><a href="#adding-a-participant-code-add-participant-parameters-code">4.3.1. Adding a Participant: <code>add participant PARAMETERS</code></a></li>
+<li><a href="#adding-a-mentor-code-add-mentor-parameters-code">4.3.2. Adding a Mentor: <code>add mentor PARAMETERS</code></a></li>
+<li><a href="#adding-a-team-code-add-team-parameters-code">4.3.3. Adding a Team: <code>add team PARAMETERS</code></a></li>
 </ul>
 </li>
-<li><a href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">3.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></li>
-<li><a href="#listing-all-entities-code-list-mentors-participants-teams-code">3.5. Listing all Entities : <code>list {mentors/participants/teams}</code></a></li>
-<li><a href="#deleting-an-entity-code-delete-mentor-participant-team-id-code">3.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></a></li>
-<li><a href="#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">3.7. Finding a Specific Entity: <code>find {mentor/team/participant} n/NAME &#8230;&#8203;</code></a></li>
-<li><a href="#show-command-history-code-history-code">3.8. Show Command History: <code>history</code></a></li>
-<li><a href="#undo-previous-commands-code-undo-code">3.9. Undo Previous Commands: <code>undo</code></a></li>
-<li><a href="#redo-previous-commands-code-redo-code">3.10. Redo Previous Commands: <code>redo</code></a></li>
-<li><a href="#judging-and-leaderboard-features">3.11. Judging and Leaderboard Features</a>
+<li><a href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">4.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></li>
+<li><a href="#listing-all-entities-code-list-mentors-participants-teams-code">4.5. Listing all Entities : <code>list {mentors/participants/teams}</code></a></li>
+<li><a href="#deleting-an-entity-code-delete-mentor-participant-team-id-code">4.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></a></li>
+<li><a href="#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">4.7. Finding a Specific Entity: <code>find {mentor/team/participant} n/NAME &#8230;&#8203;</code></a></li>
+<li><a href="#show-command-history-code-history-code">4.8. Show Command History: <code>history</code></a></li>
+<li><a href="#undo-previous-commands-code-undo-code">4.9. Undo Previous Commands: <code>undo</code></a></li>
+<li><a href="#redo-previous-commands-code-redo-code">4.10. Redo Previous Commands: <code>redo</code></a></li>
+<li><a href="#command-navigation">4.11. Command Navigation</a></li>
+<li><a href="#judging-and-leaderboard-features">4.12. Judging and Leaderboard Features</a>
 <ul class="sectlevel3">
-<li><a href="#list-team-ranking-code-leaderboard-code">3.11.1. List Team Ranking: <code>leaderboard</code></a></li>
-<li><a href="#get-the-top-k-teams-code-gettop-number-code">3.11.2. Get the top k teams: <code>getTop NUMBER</code></a></li>
-<li><a href="#add-points-code-score-add-team_id-points-code">3.11.3. Add points: <code>score add TEAM_ID POINTS</code></a></li>
-<li><a href="#subtract-points-code-score-sub-team_id-new_points-code">3.11.4. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></li>
-<li><a href="#set-points-code-score-set-team_id-new_points-code">3.11.5. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#list-team-ranking-code-leaderboard-code">4.12.1. List Team Ranking: <code>leaderboard</code></a></li>
+<li><a href="#get-the-top-k-teams-code-gettop-number-code">4.12.2. Get the top k teams: <code>getTop NUMBER</code></a></li>
+<li><a href="#add-points-code-score-add-team_id-points-code">4.12.3. Add points: <code>score add TEAM_ID POINTS</code></a></li>
+<li><a href="#subtract-points-code-score-sub-team_id-new_points-code">4.12.4. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#set-points-code-score-set-team_id-new_points-code">4.12.5. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></li>
 </ul>
 </li>
-<li><a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">3.12. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a>
+<li><a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">4.13. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a>
 <ul class="sectlevel3">
-<li><a href="#csv-file-formatting">3.12.1. CSV File Formatting</a>
+<li><a href="#csv-file-formatting">4.13.1. CSV File Formatting</a>
 <ul class="sectlevel4">
 <li><a href="#mentor-data">Mentor Data</a></li>
 <li><a href="#participant-data">Participant Data</a></li>
@@ -55,40 +57,39 @@
 </li>
 </ul>
 </li>
-<li><a href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">3.13. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
-<li><a href="#help-command-coming-in-v1-3">3.14. Help command (Coming in v1.3)</a></li>
-<li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">3.15. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
-<li><a href="#swag-coming-in-v2-0">3.16. Swag (Coming in v2.0)</a>
+<li><a href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">4.14. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
+<li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">4.15. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
+<li><a href="#swag-coming-in-v2-0">4.16. Swag (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-swag-code-add-swag-description-quantity-code">3.16.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
-<li><a href="#track-inventory-of-available-swags-code-list-swag-code">3.16.2. Track inventory of available swags: <code>list swag</code></a></li>
+<li><a href="#add-swag-code-add-swag-description-quantity-code">4.16.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
+<li><a href="#track-inventory-of-available-swags-code-list-swag-code">4.16.2. Track inventory of available swags: <code>list swag</code></a></li>
 </ul>
 </li>
-<li><a href="#schedule-coming-in-v2-0">3.17. Schedule (Coming in v2.0)</a>
+<li><a href="#schedule-coming-in-v2-0">4.17. Schedule (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">3.17.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">3.17.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#delete-schedule-code-deleteschedule-schedule_id-code">3.17.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
+<li><a href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">4.17.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">4.17.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#delete-schedule-code-deleteschedule-schedule_id-code">4.17.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
 </ul>
 </li>
-<li><a href="#food-coming-in-v2-0">3.18. Food (Coming in v2.0)</a>
+<li><a href="#food-coming-in-v2-0">4.18. Food (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">3.18.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">3.18.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#list-food-inventory-code-list-food-code">3.18.3. List Food Inventory: <code>list food</code></a></li>
+<li><a href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">4.18.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">4.18.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#list-food-inventory-code-list-food-code">4.18.3. List Food Inventory: <code>list food</code></a></li>
 </ul>
 </li>
-<li><a href="#waitlist-coming-in-v2-0">3.19. Waitlist (Coming in v2.0)</a>
+<li><a href="#waitlist-coming-in-v2-0">4.19. Waitlist (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-to-waitlist-code-addtowaitlist-participant_id-code">3.19.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">3.19.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#list-by-registration-time-code-listwaitlist-code">3.19.3. List by Registration Time: <code>listWaitList</code></a></li>
+<li><a href="#add-to-waitlist-code-addtowaitlist-participant_id-code">4.19.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">4.19.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#list-by-registration-time-code-listwaitlist-code">4.19.3. List by Registration Time: <code>listWaitList</code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
+<li><a href="#faq">5. FAQ</a></li>
+<li><a href="#command-summary">6. Command Summary</a></li>
 </ul>
 </div>
 </div>
@@ -104,15 +105,46 @@ and administrative details of the Hackathon you are organising.</p>
 </div>
 <div class="paragraph">
 <p>Furthermore, Alfred is <strong>optimized for those who prefer to work with a Command Line Interface (CLI)</strong>, while
-maintaining the benefits of having visual responses in a Graphical User Interface.</p>
+maintaining the benefits of having visual responses in a Graphical User Interface. This means that users mainly
+interact with Alfred by typing on the keyboard, instead of using the mouse to point and click. Point-and-click
+functionality is supported, but is not the main focus of the application.</p>
 </div>
 <div class="paragraph">
-<p>Interested? Well, head to <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. We hope Alfred serves you well!</p>
+<p>Interested? Well, head to <a href="#quick-start">Section 3, &#8220;Quick Start&#8221;</a> to get started. We hope Alfred serves you well!</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+<h2 id="about"><a class="link" href="#about">2. About</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This User Guide introduces you to Alfred&#8217;s features and how you can use them to enhance your productivity
+when organising a Hackathon. You can use Alfred to add and track participants in your Hackathon, assign mentors
+to participants, keep track of the scores of each team in a leaderboard, undo and redo changes you make, and a
+whole lot more.</p>
+</div>
+<div class="paragraph">
+<p>Alfred was designed to be as easy to use as possible, and the only assumption we made is that users are
+comfortable typing into a keyboard to interact with Alfred. No other technical knowledge is needed! It&#8217;s that simple.</p>
+</div>
+<div class="paragraph">
+<p>Alfred is designed to be cross-platform and is available for the Linux, Windows and Mac OS operating systems.</p>
+</div>
+<div class="paragraph">
+<p>Some simple conventions are used for this User Guide:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Commands - You will typically interact with Alfred through what we call "commands". Each command is simply some
+text that you enter into Alfred. The command text that you should enter at the command line is formatted as <code>user input</code></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="link" href="#quick-start">3. Quick Start</a></h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -126,8 +158,8 @@ maintaining the benefits of having visual responses in a Graphical User Interfac
 <p>Copy the file to the folder you want to use as the home folder for Alfred.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. Alternatively, if you use a Mac, commandType the command <code>java -jar alfred.jar</code>
-on terminal in the jar file&#8217;s directory to open start the app. The GUI should appear in a few seconds.</p>
+<p>Double-click the file to start the app. Alternatively, if you use a Mac, type the command <code>java -jar alfred.jar</code>
+on terminal in the jar file&#8217;s directory to open and start the app. The GUI should appear in a few seconds.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
@@ -146,7 +178,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list teams</code></strong> : lists teams in the hackathon</p>
 </li>
 <li>
-<p><strong><code>add participant n/Bartholomew Lim p/97654321 e/barrytheflash@superheros.com</code></strong> : adds a new participant named <code>Bartholomew Lim</code> to the Hackathon.</p>
+<p><strong><code>add participant n/Bartholomew Lim p/+6597654321 e/barrytheflash@superheros.com</code></strong> : adds a new participant named <code>Bartholomew Lim</code> to the Hackathon.</p>
 </li>
 <li>
 <p><strong><code>delete participant P-1</code></strong> : removes the participant with ID P-1 from the hackathon.</p>
@@ -158,14 +190,14 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </li>
 <li>
-<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+<p>Refer to <a href="#Features">Section 4, &#8220;Features&#8221;</a> for details of each command.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+<h2 id="Features"><a class="link" href="#Features">4. Features</a></h2>
 <div class="sectionbody">
 <div class="exampleblock">
 <div class="content">
@@ -176,18 +208,18 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <ul>
 <li>
 <p>Words in <code>UPPER_CASE</code> are the parameters which you need to supply. For example, in <code>add mentor n/NAME</code>,
-<code>NAME</code> is a parameter which you need to specify as the mentor&#8217;s name, for example <code>add mentor n/John Doe</code>.</p>
+<code>NAME</code> is a parameter which you need to specify as the mentor&#8217;s name (i.e. <code>add mentor n/John Doe</code>).</p>
 </li>
 <li>
-<p>You can commandType the parameters in any order. For instance, if the command specifies <code>n/NAME p/PHONE_NUMBER</code>,
-you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still deem it as an acceptable command.</p>
+<p>You can input the parameters in any order. For instance, if the command specifies <code>n/NAME p/PHONE_NUMBER</code>,
+you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still consider it as an acceptable command.</p>
 </li>
 <li>
 <p>Words in {curly braces} indicate values for the command that you need to select and provide.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>For example in the case of <code>add {mentor/participant/list}</code>, you can choose to commandType <code>add mentor</code>, <code>add participant</code> or <code>add team</code></p>
+<p>For example in the case of <code>add {mentor/participant/list}</code>, you can choose to type <code>add mentor</code>, <code>add participant</code> or <code>add team</code></p>
 </li>
 </ul>
 </div>
@@ -203,35 +235,50 @@ you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still deem it a
 </div>
 </li>
 <li>
-<p>Whenever you need to specify an ID, the ID will be prefixed with an alphabet indicating the commandType of the Entity (e.g. M for Mentors, P for Participants, T for Teams).</p>
+<p>Whenever you need to specify an ID, the ID will be prefixed with an alphabet indicating the type of the Entity (e.g. M for Mentors, P for Participants, T for Teams).</p>
 </li>
 <li>
-<p>Type your commands in the textbox displayed on the Alfred UI. After you are done typing the command, press ENTER on your keyboard to execute the command.</p>
+<p>Type your commands in the textbox displayed on the Alfred UI. After you are done typing the command, press <kbd>Enter</kbd> on your keyboard to execute the command.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.1. Saving the data:</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">4.1. Saving the data:</a></h3>
 <div class="paragraph">
-<p>Data in Alfred is saved to the hard disk automatically after any command that changes the data.<br>
+<p>Data in Alfred is saved to the hard disk automatically after any command that changes the data.
 There is no need for you to save the data manually.</p>
+</div>
+<div class="paragraph">
+<p>Should any tampering of the data in storage result in an invalid state for the data, the data will be re-initialised and the old data will be lost.
+Hence, please avoid directly altering the storage files as any minor errors could result in permanent
+loss of critical information.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code-coming-in-v1-3"><a class="link" href="#viewing-help-code-help-code-coming-in-v1-3">3.2. Viewing help : <code>help</code> (Coming in v1.3)</a></h3>
+<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">4.2. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
 <p>If at anytime you don&#8217;t understand how to do a certain thing on Alfred, use this command to display a
-help page in a separate pop-up window. Should you require further information,
-the pop-up window also includes links to further references and documentation.<br></p>
+help page in a separate pop-up window.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Should you require further information, the pop-up window also includes links to further references and documentation.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-an-entity-code-add-participant-mentor-team-code"><a class="link" href="#adding-an-entity-code-add-participant-mentor-team-code">3.3. Adding an Entity: <code>add {participant/mentor/team}</code></a></h3>
+<h3 id="adding-an-entity-code-add-participant-mentor-team-code"><a class="link" href="#adding-an-entity-code-add-participant-mentor-team-code">4.3. Adding an Entity: <code>add {participant/mentor/team}</code></a></h3>
 <div class="paragraph">
 <p>Use this command to add a new entity for Alfred to keep track of.<br></p>
 </div>
@@ -250,7 +297,7 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-participant-code-add-participant-parameters-code"><a class="link" href="#adding-a-participant-code-add-participant-parameters-code">3.3.1. Adding a Participant: <code>add participant PARAMETERS</code></a></h4>
+<h4 id="adding-a-participant-code-add-participant-parameters-code"><a class="link" href="#adding-a-participant-code-add-participant-parameters-code">4.3.1. Adding a Participant: <code>add participant PARAMETERS</code></a></h4>
 <div class="paragraph">
 <p>Use this command to add a new Participant to Alfred to keep track of for your hackathon.</p>
 </div>
@@ -283,9 +330,9 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-mentor-code-add-mentor-parameters-code"><a class="link" href="#adding-a-mentor-code-add-mentor-parameters-code">3.3.2. Adding a Mentor: <code>add mentor PARAMETERS</code></a></h4>
+<h4 id="adding-a-mentor-code-add-mentor-parameters-code"><a class="link" href="#adding-a-mentor-code-add-mentor-parameters-code">4.3.2. Adding a Mentor: <code>add mentor PARAMETERS</code></a></h4>
 <div class="paragraph">
-<p>Use this command to add a new Mentor to Alfred to keep track of for your hackathon.</p>
+<p>Use this command to add a new Mentor to Alfred to keep track of for your Hackathon.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -322,9 +369,9 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect3">
-<h4 id="adding-a-team-code-add-team-parameters-code"><a class="link" href="#adding-a-team-code-add-team-parameters-code">3.3.3. Adding a Team: <code>add team PARAMETERS</code></a></h4>
+<h4 id="adding-a-team-code-add-team-parameters-code"><a class="link" href="#adding-a-team-code-add-team-parameters-code">4.3.3. Adding a Team: <code>add team PARAMETERS</code></a></h4>
 <div class="paragraph">
-<p>Use this command to add a new Team to Alfred to keep track of for your hackathon.</p>
+<p>Use this command to add a new Team to Alfred to keep track of for your Hackathon.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -359,7 +406,7 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code"><a class="link" href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">3.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></h3>
+<h3 id="updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code"><a class="link" href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">4.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></h3>
 <div class="paragraph">
 <p>Edits an entity based on the parameter values you supply. Use this command in case you want to make changes to an entity you have already created within Alfred.</p>
 </div>
@@ -368,7 +415,7 @@ the pop-up window also includes links to further references and documentation.<b
 <div class="ulist">
 <ul>
 <li>
-<p>Updates the fields of the Entity with the <code>ENTITY_ID</code> you specified to the new fields you commandType in as the parameter. The ID is the unique identifier for the particular Entity you wish to edit.</p>
+<p>Updates the fields of the Entity with the <code>ENTITY_ID</code> you specified to the new fields you type in as the parameter. The ID is the unique identifier for the particular Entity you wish to edit.</p>
 </li>
 <li>
 <p>You must provide at least one of the optional fields.</p>
@@ -401,7 +448,7 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-all-entities-code-list-mentors-participants-teams-code"><a class="link" href="#listing-all-entities-code-list-mentors-participants-teams-code">3.5. Listing all Entities : <code>list {mentors/participants/teams}</code></a></h3>
+<h3 id="listing-all-entities-code-list-mentors-participants-teams-code"><a class="link" href="#listing-all-entities-code-list-mentors-participants-teams-code">4.5. Listing all Entities : <code>list {mentors/participants/teams}</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all the entities corresponding to the entity you specified that Alfred keeps track of.</p>
 </div>
@@ -434,7 +481,7 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-entity-code-delete-mentor-participant-team-id-code"><a class="link" href="#deleting-an-entity-code-delete-mentor-participant-team-id-code">3.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></a></h3>
+<h3 id="deleting-an-entity-code-delete-mentor-participant-team-id-code"><a class="link" href="#deleting-an-entity-code-delete-mentor-participant-team-id-code">4.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></a></h3>
 <div class="paragraph">
 <p>Deletes an Entity, so that Alfred will no longer keep track of that Entity.</p>
 </div>
@@ -448,6 +495,9 @@ the pop-up window also includes links to further references and documentation.<b
 </ul>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -464,7 +514,7 @@ the pop-up window also includes links to further references and documentation.<b
 </div>
 </div>
 <div class="sect2">
-<h3 id="finding-a-specific-entity-code-find-mentor-team-participant-n-name-code"><a class="link" href="#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">3.7. Finding a Specific Entity: <code>find {mentor/team/participant} n/NAME &#8230;&#8203;</code></a></h3>
+<h3 id="finding-a-specific-entity-code-find-mentor-team-participant-n-name-code"><a class="link" href="#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">4.7. Finding a Specific Entity: <code>find {mentor/team/participant} n/NAME &#8230;&#8203;</code></a></h3>
 <div class="paragraph">
 <p>Searches for Entities by selected fields, instead of their ID, in case you find that the ID is difficult to keep track of.<br></p>
 </div>
@@ -523,7 +573,7 @@ sensitive) and whose emails contain "damith.com"</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="show-command-history-code-history-code"><a class="link" href="#show-command-history-code-history-code">3.8. Show Command History: <code>history</code></a></h3>
+<h3 id="show-command-history-code-history-code"><a class="link" href="#show-command-history-code-history-code">4.8. Show Command History: <code>history</code></a></h3>
 <div class="paragraph">
 <p>Shows you up to the last 50 commands that you executed.</p>
 </div>
@@ -535,10 +585,21 @@ sensitive) and whose emails contain "damith.com"</p>
 <p>This command is to facilitate the undo/redo commands, as it becomes easier for you to track what changes were made before.</p>
 </li>
 <li>
-<p>Above the <code>=</code> delimiter are the commands that can be re-done. (see the example below)</p>
+<p>The "History" section of Alfred displays all the previously-executed commands as panels. There are 3 main delimiters.</p>
 </li>
 <li>
-<p>Below the <code>=</code> delimiter are the commands that can be un-done. (see the example below)</p>
+<p>You cannot redo any command beyond the "redo" delimiter.</p>
+</li>
+<li>
+<p>You cannot undo any command beyond the "undo delimiter".</p>
+</li>
+<li>
+<p>The "current" delimiter tells you where you are at relative to the rest of the commands you have executed.</p>
+</li>
+<li>
+<p>Note that only commands that change the state of the data in Alfred will be displayed in the "History" section and are undo/redo-able.
+For instance, <code>list participants</code> will not be undo/redo-able, as it simply shows you the participants in Alfred and does not change any information in Alfred.
+On the other hand, invoking <code>add participant</code> with the suitable parameters will be undo/redo-able and will be shown in the "History" section by the <code>history</code> command.</p>
 </li>
 </ul>
 </div>
@@ -546,30 +607,29 @@ sensitive) and whose emails contain "damith.com"</p>
 </div>
 <div class="paragraph">
 <p>Example:
-Running <code>history</code> could give you the following output in the Graphical User Interface:</p>
+After running the following commands:
+1. list participants
+2. add participant n/Bartholomew Lim p/+6593121212 e/barrytheflash@gmail.com
+3. add participant n/Diana Prince p/+6593111111 e/singaporewonderwoman@hotmail.com</p>
 </div>
-<div class="listingblock">
+<div class="paragraph">
+<p>Running <code>history</code> will show you the following output in the "History" section of the Graphical User Interface:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>2. AddParticipantCommand
-1. AddTeamCommand
-==============================
-1. AddParticipantCommand
-2. AddParticipantCommand
-3. AddMentorCommand</code></pre>
+<img src="images/HistoryCommandExampleOutput.png" alt="HistoryCommandExampleOutput" width="790">
 </div>
 </div>
 <div class="paragraph">
-<p>Above the <code>=</code> delimiter are the commands that you can re-do, listed in consecutive order. Hence, calling the <code>redo</code> command will redo the <code>1. AddTeamCommand</code> command. Calling the <code>redo</code> command once more will redo the <code>2. AddParticipantCommand</code> command.</p>
-</div>
-<div class="paragraph">
-<p>Below the <code>=</code> delimiter are the commands that you can un-do, listed in consecutive order. Hence, calling the <code>undo</code> command once will undo the <code>1. AddParticipantCommand</code> command. Calling the <code>undo</code> command once more will undo the <code>2. AddTeamCommand</code> command. Note that it is not possible to undo beyond the last listed command below the <code>=</code> delimiter.</p>
-</div>
-<div class="paragraph">
-<p>In other words, calling <code>undo</code> will undo the command immediately below the <code>=</code> delimiter, and calling <code>redo</code> will redo the command immediately above the <code>=</code> delimiter.</p>
+<p>The topmost panel shows you that you the "redo" delimiter.
+The second panel from the top shows you the "current" delimiter.
+The bottommost panel shows you the "undo" delimiter.
+This means that you can invoke the <code>undo</code> command twice, as both AddParticipantCommands can be undone.
+Notice that the <code>list participants</code> command is not shown in the "History" section as it does not change data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undo-previous-commands-code-undo-code"><a class="link" href="#undo-previous-commands-code-undo-code">3.9. Undo Previous Commands: <code>undo</code></a></h3>
+<h3 id="undo-previous-commands-code-undo-code"><a class="link" href="#undo-previous-commands-code-undo-code">4.9. Undo Previous Commands: <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Undoes the previous command you executed.</p>
 </div>
@@ -587,15 +647,18 @@ Running <code>history</code> could give you the following output in the Graphica
 <p>To be certain which command you are actually undo-ing, first run the <code>history</code> command and examine the output.</p>
 </li>
 <li>
-<p>Only the commands that actually change the data in Alfred will be undo-able. Commands that perform read operations (such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command. (Coming in v1.4)</p>
+<p>Only the commands that actually change the data in Alfred will be undo-able. Commands that perform read operations (such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Format: <code>undo</code></p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="redo-previous-commands-code-redo-code"><a class="link" href="#redo-previous-commands-code-redo-code">3.10. Redo Previous Commands: <code>redo</code></a></h3>
+<h3 id="redo-previous-commands-code-redo-code"><a class="link" href="#redo-previous-commands-code-redo-code">4.10. Redo Previous Commands: <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Redoes the previous command you executed.</p>
 </div>
@@ -604,7 +667,7 @@ Running <code>history</code> could give you the following output in the Graphica
 <div class="ulist">
 <ul>
 <li>
-<p>Redoes the effects of the previous command you executed, and will return Alfred to the previous state (as though you never executed the previous command).</p>
+<p>Redoes the effects of the previous command you executed, and will return Alfred to the previous state (as though you re-executed the previous command).</p>
 </li>
 <li>
 <p>All commands that can be redone can be found in the output of the <code>history</code> command.</p>
@@ -613,7 +676,36 @@ Running <code>history</code> could give you the following output in the Graphica
 <p>To be certain which command you are actually redo-ing, first run the <code>history</code> command and examine the output.</p>
 </li>
 <li>
-<p>Only the commands that actually change the data in Alfred will be redo-able. Commands that perform read operations (such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command. (Coming in v1.4)</p>
+<p>Only the commands that actually change the data in Alfred will be redo-able. Commands that perform read operations (such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>redo</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-navigation"><a class="link" href="#command-navigation">4.11. Command Navigation</a></h3>
+<div class="paragraph">
+<p>Navigate to previous commands by using the up <kbd>&uparrow;</kbd> and down <kbd>&downarrow;</kbd> arrow keys</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Every time you execute a command, the command is saved in Alfred, so you can navigate to a previous command without re-typing the whole thing.</p>
+</li>
+<li>
+<p>Press up <kbd>&uparrow;</kbd> to navigate to the previous command.</p>
+</li>
+<li>
+<p>Press up <kbd>&downarrow;</kbd> to navigate to the next command.</p>
+</li>
+<li>
+<p>This is not a command you type into Alfred, and is mainly for convenience as it allows you to quickly re-use previously executed commands.</p>
 </li>
 </ul>
 </div>
@@ -621,9 +713,9 @@ Running <code>history</code> could give you the following output in the Graphica
 </div>
 </div>
 <div class="sect2">
-<h3 id="judging-and-leaderboard-features"><a class="link" href="#judging-and-leaderboard-features">3.11. Judging and Leaderboard Features</a></h3>
+<h3 id="judging-and-leaderboard-features"><a class="link" href="#judging-and-leaderboard-features">4.12. Judging and Leaderboard Features</a></h3>
 <div class="sect3">
-<h4 id="list-team-ranking-code-leaderboard-code"><a class="link" href="#list-team-ranking-code-leaderboard-code">3.11.1. List Team Ranking: <code>leaderboard</code></a></h4>
+<h4 id="list-team-ranking-code-leaderboard-code"><a class="link" href="#list-team-ranking-code-leaderboard-code">4.12.1. List Team Ranking: <code>leaderboard</code></a></h4>
 <div class="paragraph">
 <p>Use this command to display the ranking of the teams in the hackathon in descending order of their points.</p>
 </div>
@@ -638,9 +730,12 @@ Running <code>history</code> could give you the following output in the Graphica
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>Format: <code>leaderboard</code></p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="get-the-top-k-teams-code-gettop-number-code"><a class="link" href="#get-the-top-k-teams-code-gettop-number-code">3.11.2. Get the top k teams: <code>getTop NUMBER</code></a></h4>
+<h4 id="get-the-top-k-teams-code-gettop-number-code"><a class="link" href="#get-the-top-k-teams-code-gettop-number-code">4.12.2. Get the top k teams: <code>getTop NUMBER</code></a></h4>
 <div class="paragraph">
 <p>Use this command to list the top k teams in the leaderboard, where k is a number (NUMBER) which you specify.</p>
 </div>
@@ -652,19 +747,11 @@ Running <code>history</code> could give you the following output in the Graphica
 <p>This command will show you a cropped version of the leaderboard.</p>
 </li>
 <li>
-<p>Alfred&#8217;s UI will display a list of top "k" teams based on their current score.</p>
+<p>Alfred&#8217;s UI will display a list of top <code>NUMBER</code> teams based on their current score.</p>
 </li>
 <li>
-<p>If you input "k" as a number more than the number of teams in the Hackathon, Alfred will simply display all the teams in the Hackathon.</p>
+<p>If you input <code>NUMBER</code> as a number more than the number of teams in the Hackathon, Alfred will simply display all the teams in the Hackathon.</p>
 </li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
 <li>
 <p>If you input <code>NUMBER</code> as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon in descending order of their points.</p>
 </li>
@@ -672,16 +759,8 @@ Running <code>history</code> could give you the following output in the Graphica
 </div>
 </div>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>If you input <code>NUMBER</code> as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon in descending order of their points.</p>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p>Format: <code>getTop NUMBER</code></p>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -698,7 +777,7 @@ Running <code>history</code> could give you the following output in the Graphica
 </div>
 </div>
 <div class="sect3">
-<h4 id="add-points-code-score-add-team_id-points-code"><a class="link" href="#add-points-code-score-add-team_id-points-code">3.11.3. Add points: <code>score add TEAM_ID POINTS</code></a></h4>
+<h4 id="add-points-code-score-add-team_id-points-code"><a class="link" href="#add-points-code-score-add-team_id-points-code">4.12.3. Add points: <code>score add TEAM_ID POINTS</code></a></h4>
 <div class="paragraph">
 <p>Adds the value of POINTS to the current score of the team with ID TEAM_ID.</p>
 </div>
@@ -734,7 +813,7 @@ Running <code>history</code> could give you the following output in the Graphica
 </div>
 </div>
 <div class="sect3">
-<h4 id="subtract-points-code-score-sub-team_id-new_points-code"><a class="link" href="#subtract-points-code-score-sub-team_id-new_points-code">3.11.4. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></h4>
+<h4 id="subtract-points-code-score-sub-team_id-new_points-code"><a class="link" href="#subtract-points-code-score-sub-team_id-new_points-code">4.12.4. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></h4>
 <div class="paragraph">
 <p>Deducts the value of POINTS from the current score of the team with ID TEAM_ID.</p>
 </div>
@@ -767,7 +846,7 @@ Running <code>history</code> could give you the following output in the Graphica
 </div>
 </div>
 <div class="sect3">
-<h4 id="set-points-code-score-set-team_id-new_points-code"><a class="link" href="#set-points-code-score-set-team_id-new_points-code">3.11.5. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></h4>
+<h4 id="set-points-code-score-set-team_id-new_points-code"><a class="link" href="#set-points-code-score-set-team_id-new_points-code">4.12.5. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></h4>
 <div class="paragraph">
 <p>Sets the score of the team with ID TEAM_ID to a new score NEW_POINTS, regardless of the team&#8217;s current score.</p>
 </div>
@@ -804,7 +883,7 @@ Running <code>history</code> could give you the following output in the Graphica
 </div>
 </div>
 <div class="sect2">
-<h3 id="bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code"><a class="link" href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">3.12. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a></h3>
+<h3 id="bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code"><a class="link" href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">4.13. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a></h3>
 <div class="paragraph">
 <p>You may import multiple entities at once into Alfred through the specification of a CSV file.<br>
 If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with all of the lines that were not able to be loaded.</p>
@@ -823,17 +902,17 @@ If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with a
 </ul>
 </div>
 <div class="paragraph">
-<p>Example usage of error file is shown at the end of <a href="#csv-file-formatting">Section 3.12.1, &#8220;CSV File Formatting&#8221;</a>.</p>
+<p>Example usage of error file is shown at the end of <a href="#csv-file-formatting">Section 4.13.1, &#8220;CSV File Formatting&#8221;</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="csv-file-formatting"><a class="link" href="#csv-file-formatting">3.12.1. CSV File Formatting</a></h4>
+<h4 id="csv-file-formatting"><a class="link" href="#csv-file-formatting">4.13.1. CSV File Formatting</a></h4>
 <div class="paragraph">
 <p>In order for the contents of the CSV file to be correctly loaded into Alfred, the file has to be in the correct format.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><code>EntityType</code> - single capital letter representing the entity commandType</p>
+<p><code>EntityType</code> - single capital letter representing the entity type</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1057,7 +1136,7 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code"><a class="link" href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">3.13. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></h3>
+<h3 id="export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code"><a class="link" href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">4.14. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></h3>
 <div class="paragraph">
 <p>You may export Alfred data to an external CSV file. If the desired CSV file path is left empty, Alfred will create a CSV file at the default location (<code>./AlfredData/Alfred_Data.csv</code>).</p>
 </div>
@@ -1076,17 +1155,7 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 <div class="sect2">
-<h3 id="help-command-coming-in-v1-3"><a class="link" href="#help-command-coming-in-v1-3">3.14. Help command (Coming in v1.3)</a></h3>
-<div class="paragraph">
-<p>The help command will list down all the commands you need to use this
-application properly!</p>
-</div>
-<div class="paragraph">
-<p>Simply run <code>help</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="seating-code-locate-participant-team-code-coming-in-v2-0"><a class="link" href="#seating-code-locate-participant-team-code-coming-in-v2-0">3.15. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></h3>
+<h3 id="seating-code-locate-participant-team-code-coming-in-v2-0"><a class="link" href="#seating-code-locate-participant-team-code-coming-in-v2-0">4.15. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></h3>
 <div class="paragraph">
 <p>Find where a particular participant or team is seated.</p>
 </div>
@@ -1105,79 +1174,79 @@ application properly!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="swag-coming-in-v2-0"><a class="link" href="#swag-coming-in-v2-0">3.16. Swag (Coming in v2.0)</a></h3>
+<h3 id="swag-coming-in-v2-0"><a class="link" href="#swag-coming-in-v2-0">4.16. Swag (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">3.16.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
+<h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">4.16.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Add swag to inventory
 Examples: <code>add swag Android Plushie 5</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="track-inventory-of-available-swags-code-list-swag-code"><a class="link" href="#track-inventory-of-available-swags-code-list-swag-code">3.16.2. Track inventory of available swags: <code>list swag</code></a></h4>
+<h4 id="track-inventory-of-available-swags-code-list-swag-code"><a class="link" href="#track-inventory-of-available-swags-code-list-swag-code">4.16.2. Track inventory of available swags: <code>list swag</code></a></h4>
 <div class="paragraph">
 <p>List the currently available swag</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="schedule-coming-in-v2-0"><a class="link" href="#schedule-coming-in-v2-0">3.17. Schedule (Coming in v2.0)</a></h3>
+<h3 id="schedule-coming-in-v2-0"><a class="link" href="#schedule-coming-in-v2-0">4.17. Schedule (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-schedule-code-addschedule-time-team_id-mentor_id-code"><a class="link" href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">3.17.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></h4>
+<h4 id="add-schedule-code-addschedule-time-team_id-mentor_id-code"><a class="link" href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">4.17.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></h4>
 <div class="paragraph">
 <p>Add a schedule for a team</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code"><a class="link" href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">3.17.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></h4>
+<h4 id="update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code"><a class="link" href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">4.17.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></h4>
 <div class="paragraph">
 <p>Update a schedule for a team</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="delete-schedule-code-deleteschedule-schedule_id-code"><a class="link" href="#delete-schedule-code-deleteschedule-schedule_id-code">3.17.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></h4>
+<h4 id="delete-schedule-code-deleteschedule-schedule_id-code"><a class="link" href="#delete-schedule-code-deleteschedule-schedule_id-code">4.17.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></h4>
 <div class="paragraph">
 <p>Delete a Schedule for a Team</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="food-coming-in-v2-0"><a class="link" href="#food-coming-in-v2-0">3.18. Food (Coming in v2.0)</a></h3>
+<h3 id="food-coming-in-v2-0"><a class="link" href="#food-coming-in-v2-0">4.18. Food (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code"><a class="link" href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">3.18.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+<h4 id="add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code"><a class="link" href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">4.18.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Add a Food Company and it associated food item inventory</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mark-food-as-received-code-receivefood-company_name-inventory-quantity-code"><a class="link" href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">3.18.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+<h4 id="mark-food-as-received-code-receivefood-company_name-inventory-quantity-code"><a class="link" href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">4.18.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Mark the inventory as received</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-food-inventory-code-list-food-code"><a class="link" href="#list-food-inventory-code-list-food-code">3.18.3. List Food Inventory: <code>list food</code></a></h4>
+<h4 id="list-food-inventory-code-list-food-code"><a class="link" href="#list-food-inventory-code-list-food-code">4.18.3. List Food Inventory: <code>list food</code></a></h4>
 <div class="paragraph">
 <p>List the food inventory and its current status (e.g. delivering, received)</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="waitlist-coming-in-v2-0"><a class="link" href="#waitlist-coming-in-v2-0">3.19. Waitlist (Coming in v2.0)</a></h3>
+<h3 id="waitlist-coming-in-v2-0"><a class="link" href="#waitlist-coming-in-v2-0">4.19. Waitlist (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-to-waitlist-code-addtowaitlist-participant_id-code"><a class="link" href="#add-to-waitlist-code-addtowaitlist-participant_id-code">3.19.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></h4>
+<h4 id="add-to-waitlist-code-addtowaitlist-participant_id-code"><a class="link" href="#add-to-waitlist-code-addtowaitlist-participant_id-code">4.19.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></h4>
 <div class="paragraph">
 <p>Add a participant to a waitlist when the number of participants exceeds a stipulated capacity.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="remove-from-waitlist-code-removefromwaitlist-participant_id-code"><a class="link" href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">3.19.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></h4>
+<h4 id="remove-from-waitlist-code-removefromwaitlist-participant_id-code"><a class="link" href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">4.19.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></h4>
 <div class="paragraph">
 <p>Remove a participant from the waitlist.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-by-registration-time-code-listwaitlist-code"><a class="link" href="#list-by-registration-time-code-listwaitlist-code">3.19.3. List by Registration Time: <code>listWaitList</code></a></h4>
+<h4 id="list-by-registration-time-code-listwaitlist-code"><a class="link" href="#list-by-registration-time-code-listwaitlist-code">4.19.3. List by Registration Time: <code>listWaitList</code></a></h4>
 <div class="paragraph">
 <p>Go through the waitlist and list the participants in the waitlist in ascending orger of registration time.</p>
 </div>
@@ -1197,16 +1266,16 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">5. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Alfred folder.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">6. Command Summary</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -1238,7 +1307,7 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List all Entities</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Shows a list of all the entities corresponding to the entity commandType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows a list of all the entities corresponding to the entity type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>list {mentors/teams/participants}</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Participant:</strong> <code>list participants</code> <strong>Team:</strong> <code>list teams</code> <strong>Mentor:</strong> <code>list mentors</code></p></td>
 </tr>
@@ -1253,6 +1322,24 @@ Examples: <code>add swag Android Plushie 5</code></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Searches for Entities by their name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>find {mentor/team/participant} NAME</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Participant:</strong> <code>find participant n/John Doe</code> <strong>Team:</strong> <code>find team n/FutureHackathonWinner</code> <strong>Mentor:</strong> <code>find mentor n/Joshua Wong</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List Undo/Redo-able Commands</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays the Undo/Redo-able Commands in the "History" section of the GUI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">`history</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo Previous Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undoes the previously executed command. Look at output of <code>history</code> to see which command can be re-done.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redo Next Command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Redoes the next command. Look at output of <code>history</code> to see which command can be re-done.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List Team rankings</p></td>
@@ -1347,4 +1434,4 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 06:09:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-10-31 09:10:16 UTC</div></div></div></body></html>
