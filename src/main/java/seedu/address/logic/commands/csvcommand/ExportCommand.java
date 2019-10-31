@@ -22,14 +22,13 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export"; // or any other suggestions
     public static final String MESSAGE_SUCCESS = "Exported all data to %s"; // %s -> file name
-    public static final String MESSAGE_IO_EXCEPTION = "An IOException was caught: %s"; // %s -> exception message
+    public static final String MESSAGE_IO_EXCEPTION =
+            "Something went wrong while accessing your file! Please try again...";
     public static final String MESSAGE_INVALID_PATH_EXCEPTION =
             "Invalid file path: %s - Exported all data to %s"; // %s -> this.csvFilePath
     public static final String MESSAGE_EMPTY_DATA = "No data to export. File was not created.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": exports Alfred data to a CSV file. "
-            + "Parameters: "
-            + "[ENTITY] "
-            + PREFIX_FILE_PATH + "[FILE_PATH]\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": exports Alfred data to a CSV file.\n"
+            + "Format: " + COMMAND_WORD + " [ENTITY] [" + PREFIX_FILE_PATH + "FILE_PATH]\n"
             + "\tExample 1: " + COMMAND_WORD
             + " (Creates AlfredData/Alfred_Entity_List.csv at current working directory)\n"
             + "\tExample 2 (Windows): " + COMMAND_WORD + " " + PREFIX_FILE_PATH + "C:/Users/USER"
@@ -64,8 +63,10 @@ public class ExportCommand extends Command {
             File csvFile = this.csvFilePath.toFile();
             FileUtil.createIfMissing(this.csvFilePath);
             CsvUtil.writeToCsv(csvFile, model);
+            model.updateHistory(this);
+            model.recordCommandExecution(this.getCommandInputString());
         } catch (IOException ioe) {
-            throw new CommandException(String.format(MESSAGE_IO_EXCEPTION, ioe.toString()));
+            throw new CommandException(MESSAGE_IO_EXCEPTION);
         }
         return new CommandResult(this.messageSuccess);
     }

@@ -12,14 +12,15 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
+import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.logic.commands.Command;
@@ -28,6 +29,7 @@ import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
@@ -56,6 +58,7 @@ public class ModelManager implements Model {
     // Also will have to change the relevant attributes to final.
     private AlfredStorage storage = null;
     private ModelHistory history = null;
+    private CommandHistory commandHistory = null;
     private AddressBook addressBook = null;
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons = null;
@@ -85,6 +88,7 @@ public class ModelManager implements Model {
         // TODO: Remove: Currently it is here to make tests pass.
         this.addressBook = new AddressBook();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.commandHistory = new CommandHistoryManager();
     }
 
     /**
@@ -100,9 +104,9 @@ public class ModelManager implements Model {
             } else {
                 this.participantList = storageParticipantList.get();
                 int largestIdUsed = participantList.list().stream()
-                        .map(participant -> ((Entity) participant).getId().getNumber())
+                        .map(participant -> participant.getId().getNumber())
                         .max(Integer::compare).orElse(0);
-                participantList.setLastUsedId(largestIdUsed);
+                ParticipantList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
             logger.warning("Initialising new ParticipantList. "
@@ -117,9 +121,9 @@ public class ModelManager implements Model {
             } else {
                 this.mentorList = storageMentorList.get();
                 int largestIdUsed = mentorList.list().stream()
-                        .map(mentor -> ((Entity) mentor).getId().getNumber())
+                        .map(mentor -> mentor.getId().getNumber())
                         .max(Integer::compare).orElse(0);
-                mentorList.setLastUsedId(largestIdUsed);
+                MentorList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
             logger.warning("Initialising new MentorList. "
@@ -134,9 +138,9 @@ public class ModelManager implements Model {
             } else {
                 this.teamList = storageTeamList.get();
                 int largestIdUsed = teamList.list().stream()
-                        .map(team -> ((Entity) team).getId().getNumber())
+                        .map(team -> team.getId().getNumber())
                         .max(Integer::compare).orElse(0);
-                teamList.setLastUsedId(largestIdUsed);
+                TeamList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
             logger.warning("Initialising new TeamList. "
@@ -159,8 +163,8 @@ public class ModelManager implements Model {
 
         try {
             this.history = new ModelHistoryManager(this.participantList, ParticipantList.getLastUsedId(),
-                    this.mentorList, MentorList.getLastUsedId(),
-                    this.teamList, TeamList.getLastUsedId());
+                                                   this.mentorList, MentorList.getLastUsedId(),
+                                                   this.teamList, TeamList.getLastUsedId());
         } catch (AlfredModelHistoryException e) {
             logger.severe("Unable to initialise ModelHistoryManager.");
         }
@@ -215,11 +219,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
-    }
-
-    @Override
     public Path getParticipantListFilePath() {
         return userPrefs.getParticipantListFilePath();
     }
@@ -232,12 +231,6 @@ public class ModelManager implements Model {
     @Override
     public Path getMentorListFilePath() {
         return userPrefs.getMentorListFilePath();
-    }
-
-    @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
     //========== EntityListMethods ===============
@@ -440,6 +433,63 @@ public class ModelManager implements Model {
         this.validateNewTeamObject(updatedTeam);
         this.teamList.update(teamId, updatedTeam);
         this.saveList(PrefixType.T);
+    }
+
+    /**
+     * Updates the given team's score with the given score.
+     *
+     * @param team the team who's score is to be updated.
+     * @param score the score to which the team's score will be updated.
+     * @throws AlfredException if the update fails.
+     */
+    public void updateTeamScore(Team team, Score score) throws AlfredException {
+        team.setScore(score);
+        updateTeam(team.getId(), team);
+    }
+
+    /**
+     * Adds to the given team's score the given score.
+     *
+     * @param team the team who's score is to be added to.
+     * @param score the score by which the team's score will be increased.
+     * @throws AlfredException if the update fails.
+     */
+    public void addTeamScore(Team team, Score score) throws AlfredException {
+        int currentScore = Integer.parseInt(team.getScore().toString());
+        int scoreToAdd = Integer.parseInt(score.toString());
+
+        if (currentScore == Score.MAX_SCORE) {
+            throw new IllegalValueException(Score.MAX_SCORE_MESSAGE);
+        } else if (currentScore + scoreToAdd > 100) {
+            team.setScore(new Score(100));
+        } else {
+            Score newScore = new Score(currentScore + scoreToAdd);
+            team.setScore(newScore);
+        }
+        updateTeam(team.getId(), team);
+    }
+
+    /**
+     * Subtracts the given score from the given team's current score.
+     *
+     * @param team the team who's score is to be subtracted from.
+     * @param score the score which will be subtracted from the team's current score.
+     * @throws AlfredException if the update fails.
+     */
+    @Override
+    public void subtractTeamScore(Team team, Score score) throws AlfredException {
+        int currentScore = Integer.parseInt(team.getScore().toString());
+        int scoreToSub = Integer.parseInt(score.toString());
+
+        if (currentScore == Score.MIN_SCORE) {
+            throw new IllegalValueException(Score.MIN_SCORE_MESSAGE);
+        } else if (currentScore - scoreToSub < 0) {
+            team.setScore(new Score(0));
+        } else {
+            Score newScore = new Score(currentScore - scoreToSub);
+            team.setScore(newScore);
+        }
+        updateTeam(team.getId(), team);
     }
 
     /**
@@ -693,77 +743,28 @@ public class ModelManager implements Model {
                 .filter(predicate).collect(Collectors.toList());
     }
 
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
-    }
-
-
-    // =========== Filtered Person List Accessors =============================================================
-
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Sets the predicate to show detailed information of {@code entity}.
+     *
+     * @param entity {@code Entity} to view.
      */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        // short circuit if same object
-        if (obj == this) {
-            return true;
+    public void viewEntity(Entity entity) {
+        PrefixType entityType = entity.getPrefix();
+        Predicate<Entity> predicate = Predicates.viewSpecifiedEntity(entity);
+        switch (entityType) {
+        case M:
+            this.filteredMentorList.setPredicate(predicate);
+            return;
+        case P:
+            this.filteredParticipantList.setPredicate(predicate);
+            return;
+        case T:
+            this.filteredTeamList.setPredicate(predicate);
+            return;
+        default:
+            // should never reach here
+            throw new RuntimeException();
         }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
     }
 
     //========== ModelHistory Methods ===============
@@ -865,4 +866,17 @@ public class ModelManager implements Model {
     public ArrayList<CommandRecord> getCommandHistory() {
         return this.history.getCommandHistory();
     }
+
+    public void recordCommandExecution(String commandInputString) {
+        this.commandHistory.saveCommandExecutionString(commandInputString);
+    }
+
+    public String getPrevCommandString() {
+        return this.commandHistory.getPrevCommandString();
+    }
+
+    public String getNextCommandString() {
+        return this.commandHistory.getNextCommandString();
+    }
+
 }

@@ -10,11 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -34,7 +34,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-
     private Stage primaryStage;
     private Logic logic;
 
@@ -44,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
-
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -73,7 +72,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private JFXButton historyButton;
 
-
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
@@ -86,10 +84,8 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-
         helpWindow = new HelpWindow();
     }
-
 
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -145,8 +141,21 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getTeamListFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        setCommandNavigationHandler();
+    }
+
+    private void setCommandNavigationHandler() {
+        this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.UP) {
+                commandBox.setTextField(logic.getPrevCommandString());
+            }
+
+            if (event.getCode() == KeyCode.DOWN) {
+                commandBox.setTextField(logic.getNextCommandString());
+            }
+        });
     }
 
     /**
@@ -312,25 +321,19 @@ public class MainWindow extends UiPart<Stage> {
             case M:
                 this.fireButton(mentorsButton);
                 break;
-
             case T:
                 this.fireButton(teamsButton);
                 break;
-
             case P:
                 this.fireButton(participantsButton);
                 break;
-
             case H:
                 this.fireButton(historyButton);
                 break;
 
-
             default:
                 logger.info("The command does not edit any of the list of Entity");
                 break;
-
-
             }
             return commandResult;
         } catch (CommandException | ParseException | AlfredModelHistoryException e) {

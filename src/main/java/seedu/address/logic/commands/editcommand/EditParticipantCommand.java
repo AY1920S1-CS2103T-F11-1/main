@@ -60,11 +60,30 @@ public class EditParticipantCommand extends EditCommand {
         try {
             model.updateParticipant(this.id, editedParticipant);
             model.updateHistory(this);
+            model.recordCommandExecution(this.getCommandInputString());
             return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS,
                     editedParticipant.toString()), CommandType.P);
         } catch (AlfredException e) {
             throw new CommandException(e.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditParticipantCommand)) {
+            return false;
+        }
+
+        // state check
+        EditParticipantCommand e = (EditParticipantCommand) other;
+        return id.equals(e.id)
+                && editParticipantDescriptor.equals(e.editParticipantDescriptor);
     }
 
     /**
