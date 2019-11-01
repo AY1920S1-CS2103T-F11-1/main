@@ -122,6 +122,11 @@ Use this command to add a new entity for Alfred to keep track of. +
 ****
 * Creates an Entity as specified by you. Each Entity object will have a unique ID automatically assigned to it.
 * As of version 1.1, you must provide all the fields. There are no optional fields.
+* Note that for the Specialisation and Subject fields, only the following values/categories are valid:
+- Environmental
+- Social
+- Health
+- Education
 ****
 
 ==== Adding a Participant: `add participant PARAMETERS`
@@ -146,32 +151,32 @@ Use this command to add a new Mentor to Alfred to keep track of for your Hackath
 ****
 * Mentors have the fields "Name", "Phone number" and "Email address" which you must provide.
 * Mentors also have a field called "Organization", which refers to the organization for which they work.
-* Mentors also have a field called "Specialisation", which refers which is the field of work they specialise in. The Specialisation must be chosen from the predetermined list of specialisations given in Section (some number).
+* Mentors also have a field called "Specialisation", which refers to the field of work they specialise in. The Specialisation must be chosen from the predetermined list of specialisations, as described in <<Adding an Entity: `add {participant/mentor/team}`>>.
 ****
 
 Format: `add mentor  n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS o/ORGANIZATION s/SPECIALISATION`
 
 Examples:
 
-* `add mentor n/Professor Superman p/91236549 e/clarkkent@gmail.com o/Daily Planet s/Artificial Intelligence`
+* `add mentor n/Professor Superman p/91236549 e/clarkkent@gmail.com o/Daily Planet s/Social`
 
-* `add mentor n/Doctor Batman p/91236549 e/bruce@gmail.com o/Google s/Augmented Reality`
+* `add mentor n/Doctor Batman p/91236549 e/bruce@gmail.com o/Google s/Environmental`
 
 ==== Adding a Team: `add team PARAMETERS`
 
 Use this command to add a new Team to Alfred to keep track of for your Hackathon.
 ****
 * Teams have the fields "Name", "Project name" and "Table Number" which you must provide.
-* Teams also have a field called "Subject", which refers the area the team's project focuses on, and must be chosen from the predetermined list of subjects given in Section (some number).
+* Teams also have a field called "Subject", which refers the area the team's project focuses on, and must be chosen from the predetermined list of subjects described in <<Adding an Entity: `add {participant/mentor/team}`>>.
 ****
 
-Format: `add team n/NAME s/SUBJECT pn/PROJECT_NAME pt/PROJECT_TYPE l/TABLE_NUMBER`
+Format: `add team n/NAME s/SUBJECT pn/PROJECT_NAME l/TABLE_NUMBER`
 
 Examples:
 
-* `add team n/Team01 s/Artificial Intelligence pn/EmotionTrain pt/Public Welfare l/12`
+* `add team n/Team01 s/Social pn/EmotionTrain l/12`
 
-* `add team n/HackathonWinners4Sure s/Augmented Reality pn/Path-ify pt/Navigation l/23`
+* `add team n/HackathonWinners4Sure s/Environmental pn/Path-ify l/3`
 
 === Updating an Entity: `edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]`
 
@@ -186,7 +191,7 @@ Edits an entity based on the parameter values you supply. Use this command in ca
 
 Examples:
 
-* `edit mentor M-1 n/NewMentorName `
+* `edit mentor M-1 n/NewMentorName`
 
 * `edit team T-1 n/NewTeamName pn/New Project Name`
 
@@ -213,6 +218,7 @@ Deletes an Entity, so that Alfred will no longer keep track of that Entity.
 
 ****
 * Deletes the Entity with the ID that you specify.
+* Note that when you delete a Team, all the participants that are part of that team will also be deleted as well.
 ****
 
 Examples:
@@ -357,19 +363,6 @@ Redoes the previous command you executed.
 
 Format: `redo`
 
-=== Command Navigation
-Navigate to previous commands by using the up kbd:[&uparrow;] and down kbd:[&downarrow;] arrow keys
-
-****
-* Every time you execute a command, the command is saved in Alfred, so you can navigate to a previous command without re-typing the whole thing.
-* Press up kbd:[&uparrow;] to navigate to the previous command.
-* Press down kbd:[&downarrow;] to navigate to the next command.
-* Unlike most of the other features in Alfred, this is not a command you type into Alfred's command input box. This is a keyboard shortcut that is mainly for your convenience as it allows you to quickly re-use previously executed commands.
-* Note that Alfred's command input box must be in focus (the cursor is active in the command input box) for the keyboard shortcuts for this feature to work
-****
-
-=== Judging and Leaderboard Features
-
 ==== List Team Ranking: `leaderboard`
 Use this command to display the ranking of the teams in the hackathon in descending order of their points.
 
@@ -411,8 +404,8 @@ where `METHOD_N` is one of the following currently available tie-break methods:
 
 * `moreParticipants`: teams with more participants are win the tie.
 * `lessParticipants`: teams with lesser participants are win the tie.
-* `higherID`: teams registered more recently (hence the highest ID) win the tie.
-* `lowerID`: teams registered earlier (hence the lowest ID) win the tie.
+* `higherId`: teams registered more recently (hence the highest ID) win the tie.
+* `lowerId`: teams registered earlier (hence the lowest ID) win the tie.
 * `random`: in case all methods used yield no distinct winner, `random` can be used as a method of last resort to break a tie in favour of a randomly chosen team.
 
 ****
