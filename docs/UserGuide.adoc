@@ -61,7 +61,7 @@ text that you enter into Alfred. The command text that you should enter at the c
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `alfred.jar` link:{releaseURL}[here].
 .  Copy the file to the folder you want to use as the home folder for Alfred.
-.  Double-click the file to start the app. Alternatively, if you use a Mac, type the command `java -jar alfred.jar`
+.  Double-click the file to start the app. Alternatively, if you use a Mac, type the command `java -jar alfred.jar` or replace `alfred.jar` with the name of the jar file downloaded.
 on terminal in the jar file's directory to open and start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
