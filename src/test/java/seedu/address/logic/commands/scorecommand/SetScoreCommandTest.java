@@ -18,15 +18,15 @@ import seedu.address.testutil.TeamBuilder;
 
 class SetScoreCommandTest {
 
-    public static final Id validTeamId = new Id(PrefixType.T, 1);
-    public static final Score validScore = new Score(20);
+    public static final Id VALID_TEAM_ID = new Id(PrefixType.T, 1);
+    public static final Score VALID_SCORE = new Score(20);
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
         // Null team id inputted.
-        assertThrows(NullPointerException.class, () -> new SetScoreCommand(null, validScore));
+        assertThrows(NullPointerException.class, () -> new SetScoreCommand(null, VALID_SCORE));
         // Null score inputted.
-        assertThrows(NullPointerException.class, () -> new SetScoreCommand(validTeamId, null));
+        assertThrows(NullPointerException.class, () -> new SetScoreCommand(VALID_TEAM_ID, null));
         // Both inputs are null.
         assertThrows(NullPointerException.class, () -> new SetScoreCommand(null, null));
     }
@@ -36,14 +36,14 @@ class SetScoreCommandTest {
         Model model = new ModelManagerStub();
         Team teamToScore = new TeamBuilder().build();
         model.addTeam(teamToScore);
-        SetScoreCommand setScoreCommand = new SetScoreCommand(validTeamId, validScore);
+        SetScoreCommand setScoreCommand = new SetScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
         String expectedMessage = String.format(SetScoreCommand.MESSAGE_SCORE_TEAM_SUCCESS,
-                teamToScore.getName().toString(), validScore.toString());
+                teamToScore.getName().toString(), VALID_SCORE.toString());
 
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamToScore);
-        expectedModel.updateTeamScore(teamToScore, validScore);
+        expectedModel.updateTeamScore(teamToScore, VALID_SCORE);
 
         assertCommandSuccess(setScoreCommand, model, expectedMessage, expectedModel);
     }
@@ -51,7 +51,7 @@ class SetScoreCommandTest {
     @Test
     public void execute_nonExistentTeamId_commandFailure() {
         Model model = new ModelManagerStub(); // empty model
-        SetScoreCommand setScoreCommand = new SetScoreCommand(validTeamId, validScore);
+        SetScoreCommand setScoreCommand = new SetScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
         assertCommandFailure(setScoreCommand, model, MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
     }

@@ -18,15 +18,15 @@ import seedu.address.testutil.TeamBuilder;
 
 class SubtractScoreCommandTest {
 
-    public static final Id validTeamId = new Id(PrefixType.T, 1);
-    public static final Score validScore = new Score(20);
+    public static final Id VALID_TEAM_ID = new Id(PrefixType.T, 1);
+    public static final Score VALID_SCORE = new Score(20);
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
         // Null team id inputted.
-        assertThrows(NullPointerException.class, () -> new SubtractScoreCommand(null, validScore));
+        assertThrows(NullPointerException.class, () -> new SubtractScoreCommand(null, VALID_SCORE));
         // Null score inputted.
-        assertThrows(NullPointerException.class, () -> new SubtractScoreCommand(validTeamId, null));
+        assertThrows(NullPointerException.class, () -> new SubtractScoreCommand(VALID_TEAM_ID, null));
         // Both inputs are null.
         assertThrows(NullPointerException.class, () -> new SubtractScoreCommand(null, null));
     }
@@ -36,14 +36,14 @@ class SubtractScoreCommandTest {
         Model model = new ModelManagerStub();
         Team teamToScore = new TeamBuilder().build();
         model.addTeam(teamToScore);
-        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(validTeamId, validScore);
+        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
         String expectedMessage = String.format(SubtractScoreCommand.MESSAGE_SCORE_TEAM_SUCCESS,
-                validScore.toString(), teamToScore.getName().toString());
+                VALID_SCORE.toString(), teamToScore.getName().toString());
 
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamToScore);
-        expectedModel.addTeamScore(teamToScore, validScore);
+        expectedModel.addTeamScore(teamToScore, VALID_SCORE);
 
         assertCommandSuccess(subtractScoreCommand, model, expectedMessage, expectedModel);
     }
@@ -51,7 +51,7 @@ class SubtractScoreCommandTest {
     @Test
     public void execute_nonExistentTeamId_commandFailure() {
         Model model = new ModelManagerStub(); // empty model
-        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(validTeamId, validScore);
+        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
         assertCommandFailure(subtractScoreCommand, model, MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
     }
@@ -62,12 +62,12 @@ class SubtractScoreCommandTest {
         Team teamToScore = new TeamBuilder().withScore(5).build();
         Team teamWithMinScore = new TeamBuilder().withScore(0).build();
         model.addTeam(teamToScore);
-        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(teamToScore.getId(), validScore);
+        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(teamToScore.getId(), VALID_SCORE);
 
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamWithMinScore);
         String expectedMessage = String.format(SubtractScoreCommand.MESSAGE_SCORE_TEAM_SUCCESS,
-                validScore.toString(), teamToScore.getName().toString());
+                VALID_SCORE.toString(), teamToScore.getName().toString());
 
         assertCommandSuccess(subtractScoreCommand, model, expectedMessage, expectedModel);
     }
@@ -78,7 +78,7 @@ class SubtractScoreCommandTest {
         Team teamToScore = new TeamBuilder().withScore(0).build();
         Team teamWithMinScore = new TeamBuilder().withScore(0).build();
         model.addTeam(teamToScore);
-        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(teamToScore.getId(), validScore);
+        SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(teamToScore.getId(), VALID_SCORE);
 
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamWithMinScore);

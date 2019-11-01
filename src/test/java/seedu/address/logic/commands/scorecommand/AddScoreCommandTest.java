@@ -15,19 +15,18 @@ import seedu.address.model.entity.Score;
 import seedu.address.model.entity.Team;
 import seedu.address.stub.ModelManagerStub;
 import seedu.address.testutil.TeamBuilder;
-import seedu.address.testutil.TeamUtil;
 
 class AddScoreCommandTest {
 
-    public static final Id validTeamId = new Id(PrefixType.T, 1);
-    public static final Score validScore = new Score(20);
+    public static final Id VALID_TEAM_ID = new Id(PrefixType.T, 1);
+    public static final Score VALID_SCORE = new Score(20);
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
         // Null team id inputted.
-        assertThrows(NullPointerException.class, () -> new AddScoreCommand(null, validScore));
+        assertThrows(NullPointerException.class, () -> new AddScoreCommand(null, VALID_SCORE));
         // Null score inputted.
-        assertThrows(NullPointerException.class, () -> new AddScoreCommand(validTeamId, null));
+        assertThrows(NullPointerException.class, () -> new AddScoreCommand(VALID_TEAM_ID, null));
         // Both inputs are null.
         assertThrows(NullPointerException.class, () -> new AddScoreCommand(null, null));
     }
@@ -37,14 +36,14 @@ class AddScoreCommandTest {
         Model model = new ModelManagerStub();
         Team teamToScore = new TeamBuilder().build();
         model.addTeam(teamToScore);
-        AddScoreCommand addScoreCommand = new AddScoreCommand(validTeamId, validScore);
+        AddScoreCommand addScoreCommand = new AddScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
         String expectedMessage = String.format(AddScoreCommand.MESSAGE_SCORE_TEAM_SUCCESS,
-                validScore.toString(), teamToScore.getName().toString());
+                VALID_SCORE.toString(), teamToScore.getName().toString());
 
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamToScore);
-        expectedModel.addTeamScore(teamToScore, validScore);
+        expectedModel.addTeamScore(teamToScore, VALID_SCORE);
 
         assertCommandSuccess(addScoreCommand, model, expectedMessage, expectedModel);
     }
@@ -52,7 +51,7 @@ class AddScoreCommandTest {
     @Test
     public void execute_nonExistentTeamId_commandFailure() {
         Model model = new ModelManagerStub(); // empty model
-        AddScoreCommand addScoreCommand = new AddScoreCommand(validTeamId, validScore);
+        AddScoreCommand addScoreCommand = new AddScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
         assertCommandFailure(addScoreCommand, model, MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
     }
@@ -63,12 +62,12 @@ class AddScoreCommandTest {
         Team teamToScore = new TeamBuilder().withScore(99).build();
         Team teamWithMaxScore = new TeamBuilder().withScore(100).build();
         model.addTeam(teamToScore);
-        AddScoreCommand addScoreCommand = new AddScoreCommand(teamToScore.getId(), validScore);
+        AddScoreCommand addScoreCommand = new AddScoreCommand(teamToScore.getId(), VALID_SCORE);
 
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamWithMaxScore);
         String expectedMessage = String.format(AddScoreCommand.MESSAGE_SCORE_TEAM_SUCCESS,
-                validScore.toString(), teamToScore.getName().toString());
+                VALID_SCORE.toString(), teamToScore.getName().toString());
 
         assertCommandSuccess(addScoreCommand, model, expectedMessage, expectedModel);
     }
@@ -79,7 +78,7 @@ class AddScoreCommandTest {
         Team teamToScore = new TeamBuilder().withScore(100).build();
         Team teamWithMaxScore = new TeamBuilder().withScore(100).build();
         model.addTeam(teamToScore);
-        AddScoreCommand addScoreCommand = new AddScoreCommand(teamToScore.getId(), validScore);
+        AddScoreCommand addScoreCommand = new AddScoreCommand(teamToScore.getId(), VALID_SCORE);
 
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamWithMaxScore);
