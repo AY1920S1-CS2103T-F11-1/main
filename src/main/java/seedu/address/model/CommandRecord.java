@@ -27,7 +27,7 @@ public class CommandRecord {
 
     public static CommandRecord getUndoEndPoint() {
         return new CommandRecord(null,
-                   "=============<< Cannot Undo Beyond This Point >>=============",
+                   "===============<< Cannot Undo Beyond This Point >>===============",
                                  CommandType.END);
     }
 
@@ -39,7 +39,7 @@ public class CommandRecord {
 
     public static CommandRecord getCurrentStatePoint() {
         return new CommandRecord(null,
-                   "=====================<< Current State >>=====================",
+                   "=======================<< Current State >>=======================",
                                  CommandType.CURR);
     }
 
