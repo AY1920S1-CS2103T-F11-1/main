@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
 

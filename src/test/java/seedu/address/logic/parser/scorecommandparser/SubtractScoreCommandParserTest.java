@@ -14,7 +14,7 @@ import seedu.address.model.entity.Score;
 
 class SubtractScoreCommandParserTest {
 
-    SubtractScoreCommandParser subtractScoreCommandParser = new SubtractScoreCommandParser();
+    private SubtractScoreCommandParser subtractScoreCommandParser = new SubtractScoreCommandParser();
 
     @Test
     void parse_incorrectUserInput_failure() {
@@ -48,5 +48,4 @@ class SubtractScoreCommandParserTest {
                 new SubtractScoreCommand(ID_THIRD_TEAM, SCORE_TWENTY));
 
     }
-
 }

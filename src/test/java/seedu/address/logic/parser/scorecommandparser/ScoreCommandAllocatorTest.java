@@ -16,10 +16,10 @@ import seedu.address.model.entity.Score;
 
 class ScoreCommandAllocatorTest {
 
-    private ScoreCommandAllocator scoreCommandAllocator = new ScoreCommandAllocator();
     private static final Id VALID_TEAM_ID = new Id(PrefixType.T, 2);
     private static final Score VALID_SCORE = new Score(45);
     private static final Score VALID_RESET_SCORE = new Score(0);
+    private ScoreCommandAllocator scoreCommandAllocator = new ScoreCommandAllocator();
 
     @Test
     void allocate_correctUserInput_success() {
@@ -49,5 +49,4 @@ class ScoreCommandAllocatorTest {
         assertAllocatorFailure(scoreCommandAllocator, "",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScoreCommand.MESSAGE_USAGE));
     }
-
 }

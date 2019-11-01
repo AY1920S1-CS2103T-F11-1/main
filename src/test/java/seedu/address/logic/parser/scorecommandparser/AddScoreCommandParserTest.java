@@ -14,7 +14,7 @@ import seedu.address.model.entity.Score;
 
 class AddScoreCommandParserTest {
 
-    AddScoreCommandParser addScoreCommandParser = new AddScoreCommandParser();
+    private AddScoreCommandParser addScoreCommandParser = new AddScoreCommandParser();
 
     @Test
     void parse_incorrectUserInput_failure() {

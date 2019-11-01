@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIds.ID_THIRD_TEAM;
 import static seedu.address.testutil.TypicalScores.RESET_SCORE;
-import static seedu.address.testutil.TypicalScores.SCORE_TWENTY;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,7 @@ import seedu.address.logic.commands.scorecommand.SetScoreCommand;
 
 class ResetScoreCommandParserTest {
 
-    ResetScoreCommandParser resetScoreCommandParser = new ResetScoreCommandParser();
+    private ResetScoreCommandParser resetScoreCommandParser = new ResetScoreCommandParser();
 
     @Test
     void parse_incorrectUserInput_failure() {
@@ -39,5 +38,4 @@ class ResetScoreCommandParserTest {
         assertParseSuccess(resetScoreCommandParser, " T-3 ",
                 new SetScoreCommand(ID_THIRD_TEAM, RESET_SCORE));
     }
-
 }
