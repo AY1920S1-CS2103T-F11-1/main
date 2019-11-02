@@ -52,6 +52,7 @@ import seedu.address.commons.core.LogsCenter;
  * Represents an AutoCompleteTextField that provide command suggestions as user types in command inputs.
  */
 public class AutoCompleteTextField extends TextField {
+    private SuggestionTemplates suggestionTemplates = new SuggestionTemplates();
     private final Logger logger = LogsCenter.getLogger(AutoCompleteTextField.class);
     /**
      * Represent the list of possible commands users can enter.
@@ -205,14 +206,13 @@ public class AutoCompleteTextField extends TextField {
 
         case "add participant":
             logger.info("Add participant template is shown on GUI");
-            return ADD_PARTICIPANT_TEMPLATE.getTextFlow();
+            return suggestionTemplates.addParticipantTemplate;
 
         case "add team":
-            return ADD_TEAM_TEMPLATE.getTextFlow();
+            return suggestionTemplates.addTeamTemplate;
 
         case "add mentor":
-            return ADD_MENTOR_TEMPLATE.getTextFlow();
-
+            return suggestionTemplates.addMentorTemplate;
         default:
             logger.info("ADD Command Template is null");
             return null;
@@ -223,13 +223,13 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "list participants":
-            return LIST_PARTICIPANT_TEMPLATE.getTextFlow();
+            return suggestionTemplates.listParticipantTemplate;
 
         case "list teams":
-            return LIST_TEAM_TEMPLATE.getTextFlow();
+            return suggestionTemplates.listTeamTemplate;
 
         case "list mentors":
-            return LIST_MENTOR_TEMPLATE.getTextFlow();
+            return suggestionTemplates.listMentorTemplate;
 
         default:
             logger.info("LIST Command Template is null");
@@ -242,13 +242,13 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "edit participant":
-            return EDIT_PARTICIPANT_TEMPLATE.getTextFlow();
+            return suggestionTemplates.editParticipantTemplate;
 
         case "edit team":
-            return EDIT_TEAM_TEMPLATE.getTextFlow();
+            return suggestionTemplates.editTeamTemplate;
 
         case "edit mentor":
-            return EDIT_MENTOR_TEMPLATE.getTextFlow();
+            return suggestionTemplates.editMentorTemplate;
 
         default:
             logger.info("EDIT Command Template is null");
@@ -261,10 +261,9 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "delete participant":
-            return DELETE_PARTICIPANT_TEMPLATE.getTextFlow();
-
+            return suggestionTemplates.deleteParticipantTemplate;
         case "delete team":
-            return DELETE_TEAM_TEMPLATE.getTextFlow();
+            return suggestionTemplates.listMentorTemplate;
 
         case "delete mentor":
             return DELETE_MENTOR_TEMPLATE.getTextFlow();
