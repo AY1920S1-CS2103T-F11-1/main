@@ -229,12 +229,12 @@ public class AlfredParserUtilTest {
     }
 
     @Test
-    void getFindType_noType_AND() throws ParseException {
+    void getFindType_noType_success() throws ParseException {
         assertEquals(FindCommandUtilEnum.AND, AlfredParserUtil.getFindType("heeehee"));
     }
 
     @Test
-    void getFindType_OR_OR() throws ParseException {
+    void getFindType_or_success() throws ParseException {
         assertEquals(FindCommandUtilEnum.OR, AlfredParserUtil.getFindType("OR haha"));
     }
 
@@ -260,7 +260,7 @@ public class AlfredParserUtilTest {
     }
 
     @Test
-    void getExcludeString_ANDinEXCLUDE_error() throws ParseException {
+    void getExcludeString_andInExclude_error() throws ParseException {
         assertThrows(ParseException.class, () -> AlfredParserUtil.getExcludeString(
                 "DAMITH EXCLUDE DAMITH AND damith is love"
         ));

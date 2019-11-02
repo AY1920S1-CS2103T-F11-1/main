@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.findcommand.FindTeamCommand;
