@@ -22,7 +22,8 @@ import seedu.address.model.entity.Team;
  */
 public class SubtractScoreCommand extends ScoreCommand {
 
-    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Subtracted %1$s points from %2$s's score";
+    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Subtracted %1$s points from %2$s's score"
+            + "\n%2$s's score is now: %3$s";;
     public static final String COMMAND_WORD = "score sub";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": subtracts the specified score from the specified team's current score. "
@@ -56,7 +57,7 @@ public class SubtractScoreCommand extends ScoreCommand {
         model.updateHistory(this);
         model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
-                score.toString(), teamToScore.getName().toString()), CommandType.T);
+                score, teamToScore.getName(), teamToScore.getScore()), CommandType.T);
     }
 
     @Override

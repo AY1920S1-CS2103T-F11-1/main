@@ -37,16 +37,16 @@ class AddScoreCommandTest {
     public void execute_validParameters_success() throws AlfredException {
         Model model = new ModelManagerStub();
         Team teamToScore = new TeamBuilder().build();
+        Team addedScoreTeam = new TeamBuilder()
+                .withScore(teamToScore.getScore().getScore() + VALID_SCORE.getScore()).build();
         model.addTeam(teamToScore);
         AddScoreCommand addScoreCommand = new AddScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
         String expectedMessage = String.format(AddScoreCommand.MESSAGE_SCORE_TEAM_SUCCESS,
-                VALID_SCORE.toString(), teamToScore.getName().toString());
+                VALID_SCORE, teamToScore.getName(), teamToScore.getScore().getScore() + VALID_SCORE.getScore());
 
         Model expectedModel = new ModelManagerStub();
-        expectedModel.addTeam(teamToScore);
-        expectedModel.addTeamScore(teamToScore, VALID_SCORE);
-
+        expectedModel.addTeam(addedScoreTeam);
         assertCommandSuccess(addScoreCommand, model, expectedMessage, expectedModel);
     }
 
@@ -69,7 +69,7 @@ class AddScoreCommandTest {
         Model expectedModel = new ModelManagerStub();
         expectedModel.addTeam(teamWithMaxScore);
         String expectedMessage = String.format(AddScoreCommand.MESSAGE_SCORE_TEAM_SUCCESS,
-                VALID_SCORE.toString(), teamToScore.getName().toString());
+                VALID_SCORE, teamToScore.getName(), teamWithMaxScore.getScore());
 
         assertCommandSuccess(addScoreCommand, model, expectedMessage, expectedModel);
     }

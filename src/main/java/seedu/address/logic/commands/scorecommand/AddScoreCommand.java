@@ -22,7 +22,8 @@ import seedu.address.model.entity.Team;
  */
 public class AddScoreCommand extends ScoreCommand {
 
-    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Added %1$s points to %2$s's score";
+    public static final String MESSAGE_SCORE_TEAM_SUCCESS = "Added %1$s points to %2$s's score"
+            + "\n%2$s's score is now: %3$s";
     public static final String COMMAND_WORD = "score add";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": adds the specified score to specified team's current score. "
@@ -56,7 +57,7 @@ public class AddScoreCommand extends ScoreCommand {
         model.updateHistory(this);
         model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
-                score.toString(), teamToScore.getName().toString()), CommandType.T);
+                score, teamToScore.getName().toString(), teamToScore.getScore()), CommandType.T);
     }
 
     @Override
