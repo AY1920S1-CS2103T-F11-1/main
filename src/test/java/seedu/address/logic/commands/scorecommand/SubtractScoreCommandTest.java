@@ -2,7 +2,7 @@ package seedu.address.logic.commands.scorecommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_NON_EXISTENT_TEAM;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -55,7 +55,7 @@ class SubtractScoreCommandTest {
         Model model = new ModelManagerStub(); // empty model
         SubtractScoreCommand subtractScoreCommand = new SubtractScoreCommand(VALID_TEAM_ID, VALID_SCORE);
 
-        assertCommandFailure(subtractScoreCommand, model, MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
+        assertCommandFailure(subtractScoreCommand, model, MESSAGE_NON_EXISTENT_TEAM);
     }
 
     @Test
