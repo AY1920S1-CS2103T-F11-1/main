@@ -58,6 +58,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Team> getSortedTeamList() {
+        return model.getSortedTeamList();
+    }
+
+    @Override
+    public ObservableList<Team> getTopKTeams() {
+        return model.getTopKTeams();
+    }
+
+    @Override
     public ObservableList<Mentor> getFilteredMentorList() {
         return model.getFilteredMentorList();
     }
@@ -67,7 +77,7 @@ public class LogicManager implements Logic {
         return model.getCommandHistory();
     }
 
-    //TODO: May update the three methods below to get Alfred file path instead
+    // TODO: May update the three methods below to get Alfred file path instead
     @Override
     public Path getParticipantListFilePath() {
         return model.getParticipantListFilePath();
@@ -93,11 +103,13 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
+    // TODO: Marked for deprecation
     @Override
     public List<String> getUndoCommandHistory() {
         return model.getUndoCommandHistory();
     }
 
+    // TODO: Marked for deprecation
     @Override
     public List<String> getRedoCommandHistory() {
         return model.getRedoCommandHistory();
@@ -122,5 +134,12 @@ public class LogicManager implements Logic {
         result.setHealthMentors(model.getHealthMentorSize());
 
         return result;
+
+    public String getPrevCommandString() {
+        return model.getPrevCommandString();
+    }
+
+    public String getNextCommandString() {
+        return model.getNextCommandString();
     }
 }

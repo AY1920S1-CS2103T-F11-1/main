@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
 
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -89,13 +91,17 @@ public interface Model {
      */
     ReadOnlyEntityList getMentorList();
 
-    /* Get the filtered lists */
+    /* Get the filtered and sorted lists */
 
     FilteredList<Participant> getFilteredParticipantList();
 
     FilteredList<Team> getFilteredTeamList();
 
     FilteredList<Mentor> getFilteredMentorList();
+
+    SortedList<Team> getSortedTeamList();
+
+    SortedList<Team> getTopKTeams();
 
     void resetFilteredLists();
 
@@ -123,7 +129,11 @@ public interface Model {
 
     void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException;
 
+    void removeParticipantFromTeam(Id teamId, Participant participant) throws AlfredException;
+
     void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException;
+
+    void removeMentorFromTeam(Id teamId, Mentor mentor) throws AlfredException;
 
     void updateTeam(Id teamId, Team team) throws AlfredException;
 
@@ -153,6 +163,14 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
+    void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators);
+
+    void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators);
+
+    void setTopK(int k, ArrayList<Comparator<Team>> comparators);
+
+    void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators);
+
     /* View command */
 
     /**
@@ -163,7 +181,8 @@ public interface Model {
     void viewEntity(Entity entity);
 
     /**
-     * Updates the history of entity states with the current state (after execution of Command c)
+     * Updates the history of entity states with the current state (after execution
+     * of Command c)
      */
     void updateHistory(Command c);
 
@@ -174,15 +193,17 @@ public interface Model {
     void undo() throws AlfredModelHistoryException;
 
     /**
-     * Redoes the effects of the previously executed command and returns the model to the state
-     * after the execution of the command.
+     * Redoes the effects of the previously executed command and returns the model
+     * to the state after the execution of the command.
      */
     void redo() throws AlfredModelHistoryException;
 
     /**
-     * Gets a String detailing the previously executed commands that can be undone by the user.
+     * Gets a String detailing the previously executed commands that can be undone
+     * by the user.
      *
-     * @return String representing the previously executed commands that can be undone by the user.
+     * @return String representing the previously executed commands that can be
+     *         undone by the user.
      */
     String getCommandHistoryString();
 
@@ -197,7 +218,8 @@ public interface Model {
     List<String> getRedoCommandHistory();
 
     /**
-     * Returns a List of CommandsRecords describing the commands that can be undone/redone
+     * Returns a List of CommandsRecords describing the commands that can be
+     * undone/redone
      *
      * @throws AlfredModelHistoryException
      */
@@ -278,5 +300,24 @@ public interface Model {
      *
      * @return number Number of Mentors
      */
-    long getHealthMentorSize();
+    long getHealthMentorSize();*
+
+    Records the
+    execution of
+    the command.
+    This is for
+    the Command
+    Navigation feature.*/
+
+    void recordCommandExecution(String commandInputString);
+
+    /**
+     * Gets the string of the previous command executed.
+     */
+    String getPrevCommandString();
+
+    /**
+     * Gets the string of the next command executed.
+     */
+    String getNextCommandString();
 }

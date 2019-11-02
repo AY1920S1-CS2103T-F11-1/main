@@ -23,10 +23,11 @@ import seedu.address.model.entity.Team;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     * 
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException, AlfredModelHistoryException;
 
@@ -38,6 +39,12 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of Mentors */
     ObservableList<Mentor> getFilteredMentorList();
+
+    /** Returns an unmodifiable view of the sorted list of Teams */
+    ObservableList<Team> getSortedTeamList();
+
+    /** Returns an unmodifiable view of the sorted list of the top K Teams */
+    ObservableList<Team> getTopKTeams();
 
     /** Returns the Record of all Commands entered by User */
     ArrayList<CommandRecord> getCommandHistory();
@@ -78,4 +85,16 @@ public interface Logic {
     List<String> getRedoCommandHistory();
 
     public Statistics getStatistics();
+
+    /**
+     * Gets string of previous command executed.
+     */
+    String getPrevCommandString();
+
+    /**
+     * Gets string of next command executed.
+     * 
+     * @return
+     */
+    String getNextCommandString();
 }

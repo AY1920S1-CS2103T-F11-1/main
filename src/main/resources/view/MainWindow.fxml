@@ -21,7 +21,7 @@
 <?import javafx.scene.Scene?>
 <?import com.jfoenix.controls.JFXButton?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Alfred - The Hackathon Butler" minWidth="700" minHeight="700">
+         title="Alfred - The Hackathon Butler" minWidth="700" minHeight="700" onCloseRequest="#handleExit">
     <icons>
         <Image url="@/images/alfred_icon.png"/>
     </icons>
@@ -75,9 +75,15 @@
                                             <FontAwesomeIconView fill="#3083cc" glyphName="USER_SECRET" size="17"/>
                                         </graphic>
                                     </JFXButton>
+<<<<<<< HEAD
                                     <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0"
                                                layoutX="3.0" layoutY="248.0" prefHeight="60.0"
                                                prefWidth="160.0" text="Leaderboard">
+=======
+                                    <JFXButton fx:id="leaderboardButton" id="leaderboardButton" alignment="BASELINE_LEFT" graphicTextGap="40.0"
+                                               layoutX="3.0" layoutY="240.0" prefHeight="60.0"
+                                               prefWidth="160.0" text="Leaderboard" onAction="#displayLeaderboard">
+>>>>>>> upstream/master
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="TROPHY" size="17"/>
                                         </graphic>
@@ -112,7 +118,10 @@
                                         </graphic>
                                     </JFXButton>
                                 </children>
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
                             </AnchorPane>
                         </left>
                         <center>
@@ -156,9 +165,6 @@
                                 <opaqueInsets>
                                     <Insets/>
                                 </opaqueInsets>
-                                <effect>
-                                    <DropShadow/>
-                                </effect>
                             </MenuBar>
 
                         </top>

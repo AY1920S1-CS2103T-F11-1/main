@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
-import seedu.address.model.entity.Name;
 
 /**
  * Deletes a {@link Mentor} in Alfred.
@@ -23,31 +22,19 @@ public class DeleteMentorCommand extends DeleteCommand {
             + "Format: " + COMMAND_WORD + " mentor ID\n"
             + "Example: " + COMMAND_WORD + " mentor M-1";
 
-    private Name teamName;
-
     public DeleteMentorCommand(Id id) {
         super(id);
-    }
-
-    public DeleteMentorCommand(Id id, Name teamName) {
-        super(id);
-        requireNonNull(teamName);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (this.teamName != null) {
-            // find team (or throw Exception)
-            // delete mentor from team
-            // return CommandResult
-        }
-
         Mentor mentorToBeDeleted;
         try {
             mentorToBeDeleted = model.deleteMentor(this.id);
             model.updateHistory(this);
+            model.recordCommandExecution(this.getCommandInputString());
         } catch (AlfredException e) {
             throw new CommandException(MESSAGE_INVALID_MENTOR_DISPLAYED_INDEX);
         }
