@@ -6,7 +6,7 @@ import java.util.LinkedList;
  * Keeps track of the valid commands that have been executed in Alfred, and allows command history navigation.
  */
 public class CommandHistoryManager implements CommandHistory {
-    private static final int capacity = 3;
+    private static final int capacity = 50;
     private LinkedList<String> history;
     private int currIndex;
 
