@@ -12,7 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.SimpleTopTeamsCommand;
+import seedu.address.logic.commands.topteamscommand.SimpleTopTeamsCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
 import seedu.address.logic.commands.assigncommand.AssignCommand;
 import seedu.address.logic.commands.csvcommand.ExportCommand;

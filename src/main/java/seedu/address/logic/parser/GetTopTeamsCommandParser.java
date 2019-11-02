@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.SimpleTopTeamsCommand;
-import seedu.address.logic.commands.TopTeamsCommand;
-import seedu.address.logic.commands.TopTeamsRandomCommand;
+import seedu.address.logic.commands.topteamscommand.SimpleTopTeamsCommand;
+import seedu.address.logic.commands.topteamscommand.TopTeamsCommand;
+import seedu.address.logic.commands.topteamscommand.TopTeamsRandomCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Team;
 
