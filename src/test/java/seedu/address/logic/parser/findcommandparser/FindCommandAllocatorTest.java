@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocato
 
 import java.util.Optional;
 
+import javax.swing.text.html.Option;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.findcommand.FindCommand;
@@ -26,9 +27,12 @@ public class FindCommandAllocatorTest {
         assertAllocatorSuccess(findCommandAllocator, "mentor n/Damith",
                 new FindMentorCommand(Optional.of("Damith"), Optional.empty(), Optional.empty(), Optional.empty()));
         assertAllocatorSuccess(findCommandAllocator, "participant e/dog@gmail.com",
-                new FindParticipantCommand(Optional.empty(), Optional.of("dog@gmail.com"), Optional.empty()));
+                new FindParticipantCommand(FindCommandUtilEnum.AND,
+                        Optional.empty(), Optional.of("dog@gmail.com"), Optional.empty(),
+                        Optional.empty(), Optional.empty(), Optional.empty()));
         assertAllocatorSuccess(findCommandAllocator, "team pn/djfnswdjf",
-                new FindTeamCommand(Optional.empty(), Optional.of("djfnswdjf")));
+                new FindTeamCommand(FindCommandUtilEnum.AND,
+                        Optional.empty(), Optional.of("djfnswdjf"), Optional.empty(), Optional.empty()));
     }
 
     @Test

@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Optional;
 
 import seedu.address.logic.commands.findcommand.FindMentorCommand;
+import seedu.address.logic.parser.AlfredParser;
+import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -26,6 +28,10 @@ public class FindMentorCommandParser implements Parser<FindMentorCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public FindMentorCommand parse(String args) throws ParseException {
+        FindCommandUtilEnum type = AlfredParserUtil.getFindType(args);
+        String andOrString = " " + AlfredParserUtil.getAndOrString(args);
+        String excludeString = " " + AlfredParserUtil.getExcludeString(args);
+
         ArgumentMultimap argumentMultimap =
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ORGANISATION);

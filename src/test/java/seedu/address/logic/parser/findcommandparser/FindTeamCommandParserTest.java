@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.util.Optional;
 
+import javax.swing.text.html.Option;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.findcommand.FindTeamCommand;
@@ -16,7 +17,11 @@ public class FindTeamCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         assertParseSuccess(findTeamParser, "team n/ifje",
-                new FindTeamCommand(Optional.of("ifje"),
+                new FindTeamCommand(
+                        FindCommandUtilEnum.AND,
+                        Optional.of("ifje"),
+                        Optional.empty(),
+                        Optional.empty(),
                         Optional.empty()));
     }
 

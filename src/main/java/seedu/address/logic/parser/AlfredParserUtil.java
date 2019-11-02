@@ -367,7 +367,7 @@ public class AlfredParserUtil {
 
         // Checks if the negative string is valid.
         if (negString.contains(FindCommandUtilEnum.AND.name())
-                && negString.contains(FindCommandUtilEnum.OR.name())) {
+                || negString.contains(FindCommandUtilEnum.OR.name())) {
             throw new ParseException("Position your find types at the start");
         }
         return negString.trim();
