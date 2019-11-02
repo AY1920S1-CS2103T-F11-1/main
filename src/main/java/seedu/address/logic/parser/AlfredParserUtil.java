@@ -384,4 +384,27 @@ public class AlfredParserUtil {
         String andOrString = string.split(FindCommandUtilEnum.EXCLUDE.name())[0].trim();
         return andOrString;
     }
+
+    /**
+     * Pass in a string with the entity name removed.
+     *
+     * @param string which does not contain the entity type
+     * @throws ParseException if the AND or OR is not at the start of the string
+     */
+    public static void isFindTypeAtStart(String string) throws ParseException {
+        // We trim the string, then check if the first x letters are the keywords we expect
+        // Note: This function does not check for duplicate OR or AND declarations
+        // That is handled by getFindType
+        // Trim string at first just in case since having a starting space will cause bugs
+        string = string.trim();
+        if (string.contains(FindCommandUtilEnum.AND.name())) {
+            if (!string.startsWith(FindCommandUtilEnum.AND.name())) {
+                throw new ParseException("AND has to be before the prefixes");
+            }
+        } else if (string.contains(FindCommandUtilEnum.OR.name())) {
+            if (!string.startsWith(FindCommandUtilEnum.OR.name())) {
+                throw new ParseException("OR has to be before the prefixes");
+            }
+        }
+    }
 }

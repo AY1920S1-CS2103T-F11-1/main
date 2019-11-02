@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -264,5 +265,27 @@ public class AlfredParserUtilTest {
         assertThrows(ParseException.class, () -> AlfredParserUtil.getExcludeString(
                 "DAMITH EXCLUDE DAMITH AND damith is love"
         ));
+    }
+
+    @Test
+    void isFindTypeAtStart_noAndOrOr_success() throws ParseException {
+        assertDoesNotThrow(() -> AlfredParserUtil.isFindTypeAtStart("nice to meet you"));
+    }
+
+    @Test
+    void isFindTypeAtStart_andAtStart_success() throws ParseException {
+        assertDoesNotThrow(() -> AlfredParserUtil.isFindTypeAtStart("AND where you been"));
+    }
+
+    @Test
+    void isFindTypeAtStart_orAtStart_success() throws ParseException {
+        assertDoesNotThrow(() -> AlfredParserUtil.isFindTypeAtStart(" OR i could show "
+                + "you incredible things"));
+    }
+
+    @Test
+    void isFindTypeAtStart_andInMiddle_error() throws ParseException {
+        assertThrows(ParseException.class, () -> AlfredParserUtil.isFindTypeAtStart(" magic madness "
+                + "AND heaven sin"));
     }
 }

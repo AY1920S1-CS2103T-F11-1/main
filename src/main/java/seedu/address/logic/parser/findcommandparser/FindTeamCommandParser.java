@@ -51,6 +51,9 @@ public class FindTeamCommandParser implements Parser<FindTeamCommand> {
                     FindTeamCommand.MESSAGE_USAGE));
         }
 
+        // Checks the position of the AND/OR
+        AlfredParserUtil.isFindTypeAtStart(args.trim().substring("team".length()));
+
         return new FindTeamCommand(type, nameNorm, projectNameNorm,
                 nameExclude, projectNameExclude);
     }
