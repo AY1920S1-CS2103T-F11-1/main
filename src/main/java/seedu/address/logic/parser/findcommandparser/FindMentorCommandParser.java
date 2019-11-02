@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Optional;
 
 import seedu.address.logic.commands.findcommand.FindMentorCommand;
-import seedu.address.logic.parser.AlfredParser;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -32,24 +31,36 @@ public class FindMentorCommandParser implements Parser<FindMentorCommand> {
         String andOrString = " " + AlfredParserUtil.getAndOrString(args);
         String excludeString = " " + AlfredParserUtil.getExcludeString(args);
 
-        ArgumentMultimap argumentMultimap =
+        ArgumentMultimap argumentMultimapNorm =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ORGANISATION);
+                        andOrString, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ORGANISATION);
+        ArgumentMultimap argumentMultimapExclude =
+                ArgumentTokenizer.tokenize(
+                        excludeString, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ORGANISATION);
 
-        Optional<String> name = argumentMultimap.getValue(PREFIX_NAME);
-        Optional<String> email = argumentMultimap.getValue(PREFIX_EMAIL);
-        Optional<String> phone = argumentMultimap.getValue(PREFIX_PHONE);
-        Optional<String> organization = argumentMultimap.getValue(PREFIX_ORGANISATION);
+        Optional<String> nameNorm = argumentMultimapNorm.getValue(PREFIX_NAME);
+        Optional<String> emailNorm = argumentMultimapNorm.getValue(PREFIX_EMAIL);
+        Optional<String> phoneNorm = argumentMultimapNorm.getValue(PREFIX_PHONE);
+        Optional<String> organizationNorm = argumentMultimapNorm.getValue(PREFIX_ORGANISATION);
 
-        boolean allPrefixesEmpty = name.isEmpty() && email.isEmpty()
-                && phone.isEmpty() && organization.isEmpty();
+        // Get negative prefixes
+        Optional<String> nameExclude = argumentMultimapExclude.getValue(PREFIX_NAME);
+        Optional<String> emailExclude = argumentMultimapExclude.getValue(PREFIX_EMAIL);
+        Optional<String> phoneExclude = argumentMultimapExclude.getValue(PREFIX_PHONE);
+        Optional<String> organizationExclude = argumentMultimapExclude.getValue(PREFIX_ORGANISATION);
+
+        boolean allPrefixesEmpty = nameNorm.isEmpty() && emailNorm.isEmpty()
+                && phoneNorm.isEmpty() && organizationNorm.isEmpty()
+                && nameExclude.isEmpty() && emailExclude.isEmpty()
+                && phoneExclude.isEmpty() && organizationExclude.isEmpty();
 
         if (allPrefixesEmpty) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindMentorCommand.MESSAGE_USAGE));
         }
 
-        return new FindMentorCommand(name, email, phone, organization);
+        return new FindMentorCommand(type, nameNorm, emailNorm, phoneNorm, organizationNorm,
+                nameExclude, emailExclude, phoneExclude, organizationExclude);
     }
 }
 

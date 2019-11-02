@@ -239,7 +239,7 @@ public class ModelManagerTest {
         }
         assertEquals(modelManager.getMentorList().list().size(), 2);
         assertEquals(modelManager.findMentor(
-                Predicates.getPredicateFindMentorByName("B")).size(), 2);
+                Predicates.getPredicateFindMentorByName("B", false)).size(), 2);
     }
 
     @Test
