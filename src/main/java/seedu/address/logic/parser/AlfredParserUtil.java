@@ -1,10 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIE_BREAK;
 import static seedu.address.commons.core.Messages.MISSING_TIEBREAK_METHODS;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
