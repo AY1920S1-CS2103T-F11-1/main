@@ -15,6 +15,10 @@ import seedu.address.model.entity.Team;
 import seedu.address.stub.ModelManagerStub;
 import seedu.address.testutil.TypicalTeams;
 
+/**
+ * Tests whether the {@link ShowLeaderboardWithRandomCommand} works as expected with regards to
+ * different scenarios and is capable of handling errors appropriately.
+ */
 class ShowLeaderboardWithRandomCommandTest {
 
     private Model model;

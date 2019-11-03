@@ -1,12 +1,14 @@
 package seedu.address.logic.commands.topteamscommand;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
 import java.util.ArrayList;
 import java.util.Comparator;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.Comparators;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.Model;
@@ -14,6 +16,10 @@ import seedu.address.model.entity.Team;
 import seedu.address.stub.ModelManagerStub;
 import seedu.address.testutil.TypicalTeams;
 
+/**
+ * Tests whether the {@link SimpleTopTeamsCommand} works as expected with regards to
+ * different scenarios and is capable of handling errors appropriately.
+ */
 class SimpleTopTeamsCommandTest {
 
     private Model model;

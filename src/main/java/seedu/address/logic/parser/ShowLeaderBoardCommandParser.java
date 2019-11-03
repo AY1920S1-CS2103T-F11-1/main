@@ -21,6 +21,19 @@ public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> 
 
     private static final String METHOD_SPLIT_REGEX = "\\s+";
 
+    /**
+     * Parses the {@code userInput} and determines whether a new {@link ShowSimpleLeaderboardCommand} or
+     * {@link ShowLeaderboardWithRandomCommand} needs to be created and returned. If no tie-break methods are specified
+     * then a {@link ShowSimpleLeaderboardCommand} object without any comparators is created and
+     * returned. However, if there are tie-break methods present, denoted by the
+     * prefix "tb" then the {@code parse} method will parse the tie-break methods
+     * specified and return a {@link ShowSimpleLeaderboardCommand} with the appropriate comparators as arguments.
+     * If "random" is selected as a method of tie-break as well then a {@link ShowLeaderboardWithRandomCommand}
+     * with the appropriate comparators will be created and returned.
+     *
+     * @return
+     * @throws ParseException
+     */
     @Override
     public LeaderboardCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TIE_BREAK);

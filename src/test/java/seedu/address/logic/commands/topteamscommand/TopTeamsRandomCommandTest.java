@@ -16,6 +16,10 @@ import seedu.address.model.entity.Team;
 import seedu.address.stub.ModelManagerStub;
 import seedu.address.testutil.TypicalTeams;
 
+/**
+ * Tests whether the {@link TopTeamsRandomCommand} works as expected with regards to
+ * different scenarios and is capable of handling errors appropriately.
+ */
 class TopTeamsRandomCommandTest {
 
     private Model model;
