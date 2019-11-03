@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIE_BREAK;
+import static seedu.address.commons.core.Messages.MISSING_TIEBREAK_METHODS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -227,7 +229,7 @@ public class AlfredParserUtil {
             return Comparators.rankByParticipantsAscending();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    LeaderboardUtil.INVALID_TIE_BREAK + method));
+                    MESSAGE_INVALID_TIE_BREAK + method));
         }
     }
 
@@ -261,6 +263,7 @@ public class AlfredParserUtil {
      * @throws ParseException if a specified does not exist or is in a wrong format.
      */
     public static ArrayList<Comparator<Team>> processedComparators(String[] tieBreakMethods) throws ParseException {
+        checkNoTieBreakMethods(tieBreakMethods);
         ArrayList<Comparator<Team>> allComparators = new ArrayList<>();
         for (String method : tieBreakMethods) {
             if (method.trim().equals(LeaderboardUtil.RANDOM_KEYWORD)) {
@@ -271,6 +274,12 @@ public class AlfredParserUtil {
         // Reverse the order of comparators for them to applied in the order users specified.
         Collections.reverse(allComparators);
         return allComparators;
+    }
+
+    private static void checkNoTieBreakMethods(String[] methods) throws ParseException {
+        if (methods.length == 1 && methods[0].equals("")) {
+            throw new ParseException(MISSING_TIEBREAK_METHODS);
+        }
     }
 
     /**

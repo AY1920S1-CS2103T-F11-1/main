@@ -20,10 +20,6 @@ import seedu.address.model.entity.Team;
 public class SimpleTopTeamsCommand extends TopTeamsCommand {
 
     public static final String MESSAGE_SUCCESS = "Showing Current Top %1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows the top K teams as the leaderboard stands"
-            + " where K is an integer value you type in. \n"
-            + "Format: " + COMMAND_WORD + " K \n"
-            + "For example: " + COMMAND_WORD + " 5";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     public SimpleTopTeamsCommand(int k, ArrayList<Comparator<Team>> comparators) {

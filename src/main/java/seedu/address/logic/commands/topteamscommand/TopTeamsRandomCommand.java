@@ -37,4 +37,11 @@ public class TopTeamsRandomCommand extends TopTeamsCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, numberOfTeams), CommandType.K);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TopTeamsRandomCommand // instanceof handles nulls
+                && numberOfTeams == ((TopTeamsRandomCommand) other).numberOfTeams)
+                && comparators.equals(((TopTeamsRandomCommand) other).comparators);
+    }
 }

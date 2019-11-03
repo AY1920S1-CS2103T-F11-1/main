@@ -38,4 +38,11 @@ public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
         model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(MESSAGE_SUCCESS, CommandType.L);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof ShowLeaderboardWithRandomCommand
+                && comparators.equals(((ShowLeaderboardWithRandomCommand) other).comparators));
+    }
 }

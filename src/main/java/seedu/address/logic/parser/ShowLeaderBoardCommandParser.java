@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIE_BREAK;
 
 import java.util.ArrayList;
@@ -24,7 +26,12 @@ public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> 
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_TIE_BREAK);
         ArrayList<Comparator<Team>> comparators = new ArrayList<>();
 
-        if (!argumentMultimap.getValue(PREFIX_TIE_BREAK).isPresent()) {
+        if (!AlfredParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_TIE_BREAK) &&
+                !argumentMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LeaderboardCommand.MESSAGE_USAGE));
+        }
+
+        if (!AlfredParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_TIE_BREAK)) {
             return new ShowSimpleLeaderboardCommand(comparators);
         }
 
@@ -36,4 +43,9 @@ public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> 
         return AlfredParserUtil.isRandomPresent(tieBreakMethods) ? new ShowLeaderboardWithRandomCommand(comparators)
                 : new ShowSimpleLeaderboardCommand(comparators);
     }
+
+
+
+
+
 }
