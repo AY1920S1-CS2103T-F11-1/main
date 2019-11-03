@@ -29,6 +29,7 @@ public class SimpleTopTeamsCommand extends TopTeamsCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        checkNoTeams(model);
         model.setTopK(this.numberOfTeams, comparators);
         logger.info("Showing Top " + this.numberOfTeams + " Teams.");
         return new CommandResult(String.format(MESSAGE_SUCCESS, numberOfTeams), CommandType.K);

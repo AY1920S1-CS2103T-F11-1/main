@@ -30,9 +30,11 @@ public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        checkNoTeams(model);
         model.setLeaderboardWithRandom(comparators);
 
         System.out.println(MESSAGE_LEADERBOARD_HEADER);
+
         logger.info("Showing Leaderboard with Random Winners.");
         model.updateHistory(this);
         model.recordCommandExecution(this.getCommandInputString());
