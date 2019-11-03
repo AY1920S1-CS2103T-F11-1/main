@@ -2,6 +2,7 @@ package seedu.address.logic.commands.leaderboardcommand;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 

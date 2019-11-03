@@ -22,10 +22,10 @@ import seedu.address.testutil.TypicalTeams;
  */
 class SimpleTopTeamsCommandTest {
 
+    private static final int VALID_TOP_TEAMS = 5;
     private Model model;
     private Model expectedModel;
     private Model emptyModel = new ModelManagerStub();
-    private static final int VALID_TOP_TEAMS = 5;
     private ArrayList<Comparator<Team>> comparators = new ArrayList<>();
 
     @BeforeEach

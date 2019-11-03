@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.topteamscommand;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIE_BREAK;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -32,6 +33,11 @@ public abstract class TopTeamsCommand extends Command {
         this.comparators = comparators;
     }
 
+    /**
+     * Checks if there are no teams currently added as per {@code model}.
+     *
+     * @throws CommandException if there are no teams added in Alfred.
+     */
     public void checkNoTeams(Model model) throws CommandException {
         if (model.getTeamList().isEmpty()) {
             throw new CommandException(MESSAGE_NO_TEAM);
