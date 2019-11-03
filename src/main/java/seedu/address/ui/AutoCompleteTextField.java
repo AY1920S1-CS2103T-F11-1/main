@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -24,7 +25,7 @@ import seedu.address.commons.core.LogsCenter;
 /**
  * Represents an AutoCompleteTextField that provide command suggestions as user types in command inputs.
  */
-public class AutoCompleteTextField extends TextField {
+public class AutoCompleteTextField extends JFXTextField {
     private SuggestionTemplates suggestionTemplates = new SuggestionTemplates();
     private final Logger logger = LogsCenter.getLogger(AutoCompleteTextField.class);
     /**
