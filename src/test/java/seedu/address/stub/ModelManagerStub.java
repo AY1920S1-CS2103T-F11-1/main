@@ -227,14 +227,15 @@ public class ModelManagerStub extends ModelManager {
      */
     @Override
     public Mentor deleteMentor(Id id) throws AlfredException {
+        Mentor mentorToDelete = this.mentorList.delete(id); // May throw MissingEntityException here
+
         Team targetTeam;
         try {
             targetTeam = this.getTeamByMentorId(id);
         } catch (MissingEntityException e) {
-            return this.mentorList.delete(id);
+            return mentorToDelete;
         }
 
-        Mentor mentorToDelete = this.getMentor(id);
         boolean isSuccessful = targetTeam.deleteMentor(mentorToDelete);
         if (!isSuccessful) {
             throw new AlfredModelException("Update to delete the mentor from the team");
@@ -268,14 +269,14 @@ public class ModelManagerStub extends ModelManager {
      * Placeholder method simulating the undoing of a command in ModelHistory
      */
     @Override
-    public void undo() {
+    public void undo(int numToUndo) {
     }
 
     /**
      * Placeholder method simulating the redoing of a command in ModelHistory
      */
     @Override
-    public void redo() {
+    public void redo(int numToRedo) {
     }
 
     /**

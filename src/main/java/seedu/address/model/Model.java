@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
 
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -87,13 +89,17 @@ public interface Model {
      */
     ReadOnlyEntityList getMentorList();
 
-    /* Get the filtered lists */
+    /* Get the filtered and sorted lists */
 
     FilteredList<Participant> getFilteredParticipantList();
 
     FilteredList<Team> getFilteredTeamList();
 
     FilteredList<Mentor> getFilteredMentorList();
+
+    SortedList<Team> getSortedTeamList();
+
+    SortedList<Team> getTopKTeams();
 
     void resetFilteredLists();
 
@@ -121,7 +127,11 @@ public interface Model {
 
     void addParticipantToTeam(Id teamId, Participant participant) throws AlfredException;
 
+    void removeParticipantFromTeam(Id teamId, Participant participant) throws AlfredException;
+
     void addMentorToTeam(Id teamId, Mentor mentor) throws AlfredException;
+
+    void removeMentorFromTeam(Id teamId, Mentor mentor) throws AlfredException;
 
     void updateTeam(Id teamId, Team team) throws AlfredException;
 
@@ -151,6 +161,14 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
+    void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators);
+
+    void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators);
+
+    void setTopK(int k, ArrayList<Comparator<Team>> comparators);
+
+    void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators);
+
     /* View command */
     /**
      * Sets the predicate to show detailed information of {@code entity}.
@@ -165,16 +183,22 @@ public interface Model {
     void updateHistory(Command c);
 
     /**
-     * Undoes the effects of the previous command and returns the model to the state
-     * prior to the execution of the command.
+     * Undoes the effects of {@code numToUndo} previous command(s) and returns the model to the state
+     * prior to the execution of these command(s).
+     * @param numToUndo number of previous commands to undo.
+     * @throws AlfredModelHistoryException this is thrown when an error is encountered trying to alter the model
+     *                                     state while undoing the previous commands.
      */
-    void undo() throws AlfredModelHistoryException;
+    void undo(int numToUndo) throws AlfredModelHistoryException;
 
     /**
-     * Redoes the effects of the previously executed command and returns the model to the state
-     * after the execution of the command.
+     * Redoes the effects of the {@code numToRedo} next command(s) and returns the model to the state
+     * after the execution of these command(s).
+     * @param numToRedo number of next commands to redo.
+     * @throws AlfredModelHistoryException this is thrown when an error is encountered trying to alter the model
+     *                                     state while redoing the next commands.
      */
-    void redo() throws AlfredModelHistoryException;
+    void redo(int numToRedo) throws AlfredModelHistoryException;
 
     /**
      * Gets a String detailing the previously executed commands that can be undone by the user.

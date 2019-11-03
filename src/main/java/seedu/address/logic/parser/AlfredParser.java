@@ -12,7 +12,9 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.SimpleTopTeamsCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
+import seedu.address.logic.commands.assigncommand.AssignCommand;
 import seedu.address.logic.commands.csvcommand.ExportCommand;
 import seedu.address.logic.commands.csvcommand.ImportCommand;
 import seedu.address.logic.commands.deletecommand.DeleteCommand;
@@ -20,17 +22,24 @@ import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.logic.commands.historycommand.HistoryCommand;
 import seedu.address.logic.commands.historycommand.RedoCommand;
 import seedu.address.logic.commands.historycommand.UndoCommand;
+import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
 import seedu.address.logic.commands.listcommand.ListCommand;
+import seedu.address.logic.commands.removecommand.RemoveCommand;
 import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.addcommandparser.AddCommandAllocator;
+import seedu.address.logic.parser.assigncommandparser.AssignCommandAllocator;
 import seedu.address.logic.parser.csvcommandparser.ExportCommandParser;
 import seedu.address.logic.parser.csvcommandparser.ImportCommandParser;
 import seedu.address.logic.parser.deletecommandparser.DeleteCommandAllocator;
 import seedu.address.logic.parser.editcommandparser.EditCommandAllocator;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.findcommandparser.FindCommandAllocator;
+import seedu.address.logic.parser.historycommandparser.HistoryCommandParser;
+import seedu.address.logic.parser.historycommandparser.RedoCommandParser;
+import seedu.address.logic.parser.historycommandparser.UndoCommandParser;
 import seedu.address.logic.parser.listcommandparser.ListCommandParser;
+import seedu.address.logic.parser.removecommandparser.RemoveCommandAllocator;
 import seedu.address.logic.parser.scorecommandparser.ScoreCommandAllocator;
 import seedu.address.logic.parser.viewcommandparser.ViewCommandAllocator;
 
@@ -66,6 +75,7 @@ public class AlfredParser {
         Command c;
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
+            logger.info("Allocating add command to appropriate parser.");
             c = new AddCommandAllocator().allocate(arguments);
             break;
 
@@ -74,15 +84,26 @@ public class AlfredParser {
             break;
 
         case DeleteCommand.COMMAND_WORD:
-            logger.info("Deleting an existing Participant...");
+            logger.info("Allocating delete command to appropriate parser.");
             c = new DeleteCommandAllocator().allocate(arguments);
             break;
 
         case ScoreCommand.COMMAND_WORD:
-            return new ScoreCommandAllocator().allocate(arguments);
+            c = new ScoreCommandAllocator().allocate(arguments);
+            break;
 
         case ListCommand.COMMAND_WORD:
+            logger.info("Showing list of a particular entity...");
             c = new ListCommandParser().parse(arguments);
+            break;
+
+        case ShowSimpleLeaderboardCommand.COMMAND_WORD:
+            logger.info("Executing leaderboard command...");
+            c = new ShowLeaderBoardCommandParser().parse(arguments);
+            break;
+
+        case SimpleTopTeamsCommand.COMMAND_WORD:
+            c = new GetTopTeamsCommandParser().parse(arguments);
             break;
 
         case ViewCommand.COMMAND_WORD:
@@ -106,20 +127,30 @@ public class AlfredParser {
             break;
 
         case UndoCommand.COMMAND_WORD:
-            c = new UndoCommand();
+            c = new UndoCommandParser().parse(arguments);
             break;
 
         case RedoCommand.COMMAND_WORD:
-            c = new RedoCommand();
+            c = new RedoCommandParser().parse(arguments);
             break;
 
         case HistoryCommand.COMMAND_WORD:
-            c = new HistoryCommand();
+            c = new HistoryCommandParser().parse(arguments);
             break;
 
         case EditCommand.COMMAND_WORD:
             logger.info("Editing an existing Entity...");
             c = new EditCommandAllocator().allocate(arguments);
+            break;
+
+        case AssignCommand.COMMAND_WORD:
+            logger.info("Assigning Entity(Mentor/Participant) to a Team");
+            c = new AssignCommandAllocator().allocate(arguments);
+            break;
+
+        case RemoveCommand.COMMAND_WORD:
+            logger.info("Removing Entity(Mentor/Participant) from a Team");
+            c = new RemoveCommandAllocator().allocate(arguments);
             break;
 
         default:
@@ -129,5 +160,4 @@ public class AlfredParser {
         c.setCommandInputString(userInput);
         return c;
     }
-
 }

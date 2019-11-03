@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
@@ -42,8 +41,9 @@ public class MainWindow extends UiPart<Stage> {
     private CommandListPanel commandListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
+    private JFXButton lastFired;
     private CommandBox commandBox;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,6 +62,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private JFXButton participantsButton;
+
+    @FXML
+    private JFXButton leaderboardButton;
 
     @FXML
     private JFXButton teamsButton;
@@ -85,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        lastFired = participantsButton;
     }
 
     public Stage getPrimaryStage() {
@@ -131,8 +135,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         //Displays the list of teams during application start up
-        entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
+        entityListPanel = new EntityListPanel(logic.getFilteredParticipantList());
         listPanelPlaceholder.getChildren().add(entityListPanel.getRoot());
+
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -202,22 +207,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles the display of Command History in the GUI.
-     */
-    private void handleHistory() {
-        List<String> undoHistory = logic.getUndoCommandHistory();
-        List<String> redoHistory = logic.getRedoCommandHistory();
-        System.out.println("Inside handleHistory: printing");
-        for (String h: redoHistory) {
-            System.out.println(h);
-        }
-        System.out.println("=====================<< Current State >>=====================");
-        for (String h: undoHistory) {
-            System.out.println(h);
-        }
-    }
-
-    /**
      * Displays the list of Participants in Model and Storage on Graphical User Interface.
      */
     @FXML
@@ -225,8 +214,26 @@ public class MainWindow extends UiPart<Stage> {
         entityListPanel = new EntityListPanel(logic.getFilteredParticipantList());
 
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color: #5d6d7e");
-        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
+    }
+
+    /**
+     * Displays the leaderboard on the Graphical User Interface.
+     */
+    @FXML
+    private void displayLeaderboard() {
+        entityListPanel = new EntityListPanel(logic.getSortedTeamList());
+
+        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+    }
+
+    /**
+     * Displays the top K teams on the Graphical User Interface.
+     */
+    @FXML
+    private void displayTopK() {
+        entityListPanel = new EntityListPanel(logic.getTopKTeams());
+
+        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
     }
 
     /**
@@ -236,9 +243,6 @@ public class MainWindow extends UiPart<Stage> {
     private void displayTeamList() {
         entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color:#abb2b9");
-        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
-
     }
 
     /**
@@ -248,9 +252,6 @@ public class MainWindow extends UiPart<Stage> {
     private void displayMentorList() {
         entityListPanel = new EntityListPanel(logic.getFilteredMentorList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color: #17202a");
-        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
-
     }
 
     /**
@@ -260,9 +261,6 @@ public class MainWindow extends UiPart<Stage> {
     private void displayHistory() {
         commandListPanel = new CommandListPanel(logic.getCommandHistory());
         listPanelPlaceholder.getChildren().set(0, commandListPanel.getRoot());
-        listPanelPlaceholder.setStyle("-fx-background-color: #17202a");
-        logger.info("Color of entity list placeholder is: " + listPanelPlaceholder.getStyle());
-
     }
 
     public EntityListPanel getEntityListPanel() {
@@ -285,7 +283,6 @@ public class MainWindow extends UiPart<Stage> {
         if (mentorsButton.isArmed()) {
             mentorsButton.disarm();
         }
-
     }
 
     private void fireButton(Button button) throws AlfredModelHistoryException {
@@ -315,23 +312,36 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-            handleHistory(); //DEBUG
 
             CommandType commandType = commandResult.getCommandType();
+            if (commandType == null) {
+                this.fireButton(lastFired);
+            }
             logger.info("CommandResult has the prefix: " + commandType);
             //TODO: if the current panel is the one being changed, do not change the entityListPlaceholder
             switch (commandType) {
             case M:
                 this.fireButton(mentorsButton);
+                lastFired = mentorsButton;
                 break;
             case T:
                 this.fireButton(teamsButton);
+                lastFired = teamsButton;
                 break;
             case P:
                 this.fireButton(participantsButton);
+                lastFired = participantsButton;
                 break;
             case H:
                 this.fireButton(historyButton);
+                lastFired = historyButton;
+                break;
+            case L:
+                this.fireButton(leaderboardButton);
+                lastFired = leaderboardButton;
+                break;
+            case K:
+                displayTopK();
                 break;
 
             default:
@@ -340,6 +350,9 @@ public class MainWindow extends UiPart<Stage> {
             }
             return commandResult;
         } catch (CommandException | ParseException | AlfredModelHistoryException e) {
+            if (lastFired != null) {
+                this.fireButton(lastFired);
+            }
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
