@@ -1,32 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.ui.SuggestionTemplates.ADD_MENTOR_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.ADD_PARTICIPANT_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.ADD_TEAM_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.DELETE_MENTOR_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.DELETE_PARTICIPANT_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.DELETE_TEAM_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.EDIT_MENTOR_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.EDIT_PARTICIPANT_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.EDIT_TEAM_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.EXPORT_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.FIND_MENTOR_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.FIND_PARTICIPANT_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.FIND_TEAM_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.GET_TOP_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.HELP_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.HISTORY_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.IMPORT_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.LEADERBOARD_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.LIST_MENTOR_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.LIST_PARTICIPANT_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.LIST_TEAM_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.REDO_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.SCORE_ADD_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.SCORE_SET_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.SCORE_SUB_TEMPLATE;
-import static seedu.address.ui.SuggestionTemplates.UNDO_TEMPLATE;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -206,13 +179,13 @@ public class AutoCompleteTextField extends TextField {
 
         case "add participant":
             logger.info("Add participant template is shown on GUI");
-            return suggestionTemplates.addParticipantTemplate;
+            return suggestionTemplates.ADD_PARTICIPANT_TEMPLATE;
 
         case "add team":
-            return suggestionTemplates.addTeamTemplate;
+            return suggestionTemplates.ADD_TEAM_TEMPLATE;
 
         case "add mentor":
-            return suggestionTemplates.addMentorTemplate;
+            return suggestionTemplates.ADD_MENTOR_TEMPLATE;
         default:
             logger.info("ADD Command Template is null");
             return null;
@@ -223,13 +196,13 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "list participants":
-            return suggestionTemplates.listParticipantTemplate;
+            return suggestionTemplates.LIST_PARTICIPANT_TEMPLATE;
 
         case "list teams":
-            return suggestionTemplates.listTeamTemplate;
+            return suggestionTemplates.LIST_TEAM_TEMPLATE;
 
         case "list mentors":
-            return suggestionTemplates.listMentorTemplate;
+            return suggestionTemplates.LIST_MENTOR_TEMPLATE;
 
         default:
             logger.info("LIST Command Template is null");
@@ -242,13 +215,13 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "edit participant":
-            return suggestionTemplates.editParticipantTemplate;
+            return suggestionTemplates.EDIT_PARTICIPANT_TEMPLATE;
 
         case "edit team":
-            return suggestionTemplates.editTeamTemplate;
+            return suggestionTemplates.EDIT_TEAM_TEMPLATE;
 
         case "edit mentor":
-            return suggestionTemplates.editMentorTemplate;
+            return suggestionTemplates.EDIT_MENTOR_TEMPLATE;
 
         default:
             logger.info("EDIT Command Template is null");
@@ -261,13 +234,12 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "delete participant":
-            return suggestionTemplates.deleteParticipantTemplate;
+            return suggestionTemplates.DELETE_PARTICIPANT_TEMPLATE;
         case "delete team":
-            return suggestionTemplates.listMentorTemplate;
+            return suggestionTemplates.DELETE_TEAM_TEMPLATE;
 
         case "delete mentor":
-            return DELETE_MENTOR_TEMPLATE.getTextFlow();
-
+            return suggestionTemplates.DELETE_MENTOR_TEMPLATE;
         default:
             logger.info("DELETE Command Template is null");
             return null;
@@ -279,13 +251,13 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "find participant":
-            return FIND_PARTICIPANT_TEMPLATE.getTextFlow();
+            return suggestionTemplates.FIND_PARTICIPANT_TEMPLATE;
 
         case "find team":
-            return FIND_TEAM_TEMPLATE.getTextFlow();
+            return suggestionTemplates.FIND_TEAM_TEMPLATE;
 
         case "find mentor":
-            return FIND_MENTOR_TEMPLATE.getTextFlow();
+            return suggestionTemplates.FIND_MENTOR_TEMPLATE;
 
         default:
             logger.info("FIND Command Template is null");
@@ -299,13 +271,13 @@ public class AutoCompleteTextField extends TextField {
         switch (suggestion) {
 
         case "score add":
-            return SCORE_ADD_TEMPLATE.getTextFlow();
+            return suggestionTemplates.SCORE_ADD_TEMPLATE;
 
         case "score sub":
-            return SCORE_SUB_TEMPLATE.getTextFlow();
+            return suggestionTemplates.SCORE_SUB_TEMPLATE;
 
         case "score set":
-            return SCORE_SET_TEMPLATE.getTextFlow();
+            return suggestionTemplates.SCORE_SET_TEMPLATE;
 
         default:
             logger.info("SCORE Command Template is null");
@@ -316,28 +288,28 @@ public class AutoCompleteTextField extends TextField {
     private TextFlow getOtherTemplate(String suggestion) {
         switch (suggestion) {
         case "undo":
-            return UNDO_TEMPLATE.getTextFlow();
+            return suggestionTemplates.UNDO_TEMPLATE;
 
         case "redo":
-            return REDO_TEMPLATE.getTextFlow();
+            return suggestionTemplates.REDO_TEMPLATE;
 
         case "history":
-            return HISTORY_TEMPLATE.getTextFlow();
+            return suggestionTemplates.HISTORY_TEMPLATE;
 
         case "leaderboard":
-            return LEADERBOARD_TEMPLATE.getTextFlow();
+            return suggestionTemplates.LEADERBOARD_TEMPLATE;
 
         case "import":
-            return IMPORT_TEMPLATE.getTextFlow();
+            return suggestionTemplates.IMPORT_TEMPLATE;
 
         case "export":
-            return EXPORT_TEMPLATE.getTextFlow();
+            return suggestionTemplates.EXPORT_TEMPLATE;
 
         case "getTop":
-            return GET_TOP_TEMPLATE.getTextFlow();
+            return suggestionTemplates.GET_TOP_TEMPLATE;
 
         case "help":
-            return HELP_TEMPLATE.getTextFlow();
+            return suggestionTemplates.HELP_TEMPLATE;
 
         default:
             logger.info("Other Template is null");
