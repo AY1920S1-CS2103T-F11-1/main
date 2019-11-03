@@ -17,17 +17,19 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.text.TextFlow;
+
 import seedu.address.commons.core.LogsCenter;
+
 
 /**
  * Represents an AutoCompleteTextField that provide command suggestions as user types in command inputs.
  */
 public class AutoCompleteTextField extends TextField {
+    private SuggestionTemplates suggestionTemplates = new SuggestionTemplates();
     private final Logger logger = LogsCenter.getLogger(AutoCompleteTextField.class);
     /**
      * Represent the list of possible commands users can enter.
      */
-    private final SuggestionTemplates suggestionTemplates;
     private final SortedSet<String> commandSuggestionSet = new TreeSet<String>();
     private final List<String> commandSuggestionList = Arrays.asList(
             "add participant",
@@ -69,7 +71,6 @@ public class AutoCompleteTextField extends TextField {
      */
     public AutoCompleteTextField() {
         super();
-        suggestionTemplates = new SuggestionTemplates();
         commandSuggestionSet.addAll(commandSuggestionList);
         commandsPopup = new ContextMenu();
         textProperty().addListener(new ChangeListener<String>() {
@@ -185,7 +186,6 @@ public class AutoCompleteTextField extends TextField {
 
         case "add mentor":
             return suggestionTemplates.ADD_MENTOR_TEMPLATE;
-
         default:
             logger.info("ADD Command Template is null");
             return null;
@@ -235,13 +235,11 @@ public class AutoCompleteTextField extends TextField {
 
         case "delete participant":
             return suggestionTemplates.DELETE_PARTICIPANT_TEMPLATE;
-
         case "delete team":
             return suggestionTemplates.DELETE_TEAM_TEMPLATE;
 
         case "delete mentor":
             return suggestionTemplates.DELETE_MENTOR_TEMPLATE;
-
         default:
             logger.info("DELETE Command Template is null");
             return null;

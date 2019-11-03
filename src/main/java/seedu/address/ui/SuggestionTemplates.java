@@ -6,302 +6,312 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+
 /**
- * Represents the possible Suggestions that could be displated by AutoCompleteTextField
+ * represents the possible suggestions that could be displated by autocompletetextfield
  */
 public class SuggestionTemplates {
+    //IMPORT/EXPORT Commands
+    public static final TextFlow IMPORT_TEMPLATE;
+    public static final TextFlow EXPORT_TEMPLATE;
 
-    //The final template for each instruction that will be displayed as suggestion to User.
-    //Combination of preceding constants(which are used as building blocks/
+    //HISTORY Commands
+    public static final TextFlow HISTORY_TEMPLATE;
+    public static final TextFlow UNDO_TEMPLATE;
+    public static final TextFlow REDO_TEMPLATE;
+    public static final TextFlow HELP_TEMPLATE;
 
-    public static final TextFlow ADD_PARTICIPANT_TEMPLATE;
+    //ADD Commands
     public static final TextFlow ADD_MENTOR_TEMPLATE;
+    public static final TextFlow ADD_PARTICIPANT_TEMPLATE;
     public static final TextFlow ADD_TEAM_TEMPLATE;
 
-    public static final TextFlow EDIT_PARTICIPANT_TEMPLATE;
+    //EDIT Commands
     public static final TextFlow EDIT_MENTOR_TEMPLATE;
+    public static final TextFlow EDIT_PARTICIPANT_TEMPLATE;
     public static final TextFlow EDIT_TEAM_TEMPLATE;
 
-    public static final TextFlow FIND_PARTICIPANT_TEMPLATE;
-    public static final TextFlow FIND_MENTOR_TEMPLATE;
-    public static final TextFlow FIND_TEAM_TEMPLATE;
-
-    public static final TextFlow DELETE_PARTICIPANT_TEMPLATE;
+    //DELETE Command
     public static final TextFlow DELETE_MENTOR_TEMPLATE;
+    public static final TextFlow DELETE_PARTICIPANT_TEMPLATE;
     public static final TextFlow DELETE_TEAM_TEMPLATE;
 
-    public static final TextFlow LIST_PARTICIPANT_TEMPLATE;
+    //FIND Command
+    public static final TextFlow FIND_MENTOR_TEMPLATE;
+    public static final TextFlow FIND_PARTICIPANT_TEMPLATE;
+    public static final TextFlow FIND_TEAM_TEMPLATE;
+
+    //LIST Command
     public static final TextFlow LIST_MENTOR_TEMPLATE;
+    public static final TextFlow LIST_PARTICIPANT_TEMPLATE;
     public static final TextFlow LIST_TEAM_TEMPLATE;
 
+    //SCORE Commands
     public static final TextFlow SCORE_ADD_TEMPLATE;
     public static final TextFlow SCORE_SUB_TEMPLATE;
     public static final TextFlow SCORE_SET_TEMPLATE;
     public static final TextFlow LEADERBOARD_TEMPLATE;
     public static final TextFlow GET_TOP_TEMPLATE;
 
-    public static final TextFlow IMPORT_TEMPLATE;
-    public static final TextFlow EXPORT_TEMPLATE;
-
-    public static final TextFlow HISTORY_TEMPLATE;
-    public static final TextFlow UNDO_TEMPLATE;
-    public static final TextFlow REDO_TEMPLATE;
-
-    public static final TextFlow HELP_TEMPLATE;
-
-    //Constants used as instructions
-    private static final Text ADD_PARTICIPANT_INSTRUCTION = new Text("(Adds a new Participant)");
-    private static final Text ADD_MENTOR_INSTRUCTION = new Text("(Adds a new Mentor)");
-    private static final Text ADD_TEAM_INSTRUCTION = new Text("(Adds a new Team)");
-
-    private static final Text EDIT_PARTICIPANT_INSTRUCTION = new Text(
-            "(Edits existing Participant according to PARAMETERS)"
-    );
-    private static final Text EDIT_MENTOR_INSTRUCTION = new Text("(Edits existing Mentor according to PARAMETERS)");
-    private static final Text EDIT_TEAM_INSTRUCTION = new Text("(Edits existing Team according to PARAMETERS)");
-
-    private static final Text FIND_PARTICIPANT_INSTRUCTION = new Text("(Finds a new Participant)");
-    private static final Text FIND_MENTOR_INSTRUCTION = new Text("(Finds a new Mentor)");
-    private static final Text FIND_TEAM_INSTRUCTION = new Text("(Finds a new Team)");
-
-    private static final Text DELETE_PARTICIPANT_INSTRUCTION = new Text("(Deletes an existing Participant)");
-    private static final Text DELETE_MENTOR_INSTRUCTION = new Text("(Deletes an existing Mentor)");
-    private static final Text DELETE_TEAM_INSTRUCTION = new Text("(Deletes an existing Team)");
-
-    private static final Text LIST_PARTICIPANT_INSTRUCTION = new Text("(Lists all Participants)");
-    private static final Text LIST_MENTOR_INSTRUCTION = new Text("(Lists all Mentors)");
-    private static final Text LIST_TEAM_INSTRUCTION = new Text("(Lists all Teams)");
-
-    private static final Text SCORE_ADD_INSTRUCTION = new Text("(Adds POINTS to Team with TEAM_ID)");
-    private static final Text SCORE_SUB_INSTRUCTION = new Text("(Subtracts POINTS to Team with TEAM_ID)");
-    private static final Text SCORE_SET_INSTRUCTION = new Text("(Set Team with TEAM_ID to obtain a SCORE)");
-    private static final Text LEADERBOARD_INSTRUCTION = new Text("(Lists all Teams from highest to lowest Score)");
-    private static final Text GET_TOP_INSTRUCTION = new Text("(Lists the top NUMBER of Teams according to Score)");
-
-    private static final Text IMPORT_INSTRUCTION = new Text("(Adds multiple Participants with details in .csv file)");
-    private static final Text EXPORT_INSTRUCTION = new Text(
-            "(Export Entity and their details into .csv file specified by FILE_PATH)"
-    );
+    private static SuggestionLabels suggestionLabels = new SuggestionLabels();
 
 
-    private static final Text HISTORY_INSTRUCTION = new Text("(Gets all past commands you have entered)");
-    private static final Text UNDO_INSTRUCTION = new Text("(Undoes the most recent command)");
-    private static final Text REDO_INSTRUCTION = new Text("(Redoes the most recent command that you have undone)");
+   static {
 
-    private static final Text HELP_INSTRUCTION = new Text("(Opens a new Help Window)");
-
-    //Constants that are used as template(this Text is also indicative of command type)
-    private static final Text ADD_PARTICIPANT = new Text("add participant ");
-    private static final Text ADD_MENTOR = new Text("add mentor ");
-    private static final Text ADD_TEAM = new Text("add team ");
-
-    private static final Text LIST_PARTICIPANT = new Text("list participant ");
-    private static final Text LIST_MENTOR = new Text("list mentor ");
-    private static final Text LIST_TEAM = new Text("list team ");
-
-    private static final Text EDIT_PARTICIPANT = new Text("edit participant ");
-    private static final Text EDIT_MENTOR = new Text("edit mentor ");
-    private static final Text EDIT_TEAM = new Text("edit team ");
-
-    private static final Text FIND_PARTICIPANT = new Text("find participant ");
-    private static final Text FIND_MENTOR = new Text("find mentor ");
-    private static final Text FIND_TEAM = new Text("find team ");
-
-    private static final Text DELETE_PARTICIPANT = new Text("delete participant ");
-    private static final Text DELETE_MENTOR = new Text("delete mentor ");
-    private static final Text DELETE_TEAM = new Text("delete team ");
-
-    private static final Text SCORE_ADD = new Text("score add ");
-    private static final Text SCORE_SUB = new Text("score sub ");
-    private static final Text SCORE_SET = new Text("score set ");
-    private static final Text LEADERBOARD = new Text("leaderboard ");
-    private static final Text GET_TOP = new Text("getTop ");
-
-    private static final Text HISTORY = new Text("history ");
-    private static final Text UNDO = new Text("undo ");
-    private static final Text REDO = new Text("redo ");
-
-    private static final Text IMPORT = new Text("import ");
-    private static final Text EXPORT = new Text("export ");
-
-    private static final Text HELP = new Text("help ");
-
-    //Constants that are used as template
-    private static final Text NAME_PREFIX = new Text("n/");
-    private static final Text PHONE_PREFIX = new Text("p/");
-    private static final Text EMAIL_PREFIX = new Text("e/");
-    private static final Text ORGANIZATION_PREFIX = new Text("o/");
-    private static final Text SPECIALISATION_PREFIX = new Text("s/ ");
-    private static final Text PROJECT_NAME_PREFIX = new Text("pn/ ");
-    private static final Text SUBJECT_PREFIX = new Text("s/ ");
-    private static final Text LOCATION_PREFIX = new Text("l/ ");
-    private static final Text FILEPATH_PREFIX = new Text("fp/ ");
-
-    //Constants (that are used are guides)
-    private static final Text NAME = new Text("NAME ");
-    private static final Text PHONE = new Text("PHONE_NUMBER ");
-    private static final Text EMAIL = new Text("EMAIL_ADDRESS ");
-    private static final Text TEAM_ID = new Text("TEAM_ID ");
-    private static final Text PARTICIPANT_ID = new Text("PARTICIPANT_ID ");
-    private static final Text MENTOR_ID = new Text("MENTOR_ID ");
-    private static final Text NUMBER = new Text("NUMBER ");
-    private static final Text POINTS = new Text("POINTS ");
-    private static final Text NEW_POINTS = new Text("NEW_POINTS ");
-    private static final Text CSV_PATH = new Text("PATH_TO_CSV_FILE ");
-    private static final Text PARAMETERS = new Text("[PARAMETERS] ");
-    private static final Text ORGANIZATION = new Text("ORGANIZATION ");
-    private static final Text SPECIALISATION = new Text("SPECIALISATION ");
-    private static final Text PROJECT_NAME = new Text("PROJECT_NAME ");
-    private static final Text SUBJECT = new Text("SUBJECT ");
-    private static final Text TABLE = new Text("TABLE_NUMBER ");
-    private static final Text FILE_PATH = new Text("PATH_TO_CSV_FILE ");
-    private static final Text ENTITY = new Text("[{team/mentor/participant}] ");
-
-
-
-    /**
-     * Constructs a {@codeSuggestionTemplates} that provides a list of Templates for each Command.
-     * Each of these templates will be displaed as a suggestion to user  when they type,
-     * in {@codeAutoCompleteTextField}.
-     */
-    static {
-        initialize();
-        //ADD Commands
-        ADD_PARTICIPANT_TEMPLATE = new TextFlow(ADD_PARTICIPANT, NAME_PREFIX, NAME,
-                PHONE_PREFIX, PHONE,
-                EMAIL_PREFIX, EMAIL,
-                ADD_PARTICIPANT_INSTRUCTION);
-
-        ADD_MENTOR_TEMPLATE = new TextFlow(ADD_MENTOR, NAME_PREFIX, NAME,
-                PHONE_PREFIX, PHONE,
-                EMAIL_PREFIX, EMAIL,
-                ORGANIZATION_PREFIX, ORGANIZATION,
-                SPECIALISATION_PREFIX, SPECIALISATION,
-                ADD_MENTOR_INSTRUCTION
+        Text filepathPrefix1 = new Text("fp/");
+        Text filepath1 = new Text("PATH_TO_CSV_FILE ");
+        filepath1.setFill(Color.GREY);
+        IMPORT_TEMPLATE = new TextFlow(
+                suggestionLabels.importWord, filepathPrefix1,
+                filepath1, suggestionLabels.importInstruction
         );
 
-        ADD_TEAM_TEMPLATE = new TextFlow(ADD_TEAM, NAME_PREFIX, NAME,
-                PROJECT_NAME_PREFIX, PROJECT_NAME,
-                SUBJECT_PREFIX, SUBJECT,
-                LOCATION_PREFIX, TABLE,
-                ADD_TEAM_INSTRUCTION
+
+        Text entity1 = new Text("[team/mentor/participant] ");
+        Text filepathPrefix2 = new Text("fp/");
+        Text filepath2 = new Text("PATH_TO_CSV_FILE ");
+        filepath2.setFill(Color.GREY);
+        entity1.setFill(Color.GREY);
+        EXPORT_TEMPLATE = new TextFlow(
+                suggestionLabels.exportWord, entity1,
+                filepathPrefix2, filepath2,
+                suggestionLabels.exportInstruction
         );
-
-        //EDIT Commands
-        EDIT_PARTICIPANT_TEMPLATE = new TextFlow(EDIT_PARTICIPANT, PARTICIPANT_ID,
-                PARAMETERS, EDIT_PARTICIPANT_INSTRUCTION);
-        EDIT_MENTOR_TEMPLATE = new TextFlow(EDIT_MENTOR, MENTOR_ID,
-                PARAMETERS, EDIT_MENTOR_INSTRUCTION);
-        EDIT_TEAM_TEMPLATE = new TextFlow(EDIT_TEAM, TEAM_ID,
-                PARAMETERS, EDIT_TEAM_INSTRUCTION);
-
-        //DELETE Commands
-        DELETE_PARTICIPANT_TEMPLATE = new TextFlow(DELETE_PARTICIPANT, PARTICIPANT_ID, DELETE_PARTICIPANT_INSTRUCTION);
-        DELETE_MENTOR_TEMPLATE = new TextFlow(DELETE_MENTOR, MENTOR_ID, DELETE_MENTOR_INSTRUCTION);
-        DELETE_TEAM_TEMPLATE = new TextFlow(DELETE_TEAM, TEAM_ID, DELETE_TEAM_INSTRUCTION);
-
-        //FIND Commands
-        FIND_PARTICIPANT_TEMPLATE = new TextFlow(FIND_PARTICIPANT, PARTICIPANT_ID, FIND_PARTICIPANT_INSTRUCTION);
-        FIND_MENTOR_TEMPLATE = new TextFlow(FIND_MENTOR, MENTOR_ID, FIND_MENTOR_INSTRUCTION);
-        FIND_TEAM_TEMPLATE = new TextFlow(FIND_TEAM, TEAM_ID, FIND_TEAM_INSTRUCTION);
-
-        //LIST Commands
-        LIST_PARTICIPANT_TEMPLATE = new TextFlow(LIST_PARTICIPANT, LIST_PARTICIPANT_INSTRUCTION);
-        LIST_MENTOR_TEMPLATE = new TextFlow(LIST_MENTOR, LIST_MENTOR_INSTRUCTION);
-        LIST_TEAM_TEMPLATE = new TextFlow(LIST_TEAM, LIST_TEAM_INSTRUCTION);
-
-        //LEADERBOARD and JUDGING Commands
-        SCORE_ADD_TEMPLATE = new TextFlow(SCORE_ADD, TEAM_ID, POINTS, SCORE_ADD_INSTRUCTION);
-        SCORE_SUB_TEMPLATE = new TextFlow(SCORE_SUB, TEAM_ID, POINTS, SCORE_SUB_INSTRUCTION);
-        SCORE_SET_TEMPLATE = new TextFlow(SCORE_SET, TEAM_ID, NEW_POINTS, SCORE_SET_INSTRUCTION);
-        LEADERBOARD_TEMPLATE = new TextFlow(LEADERBOARD, LEADERBOARD_INSTRUCTION);
-        GET_TOP_TEMPLATE = new TextFlow(GET_TOP, NUMBER, GET_TOP_INSTRUCTION);
-
-        //IMPORT/EXPORT CSV Commands
-        IMPORT_TEMPLATE = new TextFlow(IMPORT, FILEPATH_PREFIX, FILE_PATH, IMPORT_INSTRUCTION);
-        EXPORT_TEMPLATE = new TextFlow(EXPORT, ENTITY, FILEPATH_PREFIX, FILE_PATH, EXPORT_INSTRUCTION);
 
         //HISTORY Commands
-        HISTORY_TEMPLATE = new TextFlow(HISTORY, HISTORY_INSTRUCTION);
-        UNDO_TEMPLATE = new TextFlow(UNDO, UNDO_INSTRUCTION);
-        REDO_TEMPLATE = new TextFlow(REDO, REDO_INSTRUCTION);
+        HISTORY_TEMPLATE = new TextFlow(
+                suggestionLabels.history, suggestionLabels.historyInstruction
+        );
 
+        UNDO_TEMPLATE = new TextFlow(
+                suggestionLabels.undo, suggestionLabels.undoInstruction
+        );
+
+        REDO_TEMPLATE = new TextFlow(
+                suggestionLabels.redo, suggestionLabels.redoInstruction
+        );
         //HELP Command
-        HELP_TEMPLATE = new TextFlow(HELP, HELP_INSTRUCTION);
+
+        HELP_TEMPLATE = new TextFlow(
+                suggestionLabels.help, suggestionLabels.helpInstruction
+        );
+
+        //ADD Commands
+        Text namePrefix1 = new Text("n/");
+        Text name1 = new Text("NAME ");
+        Text phonePrefix1 = new Text("p/");
+        Text phone1 = new Text("PHONE ");
+        Text emailPrefix1 = new Text("e/");
+        Text email1 = new Text("EMAIL ");
+        Text organizationPrefix1 = new Text("o/");
+        Text organization1 = new Text("ORGANIZATION ");
+        Text specialisationPrefix1 = new Text("s/");
+        Text specialisation1 = new Text("SPECIALISATION");
+
+        name1.setFill(Color.GREY);
+        phone1.setFill(Color.GREY);
+        email1.setFill(Color.GREY);
+        organization1.setFill(Color.GREY);
+        specialisation1.setFill(Color.GREY);
+        ADD_MENTOR_TEMPLATE = new TextFlow(
+                suggestionLabels.addMentor,
+                namePrefix1, name1,
+                phonePrefix1, phone1,
+                emailPrefix1, email1,
+                organizationPrefix1, organization1,
+                specialisationPrefix1, specialisation1,
+                suggestionLabels.addMentorInstruction
+        );
+
+        Text namePrefix2 = new Text("n/");
+        Text name2 = new Text("NAME ");
+        Text projectNamePrefix2 = new Text("pn/");
+        Text projectName2 = new Text("PROJECT_NAME ");
+        Text subjectPrefix2 = new Text("s/");
+        Text subject2 = new Text("SUBJECT ");
+        Text locationPrefix2 = new Text("l/");
+        Text table2 = new Text("TABLE_NUMBER ");
+
+
+        name2.setFill(Color.GREY);
+        projectName2.setFill(Color.GREY);
+        subject2.setFill(Color.GREY);
+        table2.setFill(Color.GREY);
+
+        ADD_TEAM_TEMPLATE = new TextFlow(
+                suggestionLabels.addTeam,
+                namePrefix2, name2,
+                projectNamePrefix2, projectName2,
+                subjectPrefix2, subject2,
+                locationPrefix2, table2,
+                suggestionLabels.addTeamInstruction
+        );
+
+        Text namePrefix3 = new Text("n/");
+        Text name3 = new Text("NAME ");
+        Text phonePrefix3 = new Text("p/");
+        Text phone3 = new Text("PHONE ");
+        Text emailPrefix3 = new Text("e/");
+        Text email3 = new Text("EMAIL ");
+
+        name3.setFill(Color.GREY);
+        phone3.setFill(Color.GREY);
+        email3.setFill(Color.GREY);
+
+        ADD_PARTICIPANT_TEMPLATE = new TextFlow(
+                suggestionLabels.addParticipant,
+                namePrefix3, name3,
+                phonePrefix3, phone3,
+                emailPrefix3, email3,
+                suggestionLabels.addParticipantInstruction
+
+        );
+
+
+        //EDIT Commands
+        Text participantId1 = new Text("PARTICIPANT_ID ");
+        Text parameters1 = new Text("[PARAMETERS] ");
+
+        participantId1.setFill(Color.GREY);
+        parameters1.setFill(Color.GREY);
+        EDIT_PARTICIPANT_TEMPLATE = new TextFlow(suggestionLabels.editParticipant, participantId1,
+                parameters1, suggestionLabels.editParticipantInstruction
+        );
+
+        Text mentorId2 = new Text("MENTOR_ID ");
+        Text parameters2 = new Text("[PARAMETERS] ");
+
+        mentorId2.setFill(Color.GREY);
+        parameters2.setFill(Color.GREY);
+        EDIT_MENTOR_TEMPLATE = new TextFlow(suggestionLabels.editMentor, mentorId2,
+                parameters2, suggestionLabels.editMentorInstruction
+        );
+
+        Text teamId3 = new Text("TEAM_ID ");
+        Text parameters3 = new Text("[PARAMETERS] ");
+
+        teamId3.setFill(Color.GREY);
+        parameters3.setFill(Color.GREY);
+        EDIT_TEAM_TEMPLATE = new TextFlow(suggestionLabels.editTeam, teamId3,
+                parameters3, suggestionLabels.editTeamInstruction
+        );
+
+        //DELETE Commands
+        Text participantId4 = new Text("PARTICIPANT_ID ");
+
+        participantId4.setFill(Color.GREY);
+
+        DELETE_PARTICIPANT_TEMPLATE = new TextFlow(
+                suggestionLabels.deleteParticipant, participantId4,
+                suggestionLabels.deleteParticipantInstruction
+        );
+
+        Text mentorId5 = new Text("MENTOR_ID ");
+
+        mentorId5.setFill(Color.GREY);
+
+        DELETE_MENTOR_TEMPLATE = new TextFlow(
+                suggestionLabels.deleteMentor, mentorId5,
+                suggestionLabels.deleteMentorInstruction
+        );
+
+        Text teamId6 = new Text("TEAM_ID");
+
+        teamId6.setFill(Color.GREY);
+
+        DELETE_TEAM_TEMPLATE = new TextFlow(
+                suggestionLabels.deleteTeam, teamId6,
+                suggestionLabels.deleteTeamInstruction
+        );
+
+        Text participantId7 = new Text("PARTICIPANT_ID ");
+
+        participantId7.setFill(Color.GREY);
+
+
+        FIND_PARTICIPANT_TEMPLATE = new TextFlow(
+                suggestionLabels.findParticipant, participantId7,
+                suggestionLabels.findParticipantInstruction
+        );
+
+        Text mentorId8 = new Text("MENTOR_ID ");
+
+        mentorId8.setFill(Color.GREY);
+        FIND_MENTOR_TEMPLATE = new TextFlow(
+                suggestionLabels.findMentor, mentorId8, suggestionLabels.findMentorInstruction
+        );
+
+        Text teamId8 = new Text("TEAM_ID ");
+
+        teamId8.setFill(Color.GREY);
+
+        FIND_TEAM_TEMPLATE = new TextFlow(
+                suggestionLabels.findTeam, teamId8, suggestionLabels.findTeamInstruction
+        );
+
+
+        LIST_PARTICIPANT_TEMPLATE = new TextFlow(
+                suggestionLabels.listParticipant, suggestionLabels.listParticipantInstruction
+        );
+
+        LIST_MENTOR_TEMPLATE = new TextFlow(
+                suggestionLabels.listMentor, suggestionLabels.listMentorInstruction
+        );
+
+        LIST_TEAM_TEMPLATE = new TextFlow(
+                suggestionLabels.listTeam, suggestionLabels.listTeamInstruction
+        );
+
+        Text teamId9 = new Text("TEAM_ID ");
+        Text points9 = new Text("NEW_POINTS ");
+
+        teamId9.setFill(Color.GREY);
+        points9.setFill(Color.GREY);
+
+        SCORE_ADD_TEMPLATE = new TextFlow(
+                suggestionLabels.scoreAdd, teamId9,
+                points9, suggestionLabels.scoreAddInstruction
+        );
+
+        Text teamId10 = new Text("TEAM_ID ");
+        Text points10 = new Text("NEW_POINTS ");
+
+        teamId10.setFill(Color.GREY);
+        points10.setFill(Color.GREY);
+
+        SCORE_SUB_TEMPLATE = new TextFlow(
+                suggestionLabels.scoreSub, teamId10,
+                points10, suggestionLabels.scoreSubInstruction
+        );
+
+        Text teamId11 = new Text("TEAM_ID ");
+        Text newPoints11 = new Text("NEW_POINTS ");
+
+        teamId11.setFill(Color.GREY);
+        newPoints11.setFill(Color.GREY);
+
+        SCORE_SET_TEMPLATE = new TextFlow(
+                suggestionLabels.scoreSet, teamId11,
+                newPoints11, suggestionLabels.scoreSetInstruction
+        );
+
+        LEADERBOARD_TEMPLATE = new TextFlow(suggestionLabels.leaderboard, suggestionLabels.leaderboardInstruction);
+
+        Text number12 = new Text("NUMBER ");
+
+        number12.setFill(Color.GREY);
+
+        GET_TOP_TEMPLATE = new TextFlow(suggestionLabels.getTop, number12, suggestionLabels.getTopInstruction);
 
     }
 
-    /**
-     * Sets the colour for each Text object.
-     */
-    private static void initialize() {
-        //Set the instruction of each commands to cornflower blue
-        ADD_PARTICIPANT_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        ADD_MENTOR_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        ADD_TEAM_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        EDIT_PARTICIPANT_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        EDIT_MENTOR_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        EDIT_TEAM_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        FIND_PARTICIPANT_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        FIND_MENTOR_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        FIND_TEAM_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        DELETE_PARTICIPANT_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        DELETE_MENTOR_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        DELETE_TEAM_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        LIST_PARTICIPANT_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        LIST_MENTOR_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        LIST_TEAM_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        SCORE_ADD_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        SCORE_SET_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        SCORE_SUB_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        LEADERBOARD_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        GET_TOP_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-
-        EXPORT_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        IMPORT_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        HISTORY_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        UNDO_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-        REDO_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        HELP_INSTRUCTION.setFill(Color.CORNFLOWERBLUE);
-
-        //Sett the template guides to Gray
-        NAME.setFill(Color.GREY);
-        PHONE.setFill(Color.GREY);
-        EMAIL.setFill(Color.GREY);
-
-        TEAM_ID.setFill(Color.GREY);
-        PARTICIPANT_ID.setFill(Color.GREY);
-        MENTOR_ID.setFill(Color.GREY);
-
-        NUMBER.setFill(Color.GREY);
-        POINTS.setFill(Color.GREY);
-        NEW_POINTS.setFill(Color.GREY);
-
-        CSV_PATH.setFill(Color.GREY);
-        PARAMETERS.setFill(Color.GREY);
-        ORGANIZATION.setFill(Color.GREY);
-        SPECIALISATION.setFill(Color.GREY);
-        PROJECT_NAME.setFill(Color.GREY);
-        SUBJECT.setFill(Color.GREY);
-        TABLE.setFill(Color.GREY);
-        ENTITY.setFill(Color.GREY);
-
-    }
 
     /**
      * Returns a String that represents the template form of commands.
      * Only prefix and commands are returned.
      * Constants that are used to guide the user(e.g NAME, PHONE_NUMBER) are not returned).
      */
-    public static String getString(TextFlow template) {
+    public static final String getString(TextFlow template) {
         String result = template.getChildren()
                 .stream()
                 .map(textElement -> (Text) textElement)
@@ -311,5 +321,6 @@ public class SuggestionTemplates {
         return result;
 
     }
+
 
 }
