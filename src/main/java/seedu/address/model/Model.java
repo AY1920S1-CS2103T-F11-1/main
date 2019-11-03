@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
-
 import javafx.collections.transformation.SortedList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -189,6 +189,7 @@ public interface Model {
     /**
      * Undoes the effects of {@code numToUndo} previous command(s) and returns the model to the state
      * prior to the execution of these command(s).
+     *
      * @param numToUndo number of previous commands to undo.
      * @throws AlfredModelHistoryException this is thrown when an error is encountered trying to alter the model
      *                                     state while undoing the previous commands.
@@ -198,6 +199,7 @@ public interface Model {
     /**
      * Redoes the effects of the {@code numToRedo} next command(s) and returns the model to the state
      * after the execution of these command(s).
+     *
      * @param numToRedo number of next commands to redo.
      * @throws AlfredModelHistoryException this is thrown when an error is encountered trying to alter the model
      *                                     state while redoing the next commands.
@@ -209,7 +211,7 @@ public interface Model {
      * by the user.
      *
      * @return String representing the previously executed commands that can be
-     *         undone by the user.
+     * undone by the user.
      */
     String getCommandHistoryString();
 
@@ -232,88 +234,13 @@ public interface Model {
     ArrayList<CommandRecord> getCommandHistory();
 
     /**
-     * Returns the size of participant list located in the Model Manager.
-     *
-     * @return size Number of Participants
+     * Records the
+     * execution of
+     * the command.
+     * This is for
+     * the Command
+     * Navigation feature.
      */
-    int getParticipantListSize();
-
-    /**
-     * Returns the size of team list located in the Model Manager.
-     *
-     * @return size Number of Teams
-     */
-    int getTeamListSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Education.
-     *
-     * @return number Number of Mentors
-     */
-    long getEduTeamSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Environment.
-     *
-     * @return number Number of Mentors
-     */
-    long getEnvTeamSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Social.
-     *
-     * @return number Number of Mentors
-     */
-    long getSocialTeamSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Health.
-     *
-     * @return number Number of Mentors
-     */
-    long getHealthTeamSize();
-
-    /**
-     * Returns the size of Mentor list located in the Model Manager.
-     *
-     * @return size Number of Mentors
-     */
-    int getMentorListSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Education.
-     *
-     * @return number Number of Mentors
-     */
-    long getEduMentorSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Environment.
-     *
-     * @return number Number of Mentors
-     */
-    long getEnvMentorSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Social.
-     *
-     * @return number Number of Mentors
-     */
-    long getSocialMentorSize();
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Health.
-     *
-     * @return number Number of Mentors
-     */
-    long getHealthMentorSize();*
-
-    Records the
-    execution of
-    the command.
-    This is for
-    the Command
-    Navigation feature.*/
 
     void recordCommandExecution(String commandInputString);
 

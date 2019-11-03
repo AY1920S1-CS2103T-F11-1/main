@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Statistics;
 import seedu.address.ui.UiPart;
 
@@ -60,20 +59,24 @@ public class StatisticsListPanel extends UiPart<Region> {
         totalParticipantsLabel.setText(String.valueOf(statistics.getTotalParticipants()));
 
         //Set the data of the Bar Chart for teamBarChart
-        XYChart.Series<String, Number> subjectSeries = new XYChart.Series();
-        subjectSeries.getData().add(new XYChart.Data("Environmental", statistics.getEnvTeams()));
-        subjectSeries.getData().add(new XYChart.Data("Social", statistics.getSocialTeams()));
-        subjectSeries.getData().add(new XYChart.Data("Health", statistics.getHealthTeams()));
-        subjectSeries.getData().add(new XYChart.Data("Education", statistics.getEduTeams()));
+        XYChart.Series<String, Number> subjectSeries = new XYChart.Series<String, Number>();
+        subjectSeries.getData().add(new XYChart.Data<String, Number>("Environmental", statistics.getEnvTeams()));
+        subjectSeries.getData().add(new XYChart.Data<String, Number>("Social", statistics.getSocialTeams()));
+        subjectSeries.getData().add(new XYChart.Data<String, Number>("Health", statistics.getHealthTeams()));
+        subjectSeries.getData().add(new XYChart.Data<String, Number>("Education", statistics.getEduTeams()));
         teamBarChart.getData().add(subjectSeries);
 
         //Set the data of the Bar Chart for mentorBarChart
-        XYChart.Series specialisationSeries = new XYChart.Series();
-        specialisationSeries.getData().add(new XYChart.Data("Environmental", statistics.getEnvMentors()));
-        specialisationSeries.getData().add(new XYChart.Data("Social", statistics.getSocialMentors()));
-        specialisationSeries.getData().add(new XYChart.Data("Health", statistics.getHealthMentors()));
-        specialisationSeries.getData().add(new XYChart.Data("Education", statistics.getEduMentors()));
+        XYChart.Series<String, Number> specialisationSeries = new XYChart.Series<String, Number>();
+        specialisationSeries.getData().add(
+                new XYChart.Data<String, Number>("Environmental", statistics.getEnvMentors())
+        );
+        specialisationSeries.getData().add(new XYChart.Data<String, Number>("Social", statistics.getSocialMentors()));
+        specialisationSeries.getData().add(new XYChart.Data<String, Number>("Health", statistics.getHealthMentors()));
+        specialisationSeries.getData().add(new XYChart.Data<String, Number>("Education", statistics.getEduMentors()));
+
         mentorBarChart.getData().add(specialisationSeries);
+
 
     }
 

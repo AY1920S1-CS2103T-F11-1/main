@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
@@ -227,6 +228,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays the statistics of total number or entities and its distribution.
+     */
     @FXML
     private void displayStatistics() {
         logger.info("Statistics object gotten from Logic is: " + logic.getStatistics());

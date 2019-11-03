@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -13,12 +14,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AlfredParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.CommandRecord;
 import seedu.address.model.Model;
 import seedu.address.model.Statistics;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
+import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 
 /**
@@ -119,22 +120,56 @@ public class LogicManager implements Logic {
     public Statistics getStatistics() {
         Statistics result = new Statistics();
 
-        result.setTotalParticipants(model.getParticipantListSize());
-        result.setTotalTeams(model.getTeamListSize());
-        result.setTotalMentors(model.getMentorListSize());
-
-        result.setEduTeams(model.getEduTeamSize());
-        result.setEnvTeams(model.getEnvTeamSize());
-        result.setSocialTeams(model.getSocialTeamSize());
-        result.setHealthTeams(model.getHealthTeamSize());
-
-        result.setEduMentors(model.getEduMentorSize());
-        result.setEnvMentors(model.getEnvMentorSize());
-        result.setSocialMentors(model.getSocialMentorSize());
-        result.setHealthMentors(model.getHealthMentorSize());
-
+        setParticipantStatistics(result);
+        setTeamStatistics(result);
+        setMentorStatistics(result);
         return result;
 
+    }
+
+
+    private void setParticipantStatistics(Statistics statistics) {
+        FilteredList<Participant> participantList = model.getFilteredParticipantList();
+        int numParticipants = participantList.size();
+
+        statistics.setTotalParticipants(numParticipants);
+    }
+
+
+    private void setMentorStatistics(Statistics statistics) {
+        FilteredList<Mentor> mentorList = model.getFilteredMentorList();
+
+        int numMentors = mentorList.size();
+        long numHealthMentor = mentorList.stream().filter(m -> m.getSubject().equals(SubjectName.HEALTH)).count();
+        long numEnvMentors = mentorList.stream().filter(m -> m.getSubject().equals(SubjectName.ENVIRONMENTAL)).count();
+        long numSocialMentors = mentorList.stream().filter(m -> m.getSubject().equals(SubjectName.SOCIAL)).count();
+        long numEduTeams = mentorList.stream().filter(m -> m.getSubject().equals(SubjectName.EDUCATION)).count();
+
+
+        statistics.setTotalMentors(numMentors);
+        statistics.setEduMentors(numEduTeams);
+        statistics.setEnvMentors(numEnvMentors);
+        statistics.setSocialMentors(numSocialMentors);
+        statistics.setHealthMentors(numHealthMentor);
+    }
+
+
+    private void setTeamStatistics(Statistics statistics) {
+        FilteredList<Team> teamList = model.getFilteredTeamList();
+
+        int numTeams = teamList.size();
+        long numHealthTeams = teamList.stream().filter(t -> t.getSubject().equals(SubjectName.HEALTH)).count();
+        long numEnvTeams = teamList.stream().filter(t -> t.getSubject().equals(SubjectName.ENVIRONMENTAL)).count();
+        long numSocialTeams = teamList.stream().filter(t -> t.getSubject().equals(SubjectName.SOCIAL)).count();
+        long numEduTeams = teamList.stream().filter(t -> t.getSubject().equals(SubjectName.EDUCATION)).count();
+
+
+        statistics.setTotalTeams(numTeams);
+        statistics.setEduTeams(numEduTeams);
+        statistics.setEnvTeams(numEnvTeams);
+        statistics.setSocialTeams(numSocialTeams);
+        statistics.setHealthTeams(numHealthTeams);
+    }
     public String getPrevCommandString() {
         return model.getPrevCommandString();
     }

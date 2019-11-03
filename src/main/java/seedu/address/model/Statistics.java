@@ -1,5 +1,8 @@
 package seedu.address.model;
 
+/**
+ * Represents all the Statistics of the System, encapsulated in an onject.
+ */
 public class Statistics {
 
     private int totalParticipants;

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.CommandRecord;
 import seedu.address.model.Statistics;
 import seedu.address.model.entity.Mentor;
@@ -23,7 +23,7 @@ import seedu.address.model.entity.Team;
 public interface Logic {
     /**
      * Executes the command and returns the result.
-     * 
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
@@ -31,22 +31,34 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException, AlfredModelHistoryException;
 
-    /** Returns an unmodifiable view of the filtered list of Participants */
+    /**
+     * Returns an unmodifiable view of the filtered list of Participants
+     */
     ObservableList<Participant> getFilteredParticipantList();
 
-    /** Returns an unmodifiable view of the filtered list of Teams */
+    /**
+     * Returns an unmodifiable view of the filtered list of Teams
+     */
     ObservableList<Team> getFilteredTeamList();
 
-    /** Returns an unmodifiable view of the filtered list of Mentors */
+    /**
+     * Returns an unmodifiable view of the filtered list of Mentors
+     */
     ObservableList<Mentor> getFilteredMentorList();
 
-    /** Returns an unmodifiable view of the sorted list of Teams */
+    /**
+     * Returns an unmodifiable view of the sorted list of Teams
+     */
     ObservableList<Team> getSortedTeamList();
 
-    /** Returns an unmodifiable view of the sorted list of the top K Teams */
+    /**
+     * Returns an unmodifiable view of the sorted list of the top K Teams
+     */
     ObservableList<Team> getTopKTeams();
 
-    /** Returns the Record of all Commands entered by User */
+    /**
+     * Returns the Record of all Commands entered by User
+     */
     ArrayList<CommandRecord> getCommandHistory();
 
     /**
@@ -84,7 +96,8 @@ public interface Logic {
      */
     List<String> getRedoCommandHistory();
 
-    public Statistics getStatistics();
+    Statistics getStatistics();
+
 
     /**
      * Gets string of previous command executed.
@@ -93,7 +106,7 @@ public interface Logic {
 
     /**
      * Gets string of next command executed.
-     * 
+     *
      * @return
      */
     String getNextCommandString();

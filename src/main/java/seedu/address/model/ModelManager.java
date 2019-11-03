@@ -173,8 +173,8 @@ public class ModelManager implements Model {
 
         try {
             this.history = new ModelHistoryManager(this.participantList, ParticipantList.getLastUsedId(),
-                                                   this.mentorList, MentorList.getLastUsedId(),
-                                                   this.teamList, TeamList.getLastUsedId());
+                    this.mentorList, MentorList.getLastUsedId(),
+                    this.teamList, TeamList.getLastUsedId());
         } catch (AlfredModelHistoryException e) {
             logger.severe("Unable to initialise ModelHistoryManager.");
         }
@@ -264,16 +264,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns the size of participant list located in the Model Manager.
-     *
-     * @return size Number of Participants
-     */
-    public int getParticipantListSize() {
-        return this.participantList.getSize();
-    }
-
-
-    /**
      * Returns the team list located in the Model Manager.
      *
      * @return ReadableEntityList
@@ -283,52 +273,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns the size of team list located in the Model Manager.
-     *
-     * @return size Number of Teams
-     */
-    public int getTeamListSize() {
-        return this.teamList.getSize();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Education.
-     *
-     * @return number Number of Mentors
-     */
-    public long getEduTeamSize() {
-        return this.teamList.getEduTeam();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Environment.
-     *
-     * @return number Number of Mentors
-     */
-    public long getEnvTeamSize() {
-        return this.teamList.getEnvTeam();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Social.
-     *
-     * @return number Number of Mentors
-     */
-    public long getSocialTeamSize() {
-        return this.teamList.getSocialTeam();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Health.
-     *
-     * @return number Number of Mentors
-     */
-    public long getHealthTeamSize() {
-        return this.teamList.getHealthTeam();
-    }
-
-
-    /**
      * Returns the mentor list located in the Model Manager.
      *
      * @return ReadableEntityList
@@ -336,52 +280,6 @@ public class ModelManager implements Model {
     public ReadOnlyEntityList getMentorList() {
         return this.mentorList;
     }
-
-    /**
-     * Returns the size of Mentor list located in the Model Manager.
-     *
-     * @return size Number of Mentors
-     */
-    public int getMentorListSize() {
-        return this.mentorList.getSize();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Education.
-     *
-     * @return number Number of Mentors
-     */
-    public long getEduMentorSize() {
-        return this.mentorList.getEduMentor();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Environment.
-     *
-     * @return number Number of Mentors
-     */
-    public long getEnvMentorSize() {
-        return this.mentorList.getEnvMentor();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Social.
-     *
-     * @return number Number of Mentors
-     */
-    public long getSocialMentorSize() {
-        return this.mentorList.getSocialMentor();
-    }
-
-    /**
-     * Returns the number of Mentors who specialises in the field of Health.
-     *
-     * @return number Number of Mentors
-     */
-    public long getHealthMentorSize() {
-        return this.mentorList.getHealthMentor();
-    }
-
 
     public FilteredList<Participant> getFilteredParticipantList() {
         return this.filteredParticipantList;
@@ -919,7 +817,6 @@ public class ModelManager implements Model {
      * in descending order of their score, implementing additional Comparators {@code comparators}
      * for tie-breaking if specified by the user. Randomly selects the winner if two teams are still
      * tied after the additional comparators.
-     *
      */
     public void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators) {
         setSimpleLeaderboard(comparators);
@@ -932,7 +829,6 @@ public class ModelManager implements Model {
      * Sorts the sortedTeam list by the value of the team's score and additional Comparators {@code comparators}
      * if specified by the user, and filters the top {@code k} teams, inclusive of ties,
      * into {@code topKTeams} list.
-     *
      */
     public final void setTopK(int k, ArrayList<Comparator<Team>> comparators) {
         initialiseSortedList();
@@ -952,7 +848,6 @@ public class ModelManager implements Model {
      * Sorts the sortedTeam list by the value of the team's score and additional Comparators {@code comparators}
      * if specified by the user, and filters the top {@code k} teams into {@code topKTeams} list, resolving ties
      * on a random basis.
-     *
      */
     public final void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators) {
         setSimpleLeaderboard(comparators);
@@ -1043,6 +938,7 @@ public class ModelManager implements Model {
     /**
      * This method will undo the effects of the previous {@code numToUndo} command(s) executed and return the state of
      * the ModelManager to the state where these previous command(s) executed is undone.
+     *
      * @param numToUndo number of commands in ModelHistory to undo.
      * @throws AlfredModelHistoryException
      */
@@ -1062,6 +958,7 @@ public class ModelManager implements Model {
     /**
      * This method will return the ModelManager to the state where the next {@code numToRedo} command(s) executed
      * is/are redone.
+     *
      * @param numToRedo number of commands in ModelHistory to redo.
      * @throws AlfredModelHistoryException
      */

@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.Scene?>
-<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.stage.Stage?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="Alfred - The Hackathon Butler" minWidth="700" minHeight="700" onCloseRequest="#handleExit">
     <icons>
@@ -75,15 +69,11 @@
                                             <FontAwesomeIconView fill="#3083cc" glyphName="USER_SECRET" size="17"/>
                                         </graphic>
                                     </JFXButton>
-<<<<<<< HEAD
-                                    <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0"
+                                    <JFXButton fx:id="leaderboardButton" id="leaderboardButton"
+                                               alignment="BASELINE_LEFT" graphicTextGap="40.0"
                                                layoutX="3.0" layoutY="248.0" prefHeight="60.0"
-                                               prefWidth="160.0" text="Leaderboard">
-=======
-                                    <JFXButton fx:id="leaderboardButton" id="leaderboardButton" alignment="BASELINE_LEFT" graphicTextGap="40.0"
-                                               layoutX="3.0" layoutY="240.0" prefHeight="60.0"
                                                prefWidth="160.0" text="Leaderboard" onAction="#displayLeaderboard">
->>>>>>> upstream/master
+
                                         <graphic>
                                             <FontAwesomeIconView fill="#3083cc" glyphName="TROPHY" size="17"/>
                                         </graphic>
@@ -96,32 +86,7 @@
                                             <FontAwesomeIconView fill="#3083cc" glyphName="CLONE" size="17"/>
                                         </graphic>
                                     </JFXButton>
-                                    <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="5.0"
-                                               layoutY="368.0" prefHeight="60.0" prefWidth="160.0"
-                                               text="Food">
-                                        <graphic>
-                                            <FontAwesomeIconView fill="#3083cc" glyphName="CUTLERY" size="17"/>
-                                        </graphic>
-                                    </JFXButton>
-                                    <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0"
-                                               layoutY="428.0" prefHeight="60.0" prefWidth="160.0"
-                                               text="Swag">
-                                        <graphic>
-                                            <FontAwesomeIconView fill="#3083cc" glyphName="SHOPPING_BASKET" size="17"/>
-                                        </graphic>
-                                    </JFXButton>
-                                    <JFXButton alignment="BASELINE_LEFT" graphicTextGap="40.0" layoutX="3.0"
-                                               layoutY="488.0" prefHeight="60.0" prefWidth="160.0"
-                                               text="Inventory">
-                                        <graphic>
-                                            <FontAwesomeIconView fill="#3083cc" glyphName="ARCHIVE" size="17" text=""/>
-                                        </graphic>
-                                    </JFXButton>
                                 </children>
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
                             </AnchorPane>
                         </left>
                         <center>
