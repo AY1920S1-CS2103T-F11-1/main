@@ -3,7 +3,7 @@ This is more specifically for styling of the bar chart
 */
 
 .chart-title {
--fx-text-fill: #ffffff;
+-fx-text-fill: #cef9fb;
   -fx-font-size: 16px;
 }
 
@@ -11,21 +11,43 @@ This is more specifically for styling of the bar chart
     -fx-background-color: transparent;
 }
 
-.data1.chart-bar, .data2.chart-bar, .data3.chart-bar, .data4.chart-bar, .data5.chart-bar{
-    -fx-background-color: #ffffff;
+.data0.chart-bar { -fx-bar-fill: #0054C7; }
+.data1.chart-bar { -fx-bar-fill: #1583CC; }
+.data2.chart-bar { -fx-bar-fill: #2380FF; }
+.data3.chart-bar { -fx-bar-fill: #1BA9E9; }
+
+.chart-bar {
+
+    -fx-background-color:   linear-gradient(derive(-fx-bar-fill,-30%), derive(-fx-bar-fill,-40%)),
+                                                      linear-gradient(derive(-fx-bar-fill,80%), derive(-fx-bar-fill, 0%)),
+                                                      linear-gradient(derive(-fx-bar-fill,30%), derive(-fx-bar-fill,-10%));
+    -fx-background-insets: 0;
 }
 
-.chart-bar-vertical-grid-lines {
-    -fx-stroke: # #3B394A;
+
+
+.axis {
+    -fx-font-size: 20px;
+    -fx-tick-label-fill: #cef9fb;
+    -fx-font-family: Arial;
+    -fx-tick-length: 10;
+    -fx-minor-tick-length: 7;
 }
-.chart-bar-horizontal-grid-lines {
-    -fx-stroke: # #3B394A;
-}
+
+
+
+
+
 
 
 .chart-vertical-grid-lines {
-    -fx-stroke: #ffffff;
+    -fx-stroke: #858181;
 }
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #858181;
+}
+
 
 .chart-plot-background {
     -fx-background-color: # #3F3D48;
