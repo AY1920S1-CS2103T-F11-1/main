@@ -19,15 +19,37 @@ By: `Team Alfred`      Since: `Sept 2019`      Licence: `MIT`
 
 == Introduction
 
-Alfred is a desktop application to help Hackathons' Human Resource Managers organise a Hackathon event more efficiently and in an organized fashion. Currently, hackathon organizers have to keep track of various different groups of individuals on several different platforms in order to organize this single event. Alfred allows them to ease the  a hackathon's organization by bringing in all those platforms into a single app, thereby offering them greater orderliness and convenience in organizing their event.
+Alfred is a desktop application to help Hackathons' Human Resource Managers organise a Hackathon event more efficiently
+and in an organized fashion. Currently, organising a Hackathon is no mean feat, as it requires coordinating
+across different stakeholders and managing different sources of data (such as participant and mentor information).
+Instead of managing this process across different media such as Excel spreadsheets and emails, Alfred allows
+you to coordinate everything in a single, convenient-to-use platform.
 
-Any help on the development of Alfred would be greatly appreciated, and there are a couple of ways in which you could; either by contributing to Alfred's codebase by expanding its features or, testing and improving it's current features. This guide seeks to not only kick-start your journey as a contributor to Alfred by quickly getting you up to speed with how Alfred's codebase and inner workings function, but also hopes serve as a useful reference to current contributors in times or confusion or difficulties.
+Alfred is a Command Line Interface (CLI) application packaged with a Graphical User Interface (GUI). This means that users are expected
+to interact with Alfred mainly through the Command Line, but each command executed will invoke a visual response
+in Alfred.
+
+Any help on the development of Alfred would be greatly appreciated,
+and there are a couple of ways for you to do so
+- Contribute to Alfred's codebase by expanding its features
+- Improve test coverage
+- Propose and implement improvements to current features.
+
+This guide seeks to not only kick-start your journey as a contributor to Alfred by quickly getting you
+up to speed with how Alfred's codebase and inner workings function, but also hopes to serve as
+a useful reference to current contributors in times or confusion or when faced with difficulties.
 
 == Setting up
 
 Refer to the guide <<SettingUp#, here>>.
 
 == Design
+Alfred was designed with Object-Oriented Programming (OOP) principles in mind, with a focus on respecting
+the SOLID principles. This section serves to give a description of the major components in the architecture
+of Alfred. Subsequent sections will provide a lot more information on the inner workings of individual components
+and how different components interact with each other for Alfred's various features.
+
+
 [NOTE]
 Image here to the updated in the later milestones.
 
@@ -38,10 +60,6 @@ Image here to the updated in the later milestones.
 image::ArchitectureDiagram.png[]
 
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
-
-[TIP]
-The `.puml` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder.
-Refer to the <<UsingPlantUml#, Using PlantUML guide>> to learn how to create and edit diagrams.
 
 `Main` has two classes called link:{repoURL}/src/main/java/seedu/address/Main.java[`Main`] and link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
 
@@ -158,24 +176,59 @@ image::EntityListClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
-The Storage component transforms the AB3 implementation in order to support the storage of the 3 main EntityLists (ParticipantList, MentorList and TeamList), as these form the bulk of our data. In future versions, Storage would need to be udpated to support other data for Alfred as well (such as Food and Swag, which are scheduled for release in v2.0).
+The Storage component handles the complexities of actually storing to and reading from disc the different data types.The Storage component transforms the AB3 implementation in order to support the storage of the 3
+main EntityLists (ParticipantList, MentorList and TeamList). The 3 EntityLists form the main data objects
+in Alfred, and Storage's purpose is to transform each of the EntityLists into a format that is JSON-Serializable
+and store the data for each EntityList in separate JSON files.
+
+The Storage component handles the complexities of actually storing to and reading from disc the different data types.
+
+[NOTE]
+The Food- and Swag-related features scheduled for release in v2.0, will require some changes in Storage to be made.
+To be more specific, Storage would need to be updated to support the storage of these other essential data, above and beyond the
+current support for the storage of the EntityLists.
 
 .Structure of the Storage Component
 image::AlfredStorageClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/AlfredStorage.java[`AlfredStorage.java`]
 
-The `Storage` component:
+The `Storage` component saves and reads 4 different data types:
 
-* can save `UserPref` objects in json format and read it back.
-* can save the `ParticipantList` data in json format and read it back.
-* can save the `MentorList` data in json format and read it back.
-* can save the `TeamList` data in json format and read it back.
+1. `UserPrefs`: User Preferences for the Alfred Application (such as the Window Size of the application)
+2. `ParticipantList`: Information of all the Participants in Alfred
+3. `MentorList`: Information of all the Mentors in Alfred
+4. `TeamList`: Information of all the Teams in Alfred
+
+All 4 data types are stored to disc in JSON files. The data is read from the JSON files when Alfred is first
+start up. It is also important to note that saving is automatic in Alfred. This means that after the execution of each
+command, the data in Alfred will automatically be saved to disk. This frees the user from constantly calling
+some form of saving functionality, and ensures that the information is storage is as up-to-date as possible.
+
+[NOTE]
+When reading the JSON files from memory at application start-up, any kind of data corruption in the JSON files
+will cause Alfred to completely discard the file and re-initialise the data type. If there are missing fields
+in the JSON file, invalid values in the individual fields or any kind of error while reading the data from the JSON
+file, then Alfred will re-initialise the data type with an empty data type, persisting this newly initialised data type object
+to disc. This is to prevent tampering of the data - inadvertent or malicious - from affecting the integrity
+of the data in Alfred.
+
+Interacting with the Storage Component:
+
+* The Storage Component uses the Facade Design Pattern, and exposes the functionality of all the Storage classes
+to the Model Component solely through the AlfredStorage interface. The exposed functionality was deliberately kept
+simple, allowing the following methods for each of the 4 data types:
+
+    1. `getFilePath()`: Retrieves the location of the JSON file
+    2. `save()`: saves the data to the JSON file
+    3. `read()`: reads the data from the JSON file
+
+*  The Storage component handles the complexities of actually storing to and reading from disc the different data types.
 
 Details:
 
-* Each Entity has a class to deal with it (i.e. for Participant, you have `ParticipantListStorage`, `JsonParticipantListStorage` etc.). Hence, for the rest of this explanation, Entity will be used as a generic term for Participants/Mentors/Teams.
-* The class implementing the `EntityListStorage` is `JsonTeamEntityStorage`. This class is responsible for providing the read/save functionality for the entire EntityList to `AlfredStorageManager`.
+* Each EntityList has a designated Storage class (i.e. for Participant, you have `ParticipantListStorage`, `JsonParticipantListStorage` etc.). Hence, for the rest of this explanation, Entity will be used as a generic term for Participants/Mentors/Teams.
+* The class implementing the `EntityListStorage` interface is `JsonTeamEntityStorage`. This class is responsible for providing the read/save functionality for the entire EntityList to `AlfredStorageManager`.
 * In order to save the entire `EntityList` in JSON, the class `JsonSerializableEntityList` implements the logic for serialization. This is achieved by converting the `EntityList` to a `List<JsonAdaptedEntity>`.
 * In order to save each individual Entity, the Entity is in turn converted to a `JsonAdaptedEntity` object, which has methods for converting the serialized object back into an Entity object for `AlfredStorage` to return to `ModelManager`.
 
