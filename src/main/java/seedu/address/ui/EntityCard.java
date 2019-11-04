@@ -23,7 +23,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Mentor;
@@ -136,7 +135,7 @@ public class EntityCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(pt -> pt.getName().toString()))
                 .forEach(p -> participantPane.getChildren().add(new Label(p.getName().toString())));
         Optional<Mentor> teamMentor = team.getMentor();
-        Label mentorLabel =  new Label(
+        Label mentorLabel = new Label(
                 teamMentor.isEmpty()
                         ? "Mentor not assigned" : "Mentor: " + teamMentor.get().getName().toString());
         mentorLabel.setStyle("-fx-background-color: #827f9c");
@@ -157,7 +156,7 @@ public class EntityCard extends UiPart<Region> {
         membersPane.getChildren().add(new Label("Members: "));
 
         logger.info("Size of membersPane before adding Participants: " + membersPane.getChildren().size());
-        participants.stream().forEach(p -> membersPane.getChildren().add(new Label(p.getName().toString()  + " | ")));
+        participants.stream().forEach(p -> membersPane.getChildren().add(new Label(p.getName().toString() + " | ")));
         this.type = PrefixType.T;
         addScoreIcon(team);
     }
