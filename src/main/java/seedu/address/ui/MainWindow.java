@@ -153,7 +153,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the handlers for the events generated whenever the up and down arrow keys are pressed.
+     * Sets the handlers for the events generated whenever the alt modifier key, as well
+     * as the up/down arrow keys are pressed.
      */
     private void setCommandNavigationHandler() {
         this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
