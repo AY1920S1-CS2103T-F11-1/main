@@ -1,20 +1,22 @@
-{
-    -fx-primary : #2A2E37;
-    -fx-secondary : #FFFF8D;
-    -fx-primarytext : #B2B2B2;
-    -fx-blue: #1976D2;
-    -fx-red: #FF0000;
-    -fx-color-1:#1976D2;
+
+
+.background {
+    -fx-background-color: #000000;
+    background-color: #000000;
 }
 
-.root{
-    -fx-background-color: -fx-primary;
+
+.iconBar {
+   -fx-background-color: #000000;
 }
 
-/*.background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file
+.JFXButton {
+ -fx-background-color: #fffff;
+ --fx-text-fill: #000000;
+      -fx-opacity: 0.9;
 }
+
+
 
 .label {
     -fx-font-size: 11pt;
@@ -223,7 +225,8 @@
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java
+ */
 
 .button {
     -fx-padding: 5 22 5 22;
@@ -363,4 +366,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
-*/
+
