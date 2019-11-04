@@ -327,6 +327,8 @@ public class AlfredParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
+    }
+
     /**
      * Find the type of search we are going to perform.
      *
