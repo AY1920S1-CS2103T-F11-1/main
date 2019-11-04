@@ -10,14 +10,13 @@
 <?import javafx.scene.text.*?>
 <?import javafx.stage.*?>
 
-<?import java.net.URL?>
 <fx:root minHeight="700" minWidth="700" onCloseRequest="#handleExit" title="Alfred - The Hackathon Butler" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/alfred_icon.png" />
     </icons>
     <scene>
         <Scene fill="#292734">
-            <AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: transparent;">
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1200.0" style="-fx-background-color: transparent;">
                 <children>
                     <BorderPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <left>
