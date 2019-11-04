@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="555.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="555.0" prefWidth="520.0" stylesheets="@BarChart.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane prefHeight="545.0" prefWidth="637.0" style="-fx-background-color: #292734;">
             <columnConstraints>
@@ -21,7 +21,7 @@
             <children>
                 <HBox prefHeight="134.0" prefWidth="520.0" GridPane.columnSpan="2">
                     <children>
-                        <VBox prefHeight="185.0" prefWidth="172.0" style="-fx-background-color: #3F3D48;">
+                        <VBox prefHeight="175.0" prefWidth="165.0" style="-fx-background-color: #3F3D48;">
                             <children>
                                 <Label alignment="TOP_CENTER" prefHeight="36.0" prefWidth="172.0" text="Total" textAlignment="CENTER" textFill="WHITE">
                                     <font>
@@ -49,9 +49,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                         </VBox>
-                        <VBox prefHeight="172.0" prefWidth="439.0">
+                        <VBox prefHeight="172.0" prefWidth="446.0" style="-fx-background-color: #3F3D48;">
                             <children>
-                                <BarChart fx:id="teamBarChart" prefHeight="172.0" prefWidth="377.0" style="-fx-background-color: #3F3D48;" title="Team Distribution(By Subject)">
+                                <BarChart fx:id="teamBarChart" prefHeight="172.0" prefWidth="377.0" title="Team Distribution(By Subject)">
                                     <xAxis>
                                         <CategoryAxis fx:id="subjectAxis" side="BOTTOM" />
                                     </xAxis>

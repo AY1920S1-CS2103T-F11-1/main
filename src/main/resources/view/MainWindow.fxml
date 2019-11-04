@@ -15,7 +15,7 @@
         <Image url="@/images/alfred_icon.png" />
     </icons>
     <scene>
-        <Scene fill="#292734" stylesheets="@DarkTheme.css">
+        <Scene fill="#292734" stylesheets="@BarChart.css">
             <AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: transparent;">
                 <children>
                     <BorderPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
