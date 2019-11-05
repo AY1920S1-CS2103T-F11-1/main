@@ -349,21 +349,22 @@ image::UndoRedoState0.png[]
 
 
 This is what happens after each step:
-1. AddParticipantCommand: `add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com`
+
+__ Step 1. AddParticipantCommand: `add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com` __
 
 .Initial State of `ModelHistoryManager`
 image::UndoRedoState1.png[]
 
 A new `ModelHistoryRecord` is created to reflect the state of the data in Alfred after the execution of the AddParticipantCommand.
 
-2. AddMentorCommand: `add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social`
+__ Step 2. AddMentorCommand: `add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social` __
 
 .Initial State of `ModelHistoryManager`
 image::UndoRedoState2.png[]
 
 A new `ModelHistoryRecord` is created to reflect the state of the data in Alfred after the execution of the AddMentorCommand.
 
-3. ListParticipantCommand: `list participants`
+__ Step 3. ListParticipantCommand: `list participants` __
 
 .Initial State of `ModelHistoryManager`
 image::UndoRedoState3.png[]
@@ -371,7 +372,7 @@ image::UndoRedoState3.png[]
 Note that no new `ModelHistoryRecord` is created because the ListParticipantCommand does not alter the state of the data in Alfred.
 Hence, it does not implement the TrackableState interface.
 
-4. UndoCommand: `undo 2`
+__ Step 4. UndoCommand: `undo 2` __
 
 .Initial State of `ModelHistoryManager`
 image::UndoRedoState4.png[]
@@ -381,7 +382,7 @@ at the zero-th index.
 
 Note that this means that `undo 3` would throw an error, as you cannot move beyond the very first `ModelHistoryRecord` in `ModelHistoryManager`.
 
-5. AddTeamCommand: `add team n/Justice League s/Social pn/BetterThanAvengers l/12`
+__ Step 5. AddTeamCommand: `add team n/Justice League s/Social pn/BetterThanAvengers l/12` __
 
 .Initial State of `ModelHistoryManager`
 image::UndoRedoState5.png[]
