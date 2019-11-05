@@ -390,7 +390,7 @@ Note that the execution of a new command will invalidate the `ModelHistoryRecord
 data states are the result of transformations that have already been undone, so it is not valid to be able to `redo` to them.
 
 ==== Design Considerations
-When designing the undo/redo feature, there were some design considerations to take note of:
+When designing the undo/redo feature, there were some design considerations to take note of.
 
 ===== Aspect: How Undo/Redo Executes
 * **Alternative 1 (current choice):** Saves the entire data state of Alfred in memory.
@@ -465,9 +465,17 @@ image::CommandHistoryNavigationArrowKeyInvocation.png[]
 An analogous process is executed when the ALT+DOWN arrow keys are pressed.
 
 ==== Design Considerations
-The following are some design considerations for the Command History Navigation feature:
+The following are some design considerations for the Command History Navigation feature.
 
+===== Aspect: Limitation of Command History Size
+In order to ensure that `CommandHistoryManager` does not occupy an increasingly large portion of memory as more and more
+commands are executed, it is necessary to limit the number of commands that are stored. Otherwise, Alfred's performance
+will suffer as more commands are executed.
 
+==== Aspect: Usage of Arrow Keys
+Most CLI applications with such a Command History Navigation feature would use the UP/DOWN arrow keys directly, but the UP/DOWN
+arrow keys have been mapped for a different use in Alfred. Hence, we decided to use the ALT modifier key for the feature. It is
+an inconvenience, but likely a minor one.
 
 
 // tag::dataencryption[]
