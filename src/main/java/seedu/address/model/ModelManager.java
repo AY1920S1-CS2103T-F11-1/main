@@ -792,11 +792,20 @@ public class ModelManager implements Model {
     //=========== Leader-Board methods ==================================================================
 
     /**
-     * Clears up any formatting and sorting from the sorted list and resets it to its
-     * original form.
+     * Resets the sorted list of teams to its original form without any changes to sorting order so that
+     * new sorting orders in {@code comparators} can be applied applied to the sorted list to determine
+     * a new form of the leader board.
+     *
      */
-    private void initialiseSortedList() {
+    private void setSortedTeamList(ArrayList<Comparator<Team>> comparators) {
         this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
+        for (Comparator<Team> comparator : comparators) {
+            this.sortedTeam.setComparator(comparator);
+        }
+        // Set the comparator to rank by score last as in-place sorting is taking place, so ranking by score
+        // in the end will rank teams by their score and retain the tie-breaks obtained from the previously applied
+        // comparators.
+        this.sortedTeam.setComparator(Comparators.rankByScore());
     }
 
     /**
@@ -805,11 +814,9 @@ public class ModelManager implements Model {
      * for tie-breaking if specified by the user.
      */
     public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators) {
-        initialiseSortedList();
-        for (Comparator<Team> comparator : comparators) {
-            this.sortedTeam.setComparator(comparator);
-        }
-        this.sortedTeam.setComparator(Comparators.rankByScore());
+        // A simple call to this method arranges all teams in with the desired comparators,
+        // thereby reflecting the leader board.
+        setSortedTeamList(comparators);
     }
 
     /**
@@ -820,7 +827,7 @@ public class ModelManager implements Model {
      *
      */
     public void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators) {
-        setSimpleLeaderboard(comparators);
+        setSortedTeamList(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, teams.size(), comparators);
         this.sortedTeam = new SortedList<>(teams);
@@ -833,11 +840,7 @@ public class ModelManager implements Model {
      *
      */
     public final void setTopK(int k, ArrayList<Comparator<Team>> comparators) {
-        initialiseSortedList();
-        for (Comparator<Team> comparator : comparators) {
-            this.sortedTeam.setComparator(comparator);
-        }
-        this.sortedTeam.setComparator(Comparators.rankByScore());
+        setSortedTeamList(comparators);
 
         // Create a copy of the sorted teams from which teams can be removed without
         // damaging the original sorted teams list.
@@ -853,7 +856,7 @@ public class ModelManager implements Model {
      *
      */
     public final void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators) {
-        setSimpleLeaderboard(comparators);
+        setSortedTeamList(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, k, comparators);
         this.topKTeams = new SortedList<>(teams);

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.address.logic.commands.leaderboardcommand.LeaderboardCommand;
-import seedu.address.logic.commands.leaderboardcommand.ShowLeaderboardWithRandomCommand;
-import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
+import seedu.address.logic.commands.leaderboardcommand.LeaderboardWithRandomCommand;
+import seedu.address.logic.commands.leaderboardcommand.SimpleLeaderboardCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.entity.Team;
 
@@ -15,7 +15,7 @@ import seedu.address.model.entity.Team;
  * Parses the user's leaderboard command in the context of a
  * {@code LeaderboardCommand} command.
  */
-public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> {
+public class LeaderboardCommandParser implements Parser<LeaderboardCommand> {
 
     private static final String METHOD_SPLIT_REGEX = "\\s+";
 
@@ -25,7 +25,7 @@ public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> 
         ArrayList<Comparator<Team>> comparators = new ArrayList<>();
 
         if (!argumentMultimap.getValue(PREFIX_TIE_BREAK).isPresent()) {
-            return new ShowSimpleLeaderboardCommand(comparators);
+            return new SimpleLeaderboardCommand(comparators);
         }
 
         // Split on whitespace as this is what is required from the user.
@@ -33,7 +33,7 @@ public class ShowLeaderBoardCommandParser implements Parser<LeaderboardCommand> 
 
         comparators = AlfredParserUtil.processedComparators(tieBreakMethods);
 
-        return AlfredParserUtil.isRandomPresent(tieBreakMethods) ? new ShowLeaderboardWithRandomCommand(comparators)
-                : new ShowSimpleLeaderboardCommand(comparators);
+        return AlfredParserUtil.isRandomPresent(tieBreakMethods) ? new LeaderboardWithRandomCommand(comparators)
+                : new SimpleLeaderboardCommand(comparators);
     }
 }
