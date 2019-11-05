@@ -100,7 +100,7 @@ public class AlfredParser {
             break;
 
         case SimpleTopTeamsCommand.COMMAND_WORD:
-            c = new GetTopTeamsCommandParser().parse(arguments);
+            c = new TopTeamsCommandParser().parse(arguments);
             break;
 
         case ViewCommand.COMMAND_WORD:
