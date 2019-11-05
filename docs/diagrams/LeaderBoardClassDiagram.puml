@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+Interface LeaderboardCommand <<Interface>>
+Interface GetTopTeamsCommand <<Interface>>
+Interface Model <<Interface>>
+
+Class SimpleLeaderboardCommand
+Class LeaderboardWithRandomCommand
+Class SimpleTopTeamsCommand
+Class TopTeamsRandomCommand
+Class ModelManager
+Class LeaderboardUtil
+
+SimpleLeaderboardCommand .left.|> LeaderboardCommand
+LeaderboardWithRandomCommand .right.|> LeaderboardCommand
+
+SimpleTopTeamsCommand .left.|> GetTopTeamsCommand
+TopTeamsRandomCommand .right.|> GetTopTeamsCommand
+ModelManager .down.|> Model
+
+SimpleLeaderboardCommand .-> ModelManager : updates >
+LeaderboardWithRandomCommand .-> ModelManager : updates >
+SimpleTopTeamsCommand .-> ModelManager : updates >
+TopTeamsRandomCommand .-> ModelManager : updates >
+
+ModelManager .right.-> LeaderboardUtil : uses >
+@enduml

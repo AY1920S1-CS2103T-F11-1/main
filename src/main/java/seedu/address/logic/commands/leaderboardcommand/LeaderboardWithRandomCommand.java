@@ -20,7 +20,6 @@ import seedu.address.model.entity.Team;
 public class LeaderboardWithRandomCommand extends LeaderboardCommand {
 
     public static final String MESSAGE_SUCCESS = "Showing Leaderboard as it Stands with Random Winners.";
-    private static final String MESSAGE_LEADERBOARD_HEADER = "Current Standings of Teams: ";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     public LeaderboardWithRandomCommand(ArrayList<Comparator<Team>> comparators) {
@@ -32,7 +31,6 @@ public class LeaderboardWithRandomCommand extends LeaderboardCommand {
         requireNonNull(model);
         model.setLeaderboardWithRandom(comparators);
 
-        System.out.println(MESSAGE_LEADERBOARD_HEADER);
         logger.info("Showing Leaderboard with Random Winners.");
         model.updateHistory(this);
         model.recordCommandExecution(this.getCommandInputString());

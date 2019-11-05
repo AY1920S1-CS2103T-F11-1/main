@@ -579,26 +579,145 @@ Use case resumes from step 3.
 +
 Use case ends.
 
-=== Use case: Find the top scoring K Teams
+=== Use case: View the Leaderboard
 
 *MSS*
 
-1. User requests the top scoring K Teams, with K being the user input.
-2. HackathonManager displays the top K teams with their respective scores.
+1. User requests to see the Hackathon Leaderboard (that is the teams sorted in descending order of their points).
+2. HackathonManager sorts the teams in descending order of their points.
+3. HackathonManager displays the leaderboard.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The user input K is more than total number of Teams or a negative or invalid integer.
+
+* 2a. There are no teams currently registered
++
+[none]
+** 2a1. HackathonManager informs user that there are no teams to show leaderboard.
+** 2a2. Use case ends.
+
+=== Use case: View the Leaderboard with Tiebreaks
+
+*MSS*
+
+1. User requests to see the leaderboard and specifies tiebreak methods to break any ties.
+2. HackathonManager sorts the team in descending order of their points.
+3. HackathonManager breaks any ties between teams depending on the methods specified by the user.
+4. HackathonManager displays the leaderboard.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. There are no teams currently registered
++
+[none]
+** 2a1. HackathonManager displays an error informing the user that there are no teams to show leaderboard.
++
+Use case ends.
+
+* 3a. No tiebreak methods specified by the user.
+[none]
+** 3a1. Use case resumes at step 4.
+
+* 3b. Invalid tiebreak method inputted by user
+[none]
+** 3b1. Hackathon manager displays an error informing the user that the particular tiebreak method does not exist or is not supported.
+** 3b2. User inputs the command again specifying tiebreak methods again.
+** 3b3. Steps 3b1-3b2 are repeated until all tiebreak methods specified are correct.
++
+Use case resumes from step 3.
+
+
+=== Use case: Find the top scoring K Teams
+
+*MSS*
+
+1. User requests to see the Top K Teams in the Hackathon based on their score (highest score first), with K being the user input.
+2. HackathonManager sorts the teams in descending order of their points and fetches the top K teams.
+3. HackathonManager displays the top K teams with their respective scores.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The user input K as a negative, zero, invalid integer or non-integer value.
 +
 [none]
 ** 1a1. HackathonManager shows an error message.
 ** 1a2. User re-enters command with new user input of value K.
-Steps 1a1-1a2 are repeated until K is within the total number of Teams.
+Steps 1a1-1a2 are repeated until K is a correct value.
 +
 Use case resumes from step 2.
+
+* 2a. The user inputs K as a integer more than the available number of teams.
++
+[none]
+** 2a1. HackathonManager fetches all the teams in descending order of their score.
++
+Use case resumes at step 3.
+
+* 2b. There are no teams in the hackathon.
++
+[none]
+** 2b1. HackathonManager shows an error message informing him there are no teams in the hackathon.
++
+Use case ends.
+
+=== Use case: Find the top scoring K Teams with TieBreaks
+
+*MSS*
+
+1. User requests to see the Top K Teams in the Hackathon based on their score (highest score first), with K being the user input and specifies tie break methods to break any ties between teams with the same score.
+2. HackathonManager sorts the teams in descending order of their points .
+3. HackathonManager breaks any ties based on the methods specified by the user.
+4. Hackathon manager fetches the top K teams.
+5. HackathonManager displays the top K teams with their respective scores.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The user input K as a negative, zero, invalid integer or non-integer value.
++
+[none]
+** 1a1. HackathonManager shows an error message.
+** 1a2. User re-enters command with new user input of value K.
+Steps 1a1-1a2 are repeated until K is a correct value.
++
+Use case resumes from step 2.
+
+* 2a. There are no teams in the hackathon.
++
+[none]
+** 2a1. HackathonManager shows an error message informing him there are no teams in the hackathon.
++
+Use case ends.
+
+* 3a. No tiebreak methods specified by the user.
+[none]
+** 3a1. Use case resumes at step 4.
+
+* 3b. Invalid tiebreak method inputted by user
+[none]
+** 3b1. Hackathon manager displays an error informing the user that the particular tiebreak method does not exist or is not supported.
+** 3b2. User inputs the command again specifying tiebreak methods again.
+** 3b3. Steps 3b1-3b2 are repeated until all tiebreak methods specified are correct.
++
+Use case resumes from step 3.
+
+* 4a. The user inputs K as a integer more than the available number of teams.
++
+[none]
+** 4a1. HackathonManager fetches all the teams in descending order of their score.
++
+Use case resumes at step 5.
 
 === Use case: Find the ranking of all Teams
 
