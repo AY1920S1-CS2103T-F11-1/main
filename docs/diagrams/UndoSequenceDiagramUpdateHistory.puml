@@ -83,6 +83,12 @@ activate Model
 Model -> ModelHistory : updateHistory(pList, pListId, mList, mListId, tList, tListId, command)
 activate ModelHistory
 
+note right of Model
+    Note that a deep copy of the 3 EntityLists
+    (ParticipantList, MentorList and TeamList)
+    is created and stored in ModelHistoryRecord
+end note
+
 opt command instanceof TrackableState
     create ModelHistoryRecord
     ModelHistory -> ModelHistoryRecord
