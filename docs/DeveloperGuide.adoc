@@ -189,7 +189,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+To best address the numerous and varying needs of Hackathon organizers, we have packed Alfred with a multitude of different features, each of which seeks to provide the user with the optimal means of tending to their hackathon organising needs. However, with a host of features comes a sizable codebase which can make it daunting for new programmers, and often even veteran Alfred programmers, to understand how certain features have been implemented. This section aims to empower you by introducing you to some of the noteworthy features currently present within Alfred, along with few that hope to add in the future, so that you may better grasp the implementation of these features in a bid to contribute new features and improvements to existing features within Alfred. Despite our best efforts to make the explanations of Alfred's features' as comprehensive as possible, we do advice not to solely rely on this guide for understanding and encourage you to experiment with each feature's code in order to truly grasp it.
 
 // tag::undoredo[]
 === [Proposed] Undo/Redo feature
@@ -279,14 +279,90 @@ Whenever the `undo` command is invoked, `ModelHistoryManager` returns a `ModelHi
 //* **Alternative 2:** Use `HistoryManager` for undo/redo
 //** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 //** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates //Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-//// end::undoredo[]
+// end::undoredo[]
 
 // tag::dataencryption[]
-=== Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+=== Leaderboard and Get Top Teams
 
-// end::dataencryption[]
+The "Leader board" and "Get Top Teams" commands are two very important features of Alfred as they allow the user to automatically sort the teams by their scores, fetch any number of top teams in the competition and identify and break ties between teams conveniently. The execution of either of these commands displays the resultant teams on the UI in their correct sorted order.
+
+==== Implementation Overview
+
+The implementation of these two commands is very similar in nature: they both rely on updating a `SortedList` of teams present within the `ModelManager` class, which is then used to display data on the UI. The class diagram below provides a high level representation of the Object-Oriented solution devised to implement the aforementioned features.
+
+.Leaderboard and Get Top Teams Implementation Overview
+image::LeaderboardClassDiagram.png[]
+
+From the above class diagram, there are two important matters to note regarding the implementation of these features:
+
+[none]
+* 1. The `LeaderboardCommand` and `GetTopTeamsCommand` are implemented as interfaces which extend the `Command` interface. Any command to do with leader boards or getting the top teams implements either one of these interfaces depending on which command it is.
+* 2. The `ModelManager` class uses another class `LeaderboardUtil` which provides utility methods for the Leaderboard and Get Top Teams commands, such as fetching an appropriate number of teams for the Get Top Teams command and breaking ties between teams for both commands.
+
+With the class structure covered, the following sub-sections seek to explain how the different classes in Alfred interact to produce a result for the user, and finally the design considerations that were made.
+
+==== Simple Leaderboard Implementation
+
+The `SimpleLeaderboardCommand` fetches a leaderboard with teams sorted in descending order of their points, and ties between different teams broken *solely* on comparison-based methods (such as which teams has more participants) rather than the "random" method which will be covered later.
+
+Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "leaderboard tb/moreParticipants". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants.
+
+[[SimpleLeaderboard-Explanation]]
++
+.Interactions within Logic Component for SimpleLeaderboardCommand
+image::SimpleLeaderboardSequenceDiagram.png[]
+
+In the above, the `LeaderboardCommandParser` class parses the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new `ArrayList<Comparator<Team>>` object and appends the appropriate comparators to it based on the specified tiebreak methods. A new `SimpleLeaderboardCommand` object is then created with this array list as its parameter and returned.
+
+When the `SimpleLeaderboardCommand` is then executed, it calls `Model` 's `setSimpleLeaderboard(comparators)` method with the input parameter being the `ArrayList<Comparator<Team>>` passed as parameter for the former's creation.
+
+`Model` 's `setSimpleLeaderboard(comparators)` method updates the `SortedList` of teams within `Model` itself, which is then displayed on the UI when the new `CommandResult` object is created and returned.
+
+Do note that if the user's input did not specify any tie-break methods, hence just being "leaderboard" then the `SimpleLeaderboardCommand` object would be created with an empty ArrayList of comparators.
+
+===== *Design Considerations*
+*Aspect:* How to store the sorted list of participants
+
+* *Alternative 1:* Use the existing List in `ModelManager` storing the teams.
+
+** Pros: Easier to implement as lesser extra code involved, as most getters and setters have already been coded.
+** Cons: Sorting will be more complicated and potentially slower with large number of teams as the other lists are `FilteredList` objects, whose API doesn't allow direct sorting.
+** Cons: An existing List is likely to be used by other commands to display data on the UI, so with any sorting will have to undone each time after use; a process which is prone to careless errors.
+
+* *Alternative 2 (Current Choice):* Use a new `SortedList` object from the JavaFX Library
+
+** Pros: Easy and quick to sort contents with the `SortedList` API.
+** Pros: A new list means the sorting will not interfere with any other feature's operations, such as the `list` command which uses the existing `filteredTeamList` holding all the teams.
+** Cons: Another List to handle in `ModelManager` which increases the amount of code.
+
+
+==== Leaderboard with Random Winners Implementation
+
+It often occurs that even tiebreak methods cannot separate two teams in hackathon, for which organizers randomly select a winner from the tied teams, basing it purely on luck. The `leaderboard` command with the tiebreak method `random` is used to provide this functionality.
+
+Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "leaderboard tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "random" is another tie-break method.
+
+.Interactions within Logic Component for LeaderboardCommand with Random Winners
+image::RandomLeaderboardSequenceDiagram.png[]
+
+The above sequence follows the exact same logic as that for the Simple Leaderboard as explained in Section 4.2.2 (See <<SimpleLeaderboard-Explanation>>).
+
+However, in this case the `LeaderWithRandomClass` calls the `setLeaderboardWithRandom(comparators)` method of `Model` which essentially breaks any remaining ties after applying the tie-break methods between teams on a random basis.
+
+Secondly, `Model` calls its own method `setSimpleLeaderboard(comparators)`, which essentially resets the `SortedList` of teams clearing it of any sorting, and then applies the new comparators to it, before the algorithm for random winners can be applied to the teams.
+
+==== Simple Get Top Teams Implementation
+
+The `getTop NUMBER` command fetches the top NUMBER of teams sorted in descending order of their points, where NUMBER is a positive integer inputted by the user. Ties between different teams broken *solely* on comparison-based methods (such as which teams has more participants) rather than the "random" method which will be covered later.
+
+Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "getTop 3 tb/moreParticipants". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants.
+
+.Interactions within Logic Component for LeaderboardCommand with Random Winners
+image::SimpleTopKSequenceDiagram.png[]
+
+
+
 
 === Logging
 

@@ -792,12 +792,11 @@ public class ModelManager implements Model {
     //=========== Leader-Board methods ==================================================================
 
     /**
-     * Resets the sorted list of teams to its original form without any changes to sorting order so that
-     * new sorting orders in {@code comparators} can be applied applied to the sorted list to determine
-     * a new form of the leader board.
-     *
+     * Arranges the sorted team list {@code sortedTeam} to sort the current teams stored
+     * in Alfred in descending order of their score. Implements additional Comparators {@code comparators}
+     * for tie-breaking if specified by the user.
      */
-    private void setSortedTeamList(ArrayList<Comparator<Team>> comparators) {
+    public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators) {
         this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
         for (Comparator<Team> comparator : comparators) {
             this.sortedTeam.setComparator(comparator);
@@ -809,17 +808,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Arranges the sorted team list {@code sortedTeam} to sort the current teams stored
-     * in Alfred in descending order of their score. Implements additional Comparators {@code comparators}
-     * for tie-breaking if specified by the user.
-     */
-    public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators) {
-        // A simple call to this method arranges all teams in with the desired comparators,
-        // thereby reflecting the leader board.
-        setSortedTeamList(comparators);
-    }
-
-    /**
      * Arranges the sorted team list {@code sortedTeam} to sort the current teams stored in Alfred
      * in descending order of their score, implementing additional Comparators {@code comparators}
      * for tie-breaking if specified by the user. Randomly selects the winner if two teams are still
@@ -827,7 +815,7 @@ public class ModelManager implements Model {
      *
      */
     public void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators) {
-        setSortedTeamList(comparators);
+        setSimpleLeaderboard(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, teams.size(), comparators);
         this.sortedTeam = new SortedList<>(teams);
@@ -840,7 +828,7 @@ public class ModelManager implements Model {
      *
      */
     public final void setTopK(int k, ArrayList<Comparator<Team>> comparators) {
-        setSortedTeamList(comparators);
+        setSimpleLeaderboard(comparators);
 
         // Create a copy of the sorted teams from which teams can be removed without
         // damaging the original sorted teams list.
@@ -856,7 +844,7 @@ public class ModelManager implements Model {
      *
      */
     public final void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators) {
-        setSortedTeamList(comparators);
+        setSimpleLeaderboard(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, k, comparators);
         this.topKTeams = new SortedList<>(teams);

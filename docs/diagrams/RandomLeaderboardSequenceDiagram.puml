@@ -53,7 +53,7 @@ activate LeaderboardWithRandomCommand
 LeaderboardWithRandomCommand -> Model : setLeaderboardWithRandom(comparators)
 activate Model
 
-Model -> Model : setSortedTeamList(comparators)
+Model -> Model : setSimpleLeaderboard(comparators)
 activate Model
 
 Model --> Model

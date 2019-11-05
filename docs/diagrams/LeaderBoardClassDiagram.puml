@@ -6,13 +6,14 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 Interface LeaderboardCommand <<Interface>>
 Interface GetTopTeamsCommand <<Interface>>
-Interface Model <<Interface>>
+Interface Model <<Interface>> MODEL_COLOR
+Interface Command <<Interface>>
 
 Class SimpleLeaderboardCommand
 Class LeaderboardWithRandomCommand
 Class SimpleTopTeamsCommand
 Class TopTeamsRandomCommand
-Class ModelManager
+Class ModelManager MODEL_COLOR
 Class LeaderboardUtil
 
 SimpleLeaderboardCommand .left.|> LeaderboardCommand
@@ -21,6 +22,9 @@ LeaderboardWithRandomCommand .right.|> LeaderboardCommand
 SimpleTopTeamsCommand .left.|> GetTopTeamsCommand
 TopTeamsRandomCommand .right.|> GetTopTeamsCommand
 ModelManager .down.|> Model
+
+LeaderboardCommand -up-|> Command
+GetTopTeamsCommand -up-|> Command
 
 SimpleLeaderboardCommand .-> ModelManager : updates >
 LeaderboardWithRandomCommand .-> ModelManager : updates >

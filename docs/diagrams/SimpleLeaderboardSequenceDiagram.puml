@@ -53,12 +53,6 @@ activate SimpleLeaderboardCommand
 SimpleLeaderboardCommand -> Model : setSimpleLeaderboard(comparators)
 activate Model
 
-Model -> Model : setSortedTeamList(comparators)
-activate Model
-
-Model --> Model
-deactivate Model
-
 Model --> SimpleLeaderboardCommand
 deactivate Model
 
