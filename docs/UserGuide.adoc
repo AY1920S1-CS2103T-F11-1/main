@@ -64,7 +64,8 @@ text that you enter into Alfred. The command text that you should enter at the c
 .  Double-click the file to start the app. Alternatively, if you use a Mac, type the command `java -jar alfred.jar` or replace `alfred.jar` with the name of the jar file downloaded.
 on terminal in the jar file's directory to open and start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+.Layout of the application
+image::Ui.png
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -653,6 +654,7 @@ To navigate to home:
 2.	The result box will display the message “Showing homepage” in the result box. You can see the statistics and the ‘Home’ section of sidebar being highlighted.
     Below is the layout of  the homepage:
 
+.Output of `home` command
 image::HomeCommandExample.png[width="790"]
 
 === Command Suggestion Prompt
