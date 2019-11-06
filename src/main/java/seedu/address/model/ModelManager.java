@@ -792,7 +792,8 @@ public class ModelManager implements Model {
     //=========== Leader-Board methods ==================================================================
 
     /**
-     * Arranges the sorted team list {@code sortedTeam} to sort the current teams stored
+     * Resets the {@code sortedTeam} list to its original order without any sorting, then  arranges
+     * it to sort the current teams stored
      * in Alfred in descending order of their score. Implements additional Comparators {@code comparators}
      * for tie-breaking if specified by the user.
      */
@@ -805,20 +806,6 @@ public class ModelManager implements Model {
         // in the end will rank teams by their score and retain the tie-breaks obtained from the previously applied
         // comparators.
         this.sortedTeam.setComparator(Comparators.rankByScore());
-    }
-
-    /**
-     * Arranges the sorted team list {@code sortedTeam} to sort the current teams stored in Alfred
-     * in descending order of their score, implementing additional Comparators {@code comparators}
-     * for tie-breaking if specified by the user. Randomly selects the winner if two teams are still
-     * tied after the additional comparators.
-     *
-     */
-    public void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators) {
-        setSimpleLeaderboard(comparators);
-        ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
-        teams = LeaderboardUtil.randomWinnersGenerator(teams, teams.size(), comparators);
-        this.sortedTeam = new SortedList<>(teams);
     }
 
     /**
