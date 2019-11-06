@@ -58,7 +58,7 @@ public class CommandRecordCard extends UiPart<Region> {
             cardPane.setStyle("-fx-background-color: #819eb5");
             break;
         case REDO:
-           // cardPane.setStyle("-fx-background-color: #17202b");
+            // cardPane.setStyle("-fx-background-color: #17202b");
             break;
         case END:
             cardPane.setStyle("-fx-background-color: #a6c6e0");

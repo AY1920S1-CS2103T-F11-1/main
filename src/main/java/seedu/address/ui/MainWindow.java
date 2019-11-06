@@ -357,32 +357,33 @@ public class MainWindow extends UiPart<Stage> {
             // TODO: if the current panel is the one being changed, do not change the
             // entityListPlaceholder
             switch (commandType) {
-                case M:
-                    this.fireButton(mentorsButton);
-                    lastFired = mentorsButton;
-                    break;
-                case T:
-                    this.fireButton(teamsButton);
-                    lastFired = teamsButton;
-                    break;
-                case P:
-                    this.fireButton(participantsButton);
-                    lastFired = participantsButton;
-                    break;
-                case H:
-                    this.fireButton(historyButton);
-                    lastFired = historyButton;
-                    break;
-                case L:
-                    this.fireButton(leaderboardButton);
-                    lastFired = leaderboardButton;
-                    break;
-                case HM:
-                    this.fireButton(homeButton);
-                    lastFired = homeButton;
-                default:
-                    logger.info("The command does not edit any of the list of Entity");
-                    break;
+            case M:
+                this.fireButton(mentorsButton);
+                lastFired = mentorsButton;
+                break;
+            case T:
+                this.fireButton(teamsButton);
+                lastFired = teamsButton;
+                break;
+            case P:
+                this.fireButton(participantsButton);
+                lastFired = participantsButton;
+                break;
+            case H:
+                this.fireButton(historyButton);
+                lastFired = historyButton;
+                break;
+            case L:
+                this.fireButton(leaderboardButton);
+                lastFired = leaderboardButton;
+                break;
+            case HM:
+                this.fireButton(homeButton);
+                lastFired = homeButton;
+                break;
+            default:
+                logger.info("The command does not edit any of the list of Entity");
+                break;
             }
             return commandResult;
         } catch (CommandException | ParseException | AlfredModelHistoryException e) {
