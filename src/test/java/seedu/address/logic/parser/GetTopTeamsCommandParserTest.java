@@ -21,7 +21,7 @@ import seedu.address.model.entity.Team;
 
 class GetTopTeamsCommandParserTest {
 
-    private GetTopTeamsCommandParser parser = new GetTopTeamsCommandParser();
+    private TopTeamsCommandParser parser = new TopTeamsCommandParser();
 
 
     @Test

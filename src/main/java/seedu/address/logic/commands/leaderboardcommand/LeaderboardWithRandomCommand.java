@@ -43,7 +43,7 @@ public class LeaderboardWithRandomCommand extends LeaderboardCommand {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof ShowLeaderboardWithRandomCommand
-                && comparators.equals(((ShowLeaderboardWithRandomCommand) other).comparators));
+                || (other instanceof LeaderboardWithRandomCommand
+                && comparators.equals(((LeaderboardWithRandomCommand) other).comparators));
     }
 }

@@ -42,7 +42,7 @@ public class SimpleLeaderboardCommand extends LeaderboardCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ShowSimpleLeaderboardCommand // instanceof handles nulls
-                && comparators.equals(((ShowSimpleLeaderboardCommand) other).comparators));
+                || (other instanceof SimpleLeaderboardCommand // instanceof handles nulls
+                && comparators.equals(((SimpleLeaderboardCommand) other).comparators));
     }
 }
