@@ -297,10 +297,6 @@ public class ModelManager implements Model {
         return this.sortedTeam;
     }
 
-    public SortedList<Team> getTopKTeams() {
-        return this.topKTeams;
-    }
-
     /**
      * Resets the filtered lists to display all entities in the list.
      */
@@ -821,7 +817,7 @@ public class ModelManager implements Model {
         // damaging the original sorted teams list.
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.topKWithTie(teams, k, comparators);
-        this.topKTeams = new SortedList<>(teams);
+        this.sortedTeam = new SortedList<>(teams);
     }
 
     /**
@@ -834,7 +830,7 @@ public class ModelManager implements Model {
         setSimpleLeaderboard(comparators);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, k, comparators);
-        this.topKTeams = new SortedList<>(teams);
+        this.sortedTeam = new SortedList<>(teams);
     }
 
     //=========== Find methods ==================================================================

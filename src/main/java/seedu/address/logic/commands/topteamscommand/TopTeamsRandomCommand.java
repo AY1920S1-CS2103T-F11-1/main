@@ -36,7 +36,7 @@ public class TopTeamsRandomCommand extends TopTeamsCommand {
         checkNoTeams(model);
         model.setTopKRandom(this.numberOfTeams, comparators);
         logger.info("Showing Top " + this.numberOfTeams + " Teams.");
-        return new CommandResult(String.format(MESSAGE_SUCCESS, numberOfTeams), CommandType.K);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, numberOfTeams), CommandType.L);
     }
 
     @Override

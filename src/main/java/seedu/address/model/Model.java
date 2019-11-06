@@ -99,8 +99,6 @@ public interface Model {
 
     SortedList<Team> getSortedTeamList();
 
-    SortedList<Team> getTopKTeams();
-
     void resetFilteredLists();
 
     /* Below is the API exposed for the controllers to call */
