@@ -29,6 +29,8 @@ public class SimpleLeaderboardCommand extends LeaderboardCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert comparators != null : "The comparators list should not be null";
+        checkNoTeams(model);
         model.setSimpleLeaderboard(comparators);
 
         logger.info("Showing Leaderboard.");
@@ -37,4 +39,10 @@ public class SimpleLeaderboardCommand extends LeaderboardCommand {
         return new CommandResult(MESSAGE_SUCCESS, CommandType.L);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ShowSimpleLeaderboardCommand // instanceof handles nulls
+                && comparators.equals(((ShowSimpleLeaderboardCommand) other).comparators));
+    }
 }

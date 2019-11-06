@@ -29,6 +29,8 @@ public class LeaderboardWithRandomCommand extends LeaderboardCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert comparators != null : "The comparators list should not be null";
+        checkNoTeams(model);
         int numberOfTeams = model.getTeamList().list().size();
         model.setTopKRandom(numberOfTeams, comparators);
 
@@ -36,5 +38,12 @@ public class LeaderboardWithRandomCommand extends LeaderboardCommand {
         model.updateHistory(this);
         model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(MESSAGE_SUCCESS, CommandType.L);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof ShowLeaderboardWithRandomCommand
+                && comparators.equals(((ShowLeaderboardWithRandomCommand) other).comparators));
     }
 }
