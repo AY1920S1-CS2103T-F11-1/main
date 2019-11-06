@@ -58,11 +58,9 @@ activate Model
 Model --> HomeCommand
 deactivate Model
 
-HomeCommand --> AlfredParser : commandResult
-deactivate HomeCommand
 
 HomeCommand -> Logic : commandResult
-activate HomeCommand
+deactivate HomeCommand
 
 Logic --> CommandBox : commandResult
 deactivate Logic
