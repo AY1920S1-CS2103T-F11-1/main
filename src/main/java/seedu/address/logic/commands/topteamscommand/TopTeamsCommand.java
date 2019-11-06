@@ -20,7 +20,8 @@ public abstract class TopTeamsCommand extends Command {
     public static final String MESSAGE_NO_TEAM = "Top Teams cannot be generated: no Teams present in Alfred. "
             + "\nAdd more Teams to use this command.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows the top K teams as the leaderboard stands"
-            + " where K is an integer value you type in. \n"
+            + " where K is an integer value you type in. Teams are sorted in "
+            + "descending order of their score and tie-break methods used if specified.\n"
             + "Format: " + COMMAND_WORD + " K \n"
             + "Format (With Tiebreak): " + COMMAND_WORD + " K " + PREFIX_TIE_BREAK + "[Tie-break Methods]\n"
             + "For example: " + COMMAND_WORD + " 5 " + PREFIX_TIE_BREAK + "moreParticipants random";
