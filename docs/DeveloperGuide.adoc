@@ -304,12 +304,12 @@ With the class structure covered, the following sub-sections seek to explain how
 
 ==== Simple Leaderboard Implementation
 
-The `SimpleLeaderboardCommand` fetches a leaderboard with teams sorted in descending order of their points, and ties between different teams broken *solely* on comparison-based methods (such as which teams has more participants) rather than the "random" method which will be covered later.
+The `leaderboard` command fetches a leaderboard with teams sorted in descending order of their points, and ties between different teams broken *solely* on comparison-based methods (such as which teams has more participants) rather than the "random" method which will be covered later.
+
+[[SimpleLeaderboard-Explanation]]
 
 Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "leaderboard tb/moreParticipants". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants.
 
-[[SimpleLeaderboard-Explanation]]
-+
 .Interactions within Logic Component for SimpleLeaderboardCommand
 image::SimpleLeaderboardSequenceDiagram.png[]
 
