@@ -4,23 +4,26 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR
 skinparam classBackgroundColor LOGIC_COLOR
 
-Interface LeaderboardCommand <<Interface>>
-Interface GetTopTeamsCommand <<Interface>>
+Class "{Abstract}\nLeaderboardCommand" as LeaderboardCommand
+
+Class "{Abstract}\nGetTopTeamsCommand" as GetTopTeamsCommand
+
 Interface Model <<Interface>> MODEL_COLOR
-Interface Command <<Interface>>
+
+Abstract Class "{Abstract}\nCommand" as Command
 
 Class SimpleLeaderboardCommand
 Class LeaderboardWithRandomCommand
 Class SimpleTopTeamsCommand
 Class TopTeamsRandomCommand
 Class ModelManager MODEL_COLOR
-Class LeaderboardUtil
+Class LeaderboardUtil UTIL_COLOR
 
-SimpleLeaderboardCommand .left.|> LeaderboardCommand
-LeaderboardWithRandomCommand .right.|> LeaderboardCommand
+SimpleLeaderboardCommand -left-|> LeaderboardCommand
+LeaderboardWithRandomCommand -right-|> LeaderboardCommand
 
-SimpleTopTeamsCommand .left.|> GetTopTeamsCommand
-TopTeamsRandomCommand .right.|> GetTopTeamsCommand
+SimpleTopTeamsCommand -left-|> GetTopTeamsCommand
+TopTeamsRandomCommand -right-|> GetTopTeamsCommand
 ModelManager .down.|> Model
 
 LeaderboardCommand -up-|> Command

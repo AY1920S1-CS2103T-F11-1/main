@@ -53,7 +53,7 @@ activate SimpleTopKCommand
 SimpleTopKCommand -> Model : setTopK(3, comparators)
 activate Model
 
-Model -> Model : setSortedTeamList(comparators)
+Model -> Model : setSimpleLeaderboard(comparators)
 activate Model
 
 Model --> Model
