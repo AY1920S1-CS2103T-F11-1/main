@@ -11,8 +11,7 @@ public enum CommandType {
     T, // Team
     HM, // History
     H, // History
-    L, // Leaderboard
-    K; // Top K teams
+    L; // for Leaderboard and TopTeams Command
 
     // Constants
     public static final String MESSAGE_CONSTRAINTS =

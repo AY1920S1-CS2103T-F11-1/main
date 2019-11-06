@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -157,16 +158,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the handlers for the events generated whenever the up and down arrow
-     * keys are pressed.
+     * Sets the handlers for the events generated whenever the alt modifier key, as
+     * well as the up/down arrow keys are pressed.
      */
     private void setCommandNavigationHandler() {
         this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.UP) {
+            KeyCombination upCombo = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
+            KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
+
+            if (upCombo.match(event)) {
                 commandBox.setTextField(logic.getPrevCommandString());
             }
 
-            if (event.getCode() == KeyCode.DOWN) {
+            if (downCombo.match(event)) {
                 commandBox.setTextField(logic.getNextCommandString());
             }
         });
@@ -211,9 +215,9 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         primaryStage.hide();
     }
-
     /**
-     * Handles the display of Command History in the GUI.
+     * Displays the list of Participants in Model and Storage on Graphical User
+     * Interface.
      */
     private void handleHistory() {
         List<String> undoHistory = logic.getUndoCommandHistory();
@@ -256,16 +260,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void displayLeaderboard() {
         entityListPanel = new EntityListPanel(logic.getSortedTeamList());
-
-        listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
-    }
-
-    /**
-     * Displays the top K teams on the Graphical User Interface.
-     */
-    @FXML
-    private void displayTopK() {
-        entityListPanel = new EntityListPanel(logic.getTopKTeams());
 
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
     }
@@ -382,13 +376,6 @@ public class MainWindow extends UiPart<Stage> {
                 this.fireButton(leaderboardButton);
                 lastFired = leaderboardButton;
                 break;
-            case K:
-                displayTopK();
-                break;
-            case HM:
-                this.fireButton(homeButton);
-                break;
-
             default:
                 logger.info("The command does not edit any of the list of Entity");
                 break;

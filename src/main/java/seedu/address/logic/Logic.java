@@ -51,14 +51,7 @@ public interface Logic {
      */
     ObservableList<Team> getSortedTeamList();
 
-    /**
-     * Returns an unmodifiable view of the sorted list of the top K Teams
-     */
-    ObservableList<Team> getTopKTeams();
-
-    /**
-     * Returns the Record of all Commands entered by User
-     */
+    /** Returns the Record of all Commands entered by User */
     ArrayList<CommandRecord> getCommandHistory();
 
     /**
@@ -97,7 +90,6 @@ public interface Logic {
     List<String> getRedoCommandHistory();
 
     Statistics getStatistics();
-
 
     /**
      * Gets string of previous command executed.

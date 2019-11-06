@@ -13,7 +13,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HomeCommand;
-import seedu.address.logic.commands.SimpleTopTeamsCommand;
 import seedu.address.logic.commands.addcommand.AddCommand;
 import seedu.address.logic.commands.assigncommand.AssignCommand;
 import seedu.address.logic.commands.csvcommand.ExportCommand;
@@ -27,6 +26,7 @@ import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardComm
 import seedu.address.logic.commands.listcommand.ListCommand;
 import seedu.address.logic.commands.removecommand.RemoveCommand;
 import seedu.address.logic.commands.scorecommand.ScoreCommand;
+import seedu.address.logic.commands.topteamscommand.SimpleTopTeamsCommand;
 import seedu.address.logic.commands.viewcommand.ViewCommand;
 import seedu.address.logic.parser.addcommandparser.AddCommandAllocator;
 import seedu.address.logic.parser.assigncommandparser.AssignCommandAllocator;
