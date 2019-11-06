@@ -29,6 +29,7 @@ public class SimpleTopTeamsCommand extends TopTeamsCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert comparators != null : "The comparators list should not be null";
         checkNoTeams(model);
         model.setTopK(this.numberOfTeams, comparators);
         logger.info("Showing Top " + this.numberOfTeams + " Teams.");

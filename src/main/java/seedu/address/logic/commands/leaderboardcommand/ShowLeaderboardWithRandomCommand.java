@@ -20,7 +20,6 @@ import seedu.address.model.entity.Team;
 public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
 
     public static final String MESSAGE_SUCCESS = "Showing Leaderboard as it Stands with Random Winners.";
-    private static final String MESSAGE_LEADERBOARD_HEADER = "Current Standings of Teams: ";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     public ShowLeaderboardWithRandomCommand(ArrayList<Comparator<Team>> comparators) {
@@ -30,10 +29,10 @@ public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert comparators != null : "The comparators list should not be null";
         checkNoTeams(model);
-        model.setLeaderboardWithRandom(comparators);
-
-        System.out.println(MESSAGE_LEADERBOARD_HEADER);
+        int numberOfTeams = model.getTeamList().list().size();
+        model.setTopKRandom(numberOfTeams, comparators);
 
         logger.info("Showing Leaderboard with Random Winners.");
         model.updateHistory(this);

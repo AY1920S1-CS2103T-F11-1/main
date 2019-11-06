@@ -161,8 +161,6 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
-    void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators);
-
     void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators);
 
     void setTopK(int k, ArrayList<Comparator<Team>> comparators);
