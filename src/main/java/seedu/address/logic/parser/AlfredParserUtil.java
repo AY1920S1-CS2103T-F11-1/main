@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TIE_BREAK;
+import static seedu.address.commons.core.Messages.MISSING_TIEBREAK_METHODS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +22,7 @@ import seedu.address.commons.util.LeaderboardUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.ParseIdException;
+import seedu.address.logic.parser.findcommandparser.FindCommandUtilEnum;
 import seedu.address.model.entity.Email;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Location;
@@ -256,7 +260,7 @@ public class AlfredParserUtil {
             return Comparators.rankByParticipantsAscending();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    LeaderboardUtil.INVALID_TIE_BREAK + method));
+                    MESSAGE_INVALID_TIE_BREAK + method));
         }
     }
 
@@ -290,6 +294,7 @@ public class AlfredParserUtil {
      * @throws ParseException if a specified does not exist or is in a wrong format.
      */
     public static ArrayList<Comparator<Team>> processedComparators(String[] tieBreakMethods) throws ParseException {
+        checkNoTieBreakMethods(tieBreakMethods);
         ArrayList<Comparator<Team>> allComparators = new ArrayList<>();
         for (String method : tieBreakMethods) {
             if (method.trim().equals(LeaderboardUtil.RANDOM_KEYWORD)) {
@@ -300,6 +305,12 @@ public class AlfredParserUtil {
         // Reverse the order of comparators for them to applied in the order users specified.
         Collections.reverse(allComparators);
         return allComparators;
+    }
+
+    private static void checkNoTieBreakMethods(String[] methods) throws ParseException {
+        if (methods.length == 1 && methods[0].equals("")) {
+            throw new ParseException(MISSING_TIEBREAK_METHODS);
+        }
     }
 
     /**
@@ -325,6 +336,87 @@ public class AlfredParserUtil {
             int scoreValue = Integer.parseInt(score);
         } catch (NumberFormatException e) {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Find the type of search we are going to perform.
+     *
+     * @param string the user input string
+     */
+    public static FindCommandUtilEnum getFindType(String string) throws ParseException {
+        boolean isAndType = string.contains(FindCommandUtilEnum.AND.name());
+        boolean isOrType = string.contains(FindCommandUtilEnum.OR.name());
+
+        if (isAndType && isOrType) {
+            throw new ParseException("You cannot find by AND and OR");
+        }
+
+        // Default to AND if find type is not given
+        if (!isAndType && !isOrType) {
+            return FindCommandUtilEnum.AND;
+        }
+
+        return isAndType ? FindCommandUtilEnum.AND : FindCommandUtilEnum.OR;
+    }
+
+    /**
+     * This gets the String containing all the prefixes to be excluded.
+     *
+     * @param string
+     * @return the String containing the exclude clauses
+     * @throws ParseException if the input given is wrong
+     */
+    public static String getExcludeString(String string) throws ParseException {
+        String[] arr = string.split(FindCommandUtilEnum.EXCLUDE.name());
+        if (arr.length > 2) {
+            throw new ParseException("Only one EXCLUDE option should be given");
+        }
+        if (arr.length == 1) {
+            return "";
+        }
+        String negString = arr[1];
+
+        // Checks if the negative string is valid.
+        if (negString.contains(FindCommandUtilEnum.AND.name())
+                || negString.contains(FindCommandUtilEnum.OR.name())) {
+            throw new ParseException("Position your find types at the start");
+        }
+        return negString.trim();
+    }
+
+    /**
+     * Gets the AndOrString to parse for input.
+     *
+     * @param string
+     * @return String
+     * @throws ParseException if the input given is wrong.
+     */
+    public static String getAndOrString(String string) throws ParseException {
+        String andOrString = string.split(FindCommandUtilEnum.EXCLUDE.name())[0].trim();
+        return andOrString;
+    }
+
+    /**
+     * Pass in a string with the entity name removed.
+     *
+     * @param string which does not contain the entity type
+     * @throws ParseException if the AND or OR is not at the start of the string
+     */
+    public static void isFindTypeAtStart(String string) throws ParseException {
+        // We trim the string, then check if the first x letters are the keywords we expect
+        // Note: This function does not check for duplicate OR or AND declarations
+        // That is handled by getFindType
+        // Trim string at first just in case since having a starting space will cause bugs
+        string = string.trim();
+        if (string.contains(FindCommandUtilEnum.AND.name())) {
+            if (!string.startsWith(FindCommandUtilEnum.AND.name())) {
+                throw new ParseException("AND has to be before the prefixes");
+            }
+        } else if (string.contains(FindCommandUtilEnum.OR.name())) {
+            if (!string.startsWith(FindCommandUtilEnum.OR.name())) {
+                throw new ParseException("OR has to be before the prefixes");
+            }
         }
     }
 }
