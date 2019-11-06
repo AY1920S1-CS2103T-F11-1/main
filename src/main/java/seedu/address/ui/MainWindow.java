@@ -381,16 +381,6 @@ public class MainWindow extends UiPart<Stage> {
                 this.fireButton(leaderboardButton);
                 lastFired = leaderboardButton;
                 break;
-<<<<<<< HEAD
-            case K:
-                displayTopK();
-                break;
-            case HM:
-                this.fireButton(homeButton);
-                break;
-
-=======
->>>>>>> upstream/master
             default:
                 logger.info("The command does not edit any of the list of Entity");
                 break;
