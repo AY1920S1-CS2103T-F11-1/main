@@ -90,7 +90,7 @@ public class AlfredParser {
             break;
 
         case ScoreCommand.COMMAND_WORD:
-            c = new ScoreCommandAllocator().allocate(arguments);
+            c = new ScoreCommandAllocator().parse(arguments);
             break;
 
         case ListCommand.COMMAND_WORD:
