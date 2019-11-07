@@ -95,7 +95,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        lastFired = participantsButton;
+        lastFired = homeButton;
     }
 
     public Stage getPrimaryStage() {
@@ -241,6 +241,7 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Statistics panel to be assigned is: " + new StatisticsListPanel(logic.getStatistics()));
         statisticListPanel = new StatisticsListPanel(logic.getStatistics());
         listPanelPlaceholder.getChildren().set(0, statisticListPanel.getRoot());
+        lastFired = homeButton;
     }
 
     /**
@@ -250,8 +251,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void displayParticipantList() {
         entityListPanel = new EntityListPanel(logic.getFilteredParticipantList());
-
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = participantsButton;
     }
 
     /**
@@ -260,8 +261,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void displayLeaderboard() {
         entityListPanel = new EntityListPanel(logic.getSortedTeamList());
-
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = leaderboardButton;
     }
 
     /**
@@ -271,6 +272,7 @@ public class MainWindow extends UiPart<Stage> {
     private void displayTeamList() {
         entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = teamsButton;
     }
 
     /**
@@ -281,6 +283,7 @@ public class MainWindow extends UiPart<Stage> {
     private void displayMentorList() {
         entityListPanel = new EntityListPanel(logic.getFilteredMentorList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = mentorsButton;
     }
 
     /**
@@ -290,6 +293,7 @@ public class MainWindow extends UiPart<Stage> {
     private void displayHistory() {
         commandListPanel = new CommandListPanel(logic.getCommandHistory());
         listPanelPlaceholder.getChildren().set(0, commandListPanel.getRoot());
+        lastFired = historyButton;
     }
 
     public EntityListPanel getEntityListPanel() {
@@ -360,23 +364,18 @@ public class MainWindow extends UiPart<Stage> {
             switch (commandType) {
             case M:
                 this.fireButton(mentorsButton);
-                lastFired = mentorsButton;
                 break;
             case T:
                 this.fireButton(teamsButton);
-                lastFired = teamsButton;
                 break;
             case P:
                 this.fireButton(participantsButton);
-                lastFired = participantsButton;
                 break;
             case H:
-                this.fireButton(historyButton);
-                lastFired = historyButton;
+                this.fireButton(lastFired);
                 break;
             case L:
                 this.fireButton(leaderboardButton);
-                lastFired = leaderboardButton;
                 break;
             default:
                 logger.info("The command does not edit any of the list of Entity");
