@@ -241,9 +241,1719 @@ the architecture of the application. Clicking these text will redirect user to t
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="data-encryption"><a class="link" href="#data-encryption">Data Encryption</a></h3>
+<h3 id="leaderboard-and-get-top-teams"><a class="link" href="#leaderboard-and-get-top-teams">Leaderboard and Get Top Teams</a></h3>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>The <code>leaderboard</code> and <code>getTop K</code> commands are two very important features of Alfred as they allow the user to automatically sort the teams by their scores, fetch any number of top teams in the competition and identify and break ties between teams conveniently. The execution of either of these commands displays the resultant teams on the UI in their correct sorted order. The following subsections explore the implementation of each of these commands and provide an insight into the design consideration made when developing them.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-overview"><a class="link" href="#implementation-overview">Implementation Overview</a></h4>
+<div class="paragraph">
+<p>The implementation of these two commands is very similar in nature. They both:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>rely on updating a <code>SortedList</code> of teams present within the <code>ModelManager</code> class, which will be referred to as <code>sortedTeamList</code> in subsequent sections. This list is used to display the command results on the UI.</p>
+</li>
+<li>
+<p>use an ArrayList of <code>Comparator&lt;Team&gt;</code> objects to contain additional comparators. These are used to break ties between teams on a basis other than score.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The class diagram below provides a high level representation of the Object-Oriented solution devised to implement the aforementioned features.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LeaderboardClassDiagram.png" alt="LeaderboardClassDiagram">
+</div>
+<div class="title">Figure 2. Leaderboard and Get Top Teams Implementation Overview</div>
+</div>
+<div class="paragraph">
+<p>From the above class diagram, there are two important matters to note regarding the implementation of these features:</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1. The <code>LeaderboardCommand</code> and <code>GetTopTeamsCommand</code> are implemented as abstract classes which extend the <code>Command</code> abstract class. Any command to do with leaderboards or getting the top teams implements either one of these interfaces depending on which command it is.</p>
+</li>
+<li>
+<p>2. The <code>ModelManager</code> class uses another class <code>LeaderboardUtil</code> which provides utility methods for the Leaderboard and Get Top Teams commands, such as fetching an appropriate number of teams for the <code>getTop K</code> command and breaking ties between teams for both commands.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With the class structure covered, the following sub-sections seek to explain how the different classes in Alfred interact to produce a result for the user, and finally the design considerations that were made for each command.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="leaderboard-command-implementation"><a class="link" href="#leaderboard-command-implementation">Leaderboard Command Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>leaderboard</code> command fetches a leaderboard consisting of all the teams registered for the hackathon, in descending order of their score. Additionally, if tiebreak methods are specified, ties between the teams are typically broken in one of two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Comparison-based tiebreakers:</strong> wherein the user picks certain tiebreak methods which rely on comparing certain properties of teams, such as the number of participants they have.</p>
+</li>
+<li>
+<p><strong>Non-Comparison-based tiebreakers:</strong> wherein the user breaks ties on non-comparison based methods (currently only the "random" method) in addition to any Comparison-based tiebreakers.</p>
+</li>
+</ul>
+</div>
+<div id="SimpleLeaderboard-Explanation" class="paragraph">
+<p>Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command <code>leaderboard tb/moreParticipants</code>. For your reference, here the prefix "tb/" is used to precede a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants. Essentially this demonstrates the flow for a "Comparison-based tiebreak".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SimpleLeaderboardSequenceDiagram.png" alt="SimpleLeaderboardSequenceDiagram">
+</div>
+<div class="title">Figure 3. Interactions within Logic Component for SimpleLeaderboardCommand</div>
+</div>
+<div class="paragraph">
+<p>In the above, the <code>LeaderboardCommandParser</code> class parses the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods. A new <code>SimpleLeaderboardCommand</code> object is then created with this array list as its parameter and returned.</p>
+</div>
+<div class="paragraph">
+<p>When the <code>SimpleLeaderboardCommand</code> is then executed, it calls <code>Model</code> 's <code>setSimpleLeaderboard(comparators)</code> method with the input parameter being the <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> passed as parameter for the former&#8217;s creation.</p>
+</div>
+<div class="paragraph">
+<p><code>Model</code> 's <code>setSimpleLeaderboard(comparators)</code> method updates the <code>SortedList</code> of teams within <code>Model</code> itself, which is then displayed on the UI when the new <code>CommandResult</code> object is created and returned. This flow of events, albeit a few differences, is the same for every variation of the <code>leaderboard</code> and <code>getTop K</code> commands explored subsequently.</p>
+</div>
+<div class="paragraph">
+<p>Do note that if the user&#8217;s input did not specify any tie-break methods, hence just being <code>leaderboard</code> then the <code>SimpleLeaderboardCommand</code> object would be created with an empty ArrayList of comparators. The flow of events for this particular scenario would be unchanged from the above illustration.</p>
+</div>
+<div class="paragraph">
+<p>However, it often occurs that even tiebreak methods cannot separate two teams in a hackathon, for which organizers randomly select a winner from the tied teams, basing it purely on fair luck. The <code>leaderboard</code> command with the tiebreak method <code>random</code> is used to provide this functionality.</p>
+</div>
+<div class="paragraph">
+<p>Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "leaderboard tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "random" is another non-comparison based tie-break method.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RandomLeaderboardSequenceDiagram.png" alt="RandomLeaderboardSequenceDiagram">
+</div>
+<div class="title">Figure 4. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
+</div>
+<div class="paragraph">
+<p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above (See <a href="#SimpleLeaderboard-Explanation">[SimpleLeaderboard-Explanation]</a>).</p>
+</div>
+<div class="paragraph">
+<p>However, in this case the <code>LeaderWithRandomClass</code> calls the <code>setTopK(teamListSize, comparators)</code> method of <code>Model</code> which essentially breaks any remaining ties after applying the tie-break methods between teams on a random basis, and fetches a number of teams equal to <code>teamListSize</code> which is the size of the <code>sortedTeamList</code> reflecting the total number of teams in the hackathon.</p>
+</div>
+<div class="paragraph">
+<p>Secondly, <code>Model</code> calls its own method <code>setSimpleLeaderboard(comparators)</code>, which essentially resets the <code>sortedTeamList</code> of teams clearing it of any sorting, and then applies the new comparators to it, before the algorithm for random winners can be applied to the <code>sortedTeamList</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Leaderboard-DesignConsideration"><a class="link" href="#Leaderboard-DesignConsideration">Leaderboard Design Considerations</a></h4>
+<div class="paragraph">
+<p>There were several questions we asked ourselves over the course of developing the leaderboard feature. The following contains certain aspects we had to consider during the development stage and details how and why we decided to use a certain methodologies over others.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to store the sorted list of participants</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use the existing List in <code>ModelManager</code> storing the teams.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as lesser extra code involved, as most getters and setters have already been coded.</p>
+</li>
+<li>
+<p>Cons: Sorting will be more complicated and potentially slower with large number of teams as the other lists are <code>FilteredList</code> objects, whose API doesn&#8217;t allow direct sorting.</p>
+</li>
+<li>
+<p>Cons: An existing List is likely to be used by other commands to display data on the UI, so with any sorting will have to undone each time after use; a process which is prone to careless errors.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Use a new <code>SortedList</code> object from the JavaFX Library</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy and quick to sort contents with the <code>SortedList</code> API.</p>
+</li>
+<li>
+<p>Pros: A new list means the sorting will not interfere with any other feature&#8217;s operations, such as the <code>list</code> command which uses the existing <code>filteredTeamList</code> holding all the teams.</p>
+</li>
+<li>
+<p>Cons: Another List to handle in <code>ModelManager</code> which increases the amount of code.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Due to the overwhelming benefits and conveniences that a new <code>SortedList</code> of teams would bring in the development of Alfred&#8217;s <code>leaderboard</code> and <code>getTop K</code> commands, we decided to rely on "Alternative 2" with regards to this dilemma.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Designing Leaderboard&#8217;s Command Classes</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use a single <code>LeaderboardCommand</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Lesser duplicate code as both ("random" and "non-random") tiebreak methods can be handled within a single class.</p>
+</li>
+<li>
+<p>Cons: Introduces control coupling as the <code>LeaderboardCommandParser</code> will have to send a flag to <code>LeaderboardCommand</code> to indicate whether "random" should be applied or not as a means of tie-break.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Use an Abstract <code>LeaderboardCommand</code> class inheriting from <code>Command</code> which any <code>leaderboard</code> related commands will themselves extend.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Single Responsibility Principle will be better respected as any change in logic for one type of <code>leaderboard</code> command will only affect its respective class. Secondly, no longer a need for a flag as the parser can directly call the appropriate command class.</p>
+</li>
+<li>
+<p>Cons: Introduces slight duplication in code as each class will contain a similar segments of code for checking the status of the teams in <code>Model</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We decided to follow "Alternative 2". Firstly, if a single class were being used, it would be difficult to distinguish which type of <code>leaderboard</code> command should be called - whether a leaderboard with or without "random" as tiebreak should be used. This would require the <code>LeaderboardCommandParser</code> to pass a flag signalling whether the "random" version should be called or not, which introduces control coupling. Although with a single distinct method (ie "random") this seems manageable, as the scale of Alfred increases with more non-comparison based methods such as "random" being introduced, passing a flag from <code>LeaderboardCommandParser</code> to the <code>Leaderboard</code> command class would become less and less manageable. Secondly, we wanted to avoid coupling the <code>Parser</code> and <code>Command</code> classes in a way which <code>Parser</code> influences the behaviour of the <code>Command</code> as it introduces leeway for errors.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Where to Write Algorithms used by <code>leaderboard</code> (and <code>getTop NUMBER</code>) Command</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Write the methods as private within <code>ModelManager</code> itself</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Relevant code is in close proximity to where it is being called allowing for easy reference of what is being done and quick rectification if needed.</p>
+</li>
+<li>
+<p>Cons: Would harm Single Responsibility Principle as <code>ModelManager</code> would need to be changed in case there is change in required to the Leaderboard Algorithms, whereas it should only be changed if there is a change required to <code>Model</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Create a new <code>LeaderboardUtil</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Maintains single responsibility principle and ensures greater abstraction as complicated algorithms are simply handled by another class altogether.</p>
+</li>
+<li>
+<p>Cons: Increases the amount of coding and documentation required. Additionally, it brings about the inconvenience of having to shift between classes to view the available methods and their implementations.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>"Alternative 2" was eventually selected as it follows better Object-Oriented Programming practices. By abstracting away the methods used to sort and tie-break teams and keeping them in another class, the overall readability of the code is enhanced and would be easier for any future programmers working on this project to understand and work on.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="get-top-teams-implementation"><a class="link" href="#get-top-teams-implementation">Get Top Teams Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>getTop K</code> command fetches the top "K" number teams sorted in descending order of their points, where K is a positive integer inputted by the user. The <code>getTop K</code> command follows a similar pattern as the <code>leaderboard</code> command in the sense that ties between teams are broken in one of two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Comparison-based tiebreakers:</strong> wherein the user picks certain tiebreak methods which rely on comparing certain properties of teams, such as the number of participants they have.</p>
+</li>
+<li>
+<p><strong>Non-Comparison-based tiebreakers:</strong> wherein the user breaks ties on non-comparison based methods (currently only the "random" method) in addition to any Comparison-based tiebreakers.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "getTop 3 tb/moreParticipants". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants. This essentially reflects a tie being broken by comparison-based tiebreakers.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SimpleTopKSequenceDiagram.png" alt="SimpleTopKSequenceDiagram">
+</div>
+<div class="title">Figure 5. Interactions within Logic Component for getTop NUMBER Command</div>
+</div>
+<div class="paragraph">
+<p>The above diagram follows a logic very similar to the <code>leaderboard</code> command&#8217;s logic. However, in this case a <code>TopTeamsCommandParser</code> object is created to parse the arguments "3 tb/moreParticipants" which returns a <code>SimpleTopKCommand</code> object.</p>
+</div>
+<div class="paragraph">
+<p>Moreover, the <code>SimpleTopCommand</code> object calls <code>Model</code> 's <code>setTopK(3, comparators)</code> method which essentially modifies the <code>sortedTeamList</code> within <code>Model</code> to only show the top three teams as per their scores and the relevant tiebreakers as per the list of comparators <code>comparators</code>.</p>
+</div>
+<div class="paragraph">
+<p>It is also noteworthy that <code>Model</code> calls its own method <code>setSimpleLeaderboard(comparators)</code> which was associated with the <code>leaderboard</code> command. This is however a simple reuse of code to set the reset <code>Model</code> 's <code>sortedTeamList</code> and apply the relevant comparators to it, before the algorithm for fetching the top three (or any number) teams can be applied.</p>
+</div>
+<div class="paragraph">
+<p>When it comes to the <code>getTop K</code> command being used with the "random" method of tiebreak, the flow of events is resembles the above very closely. Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "getTop 3 tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants whereas "random" represents the "random" method of tiebreak.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/TopKRandomCommand.png" alt="TopKRandomCommand">
+</div>
+<div class="title">Figure 6. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
+</div>
+<div class="paragraph">
+<p>From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.</p>
+</div>
+<div class="paragraph">
+<p>The first difference is that the <code>TopTeamsCommandParser</code> object now returns a <code>topKRandomCommand</code> object. Secondly, the <code>topKRandomCommand</code> object calls the <code>setTopKRandom(3, comparators)</code> method of <code>Mode</code>, which essentially modifies the <code>sortedTeamList</code> within <code>Model</code> to only show the top three teams as per their scores and the relevant tiebreakers as per the list of comparators <code>comparators</code>, and breaks any remaining ties based on the random method.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-consideration-for-get-top-teams"><a class="link" href="#design-consideration-for-get-top-teams">Design Consideration for Get Top Teams</a></h4>
+<div class="paragraph">
+<p>Since the implementation of the <code>getTop K</code> command is almost identical to that of the <code>leaderboard</code> command, the design considerations made for the <code>leaderboard</code> command apply to the implementation of this feature as well (See <a href="#Leaderboard-DesignConsideration">Leaderboard Design Considerations</a>). However, there were some unique aspects we had to consider with regards to the <code>getTop K</code> command, all of which is detailed below.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Where to Store the Top NUMBER Teams</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Current Choice):</strong> Use the <code>SortedList</code> in <code>ModelManager</code> used for  the <code>leaderboard</code> command.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Requires lesser code - a new list would involve new getters and setters and additional code in the UI component to display this list on the UI.</p>
+</li>
+<li>
+<p>Cons: Can be cause for confusion since <code>leaderboard</code> and <code>getTop K</code> commands would be using the same list.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a new <code>SortedList</code> object.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less confusion as the <code>leaderboard</code> and <code>getTop K</code> commands use distinct lists for their operations.</p>
+</li>
+<li>
+<p>Cons: Additional code and attention required to handle an additional list, which can lead to potential errors.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After careful consideration, "Alternative 1" was chosen as it would make fewer modification to <code>ModelManager</code> and the <code>UI</code> component, particularly with regards to adding duplicate code to handle the two different lists. Moreover, since the calls to <code>ModelManager</code> 's methods reset the <code>SortedList</code> storing the sorted teams, there is likely to be lesser confusion and room for error when handling a single list for the two different commands.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Handling Situation when <code>K</code> is greater than the number of teams</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (Current Choice):</strong> Show all the teams in the hackathon</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Avoids frustrating the user if he constantly inputs a value greater than the number of teams, especially if he wants a quick overview.</p>
+</li>
+<li>
+<p>Cons: Could be potentially seen as a bug as users and testers may notice a disparity between the number of teams shown and the number requested for.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Display an error to the user</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: May prevent some confusion in case user notices a disparity between the value he inputted and the number of teams actually shown.</p>
+</li>
+<li>
+<p>Cons: Can be frustrating in case user wants a quick overview without having to worry about the total number of teams present.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We decided to prioritise user convenience in this situation and rather than displaying an error every time he inputs a value too large for <code>K</code> in the <code>getTop K</code> command, we decided to show all the teams. This aspect of the feature has been made abundantly clear in the User Guide and seeks to minimise user frustration especially since we do not want the user to worry too much about remembering how many teams have signed up.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of Leaderboard</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Implement <code>leaderboard</code> command with <code>getTop K</code> command keeping <code>K</code> as the size of the teamlist</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Better and greater re-usage of code present within <code>ModelManager</code>.</p>
+</li>
+<li>
+<p>Cons: Introduces coupling as changes made to the <code>getTop K</code> command will affect the <code>leaderboard</code> command.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Have a separate method within <code>ModelManager</code> to handle the <code>leaderboard</code> command.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The two commands' logic are kept separate so neither affects the other in case of changes.</p>
+</li>
+<li>
+<p>Cons: May be seen as a duplication of code.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The reason "Alternative 2" was selected was because <code>ModelManager</code> 's <code>setSimpleLeaderboard(ArrayList&lt;Comparator&lt;Team&gt;&gt; comparators)</code> method resets the <code>SortedList</code> of teams within <code>ModelManager</code> and applies the relevant comparators to it to sort it as desired. Hence, it is abstracting away this process into a single method so a better re-usage of code can take place in other methods. This method is reused by <code>ModelManager</code> 's <code>setTopK()</code> method when using the <code>getTop K</code> command, whereas the <code>setSimpleLeaderboard(ArrayList&lt;Comparator&lt;Team&gt;&gt; comparators)</code> method is sufficient to sort <strong>all</strong> the teams in the desired order. So instead of calling it again within another method, the <code>setSimpleLeaderboard(ArrayList&lt;Comparator&lt;Team&gt;&gt; comparators)</code> method which was meant to abstract away some processes is itself used to handle the <code>leaderboard</code> command. So indeed in the end, "Alternative 2" does not introduce duplication of code, but rather introduces better use of abstraction.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="tiebreaking"><a class="link" href="#tiebreaking">Tiebreaking</a></h4>
+<div class="paragraph">
+<p>In the above sections, the UML diagrams gloss over how tiebreaking is really parsed and understood by Alfred. The basic of tie-breaking revolves around using <code>Comparator</code> s to sort the teams in a particular order. Each tiebreak method available in Alfred has a <code>Comparator</code> associated to it and all these can be found in the <code>Comparators</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The activity diagram below illustrates the internal workings within the <code>LeaderboardCommandParser" and `TopTeamsCommandParser</code> when parsing tiebreak methods. Do note that in the below diagram the term <code>parser</code> encapsulates both of these <code>Parser</code> s as they operate in almost identical ways.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/TieBreakActivityDiagram.png" alt="TieBreakActivityDiagram">
+</div>
+<div class="title">Figure 7. Handling of Tiebreak Methods</div>
+</div>
+<div class="paragraph">
+<p>From the above there is one important aspect to note: the <code>ArrayList</code> of <code>Comparator&lt;Team&gt;</code> objects created in the second step. This is the <code>ArrayList</code> referred to in the previous sections which is tasked with containing and transferring the comparators which will be used to sort the teams in their appropriate order to form the leaderboard or top teams. This <code>ArrayList</code> is used as an input parameter for both <code>leaderboard</code> and <code>getTop K</code> command related classes, as explored in previous sections.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, before <code>comparators</code> can be passed as an argument to the commands, it is reversed. This is done intently so the comparators related to each tiebreak method are applied in an order such that they preserve the oder the user wants the tiebreak methods to be applied.</p>
+</div>
+<div class="paragraph">
+<p>Secondly, do note that the diagram above assumes there are no syntax errors made by the user when typing out the command. In case of any errors in the command, a <code>ParseException</code> would be thrown warning the user of such a situation. These have been excluded from the above diagram to prevent overcrowding and a deviation from the basic logic.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-for-tiebreaking"><a class="link" href="#design-considerations-for-tiebreaking">Design Considerations for Tiebreaking</a></h4>
+<div class="paragraph">
+<p>Though this was a relatively straightforward subset of our <code>leaderboard</code> and <code>getTop K</code> command, there were still a few, small design considerations made.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to separate tiebreak methods</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Each tiebreak method preceded by a new tiebreak prefix ("tb/")</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Follows the paradigm followed by other commands.</p>
+</li>
+<li>
+<p>Cons: Very tedious for the user to type and adds difficulty in parsing.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Each tiebreak method separated by a single whitespace</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement and more convenient for the user to type as well. Code-wise it is easy and quick to customize which character to separate methods on.</p>
+</li>
+<li>
+<p>Cons: Introduces a slight variation as other commands don&#8217;t use whitespaces as separation methods which might confuse the user.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To better consider the user&#8217;s needs and convenience, "Alternative 2" was selected. So as to not confuse users, this implementation has been made abundantly clear in the User Guide as well. From a developer&#8217;s perspective, this implementation is also more customizable to better respond to changes in user&#8217;s preferences as the separation character can easily be changes.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Where to create comparators</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Create comparators when parsing each tiebreak method</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as it does not require additional classes.</p>
+</li>
+<li>
+<p>Cons: Can overcrowd a single method or class especially as more comparison methods are added. This is also a poor use of abstraction and would not respect Single Responsibility Principle.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Create a separate <code>Comparators</code> class where relevant comparators are created beforehand and can be invoke using static methods.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Better use of abstraction and maintains Single Responsibility Principle as the parser class can focus on solely parsing the user commands.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the end, "Alternative 2" was selected as it follows better software engineering practices by making better use of abstraction. Despite requiring slightly more code and classes, it would still be better than "Alternative 1" which breaks the Single Responsibility Principle as the parser class would have to be changed for changes in tiebreak methods in addition to changes in methods of parsing.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">Logging</a></h3>
+<div class="paragraph">
+<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Configuration</a>)</p>
+</li>
+<li>
+<p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
+</li>
+<li>
+<p>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Logging Levels</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
+</li>
+<li>
+<p><code>WARNING</code> : Can continue, but with caution</p>
+</li>
+<li>
+<p><code>INFO</code> : Information showing the noteworthy actions by the App</p>
+</li>
+<li>
+<p><code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">Configuration</a></h3>
+<div class="paragraph">
+<p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="documentation"><a class="link" href="#documentation">Documentation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Refer to the guide <a href="Documentation.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing"><a class="link" href="#testing">Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Refer to the guide <a href="Testing.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dev-ops"><a class="link" href="#dev-ops">Dev Ops</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Refer to the guide <a href="DevOps.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="product-scope"><a class="link" href="#product-scope">Appendix A: Product Scope</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Target user profile</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Human Resource Admin In-Charge of School of Computing 'Hackathon' Event</p>
+</li>
+<li>
+<p>has a need to manage a significant number of contacts</p>
+</li>
+<li>
+<p>has a need to register participants in bulk</p>
+</li>
+<li>
+<p>has a need to classify contacts into Mentor, Participants and Teams</p>
+</li>
+<li>
+<p>has a need to keep track of which member is in which Team</p>
+</li>
+<li>
+<p>has a need to keep track of the seating positions of each Team</p>
+</li>
+<li>
+<p>has a need to keep track of Mentor assignments to Teams</p>
+</li>
+<li>
+<p>has a need to keep track of the competition winners and prizes won</p>
+</li>
+<li>
+<p>has a need to search for specific Mentor, Team or Participant at times</p>
+</li>
+<li>
+<p>prefer desktop apps over other types</p>
+</li>
+<li>
+<p>can commandType fast</p>
+</li>
+<li>
+<p>prefers typing over mouse input</p>
+</li>
+<li>
+<p>is reasonably comfortable using CLI apps</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Value proposition</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>manage contacts faster than a typical mouse/GUI driven app</p>
+</li>
+<li>
+<p>keep track of the relationship between Participant, Team and Mentor, such that it can be referenced at times</p>
+</li>
+<li>
+<p>store a significant number of contacts in an organised, readable manner</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="user-stories"><a class="link" href="#user-stories">Appendix B: User Stories</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 79%;">
+<colgroup>
+<col style="width: 14.0186%;">
+<col style="width: 18.6915%;">
+<col style="width: 32.7102%;">
+<col style="width: 34.5797%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see usage instructions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">refer to instructions when I forget how to use the App</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a Entity by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate details of Entity without having to go through the entire list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delete an Entity by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove entries I no longer need</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add an Entity by name and contact information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update the list of Entities</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">updated an Entity by name and contact information</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update the specific entries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">register individuals en-masse(with provided registration information)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">avoid tedious manual registration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of winning teams and the prizes won</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure that the prize-giving ceremony runs smoothly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of winning teams and the prizes won</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ensure that the prize-giving ceremony runs smoothly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">make sure that I will be notified on any wrong commands that I commandType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">make sure that I do not accidentally clutter up my list of entries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a readable and organised User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">understand the output of my commands</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of participants who signed up late or after the event has filled up into a waitlist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manage them in case available space turns up during the Event</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manually match Teams to Mentor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know which Mentor is in charge of a team</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of where each Team or Mentor is seating</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">usher them to their places during the actual event</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know my sponsor&#8217;s needs and arrival time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adequately cater to their needs and allocate manpower accordingly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of inventory of swag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">make sure they are adequately catered to all participants</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keep track of amount of food or catering</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">make sure they are adequately catered to all participants</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">automatically match Teams to Mentor by their expertise and project commandType of the Team</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">do not need to perform the matching manually</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Admin In-Charge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schedule meetings between Teams and Mentors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lets Mentors know when to consult each Team in an organised manner</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>{More to be added}</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>HackathonManager</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+</div>
+<div class="sect2">
+<h3 id="use-case-delete-an-entity-type-participant-mentor-team"><a class="link" href="#use-case-delete-an-entity-type-participant-mentor-team">Use case: Delete an Entity Type (Participant, Mentor, Team)</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests a list of an entity commandType</p>
+</li>
+<li>
+<p>HackathonManager shows a list of that entity commandType</p>
+</li>
+<li>
+<p>User requests to delete a specific entity in the list by name</p>
+</li>
+<li>
+<p>HackathonManager deletes the person</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The list is empty.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+<li>
+<p>3a. The given name is invalid.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. HackathonManager shows an error message.</p>
+<div class="paragraph">
+<p>Use case resumes at step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-find-an-entity-of-a-specific-entity-type-participant-mentor-team">Use case: Find an Entity of a specific Entity Type (Participant, Mentor, Team)</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests a find an Entity of a specific Entity Type.</p>
+</li>
+<li>
+<p>HackathonManager indicates success and shows the details of the Entity.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The Entity is not found in the list of Entities.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager shows an error message.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-create-an-entity-of-a-specific-entity-type-participant-mentor-team">Use case: Create an Entity of a specific Entity Type(Participant, Mentor, Team)</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to create an Entity by specifying the Entity Type and contact information.</p>
+</li>
+<li>
+<p>HackathonManager indicates success and shows the details of the Entity.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team"><a class="link" href="#use-case-update-an-entity-of-a-specific-entity-type-participant-mentor-team">Use case: Update an Entity of a specific Entity Type (Participant, Mentor, Team)</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests a list of an entity commandType</p>
+</li>
+<li>
+<p>HackathonManager shows a list of that entity commandType</p>
+</li>
+<li>
+<p>User requests to update a specific entity in the list by name or index</p>
+</li>
+<li>
+<p>HackathonManager updates the entity</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The name is not found it the list of Entities.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager shows an error message.</p>
+</li>
+<li>
+<p>1a2. User enters new name.</p>
+<div class="paragraph">
+<p>Steps 1a1-1a2 are repeated until the index or name is found in the list of Entities.</p>
+</div>
+<div class="paragraph">
+<p>Use case resumes from step 4.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. The index is not found it the list of Entities.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. HackathonManager shows an error message.</p>
+</li>
+<li>
+<p>1b2. User enters new index.</p>
+<div class="paragraph">
+<p>Steps 1b1 - 1b2 are repeated until the index is found in the list of Entities.</p>
+</div>
+<div class="paragraph">
+<p>Use case resumes from step 4.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-import-external-data-through-a-csv-file"><a class="link" href="#use-case-import-external-data-through-a-csv-file">Use case: Import external data through a CSV file</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User writes a CSV file with Entity data.</p>
+</li>
+<li>
+<p>User requests to import the CSV file located at user specified path into the HackathonManager.</p>
+</li>
+<li>
+<p>HackathonManager finds and retrieves the CSV file.</p>
+</li>
+<li>
+<p>HackathonManager adds each Entity in the CSV field.</p>
+</li>
+<li>
+<p>HackathonManager displays original updated list of Entities.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. User does not specify the path to the CSV file.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager asks the user to specify the file path.</p>
+</li>
+<li>
+<p>2a2. User specifies the file path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. User also requests that the HackathonManager create an error file.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a. HackathonManager cannot find the file or the path contains illegal characters (note that illegal path characters may vary from OS to OS).</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. HackathonManager informs user of failure of execution.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a. User specified CSV file contains invalid formatting</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1. HackathonManager imports the valid lines only.</p>
+</li>
+<li>
+<p>4a2. HackathonManager informs the user which lines were invalid and why.</p>
+<div class="paragraph">
+<p>Use case resumes from step 5 if user did not request for an error file.</p>
+</div>
+</li>
+<li>
+<p>4a3. HackathonManager creates a CSV file with the invalid lines at user specified path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 5.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-export-data-to-an-external-csv-file"><a class="link" href="#use-case-export-data-to-an-external-csv-file">Use case: Export data to an external CSV file.</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests that the HackathonManager export all of its data to an external CSV file at specified path.</p>
+</li>
+<li>
+<p>HackathonManager exports its data to the file at specified path.</p>
+</li>
+<li>
+<p>HackathonManager indicates success.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The user specifies which Entity Type data the HackathonManager should export.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager exports all of the data of the specified Entity Type to the file at specified path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b. The user does not specify the path of the external file.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1b1. The HackathonManager exports its data to the default file path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. The user specified path contains nonexistent directories and/or file.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager creates user specified directories and/or file.</p>
+</li>
+<li>
+<p>2a2. HackathonManager exports its data to the file at specified path.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b. The user specified path contains illegal characters (Note that illegal path characters may vary from OS to OS).</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b1. HackathonManager notifies user of the failure of execution.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-view-the-leaderboard"><a class="link" href="#use-case-view-the-leaderboard">Use case: View the Leaderboard</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to see the Hackathon Leaderboard (that is the teams sorted in descending order of their points).</p>
+</li>
+<li>
+<p>HackathonManager sorts the teams in descending order of their points.</p>
+</li>
+<li>
+<p>HackathonManager displays the leaderboard.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. There are no teams currently registered</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager informs user that there are no teams to show leaderboard.</p>
+</li>
+<li>
+<p>2a2. Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-view-the-leaderboard-with-tiebreaks"><a class="link" href="#use-case-view-the-leaderboard-with-tiebreaks">Use case: View the Leaderboard with Tiebreaks</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to see the leaderboard and specifies tiebreak methods to break any ties.</p>
+</li>
+<li>
+<p>HackathonManager sorts the team in descending order of their points.</p>
+</li>
+<li>
+<p>HackathonManager breaks any ties between teams depending on the methods specified by the user.</p>
+</li>
+<li>
+<p>HackathonManager displays the leaderboard.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a. There are no teams currently registered</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager displays an error informing the user that there are no teams to show leaderboard.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. No tiebreak methods specified by the user.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. Use case resumes at step 4.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. Invalid tiebreak method inputted by user</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3b1. Hackathon manager displays an error informing the user that the particular tiebreak method does not exist or is not supported.</p>
+</li>
+<li>
+<p>3b2. User inputs the command again specifying tiebreak methods again.</p>
+</li>
+<li>
+<p>3b3. Steps 3b1-3b2 are repeated until all tiebreak methods specified are correct.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-the-top-scoring-k-teams"><a class="link" href="#use-case-find-the-top-scoring-k-teams">Use case: Find the top scoring K Teams</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to see the Top K Teams in the Hackathon based on their score (highest score first), with K being the user input.</p>
+</li>
+<li>
+<p>HackathonManager sorts the teams in descending order of their points and fetches the top K teams.</p>
+</li>
+<li>
+<p>HackathonManager displays the top K teams with their respective scores.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The user input K as a negative, zero, invalid integer or non-integer value.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager shows an error message.</p>
+</li>
+<li>
+<p>1a2. User re-enters command with new user input of value K.
+Steps 1a1-1a2 are repeated until K is a correct value.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. The user inputs K as a integer more than the available number of teams.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager fetches all the teams in descending order of their score.</p>
+<div class="paragraph">
+<p>Use case resumes at step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2b. There are no teams in the hackathon.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2b1. HackathonManager shows an error message informing him there are no teams in the hackathon.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-the-top-scoring-k-teams-with-tiebreaks"><a class="link" href="#use-case-find-the-top-scoring-k-teams-with-tiebreaks">Use case: Find the top scoring K Teams with TieBreaks</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to see the Top K Teams in the Hackathon based on their score (highest score first), with K being the user input and specifies tie break methods to break any ties between teams with the same score.</p>
+</li>
+<li>
+<p>HackathonManager sorts the teams in descending order of their points .</p>
+</li>
+<li>
+<p>HackathonManager breaks any ties based on the methods specified by the user.</p>
+</li>
+<li>
+<p>Hackathon manager fetches the top K teams.</p>
+</li>
+<li>
+<p>HackathonManager displays the top K teams with their respective scores.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The user input K as a negative, zero, invalid integer or non-integer value.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager shows an error message.</p>
+</li>
+<li>
+<p>1a2. User re-enters command with new user input of value K.
+Steps 1a1-1a2 are repeated until K is a correct value.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. There are no teams in the hackathon.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>2a1. HackathonManager shows an error message informing him there are no teams in the hackathon.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. No tiebreak methods specified by the user.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3a1. Use case resumes at step 4.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. Invalid tiebreak method inputted by user</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>3b1. Hackathon manager displays an error informing the user that the particular tiebreak method does not exist or is not supported.</p>
+</li>
+<li>
+<p>3b2. User inputs the command again specifying tiebreak methods again.</p>
+</li>
+<li>
+<p>3b3. Steps 3b1-3b2 are repeated until all tiebreak methods specified are correct.</p>
+<div class="paragraph">
+<p>Use case resumes from step 3.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a. The user inputs K as a integer more than the available number of teams.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>4a1. HackathonManager fetches all the teams in descending order of their score.</p>
+<div class="paragraph">
+<p>Use case resumes at step 5.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-case-find-the-ranking-of-all-teams"><a class="link" href="#use-case-find-the-ranking-of-all-teams">Use case: Find the ranking of all Teams</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests for the top scorers of a specific category</p>
+</li>
+<li>
+<p>HackathonManager shows the leaderboard of the category, with respective score of each team.
+Use case ends.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. The category is not found.</p>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a1. HackathonManager shows an error message.</p>
+</li>
+<li>
+<p>1a2. User enters category.
+Steps 1a1-1a2 are repeated until the category is found.</p>
+<div class="paragraph">
+<p>Use case resumes from step 2.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+<li>
+<p>The system should not seem sluggish if it contains less than 1500 entities.</p>
+</li>
+<li>
+<p>Project is not intended for use on mobile and only should be used on desktop.</p>
+</li>
+<li>
+<p>The application assumes that the user is comfortable with the concept of the command line.</p>
+</li>
+<li>
+<p>The application is meant to run offline.</p>
+</li>
+<li>
+<p>The application is largely a personnel/HR manager, and is not expected to do anything more than that (eg hackathon finances etc).</p>
+</li>
+<li>
+<p>The application is to be used for a single hackathon only and not for multiple hackathons.</p>
+</li>
+<li>
+<p>The application assumes that the hackathon is a short term affair (no longer than 4 days).</p>
+</li>
+<li>
+<p>The application assumes that this is an English medium hackathon and that no non-English names are expected.</p>
+</li>
+<li>
+<p>The GUI should display the result of commands in an intuitive, organized manner that is readable by the laymen(as part of the organization/ affordability of the application).</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix E: Glossary</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
+<dd>
+<p>Windows, Linux, Unix, OS-X</p>
+</dd>
+<dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
+<dd>
+<p>A contact detail that is not meant to be shared with others</p>
+</dd>
+<dt class="hdlist1"><a id="logging"></a> Logging</dt>
+<dd>
+<p>Logging uses file(s) containing information about the activity of a computer program for the developers to consult and monitor.</p>
+</dd>
+<dt class="hdlist1"><a id="entity"></a> Entity</dt>
+<dd>
+<p>Entities are the main objects Alfred stores. The Entities are Participant, Mentor and Team as described below.</p>
+</dd>
+<dt class="hdlist1"><a id="participant"></a> Participant</dt>
+<dd>
+<p>It represents a participant taking part in the hackathon</p>
+</dd>
+<dt class="hdlist1"><a id="mentor"></a> Mentor</dt>
+<dd>
+<p>It represents a mentor available for teams to choose</p>
+</dd>
+<dt class="hdlist1"><a id="team"></a> Team</dt>
+<dd>
+<p>Team is the base unit of this project. It contains references to an associated list of participants and an optional mentor.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Google Sheets</strong></p>
+</div>
+<div class="paragraph">
+<p>Author: Google</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>This is extremely versatile as Google Sheets come with a list of extremely helpful macros that could help in the storage of participants.</p>
+</li>
+<li>
+<p>The display and UI of Google Sheets is extremely intuitive and will come as second nature to anyone using the web.</p>
+</li>
+<li>
+<p>Convenient and accessible by multiple HR personnel simultaneously.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Google Sheets has no concept of objects and thus it cannot accurately depict the relationships between our different entities.</p>
+</li>
+<li>
+<p>As above, it is hard to look for relationships between our entities, such as Team/Participant associations.</p>
+</li>
+<li>
+<p>Google Sheets may be useful for storing information, but it does not support command line arguments.</p>
+</li>
+<li>
+<p>Google Sheets is also unable to perform input validation as it lacks the logic to do so.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given below are instructions to test the app manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">Launch and Shutdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial launch</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Download the jar file and copy into an empty folder</p>
+</li>
+<li>
+<p>Double-click the jar file<br>
+Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.<br>
+<em>Note: If you are a OS X user, you might need to run this from your command line instead.</em></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Saving window preferences</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
+</li>
+<li>
+<p>Re-launch the app by double-clicking the jar file.<br>
+Expected: The most recent window size and location is retained.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-participant"><a class="link" href="#deleting-a-participant">Deleting a Participant</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a Participant while all participants are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all participants using the <code>list participants</code> command. Multiple participants in the list.</p>
+</li>
+<li>
+<p>Test case: <code>delete participant P-1</code><br>
+Expected: Participant with id P-1. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>delete participant P-101212323</code><br>
+Expected: No participant is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Create a JSON with corrupted data, or any data at all</p>
+</li>
+<li>
+<p>Test case: Start the application. Logger should  kindly inform you that the storage files
+are corrupted and hence it defaults to using empty lists.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -314,4 +2024,4 @@ the architecture of the application. Clicking these text will redirect user to t
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 15:14:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-07 16:13:38 UTC</div></div></div></body></html>
