@@ -291,6 +291,7 @@ Example for multiple fields:
 * `find participant n/Damith e/damith.com` finds all participants whose name contains the string "Damith" (this is case
 sensitive) and whose emails contain "damith.com"
 
+//tag::assign[]
 === Assigning a Entity to a Team: `assign {mentor/participant} ID TEAM_ID ...`
 
 Assigns Mentor or Participant Entity by their ID to a team identified by TEAM_ID. +
@@ -310,7 +311,9 @@ image::AssignCommandExample1.png[width="790"]
 * `assign participant P-100 T-2` will assign Participant with ID P-100 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:
 
 image::AssignCommandExample2.png[width="790"]
+//end::assign[]
 
+//tag::remove[]
 === Removing an Entity from a Team: `remove {mentor/participant} ID TEAM_ID ...`
 
 Removes Mentor or Participant Entity by their ID from a team identified by TEAM_ID. +
@@ -330,6 +333,7 @@ image::RemoveCommandExample1.png[width="790"]
 * `remove participant P-100 T-2` will remove Participant with ID P-100 from Team with ID T-2.Running the command will show you the following output in the 'Team' section of the GUI
 
 image::RemoveCommandExample2.png[width="790"]
+//end::remove[]
 
 === Show Command History: `history`
 Shows you up to the last 50 commands that you executed.
@@ -639,6 +643,7 @@ application properly!
 
 Simply run `help`.
 
+//tag::home[]
 === Home command: `home`
 This command allows you to navigate to the homepage where the system statistics are updated in real time. The homepage statistics are also available when you start-up the application.
 
@@ -657,6 +662,9 @@ To navigate to home:
 .Output of `home` command
 image::HomeCommandExample.png[width="790"]
 
+//end::home[]
+
+//tag:command-suggestion[]
 === Command Suggestion Prompt
 As you type, there will be a popup box predicting the type of commands you are going to type. You can navigate through these suggestions and choose the template that suits you.
 
@@ -682,6 +690,7 @@ image::CommandSuggestionStep3.png[width="790"]
 
 image::CommandSuggestionStep4.png[width="790"]
 
+//end::command-suggestion[]
 
 === Seating: `locate {PARTICIPANT/TEAM}` (Coming in v2.0)
 Find where a particular participant or team is seated.
