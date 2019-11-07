@@ -662,6 +662,49 @@ We decided to prioritise user convenience in this situation and rather than disp
 
 The reason "Alternative 2" was selected was because `ModelManager` 's `setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators)` method resets the `SortedList` of teams within `ModelManager` and applies the relevant comparators to it to sort it as desired. Hence, it is abstracting away this process into a single method so a better re-usage of code can take place in other methods. This method is reused by `ModelManager` 's `setTopK()` method when using the `getTop K` command, whereas the `setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators)` method is sufficient to sort *all* the teams in the desired order. So instead of calling it again within another method, the `setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators)` method which was meant to abstract away some processes is itself used to handle the `leaderboard` command. So indeed in the end, "Alternative 2" does not introduce duplication of code, but rather introduces better use of abstraction.
 
+==== Tiebreaking
+
+In the above sections, the UML diagrams gloss over how tiebreaking is really parsed and understood by Alfred. The basic of tie-breaking revolves around using `Comparator` s to sort the teams in a particular order. Each tiebreak method available in Alfred has a `Comparator` associated to it and all these can be found in the `Comparators` class.
+
+The activity diagram below illustrates the internal workings within the `LeaderboardCommandParser" and `TopTeamsCommandParser` when parsing tiebreak methods. Do note that in the below diagram the term `parser` encapsulates both of these `Parser` s as they operate in almost identical ways.
+
+.Handling of Tiebreak Methods
+image::TieBreakActivityDiagram.png[]
+
+From the above there is one important aspect to note: the `ArrayList` of `Comparator<Team>` objects created in the second step. This is the `ArrayList` referred to in the previous sections which is tasked with containing and transferring the comparators which will be used to sort the teams in their appropriate order to form the leaderboard or top teams. This `ArrayList` is used as an input parameter for both `leaderboard` and `getTop K` command related classes, as explored in previous sections.
+
+Additionally, before `comparators` can be passed as an argument to the commands, it is reversed. This is done intently so the comparators related to each tiebreak method are applied in an order such that they preserve the oder the user wants the tiebreak methods to be applied.
+
+Secondly, do note that the diagram above assumes there are no syntax errors made by the user when typing out the command. In case of any errors in the command, a `ParseException` would be thrown warning the user of such a situation. These have been excluded from the above diagram to prevent overcrowding and a deviation from the basic logic.
+
+==== Design Considerations for Tiebreaking
+
+Though this was a relatively straightforward subset of our `leaderboard` and `getTop K` command, there were still a few, small design considerations made.
+
+*Aspect:* How to separate tiebreak methods
+
+* *Alternative 1:* Each tiebreak method preceded by a new tiebreak prefix ("tb/")
+
+** Pros: Follows the paradigm followed by other commands.
+** Cons: Very tedious for the user to type and adds difficulty in parsing.
+
+* *Alternative 2 (Current Choice):* Each tiebreak method separated by a single whitespace
+
+** Pros: Easier to implement and more convenient for the user to type as well. Code-wise it is easy and quick to customize which character to separate methods on.
+** Cons: Introduces a slight variation as other commands don't use whitespaces as separation methods which might confuse the user.
+
+To better consider the user's needs and convenience, "Alternative 2" was selected. So as to not confuse users, this implementation has been made abundantly clear in the User Guide as well. From a developer's perspective, this implementation is also more customizable to better respond to changes in user's preferences as the separation character can easily be changes.
+
+*Aspect:* Where to create comparators
+
+* *Alternative 1:* Create comparators when parsing each tiebreak method
+** Pros: Easier to implement as it does not require additional classes.
+** Cons: Can overcrowd a single method or class especially as more comparison methods are added. This is also a poor use of abstraction and would not respect Single Responsibility Principle.
+
+* *Alternative 2 (Current Choice):* Create a separate `Comparators` class where relevant comparators are created beforehand and can be invoke using static methods.
+** Pros: Better use of abstraction and maintains Single Responsibility Principle as the parser class can focus on solely parsing the user commands.
+
+In the end, "Alternative 2" was selected as it follows better software engineering practices by making better use of abstraction. Despite requiring slightly more code and classes, it would still be better than "Alternative 1" which breaks the Single Responsibility Principle as the parser class would have to be changed for changes in tiebreak methods in addition to changes in methods of parsing.
 
 === Logging
 

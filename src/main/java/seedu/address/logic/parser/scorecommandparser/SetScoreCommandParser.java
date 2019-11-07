@@ -26,13 +26,12 @@ public class SetScoreCommandParser implements Parser<SetScoreCommand> {
     @Override
     public SetScoreCommand parse(String args) throws ParseException {
         String score;
-        String id;
         Id teamId;
 
         try {
-            id = AlfredParserUtil.getSpecifierFromCommand(args);
-            score = AlfredParserUtil.getNonEmptyArgumentFromCommand(args);
+            String id = AlfredParserUtil.getSpecifierFromCommand(args);
             teamId = AlfredParserUtil.parseIndex(id, PrefixType.T);
+            score = AlfredParserUtil.getNonEmptyArgumentFromCommand(args);
         } catch (ParseIdException e) {
             logger.severe("Team ID for Set Score Command is Invalid.");
             throw new ParseIdException(MESSAGE_INVALID_TEAM_DISPLAYED_INDEX);
