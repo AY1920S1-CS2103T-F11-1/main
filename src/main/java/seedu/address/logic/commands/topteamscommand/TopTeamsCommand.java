@@ -8,6 +8,7 @@ import java.util.Comparator;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 
 /**
@@ -28,10 +29,12 @@ public abstract class TopTeamsCommand extends Command {
 
     protected int numberOfTeams;
     protected ArrayList<Comparator<Team>> comparators;
+    protected SubjectName subject;
 
-    public TopTeamsCommand(int k, ArrayList<Comparator<Team>> comparators) {
+    public TopTeamsCommand(int k, ArrayList<Comparator<Team>> comparators, SubjectName subject) {
         this.numberOfTeams = k;
         this.comparators = comparators;
+        this.subject = subject;
     }
 
     /**

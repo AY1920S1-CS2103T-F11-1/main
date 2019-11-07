@@ -8,6 +8,7 @@ import java.util.Comparator;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 
 /**
@@ -26,9 +27,11 @@ public abstract class LeaderboardCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TIE_BREAK + "moreParticipants random";
 
     protected ArrayList<Comparator<Team>> comparators;
+    protected SubjectName subjectName;
 
-    public LeaderboardCommand(ArrayList<Comparator<Team>> comparators) {
+    public LeaderboardCommand(ArrayList<Comparator<Team>> comparators, SubjectName subjectName) {
         this.comparators = comparators;
+        this.subjectName = subjectName;
     }
 
     /**
