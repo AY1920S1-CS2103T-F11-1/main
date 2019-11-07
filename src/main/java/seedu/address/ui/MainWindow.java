@@ -372,7 +372,7 @@ public class MainWindow extends UiPart<Stage> {
                 this.fireButton(participantsButton);
                 break;
             case H:
-                this.fireButton(lastFired);
+                this.fireButton(historyButton);
                 break;
             case L:
                 this.fireButton(leaderboardButton);

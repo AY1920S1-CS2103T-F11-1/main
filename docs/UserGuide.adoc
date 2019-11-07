@@ -170,7 +170,7 @@ Use this command to add a new entity for Alfred to keep track of. +
 ****
 * Creates an Entity as specified by you. Each Entity object will have a unique ID automatically assigned to it.
 * As of version 1.1, you must provide all the fields. There are no optional fields.
-* Note that the Specialisation and Subject fields can only take on the values specified in `SubjectName` in <<Parameters>>:
+* Note that the Specialisation and Subject fields can only take on the values specified in `SubjectName` in <<Parameter Constraints and Additional Information>>:
 ****
 
 ==== Adding a Participant: `add participant PARAMETERS`
@@ -212,7 +212,7 @@ Examples:
 Use this command to add a new Team to Alfred to keep track of for your Hackathon.
 ****
 * Teams have the fields "Name", "Project name" and "Table Number" which you must provide.
-* Teams also have a field called "Subject", which refers the area the team's project focuses on, and must be chosen from the predetermined list of subjects described in `SubjectName` in <<Parameters>>.
+* Teams also have a field called "Subject", which refers the area the team's project focuses on, and must be chosen from the predetermined list of subjects described in `SubjectName` in <<Parameter Constraints and Additional Information>>.
 ****
 
 Format: `add team n/NAME s/SUBJECT pn/PROJECT_NAME l/TABLE_NUMBER`
