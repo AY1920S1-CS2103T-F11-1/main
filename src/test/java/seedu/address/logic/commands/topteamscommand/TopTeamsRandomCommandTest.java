@@ -73,6 +73,5 @@ class TopTeamsRandomCommandTest {
         // Non-Empty team list - subject specified does not have teams
         assertCommandFailure(new TopTeamsRandomCommand(VALID_TOP_TEAMS, comparators, SubjectName.SOCIAL), model,
                 String.format(TopTeamsCommand.MESSAGE_NO_TEAM_SUBJECT, SubjectName.SOCIAL.toString()));
-
     }
 }

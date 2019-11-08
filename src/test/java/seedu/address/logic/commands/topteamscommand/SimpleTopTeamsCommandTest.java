@@ -64,5 +64,13 @@ class SimpleTopTeamsCommandTest {
     void execute_emptyTeamList_commandFailure() {
         assertCommandFailure(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators,
                 SubjectName.ENVIRONMENTAL), emptyModel, TopTeamsCommand.MESSAGE_NO_TEAM);
+
+        // Empty team list subject specified
+        assertCommandFailure(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators, SubjectName.SOCIAL), emptyModel,
+                TopTeamsCommand.MESSAGE_NO_TEAM);
+
+        // Non-Empty team list - subject specified does not have teams
+        assertCommandFailure(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators, SubjectName.SOCIAL), model,
+                String.format(TopTeamsCommand.MESSAGE_NO_TEAM_SUBJECT, SubjectName.SOCIAL.toString()));
     }
 }
