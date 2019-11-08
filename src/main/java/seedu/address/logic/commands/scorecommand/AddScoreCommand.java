@@ -2,15 +2,12 @@ package seedu.address.logic.commands.scorecommand;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.address.commons.core.Messages.MESSAGE_NON_EXISTENT_TEAM;
-
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AlfredParser;
 import seedu.address.model.Model;
 import seedu.address.model.entity.CommandType;
 import seedu.address.model.entity.Id;

@@ -3,11 +3,12 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.core.Messages.MESSAGE_NON_EXISTENT_MENTOR;
 import static seedu.address.commons.core.Messages.MESSAGE_NON_EXISTENT_PARTICIPANT;
 import static seedu.address.commons.core.Messages.MESSAGE_NON_EXISTENT_TEAM;
+
 import java.util.logging.Logger;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.scorecommand.AddScoreCommand;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
