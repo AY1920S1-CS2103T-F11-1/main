@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "{Abstract}\nScoreCommand" as ScoreCommand
+
+Interface Model <<Interface>> MODEL_COLOR
+
+Abstract Class "{Abstract}\nCommand" as Command
+
+Class AddScoreCommand
+Class SubtractScoreCommand
+Class ResetScoreCommand
+Class SetScoreCommand
+
+Class ModelManager MODEL_COLOR
+
+ScoreCommand -up-|> Command
+
+AddScoreCommand -up-|> ScoreCommand
+ResetScoreCommand -up-|> ScoreCommand
+SubtractScoreCommand -up-|> ScoreCommand
+SetScoreCommand -up-|> ScoreCommand
+
+AddScoreCommand .-> ModelManager : updates >
+ResetScoreCommand .-> ModelManager : updates >
+SubtractScoreCommand .-> ModelManager : updates >
+SetScoreCommand .-> ModelManager : updates >
+
+ModelManager ..|> Model
+
+@enduml
