@@ -39,11 +39,7 @@ public class SetScoreCommand extends ScoreCommand {
         requireNonNull(model);
         Team teamToScore;
 
-        try {
-            teamToScore = model.getTeam(id);
-        } catch (AlfredException ae) {
-            throw new CommandException(MESSAGE_NON_EXISTENT_TEAM);
-        }
+        teamToScore = getTeamFromModel(model, id);
 
         try {
             model.updateTeamScore(teamToScore, score);

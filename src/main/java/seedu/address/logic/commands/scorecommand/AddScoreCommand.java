@@ -30,7 +30,7 @@ public class AddScoreCommand extends ScoreCommand {
             + "If the team's new score exceeds " + Score.MAX_SCORE + " it will be set to " + Score.MAX_SCORE + "\n"
             + "Format: " + COMMAND_WORD + " [teamID] score \n"
             + "For example: " + COMMAND_WORD + " T-5 25";
-    private final Logger logger = LogsCenter.getLogger(AlfredParser.class);
+    private final Logger logger = LogsCenter.getLogger(AddScoreCommand.class);
 
     public AddScoreCommand(Id teamId, Score score) {
         super(teamId, score);
@@ -41,11 +41,7 @@ public class AddScoreCommand extends ScoreCommand {
         requireNonNull(model);
         Team teamToScore;
 
-        try {
-            teamToScore = model.getTeam(id);
-        } catch (AlfredException ae) {
-            throw new CommandException(MESSAGE_NON_EXISTENT_TEAM);
-        }
+        teamToScore = getTeamFromModel(model, id);
 
         try {
             model.addTeamScore(teamToScore, score);
