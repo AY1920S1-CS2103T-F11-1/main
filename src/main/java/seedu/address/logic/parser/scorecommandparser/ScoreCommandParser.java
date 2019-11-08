@@ -3,7 +3,6 @@ package seedu.address.logic.parser.scorecommandparser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX;
 
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
@@ -15,7 +14,6 @@ import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
 import seedu.address.logic.parser.AlfredParser;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.CommandAllocator;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.exceptions.ParseIdException;
@@ -106,17 +104,16 @@ public class ScoreCommandParser implements Parser<ScoreCommand> {
     private static String getAppropriateUsageMessage(String specifier) throws ParseException {
         specifier = specifier.trim();
         switch (specifier) {
-            case CliSyntax.SCORE_ADD:
-                return AddScoreCommand.MESSAGE_USAGE;
-            case CliSyntax.SCORE_UPDATE:
-                return SetScoreCommand.MESSAGE_USAGE;
-            case CliSyntax.SCORE_SUBTRACT:
-                return SubtractScoreCommand.MESSAGE_USAGE;
-            case CliSyntax.SCORE_RESET:
-                return SetScoreCommand.RESET_MESSAGE_USAGE;
-            default:
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ScoreCommand.MESSAGE_USAGE));
+        case CliSyntax.SCORE_ADD:
+            return AddScoreCommand.MESSAGE_USAGE;
+        case CliSyntax.SCORE_UPDATE:
+            return SetScoreCommand.MESSAGE_USAGE;
+        case CliSyntax.SCORE_SUBTRACT:
+            return SubtractScoreCommand.MESSAGE_USAGE;
+        case CliSyntax.SCORE_RESET:
+            return SetScoreCommand.RESET_MESSAGE_USAGE;
+        default:
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScoreCommand.MESSAGE_USAGE));
         }
     }
 }

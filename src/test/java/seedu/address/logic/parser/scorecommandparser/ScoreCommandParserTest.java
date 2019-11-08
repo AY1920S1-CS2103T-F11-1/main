@@ -2,8 +2,6 @@ package seedu.address.logic.parser.scorecommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TEAM_DISPLAYED_INDEX;
-import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocatorFailure;
-import static seedu.address.logic.parser.CommandAllocatorTestUtil.assertAllocatorSuccess;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIds.ID_THIRD_TEAM;
@@ -17,8 +15,6 @@ import seedu.address.logic.commands.scorecommand.AddScoreCommand;
 import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.logic.commands.scorecommand.SetScoreCommand;
 import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
-import seedu.address.model.entity.Id;
-import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
 
 class ScoreCommandParserTest {
