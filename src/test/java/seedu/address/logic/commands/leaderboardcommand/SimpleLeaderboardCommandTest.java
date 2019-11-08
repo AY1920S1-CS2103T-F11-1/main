@@ -21,7 +21,7 @@ import seedu.address.testutil.TypicalTeams;
  * Tests whether the {@link SimpleLeaderboardCommand} works as expected with regards to
  * different scenarios and is capable of handling errors appropriately.
  */
-class ShowSimpleLeaderboardCommandTest {
+class SimpleLeaderboardCommandTest {
 
     private Model model;
     private Model expectedModel;

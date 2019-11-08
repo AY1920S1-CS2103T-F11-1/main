@@ -21,7 +21,7 @@ import seedu.address.testutil.TypicalTeams;
  * Tests whether the {@link LeaderboardWithRandomCommand} works as expected with regards to
  * different scenarios and is capable of handling errors appropriately.
  */
-class ShowLeaderboardWithRandomCommandTest {
+class LeaderboardWithRandomCommandTest {
 
     private Model model;
     private Model expectedModel;
