@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TEAM_DISPLAYED
 
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.scorecommand.AddScoreCommand;
@@ -26,24 +27,26 @@ import seedu.address.model.entity.Score;
  * Allocates the user's score command input to the correct parser in order to
  * call the appropriate score command parser depending on the scenario.
  */
-public class ScoreCommandAllocator implements Parser<ScoreCommand> {
+public class ScoreCommandParser implements Parser<ScoreCommand> {
 
     private static Logger logger = LogsCenter.getLogger(AlfredParser.class);
-    private static Score RESET_SCORE = new Score(0);
+    private static final Score RESET_SCORE = new Score(0);
+    private static final Pattern VALIDATE_METHOD = Pattern.compile("\\b(add|reset|sub|set)\\b");
 
     @Override
     public ScoreCommand parse(String userInput) throws ParseException {
         String type;
         try {
             type = AlfredParserUtil.getSpecifierFromCommand(userInput);
+            validateCommandType(type);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScoreCommand.MESSAGE_USAGE));
         }
 
         String args = AlfredParserUtil.getArgumentsFromCommand(userInput);
 
-        Id id = getIdFromArguments(type, args);
         Score score = getScoreFromArguments(type, args);
+        Id id = getIdFromArguments(type, args);
 
         switch (type) {
         case CliSyntax.SCORE_ADD:
@@ -64,6 +67,12 @@ public class ScoreCommandAllocator implements Parser<ScoreCommand> {
         }
     }
 
+    private static void validateCommandType(String type) throws ParseException {
+        if (!Pattern.matches(VALIDATE_METHOD.pattern(), type)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScoreCommand.MESSAGE_USAGE));
+        }
+    }
+
     private static Id getIdFromArguments(String specifier, String args) throws ParseException {
         try {
             String id = AlfredParserUtil.getSpecifierFromCommand(args);
@@ -81,6 +90,9 @@ public class ScoreCommandAllocator implements Parser<ScoreCommand> {
 
     private static Score getScoreFromArguments(String specifier, String args) throws ParseException {
         String score;
+        if (specifier.equals(CliSyntax.SCORE_RESET)) {
+            return RESET_SCORE;
+        }
         try {
             score = AlfredParserUtil.getNonEmptyArgumentFromCommand(args);
         } catch (ParseException pe) {
@@ -107,5 +119,4 @@ public class ScoreCommandAllocator implements Parser<ScoreCommand> {
                         ScoreCommand.MESSAGE_USAGE));
         }
     }
-
 }
