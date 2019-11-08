@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.Comparators;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 import seedu.address.stub.ModelManagerStub;
 import seedu.address.testutil.TypicalTeams;
@@ -38,23 +39,30 @@ class SimpleTopTeamsCommandTest {
         }
     }
 
-    /*
     @Test
     void execute_nonEmptyTeamList_commandSuccess() {
-        // Non-empty team list and no comparators.
-        assertCommandSuccess(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators), model,
+        // Non-empty team list and no comparators or subjects.
+        assertCommandSuccess(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators, null), model,
                 String.format(SimpleTopTeamsCommand.MESSAGE_SUCCESS, VALID_TOP_TEAMS), expectedModel);
 
-        // Non-empty team list with comparators.
+        // Non-empty team list, no comparators but specified subject
+        assertCommandSuccess(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators, SubjectName.ENVIRONMENTAL), model,
+                String.format(SimpleTopTeamsCommand.MESSAGE_SUCCESS, VALID_TOP_TEAMS), expectedModel);
+
+        // Non-empty team list with comparators, no subject.
         comparators.add(Comparators.rankByIdAscending());
         comparators.add(Comparators.rankByParticipantsDescending());
-        assertCommandSuccess(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators), model,
+        assertCommandSuccess(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators, null), model,
+                String.format(SimpleTopTeamsCommand.MESSAGE_SUCCESS, VALID_TOP_TEAMS), expectedModel);
+
+        // Non-empty team list with comparators and subject.
+        assertCommandSuccess(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators, SubjectName.ENVIRONMENTAL), model,
                 String.format(SimpleTopTeamsCommand.MESSAGE_SUCCESS, VALID_TOP_TEAMS), expectedModel);
     }
 
     @Test
     void execute_emptyTeamList_commandFailure() {
-        assertCommandFailure(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators), emptyModel,
-                TopTeamsCommand.MESSAGE_NO_TEAM);
-    }*/
+        assertCommandFailure(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators,
+                SubjectName.ENVIRONMENTAL), emptyModel, TopTeamsCommand.MESSAGE_NO_TEAM);
+    }
 }
