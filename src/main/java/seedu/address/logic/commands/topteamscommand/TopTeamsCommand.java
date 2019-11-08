@@ -4,11 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIE_BREAK;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.Predicates;
 import seedu.address.logic.commands.Command;

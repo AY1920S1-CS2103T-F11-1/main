@@ -9,14 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.MISSING_TIEBREAK_METH
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_ALFRED;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TIE_BREAK_DESC_RANDOM;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.leaderboardcommand.LeaderboardCommand;
@@ -53,7 +51,7 @@ class LeaderBoardCommandParserTest {
         // Tiebreak method not mentioned after prefix
         assertParseFailure(parser, MISSING_TIEBREAK_METHOD, MISSING_TIEBREAK_METHODS);
     }
-    
+
     @Test
     void parse_validfUserInput_success() {
         ArrayList<Comparator<Team>> comparators = new ArrayList<>();
