@@ -3,8 +3,8 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,7 +21,7 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
 
     @FXML
-    private TextField commandTextField;
+    private AutoCompleteTextField commandTextField;
 
     @FXML
     private Button sendButton;
@@ -34,8 +34,13 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
+    public void setFocusTextField() {
+        this.commandTextField.requestFocus();
+    }
+
     /**
      * Sets the text to be displayed in the TextField {@code commandTextField}.
+     *
      * @param text
      */
     public void setTextField(String text) {
