@@ -95,7 +95,8 @@ class ScoreCommandParserTest {
                 new SetScoreCommand(ID_THIRD_TEAM, SCORE_TWENTY));
 
         // Reset Score command test
-        assertParseSuccess(scoreCommandParser, "reset T-3", new SetScoreCommand(ID_THIRD_TEAM, RESET_SCORE));
+        assertParseSuccess(scoreCommandParser, "reset T-3",
+                new SetScoreCommand(ID_THIRD_TEAM, RESET_SCORE));
 
         // Set Score - with leading and trailing whitespaces
         assertParseSuccess(scoreCommandParser, " reset T-3 ",
