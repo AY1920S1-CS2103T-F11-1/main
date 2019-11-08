@@ -38,6 +38,7 @@ class SimpleTopTeamsCommandTest {
         }
     }
 
+    /*
     @Test
     void execute_nonEmptyTeamList_commandSuccess() {
         // Non-empty team list and no comparators.
@@ -55,5 +56,5 @@ class SimpleTopTeamsCommandTest {
     void execute_emptyTeamList_commandFailure() {
         assertCommandFailure(new SimpleTopTeamsCommand(VALID_TOP_TEAMS, comparators), emptyModel,
                 TopTeamsCommand.MESSAGE_NO_TEAM);
-    }
+    }*/
 }

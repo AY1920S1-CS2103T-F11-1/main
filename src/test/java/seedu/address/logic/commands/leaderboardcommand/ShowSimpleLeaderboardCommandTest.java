@@ -37,6 +37,7 @@ class ShowSimpleLeaderboardCommandTest {
         }
     }
 
+    /*
     @Test
     void execute_nonEmptyTeamList_commandSuccess() {
         // Non-empty team list and no comparators.
@@ -54,5 +55,5 @@ class ShowSimpleLeaderboardCommandTest {
     void execute_emptyTeamList_commandFailure() {
         assertCommandFailure(new SimpleLeaderboardCommand(comparators), emptyModel,
                 LeaderboardCommand.MESSAGE_NO_TEAM);
-    }
+    }*/
 }

@@ -798,28 +798,26 @@ public class ModelManager implements Model {
         if (subject != null) {
             teams.removeIf(Predicates.getPredicateFilterTeamBySubject(subject));
             this.sortedTeam = new SortedList<>(teams);
+        } else {
+            this.sortedTeam = new SortedList<>(teams);
         }
     }
 
     /**
-     * Resets the {@code sortedTeam} list to its original order without any sorting,
-     * then arranges it to sort the current teams stored in Alfred in descending
-     * order of their score. Implements additional Comparators {@code comparators}
-     * for tie-breaking if specified by the user. Additionally this also
-     * filters out teams working on a specific subject if
-     * specified by the user.
+     * Resets the {@code sortedTeam} list to its original order without any sorting and applies necessary filtering,
+     * then arranges it to sort the current teams stored in Alfred in descending order of their score. Implements
+     * additional Comparators {@code comparators} for tie-breaking if specified by the user. Additionally this also
+     * filters out teams working on a specific subject if specified by the user.
+     *
      */
     public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators, SubjectName subject) {
-        this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
         filterSortedList(subject);
         for (Comparator<Team> comparator : comparators) {
             this.sortedTeam.setComparator(comparator);
         }
         // Set the comparator to rank by score last as in-place sorting is taking place,
-        // so ranking by score
-        // in the end will rank teams by their score and retain the tie-breaks obtained
-        // from the previously applied
-        // comparators.
+        // so ranking by score in the end will rank teams by their score and retain the tie-breaks obtained
+        // from the previously applied comparators.
         this.sortedTeam.setComparator(Comparators.rankByScore());
     }
 
@@ -830,7 +828,7 @@ public class ModelManager implements Model {
      */
     public final void setTopK(int k, ArrayList<Comparator<Team>> comparators, SubjectName subject) {
         setSimpleLeaderboard(comparators, subject);
-        // Create a copy of the sorted teams from which teams can be removed without causing exceptions as
+        // Create a copy of the sorted teams from which teams can be removed without causing errors as
         // removing from SortedList leads to exceptions.
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.topKWithTie(teams, k, comparators);
