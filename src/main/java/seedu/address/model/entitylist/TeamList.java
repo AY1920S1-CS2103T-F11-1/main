@@ -4,9 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.core.LogsCenter;
-
 import seedu.address.commons.exceptions.AlfredModelException;
 import seedu.address.commons.exceptions.MissingEntityException;
 import seedu.address.commons.exceptions.ModelValidationException;
@@ -63,12 +61,16 @@ public class TeamList extends EntityList {
      * @throws MissingEntityException   if the team to update does not exist.
      * @throws ModelValidationException if a similar participant already exists.
      */
-    public void update(Id id, Team updatedTeam)
-            throws MissingEntityException, ModelValidationException {
+    public void update(Id id, Team updatedTeam) throws AlfredModelException {
         // First check if the updated team already exists
         for (Team t : this.teams) {
             if (t.isSameTeam(updatedTeam) && !t.getId().equals(updatedTeam.getId())) {
                 throw new ModelValidationException(SIMILAR_TEAM_MSG);
+            }
+            if (t.getLocation().equals(updatedTeam.getLocation())) {
+                logger.severe("Trying to assign a team to a table that is already designated to another team.");
+                throw new AlfredModelException("Location (table number) is already assigned to team " + t.getId()
+                        + ". Please try another location.");
             }
         }
 
@@ -95,7 +97,8 @@ public class TeamList extends EntityList {
             }
             if (t.getLocation().equals(team.getLocation())) {
                 logger.severe("Trying to assign a team to a table that is already designated to another team.");
-                throw new AlfredModelException("Location (table number) is assigned to team " + t.getId());
+                throw new AlfredModelException("Location (table number) is already assigned to team " + t.getId()
+                        + ". Please try another location.");
             }
         }
         this.teams.add(team);
