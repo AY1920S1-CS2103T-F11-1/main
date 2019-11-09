@@ -22,7 +22,7 @@ import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.logic.commands.historycommand.HistoryCommand;
 import seedu.address.logic.commands.historycommand.RedoCommand;
 import seedu.address.logic.commands.historycommand.UndoCommand;
-import seedu.address.logic.commands.leaderboardcommand.ShowSimpleLeaderboardCommand;
+import seedu.address.logic.commands.leaderboardcommand.SimpleLeaderboardCommand;
 import seedu.address.logic.commands.listcommand.ListCommand;
 import seedu.address.logic.commands.removecommand.RemoveCommand;
 import seedu.address.logic.commands.scorecommand.ScoreCommand;
@@ -41,7 +41,7 @@ import seedu.address.logic.parser.historycommandparser.RedoCommandParser;
 import seedu.address.logic.parser.historycommandparser.UndoCommandParser;
 import seedu.address.logic.parser.listcommandparser.ListCommandParser;
 import seedu.address.logic.parser.removecommandparser.RemoveCommandAllocator;
-import seedu.address.logic.parser.scorecommandparser.ScoreCommandAllocator;
+import seedu.address.logic.parser.scorecommandparser.ScoreCommandParser;
 import seedu.address.logic.parser.viewcommandparser.ViewCommandAllocator;
 
 /**
@@ -90,7 +90,7 @@ public class AlfredParser {
             break;
 
         case ScoreCommand.COMMAND_WORD:
-            c = new ScoreCommandAllocator().allocate(arguments);
+            c = new ScoreCommandParser().parse(arguments);
             break;
 
         case ListCommand.COMMAND_WORD:
@@ -98,13 +98,13 @@ public class AlfredParser {
             c = new ListCommandParser().parse(arguments);
             break;
 
-        case ShowSimpleLeaderboardCommand.COMMAND_WORD:
+        case SimpleLeaderboardCommand.COMMAND_WORD:
             logger.info("Executing leaderboard command...");
-            c = new ShowLeaderBoardCommandParser().parse(arguments);
+            c = new LeaderboardCommandParser().parse(arguments);
             break;
 
         case SimpleTopTeamsCommand.COMMAND_WORD:
-            c = new GetTopTeamsCommandParser().parse(arguments);
+            c = new TopTeamsCommandParser().parse(arguments);
             break;
 
         case ViewCommand.COMMAND_WORD:

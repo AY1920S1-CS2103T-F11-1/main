@@ -11,19 +11,20 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.entity.CommandType;
+import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 
 /**
  * Shows the full leaderboard as it currently stands based
  * on the teams' scores, with ties broken on random selection.
  */
-public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
+public class LeaderboardWithRandomCommand extends LeaderboardCommand {
 
     public static final String MESSAGE_SUCCESS = "Showing Leaderboard as it Stands with Random Winners.";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    public ShowLeaderboardWithRandomCommand(ArrayList<Comparator<Team>> comparators) {
-        super(comparators);
+    public LeaderboardWithRandomCommand(ArrayList<Comparator<Team>> comparators, SubjectName subjectName) {
+        super(comparators, subjectName);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
         assert comparators != null : "The comparators list should not be null";
         checkNoTeams(model);
         int numberOfTeams = model.getTeamList().list().size();
-        model.setTopKRandom(numberOfTeams, comparators);
+        model.setTopKRandom(numberOfTeams, comparators, subjectName);
 
         logger.info("Showing Leaderboard with Random Winners.");
         model.updateHistory(this);
@@ -43,7 +44,7 @@ public class ShowLeaderboardWithRandomCommand extends LeaderboardCommand {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof ShowLeaderboardWithRandomCommand
-                && comparators.equals(((ShowLeaderboardWithRandomCommand) other).comparators));
+                || (other instanceof LeaderboardWithRandomCommand
+                && comparators.equals(((LeaderboardWithRandomCommand) other).comparators));
     }
 }
