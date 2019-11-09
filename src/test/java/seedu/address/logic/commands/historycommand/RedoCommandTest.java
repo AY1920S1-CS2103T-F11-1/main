@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.entity.CommandType;
 import seedu.address.stub.ModelManagerStub;
 
 class RedoCommandTest {
