@@ -587,7 +587,7 @@ From the above diagram it can be seen that each different implementation of the 
 
 Secondly, it can also be noted that there is not `ResetScoreCommand` class. This is done intentionally as the `SetScoreCommand` can be reused to reset a particular team's score, thereby making better use of abstraction.
 
-A better representation of how the above classes interact to provide execute a user's command is highlighted in the sequence diagram below. This sequence diagram illustrates the object interactions when a user types the command `score add T-1 40`. For context, this command adds 40 points to the team with ID "T-1".
+A representation of how the above classes interact to provide execute a user's command is highlighted in the sequence diagram below. This sequence diagram illustrates the object interactions when a user types the command `score add T-1 40`. For context, this command adds 40 points to the team with ID "T-1".
 
 .Add Score Command Sequence Diagram
 image::ScoringSequenceDiagram.png[]
@@ -601,6 +601,7 @@ As seen from the above diagram, the execution of the `score add` command can be 
     ** Checking which specific implementation of the `score` command is being called (in this case "add") and ensuring it is a valid method.
     ** Parsing the Team ID specified by the user and ensuring it is of a correct format.
     ** Parsing the Score specified by the user and ensuring it is a valid score.
+
 * Step 4: `ScoreCommandParser` then creates a new `AddScoreCommand` object with the above parsed Team ID and Score, which is then returned all the way to `LogicManager`
 * Step 5: `LogicManager` then executes the `AddScoreCommand` object upon which the `AddScoreCommand` object calls `Model` 's `addTeamScore()` method which updates the specific team's score within `Model`.
 * Step 6: Upon updating the team's score in `Model`, the `AddScoreCommand` object creates a new `CommandResult` object which is returned to the UI component (not shown in the diagram) to display a feedback message to the user.
