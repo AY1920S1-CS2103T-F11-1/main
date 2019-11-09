@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -90,13 +91,17 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        //Set minimum size of window
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(800);
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        lastFired = participantsButton;
+        lastFired = homeButton;
     }
 
     public Stage getPrimaryStage() {
@@ -173,18 +178,22 @@ public class MainWindow extends UiPart<Stage> {
      * well as the up/down arrow keys are pressed.
      */
     private void setCommandNavigationHandler() {
-        this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            KeyCombination upCombo = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
-            KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
+        final KeyCombination upCombo = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
+        final KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
 
-            if (upCombo.match(event)) {
-                commandBox.setTextField(logic.getPrevCommandString());
-            }
+        this.commandBoxPlaceholder.addEventHandler(KeyEvent.ANY,
+                new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent ke) {
+                        if (upCombo.match(ke)) {
+                            commandBox.setTextField(logic.getPrevCommandString());
+                        }
 
-            if (downCombo.match(event)) {
-                commandBox.setTextField(logic.getNextCommandString());
-            }
-        });
+                        if (downCombo.match(ke)) {
+                            commandBox.setTextField(logic.getNextCommandString());
+                        }
+                    }
+                });
     }
 
     /**
@@ -253,6 +262,7 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Statistics panel to be assigned is: " + new StatisticsListPanel(logic.getStatistics()));
         statisticListPanel = new StatisticsListPanel(logic.getStatistics());
         listPanelPlaceholder.getChildren().set(0, statisticListPanel.getRoot());
+        lastFired = homeButton;
     }
 
     /**
@@ -262,8 +272,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void displayParticipantList() {
         entityListPanel = new EntityListPanel(logic.getFilteredParticipantList());
-
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = participantsButton;
     }
 
     /**
@@ -272,8 +282,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void displayLeaderboard() {
         entityListPanel = new EntityListPanel(logic.getSortedTeamList());
-
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = leaderboardButton;
     }
 
     /**
@@ -283,6 +293,7 @@ public class MainWindow extends UiPart<Stage> {
     private void displayTeamList() {
         entityListPanel = new EntityListPanel(logic.getFilteredTeamList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = teamsButton;
     }
 
     /**
@@ -293,6 +304,7 @@ public class MainWindow extends UiPart<Stage> {
     private void displayMentorList() {
         entityListPanel = new EntityListPanel(logic.getFilteredMentorList());
         listPanelPlaceholder.getChildren().set(0, entityListPanel.getRoot());
+        lastFired = mentorsButton;
     }
 
     /**
@@ -302,6 +314,7 @@ public class MainWindow extends UiPart<Stage> {
     private void displayHistory() {
         commandListPanel = new CommandListPanel(logic.getCommandHistory());
         listPanelPlaceholder.getChildren().set(0, commandListPanel.getRoot());
+        lastFired = historyButton;
     }
 
     public EntityListPanel getEntityListPanel() {
@@ -363,30 +376,27 @@ public class MainWindow extends UiPart<Stage> {
             CommandType commandType = commandResult.getCommandType();
             if (commandType == null) {
                 this.fireButton(lastFired);
+                return commandResult;
             }
+
             logger.info("CommandResult has the prefix: " + commandType);
             // TODO: if the current panel is the one being changed, do not change the
             // entityListPlaceholder
             switch (commandType) {
             case M:
                 this.fireButton(mentorsButton);
-                lastFired = mentorsButton;
                 break;
             case T:
                 this.fireButton(teamsButton);
-                lastFired = teamsButton;
                 break;
             case P:
                 this.fireButton(participantsButton);
-                lastFired = participantsButton;
                 break;
             case H:
                 this.fireButton(historyButton);
-                lastFired = historyButton;
                 break;
             case L:
                 this.fireButton(leaderboardButton);
-                lastFired = leaderboardButton;
                 break;
             case HM:
                 this.fireButton(homeButton);

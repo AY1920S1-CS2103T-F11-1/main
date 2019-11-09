@@ -20,10 +20,8 @@ import seedu.address.model.entity.Team;
  */
 public class ModelManagerStub extends ModelManager {
 
-    // TODO: Update when ModelManager gets updated
 
     public ModelManagerStub() {
-        // TODO: user constructor for Alfred later
         super();
         this.filteredParticipantList =
                 new FilteredList<>(this.participantList.getSpecificTypedList());
@@ -67,7 +65,6 @@ public class ModelManagerStub extends ModelManager {
 
     /**
      * Deletes the participant by id.
-     *
      */
     @Override
     public Participant deleteParticipant(Id id) throws AlfredException {
@@ -108,8 +105,8 @@ public class ModelManagerStub extends ModelManager {
      */
     public Team getTeamByParticipantId(Id participantId) throws MissingEntityException {
         List<Team> teams = this.teamList.getSpecificTypedList();
-        for (Team t: teams) {
-            for (Participant p: t.getParticipants()) {
+        for (Team t : teams) {
+            for (Participant p : t.getParticipants()) {
                 if (p.getId().equals(participantId)) {
                     return t;
                 }
@@ -123,7 +120,7 @@ public class ModelManagerStub extends ModelManager {
      */
     public Team getTeamByMentorId(Id mentorId) throws MissingEntityException {
         List<Team> teams = this.teamList.getSpecificTypedList();
-        for (Team t: teams) {
+        for (Team t : teams) {
             Optional<Mentor> mentor = t.getMentor();
             if (mentor.isPresent()) {
                 if (mentor.get().getId().equals(mentorId)) {
@@ -148,9 +145,13 @@ public class ModelManagerStub extends ModelManager {
         } catch (MissingEntityException e) {
             throw e;
         }
-        boolean isSuccessful = targetTeam.addParticipant(participant);
-        if (!isSuccessful) {
-            throw new AlfredModelException("Participant is already present in team");
+        try {
+            boolean isSuccessful = targetTeam.addParticipant(participant);
+            if (!isSuccessful) {
+                throw new AlfredModelException("Participant is already present in team");
+            }
+        } catch (Exception e) {
+            throw new AlfredModelException(e.getMessage());
         }
     }
 

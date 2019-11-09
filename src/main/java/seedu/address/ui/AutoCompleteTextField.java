@@ -17,6 +17,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.TextFlow;
 
 import seedu.address.commons.core.LogsCenter;
@@ -32,18 +36,12 @@ public class AutoCompleteTextField extends JFXTextField {
      * Represent the list of possible commands users can enter.
      */
     private final SortedSet<String> commandSuggestionSet = new TreeSet<String>();
-    private final List<String> commandSuggestionList = Arrays.asList(
-            "exit", "assign participant", "assign mentor",
-            "remove participant", "remove mentor", "add participant",
-            "add mentor", "add team", "list participants",
-            "list mentors", "list teams", "edit participant",
-            "edit mentor", "edit team", "delete participant",
-            "delete mentor", "delete team", "find participant",
-            "find mentor", "find team", "leaderboard",
-            "getTop", "score add", "score sub",
-            "score set", "history", "undo",
-            "redo", "import", "export", "help"
-    );
+    private final List<String> commandSuggestionList = Arrays.asList("exit", "assign participant", "assign mentor",
+            "remove participant", "remove mentor", "add participant", "add mentor", "add team", "list participants",
+            "list mentors", "list teams", "edit participant", "edit mentor", "edit team", "delete participant",
+            "delete mentor", "delete team", "find participant", "find mentor", "find team", "leaderboard", "getTop",
+            "score add", "score sub", "score set", "history", "undo", "redo", "import", "export", "help");
+
     /**
      * Represents a popup for user to select a command that is suggested.
      */
@@ -55,6 +53,20 @@ public class AutoCompleteTextField extends JFXTextField {
      */
     public AutoCompleteTextField() {
         super();
+        this.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            KeyCombination upCombo = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
+            KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
+
+            if (upCombo.match(event)) {
+                KeyEvent upEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.UP, false, false, true, false);
+                this.fireEvent(upEvent);
+            }
+
+            if (downCombo.match(event)) {
+                KeyEvent downEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.UP, false, false, true, false);
+                this.fireEvent(downEvent);
+            }
+        });
         commandSuggestionSet.addAll(commandSuggestionList);
         commandsPopup = new ContextMenu();
         textProperty().addListener(new ChangeListener<String>() {
@@ -85,11 +97,10 @@ public class AutoCompleteTextField extends JFXTextField {
                 populatePopup(finalSuggestionResults);
                 if (!commandsPopup.isShowing()) {
                     commandsPopup.show(AutoCompleteTextField.this, Side.BOTTOM, 0, 0);
-
                 }
 
                 // Request focus on first item
-                commandsPopup.getSkin().getNode().requestFocus();
+                //commandsPopup.getSkin().getNode().requestFocus();
             }
         });
 
@@ -101,6 +112,8 @@ public class AutoCompleteTextField extends JFXTextField {
                 commandsPopup.hide();
             }
         });
+
+
     }
 
     /**
@@ -307,7 +320,6 @@ public class AutoCompleteTextField extends JFXTextField {
             return null;
         }
     }
-
 
     private TextFlow getOtherTemplate(String suggestion) {
         switch (suggestion) {
