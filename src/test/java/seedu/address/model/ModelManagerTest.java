@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +35,8 @@ import seedu.address.testutil.TypicalTeams;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ModelManagerTest {
     private AlfredStorage storage = mock(AlfredStorage.class);
-    private ModelManager modelManager = new ModelManager(storage, new UserPrefs());
+    private UserPrefs userPrefs = mock(UserPrefs.class);
+    private ModelManager modelManager = new ModelManager(storage, userPrefs);
 
     @BeforeEach
     public void clearTeamA() {
@@ -66,6 +70,38 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setUserPrefs_normal_success() {
+        UserPrefs userPrefs = new UserPrefs();
+        Mockito.doNothing().when(this.userPrefs).resetData(any());
+        this.modelManager.setUserPrefs(userPrefs);
+        verify(this.userPrefs).resetData(userPrefs);
+    }
+
+    @Test
+    public void getUserPrefs_normal_success() {
+        UserPrefs userPrefs = new UserPrefs();
+        when(this.modelManager.getUserPrefs()).thenReturn(userPrefs);
+        ReadOnlyUserPrefs result = this.modelManager.getUserPrefs();
+        assertEquals(result, userPrefs);
+    }
+
+    @Test
+    public void getGuiSettings_normal_success() {
+        GuiSettings guiSettings = new GuiSettings();
+        when(this.userPrefs.getGuiSettings()).thenReturn(guiSettings);
+        GuiSettings result = this.modelManager.getGuiSettings();
+        assertEquals(result, guiSettings);
+    }
+
+    @Test
+    public void setGuiSettings_normal_success() {
+        GuiSettings guiSettings = new GuiSettings();
+        Mockito.doNothing().when(this.userPrefs).setGuiSettings(any());
+        this.modelManager.setGuiSettings(new GuiSettings());
+        verify(this.userPrefs).setGuiSettings(guiSettings);
+    }
+
+    @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
@@ -77,6 +113,29 @@ public class ModelManagerTest {
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
+    @Test
+    public void getTeamListFilePath_normal_success() {
+        Path path = Paths.get("");
+        when(this.userPrefs.getTeamListFilePath()).thenReturn(path);
+        Path result = this.modelManager.getTeamListFilePath();
+        assertEquals(path, result);
+    }
+
+    @Test
+    public void getParticipantListFilePath_normal_success() {
+        Path path = Paths.get("");
+        when(this.userPrefs.getParticipantListFilePath()).thenReturn(path);
+        Path result = this.modelManager.getParticipantListFilePath();
+        assertEquals(path, result);
+    }
+
+    @Test
+    public void getMentorListFilePath_normal_success() {
+        Path path = Paths.get("");
+        when(this.userPrefs.getMentorListFilePath()).thenReturn(path);
+        Path result = this.modelManager.getMentorListFilePath();
+        assertEquals(path, result);
+    }
 
     @Test
     public void addAndGetParticipant_validId_returnsParticipant() {
@@ -186,7 +245,6 @@ public class ModelManagerTest {
         }
     }
 
-    @Disabled
     @Test
     public void findParticipantByName_validName_correctResult() {
         try {
@@ -205,7 +263,6 @@ public class ModelManagerTest {
         }
     }
 
-    @Disabled
     @Test
     public void findTeamByName_validName_correctResult() {
         try {
@@ -222,7 +279,7 @@ public class ModelManagerTest {
         assertEquals(modelManager.findTeam(
                 Predicates.getPredicateFindTeamByName("A", false)).size(), 1);
     }
-    @Disabled
+
     @Test
     public void findMentorByName_validName_correctResult() {
         try {
