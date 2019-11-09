@@ -39,7 +39,7 @@ public class UndoCommand extends Command {
             model.undo(this.numToUndo);
             model.updateHistory(this);
             model.recordCommandExecution(this.getCommandInputString());
-            return new CommandResult(String.format(MESSAGE_SUCCESS, this.numToUndo), CommandType.H);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, this.numToUndo));
         } catch (AlfredModelHistoryException e) {
             throw new CommandException(e.getMessage());
         }

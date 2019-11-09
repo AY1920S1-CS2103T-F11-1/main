@@ -39,7 +39,7 @@ public class RedoCommand extends Command {
             model.redo(this.numToRedo);
             model.updateHistory(this);
             model.recordCommandExecution(this.getCommandInputString());
-            return new CommandResult(String.format(MESSAGE_SUCCESS, this.numToRedo), CommandType.H);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, this.numToRedo));
         } catch (AlfredModelHistoryException e) {
             throw new CommandException(e.getMessage());
         }

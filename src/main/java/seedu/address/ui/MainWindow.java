@@ -363,7 +363,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandType commandType = commandResult.getCommandType();
             if (commandType == null) {
                 this.fireButton(lastFired);
+                return commandResult;
             }
+
             logger.info("CommandResult has the prefix: " + commandType);
             // TODO: if the current panel is the one being changed, do not change the
             // entityListPlaceholder
