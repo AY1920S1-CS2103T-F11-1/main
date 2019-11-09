@@ -38,17 +38,22 @@ public class SetScoreCommand extends ScoreCommand {
         Team teamToScore;
 
         teamToScore = getTeamFromModel(model, id);
+        setScoreForTeam(model, teamToScore, score);
 
-        try {
-            model.setTeamScore(teamToScore, score);
-        } catch (AlfredException e) {
-            throw new CommandException(e.getMessage());
-        }
         logger.info("Setting " + this.score + " as Score of Team " + this.id);
         model.updateHistory(this);
         model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
                 teamToScore.getName().toString(), score.toString()), CommandType.T);
+    }
+
+    private void setScoreForTeam(Model model, Team team, Score score) throws CommandException {
+        try {
+            model.setTeamScore(team, score);
+        } catch (AlfredException ae) {
+            logger.severe("Error while setting score for team.");
+            throw new CommandException(ae.getMessage());
+        }
     }
 
     @Override

@@ -36,21 +36,24 @@ public class AddScoreCommand extends ScoreCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Team teamToScore;
 
-        teamToScore = getTeamFromModel(model, id);
-
-        try {
-            model.addTeamScore(teamToScore, score);
-        } catch (AlfredException ae) {
-            throw new CommandException(ae.getMessage());
-        }
+        Team teamToScore = getTeamFromModel(model, id);
+        addScoreToTeam(model, teamToScore, score);
 
         logger.info("Adding " + this.score + " to Score of Team " + this.id);
         model.updateHistory(this);
         model.recordCommandExecution(this.getCommandInputString());
         return new CommandResult(String.format(MESSAGE_SCORE_TEAM_SUCCESS,
                 score, teamToScore.getName().toString(), teamToScore.getScore()), CommandType.T);
+    }
+
+    private void addScoreToTeam(Model model, Team team, Score score) throws CommandException {
+        try {
+            model.addTeamScore(team, score);
+        } catch (AlfredException ae) {
+            logger.severe("Error while adding score to team.");
+            throw new CommandException(ae.getMessage());
+        }
     }
 
     @Override
