@@ -92,7 +92,7 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        //Set minimum size of window
+        // Set minimum size of window
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(800);
 
@@ -144,7 +144,6 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-
     /**
      * Fills up all the placeholders of this window.
      */
@@ -182,23 +181,22 @@ public class MainWindow extends UiPart<Stage> {
         final KeyCombination upCombo = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
         final KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
 
-        this.commandBoxPlaceholder.addEventHandler(KeyEvent.ANY,
-                new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent ke) {
-                        if (upCombo.match(ke)) {
-                            commandBox.setTextField(logic.getPrevCommandString());
-                        }
+        this.commandBoxPlaceholder.addEventHandler(KeyEvent.ANY, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent ke) {
+                if (upCombo.match(ke)) {
+                    commandBox.setTextField(logic.getPrevCommandString());
+                }
 
-                        if (downCombo.match(ke)) {
-                            commandBox.setTextField(logic.getNextCommandString());
-                        }
+                if (downCombo.match(ke)) {
+                    commandBox.setTextField(logic.getNextCommandString());
+                }
 
-                        if (KeyCode.ENTER == ke.getCode()) {
-                            commandBox.handleCommandEntered();
-                        }
-                    }
-                });
+                if (KeyCode.ENTER == ke.getCode()) {
+                    commandBox.handleCommandEntered();
+                }
+            }
+        });
     }
 
     /**

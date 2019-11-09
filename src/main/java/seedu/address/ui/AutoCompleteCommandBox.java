@@ -18,6 +18,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.TextFlow;
 
 import seedu.address.commons.core.LogsCenter;
@@ -40,7 +44,6 @@ public class AutoCompleteCommandBox extends JFXTextField {
      */
     private ContextMenu commandsPopup;
 
-
     private SuggestionTemplates suggestionTemplates = new SuggestionTemplates();
     private final Logger logger = LogsCenter.getLogger(AutoCompleteCommandBox.class);
     /**
@@ -53,12 +56,10 @@ public class AutoCompleteCommandBox extends JFXTextField {
             "delete mentor", "delete team", "find participant", "find mentor", "find team", "leaderboard", "getTop",
             "score add", "score sub", "score set", "history", "undo", "redo", "import", "export", "help");
 
-
     public AutoCompleteCommandBox(CommandExecutor commandExecutor) {
         super();
         this.commandExecutor = commandExecutor;
         this.setPromptText("What can I do for you?");
-
 
         commandSuggestionSet.addAll(commandSuggestionList);
         commandsPopup = new ContextMenu();
@@ -88,12 +89,11 @@ public class AutoCompleteCommandBox extends JFXTextField {
 
                 populatePopup(finalSuggestionResults);
                 if (!commandsPopup.isShowing()) {
-
                     commandsPopup.show(AutoCompleteCommandBox.this, Side.BOTTOM, 0, 0);
                 }
 
                 // Request focus on first item
-                commandsPopup.getSkin().getNode().requestFocus();
+                // commandsPopup.getSkin().getNode().requestFocus();
             }
         });
 
@@ -105,6 +105,7 @@ public class AutoCompleteCommandBox extends JFXTextField {
                 commandsPopup.hide();
             }
         });
+
     }
 
     /**
@@ -364,7 +365,6 @@ public class AutoCompleteCommandBox extends JFXTextField {
             // setStyleToIndicateCommandFailure();
         }
     }
-
 
     /**
      * Represents a function that can execute commands.
