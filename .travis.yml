@@ -8,7 +8,7 @@ script: >-
     ./gradlew clean checkstyleMain checkstyleTest test coverage coveralls asciidoctor
 
 after_sucesss:
-  - echo "TEST"
+  - echo "CBCBCBCBCBCBCB"
   - sh ./codecov.sh
 
 deploy:
