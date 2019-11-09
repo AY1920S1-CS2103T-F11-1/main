@@ -7,6 +7,9 @@ script: >-
     ./config/travis/run-checks.sh &&
     ./gradlew clean checkstyleMain checkstyleTest test coverage coveralls asciidoctor
 
+after_sucesss:
+  - sh ./codecov.sh
+
 deploy:
   skip_cleanup: true
   provider: script
@@ -17,9 +20,6 @@ deploy:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
-after_sucesss:
-  - sh ./codecov.sh
 
 cache:
   directories:
