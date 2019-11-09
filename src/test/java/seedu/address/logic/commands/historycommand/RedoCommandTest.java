@@ -23,6 +23,6 @@ class RedoCommandTest {
         CommandResult commandResult = new RedoCommand(1).execute(modelStub);
 
         assertEquals(String.format(RedoCommand.MESSAGE_SUCCESS, 1), commandResult.getFeedbackToUser());
-        assertEquals(CommandType.H, commandResult.getCommandType());
+        assertEquals(null, commandResult.getCommandType());
     }
 }

@@ -23,6 +23,6 @@ class UndoCommandTest {
         CommandResult commandResult = new UndoCommand(1).execute(modelStub);
 
         assertEquals(String.format(UndoCommand.MESSAGE_SUCCESS, 1), commandResult.getFeedbackToUser());
-        assertEquals(CommandType.H, commandResult.getCommandType());
+        assertEquals(null, commandResult.getCommandType());
     }
 }
