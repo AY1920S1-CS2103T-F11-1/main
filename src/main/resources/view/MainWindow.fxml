@@ -16,7 +16,7 @@
     </icons>
     <scene>
         <Scene fill="#292734">
-            <AnchorPane minHeight="1200.0" minWidth="1200.0" prefHeight="1200.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@MenuBar.css">
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@MenuBar.css">
                 <children>
                     <BorderPane prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <left>
