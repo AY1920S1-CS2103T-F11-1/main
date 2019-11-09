@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
@@ -89,6 +90,10 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        //Set minimum size of window
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(800);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -173,18 +178,22 @@ public class MainWindow extends UiPart<Stage> {
      * well as the up/down arrow keys are pressed.
      */
     private void setCommandNavigationHandler() {
-        this.commandBoxPlaceholder.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            KeyCombination upCombo = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
-            KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
+        final KeyCombination upCombo = new KeyCodeCombination(KeyCode.UP, KeyCombination.ALT_DOWN);
+        final KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
 
-            if (upCombo.match(event)) {
-                commandBox.setTextField(logic.getPrevCommandString());
-            }
+        this.commandBoxPlaceholder.addEventHandler(KeyEvent.ANY,
+                new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent ke) {
+                        if (upCombo.match(ke)) {
+                            commandBox.setTextField(logic.getPrevCommandString());
+                        }
 
-            if (downCombo.match(event)) {
-                commandBox.setTextField(logic.getNextCommandString());
-            }
-        });
+                        if (downCombo.match(ke)) {
+                            commandBox.setTextField(logic.getNextCommandString());
+                        }
+                    }
+                });
     }
 
     /**
