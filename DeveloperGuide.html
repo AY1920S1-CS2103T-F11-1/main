@@ -23,14 +23,16 @@
 </li>
 <li><a href="#implementation">4. Implementation</a>
 <ul class="sectlevel2">
-<li><a href="#undo-redo-feature">4.1. Undo/Redo feature</a></li>
-<li><a href="#command-history-navigation">4.2. Command History Navigation</a></li>
-<li><a href="#code-home-code-feature">4.3. <code>home</code> feature</a></li>
-<li><a href="#command-suggestion-feature">4.4. Command suggestion feature</a></li>
-<li><a href="#code-assign-code-code-remove-code-feature">4.5. <code>assign</code> / <code>remove</code> feature</a></li>
-<li><a href="#leaderboard-and-get-top-teams">4.6. Leaderboard and Get Top Teams</a></li>
-<li><a href="#logging">4.7. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.8. Configuration</a></li>
+<li><a href="#bulk-registration">4.1. Bulk Registration</a></li>
+<li><a href="#export-feature">4.2. Export Feature</a></li>
+<li><a href="#undo-redo-feature">4.3. Undo/Redo feature</a></li>
+<li><a href="#command-history-navigation">4.4. Command History Navigation</a></li>
+<li><a href="#code-home-code-feature">4.5. <code>home</code> feature</a></li>
+<li><a href="#command-suggestion-feature">4.6. Command suggestion feature</a></li>
+<li><a href="#code-assign-code-code-remove-code-feature">4.7. <code>assign</code> / <code>remove</code> feature</a></li>
+<li><a href="#leaderboard-and-get-top-teams">4.8. Leaderboard and Get Top Teams</a></li>
+<li><a href="#logging">4.9. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.10. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a></li>
@@ -669,7 +671,115 @@ opportunities for tampering with the data.</p>
 <p>To best address the numerous and varying needs of Hackathon organizers, we have packed Alfred with a multitude of different features, each of which seeks to provide the user with the optimal means of tending to their hackathon organising needs. However, with a host of features comes a sizable codebase which can make it daunting for new programmers, and often even veteran Alfred programmers, to understand how certain features have been implemented. This section aims to empower you by introducing you to some of the noteworthy features currently present within Alfred, along with few that hope to add in the future, so that you may better grasp the implementation of these features in a bid to contribute new features and improvements to existing features within Alfred. Despite our best efforts to make the explanations of Alfred&#8217;s features' as comprehensive as possible, we do advice not to solely rely on this guide for understanding and encourage you to experiment with each feature&#8217;s code in order to truly grasp it.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">4.1. Undo/Redo feature</a></h3>
+<h3 id="bulk-registration"><a class="link" href="#bulk-registration">4.1. Bulk Registration</a></h3>
+<div class="paragraph">
+<p>The Bulk Registration feature, referred as the import command, allows you to add multiple entities into Alfred at once through a CSV file. The file must be stored locally as Alfred will attempt to retrieve it through the file path provided by the user. In order for the import command to successfully execute, it is required that the CSV file is formatted according to Alfred&#8217;s requirements, which you can read more about in our <a href="UserGuide.html">user guide</a>.</p>
+</div>
+<div class="paragraph">
+<p>This feature will be explained further in the following subsections.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-overview"><a class="link" href="#implementation-overview">4.1.1. Implementation Overview</a></h4>
+<div class="paragraph">
+<p>Since this feature manages data from a CSV file, import command relies on the <code>CsvUtil</code> class. The <code>CsvUtil</code> class handles reading from and writing data to a CSV file. Below shows the relationships between different classes in Alfred.</p>
+</div>
+<div id="ImportCommandClassDiagram" class="imageblock">
+<div class="content">
+<img src="images/ImportCommandClassDiagram.png" alt="ImportCommandClassDiagram">
+</div>
+<div class="title">Figure 11. Import Command Class Diagram</div>
+</div>
+<div class="paragraph">
+<p>In the above class diagram, you can see that</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1. The <code>ImportCommand</code> uses the <code>FileUtil</code> class, and this is so for a number of reasons. First is to validate whether user inputted file path is, in fact, a valid file path. Once it is verified, another check is done to see if the file exists at the given file path. If the file is not able to be located, the <code>ImportCommand</code> will not complete its execution.</p>
+</li>
+<li>
+<p>2. In addition to the <code>CsvUtil</code> class, the <code>ImportCommand</code> also utilizes an <code>ErrorTracker</code> class. This class will store any lines in the CSV file that is invalid along with the reason why it is so. Each <code>Error</code> object referenced by the <code>ErrorTracker</code> will correspond to one line in the CSV file and the cause of the error.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Now, the sections below will give a detailed explanation of different portions of this feature.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-code-importcommand-code"><a class="link" href="#implementation-code-importcommand-code">4.1.2. Implementation: <code>ImportCommand</code></a></h4>
+<div class="paragraph">
+<p>Once a valid user input is parsed and passed into the <code>ImportCommand</code>, the command will open the file and read its content line by line. Each line is then parsed into the corresponding entity by the <code>CsvUtil</code> class. This will be explained further <a href="#implementation-parsing-of-entities-by-code-csvutil-code">below</a>. The following sequence diagram shows the steps involved in mass importing data into Alfred.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportCommandSequenceDiagram.png" alt="ImportCommandSequenceDiagram">
+</div>
+<div class="title">Figure 12. Import Command Sequence Diagram</div>
+</div>
+<div class="paragraph">
+<p><code>FileUtil</code> shown in the <a href="#ImportCommandClassDiagram">class diagram</a> was omitted from the above sequence diagram for simplicity as it adds little to the overall flow of execution.</p>
+</div>
+<div class="paragraph">
+<p>As the above figure shows, the file path from the user input is extracted and passed as a field for <code>ImportCommand</code>. Then, Alfred proceeds to convert file content into relevant entities.</p>
+</div>
+<div class="paragraph">
+<p>When <code>ImportCommand</code> parses and adds entities to <code>Model</code>, it is crucial that teams are the last entities to be added. In the above sequence diagram, this process of buffering teams was also omitted for simplicity. Basically, in the <code>parseLineToEntity()</code> method, if a line in CSV file corresponds to a team, the line will be buffered to be parsed after all the other lines have been parsed. The reason for this is because teams may have dependencies on other participants and mentors. It is required that all of the participants and mentors associated with a team, say Team A, exist inside the <code>Model</code> before Team A can be added.</p>
+</div>
+<div class="paragraph">
+<p>So as <code>ImportCommand</code> accesses the CSV file line by line, the line representing a team will be stored in a <code>Queue&lt;String&gt;</code> for later use. When the end of file is reached and all other participants and mentors are parsed and added to <code>Model</code>, the <code>ImportCommand</code> will poll from the <code>Queue</code>, parse into a relevant team, and add it to the <code>Model</code> until the <code>Queue</code> is empty.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-parsing-of-entities-by-code-csvutil-code"><a class="link" href="#implementation-parsing-of-entities-by-code-csvutil-code">4.1.3. Implementation: Parsing of Entities by <code>CsvUtil</code></a></h4>
+<div class="paragraph">
+<p>As mentioned before, the <code>CsvUtil</code> class is used to aid in parsing of CSV lines into entities. The process in which <code>CsvUtil</code> parses each entity is heavily dependent on the different fields each entity has. If you are not familiar with this yet, please check out our <a href="UserGuide.html#Parameter-Constraints-and-Additional-Information">user guide</a>.</p>
+</div>
+<div class="paragraph">
+<p>The process of parsing a line into a mentor or a participant is very similar, so two entities - participant and team - will be explained.</p>
+</div>
+<div class="paragraph">
+<p>First, the following is a sequence diagram for parsing a CSV line into a participant. The line to be parsed is <code>"P,ID,Bruce Wayne,12345678,wbruce@wayne.ent"</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CsvUtilParseParticipantSequenceDiagram.png" alt="CsvUtilParseParticipantSequenceDiagram">
+</div>
+<div class="title">Figure 13. <code>CsvUtil</code>: Parsing to Participant Sequence Diagram</div>
+</div>
+<div class="paragraph">
+<p>Given CSV line is first split by commas (also allows commas surrounded by arbitrary number of spaces). Then, each <code>String</code> in the array is (attempted to be) converted into corresponding fields of a Participant. As the diagram shows, each field class has its own method for checking if the given <code>String</code> argument is valid - in the form of <code>isValidField()</code> method, where <code>Field</code> is replaced by its respective class name. Once each field is successfully converted, a Participant is created with the parsed fields. The process of parsing into a Mentor is practically equivalent of that of a Participant. The only change is in the fields being parsed.</p>
+</div>
+<div class="paragraph">
+<p>Next is a sequence diagram for parsing a CSV line into a team. The line to be parsed is <code>"T,,Justice League,[P-1|P-2],M-1,Social,100,Save the Earth,1"</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CsvUtilParseTeamSequenceDiagram.png" alt="CsvUtilParseTeamSequenceDiagram">
+</div>
+<div class="title">Figure 14. <code>CsvUtil</code>: Parsing to Team Sequence Diagram</div>
+</div>
+<div class="paragraph">
+<p>Also for teams, each corresponding <code>String</code> is converted to its field counterpart just like participants and mentors. Hence, <code>isValidField()</code> method was omitted from the diagram. The difference lies in the fact that for teams, Alfred must check if any participants or mentors it makes a reference to actually exists in <code>Model</code>. Thus, <code>CsvUtil</code> calls <code>getParticipant()</code> and <code>getMentor()</code> methods exposed by the <code>Model</code> class. If there are any exceptions raised while retrieving the participants and mentors, that line in CSV will not be loaded onto Alfred.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-outputting-error-file"><a class="link" href="#implementation-outputting-error-file">4.1.4. Implementation: Outputting Error File</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.1.5. Design Considerations</a></h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="export-feature"><a class="link" href="#export-feature">4.2. Export Feature</a></h3>
+<div class="paragraph">
+<p>The export feature will be used to unload the data in Alfred to an external CSV file. This functionality will prove useful when you or the user wishes to share the aggregate data of a particular hackathon event with other people or organization or wishes to keep a record of past hackathons for future references.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">4.3. Undo/Redo feature</a></h3>
 <div class="paragraph">
 <p>The Undo/Redo feature, as the name suggests, allows you to undo and redo commands. Only commands that alter the state of the data
 in Alfred can be undone/redone. The state of the 3 EntityLists (ParticipantList, MentorList and TeamList) is tracked across the execution
@@ -702,7 +812,7 @@ result in the discarding of the oldest data state.
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-2"><a class="link" href="#implementation-2">4.1.1. Implementation</a></h4>
+<h4 id="implementation-2"><a class="link" href="#implementation-2">4.3.1. Implementation</a></h4>
 <div class="paragraph">
 <p>The general idea is as follows: The undo/redo mechanism is mainly facilitated by <code>ModelHistoryManager</code>. Alfred&#8217;s data is held in memory within the <code>ModelManager</code> object. After the execution of commands that mutate the data in Alfred, a deep copy
 of all 3 EntityLists is made and saved as a <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code>. A deep copy is necessary to ensure that
@@ -729,7 +839,7 @@ persist only while the Alfred application is running.
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-how-code-modelhistorymanager-code-keeps-track-of-the-state-of-the-data-in-alfred"><a class="link" href="#implementation-how-code-modelhistorymanager-code-keeps-track-of-the-state-of-the-data-in-alfred">4.1.2. Implementation: How <code>ModelHistoryManager</code> Keeps Track of the State of the Data in Alfred</a></h4>
+<h4 id="implementation-how-code-modelhistorymanager-code-keeps-track-of-the-state-of-the-data-in-alfred"><a class="link" href="#implementation-how-code-modelhistorymanager-code-keeps-track-of-the-state-of-the-data-in-alfred">4.3.2. Implementation: How <code>ModelHistoryManager</code> Keeps Track of the State of the Data in Alfred</a></h4>
 <div class="paragraph">
 <p>The following sequence diagram shows the sequence of method calls used to store the state of the data in
 Alfred in <code>ModelHistory</code> (<code>ModelHistoryManager</code> is an implementation of the <code>ModelHistory</code> interface) after
@@ -739,7 +849,7 @@ the execution of a DeleteParticipantCommand:</p>
 <div class="content">
 <img src="images/UndoSequenceDiagramUpdateHistory.png" alt="UndoSequenceDiagramUpdateHistory">
 </div>
-<div class="title">Figure 11. Sequence Diagram for the Updating of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 15. Sequence Diagram for the Updating of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>The top half of the diagram covers the creation of the DeleteParticipantCommand object, and the bottom half covers
@@ -753,7 +863,7 @@ the commands that mutate data in Alfred.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed"><a class="link" href="#implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed">4.1.3. Implementation: How <code>ModelManager</code> is Updated When the Undo Command is Executed</a></h4>
+<h4 id="implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed"><a class="link" href="#implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed">4.3.3. Implementation: How <code>ModelManager</code> is Updated When the Undo Command is Executed</a></h4>
 <div class="paragraph">
 <p>The following sequence diagram shows what happens when the UndoCommand is executed.</p>
 </div>
@@ -761,7 +871,7 @@ the commands that mutate data in Alfred.</p>
 <div class="content">
 <img src="images/UndoSequenceDiagramExecutionofUndo.png" alt="UndoSequenceDiagramExecutionofUndo">
 </div>
-<div class="title">Figure 12. Sequence Diagram for the Execution of the Undo Command</div>
+<div class="title">Figure 16. Sequence Diagram for the Execution of the Undo Command</div>
 </div>
 <div class="paragraph">
 <p>The important issue to take note of here is that the code first checks whether it is valid to undo to a certain state by
@@ -782,7 +892,7 @@ A analogous process is executed for the Redo Command.
 </div>
 </div>
 <div class="sect3">
-<h4 id="behaviour-of-undo-redo-mechanism"><a class="link" href="#behaviour-of-undo-redo-mechanism">4.1.4. Behaviour of Undo/Redo Mechanism</a></h4>
+<h4 id="behaviour-of-undo-redo-mechanism"><a class="link" href="#behaviour-of-undo-redo-mechanism">4.3.4. Behaviour of Undo/Redo Mechanism</a></h4>
 <div class="paragraph">
 <p><code>ModelHistoryMangager</code> contains a List of <code>ModelHistoryRecord</code>, and a pointer pointing to the <code>ModelHistoryRecord</code> that
 reflects the current state of the data in Alfred.</p>
@@ -803,7 +913,7 @@ The following commands are executed:
 <div class="content">
 <img src="images/UndoRedoState0.png" alt="UndoRedoState0">
 </div>
-<div class="title">Figure 13. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 17. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>This is what happens after each step:</p>
@@ -815,7 +925,7 @@ The following commands are executed:
 <div class="content">
 <img src="images/UndoRedoState1.png" alt="UndoRedoState1">
 </div>
-<div class="title">Figure 14. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 18. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddParticipantCommand.</p>
@@ -827,7 +937,7 @@ The following commands are executed:
 <div class="content">
 <img src="images/UndoRedoState2.png" alt="UndoRedoState2">
 </div>
-<div class="title">Figure 15. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 19. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddMentorCommand.</p>
@@ -839,7 +949,7 @@ The following commands are executed:
 <div class="content">
 <img src="images/UndoRedoState3.png" alt="UndoRedoState3">
 </div>
-<div class="title">Figure 16. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 20. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>Note that no new <code>ModelHistoryRecord</code> is created because the ListParticipantCommand does not alter the state of the data in Alfred.
@@ -852,7 +962,7 @@ Hence, it does not implement the TrackableState interface.</p>
 <div class="content">
 <img src="images/UndoRedoState4.png" alt="UndoRedoState4">
 </div>
-<div class="title">Figure 17. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 21. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>After executing the <code>undo 2</code> command, the pointer in <code>ModelHistoryManager</code> shifts backwards by 2 to point tp the <code>ModelHistoryRecord</code>
@@ -868,7 +978,7 @@ at the zero-th index.</p>
 <div class="content">
 <img src="images/UndoRedoState5.png" alt="UndoRedoState5">
 </div>
-<div class="title">Figure 18. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 22. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>Note that the execution of a new command will invalidate the <code>ModelHistoryRecord</code> after the pointer. This is because all subsequent
@@ -876,7 +986,7 @@ data states are the result of transformations that have already been undone, so 
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.1.5. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.3.5. Design Considerations</a></h4>
 <div class="paragraph">
 <p>When designing the undo/redo feature, there were some design considerations to take note of.</p>
 </div>
@@ -943,7 +1053,7 @@ a very significant error in the workflow, and recovering from that should not ha
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-history-navigation"><a class="link" href="#command-history-navigation">4.2. Command History Navigation</a></h3>
+<h3 id="command-history-navigation"><a class="link" href="#command-history-navigation">4.4. Command History Navigation</a></h3>
 <div class="paragraph">
 <p>Since Alfred is ultimately a Command-Line Interface (CLI) application, it would be good to integrate some of the more useful features
 of CLI applications into Alfred. This feature allows users to go through previously executed commands by pressing the ALT+UP/DOWN
@@ -968,7 +1078,7 @@ cannot be accessed using this feature.
 </table>
 </div>
 <div class="sect3">
-<h4 id="implementation-3"><a class="link" href="#implementation-3">4.2.1. Implementation</a></h4>
+<h4 id="implementation-3"><a class="link" href="#implementation-3">4.4.1. Implementation</a></h4>
 <div class="paragraph">
 <p>Every time a valid new command is executed, the string used to generate the command (i.e. the text that the user types into
 Alfred&#8217;s Command Input Box) is stored in the <code>Command</code> object.</p>
@@ -998,7 +1108,7 @@ Only the last 50 commands are stored in <code>CommandHistoryManager</code>. Anyt
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-setting-and-storing-of-command-input-string"><a class="link" href="#implementation-setting-and-storing-of-command-input-string">4.2.2. Implementation: Setting and Storing of Command Input String</a></h4>
+<h4 id="implementation-setting-and-storing-of-command-input-string"><a class="link" href="#implementation-setting-and-storing-of-command-input-string">4.4.2. Implementation: Setting and Storing of Command Input String</a></h4>
 <div class="paragraph">
 <p>The following sequence diagram describes the sequence of method calls used to set and store the command input string in
 <code>CommandHistoryManager</code></p>
@@ -1007,11 +1117,11 @@ Only the last 50 commands are stored in <code>CommandHistoryManager</code>. Anyt
 <div class="content">
 <img src="images/CommandHistoryNavigationSettingofCommandString.png" alt="CommandHistoryNavigationSettingofCommandString">
 </div>
-<div class="title">Figure 19. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 23. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="implementation-arrow-key-invocation"><a class="link" href="#implementation-arrow-key-invocation">4.2.3. Implementation: Arrow Key Invocation</a></h4>
+<h4 id="implementation-arrow-key-invocation"><a class="link" href="#implementation-arrow-key-invocation">4.4.3. Implementation: Arrow Key Invocation</a></h4>
 <div class="paragraph">
 <p>The following sequence diagram describes the sequence of method calls used to set the text in Alfred&#8217;s Command Input Box
 whenever the ALT + UP/DOWN arrow keys are pressed.</p>
@@ -1020,14 +1130,14 @@ whenever the ALT + UP/DOWN arrow keys are pressed.</p>
 <div class="content">
 <img src="images/CommandHistoryNavigationArrowKeyInvocation.png" alt="CommandHistoryNavigationArrowKeyInvocation">
 </div>
-<div class="title">Figure 20. Sequence Diagram for when ALT+UP arrow keys are pressed</div>
+<div class="title">Figure 24. Sequence Diagram for when ALT+UP arrow keys are pressed</div>
 </div>
 <div class="paragraph">
 <p>An analogous process is executed when the ALT+DOWN arrow keys are pressed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.2.4. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.4.4. Design Considerations</a></h4>
 <div class="paragraph">
 <p>The following are some design considerations for the Command History Navigation feature.</p>
 </div>
@@ -1041,7 +1151,7 @@ will suffer as more commands are executed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aspect-usage-of-arrow-keys"><a class="link" href="#aspect-usage-of-arrow-keys">4.2.5. Aspect: Usage of Arrow Keys</a></h4>
+<h4 id="aspect-usage-of-arrow-keys"><a class="link" href="#aspect-usage-of-arrow-keys">4.4.5. Aspect: Usage of Arrow Keys</a></h4>
 <div class="paragraph">
 <p>Most CLI applications with such a Command History Navigation feature would use the UP/DOWN arrow keys directly, but the UP/DOWN
 arrow keys have been mapped for a different use in Alfred. Hence, we decided to use the ALT modifier key for the feature. It is
@@ -1050,7 +1160,7 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="code-home-code-feature"><a class="link" href="#code-home-code-feature">4.3. <code>home</code> feature</a></h3>
+<h3 id="code-home-code-feature"><a class="link" href="#code-home-code-feature">4.5. <code>home</code> feature</a></h3>
 <div class="paragraph">
 <p>Entering the <code>home</code> command will prompt the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic</code></a>to generate a <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a> object. The <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a>  object is generated by obtaining entity lists of different types(ParticipantList, TeamList, MentorList) from <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model</code></a>. The respective lists are then converted to the Stream data structure and filtered through to obtain the distribution of each entity type by <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/entity/Subject.java"><code>Subject</code></a>, as well as the total number of each entity. These information is stored in the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a>  object. The <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a> object is then used to construct a <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/StatisticsListPanel.java"><code>StatisticsListPanel</code></a>, where the information is parse to be displayed as a distribution bar graph.</p>
 </div>
@@ -1061,10 +1171,10 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/HomeCommandSequenceDiagram.png" alt="HomeCommandSequenceDiagram">
 </div>
-<div class="title">Figure 21. Sequence Diagram for <code>home</code> command</div>
+<div class="title">Figure 25. Sequence Diagram for <code>home</code> command</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.3.1. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.5.1. Design Considerations</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1120,13 +1230,13 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-suggestion-feature"><a class="link" href="#command-suggestion-feature">4.4. Command suggestion feature</a></h3>
+<h3 id="command-suggestion-feature"><a class="link" href="#command-suggestion-feature">4.6. Command suggestion feature</a></h3>
 <div class="paragraph">
 <p>Typing into the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteTextField.java"><code>AutoCompleteTextField</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated. Activation of the <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> will prompt it to filter through the set of predefined command suggestions. The commands that start with the same text entered by user will be filtered through. These commands will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>. This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="code-assign-code-code-remove-code-feature"><a class="link" href="#code-assign-code-code-remove-code-feature">4.5. <code>assign</code> / <code>remove</code> feature</a></h3>
+<h3 id="code-assign-code-code-remove-code-feature"><a class="link" href="#code-assign-code-code-remove-code-feature">4.7. <code>assign</code> / <code>remove</code> feature</a></h3>
 <div class="paragraph">
 <p>Upon successful assignation, the new participant or mentor will be stored internally in the list of participant or optional mentor field in the Team object. Upon successful removal of Participant or Team, the specified participant or mentor will be removed from the Team object. Additionally, it calls the following operations:</p>
 </div>
@@ -1160,7 +1270,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/AssignParticipantCommandSequenceDiagram.png" alt="AssignParticipantCommandSequenceDiagram">
 </div>
-<div class="title">Figure 22. Sequence Diagram for an example of <code>assign participant</code> command</div>
+<div class="title">Figure 26. Sequence Diagram for an example of <code>assign participant</code> command</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1179,7 +1289,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/RemoveParticipantCommandSequenceDiagram.png" alt="RemoveParticipantCommandSequenceDiagram">
 </div>
-<div class="title">Figure 23. Sequence Diagram for an example of <code>remove participant</code> command</div>
+<div class="title">Figure 27. Sequence Diagram for an example of <code>remove participant</code> command</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1190,12 +1300,12 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="leaderboard-and-get-top-teams"><a class="link" href="#leaderboard-and-get-top-teams">4.6. Leaderboard and Get Top Teams</a></h3>
+<h3 id="leaderboard-and-get-top-teams"><a class="link" href="#leaderboard-and-get-top-teams">4.8. Leaderboard and Get Top Teams</a></h3>
 <div class="paragraph">
 <p>The <code>leaderboard</code> and <code>getTop K</code> commands are two very important features of Alfred as they allow the user to automatically sort the teams by their scores, fetch any number of top teams in the competition and identify and break ties between teams conveniently. The execution of either of these commands displays the resultant teams on the UI in their correct sorted order. The following subsections explore the implementation of each of these commands and provide an insight into the design consideration made when developing them.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-overview"><a class="link" href="#implementation-overview">4.6.1. Implementation Overview</a></h4>
+<h4 id="implementation-overview-2"><a class="link" href="#implementation-overview-2">4.8.1. Implementation Overview</a></h4>
 <div class="paragraph">
 <p>The implementation of these two commands is very similar in nature. They both:</p>
 </div>
@@ -1216,7 +1326,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/LeaderboardClassDiagram.png" alt="LeaderboardClassDiagram">
 </div>
-<div class="title">Figure 24. Leaderboard and Get Top Teams Implementation Overview</div>
+<div class="title">Figure 28. Leaderboard and Get Top Teams Implementation Overview</div>
 </div>
 <div class="paragraph">
 <p>From the above class diagram, there are two important matters to note regarding the implementation of these features:</p>
@@ -1236,7 +1346,7 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="leaderboard-command-implementation"><a class="link" href="#leaderboard-command-implementation">4.6.2. Leaderboard Command Implementation</a></h4>
+<h4 id="leaderboard-command-implementation"><a class="link" href="#leaderboard-command-implementation">4.8.2. Leaderboard Command Implementation</a></h4>
 <div class="paragraph">
 <p>The <code>leaderboard</code> command fetches a leaderboard consisting of all the teams registered for the hackathon, in descending order of their score. Additionally, if tiebreak methods are specified, ties between the teams are typically broken in one of two ways:</p>
 </div>
@@ -1257,7 +1367,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/SimpleLeaderboardSequenceDiagram.png" alt="SimpleLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 25. Interactions within Logic Component for SimpleLeaderboardCommand</div>
+<div class="title">Figure 29. Interactions within Logic Component for SimpleLeaderboardCommand</div>
 </div>
 <div class="paragraph">
 <p>In the above, the <code>LeaderboardCommandParser</code> class parses the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods. A new <code>SimpleLeaderboardCommand</code> object is then created with this array list as its parameter and returned.</p>
@@ -1281,7 +1391,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/RandomLeaderboardSequenceDiagram.png" alt="RandomLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 26. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
+<div class="title">Figure 30. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above (See <a href="#SimpleLeaderboard-Explanation">[SimpleLeaderboard-Explanation]</a>).</p>
@@ -1294,7 +1404,7 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="Leaderboard-DesignConsideration"><a class="link" href="#Leaderboard-DesignConsideration">4.6.3. Leaderboard Design Considerations</a></h4>
+<h4 id="Leaderboard-DesignConsideration"><a class="link" href="#Leaderboard-DesignConsideration">4.8.3. Leaderboard Design Considerations</a></h4>
 <div class="paragraph">
 <p>There were several questions we asked ourselves over the course of developing the leaderboard feature. The following contains certain aspects we had to consider during the development stage and details how and why we decided to use a certain methodologies over others.</p>
 </div>
@@ -1414,7 +1524,7 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="get-top-teams-implementation"><a class="link" href="#get-top-teams-implementation">4.6.4. Get Top Teams Implementation</a></h4>
+<h4 id="get-top-teams-implementation"><a class="link" href="#get-top-teams-implementation">4.8.4. Get Top Teams Implementation</a></h4>
 <div class="paragraph">
 <p>The <code>getTop K</code> command fetches the top "K" number teams sorted in descending order of their points, where K is a positive integer inputted by the user. The <code>getTop K</code> command follows a similar pattern as the <code>leaderboard</code> command in the sense that ties between teams are broken in one of two ways:</p>
 </div>
@@ -1435,7 +1545,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/SimpleTopKSequenceDiagram.png" alt="SimpleTopKSequenceDiagram">
 </div>
-<div class="title">Figure 27. Interactions within Logic Component for getTop NUMBER Command</div>
+<div class="title">Figure 31. Interactions within Logic Component for getTop NUMBER Command</div>
 </div>
 <div class="paragraph">
 <p>The above diagram follows a logic very similar to the <code>leaderboard</code> command&#8217;s logic. However, in this case a <code>TopTeamsCommandParser</code> object is created to parse the arguments "3 tb/moreParticipants" which returns a <code>SimpleTopKCommand</code> object.</p>
@@ -1453,7 +1563,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/TopKRandomCommand.png" alt="TopKRandomCommand">
 </div>
-<div class="title">Figure 28. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
+<div class="title">Figure 32. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.</p>
@@ -1463,9 +1573,9 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration-for-get-top-teams"><a class="link" href="#design-consideration-for-get-top-teams">4.6.5. Design Consideration for Get Top Teams</a></h4>
+<h4 id="design-consideration-for-get-top-teams"><a class="link" href="#design-consideration-for-get-top-teams">4.8.5. Design Consideration for Get Top Teams</a></h4>
 <div class="paragraph">
-<p>Since the implementation of the <code>getTop K</code> command is almost identical to that of the <code>leaderboard</code> command, the design considerations made for the <code>leaderboard</code> command apply to the implementation of this feature as well (See <a href="#Leaderboard-DesignConsideration">Section 4.6.3, &#8220;Leaderboard Design Considerations&#8221;</a>). However, there were some unique aspects we had to consider with regards to the <code>getTop K</code> command, all of which is detailed below.</p>
+<p>Since the implementation of the <code>getTop K</code> command is almost identical to that of the <code>leaderboard</code> command, the design considerations made for the <code>leaderboard</code> command apply to the implementation of this feature as well (See <a href="#Leaderboard-DesignConsideration">Section 4.8.3, &#8220;Leaderboard Design Considerations&#8221;</a>). However, there were some unique aspects we had to consider with regards to the <code>getTop K</code> command, all of which is detailed below.</p>
 </div>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Where to Store the Top NUMBER Teams</p>
@@ -1577,7 +1687,7 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="tiebreaking"><a class="link" href="#tiebreaking">4.6.6. Tiebreaking</a></h4>
+<h4 id="tiebreaking"><a class="link" href="#tiebreaking">4.8.6. Tiebreaking</a></h4>
 <div class="paragraph">
 <p>In the above sections, the UML diagrams gloss over how tiebreaking is really parsed and understood by Alfred. The basic of tie-breaking revolves around using <code>Comparator</code> s to sort the teams in a particular order. Each tiebreak method available in Alfred has a <code>Comparator</code> associated to it and all these can be found in the <code>Comparators</code> class.</p>
 </div>
@@ -1588,7 +1698,7 @@ an inconvenience, but likely a minor one.</p>
 <div class="content">
 <img src="images/TieBreakActivityDiagram.png" alt="TieBreakActivityDiagram">
 </div>
-<div class="title">Figure 29. Handling of Tiebreak Methods</div>
+<div class="title">Figure 33. Handling of Tiebreak Methods</div>
 </div>
 <div class="paragraph">
 <p>From the above there is one important aspect to note: the <code>ArrayList</code> of <code>Comparator&lt;Team&gt;</code> objects created in the second step. This is the <code>ArrayList</code> referred to in the previous sections which is tasked with containing and transferring the comparators which will be used to sort the teams in their appropriate order to form the leaderboard or top teams. This <code>ArrayList</code> is used as an input parameter for both <code>leaderboard</code> and <code>getTop K</code> command related classes, as explored in previous sections.</p>
@@ -1601,7 +1711,7 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-for-tiebreaking"><a class="link" href="#design-considerations-for-tiebreaking">4.6.7. Design Considerations for Tiebreaking</a></h4>
+<h4 id="design-considerations-for-tiebreaking"><a class="link" href="#design-considerations-for-tiebreaking">4.8.7. Design Considerations for Tiebreaking</a></h4>
 <div class="paragraph">
 <p>Though this was a relatively straightforward subset of our <code>leaderboard</code> and <code>getTop K</code> command, there were still a few, small design considerations made.</p>
 </div>
@@ -1677,14 +1787,14 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.7. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">4.9. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.8, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.10, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1715,7 +1825,7 @@ an inconvenience, but likely a minor one.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.8. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.10. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1785,7 +1895,7 @@ an inconvenience, but likely a minor one.</p>
 <p>prefer desktop apps over other types</p>
 </li>
 <li>
-<p>can commandType fast</p>
+<p>can type fast</p>
 </li>
 <li>
 <p>prefers typing over mouse input</p>
@@ -1801,13 +1911,13 @@ an inconvenience, but likely a minor one.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>manage contacts faster than a typical mouse/GUI driven app</p>
+<p>manages different entities faster than a typical mouse/GUI driven app</p>
 </li>
 <li>
-<p>keep track of the relationship between Participant, Team and Mentor, such that it can be referenced at times</p>
+<p>keeps track of the relationship between Participant, Team and Mentor, such that it can be referenced at times</p>
 </li>
 <li>
-<p>store a significant number of contacts in an organised, readable manner</p>
+<p>stores a significant number of entities in an organised, readable manner</p>
 </li>
 </ul>
 </div>
@@ -2906,4 +3016,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 09:14:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 09:39:20 UTC</div></div></div></body></html>
