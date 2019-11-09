@@ -49,7 +49,12 @@
 </li>
 <li><a href="#list-team-ranking-code-leaderboard-code">5.14. List Team Ranking: <code>leaderboard</code></a></li>
 <li><a href="#get-the-top-k-teams-code-gettop-k-code">5.15. Get the top k teams: <code>getTop K</code></a></li>
-<li><a href="#tie-break">5.16. Tie-Break</a></li>
+<li><a href="#extensions-to-code-leaderboard-code-and-code-gettop-k-code-command">5.16. Extensions to <code>leaderboard</code> and <code>getTop K</code> Command</a>
+<ul class="sectlevel3">
+<li><a href="#tie-break">5.16.1. Tie-Break</a></li>
+<li><a href="#filter-by-subject">5.16.2. Filter by Subject</a></li>
+</ul>
+</li>
 <li><a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">5.17. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a>
 <ul class="sectlevel3">
 <li><a href="#csv-file-formatting">5.17.1. CSV File Formatting</a>
@@ -1148,7 +1153,12 @@ same high score.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tie-break"><a class="link" href="#tie-break">5.16. Tie-Break</a></h3>
+<h3 id="extensions-to-code-leaderboard-code-and-code-gettop-k-code-command"><a class="link" href="#extensions-to-code-leaderboard-code-and-code-gettop-k-code-command">5.16. Extensions to <code>leaderboard</code> and <code>getTop K</code> Command</a></h3>
+<div class="paragraph">
+<p>To provide additional functionalities to the <code>leaderboard</code> and <code>getTop k</code> commands within Alfred, there are few extensions that can be added to these two commands to allow you to see a representation of the leaderboard or top teams more accustomed to your needs. These extensions and how to use them within Alfred are explained in the subsections below.</p>
+</div>
+<div class="sect3">
+<h4 id="tie-break"><a class="link" href="#tie-break">5.16.1. Tie-Break</a></h4>
 <div class="paragraph">
 <p>By default Alfred <code>leaderboard</code> and <code>getTop k</code> commands fetch and display teams in descending order of their score, and by the order they were added into Alfred in case of tied scores.</p>
 </div>
@@ -1222,6 +1232,50 @@ same high score.</p>
 <p><code>getTop 3 tb/lessParticipants random</code> will display the top 3 teams on the UI with Alfred breaking the tie between teams with equals scores based on which team has fewer participants, and if the number of participants is equal then Alfred will randomly pick the winners for the tie.</p>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="filter-by-subject"><a class="link" href="#filter-by-subject">5.16.2. Filter by Subject</a></h4>
+<div class="paragraph">
+<p>By default, when running either the <code>leaderboard</code> or <code>getTop k</code> command, Alfred will show all the appropriate teams irrespective of their subject. However, in the situation that you need to select winners from a certain subject category, Alfred&#8217;s filter by subject feature provides you the capability to achieve this. To view the leaderboard or top teams for a specific subject, follow the following format:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>leaderboard s/SUBJECT_NAME</code> in the case of a <code>leaderboard</code> command</p>
+</li>
+<li>
+<p><code>getTop k s/SUBJECT_NAME</code> in the case of a <code>getTop k</code> command</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>You must precede the subject you want to filter by with the prefix <code>s/</code> for Alfred to understand your request. You can specify only one subject to filter the leaderboard or top teams by.</p>
+</li>
+<li>
+<p>This extension can be used in addition to tiebreak methods in which case the tiebreak methods will be used to split ties between any teams with the same subject.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>leaderboard s/Social</code> will display the leaderboard consisting only of teams with the subject "Social"</p>
+</li>
+<li>
+<p><code>getTop 3 tb/lessParticipants s/Health</code> will display the top 3 teams within the hackathon, all of which will consist of only of those with subject "Health". Additionally, any ties between these teams will be broken using the tiebreak method "lessParticipants" - the team with fewer participants wins the tie.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1857,4 +1911,4 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 10:05:22 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 10:15:19 UTC</div></div></div></body></html>
