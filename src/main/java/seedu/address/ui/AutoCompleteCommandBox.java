@@ -30,9 +30,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * The UI component that is responsible for receiving user command inputs.
  */
 public class AutoCompleteCommandBox extends JFXTextField {
-
-    public static final String ERROR_STYLE_CLASS = "error";
-
     private final CommandExecutor commandExecutor;
 
     /**
@@ -88,8 +85,6 @@ public class AutoCompleteCommandBox extends JFXTextField {
                     commandsPopup.show(AutoCompleteCommandBox.this, Side.BOTTOM, 0, 0);
                 }
 
-                // Request focus on first item
-                // commandsPopup.getSkin().getNode().requestFocus();
             }
         });
 
@@ -112,7 +107,7 @@ public class AutoCompleteCommandBox extends JFXTextField {
      */
     private void populatePopup(List<String> finalSuggestionResults) {
         List<CustomMenuItem> menuItems = new LinkedList<>();
-        int maxSuggestion = 4;
+        final int maxSuggestion = 4;
         int numSuggestion = Math.min(finalSuggestionResults.size(), maxSuggestion);
 
         for (int j = 0; j < numSuggestion; j++) {
@@ -358,7 +353,7 @@ public class AutoCompleteCommandBox extends JFXTextField {
             commandExecutor.execute(getText());
             setText("");
         } catch (CommandException | ParseException | AlfredModelHistoryException e) {
-            // setStyleToIndicateCommandFailure();
+            logger.warning("Exception is thrown");
         }
     }
 
