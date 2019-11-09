@@ -112,10 +112,13 @@ All entities will also receive a unique ID, which means no two entity will share
 
 `SubjectName` - the subject a mentor or team will be focusing on in the Hackathon +
 Must be one of the values below:
+
 * Environmental
 * Social
 * Health
 * Education
+* Entertainment
+* Social
 
 `Score` - must be an integer ranging from 0 to 100.
 
