@@ -81,14 +81,18 @@ public class EditParticipantCommand extends EditCommand {
      * {@code Name} of "participant", this method will return false, whereas
      * {@link EditParticipantDescriptor#isAnyFieldEdited()} will return true.
      */
-    private boolean isAnyFieldChanged(Participant participantToEdit, EditParticipantDescriptor editParticipantDescriptor) {
-        if (!editParticipantDescriptor.getName().orElse(participantToEdit.getName()).equals(participantToEdit.getName())) {
+    private boolean isAnyFieldChanged(Participant participantToEdit,
+                                      EditParticipantDescriptor editParticipantDescriptor) {
+        if (!editParticipantDescriptor.getName().orElse(participantToEdit.getName())
+                .equals(participantToEdit.getName())) {
             return true;
         }
-        if (!editParticipantDescriptor.getPhone().orElse(participantToEdit.getPhone()).equals(participantToEdit.getPhone())) {
+        if (!editParticipantDescriptor.getPhone().orElse(participantToEdit.getPhone())
+                .equals(participantToEdit.getPhone())) {
             return true;
         }
-        return !editParticipantDescriptor.getEmail().orElse(participantToEdit.getEmail()).equals(participantToEdit.getEmail());
+        return !editParticipantDescriptor.getEmail().orElse(participantToEdit.getEmail())
+                .equals(participantToEdit.getEmail());
     }
 
     @Override

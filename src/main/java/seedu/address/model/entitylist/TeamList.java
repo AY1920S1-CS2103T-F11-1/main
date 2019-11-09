@@ -64,7 +64,10 @@ public class TeamList extends EntityList {
     public void update(Id id, Team updatedTeam) throws AlfredModelException {
         // First check if the updated team already exists
         for (Team t : this.teams) {
-            if (t.isSameTeam(updatedTeam) && !t.getId().equals(updatedTeam.getId())) {
+            if (t.getId().equals(updatedTeam.getId())) {
+                continue;
+            }
+            if (t.isSameTeam(updatedTeam)) {
                 throw new ModelValidationException(SIMILAR_TEAM_MSG);
             }
             if (t.getLocation().equals(updatedTeam.getLocation())) {
