@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
@@ -225,23 +224,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
-    }
-
-    /**
-     * Displays the list of Participants in Model and Storage on Graphical User
-     * Interface.
-     */
-    private void handleHistory() {
-        List<String> undoHistory = logic.getUndoCommandHistory();
-        List<String> redoHistory = logic.getRedoCommandHistory();
-        System.out.println("Inside handleHistory: printing");
-        for (String h : redoHistory) {
-            System.out.println(h);
-        }
-        System.out.println("=====================<< Current State >>=====================");
-        for (String h : undoHistory) {
-            System.out.println(h);
-        }
     }
 
     /**
