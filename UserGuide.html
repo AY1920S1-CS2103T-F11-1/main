@@ -18,7 +18,7 @@
 <li><a href="#introduction">1. Introduction</a></li>
 <li><a href="#about">2. About</a></li>
 <li><a href="#quick-start">3. Quick Start</a></li>
-<li><a href="#parameters">4. Parameters</a></li>
+<li><a href="#parameter-constraints-and-additional-information">4. Parameter Constraints and Additional Information</a></li>
 <li><a href="#Features">5. Features</a>
 <ul class="sectlevel2">
 <li><a href="#saving-the-data">5.1. Saving the data:</a></li>
@@ -30,7 +30,7 @@
 <li><a href="#adding-a-team-code-add-team-parameters-code">5.3.3. Adding a Team: <code>add team PARAMETERS</code></a></li>
 </ul>
 </li>
-<li><a href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">5.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></li>
+<li><a href="#updating-an-entity-code-edit-mentor-participant-team-entity_id-parameters-code">5.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITY_ID [PARAMETERS]</code></a></li>
 <li><a href="#listing-all-entities-code-list-mentors-participants-teams-code">5.5. Listing all Entities : <code>list {mentors/participants/teams}</code></a></li>
 <li><a href="#deleting-an-entity-code-delete-mentor-participant-team-id-code">5.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></a></li>
 <li><a href="#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">5.7. Finding a Specific Entity: <code>find {mentor/team/participant} n/NAME &#8230;&#8203;</code></a></li>
@@ -201,54 +201,70 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect1">
-<h2 id="parameters"><a class="link" href="#parameters">4. Parameters</a></h2>
+<h2 id="parameter-constraints-and-additional-information"><a class="link" href="#parameter-constraints-and-additional-information">4. Parameter Constraints and Additional Information</a></h2>
 <div class="sectionbody">
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><code>EntityType</code> - single capital letter representing the entity type</p>
+<p><strong><code>Entity Type</code></strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Mentor:</strong> M</p>
+<p><strong>Mentor</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A mentor has a name, phone number, email address, an organization, and a specialty (i.e. subject name) which must take on values mentioned below under "Parameters."</p>
 </li>
 <li>
-<p><strong>Participant:</strong> P</p>
+<p>Two mentors are considered as the same mentor if and only if they have the same names along with one of their phone numbers or emails.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p><strong>Team:</strong> T</p>
+<p><strong>Participant</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A participant has a name, phone number, and an email address.</p>
+</li>
+<li>
+<p>Two participants are considered as the same participant if and only if they have the same names along with one of their phone numbers or emails.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Team</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A team has a team name, a subject to focus on, score, its project name, and its location (table number).</p>
+</li>
+<li>
+<p>A team may also contain one mentor and an arbitrary number of participants (setting of restrictions coming in v2.0).</p>
+</li>
+<li>
+<p>Two teams are considered as the same team if and only if they have the same team names or project names.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><code>ID</code> - the ID of the entity (optional)</p>
+<p>All entities will also receive a unique ID, which means no two entity will share the same ID. That is, entities with same ID will also be considered as a same entity. This is to be considered for specific commands such as the <a href="#csv-file-formatting">Section 5.13.1, &#8220;CSV File Formatting&#8221;</a> under the <a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">Bulk Registration</a> command.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Mentor:</strong> M-d, where d can be any positive integer</p>
-</li>
-<li>
-<p><strong>Participant:</strong> P-d, where d can be any positive integer</p>
-</li>
-<li>
-<p><strong>Team:</strong> T-d, where d can be any positive integer</p>
-<div class="ulist">
-<ul>
-<li>
-<p>You can also express <code>ID</code> as only a positive integer.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong><code>Parameters</code></strong></p>
 </div>
 <div class="paragraph">
 <p><code>Name</code>, <code>Organization</code>, <code>ProjectName</code> - can be any combination of spaces, letters, and these special characters (,.-')</p>
 </div>
 <div class="paragraph">
-<p><code>Phone</code> - can be any combination of numbers, space and special characters (-), excluding bracket and country code may be included. Country code <code>+65</code> will be automatically included if it is not added.</p>
+<p><code>Phone</code> - can be any combination of numbers (at least three digits), space, hyphens (-), and periods (.) with or without a country code. Country code of Singapore (<code>+65</code>) will be automatically included if it is not added.</p>
 </div>
 <div class="paragraph">
 <p><code>Email</code> - must include an address and an email domain. It can include special characters (-,.), excluding bracket.</p>
@@ -283,7 +299,7 @@ Must be one of the values below:</p>
 <p><code>Score</code> - must be an integer ranging from 0 to 100.</p>
 </div>
 <div class="paragraph">
-<p><code>Location</code> - must be an integer ranging from 0 to 1000. This indicates table number.</p>
+<p><code>Location</code> - must be an integer ranging from 1 to 1000, indicating a table number. Only one team is allowed per table</p>
 </div>
 </div>
 </div>
@@ -304,8 +320,7 @@ Must be one of the values below:</p>
 <code>NAME</code> is a parameter which you need to specify as the mentor&#8217;s name (i.e. <code>add mentor n/John Doe</code>).</p>
 </li>
 <li>
-<p>You can input the parameters in any order. For instance, if the command specifies <code>n/NAME p/PHONE_NUMBER</code>,
-you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still consider it as an acceptable command.</p>
+<p>You can input the parameters in any order. For instance, if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still consider it as an acceptable command.</p>
 </li>
 <li>
 <p>Words in {curly braces} indicate values for the command that you need to select and provide.</p>
@@ -334,6 +349,9 @@ you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still consider 
 <p>Type your commands in the textbox displayed on the Alfred UI. After you are done typing the command, press <kbd>Enter</kbd> on your keyboard to execute the command.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Also, please refer to <a href="#parameter-constraints-and-additional-information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a> for more information on the different restrictions for each parameter.</p>
 </div>
 </div>
 </div>
@@ -386,7 +404,7 @@ help page in a separate pop-up window.</p>
 <p>As of version 1.1, you must provide all the fields. There are no optional fields.</p>
 </li>
 <li>
-<p>Note that the Specialisation and Subject fields can only take on the values specified in <code>SubjectName</code> in <a href="#parameters">Section 4, &#8220;Parameters&#8221;</a>:</p>
+<p>Note that the Specialisation and Subject fields can only take on the values specified in <code>SubjectName</code> in <a href="#parameter-constraints-and-additional-information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>:</p>
 </li>
 </ul>
 </div>
@@ -435,13 +453,16 @@ help page in a separate pop-up window.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Mentors have the fields "Name", "Phone number" and "Email address" which you must provide.</p>
+<p>Mentors have the fields "Name", "Phone number" and "Email address."</p>
 </li>
 <li>
 <p>Mentors also have a field called "Organization", which refers to the organization for which they work.</p>
 </li>
 <li>
-<p>Mentors also have a field called "Specialisation", which refers to the field of work they specialise in. The Specialisation can only take on the values specified in <code>SubjectName</code> in <a href="#parameters">Section 4, &#8220;Parameters&#8221;</a>.</p>
+<p>Mentors also have a field called "Specialisation", which refers to the field of work they specialise in. The Specialisation can only take on the values specified in <code>SubjectName</code> in <a href="#parameter-constraints-and-additional-information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>.</p>
+</li>
+<li>
+<p>All of these fields must be specified in order to successfully add a mentor.</p>
 </li>
 </ul>
 </div>
@@ -477,7 +498,7 @@ help page in a separate pop-up window.</p>
 <p>Teams have the fields "Name", "Project name" and "Table Number" which you must provide.</p>
 </li>
 <li>
-<p>Teams also have a field called "Subject", which refers the area the team&#8217;s project focuses on, and must be chosen from the predetermined list of subjects described in <code>SubjectName</code> in <a href="#parameters">Section 4, &#8220;Parameters&#8221;</a>.</p>
+<p>Teams also have a field called "Subject", which refers the area the team&#8217;s project focuses on, and must be chosen from the predetermined list of subjects described in <code>SubjectName</code> in <a href="#parameter-constraints-and-additional-information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>.</p>
 </li>
 </ul>
 </div>
@@ -502,7 +523,7 @@ help page in a separate pop-up window.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code"><a class="link" href="#updating-an-entity-code-edit-mentor-participant-team-entitiy_id-parameters-code">5.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITIY_ID [PARAMETERS]</code></a></h3>
+<h3 id="updating-an-entity-code-edit-mentor-participant-team-entity_id-parameters-code"><a class="link" href="#updating-an-entity-code-edit-mentor-participant-team-entity_id-parameters-code">5.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITY_ID [PARAMETERS]</code></a></h3>
 <div class="paragraph">
 <p>Edits an entity based on the parameter values you supply. Use this command in case you want to make changes to an entity you have already created within Alfred.</p>
 </div>
@@ -1189,7 +1210,7 @@ If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with a
 </ul>
 </div>
 <div class="paragraph">
-<p><code>ID</code> - the ID of the entity (optional)</p>
+<p><code>[ID]</code> - the ID of the entity (optional)</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1212,45 +1233,7 @@ If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with a
 </ul>
 </div>
 <div class="paragraph">
-<p><code>Name</code>, <code>Organization</code>, <code>ProjectName</code> - can be any combination of spaces, letters, and these special characters (,.-')</p>
-</div>
-<div class="paragraph">
-<p><code>Phone</code> - can be any combination of numbers, space and special characters (-), excluding bracket and country code may be included. Country code <code>+65</code> will be automatically included if it is not added.</p>
-</div>
-<div class="paragraph">
-<p><code>Email</code> - must include an address and an email domain. It can include special characters (-,.), excluding bracket.</p>
-</div>
-<div class="paragraph">
-<p><code>SubjectName</code> - the subject a mentor or team will be focusing on in the Hackathon<br>
-Must be one of the values below:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Environmental</p>
-</li>
-<li>
-<p>Social</p>
-</li>
-<li>
-<p>Health</p>
-</li>
-<li>
-<p>Education</p>
-</li>
-<li>
-<p>Entertainment</p>
-</li>
-<li>
-<p>Other</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><code>Score</code> - must be an integer ranging from 0 to 100.</p>
-</div>
-<div class="paragraph">
-<p><code>Location</code> - must be an integer ranging from 0 to 1000. This indicates table number.</p>
+<p>For the rest of the parameters, please refer to <a href="#parameter-constraints-and-additional-information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>.</p>
 </div>
 </div>
 </div>
@@ -1306,15 +1289,15 @@ Must be one of the values below:</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><code>Participants</code> - A list of participant IDs in the team.<br>
+<p><code>[Participants]</code> - A list of participant IDs in the team.<br>
 This field is optional, but if it is included, participants with given ID must exist in Alfred.</p>
 </div>
 <div class="paragraph">
-<p><code>Mentor</code> - An ID of the mentor associated with the team.<br>
+<p><code>[Mentor]</code> - An ID of the mentor associated with the team.<br>
 This field is also optional, but if it is included, mentor with given ID must exist in Alfred.</p>
 </div>
 <div class="paragraph">
-<p>If you are importing multiple entity data at once, don&#8217;t worry! Alfred will make sure Participant and Mentor data are loaded before Team data.</p>
+<p>If you are importing multiple entity data at once, don&#8217;t worry! Alfred will make sure Participant and Mentor data are loaded before Team data to ensure that all of them are present in Alfred before checking whether they exist or not.</p>
 </div>
 <div class="paragraph">
 <p>See example usage down below.</p>
@@ -1333,7 +1316,7 @@ This field is also optional, but if it is included, mentor with given ID must ex
 <p>T,1,Justice League,[P-1|P-2|P-3],M-1,Social,100,Save the Earth,1</p>
 </li>
 <li>
-<p>T,,Justice League,[P-1|P-2|P-3],M-1,Social,100,Save the Earth,1</p>
+<p>T,,Justice League,[P-1|P-2|P-3],1,Social,100,Save the Earth,1</p>
 </li>
 </ul>
 </div>
@@ -1405,7 +1388,7 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 <div class="sect2">
 <h3 id="export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code"><a class="link" href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">5.14. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></h3>
 <div class="paragraph">
-<p>You may export Alfred data to an external CSV file. If the desired CSV file path is left empty, Alfred will create a CSV file at the default location (<code>./AlfredData/Alfred_Data.csv</code>).</p>
+<p>You may export Alfred data to an external CSV file. If the entity type is specified, Alfred will export all the data corresponding to that entity type only. If the desired CSV file path is left empty, Alfred will create a CSV file at the default location (<code>./AlfredData/Alfred_Data.csv</code>).</p>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -1814,4 +1797,4 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 06:34:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 06:53:36 UTC</div></div></div></body></html>
