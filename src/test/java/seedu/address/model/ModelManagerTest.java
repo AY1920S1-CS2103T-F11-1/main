@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
@@ -20,12 +21,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
+import javafx.collections.transformation.FilteredList;
+
 import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entitylist.MentorList;
+import seedu.address.model.entitylist.ParticipantList;
+import seedu.address.model.entitylist.TeamList;
 import seedu.address.storage.AlfredStorage;
 import seedu.address.testutil.TypicalMentors;
 import seedu.address.testutil.TypicalParticipants;
@@ -135,6 +141,42 @@ public class ModelManagerTest {
         when(this.userPrefs.getMentorListFilePath()).thenReturn(path);
         Path result = this.modelManager.getMentorListFilePath();
         assertEquals(path, result);
+    }
+
+    @Test
+    public void getFilteredParticipantList_normal_success() {
+        ParticipantList pList = new ParticipantList();
+        FilteredList participantList = new FilteredList<>(pList.getSpecificTypedList());
+        when(this.modelManager.getFilteredParticipantList()).thenReturn(participantList);
+        FilteredList result = this.modelManager.getFilteredParticipantList();
+        assertEquals(result, pList);
+    }
+
+    @Test
+    public void getFilteredTeamList_normal_success() {
+        TeamList tList = new TeamList();
+        FilteredList teamList = new FilteredList<>(tList.getSpecificTypedList());
+        when(this.modelManager.getFilteredTeamList()).thenReturn(teamList);
+        FilteredList result = this.modelManager.getFilteredTeamList();
+        assertEquals(result, teamList);
+    }
+
+    @Test
+    public void getFilteredMentorList_normal_success() {
+        MentorList mList = new MentorList();
+        FilteredList mentorList = new FilteredList<>(mList.getSpecificTypedList());
+        when(this.modelManager.getFilteredTeamList()).thenReturn(mentorList);
+        FilteredList result = this.modelManager.getFilteredTeamList();
+        assertEquals(result, mentorList);
+    }
+
+    @Test
+    public void resetFilteredLists_normal_success () {
+        ModelManager m = new ModelManager();
+        m.resetFilteredLists();
+        verify(m.getFilteredParticipantList()).setPredicate(any());
+        verify(m.getFilteredMentorList()).setPredicate(any());
+        verify(m.getFilteredTeamList()).setPredicate(any());
     }
 
     @Test
