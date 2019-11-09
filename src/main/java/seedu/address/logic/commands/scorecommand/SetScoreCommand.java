@@ -47,6 +47,15 @@ public class SetScoreCommand extends ScoreCommand {
                 teamToScore.getName().toString(), score.toString()), CommandType.T);
     }
 
+    /**
+     * Fetches the team {@code team} from {@code model} and sets the score {@code}
+     * as their current score.
+     *
+     * @param model the {@code Model} object from which the team is supposed to be fetched and updated.
+     * @param team the Team from model whose score is to be updated.
+     * @param score the score to subtract from the team's current score.
+     * @throws CommandException if an exceptional case arises when setting the team's score.
+     */
     private void setScoreForTeam(Model model, Team team, Score score) throws CommandException {
         try {
             model.setTeamScore(team, score);

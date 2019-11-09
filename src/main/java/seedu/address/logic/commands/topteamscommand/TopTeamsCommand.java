@@ -47,9 +47,10 @@ public abstract class TopTeamsCommand extends Command {
     }
 
     /**
-     * Checks if there are no teams currently added as per {@code model}, whether any at all or with respect
+     * Checks if there are no teams currently added within {@code model}, whether any at all or with respect
      * to a specific subject.
      *
+     * @param model the {@code model} object which will be checked for presence of teams.
      * @throws CommandException if there are no teams added in Alfred.
      */
     public void checkNoTeams(Model model) throws CommandException {
@@ -61,7 +62,7 @@ public abstract class TopTeamsCommand extends Command {
             FilteredList<Team> teamList = new FilteredList<>(model.getFilteredTeamList());
             teamList.setPredicate(Predicates.getPredicateFilterTeamBySubject(subject).negate());
             if (teamList.size() == 0) {
-                logger.severe("No teams within Alfred with Subject: "+ subject.toString());
+                logger.severe("No teams within Alfred with Subject: " + subject.toString());
                 throw new CommandException(String.format(MESSAGE_NO_TEAM_SUBJECT, subject.toString()));
             }
         }

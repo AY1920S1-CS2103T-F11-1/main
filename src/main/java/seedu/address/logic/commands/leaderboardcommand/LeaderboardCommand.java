@@ -58,7 +58,7 @@ public abstract class LeaderboardCommand extends Command {
             FilteredList<Team> teamList = new FilteredList<>(model.getFilteredTeamList());
             teamList.setPredicate(Predicates.getPredicateFilterTeamBySubject(subjectName).negate());
             if (teamList.size() == 0) {
-                logger.severe("No teams within Alfred with Subject: "+ subjectName.toString());
+                logger.severe("No teams within Alfred with Subject: " + subjectName.toString());
                 throw new CommandException(String.format(MESSAGE_NO_TEAM_SUBJECT, subjectName));
             }
         }

@@ -49,6 +49,15 @@ public class SubtractScoreCommand extends ScoreCommand {
                 score, teamToScore.getName(), teamToScore.getScore()), CommandType.T);
     }
 
+    /**
+     * Fetches the {@code team} from {@code model} and subtracts {@code score} from their
+     * current score.
+     *
+     * @param model the {@code Model} object from which the team is supposed to be fetched and updated.
+     * @param team the Team from model whose score is to be updated.
+     * @param score the score to subtract from the team's current score.
+     * @throws CommandException if an exceptional case arises when subtracting the team's score.
+     */
     private void subtractScoreFromTeam(Model model, Team team, Score score) throws CommandException {
         try {
             model.subtractTeamScore(team, score);

@@ -47,6 +47,15 @@ public class AddScoreCommand extends ScoreCommand {
                 score, teamToScore.getName().toString(), teamToScore.getScore()), CommandType.T);
     }
 
+    /**
+     * Fetches the team {@code team} from {@code model} and adds the score {@code}
+     * to their current score.
+     *
+     * @param model the {@code Model} object from which the team is supposed to be fetched and updated.
+     * @param team the Team from model whose score is to be updated.
+     * @param score the score to added to the team's current score.
+     * @throws CommandException if any exceptional case is encountered while adding the score.
+     */
     private void addScoreToTeam(Model model, Team team, Score score) throws CommandException {
         try {
             model.addTeamScore(team, score);

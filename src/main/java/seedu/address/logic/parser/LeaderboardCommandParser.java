@@ -68,6 +68,13 @@ public class LeaderboardCommandParser implements Parser<LeaderboardCommand> {
                 : new SimpleLeaderboardCommand(comparators, subject);
     }
 
+    /**
+     * Checks whether the {@code ArgumentMultimap} 's preamble (text before the first valid prefix)
+     * is empty.
+     *
+     * @param argumentMultimap the {@code ArgumentMultimap} whose preamble is to be checked.
+     * @throws ParseException if the preamble is not empty.
+     */
     private void ensureEmptyPreamble(ArgumentMultimap argumentMultimap) throws ParseException {
         if (!AlfredParserUtil.arePrefixesPresent(argumentMultimap, PREFIX_TIE_BREAK)
                 && !argumentMultimap.getPreamble().isEmpty()) {

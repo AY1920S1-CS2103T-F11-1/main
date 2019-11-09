@@ -11,7 +11,6 @@ import seedu.address.logic.commands.scorecommand.AddScoreCommand;
 import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.logic.commands.scorecommand.SetScoreCommand;
 import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
-import seedu.address.logic.parser.AlfredParser;
 import seedu.address.logic.parser.AlfredParserUtil;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Parser;
@@ -27,9 +26,9 @@ import seedu.address.model.entity.Score;
  */
 public class ScoreCommandParser implements Parser<ScoreCommand> {
 
-    private Logger logger = LogsCenter.getLogger(getClass());
     private static final Score RESET_SCORE = new Score(0);
     private static final Pattern VALIDATE_METHOD = Pattern.compile("\\b(add|reset|sub|set)\\b");
+    private Logger logger = LogsCenter.getLogger(getClass());
 
     @Override
     public ScoreCommand parse(String userInput) throws ParseException {
