@@ -177,10 +177,12 @@ public class MainWindow extends UiPart<Stage> {
             KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
 
             if (upCombo.match(event)) {
+                System.out.println("Alt + Up Pressed");
                 commandBox.setTextField(logic.getPrevCommandString());
             }
 
             if (downCombo.match(event)) {
+                System.out.println("Alt + Down Pressed");
                 commandBox.setTextField(logic.getNextCommandString());
             }
         });
