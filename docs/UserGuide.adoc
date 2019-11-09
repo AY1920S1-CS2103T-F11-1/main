@@ -388,7 +388,6 @@ The bottommost panel shows you the "undo" delimiter. +
 This means that you can invoke the `undo` command twice, as both AddParticipantCommands can be undone.
 Notice that the `list participants` command is not shown in the "History" section as it does not change data.
 
-<<<<<<< HEAD
 === Undo Previous Commands: `undo [NUM_COMMANDS_TO_UNDO]`
 Undoes previously executed commands.
 
@@ -397,10 +396,6 @@ There are 2 ways for you to use this commands:
 1. `undo`: This implicitly executes `undo 1` and undoes 1 command only.
 2. `undo [NUM_COMMANDS_TO_UNDO]`: This undoes `NUM_COMMANDS_TO_UNDO` commands, subject to the number of available commands that you can
 undo, as per the output of the `history` command.
-=======
-=== Undo Previous Commands: `undo [NUM_COMMANDS]`
-Undoes previously executed commands.
->>>>>>> 88595980bd927a86e1d3ab17f38ff2b800b61387
 
 ****
 * This command undoes the effects of previously executed commands, and will return Alfred to the previous state
@@ -415,7 +410,6 @@ that the undo command cannot be executed.
 
 Format: `undo`
 
-<<<<<<< HEAD
 === Redo Previous Commands: `redo [NUM_COMMANDS_TO_REDO]`
 Redoes previously executed commands.
 
@@ -424,10 +418,6 @@ There are 2 ways for you to use this commands:
 1. `redo`: This implicitly executes `redo 1` and redoes 1 command only.
 2. `redo [NUM_COMMANDS_TO_REDO]`: This redoes `NUM_COMMANDS_TO_REDO` commands, subject to the number of available commands that you can
 redo, as per the output of the `history` command.
-=======
-=== Redo Previous Commands: `redo [NUM_COMMANDS]`
-Redoes previously executed commands.
->>>>>>> 88595980bd927a86e1d3ab17f38ff2b800b61387
 
 ****
 * This command undoes the effects of previously executed commands, and will return Alfred to the previous state
@@ -441,7 +431,6 @@ that the undo command cannot be executed.
 
 Format: `redo`
 
-<<<<<<< HEAD
 === Command History Navigation
 Navigate to previous commands by pressing the alt key kbd:[Alt], together with the up kbd:[&uparrow;] or down kbd:[&downarrow;] arrow keys.
 For Mac users, press the option key kbd:[Opt] in place of the alt key kbd:[Alt] instead. Should you have re-mapped/re-purposed the
@@ -455,10 +444,6 @@ alt key kbd:[Alt], press the remapped key on your keyboard instead.
 * Note that Alfred's command input box must be in focus (the cursor is active in the command input box) for the keyboard shortcuts for this feature to work
 * This feature only allows you to navigate up to the previous 50 successfully executed commands. Invalid commands cannot be navigated to.
 ****
-
-==== List Team Ranking: `leaderboard`
-Use this command to display the ranking of the teams in the hackathon in descending order of their points.
-=======
 
 === Scoring: `score`
 
@@ -532,7 +517,6 @@ Example:
 
 === List Team Ranking: `leaderboard`
 Use this command to display the ranking of all the teams in the hackathon in descending order of their points.
->>>>>>> 88595980bd927a86e1d3ab17f38ff2b800b61387
 
 ****
 * Once you run this command, Alfred's UI will display a list of all the teams stored within Alfred sorted in descending order of their points.
