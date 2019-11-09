@@ -182,20 +182,18 @@ public class MainWindow extends UiPart<Stage> {
         final KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
 
         this.commandBoxPlaceholder.addEventHandler(KeyEvent.ANY,
-                new EventHandler<KeyEvent>(){
-            @Override
-            public void handle (KeyEvent ke){
-                if (upCombo.match(ke))
-                {
-                    commandBox.setTextField(logic.getPrevCommandString());
-                }
+                new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent ke) {
+                        if (upCombo.match(ke)) {
+                            commandBox.setTextField(logic.getPrevCommandString());
+                        }
 
-                if (downCombo.match(ke))
-                {
-                    commandBox.setTextField(logic.getNextCommandString());
-                }
-            }
-        });
+                        if (downCombo.match(ke)) {
+                            commandBox.setTextField(logic.getNextCommandString());
+                        }
+                    }
+                });
     }
 
     /**

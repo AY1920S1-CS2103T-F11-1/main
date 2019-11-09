@@ -13,7 +13,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
@@ -59,12 +58,12 @@ public class AutoCompleteTextField extends JFXTextField {
             KeyCombination downCombo = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.ALT_DOWN);
 
             if (upCombo.match(event)) {
-                KeyEvent upEvent = new KeyEvent(KeyEvent.KEY_PRESSED , "", "", KeyCode.UP, false, false, true, false);
+                KeyEvent upEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.UP, false, false, true, false);
                 this.fireEvent(upEvent);
             }
 
             if (downCombo.match(event)) {
-                KeyEvent downEvent = new KeyEvent(KeyEvent.KEY_PRESSED , "", "", KeyCode.UP, false, false, true, false);
+                KeyEvent downEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.UP, false, false, true, false);
                 this.fireEvent(downEvent);
             }
         });
@@ -101,7 +100,7 @@ public class AutoCompleteTextField extends JFXTextField {
                 }
 
                 // Request focus on first item
-               //commandsPopup.getSkin().getNode().requestFocus();
+                //commandsPopup.getSkin().getNode().requestFocus();
             }
         });
 
