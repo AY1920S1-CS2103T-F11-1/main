@@ -17,6 +17,9 @@ deploy:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+    
+after_sucesss:
+  - sh ./codecov.sh
 
 cache:
   directories:
