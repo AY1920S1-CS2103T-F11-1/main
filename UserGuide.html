@@ -38,19 +38,21 @@
 <li><a href="#removing-an-entity-from-a-team-code-remove-mentor-participant-id-team_id-code">5.9. Removing an Entity from a Team: <code>remove {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></a></li>
 <li><a href="#show-command-history-code-history-code">5.10. Show Command History: <code>history</code></a></li>
 <li><a href="#undo-previous-commands-code-undo-code">5.11. Undo Previous Commands: <code>undo</code></a></li>
-<li><a href="#redo-previous-commands-code-redo-code">5.12. Redo Previous Commands: <code>redo</code></a>
+<li><a href="#redo-previous-commands-code-redo-code">5.12. Redo Previous Commands: <code>redo</code></a></li>
+<li><a href="#scoring-code-score-code">5.13. Scoring: <code>score</code></a>
 <ul class="sectlevel3">
-<li><a href="#list-team-ranking-code-leaderboard-code">5.12.1. List Team Ranking: <code>leaderboard</code></a></li>
-<li><a href="#get-the-top-k-teams-code-gettop-number-code">5.12.2. Get the top k teams: <code>getTop NUMBER</code></a></li>
-<li><a href="#tie-break">5.12.3. Tie-Break</a></li>
-<li><a href="#add-points-code-score-add-team_id-points-code">5.12.4. Add points: <code>score add TEAM_ID POINTS</code></a></li>
-<li><a href="#subtract-points-code-score-sub-team_id-new_points-code">5.12.5. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></li>
-<li><a href="#set-points-code-score-set-team_id-new_points-code">5.12.6. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#add-points-code-score-add-team_id-points-code">5.13.1. Add points: <code>score add TEAM_ID POINTS</code></a></li>
+<li><a href="#subtract-points-code-score-sub-team_id-new_points-code">5.13.2. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#set-points-code-score-set-team_id-new_points-code">5.13.3. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#reset-points-code-score-reset-team_id-code">5.13.4. Reset points: <code>score reset TEAM_ID</code></a></li>
 </ul>
 </li>
-<li><a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">5.13. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a>
+<li><a href="#list-team-ranking-code-leaderboard-code">5.14. List Team Ranking: <code>leaderboard</code></a></li>
+<li><a href="#get-the-top-k-teams-code-gettop-k-code">5.15. Get the top k teams: <code>getTop K</code></a></li>
+<li><a href="#tie-break">5.16. Tie-Break</a></li>
+<li><a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">5.17. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a>
 <ul class="sectlevel3">
-<li><a href="#csv-file-formatting">5.13.1. CSV File Formatting</a>
+<li><a href="#csv-file-formatting">5.17.1. CSV File Formatting</a>
 <ul class="sectlevel4">
 <li><a href="#mentor-data">Mentor Data</a></li>
 <li><a href="#participant-data">Participant Data</a></li>
@@ -59,36 +61,36 @@
 </li>
 </ul>
 </li>
-<li><a href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">5.14. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
-<li><a href="#help-command">5.15. Help command</a></li>
-<li><a href="#home-command-code-home-code">5.16. Home command: <code>home</code></a></li>
-<li><a href="#command-suggestion-prompt">5.17. Command Suggestion Prompt</a></li>
-<li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">5.18. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
-<li><a href="#swag-coming-in-v2-0">5.19. Swag (Coming in v2.0)</a>
+<li><a href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">5.18. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
+<li><a href="#help-command">5.19. Help command</a></li>
+<li><a href="#home-command-code-home-code">5.20. Home command: <code>home</code></a></li>
+<li><a href="#command-suggestion-prompt">5.21. Command Suggestion Prompt</a></li>
+<li><a href="#seating-code-locate-participant-team-code-coming-in-v2-0">5.22. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
+<li><a href="#swag-coming-in-v2-0">5.23. Swag (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-swag-code-add-swag-description-quantity-code">5.19.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
-<li><a href="#track-inventory-of-available-swags-code-list-swag-code">5.19.2. Track inventory of available swags: <code>list swag</code></a></li>
+<li><a href="#add-swag-code-add-swag-description-quantity-code">5.23.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
+<li><a href="#track-inventory-of-available-swags-code-list-swag-code">5.23.2. Track inventory of available swags: <code>list swag</code></a></li>
 </ul>
 </li>
-<li><a href="#schedule-coming-in-v2-0">5.20. Schedule (Coming in v2.0)</a>
+<li><a href="#schedule-coming-in-v2-0">5.24. Schedule (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">5.20.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">5.20.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#delete-schedule-code-deleteschedule-schedule_id-code">5.20.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
+<li><a href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">5.24.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">5.24.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#delete-schedule-code-deleteschedule-schedule_id-code">5.24.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
 </ul>
 </li>
-<li><a href="#food-coming-in-v2-0">5.21. Food (Coming in v2.0)</a>
+<li><a href="#food-coming-in-v2-0">5.25. Food (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">5.21.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">5.21.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#list-food-inventory-code-list-food-code">5.21.3. List Food Inventory: <code>list food</code></a></li>
+<li><a href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">5.25.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">5.25.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#list-food-inventory-code-list-food-code">5.25.3. List Food Inventory: <code>list food</code></a></li>
 </ul>
 </li>
-<li><a href="#waitlist-coming-in-v2-0">5.22. Waitlist (Coming in v2.0)</a>
+<li><a href="#waitlist-coming-in-v2-0">5.26. Waitlist (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#add-to-waitlist-code-addtowaitlist-participant_id-code">5.22.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">5.22.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#list-by-registration-time-code-listwaitlist-code">5.22.3. List by Registration Time: <code>listWaitList</code></a></li>
+<li><a href="#add-to-waitlist-code-addtowaitlist-participant_id-code">5.26.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">5.26.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#list-by-registration-time-code-listwaitlist-code">5.26.3. List by Registration Time: <code>listWaitList</code></a></li>
 </ul>
 </li>
 </ul>
@@ -255,7 +257,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </ul>
 </div>
 <div class="paragraph">
-<p>All entities will also receive a unique ID, which means no two entity will share the same ID. That is, entities with same ID will also be considered as a same entity. This is to be considered for specific commands such as the <a href="#csv-file-formatting">Section 5.13.1, &#8220;CSV File Formatting&#8221;</a> under the <a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">Bulk Registration</a> command.</p>
+<p>All entities will also receive a unique ID, which means no two entity will share the same ID. That is, entities with same ID will also be considered as a same entity. This is to be considered for specific commands such as the <a href="#csv-file-formatting">Section 5.17.1, &#8220;CSV File Formatting&#8221;</a> under the <a href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">Bulk Registration</a> command.</p>
 </div>
 <div class="paragraph">
 <p><strong><code>Parameters</code></strong></p>
@@ -917,10 +919,171 @@ Notice that the <code>list participants</code> command is not shown in the "Hist
 <div class="paragraph">
 <p>Format: <code>redo</code></p>
 </div>
-<div class="sect3">
-<h4 id="list-team-ranking-code-leaderboard-code"><a class="link" href="#list-team-ranking-code-leaderboard-code">5.12.1. List Team Ranking: <code>leaderboard</code></a></h4>
+</div>
+<div class="sect2">
+<h3 id="scoring-code-score-code"><a class="link" href="#scoring-code-score-code">5.13. Scoring: <code>score</code></a></h3>
 <div class="paragraph">
-<p>Use this command to display the ranking of the teams in the hackathon in descending order of their points.</p>
+<p>The <code>score</code> command allows you to change a particular team&#8217;s score. It allows you to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add points to a team&#8217;s score</p>
+</li>
+<li>
+<p>Subtract points from a team&#8217;s score</p>
+</li>
+<li>
+<p>Set a team&#8217;s score to a certain number of points</p>
+</li>
+<li>
+<p>Reset a team&#8217;s score</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The usage of the above commands are explained in the following subsections.</p>
+</div>
+<div class="sect3">
+<h4 id="add-points-code-score-add-team_id-points-code"><a class="link" href="#add-points-code-score-add-team_id-points-code">5.13.1. Add points: <code>score add TEAM_ID POINTS</code></a></h4>
+<div class="paragraph">
+<p>Adds the value of POINTS to the current score of the team with ID TEAM_ID.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Use this command when you want to award a particular team a certain amount of points.</p>
+</li>
+<li>
+<p>If you try to award more than the maximum amount of points (which is set to 100 points as default), Alfred will not allow it and will display an error message.</p>
+</li>
+<li>
+<p>If the addition of points makes the team&#8217;s total exceed the maximum, the score will simply be set to the maximum score.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>score add T-1 20</code> will add 20 points to the score of the team with ID T-1.</p>
+</li>
+<li>
+<p><code>score add T-5 60</code> will add 60 points to the score of the team with ID T-5.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="subtract-points-code-score-sub-team_id-new_points-code"><a class="link" href="#subtract-points-code-score-sub-team_id-new_points-code">5.13.2. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></h4>
+<div class="paragraph">
+<p>Deducts the value of POINTS from the current score of the team with ID TEAM_ID.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Use this command when you want to take away a certain amount of points from a particular team.</p>
+</li>
+<li>
+<p>If you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message. If the subtraction of points makes the team&#8217;s total go below the minimum (which is set to 0 points), the score will simply be set to 0.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>score sub T-1 15</code> will subtract 20 points from the score of the team with ID T-1.</p>
+</li>
+<li>
+<p><code>score sub T-5 10</code> will subtract 10 points from the score of the team with ID T-5.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="set-points-code-score-set-team_id-new_points-code"><a class="link" href="#set-points-code-score-set-team_id-new_points-code">5.13.3. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></h4>
+<div class="paragraph">
+<p>Sets the score of the team with ID TEAM_ID to a new score NEW_POINTS, regardless of the team&#8217;s current score.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Use this command when you want to set a team&#8217;s score to an exact score, rather than adding or subtracting points from their current score.</p>
+</li>
+<li>
+<p>If you try to set more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.</p>
+</li>
+<li>
+<p>If you try to set less than the minimum amount of points (which is set to 0 as default), Alfred will not allow it and will display an error message.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>score set T-1 15</code> will set the score of the team with ID T-1 as 15.</p>
+</li>
+<li>
+<p><code>score set T-5 10</code> will set the score of the team with ID T-5 as 10.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reset-points-code-score-reset-team_id-code"><a class="link" href="#reset-points-code-score-reset-team_id-code">5.13.4. Reset points: <code>score reset TEAM_ID</code></a></h4>
+<div class="paragraph">
+<p>Resets the score of the team with ID TEAM_ID to the minimum amount of points allowed, which is set to 0 as default.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Use this command when you want to set a team&#8217;s score to directly to the minimum, rather than subtracting points from their current score until you get the desired result.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>score reset T-1</code> will reset the score of the team with ID T-1.</p>
+</li>
+<li>
+<p><code>score reset T-5 10</code> will reset the score of the team with ID T-5.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="list-team-ranking-code-leaderboard-code"><a class="link" href="#list-team-ranking-code-leaderboard-code">5.14. List Team Ranking: <code>leaderboard</code></a></h3>
+<div class="paragraph">
+<p>Use this command to display the ranking of all the teams in the hackathon in descending order of their points.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -940,10 +1103,10 @@ Notice that the <code>list participants</code> command is not shown in the "Hist
 <p>Format: <code>leaderboard</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="get-the-top-k-teams-code-gettop-number-code"><a class="link" href="#get-the-top-k-teams-code-gettop-number-code">5.12.2. Get the top k teams: <code>getTop NUMBER</code></a></h4>
+<div class="sect2">
+<h3 id="get-the-top-k-teams-code-gettop-k-code"><a class="link" href="#get-the-top-k-teams-code-gettop-k-code">5.15. Get the top k teams: <code>getTop K</code></a></h3>
 <div class="paragraph">
-<p>Use this command to list the top k teams in the leaderboard, where k is a number (NUMBER) which you specify.</p>
+<p>Use this command to list the top k teams in the leaderboard, where k is a valid positive integer which you specify.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -961,7 +1124,7 @@ counted as one. Due to this, the command "getTop 1" (for example) may show more 
 same high score.</p>
 </li>
 <li>
-<p>If you input <code>NUMBER</code> as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon, in desceding order of their points.</p>
+<p>If you input <code>K</code> as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon, in descending order of their points.</p>
 </li>
 </ul>
 </div>
@@ -984,10 +1147,13 @@ same high score.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="tie-break"><a class="link" href="#tie-break">5.12.3. Tie-Break</a></h4>
+<div class="sect2">
+<h3 id="tie-break"><a class="link" href="#tie-break">5.16. Tie-Break</a></h3>
 <div class="paragraph">
-<p>By default Alfred sorts the Leaderboard by order of descending scores and by order they were added into Alfred in case tied up scores. However, Alfred also provides greater flexibility in choosing how you want to break the tie between the teams when calling the <code>leaderboard</code> or <code>getTop</code> commands. To break a tie, follow the following format:</p>
+<p>By default Alfred <code>leaderboard</code> and <code>getTop k</code> commands fetch and display teams in descending order of their score, and by the order they were added into Alfred in case of tied scores.</p>
+</div>
+<div class="paragraph">
+<p>Alfred&#8217;s tiebreak feature provides an extension to the <code>leaderboard</code> and <code>getTop k</code> commands. It provides greater flexibility in choosing how you want to break the tie between the teams when calling the <code>leaderboard</code> or <code>getTop K</code> commands. To break a tie, follow the following format:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1029,7 +1195,7 @@ same high score.</p>
 <p>You may choose one or more methods from the above list to break the tie. You need to precede the tie-break methods with the prefix <code>tb/</code> and separate each method with a single space for Alfred to properly understand them.</p>
 </li>
 <li>
-<p>Use the prefix "tb/" with discretion as Alfred will only select tiebreak methods followed by ZZthe last "tb/" prefix if more than one such prefix is specfied in the command.</p>
+<p>Use the prefix "tb/" with discretion as Alfred will only select tiebreak methods followed by the last "tb/" prefix if more than one such prefix is specfied in the command.</p>
 </li>
 <li>
 <p>Do note that the tie-break methods will be applied in the order in which you state them. That is, first METHOD_1 will be applied to break the ties, and only then will METHOD_2 be applied to break any remaining ties, if the command <code>leaderboard tb/METHOD_1 METHOD_2</code> is called.</p>
@@ -1058,114 +1224,8 @@ same high score.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="add-points-code-score-add-team_id-points-code"><a class="link" href="#add-points-code-score-add-team_id-points-code">5.12.4. Add points: <code>score add TEAM_ID POINTS</code></a></h4>
-<div class="paragraph">
-<p>Adds the value of POINTS to the current score of the team with ID TEAM_ID.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Use this command when you want to award a particular team a certain amount of points.</p>
-</li>
-<li>
-<p>If you try to award more than the maximum amount of points (which is set to 100 points as default), Alfred will not allow it and will display an error message.</p>
-</li>
-<li>
-<p>If the addition of points makes the team&#8217;s total exceed the maximum, the score will simply be set to the maximum score.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>score add T-1 20</code> will add 20 points to the score of the team with ID T-1.</p>
-</li>
-<li>
-<p><code>score add T-5 60</code> will add 60 points to the score of the team with ID T-5.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="subtract-points-code-score-sub-team_id-new_points-code"><a class="link" href="#subtract-points-code-score-sub-team_id-new_points-code">5.12.5. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></h4>
-<div class="paragraph">
-<p>Deducts the value of POINTS from the current score of the team with ID TEAM_ID.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Use this command when you want to take away a certain amount of points from a particular team.</p>
-</li>
-<li>
-<p>If you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message. If the subtraction of points makes the team&#8217;s total go below the minimum (which is set to 0 points), the score will simply be set to 0.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>score sub T-1 15</code> will subtract 20 points from the score of the team with ID T-1.</p>
-</li>
-<li>
-<p><code>score sub T-5 10</code> will subtract 10 points from the score of the team with ID T-5.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="set-points-code-score-set-team_id-new_points-code"><a class="link" href="#set-points-code-score-set-team_id-new_points-code">5.12.6. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></h4>
-<div class="paragraph">
-<p>Sets the score of the team with ID TEAM_ID to a new score NEW_POINTS, regardless of the team&#8217;s current score.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Use this command when you want to set a team&#8217;s score to an exact score, rather than adding or subtracting points from their current score.</p>
-</li>
-<li>
-<p>If you try to set more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>score set T-1 15</code> will set the score of the team with ID T-1 as 15.</p>
-</li>
-<li>
-<p><code>score set T-5 10</code> will set the score of the team with ID T-5 as 10.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Do note that if you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message. If the subtraction of points makes the team&#8217;s total go below the minimum (which is set to 0 points), the score will simply be set to 0.</p>
-</div>
-</div>
-</div>
 <div class="sect2">
-<h3 id="bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code"><a class="link" href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">5.13. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a></h3>
+<h3 id="bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code"><a class="link" href="#bulk-registration-code-import-fp-path_to_csv_file-fp-path_to_error_file-code">5.17. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a></h3>
 <div class="paragraph">
 <p>You may import multiple entities at once into Alfred through the specification of a CSV file.<br>
 If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with all of the lines that were not able to be loaded.</p>
@@ -1184,10 +1244,10 @@ If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with a
 </ul>
 </div>
 <div class="paragraph">
-<p>Example usage of error file is shown at the end of <a href="#csv-file-formatting">Section 5.13.1, &#8220;CSV File Formatting&#8221;</a>.</p>
+<p>Example usage of error file is shown at the end of <a href="#csv-file-formatting">Section 5.17.1, &#8220;CSV File Formatting&#8221;</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="csv-file-formatting"><a class="link" href="#csv-file-formatting">5.13.1. CSV File Formatting</a></h4>
+<h4 id="csv-file-formatting"><a class="link" href="#csv-file-formatting">5.17.1. CSV File Formatting</a></h4>
 <div class="paragraph">
 <p>In order for the contents of the CSV file to be correctly loaded into Alfred, the file has to be in the correct format.</p>
 </div>
@@ -1386,7 +1446,7 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code"><a class="link" href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">5.14. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></h3>
+<h3 id="export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code"><a class="link" href="#export-data-code-export-mentor-participant-team-fp-desired_csv_file_path-code">5.18. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></h3>
 <div class="paragraph">
 <p>You may export Alfred data to an external CSV file. If the entity type is specified, Alfred will export all the data corresponding to that entity type only. If the desired CSV file path is left empty, Alfred will create a CSV file at the default location (<code>./AlfredData/Alfred_Data.csv</code>).</p>
 </div>
@@ -1405,7 +1465,7 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 <div class="sect2">
-<h3 id="help-command"><a class="link" href="#help-command">5.15. Help command</a></h3>
+<h3 id="help-command"><a class="link" href="#help-command">5.19. Help command</a></h3>
 <div class="paragraph">
 <p>The help command will list all the commands you need to use this
 application properly!</p>
@@ -1415,7 +1475,7 @@ application properly!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="home-command-code-home-code"><a class="link" href="#home-command-code-home-code">5.16. Home command: <code>home</code></a></h3>
+<h3 id="home-command-code-home-code"><a class="link" href="#home-command-code-home-code">5.20. Home command: <code>home</code></a></h3>
 <div class="paragraph">
 <p>This command allows you to navigate to the homepage where the system statistics are updated in real time. The homepage statistics are also available when you start-up the application.</p>
 </div>
@@ -1448,7 +1508,7 @@ Below is the layout of  the homepage:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="command-suggestion-prompt"><a class="link" href="#command-suggestion-prompt">5.17. Command Suggestion Prompt</a></h3>
+<h3 id="command-suggestion-prompt"><a class="link" href="#command-suggestion-prompt">5.21. Command Suggestion Prompt</a></h3>
 <div class="paragraph">
 <p>As you type, there will be a popup box predicting the type of commands you are going to type. You can navigate through these suggestions and choose the template that suits you.</p>
 </div>
@@ -1506,7 +1566,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 </div>
 </div>
 <div class="sect2">
-<h3 id="seating-code-locate-participant-team-code-coming-in-v2-0"><a class="link" href="#seating-code-locate-participant-team-code-coming-in-v2-0">5.18. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></h3>
+<h3 id="seating-code-locate-participant-team-code-coming-in-v2-0"><a class="link" href="#seating-code-locate-participant-team-code-coming-in-v2-0">5.22. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></h3>
 <div class="paragraph">
 <p>Find where a particular participant or team is seated.</p>
 </div>
@@ -1525,79 +1585,79 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 </div>
 </div>
 <div class="sect2">
-<h3 id="swag-coming-in-v2-0"><a class="link" href="#swag-coming-in-v2-0">5.19. Swag (Coming in v2.0)</a></h3>
+<h3 id="swag-coming-in-v2-0"><a class="link" href="#swag-coming-in-v2-0">5.23. Swag (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">5.19.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
+<h4 id="add-swag-code-add-swag-description-quantity-code"><a class="link" href="#add-swag-code-add-swag-description-quantity-code">5.23.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Add swag to inventory
 Examples: <code>add swag Android Plushie 5</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="track-inventory-of-available-swags-code-list-swag-code"><a class="link" href="#track-inventory-of-available-swags-code-list-swag-code">5.19.2. Track inventory of available swags: <code>list swag</code></a></h4>
+<h4 id="track-inventory-of-available-swags-code-list-swag-code"><a class="link" href="#track-inventory-of-available-swags-code-list-swag-code">5.23.2. Track inventory of available swags: <code>list swag</code></a></h4>
 <div class="paragraph">
 <p>List the currently available swag</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="schedule-coming-in-v2-0"><a class="link" href="#schedule-coming-in-v2-0">5.20. Schedule (Coming in v2.0)</a></h3>
+<h3 id="schedule-coming-in-v2-0"><a class="link" href="#schedule-coming-in-v2-0">5.24. Schedule (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-schedule-code-addschedule-time-team_id-mentor_id-code"><a class="link" href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">5.20.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></h4>
+<h4 id="add-schedule-code-addschedule-time-team_id-mentor_id-code"><a class="link" href="#add-schedule-code-addschedule-time-team_id-mentor_id-code">5.24.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></h4>
 <div class="paragraph">
 <p>Add a schedule for a team</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code"><a class="link" href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">5.20.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></h4>
+<h4 id="update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code"><a class="link" href="#update-schedule-code-updateschedule-schedule_id-time-team_id-mentor_id-code">5.24.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></h4>
 <div class="paragraph">
 <p>Update a schedule for a team</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="delete-schedule-code-deleteschedule-schedule_id-code"><a class="link" href="#delete-schedule-code-deleteschedule-schedule_id-code">5.20.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></h4>
+<h4 id="delete-schedule-code-deleteschedule-schedule_id-code"><a class="link" href="#delete-schedule-code-deleteschedule-schedule_id-code">5.24.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></h4>
 <div class="paragraph">
 <p>Delete a Schedule for a Team</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="food-coming-in-v2-0"><a class="link" href="#food-coming-in-v2-0">5.21. Food (Coming in v2.0)</a></h3>
+<h3 id="food-coming-in-v2-0"><a class="link" href="#food-coming-in-v2-0">5.25. Food (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code"><a class="link" href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">5.21.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+<h4 id="add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code"><a class="link" href="#add-food-company-and-inventory-code-addfoodcompany-company_name-inventory-quantity-code">5.25.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Add a Food Company and it associated food item inventory</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mark-food-as-received-code-receivefood-company_name-inventory-quantity-code"><a class="link" href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">5.21.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
+<h4 id="mark-food-as-received-code-receivefood-company_name-inventory-quantity-code"><a class="link" href="#mark-food-as-received-code-receivefood-company_name-inventory-quantity-code">5.25.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></h4>
 <div class="paragraph">
 <p>Mark the inventory as received</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-food-inventory-code-list-food-code"><a class="link" href="#list-food-inventory-code-list-food-code">5.21.3. List Food Inventory: <code>list food</code></a></h4>
+<h4 id="list-food-inventory-code-list-food-code"><a class="link" href="#list-food-inventory-code-list-food-code">5.25.3. List Food Inventory: <code>list food</code></a></h4>
 <div class="paragraph">
 <p>List the food inventory and its current status (e.g. delivering, received)</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="waitlist-coming-in-v2-0"><a class="link" href="#waitlist-coming-in-v2-0">5.22. Waitlist (Coming in v2.0)</a></h3>
+<h3 id="waitlist-coming-in-v2-0"><a class="link" href="#waitlist-coming-in-v2-0">5.26. Waitlist (Coming in v2.0)</a></h3>
 <div class="sect3">
-<h4 id="add-to-waitlist-code-addtowaitlist-participant_id-code"><a class="link" href="#add-to-waitlist-code-addtowaitlist-participant_id-code">5.22.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></h4>
+<h4 id="add-to-waitlist-code-addtowaitlist-participant_id-code"><a class="link" href="#add-to-waitlist-code-addtowaitlist-participant_id-code">5.26.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></h4>
 <div class="paragraph">
 <p>Add a participant to a waitlist when the number of participants exceeds a stipulated capacity.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="remove-from-waitlist-code-removefromwaitlist-participant_id-code"><a class="link" href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">5.22.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></h4>
+<h4 id="remove-from-waitlist-code-removefromwaitlist-participant_id-code"><a class="link" href="#remove-from-waitlist-code-removefromwaitlist-participant_id-code">5.26.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></h4>
 <div class="paragraph">
 <p>Remove a participant from the waitlist.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="list-by-registration-time-code-listwaitlist-code"><a class="link" href="#list-by-registration-time-code-listwaitlist-code">5.22.3. List by Registration Time: <code>listWaitList</code></a></h4>
+<h4 id="list-by-registration-time-code-listwaitlist-code"><a class="link" href="#list-by-registration-time-code-listwaitlist-code">5.26.3. List by Registration Time: <code>listWaitList</code></a></h4>
 <div class="paragraph">
 <p>Go through the waitlist and list the participants in the waitlist in ascending orger of registration time.</p>
 </div>
@@ -1797,4 +1857,4 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 07:02:50 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-09 07:47:09 UTC</div></div></div></body></html>
