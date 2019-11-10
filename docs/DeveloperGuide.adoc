@@ -384,7 +384,7 @@ Also for teams, each corresponding `String` is converted to its field counterpar
 
 The export feature will be used to unload the data in Alfred to an external CSV file. This functionality will prove useful when you or the user wishes to share the aggregate data of a particular hackathon event with other people or organization or wishes to keep a record of past hackathons for future references.
 
-// tag::undoredo[]
+// tag::undoredoDG[]
 === Undo/Redo feature
 
 The Undo/Redo feature, as the name suggests, allows you to undo and redo commands. Only commands that alter the state of the data
@@ -545,7 +545,7 @@ In order to accommodate this design for the Undo/Redo feature, we decided to lim
 `ModelHistoryManager` to 50. It is unlikely that a user would want to undo more than 50 commands at a go, as that would indicate
 a very significant error in the workflow, and recovering from that should not have a reliance on the Undo/Redo feature.
 
-// end:undoredo[]
+// end::undoredoDG[]
 
 === History feature
 

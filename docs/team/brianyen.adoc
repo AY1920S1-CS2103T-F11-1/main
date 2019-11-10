@@ -101,7 +101,6 @@ include::../UserGuide.adoc[tag=commandhistorynavigation]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undo]
+include::../DeveloperGuide.adoc[tag=storageDG]
 
-include::../DeveloperGuide.adoc[tag=storage]
-
+include::../DeveloperGuide.adoc[tag=undoredoDG]
