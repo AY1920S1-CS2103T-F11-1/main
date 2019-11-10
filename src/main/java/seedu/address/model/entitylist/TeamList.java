@@ -11,7 +11,6 @@ import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.PrefixType;
-import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 
 /**
