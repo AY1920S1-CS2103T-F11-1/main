@@ -495,7 +495,6 @@ public class ModelManagerTest {
         TypicalTeams.clearTeamA();
         ModelManager m = new ModelManager(this.storage, this.userPrefs);
         m.addMentor(TypicalMentors.A);
-        m.addMentor(TypicalMentors.A);
         assertThrows(
                 AlfredModelException.class, () -> m.addMentorToTeam(TypicalTeams.A.getId(),
                         TypicalMentors.A));
