@@ -83,17 +83,19 @@ public class ModelManagerTest {
 
     @Test
     public void setUserPrefs_normal_success() {
-        Mockito.doNothing().when(this.modelManager).setUserPrefs(any());
-        this.modelManager.setUserPrefs(userPrefs);
-        verify(this.modelManager).setUserPrefs(userPrefs);
+        new ModelManager(this.storage, this.userPrefs).setUserPrefs(this.userPrefs);
+    }
+
+    @Test
+    public void setUserPrefs_nullObj_error() {
+        assertThrows(
+                NullPointerException.class, () -> new ModelManager(this.storage, this.userPrefs).setUserPrefs(null));
     }
 
     @Test
     public void getUserPrefs_normal_success() {
-        UserPrefs userPrefs = new UserPrefs();
-        when(this.modelManager.getUserPrefs()).thenReturn(userPrefs);
-        ReadOnlyUserPrefs result = this.modelManager.getUserPrefs();
-        assertEquals(result, userPrefs);
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        assertNotNull(this.modelManager.getUserPrefs());
     }
 
     @Test
@@ -114,7 +116,8 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        assertThrows(NullPointerException.class, () -> m.setGuiSettings(null));
     }
 
     @Test
