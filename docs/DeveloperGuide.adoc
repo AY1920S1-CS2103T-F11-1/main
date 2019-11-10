@@ -922,14 +922,29 @@ The `getTop K` command fetches the top "K" number teams sorted in descending ord
 
 Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "getTop 3 tb/moreParticipants". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants. This essentially reflects a tie being broken by comparison-based tiebreakers.
 
-.Interactions within Logic Component for getTop NUMBER Command
+.Interactions within Logic Component for getTop K Command
 image::SimpleTopKSequenceDiagram.png[]
 
-The above diagram follows a logic very similar to the `leaderboard` command's logic. However, in this case a `TopTeamsCommandParser` object is created to parse the arguments "3 tb/moreParticipants" which returns a `SimpleTopKCommand` object.
+The above diagram follows a logic very similar to the `leaderboard` command's logic, and can be broken down into the following steps
 
-Moreover, the `SimpleTopCommand` object calls `Model` 's `setTopK(3, comparators)` method which essentially modifies the `sortedTeamList` within `Model` to only show the top three teams as per their scores and the relevant tiebreakers as per the list of comparators `comparators`.
+* Step 1: `LogicManager` starts executing the user's command and calls the `AlfredParser` to parse it.
+* Step 2: `AlfredParser` find the appropriate `Parser` to parse the command and creates a new `TopTeamCommandParser` to parse the arguments of the leaderboard command, essentially "tb/moreParticipants".
+* Step 3: The `LeaderboardCommandParser` then parses the arguments and is responsible for:
 
-It is also noteworthy that `Model` calls its own method `setSimpleLeaderboard(comparators)` which was associated with the `leaderboard` command. This is however a simple reuse of code to set the reset `Model` 's `sortedTeamList` and apply the relevant comparators to it, before the algorithm for fetching the top three (or any number) teams can be applied.
+** Checking whether the value of "K" (3 in this case) the user inputted is valid.
+** Checking whether the user has specified a subject. If so it sets the value of a local variable "subjectName" of type "SubjectName" to the appropriate subject, otherwise it stays as null.
+** Checking whether any tiebreak methods are present.
+** Parsing the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new `ArrayList<Comparator<Team>>` object and appends the appropriate comparators to it based on the specified tiebreak methods.
+
+* Step 4: `TopTeamCommandParser` then creates a new `SimpleTopTeamsCommand` object with the above value of "K", list of comparators and subject as input parameters. This is then returned all the way to `LogicManager`
+
+* Step 5: `LogicManager` then executes the `SimpleTopTeamsCommand` object upon which the `SimpleTopTeamsCommand` object calls `Model` 's `setTopK(3, comparators, subjectName)` where comparators is the ArrayList of comparators and subjectName is the `SubjectName` used to create the `SimpleLeaderboardCommand` and 3 is the value of "K" the user supplied.
+
+* Step 6: `Model` 's `setSimpleLeaderboard(comparators, subjectName)` method updates the `sortedTeamList` within `Model` itself, by applying the comparators to it and filtering the list by the subjectName specfied. Once this is done, the algorithm to get the top teams is applied the `sortedTeamList` contains the final list of teams.
+
+* Step 7: Upon doing so, the `SimpleLeaderboardCommand` object creates a new `CommandResult` object which is returned to the UI component (not shown in the diagram) to display a feedback message to the user and signals the UI to display the teams from the `sortedTeamList`.
+
+It is noteworthy that `Model` calls its own method `setSimpleLeaderboard(comparators)` which was associated with the `leaderboard` command. This is however a simple reuse of code to set the reset `Model` 's `sortedTeamList`, filter it by the subject if needed and apply the relevant comparators to it, before the algorithm for fetching the top three (or any number) teams can be applied.
 
 When it comes to the `getTop K` command being used with the "random" method of tiebreak, the flow of events is resembles the above very closely. Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "getTop 3 tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants whereas "random" represents the "random" method of tiebreak.
 
@@ -938,7 +953,7 @@ image::TopKRandomCommand.png[]
 
 From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.
 
-The first difference is that the `TopTeamsCommandParser` object now returns a `topKRandomCommand` object. Secondly, the `topKRandomCommand` object calls the `setTopKRandom(3, comparators)` method of `Mode`, which essentially modifies the `sortedTeamList` within `Model` to only show the top three teams as per their scores and the relevant tiebreakers as per the list of comparators `comparators`, and breaks any remaining ties based on the random method.
+The first difference is that the `TopTeamsCommandParser` object now returns a `topKRandomCommand` object. Secondly, the `topKRandomCommand` object calls the `setTopKRandom(3, comparators, subjectName)` method of `Model`. It essentially modifies the `sortedTeamList` within `Model` to only show the top three teams (within a certain subject category if specified) as per their scores and the relevant tiebreakers as per the list of comparators `comparators`, and breaks any remaining ties based on the random method.
 
 ==== Design Consideration for Get Top Teams
 
