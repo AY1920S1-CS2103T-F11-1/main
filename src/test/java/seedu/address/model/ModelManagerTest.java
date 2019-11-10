@@ -150,29 +150,22 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredParticipantList_normal_success() {
-        ParticipantList pList = new ParticipantList();
-        FilteredList participantList = new FilteredList<>(pList.getSpecificTypedList());
-        when(this.modelManager.getFilteredParticipantList()).thenReturn(participantList);
-        FilteredList result = this.modelManager.getFilteredParticipantList();
-        assertEquals(result, participantList);
+        FilteredList result =
+                new ModelManager(this.storage, this.userPrefs).getFilteredParticipantList();
+        assertNotNull(result);
     }
 
     @Test
     public void getFilteredTeamList_normal_success() {
-        TeamList tList = new TeamList();
-        FilteredList teamList = new FilteredList<>(tList.getSpecificTypedList());
-        when(this.modelManager.getFilteredTeamList()).thenReturn(teamList);
-        FilteredList result = this.modelManager.getFilteredTeamList();
-        assertEquals(result, teamList);
+        FilteredList result = new ModelManager(this.storage, this.userPrefs).getFilteredTeamList();
+        assertNotNull(result);
     }
 
     @Test
     public void getFilteredMentorList_normal_success() {
-        MentorList mList = new MentorList();
-        FilteredList mentorList = new FilteredList<>(mList.getSpecificTypedList());
-        when(this.modelManager.getFilteredTeamList()).thenReturn(mentorList);
-        FilteredList result = this.modelManager.getFilteredTeamList();
-        assertEquals(result, mentorList);
+        FilteredList result =
+                new ModelManager(this.storage, this.userPrefs).getFilteredMentorList();
+        assertNotNull(result);
     }
 
     @Test
