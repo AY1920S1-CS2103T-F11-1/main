@@ -164,7 +164,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>rely on updating a <code>SortedList</code> of teams present within the <code>ModelManager</code> class, which will be referred to as <code>sortedTeamList</code> in subsequent sections. This list is used to display the command results on the UI.</p>
+<p>rely on updating a <code>SortedList</code> of teams present within the <code>ModelManager</code> class, which will be referred to as <code>sortedTeamList</code> in subsequent sections. This list is used to display the command&#8217;s results on the UI.</p>
 </li>
 <li>
 <p>use an ArrayList of <code>Comparator&lt;Team&gt;</code> objects to contain additional comparators. These are used to break ties between teams on a basis other than score.</p>
@@ -186,7 +186,7 @@
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>1. The <code>LeaderboardCommand</code> and <code>GetTopTeamsCommand</code> are implemented as abstract classes which extend the <code>Command</code> abstract class. Any command to do with leaderboards or getting the top teams implements either one of these interfaces depending on which command it is.</p>
+<p>1. The <code>LeaderboardCommand</code> and <code>GetTopTeamsCommand</code> are implemented as abstract classes which extend the <code>Command</code> abstract class. Any command to do with leaderboards or getting the top teams extends either one of these abstract classes depending on which command it is.</p>
 </li>
 <li>
 <p>2. The <code>ModelManager</code> class uses another class <code>LeaderboardUtil</code> which provides utility methods for the Leaderboard and Get Top Teams commands, such as fetching an appropriate number of teams for the <code>getTop K</code> command and breaking ties between teams for both commands.</p>
@@ -228,7 +228,10 @@
 <p>When the <code>SimpleLeaderboardCommand</code> is then executed, it calls <code>Model</code> 's <code>setSimpleLeaderboard(comparators)</code> method with the input parameter being the <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> passed as parameter for the former&#8217;s creation.</p>
 </div>
 <div class="paragraph">
-<p><code>Model</code> 's <code>setSimpleLeaderboard(comparators)</code> method updates the <code>SortedList</code> of teams within <code>Model</code> itself, which is then displayed on the UI when the new <code>CommandResult</code> object is created and returned. This flow of events, albeit a few differences, is the same for every variation of the <code>leaderboard</code> and <code>getTop K</code> commands explored subsequently.</p>
+<p><code>Model</code> 's <code>setSimpleLeaderboard(comparators)</code> method updates the <code>SortedList</code> of teams within <code>Model</code> itself, which is then displayed on the UI when the new <code>CommandResult</code> object is created and returned.</p>
+</div>
+<div class="paragraph">
+<p>This flow of events, albeit a few differences, is the same for every variation of the <code>leaderboard</code> and <code>getTop K</code> commands explored subsequently.</p>
 </div>
 <div class="paragraph">
 <p>Do note that if the user&#8217;s input did not specify any tie-break methods, hence just being <code>leaderboard</code> then the <code>SimpleLeaderboardCommand</code> object would be created with an empty ArrayList of comparators. The flow of events for this particular scenario would be unchanged from the above illustration.</p>
@@ -539,12 +542,12 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="tiebreaking"><a class="link" href="#tiebreaking">Tiebreaking</a></h4>
+<h4 id="tiebreaking-and-filtering-by-subject"><a class="link" href="#tiebreaking-and-filtering-by-subject">Tiebreaking and Filtering by Subject</a></h4>
 <div class="paragraph">
-<p>In the above sections, the UML diagrams gloss over how tiebreaking is really parsed and understood by Alfred. The basic of tie-breaking revolves around using <code>Comparator</code> s to sort the teams in a particular order. Each tiebreak method available in Alfred has a <code>Comparator</code> associated to it and all these can be found in the <code>Comparators</code> class.</p>
+<p>In the above sections, the UML diagrams gloss over how tiebreaking and filtering by subjects is parsed and understood by Alfred. The basic of tie-breaking revolves around using <code>Comparator</code> s to sort the teams in a particular order. Each tiebreak method available in Alfred has a <code>Comparator</code> associated to it and all these can be found in the <code>Comparators</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The activity diagram below illustrates the internal workings within the <code>LeaderboardCommandParser" and `TopTeamsCommandParser</code> when parsing tiebreak methods. Do note that in the below diagram the term <code>parser</code> encapsulates both of these <code>Parser</code> s as they operate in almost identical ways.</p>
+<p>The activity diagram below illustrates the internal workings within the <code>LeaderboardCommandParser</code> and <code>TopTeamsCommandParser</code> when parsing tiebreak methods. Do note that in the below diagram the term <code>Parser</code> encapsulates both of these <code>Parser</code> s as they operate in almost identical ways.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -556,7 +559,7 @@
 <p>From the above there is one important aspect to note: the <code>ArrayList</code> of <code>Comparator&lt;Team&gt;</code> objects created in the second step. This is the <code>ArrayList</code> referred to in the previous sections which is tasked with containing and transferring the comparators which will be used to sort the teams in their appropriate order to form the leaderboard or top teams. This <code>ArrayList</code> is used as an input parameter for both <code>leaderboard</code> and <code>getTop K</code> command related classes, as explored in previous sections.</p>
 </div>
 <div class="paragraph">
-<p>Additionally, before <code>comparators</code> can be passed as an argument to the commands, it is reversed. This is done intently so the comparators related to each tiebreak method are applied in an order such that they preserve the oder the user wants the tiebreak methods to be applied.</p>
+<p>Additionally, before <code>comparators</code> can be passed as an argument to the commands, it is reversed. This is done intentionally so the comparators related to each tiebreak method are applied in an order such that they preserve the oder the user wants the tiebreak methods to be applied.</p>
 </div>
 <div class="paragraph">
 <p>Secondly, do note that the diagram above assumes there are no syntax errors made by the user when typing out the command. In case of any errors in the command, a <code>ParseException</code> would be thrown warning the user of such a situation. These have been excluded from the above diagram to prevent overcrowding and a deviation from the basic logic.</p>
@@ -1877,4 +1880,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:22:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 10:28:14 UTC</div></div></div></body></html>
