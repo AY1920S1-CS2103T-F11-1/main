@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.Command;
