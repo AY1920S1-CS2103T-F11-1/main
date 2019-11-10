@@ -25,7 +25,7 @@ across different stakeholders and managing different sources of data (such as pa
 Instead of managing this process across different media such as Excel spreadsheets and emails, Alfred allows
 you to coordinate everything in a single, convenient-to-use platform.
 
-Alfred is a Command Line Interface (CLI) application packaged with a Graphical User Interface (GUI). This means that users are expected
+In particular, Alfred is a Command Line Interface (CLI) application packaged with a Graphical User Interface (GUI). This means that users are expected
 to interact with Alfred mainly through the Command Line, but each command executed will invoke a visual response
 in Alfred.
 
@@ -69,7 +69,7 @@ The *_Architecture Diagram_* given above explains the high-level design of the A
 <<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components.
 The following class plays an important role at the architecture level:
 
-* `LogsCenter` : Used by many classes to write log messages to the App's log file.
+`LogsCenter` : Used by many classes to write log messages to the App's log file.
 
 The rest of the App consists of four components.
 
@@ -193,7 +193,7 @@ image::AlfredStorageClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/AlfredStorage.java[`AlfredStorage.java`]
 
-The `Storage` component saves and reads 4 different data types:
+The `Storage` component saves and reads 4 different *_data types_*:
 
 1. `UserPrefs`: User Preferences for Alfred (such as the last used Window Size of the application)
 2. `ParticipantList`: Information of all the Participants in Alfred
@@ -202,8 +202,8 @@ The `Storage` component saves and reads 4 different data types:
 
 All 4 data types are stored to disc in JSON files. The data is read from the JSON files when Alfred is first
 start up. It is also important to note that saving is automatic in Alfred. This means that after the execution of each
-command, the data in Alfred will automatically be saved to disk. This frees the user from constantly calling
-some form of saving functionality, and ensures that the information is storage is as up-to-date as possible.
+command, the data in Alfred will automatically be saved to disk. This frees the user from the hassle of constantly calling
+some form of saving functionality, and ensures that the information in storage is as up-to-date as possible.
 
 [NOTE]
 When reading the JSON files from memory at application start-up, any kind of data corruption in the JSON files
@@ -222,14 +222,13 @@ simple, allowing the following methods for each of the 4 data types:
     2. `save()`: saves the data to the JSON file
     3. `read()`: reads the data from the JSON file
 
-*  The Storage component handles the complexities of actually storing to and reading from disc the different data types.
-
+The Storage component handles the complexities of actually storing to and reading from disc the 4 different data types.
 As can be seen in the figure at the start of this section, underlying AlfredStorage's simple interface are several classes
 that ensure the accurate storing and retrieval of Alfred's data from disc. The following are some details of the Storage
 Component:
 
 * Each EntityList has a designated Storage class (i.e. for Participant, you have `ParticipantListStorage`, `JsonParticipantListStorage` etc.). Hence, for the rest of this explanation, Entity will be used as a generic term for Participants/Mentors/Teams.
-* The class implementing the `EntityListStorage` interface is `JsonTeamEntityStorage`. This class is responsible for providing the read/save functionality for the entire EntityList to `AlfredStorageManager`.
+* The class implementing the `EntityListStorage` interface is `JsonEntityListStorage`. This class is responsible for providing the read/save functionality for the entire EntityList to `AlfredStorageManager`.
 * In order to save the entire `EntityList` in JSON, the class `JsonSerializableEntityList` implements the logic for serialization for the collection of Entities (i.e. EntityList). This is achieved by converting the `EntityList` to a `List<JsonAdaptedEntity>`.
 * In order to save each individual Entity, the Entity is in turn converted to a `JsonAdaptedEntity` object. The `JsonAdaptedEntity` class contains the fields of each Entity that are relevant for saving to disc. Hence, this class is directly serialized into JSON, and also has methods for converting the serialized object back into an Entity object for `AlfredStorage` to return to `ModelManager`.
 * The conversion of the `JsonAdaptedEntity` object to fields in a JSON file is done by Java's Jackson library.
@@ -239,7 +238,7 @@ The following is a concrete example of the storage of a ParticipantList in JSON:
 .Structure of the JSON File for ParticipantList
 image::ParticipantListJson.png[]
 
-Figure 10 shows the contents of the JSON file storing a ParticipantList containing 2 participants. The data in the red box
+The figure above shows the contents of the JSON file storing a ParticipantList containing 2 participants. The data in the red box
 corresponds to the fields in a single Participant object. These fields are generated by the Jackson library from the serializable `JsonAdaptedParticipant`
 object, and the entire list of participants in the JSON file is in turn generated because the `JsonSerializableParticipantList` class converts
 the ParticipantList to a List of `JsonAdaptedParticipant`.
@@ -255,6 +254,25 @@ upwards to ModelManager and a new EntityList is initialised in memory, effective
 inconsistencies in Alfred.
 * In future implementations, it would be best to ensure that the JSON file is encrypted and secured to minimise
 opportunities for tampering with the data.
+
+2. Single Responsibility Principle
+
+* Each class exists for a very specific purpose. A class is provided for each Entity.
+* Purpose (From Top-Down):
+** Exposing read/save functionality for EntityList: `JsonEntityListStorage`
+** Serializing EntityList: `JsonSerializableEntityList`
+** Serializing one Entity: `JsonAdaptedEntity`
+
+3. Interface Segregation
+
+* Each interface is kept as minimal as possible and targets a specific Entity type.
+* AlfredStorage is an interface that extends multiple interfaces to expose the read/save functionality
+required by Model.
+
+4. Dependency Inversion
+
+* Alfred's Model is dependent on the interface AlfredStorage, and the implementation is provided through AlfredStorageManager.
+Hence, all functionality provided are first stipulated in the AlfredStorage interface.
 
 
 [[Design-Commons]]
@@ -279,16 +297,17 @@ is an integer, allows you to undo/redo `N` commands at one go.
 To undo/redo to next immediate command, simply invoking `undo`/`redo` on Alfred would suffice, as it implicitly calls `undo 1`/`redo 1`
 in the code.
 
-This feature is a convenient feature as it allows users of Alfred to quickly correct and recover
+This feature is a convenience feature as it allows users of Alfred to quickly correct and recover
 from mistakes, greatly increasing the utility of the application.
 
 [NOTE]
-Only the 50 data states is stored in `ModelHistoryManager` at any one point in time. The addition of any more data states will
+Only a maximum of 50 data states is stored in `ModelHistoryManager` at any one point in time. The addition of any more data states will
 result in the discarding of the oldest data state.
 
 ==== Implementation
 
-The general idea is as follows: The undo/redo mechanism is mainly facilitated by `ModelHistoryManager`. Alfred's data is held in memory within the `ModelManager` object. After the execution of commands that mutate the data in Alfred, a deep copy
+The general idea is as follows: The undo/redo mechanism is mainly facilitated by the interface `ModelHistory` and its implementation `ModelHistoryManager`.
+Alfred's data is held in memory within the `ModelManager` object. After the execution of commands that mutate the data in Alfred, a deep copy
 of all 3 EntityLists is made and saved as a `ModelHistoryRecord` in `ModelHistoryManager`. A deep copy is necessary to ensure that
 any subsequent changes to data will not alter the data in the `ModelHistoryRecord`, allowing each `ModelHistoryRecord` to serve as
 a pristine record of the state of the data in Alfred at the end of the execution of each command.
@@ -311,11 +330,11 @@ image::UndoSequenceDiagramUpdateHistory.png[]
 
 The top half of the diagram covers the creation of the DeleteParticipantCommand object, and the bottom half covers
 what happens when the `execute()` method of the DeleteParticipantCommand object is called. The important thing to note is the fact
-that a deep copy of the 3 EntityLists is created and stored in ModelHistoryRecord.
+that a deep copy of the 3 EntityLists is created and stored as a `ModelHistoryRecord` in `ModelHistoryManager`.
 
 An important issue to take note of is that only commands that implement the TrackableState interface will cause a new `ModelHistoryRecord`
 to be created and stored in `ModelHistoryManager`. The TrackableState interface is a marker interface, and is used to mark
-the commands that mutate data in Alfred.
+the commands that mutate data in Alfred. All commands except the following are
 
 ==== Implementation: How `ModelManager` is Updated When the Undo Command is Executed
 The following sequence diagram shows what happens when the UndoCommand is executed.
