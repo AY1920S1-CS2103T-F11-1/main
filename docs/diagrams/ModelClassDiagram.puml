@@ -13,6 +13,10 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 Class EntityList
+Class FilteredList
+Class SortedList
+Class CommandHistory
+}
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model

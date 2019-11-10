@@ -5,7 +5,6 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 abstract EntityList
-interface ReadableEntityList <<Interface>>
 
 Model *-down-> "1" ParticipantList
 Model *-down-> "1" MentorList
@@ -14,10 +13,6 @@ Model *-down-> "1" TeamList
 EntityList .right.|> ParticipantList
 EntityList .down.|> TeamList
 EntityList .down.|> MentorList
-
-ReadableEntityList .down.|> ParticipantList
-ReadableEntityList .down.|> TeamList
-ReadableEntityList .down.|> MentorList
 
 ParticipantList *-down-> "*" Participant
 MentorList *-down-> "*" Mentor

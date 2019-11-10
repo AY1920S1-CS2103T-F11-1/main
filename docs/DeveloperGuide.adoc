@@ -177,25 +177,29 @@ NOTE: The lifeline for `DeleteParticipantCommandParser` and `DeleteCommandAlloca
 [[Design-Model]]
 === Model component
 
+==== High Level Design Overview
+
 .Structure of the Model Component
-image::BetterModelClassDiagram.png[]
+image::ModelClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
+* stores other things like `Storage`, `CommandHistory` that also depend on Model
 * stores the lists of our various entities.
 * Model is the bridge between Logic and Storage and provides an abstraction of how the data is stored in memory.
-* It exposes a `ReadableEntityList` which only has the list method to remind Logic that the data given should not be modified.
+* It exposes multiple `ReadableEntityList` which only has the list method to remind Logic that the data given should not be modified.
 * The UI can be bound to these lists so that it automatically updates when the contents of the list change.
 * At the heart of the model are observable lists which allow for the dynamic updating of the UI.
 * The `Model` interface also serves as an API through which controller can edit the data stored in memory.
 
 `ModelManager`
 
-* ModelManager implements all the methods exposed by the Model Interface. At its heart, it only contains 3 `EntityLists`
-, 3 `FilteredLists` and a `UserPrefs` Object and does all the validation logic needed for the application
+* ModelManager implements all the methods exposed by the Model Interface. The 3 most important aspects for its in-memory
+storage and UI are the `FilteredList`, `EntityList` and `UserPrefs` objects. As mentioned above, `ModelManager` also
+consists of other components, but these are not reflected in the diagrams for brevity and clarity.
 
 .Simple Illustration of ModelManager
 image::ModelManagerClassDiagram.png[]
@@ -203,6 +207,34 @@ image::ModelManagerClassDiagram.png[]
 .EntityList simplified structure
 image::EntityListClassDiagram.png[]
 
+Each `EntityList` is also further subclassed into `ParticipantList`, `MentorList`, `TeamList`. Each of
+these lists can be seen as an individual address book from the original AB3 project. The following diagrams show
+the structure of these `Entity` objects within each list. These `Entity` objects are the building blocks of Alfred.
+
+.Participant
+image::ParticipantClassDiagram.png[]
+
+.Team
+image::TeamClassDiagram.png[]
+
+.Mentor
+image::MentorClassDiagram.png[]
+
+==== Usage
+
+When the ModelManager object is first created upon starting the application, the existing data is loaded from
+the disc via methods on the `Storage` object. However, if there are any bugs in the process, perhaps due
+corrupted data, a new `EntityList` is instantiated rather than run the risk of working with outdated data.
+
+Due to its role as the API of the application, all calls which require access to the `Entity` objects will be done
+through `Model` and not via the lists directly. These operations are listed as public methods on the `Model` interface.
+
+For operations which would entail mutating the data within the
+`EntityList` objects in any form, `Model` automatically communicates with the `Storage` object to save the data.
+The saving logic can be found within the `Storage` object and thus `Model` only needs to pass it `EntityList` objects
+on its end.
+
+If there are any errors along the way, it will be logged but the error would be handled within `Model` itself.
 
 [[Design-Storage]]
 === Storage component
