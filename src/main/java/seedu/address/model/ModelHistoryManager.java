@@ -101,7 +101,6 @@ public class ModelHistoryManager implements ModelHistory {
      * @return boolean indicating whether an undo is possible.
      */
     public boolean canUndo(int numToUndo) {
-        System.out.println("Current index of canUndo: " + this.history.indexOf(this.current));
         if (this.history.indexOf(this.current) - numToUndo + 1 > 0) {
             return true;
         } else {

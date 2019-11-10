@@ -155,7 +155,6 @@ public class AlfredParser {
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
-        System.out.println("New Command Detected");
         c.setCommandInputString(userInput);
         return c;
     }

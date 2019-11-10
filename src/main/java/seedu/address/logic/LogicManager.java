@@ -38,7 +38,6 @@ public class LogicManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        System.out.println("LogicManager is receiving commandText now");
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
