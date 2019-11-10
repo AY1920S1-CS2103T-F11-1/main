@@ -5,6 +5,12 @@ start
 :Parser creates new SubjectName \nwith value null;
 :Parser creates a new empty ArrayList \n of "Comparator<Team>" objects \n called comparators;
 
+if (is subject specified) then (yes)
+: Parse subject name and set \n variable SubjectName to its value;
+else (no)
+: Leave SubjectName as null;
+endif
+
 if (are tiebreak methods \npresent?) then (no)
 :return new \nSimpleLeaderboardCommand \n with input parameter "comparators";
 
