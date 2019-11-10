@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -37,12 +36,12 @@ import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
 import seedu.address.model.entity.Score;
+import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 import seedu.address.model.entitylist.MentorList;
 import seedu.address.model.entitylist.ParticipantList;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
 import seedu.address.model.entitylist.TeamList;
-import seedu.address.model.person.Person;
 import seedu.address.storage.AlfredStorage;
 
 /**
@@ -53,9 +52,9 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     // EntityLists
-    protected ParticipantList participantList = new ParticipantList();
-    protected TeamList teamList = new TeamList();
-    protected MentorList mentorList = new MentorList();
+    protected ParticipantList participantList;
+    protected TeamList teamList;
+    protected MentorList mentorList;
 
     protected FilteredList<Participant> filteredParticipantList;
     protected FilteredList<Team> filteredTeamList;
@@ -70,36 +69,27 @@ public class ModelManager implements Model {
     private AlfredStorage storage = null;
     private ModelHistory history = null;
     private CommandHistory commandHistory = null;
-    private AddressBook addressBook = null;
     private final UserPrefs userPrefs;
-    private FilteredList<Person> filteredPersons = null;
 
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    // This constructor is only used for ModelManagerStub
+    protected ModelManager() {
         super();
-        requireAllNonNull(addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-    }
-
-    public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this.userPrefs = null;
+        this.storage = null;
+        this.participantList = new ParticipantList();
+        this.mentorList = new MentorList();
+        this.teamList = new TeamList();
+        this.filteredParticipantList = new FilteredList<>(this.participantList.getSpecificTypedList());
+        this.filteredMentorList = new FilteredList<>(this.mentorList.getSpecificTypedList());
+        this.filteredTeamList = new FilteredList<>(this.teamList.getSpecificTypedList());
     }
 
     public ModelManager(AlfredStorage storage, ReadOnlyUserPrefs userPrefs) {
         super();
         this.userPrefs = new UserPrefs(userPrefs);
         this.storage = storage;
-        // TODO: Remove: Currently it is here to make tests pass.
-        this.addressBook = new AddressBook();
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.commandHistory = new CommandHistoryManager();
+        this.initialize();
     }
 
     /**
@@ -107,6 +97,23 @@ public class ModelManager implements Model {
      * are initialized.
      */
     public void initialize() {
+        this.loadListsFromStorage();
+        this.validateTeamList();
+        this.initializeModelHistoryManager();
+
+        this.filteredParticipantList =
+                new FilteredList<>(this.participantList.getSpecificTypedList());
+        this.filteredMentorList =
+                new FilteredList<>(this.mentorList.getSpecificTypedList());
+        this.filteredTeamList =
+                new FilteredList<>(this.teamList.getSpecificTypedList());
+        this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
+    }
+
+    /**
+     * Load the lists from storage.
+     */
+    private void loadListsFromStorage() {
         // Try loading the 3 lists into memory.
         try {
             Optional<ParticipantList> storageParticipantList = this.storage.readParticipantList();
@@ -135,8 +142,8 @@ public class ModelManager implements Model {
                 MentorList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
-            logger.warning("Initialising new MentorList. " + "Problem encountered reading MentorList from storage: "
-                    + e.getMessage());
+            logger.warning("Initialising new MentorList. "
+                    + "Problem encountered reading MentorList from storage: " + e.getMessage());
             this.mentorList = new MentorList();
         }
 
@@ -151,14 +158,16 @@ public class ModelManager implements Model {
                 TeamList.setLastUsedId(largestIdUsed);
             }
         } catch (AlfredException e) {
-            logger.warning("Initialising new TeamList. " + "Problem encountered reading TeamList from storage: "
-                    + e.getMessage());
+            logger.warning("Initialising new TeamList. "
+                    + "Problem encountered reading TeamList from storage: " + e.getMessage());
             this.teamList = new TeamList();
         }
+    }
 
-        // The following try-catch block is necessary to ensure that the teamList loaded
-        // is valid
-        // and the data has not been tampered with.
+    /**
+     * Validates the team list to ensure that the data has not been tampered with.
+     */
+    private void validateTeamList() {
         try {
             for (Team t : this.teamList.getSpecificTypedList()) {
                 validateNewTeamObject(t);
@@ -169,39 +178,18 @@ public class ModelManager implements Model {
             this.mentorList = new MentorList();
             this.teamList = new TeamList();
         }
+    }
 
+    /**
+     * Initializes the modelHistoryManager.
+     */
+    private void initializeModelHistoryManager() {
         try {
             this.history = new ModelHistoryManager(this.participantList, ParticipantList.getLastUsedId(),
                     this.mentorList, MentorList.getLastUsedId(), this.teamList, TeamList.getLastUsedId());
         } catch (AlfredModelHistoryException e) {
             logger.severe("Unable to initialise ModelHistoryManager.");
         }
-
-        this.filteredParticipantList = new FilteredList<>(this.participantList.getSpecificTypedList());
-        this.filteredMentorList = new FilteredList<>(this.mentorList.getSpecificTypedList());
-        this.filteredTeamList = new FilteredList<>(this.teamList.getSpecificTypedList());
-        this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
-
-        // Optional TODO: reimplement this logic here.
-        // Optional<ReadOnlyAddressBook> addressBookOptional;
-        // ReadOnlyAddressBook initialData;
-        // try {
-        // addressBookOptional = storage.readAddressBook();
-        // if (!addressBookOptional.isPresent()) {
-        // logger.info("Data file not found. Will be starting with a sample
-        // AddressBook");
-        // }
-        // initialData =
-        // addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        // } catch (DataConversionException e) {
-        // logger.warning("Data file not in the correct format. Will be starting with an
-        // empty AddressBook");
-        // initialData = new AddressBook();
-        // } catch (IOException e) {
-        // logger.warning("Problem while reading from the file. Will be starting with an
-        // empty AddressBook");
-        // initialData = new AddressBook();
-        // }
     }
 
     // =========== UserPrefs
@@ -457,7 +445,7 @@ public class ModelManager implements Model {
      * @param score the score to which the team's score will be updated.
      * @throws AlfredException if the update fails.
      */
-    public void updateTeamScore(Team team, Score score) throws AlfredException {
+    public void setTeamScore(Team team, Score score) throws AlfredException {
         team.setScore(score);
         updateTeam(team.getId(), team);
     }
@@ -792,21 +780,35 @@ public class ModelManager implements Model {
     // ==================================================================
 
     /**
-     * Resets the {@code sortedTeam} list to its original order without any sorting,
-     * then arranges it to sort the current teams stored in Alfred in descending
-     * order of their score. Implements additional Comparators {@code comparators}
-     * for tie-breaking if specified by the user.
+     * Filters out the {@code sortedTeam} list so that it only contains teams with a specific
+     * subject {@code subject} if the {@code subject} is specified - therefore is not null.
+     *
      */
-    public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators) {
-        this.sortedTeam = new SortedList<>(this.teamList.getSpecificTypedList());
+    private void filterSortedList(SubjectName subject) {
+        ObservableList<Team> teams = FXCollections.observableArrayList(this.teamList.getSpecificTypedList());
+        if (subject != null) {
+            teams.removeIf(Predicates.getPredicateFilterTeamBySubject(subject));
+            this.sortedTeam = new SortedList<>(teams);
+        } else {
+            this.sortedTeam = new SortedList<>(teams);
+        }
+    }
+
+    /**
+     * Resets the {@code sortedTeam} list to its original order without any sorting and applies necessary filtering,
+     * then arranges it to sort the current teams stored in Alfred in descending order of their score. Implements
+     * additional Comparators {@code comparators} for tie-breaking if specified by the user. Additionally this also
+     * filters out teams working on a specific subject if specified by the user.
+     *
+     */
+    public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators, SubjectName subject) {
+        filterSortedList(subject);
         for (Comparator<Team> comparator : comparators) {
             this.sortedTeam.setComparator(comparator);
         }
         // Set the comparator to rank by score last as in-place sorting is taking place,
-        // so ranking by score
-        // in the end will rank teams by their score and retain the tie-breaks obtained
-        // from the previously applied
-        // comparators.
+        // so ranking by score in the end will rank teams by their score and retain the tie-breaks obtained
+        // from the previously applied comparators.
         this.sortedTeam.setComparator(Comparators.rankByScore());
     }
 
@@ -815,11 +817,10 @@ public class ModelManager implements Model {
      * Comparators {@code comparators} if specified by the user, and filters the top
      * {@code k} teams, inclusive of ties, into {@code topKTeams} list.
      */
-    public final void setTopK(int k, ArrayList<Comparator<Team>> comparators) {
-        setSimpleLeaderboard(comparators);
-
-        // Create a copy of the sorted teams from which teams can be removed without
-        // damaging the original sorted teams list.
+    public final void setTopK(int k, ArrayList<Comparator<Team>> comparators, SubjectName subject) {
+        setSimpleLeaderboard(comparators, subject);
+        // Create a copy of the sorted teams from which teams can be removed without causing errors as
+        // removing from SortedList leads to exceptions.
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.topKWithTie(teams, k, comparators);
         this.sortedTeam = new SortedList<>(teams);
@@ -831,8 +832,8 @@ public class ModelManager implements Model {
      * {@code k} teams into {@code topKTeams} list, resolving ties on a random
      * basis.
      */
-    public final void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators) {
-        setSimpleLeaderboard(comparators);
+    public final void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators, SubjectName subject) {
+        setSimpleLeaderboard(comparators, subject);
         ObservableList<Team> teams = FXCollections.observableArrayList(sortedTeam);
         teams = LeaderboardUtil.randomWinnersGenerator(teams, k, comparators);
         this.sortedTeam = new SortedList<>(teams);
