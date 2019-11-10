@@ -234,22 +234,6 @@ public class TeamList extends EntityList {
         return newTList;
     }
 
-    public long getEduTeam() {
-        return teams.stream().filter(m -> m.getSubject().equals(SubjectName.EDUCATION)).count();
-    }
-
-    public long getEnvTeam() {
-        return teams.stream().filter(m -> m.getSubject().equals(SubjectName.ENVIRONMENTAL)).count();
-    }
-
-    public long getSocialTeam() {
-        return teams.stream().filter(m -> m.getSubject().equals(SubjectName.SOCIAL)).count();
-    }
-
-    public long getHealthTeam() {
-        return teams.stream().filter(m -> m.getSubject().equals(SubjectName.HEALTH)).count();
-    }
-
     @Override
     public PrefixType getPrefix() {
         return PrefixType.T;
