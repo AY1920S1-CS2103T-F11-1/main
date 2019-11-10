@@ -4,15 +4,14 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-abstract Entity
 abstract EntityList
 interface ReadableEntityList <<Interface>>
 
-Model *-right-> "1" ParticipantList
-Model *-right-> "1" MentorList
-Model *-right-> "1" TeamList
+Model *-down-> "1" ParticipantList
+Model *-down-> "1" MentorList
+Model *-down-> "1" TeamList
 
-EntityList .down.|> ParticipantList
+EntityList .right.|> ParticipantList
 EntityList .down.|> TeamList
 EntityList .down.|> MentorList
 
@@ -23,12 +22,6 @@ ReadableEntityList .down.|> MentorList
 ParticipantList *-down-> "*" Participant
 MentorList *-down-> "*" Mentor
 TeamList *-down-> "*" Team
-
-Entity *--> Name
-Entity *--> Id
-Participant .up.|> Entity
-Team .up.|> Entity
-Mentor .up.|> Entity
 
 Participant *-down-> Phone
 Participant *-down-> Email
@@ -45,4 +38,5 @@ Mentor *-down-> "1" Email
 Mentor *-down-> "1" Name
 Mentor *-down-> "1" Name
 Mentor *-down-> "1" SubjectName
+Mentor *-down-> "1" Organization
 @enduml

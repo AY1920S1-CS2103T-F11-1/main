@@ -193,6 +193,7 @@ The `Model`,
 * The `Model` interface also serves as an API through which controller can edit the data stored in memory.
 
 `ModelManager`
+
 * ModelManager implements all the methods exposed by the Model Interface. At its heart, it only contains 3 `EntityLists`
 , 3 `FilteredLists` and a `UserPrefs` Object and does all the validation logic needed for the application
 
