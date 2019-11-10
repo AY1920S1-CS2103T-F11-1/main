@@ -467,6 +467,8 @@ This is because the `import` command will do its best to import as many Entities
 * This feature only allows you to navigate up to the previous 50 successfully executed commands.
 ****
 
+// tag::score[]
+
 === Scoring: `score`
 
 The `score` command allows you to change a particular team's score. It allows you to:
@@ -524,6 +526,8 @@ Example:
 
 * `score set T-5 10` will set the score of the team with ID T-5 as 10.
 
+// end::score[]
+
 ==== Reset points: `score reset TEAM_ID`
 Resets the score of the team with ID TEAM_ID to the minimum amount of points allowed, which is set to 0 as default.
 
@@ -536,6 +540,8 @@ Example:
 * `score reset T-1` will reset the score of the team with ID T-1.
 
 * `score reset T-5 10` will reset the score of the team with ID T-5.
+
+// tag::rankings[]
 
 === Team Rankings: `leaderboard` and `getTop k`
 
@@ -622,6 +628,7 @@ Example:
 * `leaderboard s/Social` will display the leaderboard consisting only of teams with the subject "Social"
 * `getTop 3 tb/lessParticipants s/Health` will display the top 3 teams within the hackathon, all of which will consist of only of those with subject "Health". Additionally, any ties between these teams will be broken using the tiebreak method "lessParticipants" - the team with fewer participants wins the tie.
 
+// end::rankings[]
 
 === Bulk Registration: `import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]`
 You may import multiple entities at once into Alfred through the specification of a CSV file. +

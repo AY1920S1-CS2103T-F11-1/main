@@ -787,7 +787,7 @@ While traditionally a subtract command would be implemented using an add command
 Upon close inspection it was observed that the removal of duplicate code would far outweigh the convenience and orderliness of having a separate class for the command, especially considering that a `ResetScoreCommand` would have far more duplicate code than unique code as compared to the `SetScoreCommand`. Bearing this in mind, we ultimately decided to choose "Alternative 2" as it would allow for better reuse of existing code and follow better software engineering practices.
 
 
-// tag::dataencryption[]
+// tag::leaderboardCommand[]
 
 === Leaderboard and Get Top Teams
 
@@ -901,7 +901,7 @@ Due to the overwhelming benefits and conveniences that a new `SortedList` of tea
 
 We decided to follow "Alternative 2". Firstly, if a single class were being used, it would be difficult to distinguish which type of `leaderboard` command should be called - whether a leaderboard with or without "random" as tiebreak should be used. This would require the `LeaderboardCommandParser` to pass a flag signalling whether the "random" version should be called or not, which introduces control coupling. Although with a single distinct method (ie "random") this seems manageable, as the scale of Alfred increases with more non-comparison based methods such as "random" being introduced, passing a flag from `LeaderboardCommandParser` to the `Leaderboard` command class would become less and less manageable. Secondly, we wanted to avoid coupling the `Parser` and `Command` classes in a way which `Parser` influences the behaviour of the `Command` as it introduces leeway for errors.
 
-*Aspect:* Where to Write Algorithms used by `leaderboard` (and `getTop NUMBER`) Command
+*Aspect:* Where to Write Algorithms used by `leaderboard` (and `getTop K`) Command
 
 * *Alternative 1:* Write the methods as private within `ModelManager` itself
 ** Pros: Relevant code is in close proximity to where it is being called allowing for easy reference of what is being done and quick rectification if needed.
@@ -912,6 +912,8 @@ We decided to follow "Alternative 2". Firstly, if a single class were being used
 ** Cons: Increases the amount of coding and documentation required. Additionally, it brings about the inconvenience of having to shift between classes to view the available methods and their implementations.
 
 "Alternative 2" was eventually selected as it follows better Object-Oriented Programming practices. By abstracting away the methods used to sort and tie-break teams and keeping them in another class, the overall readability of the code is enhanced and would be easier for any future programmers working on this project to understand and work on.
+
+// end::leaderboardCommand[]
 
 ==== Get Top Teams Implementation
 
@@ -948,7 +950,7 @@ It is noteworthy that `Model` calls its own method `setSimpleLeaderboard(compara
 
 When it comes to the `getTop K` command being used with the "random" method of tiebreak, the flow of events is resembles the above very closely. Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "getTop 3 tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants whereas "random" represents the "random" method of tiebreak.
 
-.Interactions within Logic Component for getTop NUMBER with Random Winners
+.Interactions within Logic Component for getTop K with Random Winners
 image::TopKRandomCommand.png[]
 
 From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.
@@ -959,7 +961,7 @@ The first difference is that the `TopTeamsCommandParser` object now returns a `t
 
 Since the implementation of the `getTop K` command is almost identical to that of the `leaderboard` command, the design considerations made for the `leaderboard` command apply to the implementation of this feature as well (See <<Leaderboard-DesignConsideration>>). However, there were some unique aspects we had to consider with regards to the `getTop K` command, all of which is detailed below.
 
-*Aspect:* Where to Store the Top NUMBER Teams
+*Aspect:* Where to Store the Top K Teams
 
 * *Alternative 1 (Current Choice):* Use the `SortedList` in `ModelManager` used for  the `leaderboard` command.
 
