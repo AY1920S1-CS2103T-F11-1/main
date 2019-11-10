@@ -431,7 +431,9 @@ that a deep copy of the 3 EntityLists is created and stored as a `ModelHistoryRe
 
 An important issue to take note of is that only commands that implement the TrackableState interface will cause a new `ModelHistoryRecord`
 to be created and stored in `ModelHistoryManager`. The TrackableState interface is a marker interface, and is used to mark
-the commands that mutate data in Alfred. All commands except the following are
+the commands that mutate data in Alfred. All command types except the following implement the TrackableState interface (and
+will therefore have the state of the data recorded in `ModelHistoryManager` after command execution):
+`help`, `list`, `find`, `history`, `leaderboard`, `getTop`, `export`, `help`, `home`, `undo`, `redo`.
 
 ==== Implementation: How `ModelManager` is Updated When the Undo Command is Executed
 The following sequence diagram shows what happens when the UndoCommand is executed.
@@ -493,7 +495,7 @@ __ Step 4. UndoCommand: `undo 2` __
 .Initial State of `ModelHistoryManager`
 image::UndoRedoState4.png[]
 
-After executing the `undo 2` command, the pointer in `ModelHistoryManager` shifts backwards by 2 to point tp the `ModelHistoryRecord`
+After executing the `undo 2` command, the pointer in `ModelHistoryManager` shifts backwards by 2 to point to the `ModelHistoryRecord`
 at the zero-th index.
 
 Note that this means that `undo 3` would throw an error, as you cannot move beyond the very first `ModelHistoryRecord` in `ModelHistoryManager`.
@@ -515,7 +517,10 @@ When designing the undo/redo feature, there were some design considerations to t
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
 ** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
+** Cons: We must ensure that the implementation of each individual command are correct, which is not trivial for
+certain commands, such as `import`, which provides a best-effort implementation and tries to import as many valid data entries
+as possible. In order to implement an `undo` method for this, we would have to keep track of the new Entities that got created
+due to the command execution and then invoke deletion of these Entities.
 
 Given the large number of commands that are available in Alfred, it is not very scalable to implement
 an undo/redo method for each of the commands. It is also more extensible to use Alternative 1 as it allows
@@ -536,24 +541,65 @@ In order to accommodate this design for the Undo/Redo feature, we decided to lim
 `ModelHistoryManager` to 50. It is unlikely that a user would want to undo more than 50 commands at a go, as that would indicate
 a very significant error in the workflow, and recovering from that should not have a reliance on the Undo/Redo feature.
 
+=== History feature
+
+Closely related to the undo/redo feature, the `history` feature allows you to examine up to 50 previously executed commands
+in order to provide you with a visual understanding of the history of commands executed. Specifically, it provides you information
+on how many commands are undo-able/redo-able, and which commands are undo-able/redo-able. Otherwise, it can be difficult to
+know which commands you are undo/redo-ing, especially when many commands have been executed.
+
+Simply execute `history` in Alfred to navigate to the "History" section of the Graphical User Interface and examine what commands
+are undo-able/redo-able.
+
+."History" section of the Graphical User Interface after invoking the `history` command
+image::UndoRedoExplanation.png[]
+
+Note that there are 3 types of delimiters:
+
+1. Redo Delimiter: No redos are possible beyond this point
+2. Current Delimiter: This is the current state of the data relative to all the commands previously executed.
+3. Undo Delimiter: No undos are possible beyond this point
+
+==== Implementation
+Most of the functionality required for the `history` feature is similar to that of the `undo`/`redo` feature. Specifically,
+there is a similar reliance on the `ModelHistory` interface and its implementation `ModelHistoryManager` to provide the information
+on which commands are undo-able and redo-able, along with their respective command input strings. See the sequence diagram below
+for more information.
+
+.Sequence diagram for the execution of the History command
+image::HistoryCommandRendering.png[]
+
+Since `ModelHistoryManager` keeps a linear history of Alfred's data state after commands are executed, and it has a pointer
+to the current data state, the redo-able commands are simply the ones after the pointer, and the undo-able commands are the one before
+the pointer. The panels displayed in the "History" section of the Graphical User Interface is simply a visual representation of
+this sequential ordering of datas states. The call to `getCommandHistory()` in Model will return an ArrayList of CommandRecords, where each CommandRecord
+specifies the command input string as well as whether the CommandRecord is a delimiter. This ArrayList is then provided back to
+the UI for rendering in the "History" section of the Graphical User Interface.
+
+==== Design Considerations
+Given the close relationship between this feature and the `undo`/`redo` feature, the design considerations are very similar as well.
+See <<Undo/Redo feature>> for more information.
+
 === Command History Navigation
 Since Alfred is ultimately a Command-Line Interface (CLI) application, it would be good to integrate some of the more useful features
 of CLI applications into Alfred. This feature allows users to go through previously executed commands by pressing the ALT+UP/DOWN
 arrow keys. Although it would be more convenient to use the UP/DOWN arrow keys to navigate the command history, the UP/DOWN arrow
-keys have been mapped to other uses in Alfred.
+keys have been mapped to the Command Suggestions feature in Alfred.
 
 This feature allows users to quickly re-use previously exeuted commands without having to go through the hassle of re-typing
 everything. This is particularly useful when the commands are long, and only small modifications are necessary to the command.
 
 [NOTE]
 Only successfully executed commands can be navigated to using the ALT+UP/DOWN keys. Invalid comands will not be stored, and hence
-cannot be accessed using this feature.
+cannot be accessed using this feature. The only exception to this is the `import` command, as it is a 'best-effort' command that raises exceptions for certain entries
+in the csv file, but seeks to import as many valid data entries as possible. Hence, the `import` command can be navigated to using
+the ALT+UP/DOWN arrow keys even when it does not completely succeed during execution.
 
 ==== Implementation
 Every time a valid new command is executed, the string used to generate the command (i.e. the text that the user types into
 Alfred's Command Input Box) is stored in the `Command` object.
 
-The main class resposible for remembering and providing the previously used command input strings is the `CommandHistoryManager` class,
+The main class responsible for remembering and providing the previously used command input strings is the `CommandHistoryManager` class,
 which implements the `CommandHistory` interface. The `CommandHistory` interface only exposes 3 methods: `saveCommandExecutionString`,
 `getPrevCommandString` and `getNextCommandString`. The latter 2 methods directly map to the 2 situations of pressing the ALT+UP and
 pressing the ALT+DOWN keys respectively.
@@ -584,15 +630,29 @@ An analogous process is executed when the ALT+DOWN arrow keys are pressed.
 ==== Design Considerations
 The following are some design considerations for the Command History Navigation feature.
 
+===== Aspect: Use of CommandHistoryManager
+A separate class was created for managing the command history. Although this meant that Model would have a further
+dependency on another class and hence cause an increase in the coupling between objects, this implementation adheres
+to the Single Responsibility Principle and abstracts away the details of handling the command history to a purpose-built class.
+This adheres better to the OOP-style of programming and results in conceptually cleaner code.
+
 ===== Aspect: Limitation of Command History Size
 In order to ensure that `CommandHistoryManager` does not occupy an increasingly large portion of memory as more and more
 commands are executed, it is necessary to limit the number of commands that are stored. Otherwise, Alfred's performance
 will suffer as more commands are executed.
 
+Furthermore, it is very unlikely for user to want to navigate more than 50 commands into history, as it would likely be
+more convenient to re-type the command if that is the case.
+
 ==== Aspect: Usage of Arrow Keys
 Most CLI applications with such a Command History Navigation feature would use the UP/DOWN arrow keys directly, but the UP/DOWN
-arrow keys have been mapped for a different use in Alfred. Hence, we decided to use the ALT modifier key for the feature. It is
+arrow keys have been mapped for a different use (Command Suggestion Feature) in Alfred. Hence, we decided to use the ALT modifier key for the feature. It is
 an inconvenience, but likely a minor one.
+
+==== Aspect: Navigation to Successfully-Executed Commands
+As mentioned above, only successfully executed commands can be navigated to using this feature. This is because unsuccessful
+commands will still remain within the Command Input Box in Alfred, which the user can readily edit. Only upon successful command
+execution will the text in the Command input Box disappear, so this feature is necessary to retrieve the Command's input text.
 
 === `home` feature
 
