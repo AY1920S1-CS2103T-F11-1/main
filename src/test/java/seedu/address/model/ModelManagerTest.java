@@ -133,18 +133,16 @@ public class ModelManagerTest {
 
     @Test
     public void getParticipantListFilePath_normal_success() {
-        Path path = Paths.get("");
-        when(this.modelManager.getParticipantListFilePath()).thenReturn(path);
-        Path result = this.modelManager.getParticipantListFilePath();
-        assertEquals(path, result);
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        Path result = m.getParticipantListFilePath();
+        assertNotNull(result);
     }
 
     @Test
     public void getMentorListFilePath_normal_success() {
-        Path path = Paths.get("");
-        when(this.modelManager.getMentorListFilePath()).thenReturn(path);
-        Path result = this.modelManager.getMentorListFilePath();
-        assertEquals(path, result);
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        Path result = m.getMentorListFilePath();
+        assertNotNull(result);
     }
 
     @Test
