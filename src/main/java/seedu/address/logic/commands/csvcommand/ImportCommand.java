@@ -101,15 +101,18 @@ public class ImportCommand extends Command implements TrackableState {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (!FileUtil.isFileExists(this.csvFilePath)) {
+            System.out.println("File does not exist");
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, this.csvFilePath));
         }
         File csvFile = this.csvFilePath.toFile();
         try {
             this.parseFile(csvFile, model);
         } catch (IOException ioe) {
+            System.out.println("IOException generated");
             throw new CommandException(MESSAGE_IO_EXCEPTION);
         }
         if (!errors.isEmpty()) {
+            System.out.println("Inside errors not empty block");
             String errorFileMessage = this.createErrorFile();
             // Return result message
             String message = String.join(
@@ -119,6 +122,8 @@ public class ImportCommand extends Command implements TrackableState {
                     errorFileMessage,
                     MESSAGE_INVALID_FORMAT
             );
+            model.updateHistory(this);
+            model.recordCommandExecution(this.getCommandInputString());
             throw new CommandException(message);
         }
         model.updateHistory(this);
