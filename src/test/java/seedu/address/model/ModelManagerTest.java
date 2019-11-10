@@ -436,7 +436,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void addParticipantToTeam_pNotInT_error() throws IOException, AlfredException {
+    public void removeParticipantFromTeam_pNotInT_error() throws IOException, AlfredException {
         Mockito.doNothing().when(storage).saveParticipantList(any());
         Mockito.doNothing().when(storage).saveTeamList(any());
         Mockito.doNothing().when(storage).saveMentorList(any());
@@ -449,7 +449,111 @@ public class ModelManagerTest {
                         TypicalParticipants.B));
     }
 
+    @Test
+    public void addMentorToTeam_valid_success() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addMentor(TypicalMentors.B);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertDoesNotThrow(() -> m.addMentorToTeam(TypicalTeams.EMPTY.getId(), TypicalMentors.B));
+    }
 
+    @Test
+    public void addMentorToTeam_invalidMentor_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertThrows(
+                ModelValidationException.class, () -> m.addMentorToTeam(TypicalTeams.EMPTY.getId(),
+                        TypicalMentors.B));
+    }
+
+    @Test
+    public void addMentorToTeam_invalidTeam_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addMentor(TypicalMentors.A);
+        assertThrows(
+                MissingEntityException.class, () -> m.addMentorToTeam(TypicalTeams.EMPTY.getId(),
+                        TypicalMentors.A));
+    }
+
+    @Test
+    public void addMentorToTeam_mAlreadyInT_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamA();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addMentor(TypicalMentors.A);
+        m.addMentor(TypicalMentors.A);
+        assertThrows(
+                AlfredModelException.class, () -> m.addMentorToTeam(TypicalTeams.A.getId(),
+                        TypicalMentors.A));
+    }
+
+    @Test
+    public void removeMentorToTeam_valid_success() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addMentor(TypicalMentors.B);
+        m.addTeam(TypicalTeams.EMPTY);
+        m.addMentorToTeam(TypicalTeams.EMPTY.getId(), TypicalMentors.B);
+        assertDoesNotThrow(() -> m.removeMentorFromTeam(
+                TypicalTeams.EMPTY.getId(), TypicalMentors.B));
+    }
+
+    @Test
+    public void removeMentorToTeam_invalidParticipant_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertThrows(
+                ModelValidationException.class, () -> m.removeMentorFromTeam(TypicalTeams.EMPTY.getId(),
+                        TypicalMentors.B));
+    }
+
+    @Test
+    public void removeMentorToTeam_invalidTeam_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addMentor(TypicalMentors.A);
+        assertThrows(
+                MissingEntityException.class, () -> m.removeMentorFromTeam(TypicalTeams.EMPTY.getId(),
+                        TypicalMentors.A));
+    }
+
+    @Test
+    public void removeMentorToTeam_mNotInT_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addMentor(TypicalMentors.B);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertThrows(
+                AlfredModelException.class, () -> m.removeMentorFromTeam(TypicalTeams.EMPTY.getId(),
+                        TypicalMentors.B));
+    }
     @Test
     public void equals() {
         // null -> returns false

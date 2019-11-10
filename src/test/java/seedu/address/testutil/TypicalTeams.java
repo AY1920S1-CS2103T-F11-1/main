@@ -191,8 +191,12 @@ public class TypicalTeams {
         TypicalTeams.A.setParticipants(initializeListA());
     }
 
+    /**
+     * Resets the TEAM_EMPTY variable
+     */
     public static void clearTeamEmpty() {
         TypicalTeams.EMPTY.setParticipants(new ArrayList<Participant>());
+        TypicalTeams.EMPTY.setMentor(Optional.empty());
     }
 
 }
