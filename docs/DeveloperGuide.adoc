@@ -470,21 +470,21 @@ This is what happens after each step:
 
 __ Step 1. AddParticipantCommand: `add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com` __
 
-.Initial State of `ModelHistoryManager`
+.State of `ModelHistoryManager` after Step 1
 image::UndoRedoState1.png[]
 
 A new `ModelHistoryRecord` is created to reflect the state of the data in Alfred after the execution of the AddParticipantCommand.
 
 __ Step 2. AddMentorCommand: `add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social` __
 
-.Initial State of `ModelHistoryManager`
+.State of `ModelHistoryManager` after Step 2
 image::UndoRedoState2.png[]
 
 A new `ModelHistoryRecord` is created to reflect the state of the data in Alfred after the execution of the AddMentorCommand.
 
 __ Step 3. ListParticipantCommand: `list participants` __
 
-.Initial State of `ModelHistoryManager`
+.State of `ModelHistoryManager` after Step 3
 image::UndoRedoState3.png[]
 
 Note that no new `ModelHistoryRecord` is created because the ListParticipantCommand does not alter the state of the data in Alfred.
@@ -492,7 +492,7 @@ Hence, it does not implement the TrackableState interface.
 
 __ Step 4. UndoCommand: `undo 2` __
 
-.Initial State of `ModelHistoryManager`
+.State of `ModelHistoryManager` after Step 4
 image::UndoRedoState4.png[]
 
 After executing the `undo 2` command, the pointer in `ModelHistoryManager` shifts backwards by 2 to point to the `ModelHistoryRecord`
@@ -502,7 +502,7 @@ Note that this means that `undo 3` would throw an error, as you cannot move beyo
 
 __ Step 5. AddTeamCommand: `add team n/Justice League s/Social pn/BetterThanAvengers l/12` __
 
-.Initial State of `ModelHistoryManager`
+.State of `ModelHistoryManager` after Step 5
 image::UndoRedoState5.png[]
 
 Note that the execution of a new command will invalidate the `ModelHistoryRecord` after the pointer. This is because all subsequent
