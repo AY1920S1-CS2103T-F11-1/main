@@ -701,6 +701,45 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteTeam_noParticipants_success() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertEquals(TypicalTeams.EMPTY, m.deleteTeam(TypicalTeams.EMPTY.getId()));
+    }
+
+    @Test
+    public void deleteTeam_haveParticipants_success() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addTeam(TypicalTeams.EMPTY);
+        m.addParticipant(TypicalParticipants.A);
+        m.addParticipant(TypicalParticipants.B);
+        m.addParticipantToTeam(TypicalTeams.EMPTY.getId(), TypicalParticipants.A);
+        m.addParticipantToTeam(TypicalTeams.EMPTY.getId(), TypicalParticipants.B);
+        assertEquals(TypicalTeams.EMPTY, m.deleteTeam(TypicalTeams.EMPTY.getId()));
+        assertEquals(m.getParticipantList().list().size(), 0);
+    }
+
+    @Test
+    public void deleteTeam_wrongTeam_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertThrows(MissingEntityException.class, () -> m.deleteTeam(
+                TypicalTeams.D.getId()));
+    }
+
+    @Test
     public void equals() {
         // null -> returns false
         assertFalse(modelManager.equals(null));
