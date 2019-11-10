@@ -232,9 +232,44 @@ through `Model` and not via the lists directly. These operations are listed as p
 For operations which would entail mutating the data within the
 `EntityList` objects in any form, `Model` automatically communicates with the `Storage` object to save the data.
 The saving logic can be found within the `Storage` object and thus `Model` only needs to pass it `EntityList` objects
-on its end.
+on its end. The same applies for the other attributes in `Model`, such as `CommandHistory`; `Model` will
+automatically communicate with it for you.
 
 If there are any errors along the way, it will be logged but the error would be handled within `Model` itself.
+Moreover, if there is an during a model operation, it will not be saved.
+
+==== Design Considerations
+1. Synchronization of data
+    * The role of `ModelManager` is to ensure that the data is in sync with each other across all 3 `EntityList`
+objects. The reason behind this is because for example, the `Participant` object in `ParticipantList` is a separate
+object from the one inside `Team`. It was not possible due to make the `Participant` object hold a reference
+to team due to serialization issues on `Storage`.
+    * As such, for each CRUD operation, `ModelManager` has to perform validation to ensure that the data modified/added
+is sync across all 3 `EntityList` objects.
+    * This was also the reason why `Storage` was moved into the `Model` object, as in the current implementation of
+Alfred, only `ModelManager` needs to be aware of `Storage` to ensure that only it can save/read data. This would
+hence help to synchronize data better.
+
+2. Single Responsibility Principle and Inheritance
+    * Each class in `Model` is only responsible for a single task. For example, `TeamList` is only concerned
+with managing the `Team` entities stored in it. This would help to improve testability and code quality, especially
+since the size of the `Model` codebase is substantial
+    * Inheritance was used to show links between related objects. For `Model`, the two related objects are
+`EntityList` and `Entity`. Inheritance was used to show this relationship and to reduce the need for code
+duplication.
+
+3. Open Closed Principle
+    * `Model` exposes many functions. However, in line with the Open Closed Principle, modifications to `Model`
+come in the form of exposing new methods on it and creating new attributes on the `ModelManager` object. The methods
+on `ModelManager` were also implemented as simply as possible so that future methods can build on them. This way,
+future modifications do not need to edit existing code, reducing the likelihood of regression bugs.
+
+==== Future Extensions
+1. As the single source of truth for the application in runtime, there are many small functions on `ModelManager` now.
+These functions are implemented directly in the file itself. In the future, it may be better to abstract these
+functions out into smaller modules as per the Dependency Inversion Principle. It was not done for v1 of Alfred
+as refactoring these methods would block developers and slow down feature development velocity. However,
+as Alfred scales, it is recommended that this refactoring be done.
 
 [[Design-Storage]]
 === Storage component
