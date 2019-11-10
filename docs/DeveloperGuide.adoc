@@ -645,6 +645,8 @@ As its name suggests, this feature's intended purpose is to aid users in the pro
 3. `score set`: allows users to set a team's score to a certain number of points
 4. `score reset`: allows users reset a team's score to 0
 
+==== Implementation Overview
+
 This feature and its varieties have been implemented in a relatively straightforward manner, as the Class Diagram below showing the high level representation of the Object Oriented solution devised to implement this feature highlights.
 
 .Scoring Feature Class Diagram
@@ -652,7 +654,7 @@ image::ScoringClassDiagram.png[]
 
 From the above diagram it can be seen that each different implementation of the `score` command inherits from the same `ScoreCommand` abstract class. The `ScoreCommand` abstract class provides a base for the implementation of the current specific `score` commands and in the future any further additions made to the `score` command functionality must also follow this same convention.
 
-Secondly, it can also be noted that there is not `ResetScoreCommand` class. This is done intentionally as the `SetScoreCommand` can be reused to reset a particular team's score, thereby making better use of abstraction.
+Secondly, it can also be noted that there is no `ResetScoreCommand` class. This is done intentionally as the `SetScoreCommand` can be reused to reset a particular team's score, thereby making better use of abstraction.
 
 A representation of how the above classes interact to provide execute a user's command is highlighted in the sequence diagram below. This sequence diagram illustrates the object interactions when a user types the command `score add T-1 40`. For context, this command adds 40 points to the team with ID "T-1".
 
@@ -673,7 +675,7 @@ As seen from the above diagram, the execution of the `score add` command can be 
 * Step 5: `LogicManager` then executes the `AddScoreCommand` object upon which the `AddScoreCommand` object calls `Model` 's `addTeamScore()` method which updates the specific team's score within `Model`.
 * Step 6: Upon updating the team's score in `Model`, the `AddScoreCommand` object creates a new `CommandResult` object which is returned to the UI component (not shown in the diagram) to display a feedback message to the user.
 
-Though the above diagram and steps are designed in the context of a `score add` command, the above logic applies to every other type of `score` command as well. The only difference though is the `ScoreCommandParser` creates the appropriate command object and each command object calls a different method from logic, as per the following:
+Though the above diagram and steps are designed in the context of a `score add` command, the above logic applies to every other type of `score` command as well. The only difference though is the `ScoreCommandParser` creates the appropriate command object for the command and each command object calls a different method from logic, as per the following:
 
 1. `score subtract`: `ScoreCommandParser` creates a new `SubtractScoreCommand` instead of an `AddScoreCommand` and this `SubtractScoreCommand` object calls the `subtractTeamScore()` method of `Model`.
 2. `score set` and `score reset`: `ScoreCommandParser` creates a new `SetScoreCommand` instead of an `AddScoreCommand` and this `SetScoreCommand` object calls the `setTeamScore()` of method `Model`.
@@ -711,7 +713,7 @@ The `leaderboard` and `getTop K` commands are two very important features of Alf
 
 The implementation of these two commands is very similar in nature. They both:
 
-* rely on updating a `SortedList` of teams present within the `ModelManager` class, which will be referred to as `sortedTeamList` in subsequent sections. This list is used to display the command results on the UI.
+* rely on updating a `SortedList` of teams present within the `ModelManager` class, which will be referred to as `sortedTeamList` in subsequent sections. This list is used to display the command's results on the UI.
 * use an ArrayList of `Comparator<Team>` objects to contain additional comparators. These are used to break ties between teams on a basis other than score.
 
 The class diagram below provides a high level representation of the Object-Oriented solution devised to implement the aforementioned features.
@@ -722,7 +724,7 @@ image::LeaderBoardClassDiagram.png[]
 From the above class diagram, there are two important matters to note regarding the implementation of these features:
 
 [none]
-* 1. The `LeaderboardCommand` and `GetTopTeamsCommand` are implemented as abstract classes which extend the `Command` abstract class. Any command to do with leaderboards or getting the top teams implements either one of these interfaces depending on which command it is.
+* 1. The `LeaderboardCommand` and `GetTopTeamsCommand` are implemented as abstract classes which extend the `Command` abstract class. Any command to do with leaderboards or getting the top teams extends either one of these abstract classes depending on which command it is.
 * 2. The `ModelManager` class uses another class `LeaderboardUtil` which provides utility methods for the Leaderboard and Get Top Teams commands, such as fetching an appropriate number of teams for the `getTop K` command and breaking ties between teams for both commands.
 
 With the class structure covered, the following sub-sections seek to explain how the different classes in Alfred interact to produce a result for the user, and finally the design considerations that were made for each command.
@@ -745,7 +747,9 @@ In the above, the `LeaderboardCommandParser` class parses the tie-break part of 
 
 When the `SimpleLeaderboardCommand` is then executed, it calls `Model` 's `setSimpleLeaderboard(comparators)` method with the input parameter being the `ArrayList<Comparator<Team>>` passed as parameter for the former's creation.
 
-`Model` 's `setSimpleLeaderboard(comparators)` method updates the `SortedList` of teams within `Model` itself, which is then displayed on the UI when the new `CommandResult` object is created and returned. This flow of events, albeit a few differences, is the same for every variation of the `leaderboard` and `getTop K` commands explored subsequently.
+`Model` 's `setSimpleLeaderboard(comparators)` method updates the `SortedList` of teams within `Model` itself, which is then displayed on the UI when the new `CommandResult` object is created and returned.
+
+This flow of events, albeit a few differences, is the same for every variation of the `leaderboard` and `getTop K` commands explored subsequently.
 
 Do note that if the user's input did not specify any tie-break methods, hence just being `leaderboard` then the `SimpleLeaderboardCommand` object would be created with an empty ArrayList of comparators. The flow of events for this particular scenario would be unchanged from the above illustration.
 
@@ -887,7 +891,7 @@ The reason "Alternative 2" was selected was because `ModelManager` 's `setSimple
 
 In the above sections, the UML diagrams gloss over how tiebreaking is really parsed and understood by Alfred. The basic of tie-breaking revolves around using `Comparator` s to sort the teams in a particular order. Each tiebreak method available in Alfred has a `Comparator` associated to it and all these can be found in the `Comparators` class.
 
-The activity diagram below illustrates the internal workings within the `LeaderboardCommandParser" and `TopTeamsCommandParser` when parsing tiebreak methods. Do note that in the below diagram the term `parser` encapsulates both of these `Parser` s as they operate in almost identical ways.
+The activity diagram below illustrates the internal workings within the `LeaderboardCommandParser` and `TopTeamsCommandParser` when parsing tiebreak methods. Do note that in the below diagram the term `Parser` encapsulates both of these `Parser` s as they operate in almost identical ways.
 
 .Handling of Tiebreak Methods
 image::TieBreakActivityDiagram.png[]
