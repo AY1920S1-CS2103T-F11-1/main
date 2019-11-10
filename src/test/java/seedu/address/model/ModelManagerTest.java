@@ -23,13 +23,18 @@ import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 import seedu.address.commons.Predicates;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
+import seedu.address.commons.exceptions.AlfredModelException;
+import seedu.address.commons.exceptions.MissingEntityException;
+import seedu.address.commons.exceptions.ModelValidationException;
 import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.PrefixType;
+import seedu.address.model.entity.Team;
 import seedu.address.storage.AlfredStorage;
 import seedu.address.testutil.TypicalMentors;
 import seedu.address.testutil.TypicalParticipants;
@@ -186,6 +191,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getSortedTeamList_normal_success() {
+        SortedList<Team> result = new ModelManager(this.storage, this.userPrefs)
+                .getSortedTeamList();
+        assertNotNull(result);
+    }
+
+    @Test
     public void deleteParticipant_validId_returnsParticipant() {
         try {
             Mockito.doNothing().when(storage).saveParticipantList(any());
@@ -328,6 +340,59 @@ public class ModelManagerTest {
         assertEquals(modelManager.getMentorList().list().size(), 2);
         assertEquals(modelManager.findMentor(
                 Predicates.getPredicateFindMentorByName("B", false)).size(), 1);
+    }
+
+    @Test
+    public void addParticipantToTeam_valid_success() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addParticipant(TypicalParticipants.B);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertDoesNotThrow(() -> m.addParticipantToTeam(TypicalTeams.EMPTY.getId(), TypicalParticipants.B));
+    }
+
+    @Test
+    public void addParticipantToTeam_invalidParticipant_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addTeam(TypicalTeams.EMPTY);
+        assertThrows(
+                ModelValidationException.class, () -> m.addParticipantToTeam(TypicalTeams.EMPTY.getId(),
+                        TypicalParticipants.B));
+    }
+
+    @Test
+    public void addParticipantToTeam_invalidTeam_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamEmpty();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addParticipant(TypicalParticipants.A);
+        assertThrows(
+                MissingEntityException.class, () -> m.addParticipantToTeam(TypicalTeams.EMPTY.getId(),
+                        TypicalParticipants.A));
+    }
+
+    @Test
+    public void addParticipantToTeam_pAlreadyInT_error() throws IOException, AlfredException {
+        Mockito.doNothing().when(storage).saveParticipantList(any());
+        Mockito.doNothing().when(storage).saveTeamList(any());
+        Mockito.doNothing().when(storage).saveMentorList(any());
+        TypicalTeams.clearTeamA();
+        ModelManager m = new ModelManager(this.storage, this.userPrefs);
+        m.addParticipant(TypicalParticipants.A);
+        m.addMentor(TypicalMentors.A);
+        m.addTeam(TypicalTeams.A);
+        assertThrows(
+                AlfredModelException.class, () -> m.addParticipantToTeam(TypicalTeams.A.getId(),
+                        TypicalParticipants.A));
     }
 
     @Test
