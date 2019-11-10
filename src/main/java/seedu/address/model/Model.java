@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.transformation.FilteredList;
-
 import javafx.collections.transformation.SortedList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.AlfredException;
 import seedu.address.commons.exceptions.AlfredModelHistoryException;
@@ -18,21 +18,17 @@ import seedu.address.model.entity.Id;
 import seedu.address.model.entity.Mentor;
 import seedu.address.model.entity.Participant;
 import seedu.address.model.entity.Score;
+import seedu.address.model.entity.SubjectName;
 import seedu.address.model.entity.Team;
 import seedu.address.model.entitylist.ReadOnlyEntityList;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     /**
-     * Initializes the model.
+     * {@code Predicate} that always evaluate to true
      */
-    void initialize();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -99,8 +95,6 @@ public interface Model {
 
     SortedList<Team> getSortedTeamList();
 
-    SortedList<Team> getTopKTeams();
-
     void resetFilteredLists();
 
     /* Below is the API exposed for the controllers to call */
@@ -119,9 +113,9 @@ public interface Model {
 
     Team getTeam(Id teamId) throws AlfredException;
 
-    Team getTeamByParticipantId(Id participantId) throws AlfredException;
+    List<Team> getTeamByParticipantId(Id participantId) throws AlfredException;
 
-    Team getTeamByMentorId(Id mentorId) throws AlfredException;
+    List<Team> getTeamByMentorId(Id mentorId) throws AlfredException;
 
     void addTeam(Team team) throws AlfredException;
 
@@ -134,12 +128,6 @@ public interface Model {
     void removeMentorFromTeam(Id teamId, Mentor mentor) throws AlfredException;
 
     void updateTeam(Id teamId, Team team) throws AlfredException;
-
-    void updateTeamScore(Team team, Score score) throws AlfredException;
-
-    void addTeamScore(Team team, Score score) throws AlfredException;
-
-    void subtractTeamScore(Team team, Score score) throws AlfredException;
 
     Team deleteTeam(Id id) throws AlfredException;
 
@@ -161,15 +149,24 @@ public interface Model {
 
     List<Mentor> findMentor(Predicate<Mentor> predicate);
 
-    void setLeaderboardWithRandom(ArrayList<Comparator<Team>> comparators);
+    /* Score methods */
 
-    void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators);
+    void setTeamScore(Team team, Score score) throws AlfredException;
 
-    void setTopK(int k, ArrayList<Comparator<Team>> comparators);
+    void addTeamScore(Team team, Score score) throws AlfredException;
 
-    void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators);
+    void subtractTeamScore(Team team, Score score) throws AlfredException;
+
+    /* Leaderboard methods */
+
+    void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators, SubjectName subject);
+
+    void setTopK(int k, ArrayList<Comparator<Team>> comparators, SubjectName subject);
+
+    void setTopKRandom(int k, ArrayList<Comparator<Team>> comparators, SubjectName subject);
 
     /* View command */
+
     /**
      * Sets the predicate to show detailed information of {@code entity}.
      *
@@ -178,13 +175,15 @@ public interface Model {
     void viewEntity(Entity entity);
 
     /**
-     * Updates the history of entity states with the current state (after execution of Command c)
+     * Updates the history of entity states with the current state (after execution
+     * of Command c)
      */
     void updateHistory(Command c);
 
     /**
      * Undoes the effects of {@code numToUndo} previous command(s) and returns the model to the state
      * prior to the execution of these command(s).
+     *
      * @param numToUndo number of previous commands to undo.
      * @throws AlfredModelHistoryException this is thrown when an error is encountered trying to alter the model
      *                                     state while undoing the previous commands.
@@ -194,6 +193,7 @@ public interface Model {
     /**
      * Redoes the effects of the {@code numToRedo} next command(s) and returns the model to the state
      * after the execution of these command(s).
+     *
      * @param numToRedo number of next commands to redo.
      * @throws AlfredModelHistoryException this is thrown when an error is encountered trying to alter the model
      *                                     state while redoing the next commands.
@@ -201,8 +201,11 @@ public interface Model {
     void redo(int numToRedo) throws AlfredModelHistoryException;
 
     /**
-     * Gets a String detailing the previously executed commands that can be undone by the user.
-     * @return String representing the previously executed commands that can be undone by the user.
+     * Gets a String detailing the previously executed commands that can be undone
+     * by the user.
+     *
+     * @return String representing the previously executed commands that can be
+     * undone by the user.
      */
     String getCommandHistoryString();
 
@@ -217,14 +220,22 @@ public interface Model {
     List<String> getRedoCommandHistory();
 
     /**
-     * Returns a List of CommandsRecords describing the commands that can be undone/redone
+     * Returns a List of CommandsRecords describing the commands that can be
+     * undone/redone
+     *
      * @throws AlfredModelHistoryException
      */
     ArrayList<CommandRecord> getCommandHistory();
 
     /**
-     * Records the execution of the command. This is for the Command Navigation feature.
+     * Records the
+     * execution of
+     * the command.
+     * This is for
+     * the Command
+     * Navigation feature.
      */
+
     void recordCommandExecution(String commandInputString);
 
     /**
