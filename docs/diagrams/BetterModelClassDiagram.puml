@@ -23,20 +23,4 @@ ParticipantList *-down-> "*" Participant
 MentorList *-down-> "*" Mentor
 TeamList *-down-> "*" Team
 
-Participant *-down-> Phone
-Participant *-down-> Email
-
-Team *-down-> "*" Participant
-Team *-down-> "0..1" Mentor
-Team *-down-> "1" SubjectName
-Team *-down-> "1" Score
-Team *-down-> "1" Name
-Team *-down-> "1" Location
-
-Mentor *-down-> "1" Phone
-Mentor *-down-> "1" Email
-Mentor *-down-> "1" Name
-Mentor *-down-> "1" Name
-Mentor *-down-> "1" SubjectName
-Mentor *-down-> "1" Organization
 @enduml
