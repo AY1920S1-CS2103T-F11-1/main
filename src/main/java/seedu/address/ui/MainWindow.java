@@ -1,14 +1,19 @@
 package seedu.address.ui;
 
+import static javafx.event.Event.fireEvent;
+
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
@@ -183,16 +188,13 @@ public class MainWindow extends UiPart<Stage> {
         this.commandBoxPlaceholder.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent ke) {
+
                 if (upCombo.match(ke)) {
                     commandBox.setTextField(logic.getPrevCommandString());
                 }
 
                 if (downCombo.match(ke)) {
                     commandBox.setTextField(logic.getNextCommandString());
-                }
-
-                if (KeyCode.ENTER == ke.getCode()) {
-                    commandBox.handleCommandEntered();
                 }
             }
         });
@@ -334,6 +336,9 @@ public class MainWindow extends UiPart<Stage> {
         if (historyButton.isArmed()) {
             historyButton.disarm();
         }
+        if (leaderboardButton.isArmed()) {
+            leaderboardButton.disarm();
+        }
 
     }
 
@@ -391,17 +396,12 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case HM:
                 this.fireButton(homeButton);
-                lastFired = homeButton;
                 break;
             default:
                 break;
             }
             return commandResult;
         } catch (CommandException | ParseException | AlfredModelHistoryException e) {
-            if (lastFired != null) {
-                this.fireButton(lastFired);
-            }
-
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }

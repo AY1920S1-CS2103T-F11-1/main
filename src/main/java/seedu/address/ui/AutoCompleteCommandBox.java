@@ -56,6 +56,13 @@ public class AutoCompleteCommandBox extends JFXTextField {
 
         commandSuggestionSet.addAll(commandSuggestionList);
         commandsPopup = new ContextMenu();
+
+        this.setOnAction(event -> {
+            this.handleCommandEntered();
+
+        });
+
+
         textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldString, String newString) {
@@ -121,6 +128,7 @@ public class AutoCompleteCommandBox extends JFXTextField {
             item.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    event.consume();
                     setText(SuggestionTemplates.getString(suggestionTemplate));
                     positionCaret(100);
                     // commandsPopup hides after user picks a suggestion
