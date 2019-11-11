@@ -19,7 +19,7 @@ and even import data from .csv files.
 After several rounds of iterations and improvements, we are proud to present Alfred:
 
 .Alfred's User Interface
-image::UiIntro.png[align="center"]
+image::UiIntro.png[]
 
 My main contribution to the team was to adapt the existing Storage implementation to fit the new application's purpose, and
 to implement the `undo`, `redo` and `history` features. In addition to this, I also implemented the Command History Navigation
@@ -91,7 +91,7 @@ Shows you up to the last 50 commands that you executed.
 
 [[history_diagram]]
 .History Section of UI
-image::UndoRedoExplanation.png[pdfwidth=70%, align="center"]
+image::UndoRedoExplanation.png[pdfwidth=70%]
 
 This command is to facilitate the undo/redo commands, as it becomes easier for you to track what changes were made before, and which
 commands can be undone/redone. This is especially useful when many commands have been executed and it is difficult to remember the sequence of
@@ -130,7 +130,7 @@ After running the following commands: +
 Running `history` will show you the following output in the "History" section of the Graphical User Interface:
 
 .Example Output from History Command
-image::HistoryCommandExampleOutput.png[pdfwidth=70%, align="center"]
+image::HistoryCommandExampleOutput.png[pdfwidth=70%]
 
 //Add annotations to image when the UI is finalised
 The topmost panel is the "redo" delimiter. The second panel from the top is the "current" delimiter. The bottommost panel shows you the "undo" delimiter.
@@ -194,7 +194,7 @@ persist only while the Alfred application is running.
 The following sequence diagram shows what happens when the UndoCommand is executed.
 
 .Sequence Diagram for the Execution of the Undo Command
-image::UndoSequenceDiagramExecutionofUndo.png[align="center"]
+image::UndoSequenceDiagramExecutionofUndo.png[]
 
 The important issue to take note of here is that the code first checks whether it is valid to undo to a certain state by
 calling the `canUndo()` method in `ModelHistory`. The implementation of `ModelHistory` in `ModelHistoryManager` does so by checking
@@ -224,7 +224,7 @@ The following commands are executed:
 *This is the state of `ModelHistoryManager` when Alfred is first started.*
 
 .Initial State of `ModelHistoryManager`
-image::UndoRedoState0.png[align="center"]
+image::UndoRedoState0.png[]
 
 
 *This is what happens after each step:*
@@ -232,21 +232,21 @@ image::UndoRedoState0.png[align="center"]
 __ Step 1. AddParticipantCommand: `add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com` __ +
 
 .State of `ModelHistoryManager` after Step 1
-image::UndoRedoState1.png[align="center"]
+image::UndoRedoState1.png[]
 
 A new `ModelHistoryRecord` is created to reflect the state of the data in Alfred after the execution of the AddParticipantCommand.
 
 __ Step 2. AddMentorCommand: `add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social` __ +
 
 .State of `ModelHistoryManager` after Step 2
-image::UndoRedoState2.png[align="center"]
+image::UndoRedoState2.png[]
 
 A new `ModelHistoryRecord` is created to reflect the state of the data in Alfred after the execution of the AddMentorCommand.
 
 __ Step 3. ListParticipantCommand: `list participants` __ +
 
 .State of `ModelHistoryManager` after Step 3
-image::UndoRedoState3.png[align="center"]
+image::UndoRedoState3.png[]
 
 Note that no new `ModelHistoryRecord` is created because the ListParticipantCommand does not alter the state of the data in Alfred.
 Hence, it does not implement the TrackableState interface.
@@ -254,7 +254,7 @@ Hence, it does not implement the TrackableState interface.
 __ Step 4. UndoCommand: `undo 2` __ +
 
 .State of `ModelHistoryManager` after Step 4
-image::UndoRedoState4.png[align="center"]
+image::UndoRedoState4.png[]
 
 After executing the `undo 2` command, the pointer in `ModelHistoryManager` shifts backwards by 2 to point to the `ModelHistoryRecord`
 at the zero-th index.
@@ -264,7 +264,7 @@ Note that this means that `undo 3` would throw an error, as you cannot move beyo
 __ Step 5. AddTeamCommand: `add team n/Justice League s/Social pn/BetterThanAvengers l/12` __ +
 
 .State of `ModelHistoryManager` after Step 5
-image::UndoRedoState5.png[align="center"]
+image::UndoRedoState5.png[]
 
 Note that the execution of a new command will invalidate the `ModelHistoryRecord` after the pointer. This is because all subsequent
 data states are the result of transformations that have already been undone, so it is not valid to be able to `redo` to them.
