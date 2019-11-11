@@ -148,8 +148,8 @@ Decision: We have decided to proceed with alternative 2 because this alternative
 
 [[Design-Logic]]
 === Logic component
-[NOTE]
-Logic Architecture image and description to be updated with the later milestones.
+
+The logic component of Alfred handles the various commands within Alfred and the parsing of the user input to convert them into such commands. The logic component's primary structure is unchanged from the AB3 codebase, though it has been heavily modified to accommodate the new commands implemented with regards to Alfred, as can be seen from the class diagram below which highlights the high level structure of the logic component.
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
@@ -172,6 +172,8 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteParticipantCommandParser` and `DeleteCommandAllocator` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+====
 
 [[Design-Model]]
 === Model component
