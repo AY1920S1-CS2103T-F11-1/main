@@ -2657,7 +2657,8 @@ details the interaction with the <code>Model</code>. There are 5 main steps in t
 <ol class="arabic">
 <li>
 <p><code>FindCommandAllocator</code> allocates the correct parser for the find command based on the entity name
-provided. If the entity name is incorrect, then an error will be thrown and execution will terminate.</p>
+provided. If the entity name is incorrect, then an error will be thrown and execution will terminate.
+This step is not represented in the sequence diagram to make it neater.</p>
 </li>
 <li>
 <p>The <code>FindParticipantCommandParser</code> will then parse the String provided to it. If the string provided
@@ -2685,10 +2686,18 @@ of this <code>find</code> operation.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>[NOTE]xw
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 The find command does not mutate the list in any way. It only changes the <code>Entity</code> objects displayed using
-the generated predicate.</p>
+the generated predicate.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -4028,4 +4037,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 10:57:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 11:53:36 UTC</div></div></div></body></html>
