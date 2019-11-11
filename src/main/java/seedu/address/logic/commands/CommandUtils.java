@@ -19,7 +19,6 @@ import seedu.address.logic.commands.historycommand.UndoCommand;
 import seedu.address.logic.commands.leaderboardcommand.LeaderboardCommand;
 import seedu.address.logic.commands.listcommand.ListCommand;
 import seedu.address.logic.commands.scorecommand.AddScoreCommand;
-import seedu.address.logic.commands.scorecommand.ScoreCommand;
 import seedu.address.logic.commands.scorecommand.SetScoreCommand;
 import seedu.address.logic.commands.scorecommand.SubtractScoreCommand;
 import seedu.address.logic.commands.topteamscommand.TopTeamsCommand;
