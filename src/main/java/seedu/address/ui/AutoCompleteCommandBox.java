@@ -271,6 +271,10 @@ public class AutoCompleteCommandBox extends JFXTextField {
         case "score set":
             return suggestionTemplates.SCORE_SET_TEMPLATE;
 
+        case "score reset":
+            return suggestionTemplates.SCORE_RESET_TEMPLATE;
+
+
         default:
             logger.info("SCORE Command Template is null");
             return null;
@@ -338,7 +342,7 @@ public class AutoCompleteCommandBox extends JFXTextField {
 
         case "view":
             return suggestionTemplates.VIEW_TEMPLATE;
-
+            
         default:
             logger.info("Other Template is null");
             return null;
