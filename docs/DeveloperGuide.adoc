@@ -264,6 +264,23 @@ come in the form of exposing new methods on it and creating new attributes on th
 on `ModelManager` were also implemented as simply as possible so that future methods can build on them. This way,
 future modifications do not need to edit existing code, reducing the likelihood of regression bugs.
 
+4. Design of the `Entity` objects
+* *Alternative 1*: Make the `Team` object the single source of truth (only `Team` has references to `Participant`
+and `Mentor`)
+    - Pros: This would facilitate the serialization on `Storage`
+    - Cons: As `Participant` and `Mentor` objects no longer hold a reference to the `Team` object,
+it is now possible for their fields to be different from their counterparts stored in `Team`, requiring
+Alfred to do significant validation
+* *Alternative 2*: Make `Participant`, `Mentor` and `Team` objects store a bidirectional reference to each other
+    - Pros: The `Participant` objects in the `Team` 's participants field are exactly the same objects stored in the
+`ParticipantList`, reducing the need for validation code as they will never be out of sync
+    - Cons: `Storage` serialization cannot handle bidirectional associations
+
+We decided to opt for Alternative 1 as there was no easy solution to solve the issues `Storage` had with
+bidirectional associations. Also, the validation code for Alternative 1 was implemented early and employed
+many defensive programming practices, reducing the likelihood of bugs occurring due to similar objects having
+data that is out of sync.
+
 ==== Future Extensions
 1. As the single source of truth for the application in runtime, there are many small functions on `ModelManager` now.
 These functions are implemented directly in the file itself. In the future, it may be better to abstract these
