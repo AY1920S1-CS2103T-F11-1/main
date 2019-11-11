@@ -1047,3 +1047,4 @@ Go through the waitlist and list the participants in the waitlist in ascending o
 |Remove a User from WaitList (Coming in v2.0)|Removes a prospective Participant by USER_ID from Waitlist | `removeFromWaitList USER_ID` | `removeFromWaitList U-1`
 
 |List all User in WaitList (Coming in v2.0)|Lists all prospective Participant in Waitlist | `listWaitList` | `listWaitList`
+

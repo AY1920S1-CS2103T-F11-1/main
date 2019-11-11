@@ -66,3 +66,4 @@ include::../UserGuide.adoc[tag=rankings]
 Alfred's developer guide provides an in-depth look into the architecture of how Alfred and its various features were implemented. My extensive contributions to this document exhibit my ability to write technical documentation and showcase the technical depth of my contribution to the project. This section contains an excerpt from the developer guide which shows the contribution I made with regards to my Leaderboard feature. It explains to the reader how the `leaderboard` command has been implemented and design considerations which were made when implementing it. You may also view the full version of my contributions in Alfred's Developer Guide found _https://github.com/AY1920S1-CS2103T-F11-1/main/blob/master/docs/DeveloperGuide.adoc[here]_.
 
 include::../DeveloperGuide.adoc[tag=leaderboardCommand]
+
