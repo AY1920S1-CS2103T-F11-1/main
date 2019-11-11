@@ -149,7 +149,7 @@ Decision: We have decided to proceed with alternative 2 because this alternative
 [[Design-Logic]]
 === Logic component
 
-The logic component of Alfred handles the various commands within Alfred and the parsing of the user input to convert them into such commands. The logic component's primary structure is unchanged from the AB3 codebase, though it has been heavily modified to accommodate the new commands implemented with regards to Alfred, as can be seen from the class diagram below which highlights the high level structure of the logic component.
+The logic component of Alfred handles the various commands within Alfred and the parsing of the user input to convert them into such commands. It's primary purpose is to execute these commands which leads to an update in `Model` (depending on the command) and return an appropriate feedback message to the UI component to display to the user. The logic component's primary structure is unchanged from the AB3 codebase, though it has been heavily modified to accommodate the new commands implemented with regards to Alfred, as can be seen from the class diagram below which highlights the high level structure of the logic component.
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
