@@ -934,7 +934,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <p>As the above figure shows, the file path from the user input is extracted and passed as a field for <code>ImportCommand</code>. Then, Alfred proceeds to convert file content into relevant entities.</p>
 </div>
 <div class="paragraph">
-<p>When <code>ImportCommand</code> parses and adds entities to <code>Model</code>, it is crucial that teams are the last entities to be added. In the above sequence diagram, this process of buffering teams was also omitted for simplicity. Basically, in the <code>parseLineToEntity()</code> method, if a line in CSV file corresponds to a team, the line will be buffered to be parsed after all the other lines have been parsed. The reason for this is because teams may have dependencies on other participants and mentors. It is required that all of the participants and mentors associated with a team, say Team A, exist inside the <code>Model</code> before Team A can be added.</p>
+<p>When <code>ImportCommand</code> parses and adds entities to <code>Model</code>, it is crucial that teams are the last entities to be added. In the above sequence diagram, this process of buffering teams was also omitted for simplicity. Basically, in the <code>#parseLineToEntity()</code> method, if a line in CSV file corresponds to a team, the line will be buffered to be parsed after all the other lines have been parsed. The reason for this is because teams may have dependencies on other participants and mentors. It is required that all of the participants and mentors associated with a team, say Team A, exist inside the <code>Model</code> before Team A can be added.</p>
 </div>
 <div class="paragraph">
 <p>So as <code>ImportCommand</code> accesses the CSV file line by line, the line representing a team will be stored in a <code>Queue&lt;String&gt;</code> for later use. When the end of file is reached and all other participants and mentors are parsed and added to <code>Model</code>, the <code>ImportCommand</code> will poll from the <code>Queue</code>, parse into a relevant team, and add it to the <code>Model</code> until the <code>Queue</code> is empty.</p>
@@ -958,7 +958,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <div class="title">Figure 17. <code>CsvUtil</code>: Parsing to Participant Sequence Diagram</div>
 </div>
 <div class="paragraph">
-<p>Given CSV line is first split by commas (also allows commas surrounded by arbitrary number of spaces). Then, each <code>String</code> in the array is (attempted to be) converted into corresponding fields of a Participant. As the diagram shows, each field class has its own method for checking if the given <code>String</code> argument is valid - in the form of <code>isValidField()</code> method, where <code>Field</code> is replaced by its respective class name. Once each field is successfully converted, a Participant is created with the parsed fields. The process of parsing into a Mentor is practically equivalent of that of a Participant. The only change is in the fields being parsed.</p>
+<p>Given CSV line is first split by commas (also allows commas surrounded by arbitrary number of spaces). Then, each <code>String</code> in the array is (attempted to be) converted into corresponding fields of a Participant. As the diagram shows, each field class has its own method for checking if the given <code>String</code> argument is valid - in the form of <code>#isValidField()</code> method, where <code>Field</code> is replaced by its respective class name. Once each field is successfully converted, a Participant is created with the parsed fields. The process of parsing into a Mentor is practically equivalent of that of a Participant. The only change is in the fields being parsed.</p>
 </div>
 <div class="paragraph">
 <p>Next is a sequence diagram for parsing a CSV line into a team. The line to be parsed is <code>"T,,Justice League,[P-1|P-2],M-1,Social,100,Save the Earth,1"</code>.</p>
@@ -970,7 +970,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <div class="title">Figure 18. <code>CsvUtil</code>: Parsing to Team Sequence Diagram</div>
 </div>
 <div class="paragraph">
-<p>Also for teams, each corresponding <code>String</code> is converted to its field counterpart just like participants and mentors. Hence, <code>isValidField()</code> method was omitted from the diagram. The difference lies in the fact that for teams, Alfred must check if any participants or mentors it makes a reference to actually exists in <code>Model</code>. Thus, <code>CsvUtil</code> calls <code>getParticipant()</code> and <code>getMentor()</code> methods exposed by the <code>Model</code> class. If there are any exceptions raised while retrieving the participants and mentors, that line in CSV will not be loaded onto Alfred.</p>
+<p>Also for teams, each corresponding <code>String</code> is converted to its field counterpart just like participants and mentors. Hence, <code>#isValidField()</code> method was omitted from the diagram. The difference lies in the fact that for teams, Alfred must check if any participants or mentors it makes a reference to actually exists in <code>Model</code>. Thus, <code>CsvUtil</code> calls <code>Model#getParticipant()</code> and <code>Model#getMentor()</code> methods exposed by the <code>Model</code> class. If there are any exceptions raised while retrieving the participants and mentors, that line in CSV will not be loaded onto Alfred.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1054,7 +1054,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <p>Pros: Able to store line number, content of line, and cause of error in one object.</p>
 </li>
 <li>
-<p>Pros: Makes sorting of multiple <code>Error</code> objects easier through a <code>compareTo()</code> method. This proves useful when a buffered line (representing a team) contains error.</p>
+<p>Pros: Makes sorting of multiple <code>Error</code> objects easier through a <code>#compareTo()</code> method. This proves useful when a buffered line (representing a team) contains error.</p>
 </li>
 <li>
 <p>Pros: Able to display multiple information to user in a neat fashion.</p>
@@ -1204,7 +1204,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <p>Exporting all the data from Alfred to a CSV file is nice, but sometimes, the user may only want the data of a specific entity. This would be handled by the subclasses of <code>ExportCommand</code>, which consists of <code>ExportMentorCommand</code>, <code>ExportParticipantCommand</code>, and <code>ExportTeamCommand</code>. Similar to their superclass, the subclasses also depend on <code>FileUtil</code> and <code>CsvUtil</code> classes to create and write data to CSV files.</p>
 </div>
 <div class="paragraph">
-<p>The overall flow is the same so you can refer to the aforementioned <a href="#ExportCommandActivityDiagram">activity diagram</a> and <a href="#ExportCommandSequenceDiagram">sequence diagram</a> for more information. The only difference is when the subclasses call <code>CsvUtil</code>. If you recall, <code>ExportCommand</code> passes <code>Model</code> to <code>CsvUtil</code>. For each subclass, they will retrieve the respective <code>ReadOnlyEntityList</code> and pass to <code>CsvUtil</code>. The above activity diagram shows that in <code>CsvUtil</code>, it makes three method calls to itself: <code>writeToCsv(File, MentorList)</code>, <code>writeToCsv(File, ParticipantList)</code>, and <code>writeToCsv(File, TeamList)</code>. These three methods are the methods that each subclass will call.</p>
+<p>The overall flow is the same so you can refer to the aforementioned <a href="#ExportCommandActivityDiagram">activity diagram</a> and <a href="#ExportCommandSequenceDiagram">sequence diagram</a> for more information. The only difference is when the subclasses call <code>CsvUtil</code>. If you recall, <code>ExportCommand</code> passes <code>Model</code> to <code>CsvUtil</code>. For each subclass, they will retrieve the respective <code>ReadOnlyEntityList</code> and pass to <code>CsvUtil</code>. The above activity diagram shows that in <code>CsvUtil</code>, it makes three method calls to itself: <code>#writeToCsv(File, MentorList)</code>, <code>#writeToCsv(File, ParticipantList)</code>, and <code>#writeToCsv(File, TeamList)</code>. These three methods are the methods that each subclass will call.</p>
 </div>
 </div>
 <div class="sect3">
@@ -4299,4 +4299,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:20:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:57:43 UTC</div></div></div></body></html>
