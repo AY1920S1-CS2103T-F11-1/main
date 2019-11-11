@@ -1367,7 +1367,7 @@ Though this was a relatively straightforward subset of our `leaderboard` and `ge
 ** Pros: Less prone to misuse which can cause exceptions.
 ** Cons: Leads to unnecessary wrapping and unwrapping of the variable simply to check whether a value is present.
 
-* *Alternative 2:* Use a variable of type `SubjectName` set to null.
+* *Alternative 2 (Current Choice):* Use a variable of type `SubjectName` set to null.
 ** Pros: Easier to implement. No boxing and unboxing required.
 ** Cons: Can lead to unexpected exceptions if not handled carefully.
 
