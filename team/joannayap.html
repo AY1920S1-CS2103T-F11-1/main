@@ -241,12 +241,781 @@ the architecture of the application. Clicking these text will redirect user to t
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<div class="paragraph">
+<p>The Undo/Redo feature, as the name suggests, allows you to undo and redo commands. Only commands that alter the state of the data
+in Alfred can be undone/redone. The state of the 3 EntityLists (ParticipantList, MentorList and TeamList) is tracked across the execution
+of different commands, and the state can be recovered through the use of the undo/redo feature. The last used IDs for each of the 3 EntityLists
+are also saved.</p>
+</div>
+<div class="paragraph">
+<p>The feature has been updated in v1.4 to support multiple undos/redos. This means that invoking <code>undo N</code>/<code>redo N</code> on Alfred, where <code>N</code>
+is an integer, allows you to undo/redo <code>N</code> commands at one go.</p>
+</div>
+<div class="paragraph">
+<p>To undo/redo to next immediate command, simply invoking <code>undo</code>/<code>redo</code> on Alfred would suffice, as it implicitly calls <code>undo 1</code>/<code>redo 1</code>
+in the code.</p>
+</div>
+<div class="paragraph">
+<p>This feature is a convenience feature as it allows users of Alfred to quickly correct and recover
+from mistakes, greatly increasing the utility of the application.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only a maximum of 50 data states is stored in <code>ModelHistoryManager</code> at any one point in time. The addition of any more data states will
+result in the discarding of the oldest data state.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="paragraph">
+<p>The general idea is as follows: The undo/redo mechanism is mainly facilitated by the interface <code>ModelHistory</code> and its implementation <code>ModelHistoryManager</code>.
+Alfred&#8217;s data is held in memory within the <code>ModelManager</code> object. After the execution of commands that mutate the data in Alfred, a deep copy
+of all 3 EntityLists is made and saved as a <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code>. A deep copy is necessary to ensure that
+any subsequent changes to data will not alter the data in the <code>ModelHistoryRecord</code>, allowing each <code>ModelHistoryRecord</code> to serve as
+a pristine record of the state of the data in Alfred at the end of the execution of each command.</p>
+</div>
+<div class="paragraph">
+<p>Whenever the <code>undo</code> command is invoked, <code>ModelHistoryManager</code> returns a <code>ModelHistoryRecord</code>.
+A deep copy of the EntityLists contained within <code>ModelHistoryRecord</code> are then used to replace the EntityLists in the <code>ModelManager</code> for its operations, effectively
+reverting the data in Alfred to a previous state.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The data in each <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code> is stored in memory, and is not stored on disc, so it will
+persist only while the Alfred application is running.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-how-code-modelhistorymanager-code-keeps-track-of-the-state-of-the-data-in-alfred"><a class="link" href="#implementation-how-code-modelhistorymanager-code-keeps-track-of-the-state-of-the-data-in-alfred">Implementation: How <code>ModelHistoryManager</code> Keeps Track of the State of the Data in Alfred</a></h4>
+<div class="paragraph">
+<p>The following sequence diagram shows the sequence of method calls used to store the state of the data in
+Alfred in <code>ModelHistory</code> (<code>ModelHistoryManager</code> is an implementation of the <code>ModelHistory</code> interface) after
+the execution of a DeleteParticipantCommand:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoSequenceDiagramUpdateHistory.png" alt="UndoSequenceDiagramUpdateHistory">
+</div>
+<div class="title">Figure 2. Sequence Diagram for the Updating of <code>ModelHistoryManager</code></div>
+</div>
+<div class="paragraph">
+<p>The top half of the diagram covers the creation of the DeleteParticipantCommand object, and the bottom half covers
+what happens when the <code>execute()</code> method of the DeleteParticipantCommand object is called. The important thing to note is the fact
+that a deep copy of the 3 EntityLists is created and stored as a <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code>.</p>
+</div>
+<div class="paragraph">
+<p>An important issue to take note of is that only commands that implement the TrackableState interface will cause a new <code>ModelHistoryRecord</code>
+to be created and stored in <code>ModelHistoryManager</code>. The TrackableState interface is a marker interface, and is used to mark
+the commands that mutate data in Alfred. All command types except the following implement the TrackableState interface (and
+will therefore have the state of the data recorded in <code>ModelHistoryManager</code> after command execution):
+<code>help</code>, <code>list</code>, <code>find</code>, <code>history</code>, <code>leaderboard</code>, <code>getTop</code>, <code>export</code>, <code>help</code>, <code>home</code>, <code>undo</code>, <code>redo</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed"><a class="link" href="#implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed">Implementation: How <code>ModelManager</code> is Updated When the Undo Command is Executed</a></h4>
+<div class="paragraph">
+<p>The following sequence diagram shows what happens when the UndoCommand is executed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoSequenceDiagramExecutionofUndo.png" alt="UndoSequenceDiagramExecutionofUndo">
+</div>
+<div class="title">Figure 3. Sequence Diagram for the Execution of the Undo Command</div>
+</div>
+<div class="paragraph">
+<p>The important issue to take note of here is that the code first checks whether it is valid to undo to a certain state by
+calling the <code>canUndo()</code> method in <code>ModelHistory</code>. The implementation of <code>ModelHistory</code> in <code>ModelHistoryManager</code> does so by checking
+if there are sufficient states to undo to, otherwise an exception is thrown.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A analogous process is executed for the Redo Command.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="behaviour-of-undo-redo-mechanism"><a class="link" href="#behaviour-of-undo-redo-mechanism">Behaviour of Undo/Redo Mechanism</a></h4>
+<div class="paragraph">
+<p><code>ModelHistoryMangager</code> contains a List of <code>ModelHistoryRecord</code>, and a pointer pointing to the <code>ModelHistoryRecord</code> that
+reflects the current state of the data in Alfred.</p>
+</div>
+<div class="paragraph">
+<p>In order to better illustrate how the state of the data is tracked and stored in <code>ModelHistoryManager</code>, consider the following example.
+The following commands are executed:
+1. AddParticipantCommand: <code>add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com</code>
+2. AddMentorCommand: <code>add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social</code>
+3. ListParticipantCommand: <code>list participants</code>
+4. UndoCommand: <code>undo 2</code>
+5. AddTeamCommand: <code>add team n/Justice League s/Social pn/BetterThanAvengers l/12</code></p>
+</div>
+<div class="paragraph">
+<p>This is the state of <code>ModelHistoryManager</code> when Alfred is first started.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
+</div>
+<div class="title">Figure 4. Initial State of <code>ModelHistoryManager</code></div>
+</div>
+<div class="paragraph">
+<p>This is what happens after each step:</p>
+</div>
+<div class="paragraph">
+<p><em> Step 1. AddParticipantCommand: <code>add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com</code> </em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
+</div>
+<div class="title">Figure 5. State of <code>ModelHistoryManager</code> after Step 1</div>
+</div>
+<div class="paragraph">
+<p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddParticipantCommand.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 2. AddMentorCommand: <code>add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social</code> </em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
+</div>
+<div class="title">Figure 6. State of <code>ModelHistoryManager</code> after Step 2</div>
+</div>
+<div class="paragraph">
+<p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddMentorCommand.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 3. ListParticipantCommand: <code>list participants</code> </em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
+</div>
+<div class="title">Figure 7. State of <code>ModelHistoryManager</code> after Step 3</div>
+</div>
+<div class="paragraph">
+<p>Note that no new <code>ModelHistoryRecord</code> is created because the ListParticipantCommand does not alter the state of the data in Alfred.
+Hence, it does not implement the TrackableState interface.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 4. UndoCommand: <code>undo 2</code> </em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
+</div>
+<div class="title">Figure 8. State of <code>ModelHistoryManager</code> after Step 4</div>
+</div>
+<div class="paragraph">
+<p>After executing the <code>undo 2</code> command, the pointer in <code>ModelHistoryManager</code> shifts backwards by 2 to point to the <code>ModelHistoryRecord</code>
+at the zero-th index.</p>
+</div>
+<div class="paragraph">
+<p>Note that this means that <code>undo 3</code> would throw an error, as you cannot move beyond the very first <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code>.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 5. AddTeamCommand: <code>add team n/Justice League s/Social pn/BetterThanAvengers l/12</code> </em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
+</div>
+<div class="title">Figure 9. State of <code>ModelHistoryManager</code> after Step 5</div>
+</div>
+<div class="paragraph">
+<p>Note that the execution of a new command will invalidate the <code>ModelHistoryRecord</code> after the pointer. This is because all subsequent
+data states are the result of transformations that have already been undone, so it is not valid to be able to <code>redo</code> to them.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p>When designing the undo/redo feature, there were some design considerations to take note of.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How Undo/Redo Executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire data state of Alfred in memory.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of memory usage.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+</li>
+<li>
+<p>Cons: We must ensure that the implementation of each individual command are correct, which is not trivial for
+certain commands, such as <code>import</code>, which provides a best-effort implementation and tries to import as many valid data entries
+as possible. In order to implement an <code>undo</code> method for this, we would have to keep track of the new Entities that got created
+due to the command execution and then invoke deletion of these Entities.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given the large number of commands that are available in Alfred, it is not very scalable to implement
+an undo/redo method for each of the commands. It is also more extensible to use Alternative 1 as it allows
+future commands to be added without the need for further changes for the undo/redo feature - simply get the new
+command&#8217;s class to implement the TrackableState interface if it alters the state of the data in Alfred.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-use-of-marker-interface"><a class="link" href="#aspect-use-of-marker-interface">Aspect: Use of Marker Interface</a></h5>
+<div class="paragraph">
+<p>Allows for an easy way to determine if the state of the data should be saved after the execution of the command.
+It is also very easy to change in the codebase. This means that should a feature in the future alter the state of the
+data in Alfred after execution, it is trivial to allow <code>ModelHistoryManager</code> to track the state.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-limitation-of-number-of-data-states-stored"><a class="link" href="#aspect-limitation-of-number-of-data-states-stored">Aspect: Limitation of Number of Data States Stored</a></h5>
+<div class="paragraph">
+<p>Given that the Undo/Redo feature saves the state of the data in Alfred after the execution of TrackableState commands,
+it is important to ensure that memory usage by <code>ModelHistoryManager</code> is limited, otherwise Alfred will run very slowly and
+potentially crash once a substantial number of commands have been executed.</p>
+</div>
+<div class="paragraph">
+<p>In order to accommodate this design for the Undo/Redo feature, we decided to limit the number of <code>ModelHistoryRecord</code> stored in
+<code>ModelHistoryManager</code> to 50. It is unlikely that a user would want to undo more than 50 commands at a go, as that would indicate
+a very significant error in the workflow, and recovering from that should not have a reliance on the Undo/Redo feature.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="history-feature"><a class="link" href="#history-feature">History feature</a></h3>
+<div class="paragraph">
+<p>Closely related to the undo/redo feature, the <code>history</code> feature allows you to examine up to 50 previously executed commands
+in order to provide you with a visual understanding of the history of commands executed. Specifically, it provides you information
+on how many commands are undo-able/redo-able, and which commands are undo-able/redo-able. Otherwise, it can be difficult to
+know which commands you are undo/redo-ing, especially when many commands have been executed.</p>
+</div>
+<div class="paragraph">
+<p>Simply execute <code>history</code> in Alfred to navigate to the "History" section of the Graphical User Interface and examine what commands
+are undo-able/redo-able.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoExplanation.png" alt="UndoRedoExplanation">
+</div>
+<div class="title">Figure 10. "History" section of the Graphical User Interface after invoking the <code>history</code> command</div>
+</div>
+<div class="paragraph">
+<p>Note that there are 3 types of delimiters:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Redo Delimiter: No redos are possible beyond this point</p>
+</li>
+<li>
+<p>Current Delimiter: This is the current state of the data relative to all the commands previously executed.</p>
+</li>
+<li>
+<p>Undo Delimiter: No undos are possible beyond this point</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="implementation-2"><a class="link" href="#implementation-2">Implementation</a></h4>
+<div class="paragraph">
+<p>Most of the functionality required for the <code>history</code> feature is similar to that of the <code>undo</code>/<code>redo</code> feature. Specifically,
+there is a similar reliance on the <code>ModelHistory</code> interface and its implementation <code>ModelHistoryManager</code> to provide the information
+on which commands are undo-able and redo-able, along with their respective command input strings. See the sequence diagram below
+for more information.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/HistoryCommandRendering.png" alt="HistoryCommandRendering">
+</div>
+<div class="title">Figure 11. Sequence diagram for the execution of the History command</div>
+</div>
+<div class="paragraph">
+<p>Since <code>ModelHistoryManager</code> keeps a linear history of Alfred&#8217;s data state after commands are executed, and it has a pointer
+to the current data state, the redo-able commands are simply the ones after the pointer, and the undo-able commands are the one before
+the pointer. The panels displayed in the "History" section of the Graphical User Interface is simply a visual representation of
+this sequential ordering of datas states. The call to <code>getCommandHistory()</code> in Model will return an ArrayList of CommandRecords, where each CommandRecord
+specifies the command input string as well as whether the CommandRecord is a delimiter. This ArrayList is then provided back to
+the UI for rendering in the "History" section of the Graphical User Interface.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="paragraph">
+<p>Given the close relationship between this feature and the <code>undo</code>/<code>redo</code> feature, the design considerations are very similar as well.
+See <a href="#undo-redo-feature">Undo/Redo feature</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-history-navigation"><a class="link" href="#command-history-navigation">Command History Navigation</a></h3>
+<div class="paragraph">
+<p>Since Alfred is ultimately a Command-Line Interface (CLI) application, it would be good to integrate some of the more useful features
+of CLI applications into Alfred. This feature allows users to go through previously executed commands by pressing the ALT+UP/DOWN
+arrow keys. Although it would be more convenient to use the UP/DOWN arrow keys to navigate the command history, the UP/DOWN arrow
+keys have been mapped to the Command Suggestions feature in Alfred.</p>
+</div>
+<div class="paragraph">
+<p>This feature allows users to quickly re-use previously exeuted commands without having to go through the hassle of re-typing
+everything. This is particularly useful when the commands are long, and only small modifications are necessary to the command.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only successfully executed commands can be navigated to using the ALT+UP/DOWN keys. Invalid comands will not be stored, and hence
+cannot be accessed using this feature. The only exception to this is the <code>import</code> command, as it is a 'best-effort' command that raises exceptions for certain entries
+in the csv file, but seeks to import as many valid data entries as possible. Hence, the <code>import</code> command can be navigated to using
+the ALT+UP/DOWN arrow keys even when it does not completely succeed during execution.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation-3"><a class="link" href="#implementation-3">Implementation</a></h4>
+<div class="paragraph">
+<p>Every time a valid new command is executed, the string used to generate the command (i.e. the text that the user types into
+Alfred&#8217;s Command Input Box) is stored in the <code>Command</code> object.</p>
+</div>
+<div class="paragraph">
+<p>The main class responsible for remembering and providing the previously used command input strings is the <code>CommandHistoryManager</code> class,
+which implements the <code>CommandHistory</code> interface. The <code>CommandHistory</code> interface only exposes 3 methods: <code>saveCommandExecutionString</code>,
+<code>getPrevCommandString</code> and <code>getNextCommandString</code>. The latter 2 methods directly map to the 2 situations of pressing the ALT+UP and
+pressing the ALT+DOWN keys respectively.</p>
+</div>
+<div class="paragraph">
+<p>When the <code>Command</code> object is executed, that string is then stored in the <code>CommandHistoryManager</code>. A linear list of successfully
+executed commands' input strings is stored in <code>CommandHistoryManager</code>, and a pointer to the current string being displayed in the textbox
+is used to indicate which is the currently active string.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only the last 50 commands are stored in <code>CommandHistoryManager</code>. Anything beyond that is discarded.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-setting-and-storing-of-command-input-string"><a class="link" href="#implementation-setting-and-storing-of-command-input-string">Implementation: Setting and Storing of Command Input String</a></h4>
+<div class="paragraph">
+<p>The following sequence diagram describes the sequence of method calls used to set and store the command input string in
+<code>CommandHistoryManager</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandHistoryNavigationSettingofCommandString.png" alt="CommandHistoryNavigationSettingofCommandString">
+</div>
+<div class="title">Figure 12. Initial State of <code>ModelHistoryManager</code></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-arrow-key-invocation"><a class="link" href="#implementation-arrow-key-invocation">Implementation: Arrow Key Invocation</a></h4>
+<div class="paragraph">
+<p>The following sequence diagram describes the sequence of method calls used to set the text in Alfred&#8217;s Command Input Box
+whenever the ALT + UP/DOWN arrow keys are pressed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandHistoryNavigationArrowKeyInvocation.png" alt="CommandHistoryNavigationArrowKeyInvocation">
+</div>
+<div class="title">Figure 13. Sequence Diagram for when ALT+UP arrow keys are pressed</div>
+</div>
+<div class="paragraph">
+<p>An analogous process is executed when the ALT+DOWN arrow keys are pressed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<div class="paragraph">
+<p>The following are some design considerations for the Command History Navigation feature.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-use-of-commandhistorymanager"><a class="link" href="#aspect-use-of-commandhistorymanager">Aspect: Use of CommandHistoryManager</a></h5>
+<div class="paragraph">
+<p>A separate class was created for managing the command history. Although this meant that Model would have a further
+dependency on another class and hence cause an increase in the coupling between objects, this implementation adheres
+to the Single Responsibility Principle and abstracts away the details of handling the command history to a purpose-built class.
+This adheres better to the OOP-style of programming and results in conceptually cleaner code.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-limitation-of-command-history-size"><a class="link" href="#aspect-limitation-of-command-history-size">Aspect: Limitation of Command History Size</a></h5>
+<div class="paragraph">
+<p>In order to ensure that <code>CommandHistoryManager</code> does not occupy an increasingly large portion of memory as more and more
+commands are executed, it is necessary to limit the number of commands that are stored. Otherwise, Alfred&#8217;s performance
+will suffer as more commands are executed.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, it is very unlikely for user to want to navigate more than 50 commands into history, as it would likely be
+more convenient to re-type the command if that is the case.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-usage-of-arrow-keys"><a class="link" href="#aspect-usage-of-arrow-keys">Aspect: Usage of Arrow Keys</a></h4>
+<div class="paragraph">
+<p>Most CLI applications with such a Command History Navigation feature would use the UP/DOWN arrow keys directly, but the UP/DOWN
+arrow keys have been mapped for a different use (Command Suggestion Feature) in Alfred. Hence, we decided to use the ALT modifier key for the feature. It is
+an inconvenience, but likely a minor one.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-navigation-to-successfully-executed-commands"><a class="link" href="#aspect-navigation-to-successfully-executed-commands">Aspect: Navigation to Successfully-Executed Commands</a></h4>
+<div class="paragraph">
+<p>As mentioned above, only successfully executed commands can be navigated to using this feature. This is because unsuccessful
+commands will still remain within the Command Input Box in Alfred, which the user can readily edit. Only upon successful command
+execution will the text in the Command input Box disappear, so this feature is necessary to retrieve the Command&#8217;s input text.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-home-code-feature"><a class="link" href="#code-home-code-feature"><code>home</code> feature</a></h3>
+<div class="paragraph">
+<p>Entering the <code>home</code> command will prompt the <a href="{repoURL}/src/main/java/seedu/address/logic/Logic.java"><code>Logic</code></a>to generate a <a href="{repoURL}/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a> object. The <a href="{repoURL}/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a>  object is generated by obtaining entity lists of different types(ParticipantList, TeamList, MentorList) from <a href="{repoURL}/src/main/java/seedu/address/model/Model.java"><code>Model</code></a>. The respective lists are then converted to the Stream data structure and filtered through to obtain the distribution of each entity type by <a href="{repoURL}/src/main/java/seedu/address/model/entity/Subject.java"><code>Subject</code></a>, as well as the total number of each entity. These information is stored in the <a href="{repoURL}/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a>  object. The <a href="{repoURL}/src/main/java/seedu/address/ui/Statistics.java"><code>Statistics</code></a> object is then used to construct a <a href="{repoURL}/src/main/java/seedu/address/ui/StatisticsListPanel.java"><code>StatisticsListPanel</code></a>, where the information is parse to be displayed as a distribution bar graph.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>home</code> operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/HomeCommandSequenceDiagram.png" alt="HomeCommandSequenceDiagram">
+</div>
+<div class="title">Figure 14. Sequence Diagram for <code>home</code> command</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">Design Considerations</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Finding the distribution of Teams and Mentors by subjects</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1: Implementing methods to keep track of number of mentors or participant under the respective TeamList or ParticipantList class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Each of TeamList or  Participant list will have their individual responsibilities in keeping track of the distribution of its teams or mentors.</p>
+</li>
+<li>
+<p>Cons: Clutters up the Model and ModelManger interface.</p>
+</li>
+<li>
+<p>Cons: Does not make use of existing methods under Model.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternative 2: Getting TeamList or ParticipantList from Model and implementing operation to find the distribution separately.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Makes use of existing Model methods of getting TeamList and ParticipantList.</p>
+</li>
+<li>
+<p>Pros: Does not clutter up Model and ModelManager with different methods</p>
+</li>
+<li>
+<p>Pros: Greater flexibility in implementing methods to find the distribution of teams or mentors.</p>
+</li>
+<li>
+<p>Cons: Clutters up the Model and ModelManger interface.</p>
+</li>
+<li>
+<p>Cons: Does not make use of existing methods under Model.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Decision: We decided to proceed with this alternative 2 because it makes use of existing methods under Model and provides greater flexibility on how I can find the distribution number by subject from the TeamList or ParticipantList.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-suggestion-feature"><a class="link" href="#command-suggestion-feature">Command suggestion feature</a></h3>
+<div class="paragraph">
+<p>Typing into the <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteTextField.java"><code>AutoCompleteTextField</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated. Activation of the <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> will prompt it to filter through the set of predefined command suggestions. The commands that start with the same text entered by user will be filtered through. These commands will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>. This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-assign-code-code-remove-code-feature"><a class="link" href="#code-assign-code-code-remove-code-feature"><code>assign</code> / <code>remove</code> feature</a></h3>
+<div class="paragraph">
+<p>Upon successful assignation, the new participant or mentor will be stored internally in the list of participant or optional mentor field in the Team object. Upon successful removal of Participant or Team, the specified participant or mentor will be removed from the Team object. Additionally, it calls the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#addMentorToTeam</code></a> – adds mentor to a specified team</p>
+</li>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#addParticipantToTeam</code></a> – adds participant to team</p>
+</li>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#removeParticipantFromTeam</code></a> – removes participant from team</p>
+</li>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#removeMentorFromTeam</code></a> – removes mentor from team</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>assign participant</code> command will add the new participant under the list of participant in the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This is provided that the number of members in the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object(size of list of participants) is less than 5.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>assign participant</code> operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignParticipantCommandSequenceDiagram.png" alt="AssignParticipantCommandSequenceDiagram">
+</div>
+<div class="title">Figure 15. Sequence Diagram for an example of <code>assign participant</code> command</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>assign mentor</code> command will add the new mentor under the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field in the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This is provided that there is no existing mentor in the team. The sequence diagram of <code>assign mentor</code> is similar to that of <code>assign participant</code>.</p>
+</li>
+<li>
+<p>The remove participant will first search through the list of participant under the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This checks whether the specified participant is a member of the team in the first place. If it is not a member, an error will be thrown. Whereas if it is a member, the specified participant will be removed from the list of participant.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>remove participant</code> operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RemoveParticipantCommandSequenceDiagram.png" alt="RemoveParticipantCommandSequenceDiagram">
+</div>
+<div class="title">Figure 16. Sequence Diagram for an example of <code>remove participant</code> command</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>remove mentor</code> command  will first check whether the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field under the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object is not empty and corresponds to the specified mentor. This checks whether the team have not been assigned a mentor, or they have been assigned to a different mentor. Under any of these cases, and error will be thrown. Whereas if the team is assigned the specific mentor, the specified mentor will be removed from the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field.The sequence diagram of <code>remove mentor</code> is similar to that of <code>remove participant</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="scoring"><a class="link" href="#scoring">Scoring</a></h3>
+<div class="paragraph">
+<p>As its name suggests, this feature&#8217;s intended purpose is to aid users in the process of giving scores to the teams participating the hackathon. The <code>score</code> command is a crucial feature of Alfred as judging and scoring are core activities within every hackathon. Alfred provides the following implementations of the <code>score</code> command:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>score add</code>: allows users to add a certain number of points to a team&#8217;s score</p>
+</li>
+<li>
+<p><code>score sub</code>: allows users to subtract a certain number of points from a team&#8217;s score</p>
+</li>
+<li>
+<p><code>score set</code>: allows users to set a team&#8217;s score to a certain number of points</p>
+</li>
+<li>
+<p><code>score reset</code>: allows users reset a team&#8217;s score to 0</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="implementation-overview"><a class="link" href="#implementation-overview">Implementation Overview</a></h4>
+<div class="paragraph">
+<p>This feature and its varieties have been implemented in a relatively straightforward manner, as the Class Diagram below showing the high level representation of the Object Oriented solution devised to implement this feature highlights.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ScoringClassDiagram.png" alt="ScoringClassDiagram">
+</div>
+<div class="title">Figure 17. Scoring Feature Class Diagram</div>
+</div>
+<div class="paragraph">
+<p>From the above diagram it can be seen that each different implementation of the <code>score</code> command inherits from the same <code>ScoreCommand</code> abstract class. The <code>ScoreCommand</code> abstract class provides a base for the implementation of the current specific <code>score</code> commands and in the future any further additions made to the <code>score</code> command functionality must also follow this same convention.</p>
+</div>
+<div class="paragraph">
+<p>Secondly, there is no <code>ResetScoreCommand</code> class. This is done intentionally as the <code>SetScoreCommand</code> can be reused to reset a particular team&#8217;s score, thereby making better use of abstraction.</p>
+</div>
+<div class="paragraph">
+<p>A representation of how the above classes interact to provide execute a user&#8217;s command is highlighted in the sequence diagram below. This sequence diagram illustrates the object interactions when a user types the command <code>score add T-1 40</code>. For context, this command adds 40 points to the team with ID "T-1".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ScoringSequenceDiagram.png" alt="ScoringSequenceDiagram">
+</div>
+<div class="title">Figure 18. Add Score Command Sequence Diagram</div>
+</div>
+<div class="paragraph">
+<p>As seen from the above diagram, the execution of the <code>score add</code> command can be put in simple words as per the following steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 1: <code>LogicManager</code> starts executing the user&#8217;s command and calls the <code>AlfredParser</code> to parse it.</p>
+</li>
+<li>
+<p>Step 2: <code>AlfredParser</code> find the appropriate <code>Parser</code> to parse the command and creates a new <code>ScoreCommandParser</code> to parse the arguments of the score command, essentially "add T-1 40".</p>
+</li>
+<li>
+<p>Step 3: The <code>ScoreCommandParser</code> then parses the arguments and is responsible for:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Checking which specific implementation of the <code>score</code> command is being called (in this case "add") and ensuring it is a valid method.</p>
+</li>
+<li>
+<p>Parsing the Team ID specified by the user and ensuring it is of a correct format.</p>
+</li>
+<li>
+<p>Parsing the Score specified by the user and ensuring it is a valid score.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Step 4: <code>ScoreCommandParser</code> then creates a new <code>AddScoreCommand</code> object with the above parsed Team ID and Score, which is then returned all the way to <code>LogicManager</code></p>
+</li>
+<li>
+<p>Step 5: <code>LogicManager</code> then executes the <code>AddScoreCommand</code> object upon which the <code>AddScoreCommand</code> object calls <code>Model</code> 's <code>addTeamScore()</code> method which updates the specific team&#8217;s score within <code>Model</code>. The updating is done by the <code>updateTeam(teamID, updatedTeam)</code> method of <code>Model</code> which updates the Team object with ID "teamID" within <code>Model</code> to match the "updatedTeam" team object.</p>
+</li>
+<li>
+<p>Step 6: Upon updating the team&#8217;s score in <code>Model</code>, the <code>AddScoreCommand</code> object creates a new <code>CommandResult</code> object which is returned to the UI component (not shown in the diagram) to display a feedback message to the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Though the above diagram and steps are designed in the context of a <code>score add</code> command, the logic applies to every other type of <code>score</code> command as well. The only difference is that the <code>ScoreCommandParser</code> creates the appropriate command object for the command and each command object calls a different method from <code>Model</code>, as per the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>score subtract</code>: <code>ScoreCommandParser</code> creates a new <code>SubtractScoreCommand</code> instead of an <code>AddScoreCommand</code> and this <code>SubtractScoreCommand</code> object calls the <code>subtractTeamScore()</code> method of <code>Model</code>.</p>
+</li>
+<li>
+<p><code>score set</code> and <code>score reset</code>: <code>ScoreCommandParser</code> creates a new <code>SetScoreCommand</code> instead of an <code>AddScoreCommand</code> and this <code>SetScoreCommand</code> object calls the <code>setTeamScore()</code> of method <code>Model</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">Design Considerations</a></h4>
+<div class="paragraph">
+<p>To develop the <code>score</code> feature a few considerations and decisions had to be made with regards to how to implement the feature at various steps. This section focuses on some of the aspects wherein we faced dilemmas and how we addressed them.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to implement the Score Commands</p>
+</div>
+<div class="paragraph">
+<p>Currently, Alfred&#8217;s score commands all inherit from a single <code>ScoreCommand</code> abstract class rather than each command class inheriting directly from the command class. This was done in order to provide a concrete base for the score commands, but more importantly also to make better use of polymorphism within our codebase. This use of polymorphism allows the Alfred codebase to avoid several code repetitions, for example by facilitating the use of a single parser class to parse the <code>score</code> commands as it can then simply return a <code>ScoreCommand</code> object regardless of which specific <code>score</code> command is called. Thanks to this, we avoid having to make a parser for every single <code>score</code> command.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to implement <code>score sub</code> (Subtract Score Command)</p>
+</div>
+<div class="paragraph">
+<p>While traditionally a subtract command would be implemented using an add command only with negated values, this is not quite possible in Alfred&#8217;s case. Within Alfred <code>Score</code> objects have a strict restriction that they cannot be created with negative values as a team&#8217;s score can never be negative. This restriction cannot be relaxed as it ensures that any data being imported into Alfred does not violate this property either. Due to this the <code>score sub</code> command could be implemented by reusing the <code>AddScoreCommand</code> and hence why it has its own command class <code>SubtractScoreCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Implementation of <code>score reset</code> command</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Create a <code>ResetScoreCommand</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Lowers confusion as all the relevant code is in its own class rather than mixed with other code.</p>
+</li>
+<li>
+<p>Cons: Leads to duplication of code as the command is very similar to the <code>score set</code> command, making it poor software engineering practice.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Reuse the <code>SetScoreCommand</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Better use of abstraction and reduces the amount of duplicate code written.</p>
+</li>
+<li>
+<p>Cons: Overcrowds a single class as feedback messages and other properties of the <code>score reset</code> command also need to be written within it.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Upon close inspection it was observed that the removal of duplicate code would far outweigh the convenience and orderliness of having a separate class for the command, especially considering that a <code>ResetScoreCommand</code> would have far more duplicate code than unique code as compared to the <code>SetScoreCommand</code>. Bearing this in mind, we ultimately decided to choose "Alternative 2" as it would allow for better reuse of existing code and follow better software engineering practices.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="leaderboard-and-get-top-teams"><a class="link" href="#leaderboard-and-get-top-teams">Leaderboard and Get Top Teams</a></h3>
 <div class="paragraph">
 <p>The <code>leaderboard</code> and <code>getTop K</code> commands are two very important features of Alfred as they allow the user to automatically sort the teams by their scores, fetch any number of top teams in the competition and identify and break ties between teams conveniently. The execution of either of these commands displays the resultant teams on the UI in their correct sorted order. The following subsections explore the implementation of each of these commands and provide an insight into the design consideration made when developing them.</p>
 </div>
 <div class="sect3">
-<h4 id="implementation-overview"><a class="link" href="#implementation-overview">Implementation Overview</a></h4>
+<h4 id="implementation-overview-2"><a class="link" href="#implementation-overview-2">Implementation Overview</a></h4>
 <div class="paragraph">
 <p>The implementation of these two commands is very similar in nature. They both:</p>
 </div>
@@ -267,7 +1036,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="content">
 <img src="../images/LeaderBoardClassDiagram.png" alt="LeaderBoardClassDiagram">
 </div>
-<div class="title">Figure 2. Leaderboard and Get Top Teams Implementation Overview</div>
+<div class="title">Figure 19. Leaderboard and Get Top Teams Implementation Overview</div>
 </div>
 <div class="paragraph">
 <p>From the above class diagram, there are two important matters to note regarding the implementation of these features:</p>
@@ -308,7 +1077,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="content">
 <img src="../images/SimpleLeaderboardSequenceDiagram.png" alt="SimpleLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 3. Interactions within Logic Component for SimpleLeaderboardCommand</div>
+<div class="title">Figure 20. Interactions within Logic Component for SimpleLeaderboardCommand</div>
 </div>
 <div class="paragraph">
 <p>In the above, the <code>LeaderboardCommandParser</code> class parses the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods. A new <code>SimpleLeaderboardCommand</code> object is then created with this array list as its parameter and returned.</p>
@@ -335,7 +1104,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="content">
 <img src="../images/RandomLeaderboardSequenceDiagram.png" alt="RandomLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 4. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
+<div class="title">Figure 21. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above (See <a href="#SimpleLeaderboard-Explanation">[SimpleLeaderboard-Explanation]</a>).</p>
@@ -489,7 +1258,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="content">
 <img src="../images/SimpleTopKSequenceDiagram.png" alt="SimpleTopKSequenceDiagram">
 </div>
-<div class="title">Figure 5. Interactions within Logic Component for getTop NUMBER Command</div>
+<div class="title">Figure 22. Interactions within Logic Component for getTop NUMBER Command</div>
 </div>
 <div class="paragraph">
 <p>The above diagram follows a logic very similar to the <code>leaderboard</code> command&#8217;s logic. However, in this case a <code>TopTeamsCommandParser</code> object is created to parse the arguments "3 tb/moreParticipants" which returns a <code>SimpleTopKCommand</code> object.</p>
@@ -507,7 +1276,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="content">
 <img src="../images/TopKRandomCommand.png" alt="TopKRandomCommand">
 </div>
-<div class="title">Figure 6. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
+<div class="title">Figure 23. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.</p>
@@ -642,7 +1411,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="content">
 <img src="../images/TieBreakActivityDiagram.png" alt="TieBreakActivityDiagram">
 </div>
-<div class="title">Figure 7. Handling of Tiebreak Methods</div>
+<div class="title">Figure 24. Handling of Tiebreak Methods</div>
 </div>
 <div class="paragraph">
 <p>From the above there is one important aspect to note: the <code>ArrayList</code> of <code>Comparator&lt;Team&gt;</code> objects created in the second step. This is the <code>ArrayList</code> referred to in the previous sections which is tasked with containing and transferring the comparators which will be used to sort the teams in their appropriate order to form the leaderboard or top teams. This <code>ArrayList</code> is used as an input parameter for both <code>leaderboard</code> and <code>getTop K</code> command related classes, as explored in previous sections.</p>
@@ -1962,7 +2731,7 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h2>
+<h2 id="design-considerations-6"><a class="link" href="#design-considerations-6">Design Considerations</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -2027,4 +2796,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-10 15:53:25 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 00:27:24 UTC</div></div></div></body></html>
