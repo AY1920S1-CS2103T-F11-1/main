@@ -342,7 +342,7 @@ public class AutoCompleteCommandBox extends JFXTextField {
 
         case "view":
             return suggestionTemplates.VIEW_TEMPLATE;
-            
+                
         default:
             logger.info("Other Template is null");
             return null;
