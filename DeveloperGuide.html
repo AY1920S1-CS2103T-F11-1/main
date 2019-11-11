@@ -347,17 +347,8 @@ The UI component,
 </div>
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic component</a></h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Logic Architecture image and description to be updated with the later milestones.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The logic component of Alfred handles the various commands within Alfred and the parsing of the user input to convert them into such commands. It&#8217;s primary purpose is to execute these commands which leads to an update in <code>Model</code> (depending on the command) and return an appropriate feedback message to the UI component to display to the user. The logic component&#8217;s primary structure is unchanged from the AB3 codebase, though it has been heavily modified to accommodate the new commands implemented with regards to Alfred, as can be seen from the class diagram below which highlights the high level structure of the logic component.</p>
 </div>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
@@ -2771,7 +2762,7 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Use a variable of type <code>SubjectName</code> set to null.</p>
+<p><strong>Alternative 2 (Current Choice):</strong> Use a variable of type <code>SubjectName</code> set to null.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2799,7 +2790,7 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </ul>
 </div>
 <div class="paragraph">
-<p>In the end "Alternative 2" was favoured over the other two alternatives. Although the misuse of null can lead to unwanted exceptions, it has been carefully used to ensure that at no point is null value used other than to check once whether the variable&#8217;s value is null or not. This careful implementation ensures that the variable is used selectively at only once place thereby making sure that no possibility `NullPointerException" occurs at any other part of the code. Although "Alternative 3" is a standard solution to null input parameters, in this case it would not serve its purpose too well as calling the overloaded constructor would require additional logic to check whether or not the subject is mentioned and then depending on this result which command needs to be created and returned. Java&#8217;s Optional class provides a good alternative, however it was not selected as it leads to needless wrapping and unwrapping of the variable.</p>
+<p>In the end "Alternative 2" was favoured over the other two alternatives. Although the misuse of null can lead to unwanted exceptions, it has been carefully used to ensure that at no point is null value used other than to check once whether the variable&#8217;s value is null or not. This careful implementation ensures that the variable is used selectively at only one place thereby making sure that no possibility `NullPointerException" occurs at any other part of the code. Moreover, it has been reinforced through thorough documentation of the constructors to guide future contributors. Although "Alternative 3" is a standard solution to null input parameters, in this case it would not serve its purpose too well as calling the overloaded constructor would require additional logic to check whether or not the subject is mentioned and then depending on this result which command needs to be created and returned. Java&#8217;s Optional class provides a good alternative, however it was not selected as it leads to needless wrapping and unwrapping of the variable, adding another layer of packaging and unpacking.</p>
 </div>
 </div>
 <div class="sect4">
@@ -4308,4 +4299,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:10:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:20:43 UTC</div></div></div></body></html>
