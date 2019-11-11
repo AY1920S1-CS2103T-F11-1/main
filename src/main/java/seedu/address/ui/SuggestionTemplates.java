@@ -56,12 +56,16 @@ import static seedu.address.ui.SuggestionLabels.REMOVE_PARTICIPANT;
 import static seedu.address.ui.SuggestionLabels.REMOVE_PARTICIPANT_INSTRUCTION;
 import static seedu.address.ui.SuggestionLabels.SCORE_ADD;
 import static seedu.address.ui.SuggestionLabels.SCORE_ADD_INSTRUCTION;
+import static seedu.address.ui.SuggestionLabels.SCORE_RESET;
+import static seedu.address.ui.SuggestionLabels.SCORE_RESET_INSTRUCTION;
 import static seedu.address.ui.SuggestionLabels.SCORE_SET;
 import static seedu.address.ui.SuggestionLabels.SCORE_SET_INSTRUCTION;
 import static seedu.address.ui.SuggestionLabels.SCORE_SUB;
 import static seedu.address.ui.SuggestionLabels.SCORE_SUB_INSTRUCTION;
 import static seedu.address.ui.SuggestionLabels.UNDO;
 import static seedu.address.ui.SuggestionLabels.UNDO_INSTRUCTION;
+import static seedu.address.ui.SuggestionLabels.VIEW;
+import static seedu.address.ui.SuggestionLabels.VIEW_INSTRUCTION;
 
 import java.util.stream.Collectors;
 
@@ -119,9 +123,12 @@ public class SuggestionTemplates {
     public static final TextFlow SCORE_ADD_TEMPLATE;
     public static final TextFlow SCORE_SUB_TEMPLATE;
     public static final TextFlow SCORE_SET_TEMPLATE;
+    public static final TextFlow SCORE_RESET_TEMPLATE;
     public static final TextFlow LEADERBOARD_TEMPLATE;
     public static final TextFlow GET_TOP_TEMPLATE;
+
     public static final TextFlow EXIT_TEMPLATE;
+    public static final TextFlow VIEW_TEMPLATE;
 
 
     static {
@@ -273,29 +280,29 @@ public class SuggestionTemplates {
                 DELETE_TEAM_INSTRUCTION.getText()
         );
 
-        Text participantId7 = new Text("PARTICIPANT_ID ");
+        Text participantPrefixes7 = new Text("OTHER_PARAMETERS");
 
-        participantId7.setFill(Color.GREY);
+        participantPrefixes7.setFill(Color.GREY);
 
 
         FIND_PARTICIPANT_TEMPLATE = new TextFlow(
-                FIND_PARTICIPANT.getText(), participantId7,
+                FIND_PARTICIPANT.getText(), participantPrefixes7,
                 FIND_PARTICIPANT_INSTRUCTION.getText()
         );
 
-        Text mentorId8 = new Text("MENTOR_ID ");
+        Text mentorPrefixes8 = new Text("OTHER_PARAMETERS");
 
-        mentorId8.setFill(Color.GREY);
+        mentorPrefixes8.setFill(Color.GREY);
         FIND_MENTOR_TEMPLATE = new TextFlow(
-                FIND_MENTOR.getText(), mentorId8, FIND_MENTOR_INSTRUCTION.getText()
+                FIND_MENTOR.getText(), mentorPrefixes8, FIND_MENTOR_INSTRUCTION.getText()
         );
 
-        Text teamId8 = new Text("TEAM_ID ");
+        Text teamPrefixes8 = new Text("OTHER_PARAMETERS");
 
-        teamId8.setFill(Color.GREY);
+        teamPrefixes8.setFill(Color.GREY);
 
         FIND_TEAM_TEMPLATE = new TextFlow(
-                FIND_TEAM.getText(), teamId8, FIND_TEAM_INSTRUCTION.getText()
+                FIND_TEAM.getText(), teamPrefixes8, FIND_TEAM_INSTRUCTION.getText()
         );
 
 
@@ -411,15 +418,30 @@ public class SuggestionTemplates {
 
         //UNDO/REDO Method
         Text numbers17 = new Text("[NUMBER] ");
+        numbers17.setFill(Color.GREY);
         UNDO_TEMPLATE = new TextFlow(
                 UNDO.getText(), numbers17, UNDO_INSTRUCTION.getText()
         );
 
         Text numbers18 = new Text("[NUMBER] ");
+        numbers18.setFill(Color.GREY);
         REDO_TEMPLATE = new TextFlow(
                 REDO.getText(), numbers18, REDO_INSTRUCTION.getText()
         );
 
+        //VIEW Method
+        Text id19 = new Text("MENTOR_ID | PARTICIPANT_ID | MENTOR_ID");
+        id19.setFill(Color.GREY);
+        VIEW_TEMPLATE = new TextFlow(
+                VIEW.getText(), id19, VIEW_INSTRUCTION.getText()
+        );
+
+        //SCORE RESET Method
+        Text teamId20 = new Text("TEAM_ID ");
+        teamId20.setFill(Color.GREY);
+        SCORE_RESET_TEMPLATE = new TextFlow(
+                 SCORE_RESET.getText(), teamId20, SCORE_RESET_INSTRUCTION.getText()
+         );
     }
 
 
@@ -433,7 +455,7 @@ public class SuggestionTemplates {
                 .stream()
                 .map(textElement -> (Text) textElement)
                 .map(t -> t.getText())
-                .filter(s -> !s.matches("\\[[A-Za-z{}_ ]+\\] |[A-Z_{} ]+|\\([A-Za-z_. ]+\\)"))
+                .filter(s -> !s.matches("\\[[A-Za-z{}_ ]+\\] |[A-Z_{}| ]+|\\([A-Za-z_. ]+\\)"))
                 .collect(Collectors.joining(" "));
         return result;
 

@@ -196,7 +196,6 @@ public class MainWindow extends UiPart<Stage> {
                 if (downCombo.match(ke)) {
                     commandBox.setTextField(logic.getNextCommandString());
                 }
-            }
         });
     }
 

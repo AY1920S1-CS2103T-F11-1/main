@@ -47,12 +47,15 @@ public class AutoCompleteCommandBox extends JFXTextField {
             "remove participant", "remove mentor", "add participant", "add mentor", "add team", "list participants",
             "list mentors", "list teams", "edit participant", "edit mentor", "edit team", "delete participant",
             "delete mentor", "delete team", "find participant", "find mentor", "find team", "leaderboard", "getTop",
-            "score add", "score sub", "score set", "history", "undo", "redo", "import", "export", "help");
+            "score add", "score sub", "score set", "history", "undo", "redo", "import", "export", "help", "view",
+            "score reset");
 
     public AutoCompleteCommandBox(CommandExecutor commandExecutor) {
         super();
         this.commandExecutor = commandExecutor;
         this.setPromptText("What can I do for you?");
+
+        this.setOnAction(event -> handleCommandEntered());
 
         commandSuggestionSet.addAll(commandSuggestionList);
         commandsPopup = new ContextMenu();
@@ -75,7 +78,9 @@ public class AutoCompleteCommandBox extends JFXTextField {
                 List<String> filteredSuggestionResults = commandSuggestionSet.stream()
                         // Only command suggestion that starts with user input will be filtered out
                         // This is done in a case insensitive manner
-                        .filter(suggestion -> suggestion.toLowerCase().startsWith(getText().toLowerCase()))
+                        .filter(suggestion ->
+                                   suggestion.toLowerCase().startsWith(getText().toLowerCase())
+                                           && !suggestion.equals(getText().toLowerCase()))
                         .collect(Collectors.toList());
 
                 List<String> finalSuggestionResults = new LinkedList<String>();
@@ -275,6 +280,10 @@ public class AutoCompleteCommandBox extends JFXTextField {
         case "score set":
             return suggestionTemplates.SCORE_SET_TEMPLATE;
 
+        case "score reset":
+            return suggestionTemplates.SCORE_RESET_TEMPLATE;
+
+
         default:
             logger.info("SCORE Command Template is null");
             return null;
@@ -340,6 +349,8 @@ public class AutoCompleteCommandBox extends JFXTextField {
         case "exit":
             return suggestionTemplates.EXIT_TEMPLATE;
 
+        case "view":
+            return suggestionTemplates.VIEW_TEMPLATE;
         default:
             logger.info("Other Template is null");
             return null;
