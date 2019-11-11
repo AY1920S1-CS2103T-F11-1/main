@@ -179,9 +179,11 @@ text that you enter into Alfred. The command text that you should enter at the c
 <li>
 <p>Double-click the file to start the app. Alternatively, if you use a Mac, type the command <code>java -jar alfred.jar</code> or replace <code>alfred.jar</code> with the name of the jar file downloaded.
 on terminal in the jar file&#8217;s directory to open and start the app. The GUI should appear in a few seconds.</p>
-<div class="paragraph">
-<div class="title">Layout of the application</div>
-<p>image::Ui.png</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/UiAnnotated.png" alt="UiAnnotated">
+</div>
+<div class="title">Figure 1. Layout of the application</div>
 </div>
 </li>
 <li>
@@ -308,7 +310,7 @@ Must be one of the values below:</p>
 <p>Entertainment</p>
 </li>
 <li>
-<p>Social</p>
+<p>Other</p>
 </li>
 </ul>
 </div>
@@ -868,10 +870,13 @@ the default find does a search by intersection.</p>
 <p>Take note that the <code>assign</code> command can only be used to assign Participants and Mentors to a Team.</p>
 </li>
 <li>
-<p>An error will be shown is the Team already has a Mentor.</p>
+<p>An error will be shown if the Team already has a Mentor.</p>
 </li>
 <li>
 <p>An error will be shown if the Team already has said Participant.</p>
+</li>
+<li>
+<p>An error will be shown if the Team has reach the maximum capacity of five members.</p>
 </li>
 </ul>
 </div>
@@ -883,7 +888,7 @@ the default find does a search by intersection.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>assign mentor M-18 T-2</code> will assign Mentor with ID M-18 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
+<p><code>assign mentor M-18 T-2</code> will assign a Mentor with ID M-18 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
 </li>
 </ul>
 </div>
@@ -921,7 +926,7 @@ the default find does a search by intersection.</p>
 <p>An error will be shown if the Participant or Mentor is not in the specific Team.</p>
 </li>
 <li>
-<p>Deleting a Participant or Mentor will also delete all their connections with a team or teams.</p>
+<p>Deleting a Participant or Mentor will also delete all their connections with all the teams it belongs to.</p>
 </li>
 </ul>
 </div>
@@ -964,7 +969,7 @@ the default find does a search by intersection.</p>
 <div class="content">
 <img src="images/UndoRedoExplanation.png" alt="UndoRedoExplanation" width="790">
 </div>
-<div class="title">Figure 1. History Section of UI</div>
+<div class="title">Figure 2. History Section of UI</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1046,7 +1051,7 @@ All other commands are undo/redo-able.
 <div class="content">
 <img src="images/HistoryCommandExampleOutput.png" alt="HistoryCommandExampleOutput" width="790">
 </div>
-<div class="title">Figure 2. Output from History Command</div>
+<div class="title">Figure 3. Output from History Command</div>
 </div>
 <div class="paragraph">
 <p>The topmost panel is the "redo" delimiter. The second panel from the top is the "current" delimiter. The bottommost panel shows you the "undo" delimiter.</p>
@@ -1292,7 +1297,7 @@ This is because the <code>import</code> command will do its best to import as ma
 <div class="ulist">
 <ul>
 <li>
-<p><code>score sub T-1 15</code> will subtract 20 points from the score of the team with ID T-1.</p>
+<p><code>score sub T-1 15</code> will subtract 15 points from the score of the team with ID T-1.</p>
 </li>
 <li>
 <p><code>score sub T-5 10</code> will subtract 10 points from the score of the team with ID T-5.</p>
@@ -1367,7 +1372,7 @@ This is because the <code>import</code> command will do its best to import as ma
 <p><code>score reset T-1</code> will reset the score of the team with ID T-1.</p>
 </li>
 <li>
-<p><code>score reset T-5 10</code> will reset the score of the team with ID T-5.</p>
+<p><code>score reset T-5</code> will reset the score of the team with ID T-5.</p>
 </li>
 </ul>
 </div>
@@ -1407,7 +1412,7 @@ This is because the <code>import</code> command will do its best to import as ma
 <div class="content">
 <img src="images/LeaderboardExample.png" alt="LeaderboardExample" width="600" height="420">
 </div>
-<div class="title">Figure 3. GUI Display for Command "leaderboard"</div>
+<div class="title">Figure 4. GUI Display for Command "leaderboard"</div>
 </div>
 </div>
 <div class="sect3">
@@ -1454,7 +1459,7 @@ same high score.</p>
 <div class="content">
 <img src="images/TopTeamExample.png" alt="TopTeamExample" width="600" height="420">
 </div>
-<div class="title">Figure 4. GUI Display for Command "getTop 2"</div>
+<div class="title">Figure 5. GUI Display for Command "getTop 2"</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1467,7 +1472,7 @@ same high score.</p>
 <div class="content">
 <img src="images/GetTop4.png" alt="GetTop4" width="600" height="420">
 </div>
-<div class="title">Figure 5. GUI Display for Command "getTop 4"</div>
+<div class="title">Figure 6. GUI Display for Command "getTop 4"</div>
 </div>
 <div class="paragraph">
 <p>Note that due to the tie between the fourth and fifth teams, more than 4 teams are shown.</p>
@@ -1555,7 +1560,7 @@ same high score.</p>
 <div class="content">
 <img src="images/LeaderboardSimple.png" alt="LeaderboardSimple" width="600" height="420">
 </div>
-<div class="title">Figure 6. GUI Display for Command "leaderboard tb/moreParticipants lowerId"</div>
+<div class="title">Figure 7. GUI Display for Command "leaderboard tb/moreParticipants lowerId"</div>
 </div>
 <div class="paragraph">
 <p>Note that in the above team "BroBro" comes above team "Bro" despite having the same number of points as "BroBro" has more participants. Secondly, "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, since "Amazon Warriors" has a lower ID.</p>
@@ -1571,7 +1576,7 @@ same high score.</p>
 <div class="content">
 <img src="images/RandomGetTop.png" alt="RandomGetTop" width="600" height="420">
 </div>
-<div class="title">Figure 7. GUI Display for Command "getTop 3 tb/lessParticipants random"</div>
+<div class="title">Figure 8. GUI Display for Command "getTop 3 tb/lessParticipants random"</div>
 </div>
 <div class="paragraph">
 <p>Note that in the above "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, due to the random tiebreak. Repeating the above command would change the outcome due to the random nature of the tiebreak.</p>
@@ -1620,10 +1625,7 @@ same high score.</p>
 <div class="content">
 <img src="images/HealthLeaderboard.png" alt="HealthLeaderboard" width="600" height="420">
 </div>
-<div class="title">Figure 8. GUI Display for Command "leaderboard s/Health"</div>
-</div>
-<div class="paragraph">
-<p>Note that the above leaderboard only shows team with the subject "Health".</p>
+<div class="title">Figure 9. GUI Display for Command "leaderboard s/Health"</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1636,7 +1638,7 @@ same high score.</p>
 <div class="content">
 <img src="images/HealthMoreP.png" alt="HealthMoreP" width="600" height="420">
 </div>
-<div class="title">Figure 9. GUI Display for Command "getTop 3 tb/moreParticipants s/Health"</div>
+<div class="title">Figure 10. GUI Display for Command "getTop 3 tb/moreParticipants s/Health"</div>
 </div>
 <div class="paragraph">
 <p>Note that in the above team "BroBro" goes above team "Bro" as it has more participants, despite both teams having equal scores.</p>
@@ -1941,7 +1943,7 @@ Below is the layout of  the homepage:</p>
 <div class="content">
 <img src="images/HomeCommandExample.png" alt="HomeCommandExample" width="600" height="200">
 </div>
-<div class="title">Figure 10. Output of <code>home</code> command</div>
+<div class="title">Figure 11. Output of <code>home</code> command</div>
 </div>
 </div>
 <div class="sect2">
@@ -1950,8 +1952,10 @@ Below is the layout of  the homepage:</p>
 <p>As you type, there will be a popup box predicting the type of commands you are going to type. You can navigate through these suggestions and choose the template that suits you.</p>
 </div>
 <div class="paragraph">
-<p>Example:
-Let us suppose that you want to type the command <code>add mentor</code> and you forgot the fields that are required in the command.</p>
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p>Let us suppose that you want to type the command <code>add mentor</code> and you forgot the fields that are required in the command.</p>
 </div>
 <div class="paragraph">
 <p>Instead of going through the user guide to look for the command, a popup box will appear as you type. The content in this box will change as you type, such that the commands suggested will start with the words or letters that you have already entered.</p>
@@ -1962,7 +1966,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Type ‘add’ into the command box, and <code>add participant</code>, <code>add mentor</code> and <code>add team</code>  commands will be suggested to you. The grey text are meant as guides and blue text are meant as usage instructions . These text will not appear if you choose the command.</p>
+<p>Type ‘add’ into the command box, and <code>add participant</code>, <code>add mentor</code> and <code>add team</code>  commands will be suggested to you. The grey text are meant as guides and blue text are meant as usage instructions . These text will not appear when you choose the command of choice.</p>
 </li>
 </ol>
 </div>
@@ -1974,7 +1978,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Press the <code>up</code> or <code>down</code> arrow keys to navigate up and down the popup box.</p>
+<p>Press the <kbd>up arrow</kbd> or <kbd>down arrow</kbd> arrow keys to navigate up and down the popup box.</p>
 </li>
 </ol>
 </div>
@@ -1986,7 +1990,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Press <code>Enter</code> to choose the command of your choice. The command will then appear on the user input box.</p>
+<p>Press <kbd>Enter</kbd> to choose the command of your choice. The command will then appear on the user input box.</p>
 </li>
 </ol>
 </div>
@@ -1998,7 +2002,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Press ‘left’ or ‘right’ keys to navigate the cursor and fill in the respective fields. Press Enter to execute the command.</p>
+<p>Press <kbd>left arrow</kbd> or <kbd>right arrow</kbd> keys to navigate the cursor and fill in the respective fields. Press <kbd>Enter</kbd> to execute the command.</p>
 </li>
 </ol>
 </div>
@@ -2319,4 +2323,4 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:57:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:38:37 UTC</div></div></div></body></html>

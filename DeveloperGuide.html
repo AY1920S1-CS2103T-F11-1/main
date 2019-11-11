@@ -30,7 +30,7 @@
 <li><a href="#command-history-navigation">4.5. Command History Navigation</a></li>
 <li><a href="#home-feature">4.6. Home feature</a></li>
 <li><a href="#command-suggestion-feature">4.7. Command suggestion feature</a></li>
-<li><a href="#assign-and-remove-feature">4.8. Assign and Remove feature</a></li>
+<li><a href="#code-assign-code-code-remove-code-feature">4.8. <code>assign</code> / <code>remove</code> feature</a></li>
 <li><a href="#scoring">4.9. Scoring</a></li>
 <li><a href="#leaderboard-and-get-top-teams">4.10. Leaderboard and Get Top Teams</a></li>
 <li><a href="#find-command">4.11. Find Command</a></li>
@@ -348,7 +348,28 @@ The UI component,
 <div class="sect2">
 <h3 id="Design-Logic"><a class="link" href="#Design-Logic">3.3. Logic component</a></h3>
 <div class="paragraph">
-<p>The logic component of Alfred handles the various commands within Alfred and the parsing of the user input to convert them into such commands. It&#8217;s primary purpose is to execute these commands which leads to an update in <code>Model</code> (depending on the command) and return an appropriate feedback message to the UI component to display to the user. The logic component&#8217;s primary structure is unchanged from the AB3 codebase, though it has been heavily modified to accommodate the new commands implemented with regards to Alfred, as can be seen from the class diagram below which highlights the high level structure of the logic component.</p>
+<p>The <code>Logic</code> component of Alfred handles the various commands within Alfred and
+the parsing of the user input to convert them into such commands.
+It&#8217;s primary purpose is to execute these commands which leads to an update in <code>Model</code>
+(depending on the command) and return an appropriate feedback message to the UI component to
+display to the user. It does this through a set of allocators, parsers and commands.</p>
+</div>
+<div class="paragraph">
+<p>Allocators are relevant for commands which involve a specific entity, such as <code>find participant</code>. The
+allocator will allocate the appropriate <code>FindParticipantCommandParser</code> to parse the input. If the input
+is valid, parsers will then generate a command object to be returned. This command object is then
+executed in <code>LogicManager</code>. However, <code>Logic</code> does not concern itself with the details of the execution.
+That is abstracted away via polymorphism and delegated to <code>Model</code>. Executing a command then returns
+a <code>CommandResult</code> object, which will then be processed to conclude the command execution flow.</p>
+</div>
+<div class="paragraph">
+<p>If any errors are encountered along the way, an error is thrown and the flow terminates.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Logic</code> component&#8217;s primary structure is unchanged from the AB3 codebase,
+though it has been heavily modified to accommodate the new commands implemented with regards to
+Alfred, as can be seen from the class diagram below which highlights the high level structure
+of the logic component.</p>
 </div>
 <div id="fig-LogicClassDiagram" class="imageblock">
 <div class="content">
@@ -1872,7 +1893,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="sect2">
 <h3 id="command-suggestion-feature"><a class="link" href="#command-suggestion-feature">4.7. Command suggestion feature</a></h3>
 <div class="paragraph">
-<p>This feature provides suggestions by predicting the commands that a user intends to enter(as the user types).</p>
+<p>This feature provides suggestions by predicting the commands that a user intends to enter.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1889,31 +1910,25 @@ Only suggestions that start with the same alphabets or spaces as those entered b
 <div class="sect3">
 <h4 id="implementation-5"><a class="link" href="#implementation-5">4.7.1. Implementation</a></h4>
 <div class="paragraph">
-<p>The main class responsible for remembering and providing the previously used command input strings is the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> class.Typing into the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated.
+<p>The main class responsible providing suggestions is the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> class.Typing into the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated.
 Activation of the <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> will prompt it to filter through the set of predefined command suggestions.
-The commands that start with the same text entered by user will be filtered through.
-The first five result will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>.
-This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box.
-ser input box, the method. Pressing <code><code>up</code></code> and <code><code>down</code></code> arrow keys will enable the user to choose a command suggestion.
-Additionally, pressing <code><code>enter</code></code> will filter out different <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> from the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object. The <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>setText</code></a> method will then be called to set the <a href="https://github.com/jfoenixadmin/JFoenix/blob/master/jfoenix/src/main/java/com/jfoenix/controls/JFXTextField.java"><code>JFXTextField</code></a> to the said <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> object.</p>
+The commands that start with the same alphabet or alphabets entered by user will be filtered through.
+The first four result will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>.
+This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box. Pressing up arrow and down arrow keys will enable the user to choose a command suggestion.
+Additionally, pressing <kbd>enter</kbd> will filter out different <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> from the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object. The <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBoxsetText</code></a> method will then be called to set the <a href="https://github.com/jfoenixadmin/JFoenix/blob/master/jfoenix/src/main/java/com/jfoenix/controls/JFXTextField.java"><code>JFXTextField</code></a> to the said <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> object.</p>
 </div>
 <div class="sect5">
 <h6 id="design-considerations-8"><a class="link" href="#design-considerations-8">Design Considerations</a></h6>
-<div class="paragraph">
-<p>The design considerations for the command suggestion feature are as follows.</p>
-</div>
+
 </div>
 <div class="sect4">
 <h5 id="aspect-how-to-store-a-set-of-correct-commands-and-search-through-it-as-the-user-types"><a class="link" href="#aspect-how-to-store-a-set-of-correct-commands-and-search-through-it-as-the-user-types">Aspect: How to store a set of correct commands and search through it as the user types</a></h5>
 <div class="literalblock">
 <div class="content">
-<pre>In order to provide suggestions as a user types, there needs to be a way to store the set of correct commands as strings in the system, and search through it to check if it contains some parts of user input. The results will be provided to the user as suggestions.</pre>
+<pre> In order to provide suggestions as a user types, there needs to be a way to store the set of correct commands as strings in the system, and search through it to check if it contains some parts of user input. The results will then be provided to the user as suggestions.
+* *Alternative 1:* Use an `ArrayList` and go through every element in the array list one by one to look for commands that matches the user input.</pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1:</strong> Use an <code>ArrayList</code> and go through every element in the array list one by one to look for commands that matches the user input.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1928,24 +1943,21 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <li>
 <p><strong>Cons</strong>: Searching through the <code>ArrayList</code> is inefficient as <code>Stream</code> is not used.</p>
 </li>
-</ul>
-</div>
-</li>
 <li>
 <p><strong>Alternative 2</strong>: Store the commands in a <code>Set</code> and convert it to a <code>Stream</code> to search through the commands.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>*Pros</strong>: Prevent duplicates, so that duplicate commands will not be entered accidentally.</p>
+</div>
 <div class="ulist">
 <ul>
-<li>
-<p><strong>Pros</strong>: Prevent duplicates, so that duplicate commands will not be entered accidentally.</p>
-</li>
 <li>
 <p><strong>Pros</strong>: More efficient.</p>
 </li>
 <li>
 <p><strong>Pros</strong>: Easier to search through the set of commands when it is stored as <code>Stream</code>.</p>
-</li>
-</ul>
-</div>
 </li>
 </ul>
 </div>
@@ -1956,14 +1968,13 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="sect4">
 <h5 id="aspect-how-to-fill-up-user-input-text-field-when-a-command-suggestion-is-chosen"><a class="link" href="#aspect-how-to-fill-up-user-input-text-field-when-a-command-suggestion-is-chosen">Aspect: How to fill up user input text field when a command suggestion is chosen</a></h5>
 <div class="paragraph">
-<p>Upon choosing a command suggestion, it template(the command suggestion excluding blue-colored instructions and grey-colored guides) will be used to occupy the user input text field.</p>
+<p>upon choosing a command suggestion, it template(the command suggestion excluding blue-colored instructions and grey-colored guides) will be used to occupy the user input text field.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p><strong>Alternative 1</strong> :Map each command suggestion to their respective templates in <code>String</code> form</p>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p><strong>Pros</strong>: Easy to implement.</p>
 </li>
@@ -1973,13 +1984,9 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <li>
 <p><strong>Cons</strong>: Duplicate logic will be implemented, as the templates could be extracted from the command suggestion itself.</p>
 </li>
-</ul>
-</div>
-</li>
 <li>
 <p><strong>Alternative 2</strong> : Filter out the relevant text template from the command suggestion that is choosen.</p>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p><strong>Pros</strong>: No duplicate logic is implemented as the templates are extracted directly from the choosen command suggestion.</p>
 </li>
@@ -1991,14 +1998,11 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="assign-and-remove-feature"><a class="link" href="#assign-and-remove-feature">4.8. Assign and Remove feature</a></h3>
+<h3 id="code-assign-code-code-remove-code-feature"><a class="link" href="#code-assign-code-code-remove-code-feature">4.8. <code>assign</code> / <code>remove</code> feature</a></h3>
 <div class="paragraph">
 <p>The Class Diagram below showing the high level representation of the Object Oriented solution devised to implement the <code>assign</code> feature.</p>
 </div>
@@ -4299,4 +4303,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:57:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:38:37 UTC</div></div></div></body></html>

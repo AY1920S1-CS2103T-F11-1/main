@@ -11,12 +11,12 @@
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/Ui.png" alt="][height=&quot;200&quot;" width="550">
+<img src="../images/UiAnnotated.png" alt="][height=&quot;200&quot;" width="550">
 </div>
 <div class="title">Figure 1. The graphical user interface for the homepage of Alfred.</div>
 </div>
 <div class="paragraph">
-<p>My main role was to design and write the code for the Graphical User Interface(GUI), to ensure that information about each party is displayed in an organised and readable manner. As part of my duty, I have implemented the command suggestion prompt. I have also implemented assign and remove commands to assign participants or mentors to a team. These are the two main feature I have implemented, The following sections illustrate these enhancements in further detail, including the relevant documentation I have included in the user and developer guide with reference to these features. Further details on the <code>home</code> command feature and layout of the GUI (that I have also implemented) can be found in the user guide and developer guide.</p>
+<p>My main role was to design and write the code for the Graphical User Interface(GUI), in order to ensure that user experience is enhanced, and information is displayed in an organised and readable manner. As part of my duty, I have implemented the command suggestion prompt. I have also implemented <code>assign</code> and <code>remove</code> commands to assign participants or mentors to a team. The following sections illustrate these enhancements in further detail, including the relevant documentation I have included in the user and developer guide with reference to these features. Further details on the <code>home</code> command feature and layout of the GUI (that I have also implemented) can be found in the user guide and developer guide.</p>
 </div>
 <div class="paragraph">
 <p><strong>Note the following terms used in this document</strong>:</p>
@@ -40,11 +40,11 @@
 </table>
 </div>
 <div class="paragraph">
-<p><code>remove mentor</code>  A grey highlight (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the
+<p><code>remove mentor</code>     Text in red indicates that this is a command that can be inputted into the command line and executed by the
 application.</p>
 </div>
 <div class="paragraph">
-<p><a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> An underlined text with grey highlight indicates a component, class or object in
+<p><a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a>   A clickable text in red indicates a component, class or object in
 the architecture of the application. Clicking these text will redirect user to the implementation or interface of the component, class or object.</p>
 </div>
 </div>
@@ -68,26 +68,26 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: This feature predicts the command that a user is going to enter as they are typing, and provides suggestions. The user can then navigate and choose from these suggestions. Doing so will provide a command template for the user to work it.</p>
+<p>What it does: This feature predicts the command that a user is going to enter as they are typing, and provides suggestions. The user can then navigate and choose from these suggestions. Doing so will provide a command template for the user to work with.</p>
 </li>
 <li>
 <p>Justification: Managing different entities in the system requires a variety of commands(in which some are more complex in nature). Thus, this feature allows users to conveniently summon commands. Furthermore, it takes the memory work of remembering numerous commands out of the equation.</p>
 </li>
 <li>
-<p>Highlights: This enhancement works with existing as well as future commands. Addition of new commands would only require minimal changes to the code base of this feature. The fulfilment of this feature was more demanding as it requires a deeper understanding on the working of the third party library JavaFX. On top of that, its implementation was constantly met with errors, before vital concepts regarding the Node components of JavaFX came into light.</p>
+<p>Highlights: This enhancement works with existing as well as future commands. Addition of new commands would only require minimal changes to the code base of this feature. The fulfilment of this feature was more demanding as it requires a deeper understanding on the workings of the third party library JavaFX. On top of that, the implementation of this feature was constantly met with errors, before vital concepts regarding the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/Node.html"><code>Node</code></a> component of JavaFX came into light.</p>
 </li>
 <li>
-<p>Credits: This was inspired by the command suggestion box in Telegram bots. The inspiration of how it can be implemented comes from the following webpage: <a href="https://stackoverflow.com/questions/50495430/how-to-customize-auto-complete-text-field-suggestion-in-javafx" class="bare">https://stackoverflow.com/questions/50495430/how-to-customize-auto-complete-text-field-suggestion-in-javafx</a></p>
+<p>Credits: This was inspired by the command suggestion box in Telegram bots. The inspiration of how this feature can be implemented comes from the following webpage: <a href="https://stackoverflow.com/questions/50495430/how-to-customize-auto-complete-text-field-suggestion-in-javafx" class="bare">https://stackoverflow.com/questions/50495430/how-to-customize-auto-complete-text-field-suggestion-in-javafx</a></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Enhancement added</strong>: I added the ability to assign participants or a mentor to a team</p>
+<p><strong>Enhancement added</strong>: I added the ability to assign several participants or one mentor to a team</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: The assign participant and assign mentor command assigns a participant or mentor to a team. The remove participant or remove mentor command removes said entity from the team.</p>
+<p>What it does: The assign command assigns a participant or mentor to a team. The remove participant or remove mentor command removes said entity from the team.</p>
 </li>
 <li>
 <p>Justification: Hackathons involves teaming participants up and allocating a mentor to guide teams. This feature helps to establish this relation.</p>
@@ -117,13 +117,13 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="ulist">
 <ul>
 <li>
-<p>Wrote additional tests for existing features to increase coverage (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/347">#347</a>)</p>
+<p>Wrote additional tests for existing features to increase coverage (Pull request <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/347">#347</a>)</p>
 </li>
 <li>
 <p>Added and modified constraints of different fields in the commands(Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/15">#15</a>)</p>
 </li>
 <li>
-<p>Implemented sidebar and dark mode for readability and aesthetic purposes (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#158</a>,https://github.com/AY1920S1-CS2103T-F11-1/main/pull/284[#284])</p>
+<p>Implemented sidebar and dark mode for readability and aesthetic purposes (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#158</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/284">#284</a>)</p>
 </li>
 </ul>
 </div>
@@ -149,7 +149,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/127">#127</a></p>
 </li>
 <li>
-<p>Integrated a third party library (FontAwesomeFX and JFeonix) to the project (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#159</a>)</p>
+<p>Integrated a third party library (FontAwesomeFX and JFeonix) to the project (Pull request: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#159</a>)</p>
 </li>
 </ul>
 </div>
@@ -167,7 +167,7 @@ the architecture of the application. Clicking these text will redirect user to t
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>We had to amend the Addressbook User Guide with instructions on how to utilise the enhancement we added. Below is an excerpt of the Alfred User Guide, showcasing the homepage statistics, command suggestion prompt and assign command features I have added.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>We had to amend the Addressbook User Guide with instructions on how to utilise the enhancements we added. Below is an excerpt from the Alfred User Guide, showcasing the command suggestion prompt, <code>assign</code>  and <code>remove</code> command features I have added.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -177,8 +177,10 @@ the architecture of the application. Clicking these text will redirect user to t
 <p>As you type, there will be a popup box predicting the type of commands you are going to type. You can navigate through these suggestions and choose the template that suits you.</p>
 </div>
 <div class="paragraph">
-<p>Example:
-Let us suppose that you want to type the command <code>add mentor</code> and you forgot the fields that are required in the command.</p>
+<p>Example:</p>
+</div>
+<div class="paragraph">
+<p>Let us suppose that you want to type the command <code>add mentor</code> and you forgot the fields that are required in the command.</p>
 </div>
 <div class="paragraph">
 <p>Instead of going through the user guide to look for the command, a popup box will appear as you type. The content in this box will change as you type, such that the commands suggested will start with the words or letters that you have already entered.</p>
@@ -189,7 +191,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Type ‘add’ into the command box, and <code>add participant</code>, <code>add mentor</code> and <code>add team</code>  commands will be suggested to you. The grey text are meant as guides and blue text are meant as usage instructions . These text will not appear if you choose the command.</p>
+<p>Type ‘add’ into the command box, and <code>add participant</code>, <code>add mentor</code> and <code>add team</code>  commands will be suggested to you. The grey text are meant as guides and blue text are meant as usage instructions . These text will not appear when you choose the command of choice.</p>
 </li>
 </ol>
 </div>
@@ -201,7 +203,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Press the <code>up</code> or <code>down</code> arrow keys to navigate up and down the popup box.</p>
+<p>Press the <kbd>up arrow</kbd> or <kbd>down arrow</kbd> arrow keys to navigate up and down the popup box.</p>
 </li>
 </ol>
 </div>
@@ -213,7 +215,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Press <code>Enter</code> to choose the command of your choice. The command will then appear on the user input box.</p>
+<p>Press <kbd>Enter</kbd> to choose the command of your choice. The command will then appear on the user input box.</p>
 </li>
 </ol>
 </div>
@@ -225,7 +227,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Press ‘left’ or ‘right’ keys to navigate the cursor and fill in the respective fields. Press Enter to execute the command.</p>
+<p>Press <kbd>left arrow</kbd> or <kbd>right arrow</kbd> keys to navigate the cursor and fill in the respective fields. Press <kbd>Enter</kbd> to execute the command.</p>
 </li>
 </ol>
 </div>
@@ -248,10 +250,13 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <p>Take note that the <code>assign</code> command can only be used to assign Participants and Mentors to a Team.</p>
 </li>
 <li>
-<p>An error will be shown is the Team already has a Mentor.</p>
+<p>An error will be shown if the Team already has a Mentor.</p>
 </li>
 <li>
 <p>An error will be shown if the Team already has said Participant.</p>
+</li>
+<li>
+<p>An error will be shown if the Team has reach the maximum capacity of five members.</p>
 </li>
 </ul>
 </div>
@@ -263,7 +268,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <div class="ulist">
 <ul>
 <li>
-<p><code>assign mentor M-18 T-2</code> will assign Mentor with ID M-18 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
+<p><code>assign mentor M-18 T-2</code> will assign a Mentor with ID M-18 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
 </li>
 </ul>
 </div>
@@ -301,7 +306,7 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 <p>An error will be shown if the Participant or Mentor is not in the specific Team.</p>
 </li>
 <li>
-<p>Deleting a Participant or Mentor will also delete all their connections with a team or teams.</p>
+<p>Deleting a Participant or Mentor will also delete all their connections with all the teams it belongs to.</p>
 </li>
 </ul>
 </div>
@@ -346,14 +351,14 @@ Let us suppose that you want to type the command <code>add mentor</code> and you
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The following sections shows my contribution to the Alfred Developer Guide for the homepage statistics feature, command suggestion and assign feature.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The following sections shows my contribution to the Alfred Developer Guide for the command suggestion, <code>assign</code> and <code>remove</code> feature.</em></p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
 <h3 id="command-suggestion-feature"><a class="link" href="#command-suggestion-feature">Command suggestion feature</a></h3>
 <div class="paragraph">
-<p>This feature provides suggestions by predicting the commands that a user intends to enter(as the user types).</p>
+<p>This feature provides suggestions by predicting the commands that a user intends to enter.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -370,18 +375,17 @@ Only suggestions that start with the same alphabets or spaces as those entered b
 <div class="sect3">
 <h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
 <div class="paragraph">
-<p>The main class responsible for remembering and providing the previously used command input strings is the <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> class.Typing into the <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated.
+<p>The main class responsible providing suggestions is the <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> class.Typing into the <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated.
 Activation of the <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> will prompt it to filter through the set of predefined command suggestions.
-The commands that start with the same text entered by user will be filtered through.
-The first five result will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>.
-This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box.
-ser input box, the method. Pressing <code><code>up</code></code> and <code><code>down</code></code> arrow keys will enable the user to choose a command suggestion.
-Additionally, pressing <code><code>enter</code></code> will filter out different <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> from the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object. The <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>setText</code></a> method will then be called to set the <a href="https://github.com/jfoenixadmin/JFoenix/blob/master/jfoenix/src/main/java/com/jfoenix/controls/JFXTextField.java"><code>JFXTextField</code></a> to the said <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> object.</p>
+The commands that start with the same alphabet or alphabets entered by user will be filtered through.
+The first four result will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>.
+This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box. Pressing up arrow and down arrow keys will enable the user to choose a command suggestion.
+Additionally, pressing <kbd>enter</kbd> will filter out different <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> from the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object. The <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBoxsetText</code></a> method will then be called to set the <a href="https://github.com/jfoenixadmin/JFoenix/blob/master/jfoenix/src/main/java/com/jfoenix/controls/JFXTextField.java"><code>JFXTextField</code></a> to the said <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> object.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="assign-and-remove-feature"><a class="link" href="#assign-and-remove-feature">Assign and Remove feature</a></h3>
+<h3 id="code-assign-code-code-remove-code-feature"><a class="link" href="#code-assign-code-code-remove-code-feature"><code>assign</code> / <code>remove</code> feature</a></h3>
 <div class="paragraph">
 <p>The Class Diagram below showing the high level representation of the Object Oriented solution devised to implement the <code>assign</code> feature.</p>
 </div>
@@ -527,4 +531,4 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:57:43 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 14:38:37 UTC</div></div></div></body></html>
