@@ -4,25 +4,25 @@
 <h2 id="about-the-project"><a class="link" href="#about-the-project">About the project</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>My team and I were tasked with enhancing an desktop application, which is command line interface addressbook application. After careful consideration, we have morphed the application into a Hackathon personnel management system called Alfred. With the target user of Human Resource Managers of small to medium sized enterprise and start-ups in mind, we created this application help streamline the management of Hackathon. This improved application enables users to manage different parties of participants, teams and mentors. Additionally, it automatically establishes relationship between these parties, delegating the tedious task of maintaining complex relationships to the system itself.</p>
+<p>My team and I were tasked with enhancing a command line interface addressbook application. After careful consideration, we morphed the application into a Hackathon personnel management system called Alfred. With human resource managers of startups and small- and medium- sized enterprise in mind, we created this application to help streamline the management of Hackathon competitions. This improved application enables users to manage different parties(like participants, teams and mentors). Additionally, it automatically establishes relationships between these parties, delegating the tedious task of maintaining complex relationships to the system itself.</p>
 </div>
 <div class="paragraph">
 <p>This is what our project looks like:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/Ui.png" alt="Ui">
+<img src="../images/Ui.png" alt="][height=&quot;200&quot;" width="550">
 </div>
 <div class="title">Figure 1. The graphical user interface for the homepage of Alfred.</div>
 </div>
 <div class="paragraph">
-<p>My main role was to design and write the code for the Graphical User Interface(GUI) to ensure that information about each party(participant, team and mentor alike) is displayed in an organised and readable manner. Additionally, as part of my duty, I have also implemented the command prompt box and homepage statistics. This ensures that users do not need to type out complex commands and that they are well informed of the statistics of different parties in the system. I have also implemented assign and remove commands to assign participants or mentors to a team. The following sections illustrate these enhancements in further detail, including the relevant documentation I have included in the user and developer guide with reference to these features.</p>
+<p>My main role was to design and write the code for the Graphical User Interface(GUI), to ensure that information about each party is displayed in an organised and readable manner. As part of my duty, I have implemented the command suggestion prompt. I have also implemented assign and remove commands to assign participants or mentors to a team. These are the two main feature I have implemented, The following sections illustrate these enhancements in further detail, including the relevant documentation I have included in the user and developer guide with reference to these features. Further details on the <code>home</code> command feature and layout of the GUI (that I have also implemented) can be found in the user guide and developer guide.</p>
 </div>
 <div class="paragraph">
 <p><strong>Note the following terms used in this document</strong>:</p>
 </div>
 <div class="paragraph">
-<p><strong>Entity</strong>: The term entity refers to different parties that could be stored in the system. This includes participants, teams and mentors that are involved in the Hackathon competition.</p>
+<p><strong>Entity</strong>: Entity refers to different parties that could be stored in the system. This includes participants, teams and mentors that are involved in the Hackathon competition.</p>
 </div>
 <div class="paragraph">
 <p><strong>Note the following symbols and formatting used in this document</strong>:</p>
@@ -63,47 +63,6 @@ the architecture of the application. Clicking these text will redirect user to t
 </tbody>
 </table>
 <div class="paragraph">
-<p><strong>Enhancement added</strong>: I have improved on the design of the GUI</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: There are two main features of the GUI. The first feature is the sidebar. The sidebar consist of different sections. When commands are entered, the result will be shown, with respective sections of the sidebar highlighted for reference. Secondly, I have also implemented the parsing and display of information returned by the backend into cards.</p>
-</li>
-<li>
-<p>Justification: Upon entering commands into the application, the result of these commands will return the details of different entities. Parsing and displaying these information into a more visual manner will allow users to be able to digest such information easily and intuitively. Furthermore, being able to view the section of the sidebar that is highlighted will give the user a clearer idea of the type of entity they are looking at.</p>
-</li>
-<li>
-<p>Credits: Two third party libraries are used. They are Jfeonix and FontAwesomeFx Library.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Code contributed</strong>: Please click these links to see a sample of my code: [Functional code] [Test code] {give links to collated code files}</p>
-</div>
-<div class="paragraph">
-<p><strong>Enhancement added</strong>: I added the ability to view statistics on the homepage of the application</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: The home command allows the user to navigate to the homepage of the application. The homepage displays statistics that informs users on the number of entities ( by their entity type), as well as the distribution of entity by subjects.</p>
-</li>
-<li>
-<p>Justification: Hackathon competitions may be a measurably large event with large volumes of entities stored in the system. Hence, the overall view of the total number of each entity is needed to keep the maximum capacity of the competition in check. Additionally, the distribution graph of entities by subjects will allow optimal allocation of participants into teams or mentors to teams (according to their subject of choice).</p>
-</li>
-<li>
-<p>Highlights: The implementation of the distribution graph requires sieving through entities of the same type by subjects. Therefore, the Stream data structure was used to create a more elegant solution.</p>
-</li>
-<li>
-<p>Credits: JavaFX library was used.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Code contributed</strong>: Please click these links to see a sample of my code: [Functional code] [Test code] {give links to collated code files}</p>
-</div>
-<div class="paragraph">
 <p><strong>Enhancement added</strong>: I added the ability to choose from different suggested command templates as a user types into the user input box</p>
 </div>
 <div class="ulist">
@@ -123,9 +82,6 @@ the architecture of the application. Clicking these text will redirect user to t
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Code contributed</strong>: Please click these links to see a sample of my code: [Functional code] [Test code] {give links to collated code files}</p>
-</div>
-<div class="paragraph">
 <p><strong>Enhancement added</strong>: I added the ability to assign participants or a mentor to a team</p>
 </div>
 <div class="ulist">
@@ -139,7 +95,7 @@ the architecture of the application. Clicking these text will redirect user to t
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Code contributed</strong>: Please click these links to see a sample of my code: [Functional code] [Test code] {give links to collated code files}</p>
+<p><strong>Code contributed</strong>: Please click these links to see a sample of my code: <a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=f11&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=Joanna-YJA&amp;tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D">Functional code</a> | <a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=joanna-yja&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=Joanna-YJA&amp;tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D">Test code</a></p>
 </div>
 <div class="paragraph">
 <p><strong>Other contributions</strong>:</p>
@@ -151,7 +107,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="ulist">
 <ul>
 <li>
-<p>There were a total of 5 releases, from version 1.1 to 1.5. I managed releases versions 1.2.1 on GitHub.</p>
+<p>There were a total of 5 releases, from version 1.1 to 1.5. I managed releases versions <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/releases/tag/v1.2.1">1.2.1</a> on GitHub.</p>
 </li>
 </ul>
 </div>
@@ -161,16 +117,13 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="ulist">
 <ul>
 <li>
-<p>Wrote additional tests for existing features to increase coverage (Pull requests #36, #38)</p>
+<p>Wrote additional tests for existing features to increase coverage (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/347">#347</a>)</p>
 </li>
 <li>
-<p>Enhanced delete command to enable the deletion of all entities or more than one entiy (Pull requests #36, #38)</p>
+<p>Added and modified constraints of different fields in the commands(Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/15">#15</a>)</p>
 </li>
 <li>
-<p>Added and modified constraints of different fields in the commands(Pull requests #36, #38)</p>
-</li>
-<li>
-<p>Implemented dark mode for readability and aesthetic purposes (Pull requests #36)</p>
+<p>Implemented sidebar and dark mode for readability and aesthetic purposes (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#158</a>,https://github.com/AY1920S1-CS2103T-F11-1/main/pull/284[#284])</p>
 </li>
 </ul>
 </div>
@@ -180,7 +133,7 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="ulist">
 <ul>
 <li>
-<p>Added user stories and use cases to Developer Guide(Pull requests #36)</p>
+<p>Added user stories and use cases to Developer Guide(Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/149">#149</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/153">#153</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/215">#215</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/293">#293</a>)</p>
 </li>
 </ul>
 </div>
@@ -190,20 +143,13 @@ the architecture of the application. Clicking these text will redirect user to t
 <div class="ulist">
 <ul>
 <li>
-<p>Reviewed Pull Requests (with non-trivial review comments): #12, #32, #19, #42</p>
+<p>Reviewed Pull Requests (with non-trivial review comments): <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/280">#200</a>,
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/104">#104</a>
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/173">#173</a>
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/127">#127</a></p>
 </li>
 <li>
-<p>Reported bugs and offered suggestions for other teams in the class (examples: 1, 2, 3)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (FontAwesomeFX and JFeonix) to the project (#42)</p>
+<p>Integrated a third party library (FontAwesomeFX and JFeonix) to the project (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#159</a>)</p>
 </li>
 </ul>
 </div>
@@ -225,6 +171,170 @@ the architecture of the application. Clicking these text will redirect user to t
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="command-suggestion-prompt"><a class="link" href="#command-suggestion-prompt">Command Suggestion Prompt</a></h3>
+<div class="paragraph">
+<p>As you type, there will be a popup box predicting the type of commands you are going to type. You can navigate through these suggestions and choose the template that suits you.</p>
+</div>
+<div class="paragraph">
+<p>Example:
+Let us suppose that you want to type the command <code>add mentor</code> and you forgot the fields that are required in the command.</p>
+</div>
+<div class="paragraph">
+<p>Instead of going through the user guide to look for the command, a popup box will appear as you type. The content in this box will change as you type, such that the commands suggested will start with the words or letters that you have already entered.</p>
+</div>
+<div class="paragraph">
+<p>As you type:<br></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Type ‘add’ into the command box, and <code>add participant</code>, <code>add mentor</code> and <code>add team</code>  commands will be suggested to you. The grey text are meant as guides and blue text are meant as usage instructions . These text will not appear if you choose the command.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandSuggestionStep1.png" alt="CommandSuggestionStep1" width="600" height="10">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Press the <code>up</code> or <code>down</code> arrow keys to navigate up and down the popup box.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandSuggestionStep2.png" alt="CommandSuggestionStep2" width="600" height="10">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Press <code>Enter</code> to choose the command of your choice. The command will then appear on the user input box.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandSuggestionStep3.png" alt="CommandSuggestionStep3" width="600" height="10">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Press ‘left’ or ‘right’ keys to navigate the cursor and fill in the respective fields. Press Enter to execute the command.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/CommandSuggestionStep4.png" alt="CommandSuggestionStep4" width="600" height="10">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="assigning-a-entity-to-a-team-code-assign-mentor-participant-id-team_id-code"><a class="link" href="#assigning-a-entity-to-a-team-code-assign-mentor-participant-id-team_id-code">Assigning a Entity to a Team: <code>assign {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></a></h3>
+<div class="paragraph">
+<p>Assigns Mentor or Participant Entity by their ID to a team identified by TEAM_ID. It is possible to assign a participant or mentor to multiple teams.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Take note that the <code>assign</code> command can only be used to assign Participants and Mentors to a Team.</p>
+</li>
+<li>
+<p>An error will be shown is the Team already has a Mentor.</p>
+</li>
+<li>
+<p>An error will be shown if the Team already has said Participant.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>assign mentor M-18 T-2</code> will assign Mentor with ID M-18 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignCommandExample1.png" alt="AssignCommandExample1" width="550" height="200">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>assign participant P-100 T-2</code> will assign Participant with ID P-100 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignCommandExample2.png" alt="AssignCommandExample2" width="550" height="200">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="removing-an-entity-from-a-team-code-remove-mentor-participant-id-team_id-code"><a class="link" href="#removing-an-entity-from-a-team-code-remove-mentor-participant-id-team_id-code">Removing an Entity from a Team: <code>remove {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></a></h3>
+<div class="paragraph">
+<p>Removes Mentor or Participant Entity by their ID from a team identified by TEAM_ID.<br></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Take note that the <code>remove</code> command can only be used to remove Participant or Mentor from a Team.</p>
+</li>
+<li>
+<p>An error will be shown if the Participant or Mentor is not in the specific Team.</p>
+</li>
+<li>
+<p>Deleting a Participant or Mentor will also delete all their connections with a team or teams.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>remove mentor M-18 T-8</code> will remove Mentor with ID M-18 to Team with ID T-8. Running the command will show you the text 'Mentor not assigned' in the respective team. The following will be shown in the 'Team' section of the GUI:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RemoveCommandExample1.png" alt="RemoveCommandExample1" width="550" height="200">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>remove participant P-100 T-2</code> will remove Participant with ID P-100 from Team with ID T-2.Running the command will show you the following output in the 'Team' section of the GUI</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RemoveCommandExample2.png" alt="RemoveCommandExample2" width="550" height="200">
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -240,6 +350,128 @@ the architecture of the application. Clicking these text will redirect user to t
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="command-suggestion-feature"><a class="link" href="#command-suggestion-feature">Command suggestion feature</a></h3>
+<div class="paragraph">
+<p>This feature provides suggestions by predicting the commands that a user intends to enter(as the user types).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only suggestions that start with the same alphabets or spaces as those entered by user will be suggested.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="paragraph">
+<p>The main class responsible for remembering and providing the previously used command input strings is the <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> class.Typing into the <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated.
+Activation of the <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> will prompt it to filter through the set of predefined command suggestions.
+The commands that start with the same text entered by user will be filtered through.
+The first five result will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>.
+This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box.
+ser input box, the method. Pressing <code><code>up</code></code> and <code><code>down</code></code> arrow keys will enable the user to choose a command suggestion.
+Additionally, pressing <code><code>enter</code></code> will filter out different <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> from the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object. The <a href="{repoURL}/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>setText</code></a> method will then be called to set the <a href="https://github.com/jfoenixadmin/JFoenix/blob/master/jfoenix/src/main/java/com/jfoenix/controls/JFXTextField.java"><code>JFXTextField</code></a> to the said <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> object.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-assign-code-code-remove-code-feature"><a class="link" href="#code-assign-code-code-remove-code-feature"><code>assign</code> / <code>remove</code> feature</a></h3>
+<div class="paragraph">
+<p>The Class Diagram below showing the high level representation of the Object Oriented solution devised to implement the <code>assign</code> feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignClassDiagram.png" alt="AssignClassDiagram" width="600">
+</div>
+<div class="title">Figure 2. Assign Class Diagram</div>
+</div>
+<div class="paragraph">
+<p>The Class Diagram below showing the high level representation of the Object Oriented solution devised to implement the <code>remove</code> feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RemoveClassDiagram.png" alt="RemoveClassDiagram" width="600">
+</div>
+<div class="title">Figure 3. Remove Class Diagram</div>
+</div>
+<div class="paragraph">
+<p>Upon successful assignation, the new participant or mentor will be stored internally in the list of participant or optional mentor field in the Team object. Upon successful removal of Participant or Team, the specified participant or mentor will be removed from the Team object. Additionally, it calls the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#addMentorToTeam</code></a> – adds mentor to a specified team</p>
+</li>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#addParticipantToTeam</code></a> – adds participant to team</p>
+</li>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#removeParticipantFromTeam</code></a> – removes participant from team</p>
+</li>
+<li>
+<p><a href="{repoURL}/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#removeMentorFromTeam</code></a> – removes mentor from team</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="code-assign-code-feature"><a class="link" href="#code-assign-code-feature"><code>assign</code> feature</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>assign participant</code> command will add the new participant under the list of participant in the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This is provided that the number of members in the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object(size of list of participants) is less than 5.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>assign participant</code> operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/AssignParticipantCommandSequenceDiagram.png" alt="][width=790" height="480">
+</div>
+<div class="title">Figure 4. Sequence Diagram for an example of <code>assign participant</code> command</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>assign mentor</code> command will add the new mentor under the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field in the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This is provided that there is no existing mentor in the team. The sequence diagram of <code>assign mentor</code> is similar to that of <code>assign participant</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-remove-code-feature"><a class="link" href="#code-remove-code-feature"><code>remove</code> feature</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The remove participant will first search through the list of participant under the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This checks whether the specified participant is a member of the team in the first place. If it is not a member, an error will be thrown. Whereas if it is a member, the specified participant will be removed from the list of participant.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the <code>remove participant</code> operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RemoveParticipantCommandSequenceDiagram.png" alt="][width=790" height="480">
+</div>
+<div class="title">Figure 5. Sequence Diagram for an example of <code>remove participant</code> command</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The <code>remove mentor</code> command  will first check whether the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field under the specified <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object is not empty and corresponds to the specified mentor. This checks whether the team have not been assigned a mentor, or they have been assigned to a different mentor. Under any of these cases, and error will be thrown. Whereas if the team is assigned the specific mentor, the specified mentor will be removed from the <a href="{repoURL}/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field.The sequence diagram of <code>remove mentor</code> is similar to that of <code>remove participant</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -251,15 +483,15 @@ the architecture of the application. Clicking these text will redirect user to t
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When designing the GUI, homepage statistics, command suggestion and assign/remove functions, careful deliberation was needed on optimum data structure to use and design principle to employ to implement these features. Below is a brief summary of the thought process I put in before coming to a decision. _</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When designing the GUI, homepage statistics, command suggestion and assign/remove functions, careful deliberation was needed on optimum data structure to use and design principle to employ to implement these features. Below is a brief summary of the thought process I put in before coming to a decision.</p></td>
 </tr>
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 22%;">
+<col style="width: 38%;">
+<col style="width: 40%;">
 </colgroup>
 <tbody>
 <tr>
@@ -268,44 +500,31 @@ the architecture of the application. Clicking these text will redirect user to t
 <td class="tableblock halign-left valign-top"><p class="tableblock">Alternative 2</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ways to update different entity list</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The system collects information form Model after each command, to display the entity list as the command result.</p>
-<p class="tableblock"> <strong>Pros</strong>: Easy to implement with existing Model interface</p>
-<p class="tableblock"> <strong>Cons</strong>: High degree of dependency between UI components and Model components(high coupling).</p>
-<p class="tableblock"> <strong>Cons</strong>: Updating of the data is not automatic.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The system uses and Observable interface that observes for changes in the three types of list, namely ParticipantList, TeamList and MentorList.</p>
-<p class="tableblock"> <strong>Pros</strong>: Low degree of dependency between UI and Model components(low coupling).</p>
-<p class="tableblock">	<strong>Pros</strong>: The data in GUI is automatically updated.</p>
-<p class="tableblock">	<strong>Cons</strong>: Harder to implement.</p>
-<p class="tableblock">I have decided to go with this alternative because low dependency will ensure testability and maintainability of the system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How to store a set of correct commands and search through it as user types: In order to provide suggestions as a user types, there needs to be a way to store the set of correct commands as strings in the system, and search through it to check if it contains some parts of user input. The results will be provided to the user as suggestions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use an <code>ArrayList</code> and go through every element in the array list one by one to look for commands that matches the user input.</p>
+<p class="tableblock"><strong>Pros</strong>: Easy to implement</p>
+<p class="tableblock"><strong>Pros</strong>: When new commands are implemented, they can easily be added into the <code>ArrayList</code></p>
+<p class="tableblock"><strong>Cons</strong>: Allows duplicates, if duplicate commands are added into the <code>ArrayList</code>, duplicate suggestions may be provided.</p>
+<p class="tableblock"><strong>Cons</strong>: Searching through the <code>ArrayList</code> is inefficient as <code>Stream</code> is not used.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store the commands in a <code>Set</code> and convert it to a <code>Stream</code> to search through the commands.</p>
+<p class="tableblock"><strong>Pros</strong>: Prevent duplicates, so that duplicate commands will not be entered accidentally.</p>
+<p class="tableblock"><strong>Pros</strong>: More efficient.</p>
+<p class="tableblock"><strong>Pros</strong>: Easier to search through the set of commands when it is stored as <code>Stream</code>.</p>
+<p class="tableblock">I have decided to proceed with this option as preventing duplicates enables a more defensive style of programming. It is also more efficient.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Finding the distribution of Teams and Mentors by subjects</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implementing methods to keep track of number of mentors or participant under the respective TeamList or ParticipantList class.</p>
-<p class="tableblock"><strong>Pros</strong>: Each of TeamList or  Participant list will have their individual responsibilities in keeping track of the distribution of its teams or mentors.</p>
-<p class="tableblock"><strong>Cons</strong>: Clutters up the Model and ModelManger interface.</p>
-<p class="tableblock"><strong>Cons</strong>: Does not make use of existing methods under Model.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Getting TeamList or ParticipantList from Model and implementing operation to find the distribution separately.</p>
-<p class="tableblock"><strong>Pros</strong>: Makes use of existing Model methods of getting TeamList and ParticipantList</p>
-<p class="tableblock"><strong>Pros</strong>: Does not clutter up Model and ModelManager with different methods</p>
-<p class="tableblock"><strong>Pros</strong>: Greater flexibility in implementing methods to find the distribution of teams or mentors.</p>
-<p class="tableblock"><strong>Cons</strong>: Clutters up the Model and ModelManger interface.</p>
-<p class="tableblock"><strong>Cons</strong>: Does not make use of existing methods under Model.</p>
-<p class="tableblock">I decided to proceed with this option because it makes use of existing methods under Model and provides greater flexibility on how I can find the distribution number by subject from the TeamList or ParticipantList.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">How to generate EntityCard and ListPanel to display different entities</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implement different classes that inherits EntityCard, like TeamCard, ParticipantCard and MentorCard respectively. Additionaly, implement different classes that extents ListPanel, like TeamListPanel and more.</p>
-<p class="tableblock"><strong>Pros</strong>: Easy to implement and style respective cards and list panels.</p>
-<p class="tableblock"><strong>Cons</strong>: Logic is duplicated many times, one for each type of entity. For example, ParticipantCard and Mentorcard are similar for most fields, except the extra field of Organisation and Specialisation.</p>
-<p class="tableblock"><strong>Cons</strong>:  Clutters the system with extra classes.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implement a EntityCard class with a skeleton structure. Then dynamically add and morph the fields in Entity card according to the entity type.</p>
-<p class="tableblock"><strong>Pros</strong>: No duplication of the same logic and implementation, as abstraction was used</p>
-<p class="tableblock"><strong>Pros</strong>: Lesser class files required.</p>
-<p class="tableblock"><strong>Cons</strong>: Harder to implement.</p>
-<p class="tableblock">I have decided to proceed with this option because this alternative employs that theory of abstraction in programming, and it there is less redundant code in this implementation.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How to fill up user input text field when a command suggestion is chosen:</p>
+<p class="tableblock">upon choosing a command suggestion, it template(the command suggestion excluding blue-colored instructions and grey-colored guides) will be used to occupy the user input text field.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map each command suggestion to their respective templates in <code>String</code> form</p>
+<p class="tableblock"><strong>Pros</strong>: Easy to implement.</p>
+<p class="tableblock"><strong>Cons</strong>: Tedious to implement(requires many lines of code).</p>
+<p class="tableblock"><strong>Cons</strong>: Duplicate logic will be implemented, as the templates could be extracted from the command suggestion itself.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filter out the relevant text template from the command suggestion that is choosen.</p>
+<p class="tableblock"><strong>Pros</strong>: No duplicate logic is implemented as the templates are extracted directly from the choosen command suggestion.</p>
+<p class="tableblock"><strong>Pros</strong>: Lesser code needs to be written in order to extract the template from the choosen command suggestion.</p>
+<p class="tableblock"><strong>Pros</strong>: Use of regular expression may be harder to implement.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:25:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:36:48 UTC</div></div></div></body></html>

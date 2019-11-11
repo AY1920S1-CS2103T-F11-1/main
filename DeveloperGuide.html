@@ -228,10 +228,15 @@ UI image and description to be updated with the later milestones.
 </div>
 </div>
 <div class="paragraph">
-<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
+<p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a>
+The UI consist of a <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> that is made up of different parts like <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/StatusBarFooter.java"><code>StatusBarFooter.</code></a> , <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/ResultDisplay.java"><code>ResultDisplay</code></a> and more. All these including <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindo</code></a> , inherit from the abstract <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/UiPart.java"><code>UiPart</code></a> class.</p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>EntityListPanel</code>, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/EntityListPanel.java"><code>EntityListPanel</code></a> consist of any number <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/EntityCard.java"><code>EntityCard</code></a> (which also inherits from the abstract UiPart class). The <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/EntityCard.java"><code>EntityCard</code></a>  will dynamically generate cards of different entity type according to the data provided by Model, hence it will have a soft dependency on Model.
+The UI component uses JavaFX UI framework, with the support of third party libraries JFeonix and FontAwesomeFX. The layout of these UI parts are defined in matching .fxml files that are in the src/main/resources/view folder. For example, the layout of the MainWindow is specified in MainWindow.fxml.
+The UI component,
+•  Executes user commands using the Logic component.
+•  Listens for changes to <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/Model.java"><code>Model</code></a> data so that the UI can be updated with the modified data.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -242,10 +247,10 @@ UI image and description to be updated with the later milestones.
 <div class="ulist">
 <ul>
 <li>
-<p>Executes user commands using the <code>Logic</code> component.</p>
+<p>Executes user commands using the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/logic/Logic.java"><code>Logic</code></a> component.</p>
 </li>
 <li>
-<p>Looks at the prefix commandType given in the CommandResult(returned after every Command is executed), as displays the specific EntityListPanel respectively.</p>
+<p>Looks at the prefix commandType given in the CommandResult(returned after every Command is executed), as displays the specific <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/EntityListPanel.java"><code>EntityListPanel</code></a> respectively.</p>
 </li>
 </ul>
 </div>
@@ -1821,7 +1826,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/HomeCommandSequenceDiagram.png" alt="HomeCommandSequenceDiagram">
+<img src="images/HomeCommandSequenceDiagram.png" alt="][width=790" height="480">
 </div>
 <div class="title">Figure 35. Sequence Diagram for <code>home</code> command</div>
 </div>
@@ -1884,11 +1889,135 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="sect2">
 <h3 id="command-suggestion-feature"><a class="link" href="#command-suggestion-feature">4.7. Command suggestion feature</a></h3>
 <div class="paragraph">
-<p>Typing into the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteTextField.java"><code>AutoCompleteTextField</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated. Activation of the <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> will prompt it to filter through the set of predefined command suggestions. The commands that start with the same text entered by user will be filtered through. These commands will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>. This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box.</p>
+<p>This feature provides suggestions by predicting the commands that a user intends to enter(as the user types).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only suggestions that start with the same alphabets or spaces as those entered by user will be suggested.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation-5"><a class="link" href="#implementation-5">4.7.1. Implementation</a></h4>
+<div class="paragraph">
+<p>The main class responsible for remembering and providing the previously used command input strings is the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> class.Typing into the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>AutoCompleteCommandBox</code></a> will prompt the attached <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> to be activated.
+Activation of the <a href="https://docs.oracle.com/javafx/2/api/javafx/beans/value/ChangeListener.html"><code>Listener</code></a> will prompt it to filter through the set of predefined command suggestions.
+The commands that start with the same text entered by user will be filtered through.
+The first five result will then be mapped to their respective <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object and added to the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a>.
+This <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ContextMenu.html"><code>ContextMenu</code></a> will then appear as a pop up box.
+ser input box, the method. Pressing <code><code>up</code></code> and <code><code>down</code></code> arrow keys will enable the user to choose a command suggestion.
+Additionally, pressing <code><code>enter</code></code> will filter out different <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> from the <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/TextFlow.html"><code>TextFlow</code></a> object. The <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/ui/AutoCompleteCommandBox.java"><code>setText</code></a> method will then be called to set the <a href="https://github.com/jfoenixadmin/JFoenix/blob/master/jfoenix/src/main/java/com/jfoenix/controls/JFXTextField.java"><code>JFXTextField</code></a> to the said <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/text/Text.html"><code>Text</code></a> object.</p>
+</div>
+<div class="sect5">
+<h6 id="design-considerations-8"><a class="link" href="#design-considerations-8">Design Considerations</a></h6>
+
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-store-a-set-of-correct-commands-and-search-through-it-as-the-user-types"><a class="link" href="#aspect-how-to-store-a-set-of-correct-commands-and-search-through-it-as-the-user-types">Aspect: How to store a set of correct commands and search through it as the user types</a></h5>
+<div class="literalblock">
+<div class="content">
+<pre> In order to provide suggestions as a user types, there needs to be a way to store the set of correct commands as strings in the system, and search through it to check if it contains some parts of user input. The results will be provided to the user as suggestions.
+* *Alternative 1:* Use an `ArrayList` and go through every element in the array list one by one to look for commands that matches the user input.</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros</strong>: Easy to implement</p>
+</li>
+<li>
+<p><strong>Pros</strong>: When new commands are implemented, they can easily be added into the <code>ArrayList</code></p>
+</li>
+<li>
+<p><strong>Cons</strong>: Allows duplicates, if duplicate commands are added into the <code>ArrayList</code>, duplicate suggestions may be provided.</p>
+</li>
+<li>
+<p><strong>Cons</strong>: Searching through the <code>ArrayList</code> is inefficient as <code>Stream</code> is not used.</p>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Store the commands in a <code>Set</code> and convert it to a <code>Stream</code> to search through the commands.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>*Pros</strong>: Prevent duplicates, so that duplicate commands will not be entered accidentally.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Pros</strong>: More efficient.</p>
+</li>
+<li>
+<p><strong>Pros</strong>: Easier to search through the set of commands when it is stored as <code>Stream</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I have decided to proceed with this option as preventing duplicates enables a more defensive style of programming. It is also more efficient.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-fill-up-user-input-text-field-when-a-command-suggestion-is-chosen"><a class="link" href="#aspect-how-to-fill-up-user-input-text-field-when-a-command-suggestion-is-chosen">Aspect: How to fill up user input text field when a command suggestion is chosen</a></h5>
+<div class="paragraph">
+<p>upon choosing a command suggestion, it template(the command suggestion excluding blue-colored instructions and grey-colored guides) will be used to occupy the user input text field.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong> :Map each command suggestion to their respective templates in <code>String</code> form</p>
+</li>
+<li>
+<p><strong>Pros</strong>: Easy to implement.</p>
+</li>
+<li>
+<p><strong>Cons</strong>: Tedious to implement(requires many lines of code).</p>
+</li>
+<li>
+<p><strong>Cons</strong>: Duplicate logic will be implemented, as the templates could be extracted from the command suggestion itself.</p>
+</li>
+<li>
+<p><strong>Alternative 2</strong> : Filter out the relevant text template from the command suggestion that is choosen.</p>
+</li>
+<li>
+<p><strong>Pros</strong>: No duplicate logic is implemented as the templates are extracted directly from the choosen command suggestion.</p>
+</li>
+<li>
+<p><strong>Pros</strong>: Lesser code needs to be written in order to extract the template from the choosen command suggestion.</p>
+</li>
+<li>
+<p><strong>Pros</strong>: Use of regular express ion may be harder to implement.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="code-assign-code-code-remove-code-feature"><a class="link" href="#code-assign-code-code-remove-code-feature">4.8. <code>assign</code> / <code>remove</code> feature</a></h3>
+<div class="paragraph">
+<p>The Class Diagram below showing the high level representation of the Object Oriented solution devised to implement the <code>assign</code> feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/AssignClassDiagram.png" alt="AssignClassDiagram" width="600">
+</div>
+<div class="title">Figure 36. Assign Class Diagram</div>
+</div>
+<div class="paragraph">
+<p>The Class Diagram below showing the high level representation of the Object Oriented solution devised to implement the <code>remove</code> feature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RemoveClassDiagram.png" alt="RemoveClassDiagram" width="600">
+</div>
+<div class="title">Figure 37. Remove Class Diagram</div>
+</div>
 <div class="paragraph">
 <p>Upon successful assignation, the new participant or mentor will be stored internally in the list of participant or optional mentor field in the Team object. Upon successful removal of Participant or Team, the specified participant or mentor will be removed from the Team object. Additionally, it calls the following operations:</p>
 </div>
@@ -1905,6 +2034,11 @@ execution will the text in the Command input Box disappear, so this feature is n
 </li>
 <li>
 <p><a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/ModelManager.java"><code>ModelManager#removeMentorFromTeam</code></a> – removes mentor from team</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="code-assign-code-feature"><a class="link" href="#code-assign-code-feature">4.8.1. <code>assign</code> feature</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1912,23 +2046,27 @@ execution will the text in the Command input Box disappear, so this feature is n
 </li>
 </ol>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>The following sequence diagram shows how the <code>assign participant</code> operation works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AssignParticipantCommandSequenceDiagram.png" alt="AssignParticipantCommandSequenceDiagram">
+<img src="images/AssignParticipantCommandSequenceDiagram.png" alt="][width=790" height="480">
 </div>
-<div class="title">Figure 36. Sequence Diagram for an example of <code>assign participant</code> command</div>
+<div class="title">Figure 38. Sequence Diagram for an example of <code>assign participant</code> command</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>The <code>assign mentor</code> command will add the new mentor under the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field in the specified <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This is provided that there is no existing mentor in the team. The sequence diagram of <code>assign mentor</code> is similar to that of <code>assign participant</code>.</p>
 </li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="code-remove-code-feature"><a class="link" href="#code-remove-code-feature">4.8.2. <code>remove</code> feature</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>The remove participant will first search through the list of participant under the specified <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object. This checks whether the specified participant is a member of the team in the first place. If it is not a member, an error will be thrown. Whereas if it is a member, the specified participant will be removed from the list of participant.</p>
 </li>
@@ -1939,9 +2077,9 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/RemoveParticipantCommandSequenceDiagram.png" alt="RemoveParticipantCommandSequenceDiagram">
+<img src="images/RemoveParticipantCommandSequenceDiagram.png" alt="][width=790" height="480">
 </div>
-<div class="title">Figure 37. Sequence Diagram for an example of <code>remove participant</code> command</div>
+<div class="title">Figure 39. Sequence Diagram for an example of <code>remove participant</code> command</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1949,6 +2087,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <p>The <code>remove mentor</code> command  will first check whether the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field under the specified <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/entity/Team.java"><code>Team</code></a> object is not empty and corresponds to the specified mentor. This checks whether the team have not been assigned a mentor, or they have been assigned to a different mentor. Under any of these cases, and error will be thrown. Whereas if the team is assigned the specific mentor, the specified mentor will be removed from the <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/model/entity/Team.java"><code>Optional&lt;Mentor&gt;</code></a> field.The sequence diagram of <code>remove mentor</code> is similar to that of <code>remove participant</code>.</p>
 </li>
 </ol>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1981,7 +2120,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/ScoringClassDiagram.png" alt="ScoringClassDiagram">
 </div>
-<div class="title">Figure 38. Scoring Feature Class Diagram</div>
+<div class="title">Figure 40. Scoring Feature Class Diagram</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram it can be seen that each different implementation of the <code>score</code> command inherits from the same <code>ScoreCommand</code> abstract class. The <code>ScoreCommand</code> abstract class provides a base for the implementation of the current specific <code>score</code> commands and in the future any further additions made to the <code>score</code> command functionality must also follow this same convention.</p>
@@ -1996,7 +2135,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/ScoringSequenceDiagram.png" alt="ScoringSequenceDiagram">
 </div>
-<div class="title">Figure 39. Add Score Command Sequence Diagram</div>
+<div class="title">Figure 41. Add Score Command Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>As seen from the above diagram, the execution of the <code>score add</code> command can be put in simple words as per the following steps:</p>
@@ -2051,7 +2190,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.9.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>To develop the <code>score</code> feature a few considerations and decisions had to be made with regards to how to implement the feature at various steps. This section focuses on some of the aspects wherein we faced dilemmas and how we addressed them.</p>
 </div>
@@ -2135,7 +2274,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/LeaderBoardClassDiagram.png" alt="LeaderBoardClassDiagram">
 </div>
-<div class="title">Figure 40. Leaderboard and Get Top Teams Implementation Overview</div>
+<div class="title">Figure 42. Leaderboard and Get Top Teams Implementation Overview</div>
 </div>
 <div class="paragraph">
 <p>From the above class diagram, there are two important matters to note regarding the implementation of these features:</p>
@@ -2179,7 +2318,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/SimpleLeaderboardSequenceDiagram.png" alt="SimpleLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 41. Interactions within Logic Component for SimpleLeaderboardCommand</div>
+<div class="title">Figure 43. Interactions within Logic Component for SimpleLeaderboardCommand</div>
 </div>
 <div class="paragraph">
 <p>The observations of the above diagram can be put into the following steps:</p>
@@ -2235,7 +2374,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/RandomLeaderboardSequenceDiagram.png" alt="RandomLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 42. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
+<div class="title">Figure 44. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above.</p>
@@ -2389,7 +2528,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/SimpleTopKSequenceDiagram.png" alt="SimpleTopKSequenceDiagram">
 </div>
-<div class="title">Figure 43. Interactions within Logic Component for getTop K Command</div>
+<div class="title">Figure 45. Interactions within Logic Component for getTop K Command</div>
 </div>
 <div class="paragraph">
 <p>The above diagram follows a logic very similar to the <code>leaderboard</code> command&#8217;s logic, and can be broken down into the following steps</p>
@@ -2445,7 +2584,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/TopKRandomCommand.png" alt="TopKRandomCommand">
 </div>
-<div class="title">Figure 44. Interactions within Logic Component for getTop K with Random Winners</div>
+<div class="title">Figure 46. Interactions within Logic Component for getTop K with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.</p>
@@ -2586,7 +2725,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/TieBreakActivityDiagram.png" alt="TieBreakActivityDiagram">
 </div>
-<div class="title">Figure 45. Handling of Tiebreak Methods</div>
+<div class="title">Figure 47. Handling of Tiebreak Methods</div>
 </div>
 <div class="paragraph">
 <p>From the above there is one important aspect to note: the <code>ArrayList</code> of <code>Comparator&lt;Team&gt;</code> objects created in the second step. This is the <code>ArrayList</code> referred to in the previous sections which is tasked with containing and transferring the comparators which will be used to sort the teams in their appropriate order to form the leaderboard or top teams. This <code>ArrayList</code> is used as an input parameter for both <code>leaderboard</code> and <code>getTop K</code> command related classes, as explored in previous sections.</p>
@@ -2751,7 +2890,7 @@ whose name that does not contain "uc".</p>
 <div class="content">
 <img src="images/FindScreenshot.png" alt="FindScreenshot">
 </div>
-<div class="title">Figure 46. Find Command User Interface</div>
+<div class="title">Figure 48. Find Command User Interface</div>
 </div>
 <div class="paragraph">
 <p>By default, Alfred does a search by intersection for the given entity. However, Alfred also allows
@@ -2771,7 +2910,7 @@ An analogous sequence diagram also applies for the <code>Team</code> and <code>M
 <div class="content">
 <img src="images/FindCommandSequenceDiagram.png" alt="FindCommandSequenceDiagram">
 </div>
-<div class="title">Figure 47. Find Participant Command Sequence Diagram</div>
+<div class="title">Figure 49. Find Participant Command Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>The left half of the diagram covers creation of the <code>FindParticipantCommand</code> while the right half
@@ -2825,7 +2964,7 @@ the generated predicate.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.11.2. Design Considerations</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.11.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>The following are some design considerations for the Find Command Feature</p>
 </div>
@@ -4161,4 +4300,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:25:23 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:36:48 UTC</div></div></div></body></html>
