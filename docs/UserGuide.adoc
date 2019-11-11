@@ -285,7 +285,6 @@ Examples:
 
 * `delete team T-1` will delete the team with ID T-1 from Alfred.
 
-
 === Finding a Specific Entity: `find {mentor/team/participant} n/NAME ...`
 
 Searches for Entities by selected fields, instead of their ID, in case you find that the ID is difficult to keep track of. +
