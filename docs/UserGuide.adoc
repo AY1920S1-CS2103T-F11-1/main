@@ -285,7 +285,6 @@ Examples:
 
 * `delete team T-1` will delete the team with ID T-1 from Alfred.
 
-//tag::findFeature
 
 === Finding a Specific Entity: `find {mentor/team/participant} n/NAME ...`
 
@@ -370,8 +369,6 @@ contain "ArsenalFC" or whose project name does not contain "Football".
 2. `find participant AND n/Abramov EXCLUDE e/react` will do a search where participant names contain "Abramov"
 and whose email does not contain "react". In this case, the `AND` keyword could have been omitted because
 the default find does a search by intersection.
-
-//end::findFeature
 
 //tag::assign[]
 === Assigning a Entity to a Team: `assign {mentor/participant} ID TEAM_ID ...`
