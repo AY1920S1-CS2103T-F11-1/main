@@ -3,45 +3,72 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 3
+== PROJECT: Alfred - The Hackathon Butler
 
 ---
 
 == Overview
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+As part of our software engineering project, my team of five, including me, were tasked with either improving
+the existing *AddressBook3* application codebase, or morphing it into any application, as long as
+it maintained a command line interface and had a Graphical Display. We opted for the latter and morphed the
+*AddressBook3* codebase into a Hackathon manager, named *Alfred* that is targeted at Hackathon HR managers to aid them in
+the organization of hackathons, including the logistics and administration. *Alfred* packages multiple
+features into a single application, such as but not including judging, data validation, find, undo/redo, a
+whole new UI and more!
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major Enhancement*: Added *the command to perform advanced finding functions on the stored data*
+** What it does: This functionality enables the user to search for users in the database via different fields
+and complements the preexisting `view` command, which only gets a single user by `ID`.
+** Justification: This functionality makes searching for users extremely convenient, especially if
+the hackathon has hundreds of participants. It also can return multiple users that match the given search
+parameters in a single command, which makes it more efficient than the more specialized `view` command and
+removes the need for the hackathon organizer to remember randomly generated `ID` numbers. This functionality
+makes *Alfred* a viable alternative to existing software like Excel
+** Highlights: Like existing query langages, the find command supports a powerful search, allowing users
+to search by intersection, union across multiple fields and to perform a negative search on selected fields.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major Enhancement*: Refactored and Implemented the new `Model` for *Alfred*
+** What it does: The preexisting *AddressBook3* codebase only has the relevant objects for the address book
+application. However, *Alfred* required new objects such as `Score`, `Participant` and `Team`, and to create
+new methods for the other parts of the codebase to interact with this in-memory data. It is also the only component
+of the codebase that interacts with `Storage`.
+** Justification:  Without the new objects created by `Model`,
+it would also impossible to store anything in memory. The methods exposed by `Model` are the only way that the other
+parts of the object can interact with the in-memory data.
+Thus, `Model` serves as a single source of truth for the application in order to ensure that the
+hackathon information managed by the application is accurate.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Minor enhancement*: Updated the help command UI to reflect the new commands in *Alfred*
+
+* *Code contributed*:
+** https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=hcwong&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=hcwong&tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D[Functional code]
+** https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=hcwong&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=hcwong&tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D[Test code]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Managed release `v1.1`
+*** Set up the repository and continous deployment of documentation
+*** Deprecated old *AddressBook3* code
+** Tests:
+*** Wrote tests that helped to raise the coverage of the codebase by 8%
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated User Guide and Developer Guides to reflect features implemented
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** Maintained the develop branch on Github in the initial stages when the master branch
+was broken
+*** Reviewed PRs with constructive comments
+*** Participated in discussions with teammates
+, especially about the overall architecture and plan for the application
+*** Participated in dogfooding exercises and reported any bugs found to teammates
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** In my capacity as Github In-Charge, helped to integrate the following tools
+*** Integrated codecov  into the repository to enable automated test coverage detection
+*** Integrated Travis CI into repository to enable continuous integration
+*** Integrated Mockito testing library for easier automated testing of the codebase
 
 == Contributions to the User Guide
 
@@ -50,9 +77,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=delete]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=findFeature]
 
 == Contributions to the Developer Guide
 
@@ -64,9 +89,3 @@ include::../DeveloperGuide.adoc[tag=undoredo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
 
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
