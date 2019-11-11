@@ -273,7 +273,7 @@ public class SuggestionTemplates {
                 DELETE_TEAM_INSTRUCTION.getText()
         );
 
-        Text participantPrefixes7 = new Text("otherParameters");
+        Text participantPrefixes7 = new Text("OTHER_PARAMETERS");
 
         participantPrefixes7.setFill(Color.GREY);
 
@@ -283,14 +283,14 @@ public class SuggestionTemplates {
                 FIND_PARTICIPANT_INSTRUCTION.getText()
         );
 
-        Text mentorPrefixes8 = new Text("otherParameters");
+        Text mentorPrefixes8 = new Text("OTHER_PARAMETERS");
 
         mentorPrefixes8.setFill(Color.GREY);
         FIND_MENTOR_TEMPLATE = new TextFlow(
                 FIND_MENTOR.getText(), mentorPrefixes8, FIND_MENTOR_INSTRUCTION.getText()
         );
 
-        Text teamPrefixes8 = new Text("otherParameters");
+        Text teamPrefixes8 = new Text("OTHER_PARAMETERS");
 
         teamPrefixes8.setFill(Color.GREY);
 
