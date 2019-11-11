@@ -71,7 +71,7 @@ data reliably is key to the application&#8217;s success.</p>
 </li>
 <li>
 <p>Justification: Should users make a mistake or have a need to reverse previously executed commands, this feature allows them
-to quickly revert changes by invoking the <code>redo</code> command, improving their overall productivity and streamlining workflows with the application. Should they
+to quickly revert changes by invoking the <code>undo</code> command, improving their overall productivity and streamlining workflows with the application. Should they
 change their mind and actually wish to execute the command again, there is no need for them to re-type and execute the command,
 as they can simply invoke the <code>redo</code> command.</p>
 </li>
@@ -98,15 +98,15 @@ better inform users on which commands they would like to <code>undo</code>/<code
 </li>
 <li>
 <p><strong>Minor Enhancement</strong> Allow users to navigate to previously executed commands using the ALT + UP/DOWN Arrow Keys</p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Purpose: Allow quick access to previously executed commands, as opposed to re-typing everything.</p>
 </li>
 <li>
 <p>Justification: This is a convenience feature that most Command Line prompts have, so it is a nice feature for Alfred to
 include, given that Alfred is ultimately a Command Line Interface.</p>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>Highlights: Users can navigate up to 50 previous commands.</p>
 </li>
@@ -119,15 +119,17 @@ include, given that Alfred is ultimately a Command Line Interface.</p>
 <div class="sect2">
 <h3 id="code-contributions"><a class="link" href="#code-contributions">Code Contributions</a></h3>
 <div class="paragraph">
-<p>These are some of the code I have written (my contributions are not limited to these files):
-<strong> Functional Code
-</strong>* <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/storage">Storage Code</a>
-<strong>* <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/blob/master/src/main/java/seedu/address/model/ModelHistoryManager.java">Model History Code</a>
-</strong>* <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/blob/master/src/main/java/seedu/address/model/CommandHistoryManager.java">Command History Code</a>
-<strong> Test Code
-</strong>* <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/test/java/seedu/address/storage">Storage Test Code</a>
-<strong>* <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/blob/master/src/test/java/seedu/address/model/ModelHistoryManagerTest.java">Model History Test Code</a>
-</strong>* <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/blob/master/src/test/java/seedu/address/model/CommandHistoryManagerTest.java">Command History Test Code</a></p>
+<p>These are some of the code I have written:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=brianyenna&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=brianyenna&amp;tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D">Functional Code</a></p>
+</li>
+<li>
+<p><a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=brianyenna&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=brianyenna&amp;tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D">Test Code</a></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -155,7 +157,8 @@ include, given that Alfred is ultimately a Command Line Interface.</p>
 <p>Helped write tests to ensure that test code coverage is maintained at a healthy level</p>
 </li>
 <li>
-<p>These tests helped ensure that the implementation of new features by my teammates can be verified to not break existing features.</p>
+<p>These tests helped ensure that the implementation of new features by my teammates can be verified to not break existing features,
+therebys streamlining Alfred&#8217;s development.</p>
 </li>
 </ul>
 </div>
@@ -204,7 +207,7 @@ of the documentation being a top priority.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users. The following text is taken from the History feature section of the User Guide, and explains how to use the History feature. For more information on the features I implemented, please feel free to look through the User Guide <a href="https://ay1920s1-cs2103t-f11-1.github.io/main/UserGuide.html">here</a>.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -215,43 +218,30 @@ of the documentation being a top priority.</p>
 </div>
 <div id="history_diagram" class="imageblock">
 <div class="content">
-<img src="../images/UndoRedoExplanation.png" alt="UndoRedoExplanation" width="790">
+<img src="../images/UndoRedoExplanation.png" alt="UndoRedoExplanation">
 </div>
+<div class="title">Figure 2. History Section of UI</div>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p>This command is to facilitate the undo/redo commands, as it becomes easier for you to track what changes were made before, and which
 commands can be undone/redone. This is especially useful when many commands have been executed and it is difficult to remember the sequence of
 execution of the commands.</p>
-</li>
-<li>
-<p>Executing the command will bring you to the "History" section of Alfred, which displays all the previously-executed
+</div>
+<div class="paragraph">
+<p>Executing the <code>history</code> command will bring you to the "History" section of Alfred, which displays all the previously-executed
 commands as panels. There are 3 main delimiters. Each delimiter is just a visual representation of the limits for the undo/redo commands.</p>
-</li>
-<li>
-<p>You cannot redo any command beyond the "redo" delimiter.</p>
-</li>
-<li>
-<p>You cannot undo any command beyond the "undo" delimiter.</p>
-</li>
-<li>
-<p>The "current" delimiter tells you where you are at relative to the rest of the commands you have executed. It represents the
+</div>
+<div class="paragraph">
+<p>You cannot redo any command beyond the "redo" delimiter, or undo any command beyond the "undo" delimiter. The "current" delimiter tells you where you are at relative to the rest of the commands you have executed. It represents the
 current state of the data.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p>Note that only commands that change the state of the data in Alfred will be displayed in the "History" section and are undo/redo-able.
 For instance, <code>list participants</code> will not be undo/redo-able, as it simply shows you the participants in Alfred and does not change any information in Alfred.
 On the other hand, invoking <code>add participant</code> with the suitable parameters will be undo/redo-able and will be shown in the "History" section by the <code>history</code> command.</p>
-</li>
-<li>
+</div>
+<div class="paragraph">
 <p>In total, only 50 states will be stored, so this serves as a limit for the number of commands you can undo/redo to.</p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -270,24 +260,24 @@ All other commands are undo/redo-able.
 <p>Example:</p>
 </div>
 <div class="paragraph">
-<p>After running the following commands:</p>
+<p>After running the following commands:<br></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>list participants</code></p>
+<p><code>list participants</code><br></p>
 </li>
 <li>
-<p><code>add participant n/SuperHero1 p/+6591111111 e/superhero1@gmail.com</code></p>
+<p><code>add participant n/SuperHero1 p/+6591111111 e/superhero1@gmail.com</code><br></p>
 </li>
 <li>
-<p><code>add participant n/SuperHero2 p/+6592222222 e/superhero2@gmail.com</code></p>
+<p><code>add participant n/SuperHero2 p/+6592222222 e/superhero2@gmail.com</code><br></p>
 </li>
 <li>
-<p><code>add participant n/SuperHero3 p/+6593333333 e/superhero3@gmail.com</code></p>
+<p><code>add participant n/SuperHero3 p/+6593333333 e/superhero3@gmail.com</code><br></p>
 </li>
 <li>
-<p><code>edit participant P-4 n/The Flash</code></p>
+<p><code>edit participant P-4 n/The Flash</code><br></p>
 </li>
 </ol>
 </div>
@@ -296,54 +286,25 @@ All other commands are undo/redo-able.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/HistoryCommandExampleOutput.png" alt="HistoryCommandExampleOutput" width="790">
+<img src="../images/HistoryCommandExampleOutput.png" alt="HistoryCommandExampleOutput">
 </div>
+<div class="title">Figure 3. Example Output from History Command</div>
 </div>
 <div class="paragraph">
-<p>The topmost panel is the "redo" delimiter.<br>
-The second panel from the top is the "current" delimiter.<br>
-The bottommost panel shows you the "undo" delimiter.<br>
-In this example, the output of the <code>history</code> command shows you can invoke the <code>undo</code> command four times.
-Notice that the <code>list participants</code> command is not shown in the "History" section as it does not change data.<br>
-Also note that the undo-able commands are numbered, with the 1st undo-able command being the most recently executed command (the EditParticipantCommand),
-and the 4th undo-able command being the oldest executed command. In this case, the maximum number of commands you can undo at once is 4.
-Also note that in this case, no commands are redo-able, that&#8217;s why there are no panels between the "redo" and "current" delimiters. Hence, executing <code>redo</code> command will result in an error.</p>
+<p>The topmost panel is the "redo" delimiter. The second panel from the top is the "current" delimiter. The bottommost panel shows you the "undo" delimiter.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="command-history-navigation"><a class="link" href="#command-history-navigation">Command History Navigation</a></h3>
 <div class="paragraph">
-<p>Navigate to previous commands by pressing the alt key <kbd>Alt</kbd>, together with the up <kbd>&uparrow;</kbd> or down <kbd>&downarrow;</kbd> arrow keys.
-For Mac users, press the option key <kbd>Opt</kbd> in place of the alt key <kbd>Alt</kbd> instead. Should you have re-mapped/re-purposed the
-alt key <kbd>Alt</kbd>, press the remapped key on your keyboard instead.</p>
+<p>In this example, the output of the <code>history</code> command shows you can invoke the <code>undo</code> command four times.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Every time you execute a command <strong><em>successfully</em></strong>, the command is saved in Alfred, so you can navigate to a previous command without re-typing the whole thing.
-There is only 1 exception to this rule: the <code>import</code> command can be navigated to even if there are errors raised during execution.
-This is because the <code>import</code> command will do its best to import as many Entities into Alfred as possible, before finally notifying the user of any incorrect entries (so there is partial successin the command&#8217;s execution).</p>
-</li>
-<li>
-<p>Press <kbd>Alt</kbd> + up <kbd>&uparrow;</kbd> to navigate to the previous command.</p>
-</li>
-<li>
-<p>Press <kbd>Alt</kbd> + down <kbd>&downarrow;</kbd> to navigate to the next command.</p>
-</li>
-<li>
-<p>Unlike most of the other features in Alfred, this is not a command you type into Alfred&#8217;s command input box. This is a keyboard shortcut that is mainly for your convenience as it allows you to quickly re-use previously executed commands.</p>
-</li>
-<li>
-<p>Note that Alfred&#8217;s command input box must be in focus (the cursor is active in the command input box) for the keyboard shortcuts for this feature to work</p>
-</li>
-<li>
-<p>This feature only allows you to navigate up to the previous 50 successfully executed commands.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Notice that the <code>list participants</code> command is not shown in the "History" section as it does not change data.</p>
 </div>
+<div class="paragraph">
+<p>Also note that the undo-able commands are numbered, with the 1st undo-able command being the most recently executed command (the EditParticipantCommand),
+and the 4th undo-able command being the oldest executed command. In this case, the maximum number of commands you can undo at once is 4.</p>
 </div>
+<div class="paragraph">
+<p>Also note that in this case, no commands are redo-able, that&#8217;s why there are no panels between the "redo" and "current" delimiters. Hence, executing <code>redo</code> command will result in an error.</p>
 </div>
 </div>
 </div>
@@ -357,9 +318,277 @@ This is because the <code>import</code> command will do its best to import as ma
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project. The following text is taken from the Undo/Redo feature section of the Developer Guide, and explains how the Undo/Redo feature works. For more information on the rest of the features I implemented, please feel free to look through the developer guide <a href="https://ay1920s1-cs2103t-f11-1.github.io/main/DeveloperGuide.html">here</a>.</em></p></td>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
+<div class="paragraph">
+<p>The Undo/Redo feature, as the name suggests, allows you to undo and redo commands. Only commands that alter the state of the data
+in Alfred can be undone/redone. The state of the 3 EntityLists (ParticipantList, MentorList and TeamList) is tracked across the execution
+of different commands, and the state can be recovered through the use of the undo/redo feature. The last used IDs for each of the 3 EntityLists
+are also saved.</p>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 05:10:00 UTC</div></div></div></body></html>
+<div class="paragraph">
+<p>The feature has been updated in v1.4 to support multiple undos/redos. This means that invoking <code>undo N</code>/<code>redo N</code> on Alfred, where <code>N</code>
+is an integer, allows you to undo/redo <code>N</code> commands at one go.</p>
+</div>
+<div class="paragraph">
+<p>To undo/redo to next immediate command, simply invoking <code>undo</code>/<code>redo</code> on Alfred would suffice, as it implicitly calls <code>undo 1</code>/<code>redo 1</code>
+in the code.</p>
+</div>
+<div class="paragraph">
+<p>This feature is a convenience feature as it allows users of Alfred to quickly correct and recover
+from mistakes, greatly increasing the utility of the application.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only a maximum of 50 data states is stored in <code>ModelHistoryManager</code> at any one point in time. The addition of any more data states will
+result in the discarding of the oldest data state.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="implementation"><a class="link" href="#implementation">Implementation</a></h4>
+<div class="paragraph">
+<p>The general idea is as follows: The undo/redo mechanism is mainly facilitated by the interface <code>ModelHistory</code> and its implementation <code>ModelHistoryManager</code>.
+Alfred&#8217;s data is held in memory within the <code>ModelManager</code> object. After the execution of commands that mutate the data in Alfred, a deep copy
+of all 3 EntityLists is made and saved as a <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code>. A deep copy is necessary to ensure that
+any subsequent changes to data will not alter the data in the <code>ModelHistoryRecord</code>, allowing each <code>ModelHistoryRecord</code> to serve as
+a pristine record of the state of the data in Alfred at the end of the execution of each command.</p>
+</div>
+<div class="paragraph">
+<p>Whenever the <code>undo</code> command is invoked, <code>ModelHistoryManager</code> returns a <code>ModelHistoryRecord</code>.
+A deep copy of the EntityLists contained within <code>ModelHistoryRecord</code> are then used to replace the EntityLists in the <code>ModelManager</code> for its operations, effectively
+reverting the data in Alfred to a previous state.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The data in each <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code> is stored in memory, and is not stored on disc, so it will
+persist only while the Alfred application is running.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed"><a class="link" href="#implementation-how-code-modelmanager-code-is-updated-when-the-undo-command-is-executed">Implementation: How <code>ModelManager</code> is Updated When the Undo Command is Executed</a></h4>
+<div class="paragraph">
+<p>The following sequence diagram shows what happens when the UndoCommand is executed.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoSequenceDiagramExecutionofUndo.png" alt="UndoSequenceDiagramExecutionofUndo">
+</div>
+<div class="title">Figure 4. Sequence Diagram for the Execution of the Undo Command</div>
+</div>
+<div class="paragraph">
+<p>The important issue to take note of here is that the code first checks whether it is valid to undo to a certain state by
+calling the <code>canUndo()</code> method in <code>ModelHistory</code>. The implementation of <code>ModelHistory</code> in <code>ModelHistoryManager</code> does so by checking
+if there are sufficient states to undo to, otherwise an exception is thrown.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A analogous process is executed for the Redo Command.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="behaviour-of-undo-redo-mechanism"><a class="link" href="#behaviour-of-undo-redo-mechanism">Behaviour of Undo/Redo Mechanism</a></h4>
+<div class="paragraph">
+<p><code>ModelHistoryMangager</code> contains a List of <code>ModelHistoryRecord</code>, and a pointer pointing to the <code>ModelHistoryRecord</code> that
+reflects the current state of the data in Alfred.</p>
+</div>
+<div class="paragraph">
+<p>In order to better illustrate how the state of the data is tracked and stored in <code>ModelHistoryManager</code>, consider the following example.
+The following commands are executed:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>AddParticipantCommand: <code>add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com</code><br></p>
+</li>
+<li>
+<p>AddMentorCommand: <code>add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social</code><br></p>
+</li>
+<li>
+<p>ListParticipantCommand: <code>list participants</code><br></p>
+</li>
+<li>
+<p>UndoCommand: <code>undo 2</code><br></p>
+</li>
+<li>
+<p>AddTeamCommand: <code>add team n/Justice League s/Social pn/BetterThanAvengers l/12</code><br></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>This is the state of <code>ModelHistoryManager</code> when Alfred is first started.</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState0.png" alt="UndoRedoState0">
+</div>
+<div class="title">Figure 5. Initial State of <code>ModelHistoryManager</code></div>
+</div>
+<div class="paragraph">
+<p><strong>This is what happens after each step:</strong></p>
+</div>
+<div class="paragraph">
+<p><em> Step 1. AddParticipantCommand: <code>add participant n/Clark Kent p/+6598321212 e/clark.kent@supermail.com</code> </em><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState1.png" alt="UndoRedoState1">
+</div>
+<div class="title">Figure 6. State of <code>ModelHistoryManager</code> after Step 1</div>
+</div>
+<div class="paragraph">
+<p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddParticipantCommand.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 2. AddMentorCommand: <code>add mentor n/Lex Luthor o/LexCorp p/+6598321010 e/lex.not.evil@gmail.com s/Social</code> </em><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState2.png" alt="UndoRedoState2">
+</div>
+<div class="title">Figure 7. State of <code>ModelHistoryManager</code> after Step 2</div>
+</div>
+<div class="paragraph">
+<p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddMentorCommand.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 3. ListParticipantCommand: <code>list participants</code> </em><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState3.png" alt="UndoRedoState3">
+</div>
+<div class="title">Figure 8. State of <code>ModelHistoryManager</code> after Step 3</div>
+</div>
+<div class="paragraph">
+<p>Note that no new <code>ModelHistoryRecord</code> is created because the ListParticipantCommand does not alter the state of the data in Alfred.
+Hence, it does not implement the TrackableState interface.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 4. UndoCommand: <code>undo 2</code> </em><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState4.png" alt="UndoRedoState4">
+</div>
+<div class="title">Figure 9. State of <code>ModelHistoryManager</code> after Step 4</div>
+</div>
+<div class="paragraph">
+<p>After executing the <code>undo 2</code> command, the pointer in <code>ModelHistoryManager</code> shifts backwards by 2 to point to the <code>ModelHistoryRecord</code>
+at the zero-th index.</p>
+</div>
+<div class="paragraph">
+<p>Note that this means that <code>undo 3</code> would throw an error, as you cannot move beyond the very first <code>ModelHistoryRecord</code> in <code>ModelHistoryManager</code>.</p>
+</div>
+<div class="paragraph">
+<p><em> Step 5. AddTeamCommand: <code>add team n/Justice League s/Social pn/BetterThanAvengers l/12</code> </em><br></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UndoRedoState5.png" alt="UndoRedoState5">
+</div>
+<div class="title">Figure 10. State of <code>ModelHistoryManager</code> after Step 5</div>
+</div>
+<div class="paragraph">
+<p>Note that the execution of a new command will invalidate the <code>ModelHistoryRecord</code> after the pointer. This is because all subsequent
+data states are the result of transformations that have already been undone, so it is not valid to be able to <code>redo</code> to them.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="paragraph">
+<p>When designing the undo/redo feature, there were some design considerations to take note of.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How Undo/Redo Executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire data state of Alfred in memory.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of memory usage.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+</li>
+<li>
+<p>Cons: We must ensure that the implementation of each individual command are correct, which is not trivial for
+certain commands, such as <code>import</code>, which provides a best-effort implementation and tries to import as many valid data entries
+as possible. In order to implement an <code>undo</code> method for this, we would have to keep track of the new Entities that got created
+due to the command execution and then invoke deletion of these Entities.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given the large number of commands that are available in Alfred, it is not very scalable to implement
+an undo/redo method for each of the commands. It is also more extensible to use Alternative 1 as it allows
+future commands to be added without the need for further changes for the undo/redo feature - simply get the new
+command&#8217;s class to implement the TrackableState interface if it alters the state of the data in Alfred.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-use-of-marker-interface"><a class="link" href="#aspect-use-of-marker-interface">Aspect: Use of Marker Interface</a></h5>
+<div class="paragraph">
+<p>Allows for an easy way to determine if the state of the data should be saved after the execution of the command.
+It is also very easy to change in the codebase. This means that should a feature in the future alter the state of the
+data in Alfred after execution, it is trivial to allow <code>ModelHistoryManager</code> to track the state.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-limitation-of-number-of-data-states-stored"><a class="link" href="#aspect-limitation-of-number-of-data-states-stored">Aspect: Limitation of Number of Data States Stored</a></h5>
+<div class="paragraph">
+<p>Given that the Undo/Redo feature saves the state of the data in Alfred after the execution of TrackableState commands,
+it is important to ensure that memory usage by <code>ModelHistoryManager</code> is limited, otherwise Alfred will run very slowly and
+potentially crash once a substantial number of commands have been executed.</p>
+</div>
+<div class="paragraph">
+<p>In order to accommodate this design for the Undo/Redo feature, we decided to limit the number of <code>ModelHistoryRecord</code> stored in
+<code>ModelHistoryManager</code> to 50. It is unlikely that a user would want to undo more than 50 commands at a go, as that would indicate
+a very significant error in the workflow, and recovering from that should not have a reliance on the Undo/Redo feature.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 05:24:46 UTC</div></div></div></body></html>
