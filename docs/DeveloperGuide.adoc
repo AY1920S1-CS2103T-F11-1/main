@@ -1105,7 +1105,7 @@ image::FindScreenshot.png[]
 
 By default, Alfred does a search by intersection for the given entity. However, Alfred also allows
 the user to do a search by union. This can be done by inserting an `OR` keyword before all the parameters.
-Further examples of the usage of `find` can be found in the
+Further examples on the usage of `find` can be found in the
 <<UserGuide.adoc#advanced-finding-of-a-specific-entity-by-union-or-negative-code-find-and-or-mentor-team-participant-n-name-exclude-code, user guide>>
 .
 
@@ -1113,10 +1113,37 @@ Further examples of the usage of `find` can be found in the
 
 The following sequence diagram shows the sequence of method calls used to display the filtered list
 on the application, from `Logic` to `ModelManager` upon the execution of a `FindParticipantCommand`.
+An analogous sequence diagram also applies for the `Team` and `Mentor` objects as well.
 
 .Find Participant Command Sequence Diagram
 image::FindCommandSequenceDiagram.png[]
 
+The left half of the diagram covers creation of the `FindParticipantCommand` while the right half
+details the interaction with the `Model`. There are 5 main steps in the execution of the command.
+
+1. `FindCommandAllocator` allocates the correct parser for the find command based on the entity name
+provided. If the entity name is incorrect, then an error will be thrown and execution will terminate.
+
+2. The `FindParticipantCommandParser` will then parse the String provided to it. If the string provided
+is invalid and does not follow the specified format, an error will be thrown. Likewise, if the find command
+is called and no parameters are provided, an error will also be thrown. During the parsing, the parser splits
+the input string given into two separate strings, one for normal parameters and the other for parameters
+that will undergo negated search.
+
+3. If there are no errors, the `FindParticipantCommandParser` then creates
+a `FindParticipantCommand` which in turn generates the predicate it would use
+to filter the relevant `EntityList` by. These predicates are stored as static variables on a central `Predicates`
+file. `FindParticipantCommand` selects the predicates based on which fields are provided in the original
+input string.
+
+4. With this predicate, it then calls the `findParticipant` method on the model with the generated predicate.
+
+5. A list of `Participant` objects is then returned, and is also printed onto the console for the user's
+reference.
+
+[NOTE]
+The find command does not mutate the list in any way. It only changes the `Entity` objects displayed using
+the generated predicate.
 
 === Logging
 

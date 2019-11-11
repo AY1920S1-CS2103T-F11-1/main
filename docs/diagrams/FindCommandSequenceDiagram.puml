@@ -63,7 +63,7 @@ activate FindParticipantCommand
 FindParticipantCommand -> Model: findParticipant(predicate)
 activate Model
 
-Model -> ModelManager: findPareticipant(predicate)
+Model -> ModelManager: findParticipant(predicate)
 activate ModelManager
 
 ModelManager -> Model: List<Participant>
