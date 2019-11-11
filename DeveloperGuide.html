@@ -33,8 +33,9 @@
 <li><a href="#code-assign-code-code-remove-code-feature">4.8. <code>assign</code> / <code>remove</code> feature</a></li>
 <li><a href="#scoring">4.9. Scoring</a></li>
 <li><a href="#leaderboard-and-get-top-teams">4.10. Leaderboard and Get Top Teams</a></li>
-<li><a href="#logging">4.11. Logging</a></li>
-<li><a href="#Implementation-Configuration">4.12. Configuration</a></li>
+<li><a href="#find-command">4.11. Find Command</a></li>
+<li><a href="#logging">4.12. Logging</a></li>
+<li><a href="#Implementation-Configuration">4.13. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">5. Documentation</a></li>
@@ -428,9 +429,11 @@ The lifeline for <code>DeleteParticipantCommandParser</code> and <code>DeleteCom
 </div>
 <div class="sect2">
 <h3 id="Design-Model"><a class="link" href="#Design-Model">3.4. Model component</a></h3>
+<div class="sect3">
+<h4 id="high-level-design-overview"><a class="link" href="#high-level-design-overview">3.4.1. High Level Design Overview</a></h4>
 <div class="imageblock">
 <div class="content">
-<img src="images/BetterModelClassDiagram.png" alt="BetterModelClassDiagram">
+<img src="images/ModelClassDiagram.png" alt="ModelClassDiagram">
 </div>
 <div class="title">Figure 6. Structure of the Model Component</div>
 </div>
@@ -446,13 +449,16 @@ The lifeline for <code>DeleteParticipantCommandParser</code> and <code>DeleteCom
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
+<p>stores other things like <code>Storage</code>, <code>CommandHistory</code> that also depend on Model</p>
+</li>
+<li>
 <p>stores the lists of our various entities.</p>
 </li>
 <li>
 <p>Model is the bridge between Logic and Storage and provides an abstraction of how the data is stored in memory.</p>
 </li>
 <li>
-<p>It exposes a <code>ReadableEntityList</code> which only has the list method to remind Logic that the data given should not be modified.</p>
+<p>It exposes multiple <code>ReadableEntityList</code> which only has the list method to remind Logic that the data given should not be modified.</p>
 </li>
 <li>
 <p>The UI can be bound to these lists so that it automatically updates when the contents of the list change.</p>
@@ -466,9 +472,16 @@ The lifeline for <code>DeleteParticipantCommandParser</code> and <code>DeleteCom
 </ul>
 </div>
 <div class="paragraph">
-<p><code>ModelManager</code>
-* ModelManager implements all the methods exposed by the Model Interface. At its heart, it only contains 3 <code>EntityLists</code>
-, 3 <code>FilteredLists</code> and a <code>UserPrefs</code> Object and does all the validation logic needed for the application</p>
+<p><code>ModelManager</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ModelManager implements all the methods exposed by the Model Interface. The 3 most important aspects for its in-memory
+storage and UI are the <code>FilteredList</code>, <code>EntityList</code> and <code>UserPrefs</code> objects. As mentioned above, <code>ModelManager</code> also
+consists of other components, but these are not reflected in the diagrams for brevity and clarity.</p>
+</li>
+</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -481,6 +494,169 @@ The lifeline for <code>DeleteParticipantCommandParser</code> and <code>DeleteCom
 <img src="images/EntityListClassDiagram.png" alt="EntityListClassDiagram">
 </div>
 <div class="title">Figure 8. EntityList simplified structure</div>
+</div>
+<div class="paragraph">
+<p>Each <code>EntityList</code> is also further subclassed into <code>ParticipantList</code>, <code>MentorList</code>, <code>TeamList</code>. Each of
+these lists can be seen as an individual address book from the original AB3 project. The following diagrams show
+the structure of these <code>Entity</code> objects within each list. These <code>Entity</code> objects are the building blocks of Alfred.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ParticipantClassDiagram.png" alt="ParticipantClassDiagram">
+</div>
+<div class="title">Figure 9. Participant</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TeamClassDiagram.png" alt="TeamClassDiagram">
+</div>
+<div class="title">Figure 10. Team</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/MentorClassDiagram.png" alt="MentorClassDiagram">
+</div>
+<div class="title">Figure 11. Mentor</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="usage"><a class="link" href="#usage">3.4.2. Usage</a></h4>
+<div class="paragraph">
+<p>When the ModelManager object is first created upon starting the application, the existing data is loaded from
+the disc via methods on the <code>Storage</code> object. However, if there are any bugs in the process, perhaps due
+corrupted data, a new <code>EntityList</code> is instantiated rather than run the risk of working with outdated data.</p>
+</div>
+<div class="paragraph">
+<p>Due to its role as the API of the application, all calls which require access to the <code>Entity</code> objects will be done
+through <code>Model</code> and not via the lists directly. These operations are listed as public methods on the <code>Model</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>For operations which would entail mutating the data within the
+<code>EntityList</code> objects in any form, <code>Model</code> automatically communicates with the <code>Storage</code> object to save the data.
+The saving logic can be found within the <code>Storage</code> object and thus <code>Model</code> only needs to pass it <code>EntityList</code> objects
+on its end. The same applies for the other attributes in <code>Model</code>, such as <code>CommandHistory</code>; <code>Model</code> will
+automatically communicate with it for you.</p>
+</div>
+<div class="paragraph">
+<p>If there are any errors along the way, it will be logged but the error would be handled within <code>Model</code> itself.
+Moreover, if there is an during a model operation, it will not be saved.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.3. Design Considerations</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Synchronization of data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The role of <code>ModelManager</code> is to ensure that the data is in sync with each other across all 3 <code>EntityList</code>
+objects. The reason behind this is because for example, the <code>Participant</code> object in <code>ParticipantList</code> is a separate
+object from the one inside <code>Team</code>. It was not possible due to make the <code>Participant</code> object hold a reference
+to team due to serialization issues on <code>Storage</code>.</p>
+</li>
+<li>
+<p>As such, for each CRUD operation, <code>ModelManager</code> has to perform validation to ensure that the data modified/added
+is sync across all 3 <code>EntityList</code> objects.</p>
+</li>
+<li>
+<p>This was also the reason why <code>Storage</code> was moved into the <code>Model</code> object, as in the current implementation of
+Alfred, only <code>ModelManager</code> needs to be aware of <code>Storage</code> to ensure that only it can save/read data. This would
+hence help to synchronize data better.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Single Responsibility Principle and Inheritance</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Each class in <code>Model</code> is only responsible for a single task. For example, <code>TeamList</code> is only concerned
+with managing the <code>Team</code> entities stored in it. This would help to improve testability and code quality, especially
+since the size of the <code>Model</code> codebase is substantial</p>
+</li>
+<li>
+<p>Inheritance was used to show links between related objects. For <code>Model</code>, the two related objects are
+<code>EntityList</code> and <code>Entity</code>. Inheritance was used to show this relationship and to reduce the need for code
+duplication.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Open Closed Principle</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Model</code> exposes many functions. However, in line with the Open Closed Principle, modifications to <code>Model</code>
+come in the form of exposing new methods on it and creating new attributes on the <code>ModelManager</code> object. The methods
+on <code>ModelManager</code> were also implemented as simply as possible so that future methods can build on them. This way,
+future modifications do not need to edit existing code, reducing the likelihood of regression bugs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Design of the <code>Entity</code> objects</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Make the <code>Team</code> object the single source of truth (only <code>Team</code> has references to <code>Participant</code>
+and <code>Mentor</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: This would facilitate the serialization on <code>Storage</code></p>
+</li>
+<li>
+<p>Cons: As <code>Participant</code> and <code>Mentor</code> objects no longer hold a reference to the <code>Team</code> object,
+it is now possible for their fields to be different from their counterparts stored in <code>Team</code>, requiring
+Alfred to do significant validation</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Make <code>Participant</code>, <code>Mentor</code> and <code>Team</code> objects store a bidirectional reference to each other</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The <code>Participant</code> objects in the <code>Team</code> 's participants field are exactly the same objects stored in the
+<code>ParticipantList</code>, reducing the need for validation code as they will never be out of sync</p>
+</li>
+<li>
+<p>Cons: <code>Storage</code> serialization cannot handle bidirectional associations</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>We decided to opt for Alternative 1 as there was no easy solution to solve the issues <code>Storage</code> had with
+bidirectional associations. Also, the validation code for Alternative 1 was implemented early and employed
+many defensive programming practices, reducing the likelihood of bugs occurring due to similar objects having
+data that is out of sync.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="future-extensions"><a class="link" href="#future-extensions">3.4.4. Future Extensions</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>As the single source of truth for the application in runtime, there are many small functions on <code>ModelManager</code> now.
+These functions are implemented directly in the file itself. In the future, it may be better to abstract these
+functions out into smaller modules as per the Dependency Inversion Principle. It was not done for v1 of Alfred
+as refactoring these methods would block developers and slow down feature development velocity. However,
+as Alfred scales, it is recommended that this refactoring be done.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -512,7 +688,7 @@ current support for the storage of the EntityLists.
 <div class="content">
 <img src="images/AlfredStorageClassDiagram.png" alt="AlfredStorageClassDiagram">
 </div>
-<div class="title">Figure 9. Structure of the Storage Component</div>
+<div class="title">Figure 12. Structure of the Storage Component</div>
 </div>
 <div class="paragraph">
 <p><strong>API</strong> : <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/tree/master/src/main/java/seedu/address/storage/AlfredStorage.java"><code>AlfredStorage.java</code></a></p>
@@ -611,7 +787,7 @@ Component:</p>
 <div class="content">
 <img src="images/ParticipantListJson.png" alt="ParticipantListJson">
 </div>
-<div class="title">Figure 10. Structure of the JSON File for ParticipantList</div>
+<div class="title">Figure 13. Structure of the JSON File for ParticipantList</div>
 </div>
 <div class="paragraph">
 <p>The figure above shows the contents of the JSON file storing a ParticipantList containing 2 participants. The data in the red box
@@ -621,7 +797,7 @@ the ParticipantList to a List of <code>JsonAdaptedParticipant</code>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.5.3. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.3. Design Considerations</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -730,7 +906,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <div class="content">
 <img src="images/ImportCommandClassDiagram.png" alt="ImportCommandClassDiagram">
 </div>
-<div class="title">Figure 11. Import Command Class Diagram</div>
+<div class="title">Figure 14. Import Command Class Diagram</div>
 </div>
 <div class="paragraph">
 <p>In the above class diagram, you can see that</p>
@@ -758,7 +934,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <div class="content">
 <img src="images/ImportCommandSequenceDiagram.png" alt="ImportCommandSequenceDiagram">
 </div>
-<div class="title">Figure 12. Import Command Sequence Diagram</div>
+<div class="title">Figure 15. Import Command Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p><code>FileUtil</code> shown in the <a href="#ImportCommandClassDiagram">class diagram</a> was omitted from the above sequence diagram for simplicity as it adds little to the overall flow of execution.</p>
@@ -788,7 +964,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <div class="content">
 <img src="images/CsvUtilParseParticipantSequenceDiagram.png" alt="CsvUtilParseParticipantSequenceDiagram">
 </div>
-<div class="title">Figure 13. <code>CsvUtil</code>: Parsing to Participant Sequence Diagram</div>
+<div class="title">Figure 16. <code>CsvUtil</code>: Parsing to Participant Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>Given CSV line is first split by commas (also allows commas surrounded by arbitrary number of spaces). Then, each <code>String</code> in the array is (attempted to be) converted into corresponding fields of a Participant. As the diagram shows, each field class has its own method for checking if the given <code>String</code> argument is valid - in the form of <code>isValidField()</code> method, where <code>Field</code> is replaced by its respective class name. Once each field is successfully converted, a Participant is created with the parsed fields. The process of parsing into a Mentor is practically equivalent of that of a Participant. The only change is in the fields being parsed.</p>
@@ -800,7 +976,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <div class="content">
 <img src="images/CsvUtilParseTeamSequenceDiagram.png" alt="CsvUtilParseTeamSequenceDiagram">
 </div>
-<div class="title">Figure 14. <code>CsvUtil</code>: Parsing to Team Sequence Diagram</div>
+<div class="title">Figure 17. <code>CsvUtil</code>: Parsing to Team Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>Also for teams, each corresponding <code>String</code> is converted to its field counterpart just like participants and mentors. Hence, <code>isValidField()</code> method was omitted from the diagram. The difference lies in the fact that for teams, Alfred must check if any participants or mentors it makes a reference to actually exists in <code>Model</code>. Thus, <code>CsvUtil</code> calls <code>getParticipant()</code> and <code>getMentor()</code> methods exposed by the <code>Model</code> class. If there are any exceptions raised while retrieving the participants and mentors, that line in CSV will not be loaded onto Alfred.</p>
@@ -811,7 +987,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">4.1.5. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.1.5. Design Considerations</a></h4>
 
 </div>
 </div>
@@ -893,7 +1069,7 @@ the execution of a DeleteParticipantCommand:</p>
 <div class="content">
 <img src="images/UndoSequenceDiagramUpdateHistory.png" alt="UndoSequenceDiagramUpdateHistory">
 </div>
-<div class="title">Figure 15. Sequence Diagram for the Updating of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 18. Sequence Diagram for the Updating of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>The top half of the diagram covers the creation of the DeleteParticipantCommand object, and the bottom half covers
@@ -917,7 +1093,7 @@ will therefore have the state of the data recorded in <code>ModelHistoryManager<
 <div class="content">
 <img src="images/UndoSequenceDiagramExecutionofUndo.png" alt="UndoSequenceDiagramExecutionofUndo">
 </div>
-<div class="title">Figure 16. Sequence Diagram for the Execution of the Undo Command</div>
+<div class="title">Figure 19. Sequence Diagram for the Execution of the Undo Command</div>
 </div>
 <div class="paragraph">
 <p>The important issue to take note of here is that the code first checks whether it is valid to undo to a certain state by
@@ -973,7 +1149,7 @@ The following commands are executed:</p>
 <div class="content">
 <img src="images/UndoRedoState0.png" alt="UndoRedoState0">
 </div>
-<div class="title">Figure 17. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 20. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 <div class="paragraph">
 <p>This is what happens after each step:</p>
@@ -985,7 +1161,7 @@ The following commands are executed:</p>
 <div class="content">
 <img src="images/UndoRedoState1.png" alt="UndoRedoState1">
 </div>
-<div class="title">Figure 18. State of <code>ModelHistoryManager</code> after Step 1</div>
+<div class="title">Figure 21. State of <code>ModelHistoryManager</code> after Step 1</div>
 </div>
 <div class="paragraph">
 <p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddParticipantCommand.</p>
@@ -997,7 +1173,7 @@ The following commands are executed:</p>
 <div class="content">
 <img src="images/UndoRedoState2.png" alt="UndoRedoState2">
 </div>
-<div class="title">Figure 19. State of <code>ModelHistoryManager</code> after Step 2</div>
+<div class="title">Figure 22. State of <code>ModelHistoryManager</code> after Step 2</div>
 </div>
 <div class="paragraph">
 <p>A new <code>ModelHistoryRecord</code> is created to reflect the state of the data in Alfred after the execution of the AddMentorCommand.</p>
@@ -1009,7 +1185,7 @@ The following commands are executed:</p>
 <div class="content">
 <img src="images/UndoRedoState3.png" alt="UndoRedoState3">
 </div>
-<div class="title">Figure 20. State of <code>ModelHistoryManager</code> after Step 3</div>
+<div class="title">Figure 23. State of <code>ModelHistoryManager</code> after Step 3</div>
 </div>
 <div class="paragraph">
 <p>Note that no new <code>ModelHistoryRecord</code> is created because the ListParticipantCommand does not alter the state of the data in Alfred.
@@ -1022,7 +1198,7 @@ Hence, it does not implement the TrackableState interface.</p>
 <div class="content">
 <img src="images/UndoRedoState4.png" alt="UndoRedoState4">
 </div>
-<div class="title">Figure 21. State of <code>ModelHistoryManager</code> after Step 4</div>
+<div class="title">Figure 24. State of <code>ModelHistoryManager</code> after Step 4</div>
 </div>
 <div class="paragraph">
 <p>After executing the <code>undo 2</code> command, the pointer in <code>ModelHistoryManager</code> shifts backwards by 2 to point to the <code>ModelHistoryRecord</code>
@@ -1038,7 +1214,7 @@ at the zero-th index.</p>
 <div class="content">
 <img src="images/UndoRedoState5.png" alt="UndoRedoState5">
 </div>
-<div class="title">Figure 22. State of <code>ModelHistoryManager</code> after Step 5</div>
+<div class="title">Figure 25. State of <code>ModelHistoryManager</code> after Step 5</div>
 </div>
 <div class="paragraph">
 <p>Note that the execution of a new command will invalidate the <code>ModelHistoryRecord</code> after the pointer. This is because all subsequent
@@ -1046,7 +1222,7 @@ data states are the result of transformations that have already been undone, so 
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">4.3.5. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.3.5. Design Considerations</a></h4>
 <div class="paragraph">
 <p>When designing the undo/redo feature, there were some design considerations to take note of.</p>
 </div>
@@ -1131,7 +1307,7 @@ are undo-able/redo-able.</p>
 <div class="content">
 <img src="images/UndoRedoExplanation.png" alt="UndoRedoExplanation">
 </div>
-<div class="title">Figure 23. "History" section of the Graphical User Interface after invoking the <code>history</code> command</div>
+<div class="title">Figure 26. "History" section of the Graphical User Interface after invoking the <code>history</code> command</div>
 </div>
 <div class="paragraph">
 <p>Note that there are 3 types of delimiters:</p>
@@ -1161,7 +1337,7 @@ for more information.</p>
 <div class="content">
 <img src="images/HistoryCommandRendering.png" alt="HistoryCommandRendering">
 </div>
-<div class="title">Figure 24. Sequence diagram for the execution of the History command</div>
+<div class="title">Figure 27. Sequence diagram for the execution of the History command</div>
 </div>
 <div class="paragraph">
 <p>Since <code>ModelHistoryManager</code> keeps a linear history of Alfred&#8217;s data state after commands are executed, and it has a pointer
@@ -1173,7 +1349,7 @@ the UI for rendering in the "History" section of the Graphical User Interface.</
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">4.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.4.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Given the close relationship between this feature and the <code>undo</code>/<code>redo</code> feature, the design considerations are very similar as well.
 See <a href="#undo-redo-feature">Section 4.3, &#8220;Undo/Redo feature&#8221;</a> for more information.</p>
@@ -1247,7 +1423,7 @@ Only the last 50 commands are stored in <code>CommandHistoryManager</code>. Anyt
 <div class="content">
 <img src="images/CommandHistoryNavigationSettingofCommandString.png" alt="CommandHistoryNavigationSettingofCommandString">
 </div>
-<div class="title">Figure 25. Initial State of <code>ModelHistoryManager</code></div>
+<div class="title">Figure 28. Initial State of <code>ModelHistoryManager</code></div>
 </div>
 </div>
 <div class="sect3">
@@ -1260,14 +1436,14 @@ whenever the ALT + UP/DOWN arrow keys are pressed.</p>
 <div class="content">
 <img src="images/CommandHistoryNavigationArrowKeyInvocation.png" alt="CommandHistoryNavigationArrowKeyInvocation">
 </div>
-<div class="title">Figure 26. Sequence Diagram for when ALT+UP arrow keys are pressed</div>
+<div class="title">Figure 29. Sequence Diagram for when ALT+UP arrow keys are pressed</div>
 </div>
 <div class="paragraph">
 <p>An analogous process is executed when the ALT+DOWN arrow keys are pressed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">4.5.4. Design Considerations</a></h4>
+<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.5.4. Design Considerations</a></h4>
 <div class="paragraph">
 <p>The following are some design considerations for the Command History Navigation feature.</p>
 </div>
@@ -1322,10 +1498,10 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/HomeCommandSequenceDiagram.png" alt="HomeCommandSequenceDiagram">
 </div>
-<div class="title">Figure 27. Sequence Diagram for <code>home</code> command</div>
+<div class="title">Figure 30. Sequence Diagram for <code>home</code> command</div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.6.1. Design Considerations</a></h4>
+<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.6.1. Design Considerations</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1421,7 +1597,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/AssignParticipantCommandSequenceDiagram.png" alt="AssignParticipantCommandSequenceDiagram">
 </div>
-<div class="title">Figure 28. Sequence Diagram for an example of <code>assign participant</code> command</div>
+<div class="title">Figure 31. Sequence Diagram for an example of <code>assign participant</code> command</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1440,7 +1616,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/RemoveParticipantCommandSequenceDiagram.png" alt="RemoveParticipantCommandSequenceDiagram">
 </div>
-<div class="title">Figure 29. Sequence Diagram for an example of <code>remove participant</code> command</div>
+<div class="title">Figure 32. Sequence Diagram for an example of <code>remove participant</code> command</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1480,7 +1656,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/ScoringClassDiagram.png" alt="ScoringClassDiagram">
 </div>
-<div class="title">Figure 30. Scoring Feature Class Diagram</div>
+<div class="title">Figure 33. Scoring Feature Class Diagram</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram it can be seen that each different implementation of the <code>score</code> command inherits from the same <code>ScoreCommand</code> abstract class. The <code>ScoreCommand</code> abstract class provides a base for the implementation of the current specific <code>score</code> commands and in the future any further additions made to the <code>score</code> command functionality must also follow this same convention.</p>
@@ -1495,7 +1671,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/ScoringSequenceDiagram.png" alt="ScoringSequenceDiagram">
 </div>
-<div class="title">Figure 31. Add Score Command Sequence Diagram</div>
+<div class="title">Figure 34. Add Score Command Sequence Diagram</div>
 </div>
 <div class="paragraph">
 <p>As seen from the above diagram, the execution of the <code>score add</code> command can be put in simple words as per the following steps:</p>
@@ -1550,7 +1726,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-8"><a class="link" href="#design-considerations-8">4.9.2. Design Considerations</a></h4>
+<h4 id="design-considerations-9"><a class="link" href="#design-considerations-9">4.9.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>To develop the <code>score</code> feature a few considerations and decisions had to be made with regards to how to implement the feature at various steps. This section focuses on some of the aspects wherein we faced dilemmas and how we addressed them.</p>
 </div>
@@ -1631,7 +1807,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/LeaderBoardClassDiagram.png" alt="LeaderBoardClassDiagram">
 </div>
-<div class="title">Figure 32. Leaderboard and Get Top Teams Implementation Overview</div>
+<div class="title">Figure 35. Leaderboard and Get Top Teams Implementation Overview</div>
 </div>
 <div class="paragraph">
 <p>From the above class diagram, there are two important matters to note regarding the implementation of these features:</p>
@@ -1672,7 +1848,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/SimpleLeaderboardSequenceDiagram.png" alt="SimpleLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 33. Interactions within Logic Component for SimpleLeaderboardCommand</div>
+<div class="title">Figure 36. Interactions within Logic Component for SimpleLeaderboardCommand</div>
 </div>
 <div class="paragraph">
 <p>In the above, the <code>LeaderboardCommandParser</code> class parses the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods. A new <code>SimpleLeaderboardCommand</code> object is then created with this array list as its parameter and returned.</p>
@@ -1699,7 +1875,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/RandomLeaderboardSequenceDiagram.png" alt="RandomLeaderboardSequenceDiagram">
 </div>
-<div class="title">Figure 34. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
+<div class="title">Figure 37. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above (See <a href="#SimpleLeaderboard-Explanation">[SimpleLeaderboard-Explanation]</a>).</p>
@@ -1853,7 +2029,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/SimpleTopKSequenceDiagram.png" alt="SimpleTopKSequenceDiagram">
 </div>
-<div class="title">Figure 35. Interactions within Logic Component for getTop NUMBER Command</div>
+<div class="title">Figure 38. Interactions within Logic Component for getTop NUMBER Command</div>
 </div>
 <div class="paragraph">
 <p>The above diagram follows a logic very similar to the <code>leaderboard</code> command&#8217;s logic. However, in this case a <code>TopTeamsCommandParser</code> object is created to parse the arguments "3 tb/moreParticipants" which returns a <code>SimpleTopKCommand</code> object.</p>
@@ -1871,7 +2047,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/TopKRandomCommand.png" alt="TopKRandomCommand">
 </div>
-<div class="title">Figure 36. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
+<div class="title">Figure 39. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.</p>
@@ -2006,7 +2182,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/TieBreakActivityDiagram.png" alt="TieBreakActivityDiagram">
 </div>
-<div class="title">Figure 37. Handling of Tiebreak Methods</div>
+<div class="title">Figure 40. Handling of Tiebreak Methods</div>
 </div>
 <div class="paragraph">
 <p>From the above there is one important aspect to note: the <code>ArrayList</code> of <code>Comparator&lt;Team&gt;</code> objects created in the second step. This is the <code>ArrayList</code> referred to in the previous sections which is tasked with containing and transferring the comparators which will be used to sort the teams in their appropriate order to form the leaderboard or top teams. This <code>ArrayList</code> is used as an input parameter for both <code>leaderboard</code> and <code>getTop K</code> command related classes, as explored in previous sections.</p>
@@ -2095,14 +2271,210 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">4.11. Logging</a></h3>
+<h3 id="find-command"><a class="link" href="#find-command">4.11. Find Command</a></h3>
+<div class="paragraph">
+<p>Currently, Alfred allows users to view specific entities by their <code>ID</code> using the <code>view ENTITY ID</code>.
+However, it may not be convenient for users to remember the <code>ID</code> of specific users, especially since
+<code>ID</code> objects are randomly generated.</p>
+</div>
+<div class="paragraph">
+<p>To help Alfred become a viable alternative to Excel, Alfred also offers an improved <code>find</code> function
+that has been inspired by the power of Excel Macros.
+<code>find</code> offers a search by a single field and multiple fields. The list of fields that can be searched for
+for each entity can be found in the
+<a href="UserGuide.html#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">user guide</a>, or by
+simply typing in an incorrect command in the application.</p>
+</div>
+<div class="paragraph">
+<p>The find command also offers an option to do a negative search of the fields in the list. This can be
+done via the <code>EXCLUDE</code> keyword. All the parameters that come after the keyword will undergo a negative
+search. Figure 41 shows an example of this. <code>find participant EXCLUDE n/uc</code> will look for all participants
+whose name that does not contain "uc".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindScreenshot.png" alt="FindScreenshot">
+</div>
+<div class="title">Figure 41. Find Command User Interface</div>
+</div>
+<div class="paragraph">
+<p>By default, Alfred does a search by intersection for the given entity. However, Alfred also allows
+the user to do a search by union. This can be done by inserting an <code>OR</code> keyword before all the parameters.
+Further examples on the usage of <code>find</code> can be found in the
+<a href="UserGuide.html#advanced-finding-of-a-specific-entity-by-union-or-negative-code-find-and-or-mentor-team-participant-n-name-exclude-code">user guide</a>
+.</p>
+</div>
+<div class="sect3">
+<h4 id="find-command-implementation-overview"><a class="link" href="#find-command-implementation-overview">4.11.1. Find Command Implementation Overview</a></h4>
+<div class="paragraph">
+<p>The following sequence diagram shows the sequence of method calls used to display the filtered list
+on the application, from <code>Logic</code> to <code>ModelManager</code> upon the execution of a <code>FindParticipantCommand</code>.
+An analogous sequence diagram also applies for the <code>Team</code> and <code>Mentor</code> objects as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/FindCommandSequenceDiagram.png" alt="FindCommandSequenceDiagram">
+</div>
+<div class="title">Figure 42. Find Participant Command Sequence Diagram</div>
+</div>
+<div class="paragraph">
+<p>The left half of the diagram covers creation of the <code>FindParticipantCommand</code> while the right half
+details the interaction with the <code>Model</code>. There are 5 main steps in the execution of the command.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>FindCommandAllocator</code> allocates the correct parser for the find command based on the entity name
+provided. If the entity name is incorrect, then an error will be thrown and execution will terminate.</p>
+</li>
+<li>
+<p>The <code>FindParticipantCommandParser</code> will then parse the String provided to it. If the string provided
+is invalid and does not follow the specified format, an error will be thrown. Likewise, if the find command
+is called and no parameters are provided, an error will also be thrown. During the parsing, the parser splits
+the input string given into two separate strings, one for normal parameters and the other for parameters
+that will undergo negated search. Two separate <code>ArgumentMultimap</code> objects are generated using the two
+strings. These <code>ArgumentMultimap</code> objects are the same as the ones found in AB3 and thus behave in a similar manner
+and have the same constraints.</p>
+</li>
+<li>
+<p>If there are no errors, the <code>FindParticipantCommandParser</code> then creates
+a <code>FindParticipantCommand</code> which in turn generates the predicate it would use
+to filter the relevant <code>EntityList</code> by. These predicates are stored as static variables in a central <code>Predicates</code>
+file. <code>FindParticipantCommand</code> selects the predicates based on which fields are provided in the original
+input string.</p>
+</li>
+<li>
+<p>With these predicates, it then calls the <code>findParticipant</code> method on the model with the generated predicate.</p>
+</li>
+<li>
+<p>A list of <code>Participant</code> objects is then returned, and is also printed onto the console for the user&#8217;s
+reference. Then, at <code>FindParticipantCommand</code>, a <code>CommandResult</code> is returned after the smooth execution
+of this <code>find</code> operation.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>[NOTE]xw
+The find command does not mutate the list in any way. It only changes the <code>Entity</code> objects displayed using
+the generated predicate.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.11.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>The following are some design considerations for the Find Command Feature</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-format-of-the-input-string"><a class="link" href="#aspect-format-of-the-input-string">Aspect: Format of the input string</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Use a SQL style query string</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: SQL syntax is universally used to communicate with databases and is clean</p>
+</li>
+<li>
+<p>Cons: Users may not be familiar with SQL</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Use the current format of <code>n/NAME e/EMAIL &#8230;&#8203;</code> (current)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Maintains consistency within the application</p>
+</li>
+<li>
+<p>Cons: It is not as clear as SQL style syntax.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Alternative 1 would take the form
+    of <code>find where name="John" and phone like "123" and not email="gmail.com"</code>. This would also have the added
+benefit of better on-boarding SQL users. However,
+while SQL-style syntax  is relatively clean and understandable, we decided not to implement this
+for the following reasons.
+The first reason was that SQL queries are meant to be used for large databases with thousands of columns,
+hence, the structure of the query must be clean to reduce the number of bugs made in the query. On the
+other hand, each <code>Entity</code> in Alfred only has a small number of fields (less than 6) and thus the current
+query format would still be understandable. Secondly, as mentioned above, users may not be familiar with SQL.</p>
+</div>
+<div class="paragraph">
+<p>Hence, Alternative 2 was chosen as it would be more
+user friendly for users to the existing command format instead of memorizing a new format.
+Furthermore, implementing a new format would take more time as
+the new query format would have to be written and tested thoroughly, thus negatively impacting development
+velocity.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-storing-of-the-predicates"><a class="link" href="#aspect-storing-of-the-predicates">Aspect: Storing of the predicates</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1</strong>: Store the Predicates in a central file (current)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Makes the predicates accessible to the whole application
+hence reducing code duplication</p>
+</li>
+<li>
+<p>Cons: A large conditional statement would be needed in each Command class.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2</strong>: Store the Predicates within each <code>FindCommand</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Each predicate is only used by one class, so this would have resulted in a better separation
+of concerns</p>
+</li>
+<li>
+<p>Cons: A large conditional statement or hash map would still be needed to decide which predicates to
+use</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ultimately, we decided to use Alternative 1. Although most of the predicates are only used once, they are
+all unmodifiable functions that return a predicate in the form of a closure. Thus, the risks associated
+with unrestricted access and modification of an object are greatly reduced. Furthermore, predicates are
+also used in other parts of the codebase. Hence, it is a good idea to consolidate them in a single location.
+Thus, if another class in the codebase needed to implement another predicate, all it had to do would be to check
+this central file to see if a similar one was already written, as opposed to trawling though the entire codebase.</p>
+</div>
+<div class="paragraph">
+<p>The large conditional statement was also not a major issue. This is because although it is large, the
+code within was understandable and this would have facilitated its extension, as compared to prematurely
+refactoring out into smaller submodules.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">4.12. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.12, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 4.13, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2133,7 +2505,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.12. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">4.13. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3324,4 +3696,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 05:24:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 06:53:48 UTC</div></div></div></body></html>
