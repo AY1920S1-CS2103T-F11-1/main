@@ -8,11 +8,12 @@
 
 == Overview
 
-For our software engineering project, my team of five software engineering students, including myself, were tasked with either improving an existing addressbook application's codebase, or completely modifying it into a new application. We opted to morph the addressbook codebase into a command-line based hackathon organizing tool which we named "*Alfred*". Alfred is a desktop application targeted towards hackathon organizers and intends to aid them with several organizational and logistical needs, such as tracking the participants, teams and mentors involved in the hackathon; managing the relations between different these entities; and judging and determining winners within the hackathon. All of this intends to package the various complex tools required to organise a hackathon into a single desktop application.
+For our software engineering project, my team of five software engineering students, including myself, were tasked with either improving an existing addressbook application's codebase, or completely modifying it into a new application. We opted to morph the addressbook codebase into a command-line based hackathon organizing tool which we named "*Alfred*". Alfred is a desktop application targeted towards hackathon organizers and intends to aid them with several organizational and logistical needs, such as tracking the participants, teams and mentors involved in the hackathon; managing the relations between different these entities; and judging and determining winners within the hackathon. All of this intends to package the various complex tools required to organise a hackathon into a single desktop application, resembling the image below.
 
-My main role in this project was to design and write code for the judging and leaderboard functions we intended to equip our application with. Judging and leaderboard are essential components of a hackathon as every competition is bound to have winners based on their scores. To allow Alfred's users to easily judge teams, I implemented the `score` feature which provides several functionalities in adjusting a team's score. Secondly, to facilitate viewing the leaderboard or the top teams in the hackathon, I implemented the `leaderboard` and `getTop k` commands to endow the user with ability to do so.
+.Alfred's UI
+image::Ui.png[]
 
-The following sections of this document highlight in more detail the features I implemented and the enhancements I added to this project. Additionally, it also explores the relevant documentation I added to our application user guide and developer guide with regards to the enhancements I made.
+My main role in this project was to design and write code for the judging and leaderboard functions we intended to equip our application with. Judging and leaderboard are essential components of a hackathon as every competition is bound to have winners based on their scores. The following sections of this document highlight in more detail the features I implemented and the enhancements I added to this project. Additionally, it also explores the relevant documentation I added to our application user guide and developer guide with regards to the enhancements I made.
 
 == Summary of contributions
 
@@ -54,7 +55,7 @@ The following sections of this document highlight in more detail the features I 
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 
 == Contributions to the User Guide
-Alfred's user guide is a thorough and intuitive guide which explains to the its users how to properly use each of its features. It intends to introduce and guide new Alfred users through the various functionalities the application provides, and serve as a reference point for existing users in moments of uncertainty. The old addressbook user guide had to be updated to reflect the modifications we made to the application and how to use the new features we had implemented. This section highlights the non-trivial additions I made to the user guide, particularly with regards to the features I implemented.
+Alfred's user guide is a thorough and intuitive guide which explains to the its users how to properly use each of its features. To make it so, the old addressbook user guide had to be updated to reflect the modifications we made to the application and how to use the new features we had implemented. This section highlights the non-trivial additions I made to the user guide, particularly with regards to the features I implemented.
 
 //The following is an excerpt from the user guide which shows the contribution I made with regards to my Scoring feature. It explains to the user how to use the `score` command appropriately and clarifies some of the constraints and warning which the user may face.
 
@@ -65,7 +66,7 @@ The following is an excerpt from the user guide which shows the contribution I m
 include::../UserGuide.adoc[tag=rankings]
 
 == Contributions to the Developer Guide
-Alfred's developer guide provides an in-depth look into the architecture of how Alfred and its various features were implemented and different thoughts that went into designing them so it can serve as a reference point for current and future contributors to understand Alfred's design so they can continue improving it. This section highlights the non-trivial additions I made to the developer guide, particularly with regards to the features I implemented.
+Alfred's developer guide provides an in-depth look into the architecture of how Alfred and its various features were implemented and different thoughts that went into designing them so it can serve as a reference point for current and future contributors to understand Alfred's design. This section highlights the non-trivial additions I made to the developer guide, particularly with regards to the features I implemented.
 
 The following is an excerpt from the developer guide which shows the contribution I made with regards to my Leaderboard feature. It explains to the reader how the `leaderboard` command has been implemented and design considerations which were made when implementing it.
 
