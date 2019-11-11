@@ -642,6 +642,11 @@ Displays the ranking of all the teams in the hackathon in descending order of th
 
 Format: `leaderboard`
 
+Running `leaderboard` will show the following on the GUI:
+
+.GUI Display for Command "leaderboard"
+image::LeaderboardExample.png[width=600,height=420]
+
 ==== Get the top k teams: `getTop K`
 Lists the top k teams in the leaderboard, where k is a valid positive integer which you specify.
 
@@ -658,13 +663,21 @@ Format: `getTop K`
 
 Example:
 
-* `getTop 5` will display the top 5 teams with the highest points in the hackathon.
+* `getTop 2` will display the top 2 teams with the highest points in the hackathon as shown below:
 
-* `getTop 20` will display the top 20 teams with the highest points in the hackathon.
+.GUI Display for Command "getTop 2"
+image::TopTeamExample.png[width=600,height=420]
+
+* `getTop 4` will display the top 4 teams with the highest points in the hackathon as shown below:
+
+.GUI Display for Command "getTop 4"
+image::GetTop4.png[width=600,height=420]
+
+Note that due to the tie between the fourth and fifth teams, more than 4 teams are shown.
 
 ==== Extensions to `leaderboard` and `getTop K` Command
 
-To provide additional functionalities to the `leaderboard` and `getTop k` commands, there are few extensions that can be added to these two commands to allow you to customize them to your needs. These extensions and how to use them are listed below.
+To provide additional functionalities to the `leaderboard` and `getTop k` commands, there are few extensions that can be added to these two commands to allow you to customize them to your needs. These extensions are explored below.
 
 ===== Tie-Break
 
@@ -694,7 +707,20 @@ where `METHOD_N` is one of the following currently available tie-break methods:
 Example:
 
 * `leaderboard tb/moreParticipants lowerId` will display the leaderboard on the UI with Alfred breaking the tie between teams with equals scores based on which team has more participants, and if the number of participants is equal then by which team has the lower ID.
+
+.GUI Display for Command "leaderboard tb/moreParticipants lowerId"
+image::LeaderboardSimple.png[width=600,height=420]
+
+Note that in the above team "BroBro" comes above team "Bro" despite having the same number of points as "BroBro" has more participants. Secondly, "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, since "Amazon Warriors" has a lower ID.
+
 * `getTop 3 tb/lessParticipants random` will display the top 3 teams on the UI with Alfred breaking the tie between teams with equals scores based on which team has fewer participants, and if the number of participants is equal then Alfred will randomly pick the winners for the tie.
+
+.GUI Display for Command "getTop 3 tb/lessParticipants random"
+image::RandomGetTop.png[width=600,height=420]
+
+Note that in the above "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, due to the random tiebreak. Repeating the above command would change the outcome due to the random nature of the tiebreak.
+
+// end::rankings[]
 
 ===== Filter by Subject
 
@@ -710,10 +736,19 @@ By default, when running either the `leaderboard` or `getTop k` command, Alfred 
 
 Example:
 
-* `leaderboard s/Social` will display the leaderboard consisting only of teams with the subject "Social"
-* `getTop 3 tb/lessParticipants s/Health` will display the top 3 teams within the hackathon, all of which will consist of only of those with subject "Health". Additionally, any ties between these teams will be broken using the tiebreak method "lessParticipants" - the team with fewer participants wins the tie.
+* `leaderboard s/Health` will display the leaderboard consisting only of teams with the subject "Health" as shown below:
 
-// end::rankings[]
+.GUI Display for Command "leaderboard s/Health"
+image::HealthLeaderboard.png[width=600,height=420]
+
+Note that the above leaderboard only shows team with the subject "Health".
+
+* `getTop 3 tb/moreParticipants s/Health` will display the top 3 teams within the hackathon, all of which will consist of only of those with subject "Health". Additionally, any ties between these teams will be broken using the tiebreak method "moreParticipants" - the team with more participants wins the tie.
+
+.GUI Display for Command "getTop 3 tb/moreParticipants s/Health"
+image::HealthMoreP.png[width=600,height=420]
+
+Note that in the above team "BroBro" goes above team "Bro" as it has more participants, despite both teams having equal scores.
 
 === Bulk Registration: `import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]`
 You may import multiple entities at once into Alfred through the specification of a CSV file. +

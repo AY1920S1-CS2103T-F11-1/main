@@ -29,11 +29,10 @@ My main role in this project was to design and write code for the judging and le
 ** *Justification*: At the end of a hackathon, the organizers need to determine the winners of the hackathon. This feature allows them to easily do so easily by running simple single line commands, rather than having to scroll and squint at different teams in the hackathon.
 ** *Highlights*: This enhancement was particularly difficult to implement as it had several sub-parts to it, especially in handling cases when teams are ties. This required me to devise and code few complicated algorithms to ensure that the multiple edge cases, such as when teams are still tied after applying tiebreak methods, are appropriately handled in order to display the correct results to the user.
 
-*Code Contributed*: Please see the following links to see view the code I implemented for each feature
+*Code Contributed*: Please see the following links to see view the code I implemented for this project:
 
-* Scoring Feature:
-* Leaderboard Feature:
-* Top Teams Feature:
+* https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=abhiman&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=Abhiman2211&tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D[Functional Code]: the functional lines of code contributed towards the project.
+* https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=abhiman&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=Abhiman2211&tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D[Test Code]: the code written to test the code within the project.
 
 *Other contributions*:
 
@@ -46,28 +45,24 @@ My main role in this project was to design and write code for the judging and le
 *** I abstracted several common bits of code into single methods which were then used by my teammates.
 
 ** Documentation:
-*** Wrote how to use the Score, Leaderboard and Top Teams Command into the user guide.
+*** Wrote the Score, Leaderboard and Top Teams command sections of the user guide.
 *** Explained the implementation of the Score, Leaderboard and Top Teams Command in the developer guide.
 *** Made cosmetic tweaks to the contents of the User Guide: https://github.com[#14]
-*** Made cosmetic changes to the contents of the Developer Guide to suit it to our application.
+*** Made cosmetic changes to the contents of the Developer Guide to suit our application.
 
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 
 == Contributions to the User Guide
-Alfred's user guide is a thorough and intuitive guide which explains to the its users how to properly use each of its features. To make it so, the old addressbook user guide had to be updated to reflect the modifications we made to the application and how to use the new features we had implemented. This section highlights the non-trivial additions I made to the user guide, particularly with regards to the features I implemented.
+Alfred's user guide is a thorough and intuitive guide which explains to the its users how to properly use each of its features. My extensive contributions to it showcase my ability to write documentation targeting the end-users. This section contains an excerpt from my additions to the user guide with regards to my Leaderboard and Get Top Teams feature which explains how to use the `leaderboard` and `getTop K` commands. You may also view the full version of my contributions in Alfred's User Guide found _https://ay1920s1-cs2103t-f11-1.github.io/main/UserGuide.html[here]_.
 
 //The following is an excerpt from the user guide which shows the contribution I made with regards to my Scoring feature. It explains to the user how to use the `score` command appropriately and clarifies some of the constraints and warning which the user may face.
 
 //include::../UserGuide.adoc[tag=score]
 
-The following is an excerpt from the user guide which shows the contribution I made to the user guide with regards to my Leaderboard and Get Top Teams feature. It explains to the user how to use the `leaderboard` and `getTop K` commands appropriately and clarifies how to use their provided extensions.
-
 include::../UserGuide.adoc[tag=rankings]
 
 == Contributions to the Developer Guide
-Alfred's developer guide provides an in-depth look into the architecture of how Alfred and its various features were implemented and different thoughts that went into designing them so it can serve as a reference point for current and future contributors to understand Alfred's design. This section highlights the non-trivial additions I made to the developer guide, particularly with regards to the features I implemented.
-
-The following is an excerpt from the developer guide which shows the contribution I made with regards to my Leaderboard feature. It explains to the reader how the `leaderboard` command has been implemented and design considerations which were made when implementing it.
+Alfred's developer guide provides an in-depth look into the architecture of how Alfred and its various features were implemented. My extensive contributions to this document exhibit my ability to write technical documentation and showcase the technical depth of my contribution to the project. This section contains an excerpt from the developer guide which shows the contribution I made with regards to my Leaderboard feature. It explains to the reader how the `leaderboard` command has been implemented and design considerations which were made when implementing it. You may also view the full version of my contributions in Alfred's Developer Guide found _https://github.com/AY1920S1-CS2103T-F11-1/main/blob/master/docs/DeveloperGuide.adoc[here]_.
 
 include::../DeveloperGuide.adoc[tag=leaderboardCommand]

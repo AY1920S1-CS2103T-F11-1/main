@@ -475,73 +475,74 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_listing_all_entities_list_mentorsparticipantsteams">5.5. Listing all Entities : <code>list {mentors/participants/teams}</code></a></li>
 <li><a href="#_deleting_an_entity_delete_mentorparticipantteam_id">5.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></a></li>
 <li><a href="#_finding_a_specific_entity_find_mentorteamparticipant_nname">5.7. Finding a Specific Entity: <code>find {mentor/team/participant} n/NAME &#8230;&#8203;</code></a></li>
-<li><a href="#_assigning_a_entity_to_a_team_assign_mentorparticipant_id_team_id">5.8. Assigning a Entity to a Team: <code>assign {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></a></li>
-<li><a href="#_removing_an_entity_from_a_team_remove_mentorparticipant_id_team_id">5.9. Removing an Entity from a Team: <code>remove {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></a></li>
-<li><a href="#_show_command_history_history">5.10. Show Command History: <code>history</code></a></li>
-<li><a href="#_undo_previous_commands_undo_num_commands_to_undo">5.11. Undo Previous Commands: <code>undo [NUM_COMMANDS_TO_UNDO]</code></a></li>
-<li><a href="#_redo_previous_commands_redo_num_commands_to_redo">5.12. Redo Previous Commands: <code>redo [NUM_COMMANDS_TO_REDO]</code></a></li>
-<li><a href="#_command_history_navigation">5.13. Command History Navigation</a></li>
-<li><a href="#_scoring_score">5.14. Scoring: <code>score</code></a>
+<li><a href="#_advanced_finding_of_a_specific_entity_by_union_or_negative_find_andor_mentorteamparticipant_nname_exclude">5.8. Advanced Finding of a Specific Entity by Union or Negative: <code>find [AND/OR] {mentor/team/participant} n/NAME &#8230;&#8203; [EXCLUDE] &#8230;&#8203;</code></a></li>
+<li><a href="#_assigning_a_entity_to_a_team_assign_mentorparticipant_id_team_id">5.9. Assigning a Entity to a Team: <code>assign {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></a></li>
+<li><a href="#_removing_an_entity_from_a_team_remove_mentorparticipant_id_team_id">5.10. Removing an Entity from a Team: <code>remove {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></a></li>
+<li><a href="#_show_command_history_history">5.11. Show Command History: <code>history</code></a></li>
+<li><a href="#_undo_previous_commands_undo_num_commands_to_undo">5.12. Undo Previous Commands: <code>undo [NUM_COMMANDS_TO_UNDO]</code></a></li>
+<li><a href="#_redo_previous_commands_redo_num_commands_to_redo">5.13. Redo Previous Commands: <code>redo [NUM_COMMANDS_TO_REDO]</code></a></li>
+<li><a href="#_command_history_navigation">5.14. Command History Navigation</a></li>
+<li><a href="#_scoring_score">5.15. Scoring: <code>score</code></a>
 <ul class="sectlevel3">
-<li><a href="#_add_points_score_add_team_id_points">5.14.1. Add points: <code>score add TEAM_ID POINTS</code></a></li>
-<li><a href="#_subtract_points_score_sub_team_id_new_points">5.14.2. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></li>
-<li><a href="#_set_points_score_set_team_id_new_points">5.14.3. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></li>
-<li><a href="#_reset_points_score_reset_team_id">5.14.4. Reset points: <code>score reset TEAM_ID</code></a></li>
+<li><a href="#_add_points_score_add_team_id_points">5.15.1. Add points: <code>score add TEAM_ID POINTS</code></a></li>
+<li><a href="#_subtract_points_score_sub_team_id_new_points">5.15.2. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#_set_points_score_set_team_id_new_points">5.15.3. Set points: <code>score set TEAM_ID NEW_POINTS</code></a></li>
+<li><a href="#_reset_points_score_reset_team_id">5.15.4. Reset points: <code>score reset TEAM_ID</code></a></li>
 </ul>
 </li>
-<li><a href="#_team_rankings_leaderboard_and_gettop_k">5.15. Team Rankings: <code>leaderboard</code> and <code>getTop k</code></a>
+<li><a href="#_team_rankings_leaderboard_and_gettop_k">5.16. Team Rankings: <code>leaderboard</code> and <code>getTop k</code></a>
 <ul class="sectlevel3">
-<li><a href="#_view_leaderboard_leaderboard">5.15.1. View Leaderboard: <code>leaderboard</code></a></li>
-<li><a href="#_get_the_top_k_teams_gettop_k">5.15.2. Get the top k teams: <code>getTop K</code></a></li>
-<li><a href="#_extensions_to_leaderboard_and_gettop_k_command">5.15.3. Extensions to <code>leaderboard</code> and <code>getTop K</code> Command</a>
+<li><a href="#_view_leaderboard_leaderboard">5.16.1. View Leaderboard: <code>leaderboard</code></a></li>
+<li><a href="#_get_the_top_k_teams_gettop_k">5.16.2. Get the top k teams: <code>getTop K</code></a></li>
+<li><a href="#_extensions_to_leaderboard_and_gettop_k_command">5.16.3. Extensions to <code>leaderboard</code> and <code>getTop K</code> Command</a>
 <ul class="sectlevel4">
-<li><a href="#_tie_break">5.15.3.1. Tie-Break</a></li>
-<li><a href="#_filter_by_subject">5.15.3.2. Filter by Subject</a></li>
+<li><a href="#_tie_break">5.16.3.1. Tie-Break</a></li>
+<li><a href="#_filter_by_subject">5.16.3.2. Filter by Subject</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_bulk_registration_import_fppath_to_csv_file_fppath_to_error_file">5.16. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a>
+<li><a href="#_bulk_registration_import_fppath_to_csv_file_fppath_to_error_file">5.17. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></a>
 <ul class="sectlevel3">
-<li><a href="#_csv_file_formatting">5.16.1. CSV File Formatting</a>
+<li><a href="#_csv_file_formatting">5.17.1. CSV File Formatting</a>
 <ul class="sectlevel4">
-<li><a href="#_mentor_data">5.16.1.1. Mentor Data</a></li>
-<li><a href="#_participant_data">5.16.1.2. Participant Data</a></li>
-<li><a href="#_team_data">5.16.1.3. Team Data</a></li>
+<li><a href="#_mentor_data">5.17.1.1. Mentor Data</a></li>
+<li><a href="#_participant_data">5.17.1.2. Participant Data</a></li>
+<li><a href="#_team_data">5.17.1.3. Team Data</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_export_data_export_mentorparticipantteam_fpdesired_csv_file_path">5.17. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
-<li><a href="#_help_command">5.18. Help command</a></li>
-<li><a href="#_home_command_home">5.19. Home command: <code>home</code></a></li>
-<li><a href="#_command_suggestion_prompt">5.20. Command Suggestion Prompt</a></li>
-<li><a href="#_seating_locate_participantteam_coming_in_v2_0">5.21. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
-<li><a href="#_swag_coming_in_v2_0">5.22. Swag (Coming in v2.0)</a>
+<li><a href="#_export_data_export_mentorparticipantteam_fpdesired_csv_file_path">5.18. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></a></li>
+<li><a href="#_help_command">5.19. Help command</a></li>
+<li><a href="#_home_command_home">5.20. Home command: <code>home</code></a></li>
+<li><a href="#_command_suggestion_prompt">5.21. Command Suggestion Prompt</a></li>
+<li><a href="#_seating_locate_participantteam_coming_in_v2_0">5.22. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</a></li>
+<li><a href="#_swag_coming_in_v2_0">5.23. Swag (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#_add_swag_add_swag_description_quantity">5.22.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
-<li><a href="#_track_inventory_of_available_swags_list_swag">5.22.2. Track inventory of available swags: <code>list swag</code></a></li>
+<li><a href="#_add_swag_add_swag_description_quantity">5.23.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></a></li>
+<li><a href="#_track_inventory_of_available_swags_list_swag">5.23.2. Track inventory of available swags: <code>list swag</code></a></li>
 </ul>
 </li>
-<li><a href="#_schedule_coming_in_v2_0">5.23. Schedule (Coming in v2.0)</a>
+<li><a href="#_schedule_coming_in_v2_0">5.24. Schedule (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#_add_schedule_addschedule_time_team_id_mentor_id">5.23.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#_update_schedule_updateschedule_schedule_id_time_team_id_mentor_id">5.23.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
-<li><a href="#_delete_schedule_deleteschedule_schedule_id">5.23.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
+<li><a href="#_add_schedule_addschedule_time_team_id_mentor_id">5.24.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#_update_schedule_updateschedule_schedule_id_time_team_id_mentor_id">5.24.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></a></li>
+<li><a href="#_delete_schedule_deleteschedule_schedule_id">5.24.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></a></li>
 </ul>
 </li>
-<li><a href="#_food_coming_in_v2_0">5.24. Food (Coming in v2.0)</a>
+<li><a href="#_food_coming_in_v2_0">5.25. Food (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#_add_food_company_and_inventory_addfoodcompany_company_name_inventory_quantity">5.24.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#_mark_food_as_received_receivefood_company_name_inventory_quantity">5.24.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
-<li><a href="#_list_food_inventory_list_food">5.24.3. List Food Inventory: <code>list food</code></a></li>
+<li><a href="#_add_food_company_and_inventory_addfoodcompany_company_name_inventory_quantity">5.25.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#_mark_food_as_received_receivefood_company_name_inventory_quantity">5.25.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></a></li>
+<li><a href="#_list_food_inventory_list_food">5.25.3. List Food Inventory: <code>list food</code></a></li>
 </ul>
 </li>
-<li><a href="#_waitlist_coming_in_v2_0">5.25. Waitlist (Coming in v2.0)</a>
+<li><a href="#_waitlist_coming_in_v2_0">5.26. Waitlist (Coming in v2.0)</a>
 <ul class="sectlevel3">
-<li><a href="#_add_to_waitlist_addtowaitlist_participant_id">5.25.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#_remove_from_waitlist_removefromwaitlist_participant_id">5.25.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
-<li><a href="#_list_by_registration_time_listwaitlist">5.25.3. List by Registration Time: <code>listWaitList</code></a></li>
+<li><a href="#_add_to_waitlist_addtowaitlist_participant_id">5.26.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#_remove_from_waitlist_removefromwaitlist_participant_id">5.26.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></a></li>
+<li><a href="#_list_by_registration_time_listwaitlist">5.26.3. List by Registration Time: <code>listWaitList</code></a></li>
 </ul>
 </li>
 </ul>
@@ -694,12 +695,13 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-99">
 <ul>
 <li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-99">
-<p>A team has a team name, a subject to focus on, score, its project name, and its location (table number).</p>
-</li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-100">
-<p>A team may also contain one mentor and an arbitrary number of participants (setting of restrictions coming in v2.0).</p>
+<p>A team has a team name, a subject to focus on, score, its project name, and its location (table number).
+(For now, many teams can be grouped in 1 location. setting of restrictions coming in v2.0).</p>
 </li>
 <li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-101">
+<p>A team may also contain one mentor and 5 participants (setting of restrictions coming in v2.0).</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-102">
 <p>Two teams are considered as the same team if and only if they have the same team names or project names.</p>
 </li>
 </ul>
@@ -707,590 +709,706 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-103">
-<p>All entities will also receive a unique ID, which means no two entity will share the same ID. That is, entities with same ID will also be considered as a same entity. This is to be considered for specific commands such as the <a href="#_csv_file_formatting">Section 5.16.1, &#8220;CSV File Formatting&#8221;</a> under the <a href="#_bulk_registration_import_fppath_to_csv_file_fppath_to_error_file">Bulk Registration</a> command.</p>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-104">
+<p>All entities will also receive a unique ID, which means no two entity will share the same ID.
+That is, entities with same ID will also be considered as a same entity. This is to be considered for specific commands such as the <a href="#_csv_file_formatting">Section 5.17.1, &#8220;CSV File Formatting&#8221;</a> under the <a href="#_bulk_registration_import_fppath_to_csv_file_fppath_to_error_file">Bulk Registration</a> command.
+Also, do not that entities are randomly generated and are not necessarily in ascending order.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-105">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-108">
 <p><strong><code>Parameters</code></strong></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-107">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-110">
 <p><code>Name</code>, <code>Organization</code>, <code>ProjectName</code> - can be any combination of spaces, letters, and these special characters (,.-')</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-109">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-112">
 <p><code>Phone</code> - can be any combination of numbers (at least three digits), space, hyphens (-), and periods (.) with or without a country code. Country code of Singapore (<code>+65</code>) will be automatically included if it is not added.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-111">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-114">
 <p><code>Email</code> - must include an address and an email domain. It can include special characters (-,.), excluding bracket.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-113">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-116">
 <p><code>SubjectName</code> - the subject a mentor or team will be focusing on in the Hackathon<br>
 Must be one of the values below:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-116">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-119">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-116">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-119">
 <p>Environmental</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-117">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-120">
 <p>Social</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-118">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-121">
 <p>Health</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-119">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-122">
 <p>Education</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-120">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-123">
 <p>Entertainment</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-121">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-124">
 <p>Social</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-123">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-126">
 <p><code>Score</code> - must be an integer ranging from 0 to 100.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-125">
-<p><code>Location</code> - must be an integer ranging from 1 to 1000, indicating a table number. Only one team is allowed per table</p>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-128">
+<p><code>Location</code> - must be an integer ranging from 1 to 1000, indicating a table number.
+Restrictions of the number of teams per table will be coming in v2.0.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-130">
+<div class="sect1 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-134">
 <h2 id="Features">5. Features</h2>
 <div class="sectionbody">
-<div class="exampleblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-132">
+<div class="exampleblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-136">
 <div class="content">
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-134">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-138">
 <p><strong>Prelude - Command Format</strong></p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-136">
-<ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-136">
-<p>Words in <code>UPPER_CASE</code> are the parameters which you need to supply. For example, in <code>add mentor n/NAME</code>,
-<code>NAME</code> is a parameter which you need to specify as the mentor&#8217;s name (i.e. <code>add mentor n/John Doe</code>).</p>
-</li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-138">
-<p>You can input the parameters in any order. For instance, if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still consider it as an acceptable command.</p>
-</li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-139">
-<p>Words in {curly braces} indicate values for the command that you need to select and provide.</p>
 <div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-140">
 <ul>
 <li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-140">
+<p>Words in <code>UPPER_CASE</code> are the parameters which you need to supply. For example, in <code>add mentor n/NAME</code>,
+<code>NAME</code> is a parameter which you need to specify as the mentor&#8217;s name (i.e. <code>add mentor n/John Doe</code>).</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-142">
+<p>You can input the parameters in any order. For instance, if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, you may input <code>p/PHONE_NUMBER n/NAME</code> and Alfred will still consider it as an acceptable command.</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-143">
+<p>Words in {curly braces} indicate values for the command that you need to select and provide.</p>
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-144">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-144">
 <p>For example in the case of <code>add {mentor/participant/list}</code>, you can choose to type <code>add mentor</code>, <code>add participant</code> or <code>add team</code></p>
 </li>
 </ul>
 </div>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-141">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-145">
 <p>Words in [brackets] indicate values that are optional for the command.</p>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-142">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-146">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-142">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-146">
 <p>For example, in the case of <code>export [CSV_FILE_PATH]</code>, you can choose to leave out the file path.</p>
 </li>
 </ul>
 </div>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-143">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-147">
 <p>Whenever you need to specify an ID, the ID will be prefixed with an alphabet indicating the type of the Entity (e.g. M for Mentors, P for Participants, T for Teams).</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-144">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-148">
 <p>Type your commands in the textbox displayed on the Alfred UI. After you are done typing the command, press <kbd>Enter</kbd> on your keyboard to execute the command.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-146">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-150">
 <p>Also, please refer to <a href="#_parameter_constraints_and_additional_information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a> for more information on the different restrictions for each parameter.</p>
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-150">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-154">
 <h3 id="_saving_the_data">5.1. Saving the data:</h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-152">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-156">
 <p>Data in Alfred is saved to the hard disk automatically after any command that changes the data.
 There is no need for you to save the data manually.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-155">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-159">
 <p>Should any tampering of the data in storage result in an invalid state for the data, the data will be re-initialised and the old data will be lost.
 Hence, please avoid directly altering the storage files as any minor errors could result in permanent
 loss of critical information.</p>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-159">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-163">
 <h3 id="_viewing_help_help">5.2. Viewing help : <code>help</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-161">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-165">
 <p>If at anytime you don&#8217;t understand how to do a certain thing on Alfred, use this command to display a
 help page in a separate pop-up window.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-164">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-168">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-165">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-169">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-165">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-169">
 <p>Should you require further information, the pop-up window also includes links to further references and documentation.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-168">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-172">
+<p>To close the window, run any non-<code>help</code> command.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-174">
 <p>Format: <code>help</code></p>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-170">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-176">
 <h3 id="_adding_an_entity_add_participantmentorteam">5.3. Adding an Entity: <code>add {participant/mentor/team}</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-172">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-178">
 <p>Use this command to add a new entity for Alfred to keep track of.<br></p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-174">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-180">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-175">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-181">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-175">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-181">
 <p>Creates an Entity as specified by you. Each Entity object will have a unique ID automatically assigned to it.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-176">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-182">
 <p>As of version 1.1, you must provide all the fields. There are no optional fields.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-177">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-183">
 <p>Note that the Specialisation and Subject fields can only take on the values specified in <code>SubjectName</code> in <a href="#_parameter_constraints_and_additional_information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>:</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-180">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-186">
 <h4 id="_adding_a_participant_add_participant_parameters">5.3.1. Adding a Participant: <code>add participant PARAMETERS</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-182">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-188">
 <p>Use this command to add a new Participant to Alfred to keep track of for your hackathon.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-184">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-190">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-185">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-191">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-185">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-191">
 <p>Participants have the fields "Name", "Phone number" and "Email address" which you must provide.</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-192">
+<p>For now, to cater to an international audience, we do not check for validity of phone numbers.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-188">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-195">
 <p>Format: <code>add participant n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-190">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-197">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-192">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-199">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-192">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-199">
 <p><code>add participant n/John Doe p/98765432 e/johnd@example.com</code></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-194">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-201">
 <p><code>add participant n/Betsy Crowe e/betsycrowe@example.com p/1234567</code></p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-196">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-203">
 <h4 id="_adding_a_mentor_add_mentor_parameters">5.3.2. Adding a Mentor: <code>add mentor PARAMETERS</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-197">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-204">
 <p>Use this command to add a new Mentor to Alfred to keep track of for your Hackathon.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-199">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-206">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-200">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-207">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-200">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-207">
 <p>Mentors have the fields "Name", "Phone number" and "Email address."</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-201">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-208">
 <p>Mentors also have a field called "Organization", which refers to the organization for which they work.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-202">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-209">
 <p>Mentors also have a field called "Specialisation", which refers to the field of work they specialise in. The Specialisation can only take on the values specified in <code>SubjectName</code> in <a href="#_parameter_constraints_and_additional_information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-203">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-210">
 <p>All of these fields must be specified in order to successfully add a mentor.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-206">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-213">
 <p>Format: <code>add mentor  n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS o/ORGANIZATION s/SPECIALISATION</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-208">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-215">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-210">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-217">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-210">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-217">
 <p><code>add mentor n/Professor Superman p/91236549 e/clarkkent@gmail.com o/Daily Planet s/Social</code></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-212">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-219">
 <p><code>add mentor n/Doctor Batman p/91236549 e/bruce@gmail.com o/Google s/Environmental</code></p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-214">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-221">
 <h4 id="_adding_a_team_add_team_parameters">5.3.3. Adding a Team: <code>add team PARAMETERS</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-216">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-223">
 <p>Use this command to add a new Team to Alfred to keep track of for your Hackathon.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-217">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-224">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-218">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-225">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-218">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-225">
 <p>Teams have the fields "Name", "Project name" and "Table Number" which you must provide.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-219">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-226">
 <p>Teams also have a field called "Subject", which refers the area the team&#8217;s project focuses on, and must be chosen from the predetermined list of subjects described in <code>SubjectName</code> in <a href="#_parameter_constraints_and_additional_information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-222">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-229">
 <p>Format: <code>add team n/NAME s/SUBJECT pn/PROJECT_NAME l/TABLE_NUMBER</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-224">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-231">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-226">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-233">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-226">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-233">
 <p><code>add team n/Team01 s/Social pn/EmotionTrain l/12</code></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-228">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-235">
 <p><code>add team n/HackathonWinners4Sure s/Environmental pn/Path-ify l/3</code></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-230">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-237">
 <h3 id="_updating_an_entity_edit_mentorparticipantteam_entity_id_parameters">5.4. Updating an Entity: <code>edit {mentor/participant/team} ENTITY_ID [PARAMETERS]</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-232">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-239">
 <p>Edits an entity based on the parameter values you supply. Use this command in case you want to make changes to an entity you have already created within Alfred.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-234">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-241">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-235">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-242">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-235">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-242">
 <p>Updates the fields of the Entity with the <code>ENTITY_ID</code> you specified to the new fields you type in as the parameter. The ID is the unique identifier for the particular Entity you wish to edit.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-236">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-243">
 <p>You must provide at least one of the optional fields.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-237">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-244">
 <p>The fields you provide must pertain to the specified entity in order for the edit to be successful. For instance, you cannot add a field "pn/NewProjectName" for a participant as a participant doesn&#8217;t have a project name.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-238">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-245">
 <p>Existing values will be updated to the input values you provide.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-241">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-248">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-243">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-250">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-243">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-250">
 <p><code>edit mentor M-1 n/NewMentorName</code></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-245">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-252">
 <p><code>edit team T-1 n/NewTeamName pn/New Project Name</code></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-247">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-254">
 <p><code>edit participant P-1 n/NewParticipantNAme</code></p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-249">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-256">
 <h3 id="_listing_all_entities_list_mentorsparticipantsteams">5.5. Listing all Entities : <code>list {mentors/participants/teams}</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-251">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-258">
 <p>Shows a list of all the entities corresponding to the entity you specified that Alfred keeps track of.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-253">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-260">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-254">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-261">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-254">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-261">
 <p>The fields of the Entity will be displayed on Alfred&#8217;s Graphical User Interface.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-257">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-264">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-259">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-266">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-259">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-266">
 <p><code>list mentors</code> will list all mentors stored within Alfred.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-261">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-268">
 <p><code>list participants</code> will list all hackathon participants stored within Alfred.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-263">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-270">
 <p><code>list teams</code> will list all hackathon teams stored within Alfred.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-265">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-272">
 <h3 id="_deleting_an_entity_delete_mentorparticipantteam_id">5.6. Deleting an Entity: <code>delete {mentor/participant/team} ID</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-266">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-273">
 <p>Deletes an Entity, so that Alfred will no longer keep track of that Entity.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-268">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-275">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-269">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-276">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-269">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-276">
 <p>Deletes the Entity with the ID that you specify.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-270">
-<p>Note that when you delete a Team, all the participants that are part of that team will also be deleted as well.</p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-277">
+<p>Note that when you delete a Team, it does not delete the participants or mentors associated with the teams.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-273">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-280">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-275">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-282">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-275">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-282">
 <p><code>delete mentor M-1</code> will delete the mentor with ID M-1 from Alfred.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-277">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-284">
 <p><code>delete participant P-1</code> will delete the participant with ID P-1 from Alfred.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-279">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-286">
 <p><code>delete team T-1</code> will delete the team with ID T-1 from Alfred.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-281">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-288">
 <h3 id="_finding_a_specific_entity_find_mentorteamparticipant_nname">5.7. Finding a Specific Entity: <code>find {mentor/team/participant} n/NAME &#8230;&#8203;</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-283">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-290">
 <p>Searches for Entities by selected fields, instead of their ID, in case you find that the ID is difficult to keep track of.<br></p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-285">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-292">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-286">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-293">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-286">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-293">
 <p>Take note that the <code>find</code> command only searches
 and matches the fields whose strings are a substring of the given value. It also does an intersection
 search in the event where one or more fields are provided, that is, the entities found would have the selected values
-for each of the fields you key in</p>
+for each of the fields you key in. This search is case insensitive.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-292">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-299">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-294">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-301">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-294">
-<p><code>find mentor n/Joshua Wong</code> will display a list of all mentors in the Hackathon who are named "Joshua Wong", or have "Joshua Wong" in their name.</p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-301">
+<p><code>find mentor n/Joshua Wong</code> will display a list of all mentors in the Hackathon who are named "Joshua Wong",
+or have "Joshua Wong" in their name.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-296">
-<p><code>find participant n/John Doe</code> will display a list of all participants in the Hackathon who are named "John Doe", or have "John Doe" in their name.</p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-304">
+<p><code>find participant n/John Doe</code> will display a list of all participants in the Hackathon who are named "John Doe",
+or have "John Doe" in their name.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-298">
-<p><code>find team n/FutureHackathonWinner</code> will display a list of all teams in the Hackathon that are named "FutureHackathonWinner", or have "FutureHackathonWinner" in their name.</p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-307">
+<p><code>find team n/FutureHackathonWinner</code> will display a list of all teams in the Hackathon that are named "FutureHackathonWinner",
+or have "FutureHackathonWinner" in their name.</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-300">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-310">
 <p>Each entity will have different fields available to find.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-302">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-312">
 <p>For participant, <code>n/NAME e/EMAIL p/PHONE</code> are all options to search for.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-304">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-314">
 <p>For team, <code>n/TEAMNAME pn/PROJECTNAME</code> are also all options to search for.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-306">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-316">
 <p>For mentor, <code>n/NAME, e/EMAIL, p/PHONE o/ORGANIZATION</code> are all available</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-308">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-318">
 <p>Example for multiple fields:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-310">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-320">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-310">
-<p><code>find participant n/Damith e/damith.com</code> finds all participants whose name contains the string "Damith" (this is case
-sensitive) and whose emails contain "damith.com"</p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-320">
+<p><code>find participant n/Damith e/damith.com</code> finds all participants
+whose name contains the string "Damith" and whose emails contain "damith.com"</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-314">
-<h3 id="_assigning_a_entity_to_a_team_assign_mentorparticipant_id_team_id">5.8. Assigning a Entity to a Team: <code>assign {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-316">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-323">
+<h3 id="_advanced_finding_of_a_specific_entity_by_union_or_negative_find_andor_mentorteamparticipant_nname_exclude">5.8. Advanced Finding of a Specific Entity by Union or Negative: <code>find [AND/OR] {mentor/team/participant} n/NAME &#8230;&#8203; [EXCLUDE] &#8230;&#8203;</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-325">
+<p>The default find command for single and multiple fields works via a find by intersection. That is, entities
+must be true for all the predicates for it to be displayed. However, Alfred also supports finding by union.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-328">
+<p>As above, all find commands are case insensitive.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-330">
+<p>The commands for this is as such:</p>
+</div>
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-332">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-332">
+<p><code>find participant OR n/Damith e/nus</code> will do a search for all Participants whose name contains "Damith" or whose
+email contains "nus" in it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-335">
+<p>Also do note that for this command, the OR key must be placed before all the arguments to the command. Also,
+the OR key can be replaced by the AND key to do a search by intersection. If none are provided, then a search by
+intersection is done by default. The AND/OR keyword must be in caps.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-339">
+<p>Next, Alfred also supports negative searches, if you wish to do it. Simply run</p>
+</div>
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-341">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-341">
+<p><code>find mentor n/Boss EXCLUDE e/boss.com</code> will return all mentors whose name has a "boss"
+and whose email does not contain "boss.com"</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-344">
+<p>Also, you can do negative searches by union as well.</p>
+</div>
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-346">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-346">
+<p><code>find mentor OR n/boss EXCLUDE e/boss.com</code> will now return all mentors whose
+name has a "boss" in it or whose email does not contain "boss.com"</p>
+</li>
+</ul>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-349">
+<p>However, there are also some caveats when it comes to using <code>find</code>.</p>
+</div>
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-351">
+<ol class="arabic">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-351">
+<p>The <code>AND/OR</code> keyword must be placed at the front before all parameters and the <code>EXCLUDE</code> keyword</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-352">
+<p>Anything after the <code>EXCLUDE</code> keyword will be processed using negative find.</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-353">
+<p>No <code>AND/OR</code> keywords are allowed after the <code>EXCLUDE</code> keyword.</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-354">
+<p>You can only search by <code>AND</code> or <code>OR</code>. You cannot do a search by both <code>AND</code> and <code>OR</code></p>
+</li>
+</ol>
+</div>
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-356">
+<div class="content">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-357">
+<p>Some notes on the logic used in find.</p>
+</div>
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-359">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-359">
+<p>The logic used in find obeys normal boolean, probabilistic logic.</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-360">
+<p>Hence commands like <code>find participant n/Ki EXCLUDE n/Ki</code> will return an empty list</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-361">
+<p>Likewise, commands like <code>find participant OR n/Ki EXCLUDE n/Ki</code> will return the full list.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-364">
+<p>Other examples of valid commands are also provided here for your reference:</p>
+</div>
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-366">
+<ol class="arabic">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-366">
+<p><code>find team OR EXCLUDE n/ArsenalFC pn/Football</code> will do a search of all teams whose name does not
+contain "ArsenalFC" or whose project name does not contain "Football".</p>
+</li>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-368">
+<p><code>find participant AND n/Abramov EXCLUDE e/react</code> will do a search where participant names contain "Abramov"
+and whose email does not contain "react". In this case, the <code>AND</code> keyword could have been omitted because
+the default find does a search by intersection.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-373">
+<h3 id="_assigning_a_entity_to_a_team_assign_mentorparticipant_id_team_id">5.9. Assigning a Entity to a Team: <code>assign {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-375">
 <p>Assigns Mentor or Participant Entity by their ID to a team identified by TEAM_ID.<br></p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-318">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-377">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-319">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-378">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-319">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-378">
 <p>Take note that the <code>assign</code> command can only be used to assign Participants and Mentors to a Team.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-320">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-379">
 <p>An error will be shown is the Team already has a Mentor.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-321">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-380">
 <p>An error will be shown if the Team already has said Participant.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-324">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-383">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-326">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-385">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-326">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-385">
 <p><code>assign mentor M-18 T-2</code> will assign Mentor with ID M-18 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
 </li>
 </ul>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-328">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-387">
 <div class="content">
 <img src="images/AssignCommandExample1.png" alt="AssignCommandExample1" width="790">
 </div>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-330">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-389">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-330">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-389">
 <p><code>assign participant P-100 T-2</code> will assign Participant with ID P-100 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:</p>
 </li>
 </ul>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-332">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-391">
 <div class="content">
 <img src="images/AssignCommandExample2.png" alt="AssignCommandExample2" width="790">
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-336">
-<h3 id="_removing_an_entity_from_a_team_remove_mentorparticipant_id_team_id">5.9. Removing an Entity from a Team: <code>remove {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-338">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-395">
+<h3 id="_removing_an_entity_from_a_team_remove_mentorparticipant_id_team_id">5.10. Removing an Entity from a Team: <code>remove {mentor/participant} ID TEAM_ID &#8230;&#8203;</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-397">
 <p>Removes Mentor or Participant Entity by their ID from a team identified by TEAM_ID.<br></p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-340">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-399">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-341">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-400">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-341">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-400">
 <p>Take note that the <code>remove</code> command can only be used to remove Participant or Mentor from a Team.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-342">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-401">
 <p>An error will be shown if the Participant or Mentor is not in the specific Team.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-343">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-402">
 <p>Deleting a Participant or Mentor will also delete all their connections with a team or teams.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-346">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-405">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-348">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-407">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-348">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-407">
 <p><code>remove mentor M-18 T-8</code> will remove Mentor with ID M-18 to Team with ID T-8. Running the command will show you the text 'Mentor not assigned' in the respective team. The following will be shown in the 'Team' section of the GUI:</p>
 </li>
 </ul>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-350">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-409">
 <div class="content">
 <img src="images/RemoveCommandExample1.png" alt="RemoveCommandExample1" width="790">
 </div>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-352">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-411">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-352">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-411">
 <p><code>remove participant P-100 T-2</code> will remove Participant with ID P-100 from Team with ID T-2.Running the command will show you the following output in the 'Team' section of the GUI</p>
 </li>
 </ul>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-354">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-413">
 <div class="content">
 <img src="images/RemoveCommandExample2.png" alt="RemoveCommandExample2" width="790">
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-357">
-<h3 id="_show_command_history_history">5.10. Show Command History: <code>history</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-358">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-417">
+<h3 id="_show_command_history_history">5.11. Show Command History: <code>history</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-418">
 <p>Shows you up to the last 50 commands that you executed.</p>
 </div>
-<div id="history_diagram" class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-361">
+<div id="history_diagram" class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-422">
 <div class="content">
 <img src="images/UndoRedoExplanation.png" alt="UndoRedoExplanation" width="790">
 </div>
+<div class="title">Figure 1. History Section of UI</div>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-363">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-426">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-364">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-427">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-364">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-427">
 <p>This command is to facilitate the undo/redo commands, as it becomes easier for you to track what changes were made before, and which
 commands can be undone/redone. This is especially useful when many commands have been executed and it is difficult to remember the sequence of
 execution of the commands.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-367">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-430">
 <p>Executing the command will bring you to the "History" section of Alfred, which displays all the previously-executed
 commands as panels. There are 3 main delimiters. Each delimiter is just a visual representation of the limits for the undo/redo commands.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-369">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-432">
 <p>You cannot redo any command beyond the "redo" delimiter.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-370">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-433">
 <p>You cannot undo any command beyond the "undo" delimiter.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-371">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-434">
 <p>The "current" delimiter tells you where you are at relative to the rest of the commands you have executed. It represents the
 current state of the data.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-373">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-436">
 <p>Note that only commands that change the state of the data in Alfred will be displayed in the "History" section and are undo/redo-able.
 For instance, <code>list participants</code> will not be undo/redo-able, as it simply shows you the participants in Alfred and does not change any information in Alfred.
 On the other hand, invoking <code>add participant</code> with the suitable parameters will be undo/redo-able and will be shown in the "History" section by the <code>history</code> command.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-376">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-439">
 <p>In total, only 50 states will be stored, so this serves as a limit for the number of commands you can undo/redo to.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="admonitionblock note has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-380">
+<div class="admonitionblock note has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-445">
 <table>
 <tr>
 <td class="icon">
@@ -1303,88 +1421,95 @@ All other commands are undo/redo-able.
 </tr>
 </table>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-383">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-448">
 <p>Example:</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-385">
-<p>After running the following commands:</p>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-450">
+<p>After running the following commands:<br></p>
 </div>
-<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-387">
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-452">
 <ol class="arabic">
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-387">
-<p><code>list participants</code></p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-452">
+<p><code>list participants</code><br></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-388">
-<p><code>add participant n/SuperHero1 p/+6591111111 e/superhero1@gmail.com</code></p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-454">
+<p><code>add participant n/SuperHero1 p/+6591111111 e/superhero1@gmail.com</code><br></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-389">
-<p><code>add participant n/SuperHero2 p/+6592222222 e/superhero2@gmail.com</code></p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-456">
+<p><code>add participant n/SuperHero2 p/+6592222222 e/superhero2@gmail.com</code><br></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-390">
-<p><code>add participant n/SuperHero3 p/+6593333333 e/superhero3@gmail.com</code></p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-458">
+<p><code>add participant n/SuperHero3 p/+6593333333 e/superhero3@gmail.com</code><br></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-391">
-<p><code>edit participant P-4 n/The Flash</code></p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-460">
+<p><code>edit participant P-4 n/The Flash</code><br></p>
 </li>
 </ol>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-393">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-462">
 <p>Running <code>history</code> will show you the following output in the "History" section of the Graphical User Interface:</p>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-395">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-465">
 <div class="content">
 <img src="images/HistoryCommandExampleOutput.png" alt="HistoryCommandExampleOutput" width="790">
 </div>
+<div class="title">Figure 2. Output from History Command</div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-398">
-<p>The topmost panel is the "redo" delimiter.<br>
-The second panel from the top is the "current" delimiter.<br>
-The bottommost panel shows you the "undo" delimiter.<br>
-In this example, the output of the <code>history</code> command shows you can invoke the <code>undo</code> command four times.
-Notice that the <code>list participants</code> command is not shown in the "History" section as it does not change data.<br>
-Also note that the undo-able commands are numbered, with the 1st undo-able command being the most recently executed command (the EditParticipantCommand),
-and the 4th undo-able command being the oldest executed command. You are unable to undo beyond the 4th undo-able command. Doing so will result in an error (see <a href="#_undo_previous_commands_undo_num_commands_to_undo">Section 5.11, &#8220;Undo Previous Commands: <code>undo [NUM_COMMANDS_TO_UNDO]</code>&#8221;</a>)<br>
-Also note that in this case, no commands are redo-able, that&#8217;s why there are no panels between the "redo" and "current" delimiters. Hence, executing <code>redo</code> command will result in an error (see <a href="#_redo_previous_commands_redo_num_commands_to_redo">Section 5.12, &#8220;Redo Previous Commands: <code>redo [NUM_COMMANDS_TO_REDO]</code>&#8221;</a>)<br></p>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-468">
+<p>The topmost panel is the "redo" delimiter. The second panel from the top is the "current" delimiter. The bottommost panel shows you the "undo" delimiter.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-470">
+<p>In this example, the output of the <code>history</code> command shows you can invoke the <code>undo</code> command four times.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-472">
+<p>Notice that the <code>list participants</code> command is not shown in the "History" section as it does not change data.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-474">
+<p>Also note that the undo-able commands are numbered, with the 1st undo-able command being the most recently executed command (the EditParticipantCommand),
+and the 4th undo-able command being the oldest executed command. In this case, the maximum number of commands you can undo at once is 4.</p>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-477">
+<p>Also note that in this case, no commands are redo-able, that&#8217;s why there are no panels between the "redo" and "current" delimiters. Hence, executing <code>redo</code> command will result in an error.</p>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-408">
-<h3 id="_undo_previous_commands_undo_num_commands_to_undo">5.11. Undo Previous Commands: <code>undo [NUM_COMMANDS_TO_UNDO]</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-409">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-481">
+<h3 id="_undo_previous_commands_undo_num_commands_to_undo">5.12. Undo Previous Commands: <code>undo [NUM_COMMANDS_TO_UNDO]</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-482">
 <p>Undoes previously executed commands.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-411">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-484">
 <p>There are 2 ways for you to use this commands:</p>
 </div>
-<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-413">
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-486">
 <ol class="arabic">
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-413">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-486">
 <p><code>undo</code>: This implicitly executes <code>undo 1</code> and undoes 1 command only.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-414">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-487">
 <p><code>undo [NUM_COMMANDS_TO_UNDO]</code>: This undoes <code>NUM_COMMANDS_TO_UNDO</code> commands, subject to the number of available commands that you can
 undo, as per the output of the <code>history</code> command.</p>
 </li>
 </ol>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-417">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-490">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-418">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-491">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-418">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-491">
 <p>This command undoes the effects of previously executed commands, and will return Alfred to the previous state
 (as though you had never executed the <code>NUM_COMMANDS_TO_UNDO</code> previous commands)</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-420">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-493">
 <p>All commands that can be undone can be found in the output of the <code>history</code> command. Use this to see the total number of commands and which commands you can undo.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-421">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-494">
 <p>To be certain which command you are actually undo-ing, first run the <code>history</code> command and examine the output.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-422">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-495">
 <p>Only the commands that actually change the data in Alfred will be undo-able. Commands that perform read operations
-(such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command. See <a href="#_show_command_history_history">Section 5.10, &#8220;Show Command History: <code>history</code>&#8221;</a> for a full list of commands that are not undo-able.</p>
+(such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command. See <a href="#_show_command_history_history">Section 5.11, &#8220;Show Command History: <code>history</code>&#8221;</a> for a full list of commands that are not undo-able.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-424">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-497">
 <p>Note that <code>NUM_COMMANDS_TO_UNDO</code> must be an integer, and must be a number between 1 and 49 (because only a maximum of 50 states are stored).
 If <code>NUM_COMMANDS_TO_UNDO</code> exceeds the number of commands that can be undone, Alfred will indicate
 that the undo command cannot be executed.</p>
@@ -1393,48 +1518,48 @@ that the undo command cannot be executed.</p>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-429">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-502">
 <p>Format: <code>undo [NUM_COMMANDS_TO_UNDO]</code></p>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-431">
-<h3 id="_redo_previous_commands_redo_num_commands_to_redo">5.12. Redo Previous Commands: <code>redo [NUM_COMMANDS_TO_REDO]</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-432">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-504">
+<h3 id="_redo_previous_commands_redo_num_commands_to_redo">5.13. Redo Previous Commands: <code>redo [NUM_COMMANDS_TO_REDO]</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-505">
 <p>Redoes previously executed commands.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-434">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-507">
 <p>There are 2 ways for you to use this commands:</p>
 </div>
-<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-436">
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-509">
 <ol class="arabic">
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-436">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-509">
 <p><code>redo</code>: This implicitly executes <code>redo 1</code> and redoes 1 command only.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-437">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-510">
 <p><code>redo [NUM_COMMANDS_TO_REDO]</code>: This redoes <code>NUM_COMMANDS_TO_REDO</code> commands, subject to the number of available commands that you can
 redo, as per the output of the <code>history</code> command.</p>
 </li>
 </ol>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-440">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-513">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-441">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-514">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-441">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-514">
 <p>This command undoes the effects of previously executed commands, and will return Alfred to the previous state
 (as though you re-executed the <code>NUM_COMMANDS_TO_REDO</code> previous commands)</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-443">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-516">
 <p>All commands that can be redone can be found in the output of the <code>history</code> command. Use this to see the total number of commands and which commands you can redo.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-444">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-517">
 <p>To be certain which command you are actually redo-ing, first run the <code>history</code> command and examine the output.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-445">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-518">
 <p>Only the commands that actually change the data in Alfred will be redo-able.
-Commands that perform read operations (such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command. See <a href="#_show_command_history_history">Section 5.10, &#8220;Show Command History: <code>history</code>&#8221;</a> for a full list of commands that are not redo-able.</p>
+Commands that perform read operations (such as <code>find</code> and <code>list</code>) will not be found in the output of the <code>history</code> command. See <a href="#_show_command_history_history">Section 5.11, &#8220;Show Command History: <code>history</code>&#8221;</a> for a full list of commands that are not redo-able.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-447">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-520">
 <p>Note that <code>NUM_COMMANDS_TO_REDO</code> must be an integer, and must be a number between 1 and 49 (because only a maximum of 50 states are stored).
 If <code>NUM_COMMANDS_TO_REDO</code> exceeds the number of commands that can be redone, Alfred will indicate
 that the redo command cannot be executed.</p>
@@ -1443,39 +1568,39 @@ that the redo command cannot be executed.</p>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-452">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-525">
 <p>Format: <code>redo [NUM_COMMANDS_TO_REDO]</code></p>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-454">
-<h3 id="_command_history_navigation">5.13. Command History Navigation</h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-455">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-529">
+<h3 id="_command_history_navigation">5.14. Command History Navigation</h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-530">
 <p>Navigate to previous commands by pressing the alt key <kbd>Alt</kbd>, together with the up <kbd>&uparrow;</kbd> or down <kbd>&downarrow;</kbd> arrow keys.
 For Mac users, press the option key <kbd>Opt</kbd> in place of the alt key <kbd>Alt</kbd> instead. Should you have re-mapped/re-purposed the
 alt key <kbd>Alt</kbd>, press the remapped key on your keyboard instead.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-459">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-534">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-460">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-535">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-460">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-535">
 <p>Every time you execute a command <strong><em>successfully</em></strong>, the command is saved in Alfred, so you can navigate to a previous command without re-typing the whole thing.
 There is only 1 exception to this rule: the <code>import</code> command can be navigated to even if there are errors raised during execution.
 This is because the <code>import</code> command will do its best to import as many Entities into Alfred as possible, before finally notifying the user of any incorrect entries (so there is partial successin the command&#8217;s execution).</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-463">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-538">
 <p>Press <kbd>Alt</kbd> + up <kbd>&uparrow;</kbd> to navigate to the previous command.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-464">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-539">
 <p>Press <kbd>Alt</kbd> + down <kbd>&downarrow;</kbd> to navigate to the next command.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-465">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-540">
 <p>Unlike most of the other features in Alfred, this is not a command you type into Alfred&#8217;s command input box. This is a keyboard shortcut that is mainly for your convenience as it allows you to quickly re-use previously executed commands.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-466">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-541">
 <p>Note that Alfred&#8217;s command input box must be in focus (the cursor is active in the command input box) for the keyboard shortcuts for this feature to work</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-467">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-542">
 <p>This feature only allows you to navigate up to the previous 50 successfully executed commands.</p>
 </li>
 </ul>
@@ -1483,438 +1608,510 @@ This is because the <code>import</code> command will do its best to import as ma
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-472">
-<h3 id="_scoring_score">5.14. Scoring: <code>score</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-474">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-549">
+<h3 id="_scoring_score">5.15. Scoring: <code>score</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-551">
 <p>The <code>score</code> command allows you to change a particular team&#8217;s score. It allows you to:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-476">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-553">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-476">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-553">
 <p>Add points to a team&#8217;s score</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-477">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-554">
 <p>Subtract points from a team&#8217;s score</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-478">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-555">
 <p>Set a team&#8217;s score to a certain number of points</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-479">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-556">
 <p>Reset a team&#8217;s score</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-481">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-558">
 <p>The usage of the above commands are explained in the following subsections.</p>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-483">
-<h4 id="_add_points_score_add_team_id_points">5.14.1. Add points: <code>score add TEAM_ID POINTS</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-485">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-560">
+<h4 id="_add_points_score_add_team_id_points">5.15.1. Add points: <code>score add TEAM_ID POINTS</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-562">
 <p>Adds the value of POINTS to the current score of the team with ID TEAM_ID.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-487">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-564">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-488">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-565">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-488">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-565">
 <p>Use this command when you want to award a particular team a certain amount of points.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-489">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-566">
 <p>If you try to award more than the maximum amount of points (which is set to 100 points as default), Alfred will not allow it and will display an error message.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-490">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-567">
 <p>If the addition of points makes the team&#8217;s total exceed the maximum, the score will simply be set to the maximum score.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-493">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-570">
 <p>Format: <code>score add TEAM_ID POINTS</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-495">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-572">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-497">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-574">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-497">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-574">
 <p><code>score add T-1 20</code> will add 20 points to the score of the team with ID T-1.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-499">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-576">
 <p><code>score add T-5 60</code> will add 60 points to the score of the team with ID T-5.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-501">
-<h4 id="_subtract_points_score_sub_team_id_new_points">5.14.2. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-503">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-578">
+<h4 id="_subtract_points_score_sub_team_id_new_points">5.15.2. Subtract points: <code>score sub TEAM_ID NEW_POINTS</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-580">
 <p>Deducts the value of POINTS from the current score of the team with ID TEAM_ID.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-505">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-582">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-506">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-583">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-506">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-583">
 <p>Use this command when you want to take away a certain amount of points from a particular team.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-507">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-584">
 <p>If you try to subtract more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message. If the subtraction of points makes the team&#8217;s total go below the minimum (which is set to 0 points), the score will simply be set to 0.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-510">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-587">
 <p>Format: <code>score sub TEAM_ID POINTS</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-512">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-589">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-514">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-591">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-514">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-591">
 <p><code>score sub T-1 15</code> will subtract 20 points from the score of the team with ID T-1.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-516">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-593">
 <p><code>score sub T-5 10</code> will subtract 10 points from the score of the team with ID T-5.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-518">
-<h4 id="_set_points_score_set_team_id_new_points">5.14.3. Set points: <code>score set TEAM_ID NEW_POINTS</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-519">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-595">
+<h4 id="_set_points_score_set_team_id_new_points">5.15.3. Set points: <code>score set TEAM_ID NEW_POINTS</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-596">
 <p>Sets the score of the team with ID TEAM_ID to a new score NEW_POINTS, regardless of the team&#8217;s current score.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-521">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-598">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-522">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-599">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-522">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-599">
 <p>Use this command when you want to set a team&#8217;s score to an exact score, rather than adding or subtracting points from their current score.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-523">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-600">
 <p>If you try to set more than the maximum amount of points (which is set to 100 as default), Alfred will not allow it and will display an error message.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-524">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-601">
 <p>If you try to set less than the minimum amount of points (which is set to 0 as default), Alfred will not allow it and will display an error message.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-527">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-604">
 <p>Format: <code>score set TEAM_ID POINTS</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-529">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-606">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-531">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-608">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-531">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-608">
 <p><code>score set T-1 15</code> will set the score of the team with ID T-1 as 15.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-533">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-610">
 <p><code>score set T-5 10</code> will set the score of the team with ID T-5 as 10.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-537">
-<h4 id="_reset_points_score_reset_team_id">5.14.4. Reset points: <code>score reset TEAM_ID</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-538">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-614">
+<h4 id="_reset_points_score_reset_team_id">5.15.4. Reset points: <code>score reset TEAM_ID</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-615">
 <p>Resets the score of the team with ID TEAM_ID to the minimum amount of points allowed, which is set to 0 as default.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-540">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-617">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-541">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-618">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-541">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-618">
 <p>Use this command when you want to set a team&#8217;s score to directly to the minimum, rather than subtracting points from their current score until you get the desired result.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-544">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-621">
 <p>Format: <code>score reset TEAM_ID</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-546">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-623">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-548">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-625">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-548">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-625">
 <p><code>score reset T-1</code> will reset the score of the team with ID T-1.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-550">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-627">
 <p><code>score reset T-5 10</code> will reset the score of the team with ID T-5.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-554">
-<h3 id="_team_rankings_leaderboard_and_gettop_k">5.15. Team Rankings: <code>leaderboard</code> and <code>getTop k</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-556">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-631">
+<h3 id="_team_rankings_leaderboard_and_gettop_k">5.16. Team Rankings: <code>leaderboard</code> and <code>getTop k</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-633">
 <p>In addition to assigning scores to teams, Alfred also facilitates viewing the leaderboard and fetching the top teams in the hackathon with ease. The following subsections explain how to do so within Alfred.</p>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-558">
-<h4 id="_view_leaderboard_leaderboard">5.15.1. View Leaderboard: <code>leaderboard</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-559">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-635">
+<h4 id="_view_leaderboard_leaderboard">5.16.1. View Leaderboard: <code>leaderboard</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-636">
 <p>Displays the ranking of all the teams in the hackathon in descending order of their points.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-561">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-638">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-562">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-639">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-562">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-639">
 <p>Once you run this command, Alfred&#8217;s UI will display a list of all the teams stored within Alfred sorted in descending order of their points.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-563">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-640">
 <p>By default Alfred sorts teams with equal points in the order they were added into Alfred, based on their ID.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-566">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-643">
 <p>Format: <code>leaderboard</code></p>
 </div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-645">
+<p>Running <code>leaderboard</code> will show the following on the GUI:</p>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-568">
-<h4 id="_get_the_top_k_teams_gettop_k">5.15.2. Get the top k teams: <code>getTop K</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-569">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-648">
+<div class="content">
+<img src="images/LeaderboardExample.png" alt="LeaderboardExample" width="600" height="420">
+</div>
+<div class="title">Figure 3. GUI Display for Command "leaderboard"</div>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-650">
+<h4 id="_get_the_top_k_teams_gettop_k">5.16.2. Get the top k teams: <code>getTop K</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-651">
 <p>Lists the top k teams in the leaderboard, where k is a valid positive integer which you specify.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-571">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-653">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-572">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-654">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-572">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-654">
 <p>This command will show you a cropped version of the leaderboard.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-573">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-655">
 <p>Alfred&#8217;s UI will display a list of top "k" teams based on their current score.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-574">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-656">
 <p>Do note that this command does not discriminate between teams of the same score - Teams with equal scores will be
 counted as one. Due to this, the command "getTop 1" (for example) may show more than 1 team if there are more than 1 teams with the
 same high score.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-577">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-659">
 <p>If you input <code>K</code> as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon, in descending order of their points.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-580">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-662">
 <p>Format: <code>getTop K</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-582">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-664">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-584">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-666">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-584">
-<p><code>getTop 5</code> will display the top 5 teams with the highest points in the hackathon.</p>
-</li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-586">
-<p><code>getTop 20</code> will display the top 20 teams with the highest points in the hackathon.</p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-666">
+<p><code>getTop 2</code> will display the top 2 teams with the highest points in the hackathon as shown below:</p>
 </li>
 </ul>
 </div>
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-669">
+<div class="content">
+<img src="images/TopTeamExample.png" alt="TopTeamExample" width="600" height="420">
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-588">
-<h4 id="_extensions_to_leaderboard_and_gettop_k_command">5.15.3. Extensions to <code>leaderboard</code> and <code>getTop K</code> Command</h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-590">
-<p>To provide additional functionalities to the <code>leaderboard</code> and <code>getTop k</code> commands, there are few extensions that can be added to these two commands to allow you to customize them to your needs. These extensions and how to use them are listed below.</p>
+<div class="title">Figure 4. GUI Display for Command "getTop 2"</div>
 </div>
-<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-592">
-<h5 id="_tie_break">5.15.3.1. Tie-Break</h5>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-594">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-671">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-671">
+<p><code>getTop 4</code> will display the top 4 teams with the highest points in the hackathon as shown below:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-674">
+<div class="content">
+<img src="images/GetTop4.png" alt="GetTop4" width="600" height="420">
+</div>
+<div class="title">Figure 5. GUI Display for Command "getTop 4"</div>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-676">
+<p>Note that due to the tie between the fourth and fifth teams, more than 4 teams are shown.</p>
+</div>
+</div>
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-678">
+<h4 id="_extensions_to_leaderboard_and_gettop_k_command">5.16.3. Extensions to <code>leaderboard</code> and <code>getTop K</code> Command</h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-680">
+<p>To provide additional functionalities to the <code>leaderboard</code> and <code>getTop k</code> commands, there are few extensions that can be added to these two commands to allow you to customize them to your needs. These extensions are explored below.</p>
+</div>
+<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-682">
+<h5 id="_tie_break">5.16.3.1. Tie-Break</h5>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-684">
 <p>By default Alfred <code>leaderboard</code> and <code>getTop k</code> commands fetch and display teams in descending order of their score, and by the order they were added into Alfred in case of tied scores.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-596">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-686">
 <p>Alfred&#8217;s tiebreak feature provides an extension to the <code>leaderboard</code> and <code>getTop k</code> commands allowing you to choose how you want to break the tie between the teams when calling these commands. To break a tie, follow the following format:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-598">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-688">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-598">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-688">
 <p><code>leaderboard tb/METHOD_1 METHOD_2 METHOD_3</code> in the case of a <code>leaderboard</code> command</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-599">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-689">
 <p><code>getTop NUMBER tb/METHOD_1 METHOD_2 METHOD_3</code> in the case of a <code>getTop NUMBER</code> command</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-601">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-691">
 <p>where <code>METHOD_N</code> is one of the following currently available tie-break methods:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-603">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-693">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-603">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-693">
 <p><code>moreParticipants</code>: teams with more participants are win the tie.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-604">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-694">
 <p><code>lessParticipants</code>: teams with lesser participants are win the tie.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-605">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-695">
 <p><code>higherId</code>: teams registered more recently (hence the highest ID) win the tie.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-606">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-696">
 <p><code>lowerId</code>: teams registered earlier (hence the lowest ID) win the tie.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-607">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-697">
 <p><code>random</code>: in case all methods used yield no distinct winner, <code>random</code> can be used as a method of last resort to break a tie in favour of a randomly chosen team.</p>
 </li>
 </ul>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-609">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-699">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-610">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-700">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-610">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-700">
 <p>You may choose one or more methods from the above list to break the tie. You need to precede the tie-break methods with the prefix <code>tb/</code> and separate each method with a single space for Alfred to properly understand them.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-611">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-701">
 <p>Use the prefix "tb/" with discretion as Alfred will only select tiebreak methods followed by the last "tb/" prefix if more than one such prefix is specfied in the command.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-612">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-702">
 <p>Do note that the tie-break methods will be applied in the order in which you state them. That is, first METHOD_1 will be applied to break the ties, and only then will METHOD_2 be applied to break any remaining ties, if the command <code>leaderboard tb/METHOD_1 METHOD_2</code> is called.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-613">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-703">
 <p>The <code>getTop NUMBER</code> command may still display teams more than the value of <code>NUMBER</code> if Alfred was still unsuccessful in breaking certain ties despite applying the tie-break methods you stated.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-614">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-704">
 <p>When using the <code>random</code> method, it must be the last stated tie-break method if it is being used alongside other tie-break methods.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-617">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-707">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-619">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-709">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-619">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-709">
 <p><code>leaderboard tb/moreParticipants lowerId</code> will display the leaderboard on the UI with Alfred breaking the tie between teams with equals scores based on which team has more participants, and if the number of participants is equal then by which team has the lower ID.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-620">
+</ul>
+</div>
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-712">
+<div class="content">
+<img src="images/LeaderboardSimple.png" alt="LeaderboardSimple" width="600" height="420">
+</div>
+<div class="title">Figure 6. GUI Display for Command "leaderboard tb/moreParticipants lowerId"</div>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-714">
+<p>Note that in the above team "BroBro" comes above team "Bro" despite having the same number of points as "BroBro" has more participants. Secondly, "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, since "Amazon Warriors" has a lower ID.</p>
+</div>
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-716">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-716">
 <p><code>getTop 3 tb/lessParticipants random</code> will display the top 3 teams on the UI with Alfred breaking the tie between teams with equals scores based on which team has fewer participants, and if the number of participants is equal then Alfred will randomly pick the winners for the tie.</p>
 </li>
 </ul>
 </div>
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-719">
+<div class="content">
+<img src="images/RandomGetTop.png" alt="RandomGetTop" width="600" height="420">
 </div>
-<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-622">
-<h5 id="_filter_by_subject">5.15.3.2. Filter by Subject</h5>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-624">
+<div class="title">Figure 7. GUI Display for Command "getTop 3 tb/lessParticipants random"</div>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-721">
+<p>Note that in the above "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, due to the random tiebreak. Repeating the above command would change the outcome due to the random nature of the tiebreak.</p>
+</div>
+</div>
+<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-725">
+<h5 id="_filter_by_subject">5.16.3.2. Filter by Subject</h5>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-727">
 <p>By default, when running either the <code>leaderboard</code> or <code>getTop k</code> command, Alfred will show all the appropriate teams irrespective of their subject. However, Alfred&#8217;s filter by subject feature provides the ability to view the leaderboard or top teams for a specific subject, by following the below format:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-626">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-729">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-626">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-729">
 <p><code>leaderboard s/SUBJECT_NAME</code> in the case of a <code>leaderboard</code> command</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-627">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-730">
 <p><code>getTop k s/SUBJECT_NAME</code> in the case of a <code>getTop k</code> command</p>
 </li>
 </ul>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-629">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-732">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-630">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-733">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-630">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-733">
 <p>You must precede the subject you want to filter by with the prefix <code>s/</code> for Alfred to understand your request. You can specify only one subject to filter the leaderboard or top teams by.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-631">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-734">
 <p>This extension can be used in addition to tiebreak methods in which case the tiebreak methods will be used to split ties between any teams with the same subject.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-634">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-737">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-636">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-739">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-636">
-<p><code>leaderboard s/Social</code> will display the leaderboard consisting only of teams with the subject "Social"</p>
-</li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-637">
-<p><code>getTop 3 tb/lessParticipants s/Health</code> will display the top 3 teams within the hackathon, all of which will consist of only of those with subject "Health". Additionally, any ties between these teams will be broken using the tiebreak method "lessParticipants" - the team with fewer participants wins the tie.</p>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-739">
+<p><code>leaderboard s/Health</code> will display the leaderboard consisting only of teams with the subject "Health" as shown below:</p>
 </li>
 </ul>
 </div>
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-742">
+<div class="content">
+<img src="images/HealthLeaderboard.png" alt="HealthLeaderboard" width="600" height="420">
+</div>
+<div class="title">Figure 8. GUI Display for Command "leaderboard s/Health"</div>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-744">
+<p>Note that the above leaderboard only shows team with the subject "Health".</p>
+</div>
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-746">
+<ul>
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-746">
+<p><code>getTop 3 tb/moreParticipants s/Health</code> will display the top 3 teams within the hackathon, all of which will consist of only of those with subject "Health". Additionally, any ties between these teams will be broken using the tiebreak method "moreParticipants" - the team with more participants wins the tie.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-749">
+<div class="content">
+<img src="images/HealthMoreP.png" alt="HealthMoreP" width="600" height="420">
+</div>
+<div class="title">Figure 9. GUI Display for Command "getTop 3 tb/moreParticipants s/Health"</div>
+</div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-751">
+<p>Note that in the above team "BroBro" goes above team "Bro" as it has more participants, despite both teams having equal scores.</p>
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-641">
-<h3 id="_bulk_registration_import_fppath_to_csv_file_fppath_to_error_file">5.16. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-642">
+</div>
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-753">
+<h3 id="_bulk_registration_import_fppath_to_csv_file_fppath_to_error_file">5.17. Bulk Registration: <code>import fp/PATH_TO_CSV_FILE [fp/PATH_TO_ERROR_FILE]</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-754">
 <p>You may import multiple entities at once into Alfred through the specification of a CSV file.<br>
 If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with all of the lines that were not able to be loaded.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-645">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-757">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-647">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-759">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-647">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-759">
 <p><code>import fp/C:/User/Hackathon2019/participant.csv</code> will import data from the participant.csv file into Alfred.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-648">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-760">
 <p><code>import fp/Hackathon2019/participant.csv</code> will look for the CSV file in your current directory (or the folder where alfred.jar is downloaded).</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-650">
-<p>Example usage of error file is shown at the end of <a href="#_csv_file_formatting">Section 5.16.1, &#8220;CSV File Formatting&#8221;</a>.</p>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-762">
+<p>Example usage of error file is shown at the end of <a href="#_csv_file_formatting">Section 5.17.1, &#8220;CSV File Formatting&#8221;</a>.</p>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-652">
-<h4 id="_csv_file_formatting">5.16.1. CSV File Formatting</h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-653">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-764">
+<h4 id="_csv_file_formatting">5.17.1. CSV File Formatting</h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-765">
 <p>In order for the contents of the CSV file to be correctly loaded into Alfred, the file has to be in the correct format.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-655">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-767">
 <div class="content">
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-656">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-768">
 <p><code>EntityType</code> - single capital letter representing the entity type</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-658">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-770">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-658">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-770">
 <p><strong>Mentor:</strong> M</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-659">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-771">
 <p><strong>Participant:</strong> P</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-660">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-772">
 <p><strong>Team:</strong> T</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-662">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-774">
 <p><code>[ID]</code> - the ID of the entity (optional)</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-664">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-776">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-664">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-776">
 <p><strong>Mentor:</strong> M-d, where d can be any positive integer</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-665">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-777">
 <p><strong>Participant:</strong> P-d, where d can be any positive integer</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-666">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-778">
 <p><strong>Team:</strong> T-d, where d can be any positive integer</p>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-667">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-779">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-667">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-779">
 <p>You can also express <code>ID</code> as only a positive integer.</p>
 </li>
 </ul>
@@ -1922,104 +2119,104 @@ If the PATH_TO_ERROR_FILE is specified, Alfred will create a new CSV file with a
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-669">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-781">
 <p>For the rest of the parameters, please refer to <a href="#_parameter_constraints_and_additional_information">Section 4, &#8220;Parameter Constraints and Additional Information&#8221;</a>.</p>
 </div>
 </div>
 </div>
-<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-673">
-<h5 id="_mentor_data">5.16.1.1. Mentor Data</h5>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-674">
+<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-785">
+<h5 id="_mentor_data">5.17.1.1. Mentor Data</h5>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-786">
 <p>Header: <code>EntityType,ID,Name,Phone,Email,Organization,SubjectName</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-676">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-788">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-678">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-790">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-678">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-790">
 <p>M,M-1,Alfred the Mentor,12345678,<a href="mailto:alfred@batcave.com">alfred@batcave.com</a>,Batcave Corp.,Education</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-679">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-791">
 <p>M,1,Alfred the Mentor,+6512345678,<a href="mailto:alfred@batcave.com">alfred@batcave.com</a>,Batcave Corp.,EDUCATION</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-680">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-792">
 <p>M,,Alfred the Mentor,+65 12345678,<a href="mailto:alfred@batcave.com">alfred@batcave.com</a>,Batcave Corp.,Education</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-682">
-<h5 id="_participant_data">5.16.1.2. Participant Data</h5>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-683">
+<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-794">
+<h5 id="_participant_data">5.17.1.2. Participant Data</h5>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-795">
 <p>Header: <code>EntityType,ID,Name,Phone,Email</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-685">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-797">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-687">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-799">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-687">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-799">
 <p>P,P-1,Bruce Wayne,23456789,<a href="mailto:wbruce@wayne.ent">wbruce@wayne.ent</a></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-688">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-800">
 <p>P,1,Bruce Wayne,+6523456789,<a href="mailto:wbruce@wayne.ent">wbruce@wayne.ent</a></p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-689">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-801">
 <p>P,,Bruce Wayne,+65 23456789,<a href="mailto:wbruce@wayne.ent">wbruce@wayne.ent</a></p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-691">
-<h5 id="_team_data">5.16.1.3. Team Data</h5>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-692">
+<div class="sect4 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-803">
+<h5 id="_team_data">5.17.1.3. Team Data</h5>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-804">
 <p>Header: <code>EntityType,ID,Name,Participants,Mentor,SubjectName,Score,ProjectName,Location</code></p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-694">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-806">
 <div class="content">
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-695">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-807">
 <p><code>[Participants]</code> - A list of participant IDs in the team.<br>
 This field is optional, but if it is included, participants with given ID must exist in Alfred.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-698">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-810">
 <p><code>[Mentor]</code> - An ID of the mentor associated with the team.<br>
 This field is also optional, but if it is included, mentor with given ID must exist in Alfred.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-701">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-813">
 <p>If you are importing multiple entity data at once, don&#8217;t worry! Alfred will make sure Participant and Mentor data are loaded before Team data to ensure that all of them are present in Alfred before checking whether they exist or not.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-703">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-815">
 <p>See example usage down below.</p>
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-706">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-818">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-708">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-820">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-708">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-820">
 <p>T,T-1,Justice League,,,Social,100,Save the Earth,1</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-709">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-821">
 <p>T,1,Justice League,[P-1|P-2|P-3],M-1,Social,100,Save the Earth,1</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-710">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-822">
 <p>T,,Justice League,[P-1|P-2|P-3],1,Social,100,Save the Earth,1</p>
 </li>
 </ul>
 </div>
 <hr>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-714">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-826">
 <p>Alfred will recognize each of the entity headers and will not count it as an error. Example CSV file may look like this:</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-716">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-828">
 <div class="content">
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-718">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-830">
 <p>Alfred.csv</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-720">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-832">
 <p>EntityType,ID,Name,Participants,Mentor,SubjectName,Score,ProjectName,Location<br>
 T,,Justice League,[P-1|P-2],M-1,Social,100,Save the Earth,1<br>
 T,,Amazon Warriors,[P-3|P-4],,Environmental,100,Save the Amazon,2<br>
@@ -2034,37 +2231,37 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-734">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-846">
 <p>Assuming Alfred has no data, we can see that lines 3, 6, and 11 will fail.</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-736">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-848">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-736">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-848">
 <p>Line 3: No participant with ID P-4 exist (Missing entity)</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-737">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-849">
 <p>Line 6: Phone number is missing and email is invalid (Invalid format)</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-738">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-850">
 <p>Line 11: Another participant with ID P-3 exists (Duplicate entity)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-740">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-852">
 <p>If you give the following command to Alfred,</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-742">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-854">
 <p><code>import fp/Alfred.csv fp/Alfred_Errors.csv</code></p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-744">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-856">
 <p>then the following CSV file will be created where Alfred.csv is located at.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-746">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-858">
 <div class="content">
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-748">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-860">
 <p>Alfred_Errors.csv</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-750">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-862">
 <p>T,,Amazon Warriors,[P-3|P-4],,Environmental,100,Save the Amazon,2<br>
 M,,Joker,,is this my email??<br>
 P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dailyplanet.org</a></p>
@@ -2075,227 +2272,231 @@ P,3,Lois Lane,+6598765432,<a href="mailto:loislane@dailyplanet.org">loislane@dai
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-758">
-<h3 id="_export_data_export_mentorparticipantteam_fpdesired_csv_file_path">5.17. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-759">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-870">
+<h3 id="_export_data_export_mentorparticipantteam_fpdesired_csv_file_path">5.18. Export Data: <code>export [{mentor/participant/team}] [fp/DESIRED_CSV_FILE_PATH]</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-871">
 <p>You may export Alfred data to an external CSV file. If the entity type is specified, Alfred will export all the data corresponding to that entity type only. If the desired CSV file path is left empty, Alfred will create a CSV file at the default location (<code>./AlfredData/Alfred_Data.csv</code>).</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-761">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-873">
 <p>Example:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-763">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-875">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-763">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-875">
 <p><code>export</code> will export all entities' data in Alfred to the default file path: <code>/AlfredData/Alfred_Data.csv</code>.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-764">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-876">
 <p><code>export mentor fp/data/Alfred.csv</code> will export all mentor data in Alfred to <code>/data/Alfred.csv</code>. If the any folders do not happen to exist, Alfred will create them for you.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-766">
-<h3 id="_help_command">5.18. Help command</h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-768">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-878">
+<h3 id="_help_command">5.19. Help command</h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-880">
 <p>The help command will list all the commands you need to use this
 application properly!</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-771">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-883">
 <p>Simply run <code>help</code>.</p>
 </div>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-885">
+<p>If you want the help window to close, simply run another command that is not <code>help</code> and the window
+will close by itself.</p>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-774">
-<h3 id="_home_command_home">5.19. Home command: <code>home</code></h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-775">
+</div>
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-889">
+<h3 id="_home_command_home">5.20. Home command: <code>home</code></h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-890">
 <p>This command allows you to navigate to the homepage where the system statistics are updated in real time. The homepage statistics are also available when you start-up the application.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-777">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-892">
 <p>Example:
 Suppose you want to check the distribution of teams by subjects, in order to gauge the demand for mentors for each subject.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-780">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-895">
 <p>Instead of manually sieving through all the teams by the subject that their project is on, you can easily view the distribution of teams and mentors by subject via the home command.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-782">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-897">
 <p>To navigate to home:</p>
 </div>
-<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-784">
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-899">
 <ol class="arabic">
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-784">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-899">
 <p>Type home into the command box, and press <code><code>Enter</code></code> to execute it.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-786">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-901">
 <p>The result box will display the message “Showing homepage” in the result box. You can see the statistics and the ‘Home’ section of sidebar being highlighted.
 Below is the layout of  the homepage:</p>
 </li>
 </ol>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-790">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-905">
 <div class="content">
 <img src="images/HomeCommandExample.png" alt="HomeCommandExample" width="790">
 </div>
-<div class="title">Figure 1. Output of <code>home</code> command</div>
+<div class="title">Figure 10. Output of <code>home</code> command</div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-795">
-<h3 id="_command_suggestion_prompt">5.20. Command Suggestion Prompt</h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-796">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-910">
+<h3 id="_command_suggestion_prompt">5.21. Command Suggestion Prompt</h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-911">
 <p>As you type, there will be a popup box predicting the type of commands you are going to type. You can navigate through these suggestions and choose the template that suits you.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-798">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-913">
 <p>Example:
 Let us suppose that you want to type the command <code>add mentor</code> and you forgot the fields that are required in the command.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-801">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-916">
 <p>Instead of going through the user guide to look for the command, a popup box will appear as you type. The content in this box will change as you type, such that the commands suggested will start with the words or letters that you have already entered.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-803">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-918">
 <p>As you type:
 1.	Type ‘add’ into the command box, and <code>add participant</code>, <code>add mentor</code> and <code>add team</code>  commands will be suggested to you. The grey text are meant as guides and blue text are meant as usage instructions . These text will not appear if you choose the command.</p>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-806">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-921">
 <div class="content">
 <img src="images/CommandSuggestionStep1.png" alt="CommandSuggestionStep1" width="790">
 </div>
 </div>
-<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-808">
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-923">
 <ol class="arabic">
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-808">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-923">
 <p>Press the <code><code>up</code> or <code>`down</code></code> arrow keys to navigate up and down the popup box.</p>
 </li>
 </ol>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-810">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-925">
 <div class="content">
 <img src="images/CommandSuggestionStep2.png" alt="CommandSuggestionStep2" width="790">
 </div>
 </div>
-<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-812">
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-927">
 <ol class="arabic">
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-812">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-927">
 <p>Press <code><code>Enter</code></code> to choose the command of your choice. The command will then appear on the user input box.</p>
 </li>
 </ol>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-814">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-929">
 <div class="content">
 <img src="images/CommandSuggestionStep3.png" alt="CommandSuggestionStep3" width="790">
 </div>
 </div>
-<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-816">
+<div class="olist arabic has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-931">
 <ol class="arabic">
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-816">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-931">
 <p>Press ‘left’ or ‘right’ keys to navigate the cursor and fill in the respective fields. Press Enter to execute the command.</p>
 </li>
 </ol>
 </div>
-<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-818">
+<div class="imageblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-933">
 <div class="content">
 <img src="images/CommandSuggestionStep4.png" alt="CommandSuggestionStep4" width="790">
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-822">
-<h3 id="_seating_locate_participantteam_coming_in_v2_0">5.21. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</h3>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-823">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-937">
+<h3 id="_seating_locate_participantteam_coming_in_v2_0">5.22. Seating: <code>locate {PARTICIPANT/TEAM}</code> (Coming in v2.0)</h3>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-938">
 <p>Find where a particular participant or team is seated.</p>
 </div>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-825">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-940">
 <p>Examples:</p>
 </div>
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-827">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-942">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-827">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-942">
 <p><code>locate n/Brian</code> will tell you where the participant Brian is seated.</p>
 </li>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-829">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-944">
 <p><code>locate n/GenericTeamName</code> will tell you where the team GenericTeamName is seated.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-832">
-<h3 id="_swag_coming_in_v2_0">5.22. Swag (Coming in v2.0)</h3>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-833">
-<h4 id="_add_swag_add_swag_description_quantity">5.22.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-834">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-947">
+<h3 id="_swag_coming_in_v2_0">5.23. Swag (Coming in v2.0)</h3>
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-948">
+<h4 id="_add_swag_add_swag_description_quantity">5.23.1. Add Swag: <code>add swag DESCRIPTION QUANTITY</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-949">
 <p>Add swag to inventory
 Examples: <code>add swag Android Plushie 5</code></p>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-837">
-<h4 id="_track_inventory_of_available_swags_list_swag">5.22.2. Track inventory of available swags: <code>list swag</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-838">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-952">
+<h4 id="_track_inventory_of_available_swags_list_swag">5.23.2. Track inventory of available swags: <code>list swag</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-953">
 <p>List the currently available swag</p>
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-840">
-<h3 id="_schedule_coming_in_v2_0">5.23. Schedule (Coming in v2.0)</h3>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-841">
-<h4 id="_add_schedule_addschedule_time_team_id_mentor_id">5.23.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-842">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-955">
+<h3 id="_schedule_coming_in_v2_0">5.24. Schedule (Coming in v2.0)</h3>
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-956">
+<h4 id="_add_schedule_addschedule_time_team_id_mentor_id">5.24.1. Add schedule: <code>addSchedule TIME TEAM_ID MENTOR_ID</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-957">
 <p>Add a schedule for a team</p>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-844">
-<h4 id="_update_schedule_updateschedule_schedule_id_time_team_id_mentor_id">5.23.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-845">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-959">
+<h4 id="_update_schedule_updateschedule_schedule_id_time_team_id_mentor_id">5.24.2. Update schedule: <code>updateSchedule SCHEDULE_ID TIME TEAM_ID MENTOR_ID</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-960">
 <p>Update a schedule for a team</p>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-847">
-<h4 id="_delete_schedule_deleteschedule_schedule_id">5.23.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-848">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-962">
+<h4 id="_delete_schedule_deleteschedule_schedule_id">5.24.3. Delete schedule: <code>deleteSchedule SCHEDULE_ID</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-963">
 <p>Delete a Schedule for a Team</p>
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-850">
-<h3 id="_food_coming_in_v2_0">5.24. Food (Coming in v2.0)</h3>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-851">
-<h4 id="_add_food_company_and_inventory_addfoodcompany_company_name_inventory_quantity">5.24.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-852">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-965">
+<h3 id="_food_coming_in_v2_0">5.25. Food (Coming in v2.0)</h3>
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-966">
+<h4 id="_add_food_company_and_inventory_addfoodcompany_company_name_inventory_quantity">5.25.1. Add Food Company and Inventory: <code>addFoodCompany COMPANY_NAME INVENTORY QUANTITY</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-967">
 <p>Add a Food Company and it associated food item inventory</p>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-854">
-<h4 id="_mark_food_as_received_receivefood_company_name_inventory_quantity">5.24.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-855">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-969">
+<h4 id="_mark_food_as_received_receivefood_company_name_inventory_quantity">5.25.2. Mark Food as Received: <code>receiveFood COMPANY_NAME INVENTORY QUANTITY</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-970">
 <p>Mark the inventory as received</p>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-857">
-<h4 id="_list_food_inventory_list_food">5.24.3. List Food Inventory: <code>list food</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-858">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-972">
+<h4 id="_list_food_inventory_list_food">5.25.3. List Food Inventory: <code>list food</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-973">
 <p>List the food inventory and its current status (e.g. delivering, received)</p>
 </div>
 </div>
 </div>
-<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-860">
-<h3 id="_waitlist_coming_in_v2_0">5.25. Waitlist (Coming in v2.0)</h3>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-861">
-<h4 id="_add_to_waitlist_addtowaitlist_participant_id">5.25.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-862">
+<div class="sect2 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-975">
+<h3 id="_waitlist_coming_in_v2_0">5.26. Waitlist (Coming in v2.0)</h3>
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-976">
+<h4 id="_add_to_waitlist_addtowaitlist_participant_id">5.26.1. Add to waitlist: <code>addToWaitList PARTICIPANT_ID</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-977">
 <p>Add a participant to a waitlist when the number of participants exceeds a stipulated capacity.</p>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-864">
-<h4 id="_remove_from_waitlist_removefromwaitlist_participant_id">5.25.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-865">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-979">
+<h4 id="_remove_from_waitlist_removefromwaitlist_participant_id">5.26.2. Remove from waitlist: <code>removeFromWaitList PARTICIPANT_ID</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-980">
 <p>Remove a participant from the waitlist.</p>
 </div>
 </div>
-<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-867">
-<h4 id="_list_by_registration_time_listwaitlist">5.25.3. List by Registration Time: <code>listWaitList</code></h4>
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-868">
+<div class="sect3 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-982">
+<h4 id="_list_by_registration_time_listwaitlist">5.26.3. List by Registration Time: <code>listWaitList</code></h4>
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-983">
 <p>Go through the waitlist and list the participants in the waitlist in ascending orger of registration time.</p>
 </div>
-<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-869">
+<div class="sidebarblock has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-984">
 <div class="content">
-<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-870">
+<div class="ulist has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-985">
 <ul>
-<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-870">
+<li class="has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-985">
 <p>This helps fulfill a first-come-first-serve policy.</p>
 </li>
 </ul>
@@ -2306,19 +2507,19 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </div>
 </div>
 </div>
-<div class="sect1 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-875">
+<div class="sect1 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-990">
 <h2 id="_faq">6. FAQ</h2>
 <div class="sectionbody">
-<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-877">
+<div class="paragraph has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-992">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
 <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Alfred folder.</p>
 </div>
 </div>
 </div>
-<div class="sect1 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-880">
+<div class="sect1 has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-995">
 <h2 id="_command_summary">7. Command Summary</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-884">
+<table class="tableblock frame-all grid-all stretch has-source-line data-line-/Users/abhimanyadav/Desktop/TP/main/docs/UserGuide.adoc-999">
 <colgroup>
 <col style="width: 1.0416%;">
 <col style="width: 26.0416%;">
@@ -2491,7 +2692,7 @@ Examples: <code>add swag Android Plushie 5</code></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-11-11 14:30:31 +0800
+Last updated 2019-11-11 19:51:36 +0800
 </div>
 </div>
 </body>

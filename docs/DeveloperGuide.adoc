@@ -950,9 +950,7 @@ This flow of events, albeit a few differences, is the same for every variation o
 
 Do note that if the user's input did not specify any tie-break methods, hence just being `leaderboard s/Social` then the `SimpleLeaderboardCommand` object would be created with an empty ArrayList of comparators. If the user's input did not specify any subject, hence just being `leaderboard`, then the `SimpleLeaderboardCommand` object would be created with the `SubjectName` variable "subjectName" being null, in which case no filtering of `sortedTeamList` takes place. The flow of events for this particular scenario would be unchanged from the above illustration.
 
-However, it often occurs that even tiebreak methods cannot separate two teams in a hackathon, for which organizers randomly select a winner from the tied teams, basing it purely on fair luck. The `leaderboard` command with the tiebreak method `random` is used to provide this functionality.
-
-Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "leaderboard tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "random" is another non-comparison based tie-break method.
+The `leaderboard` command with the tiebreak method `random` follows a slightly different sequence. Given below is the sequence diagram illustrating the flow of events when the user types the command "leaderboard tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "random" is another non-comparison based tie-break method.
 
 .Interactions within Logic Component for LeaderboardCommand with Random Winners
 image::RandomLeaderboardSequenceDiagram.png[]
@@ -983,7 +981,7 @@ There were several questions we asked ourselves over the course of developing th
 ** Pros: A new list means the sorting will not interfere with any other feature's operations, such as the `list` command which uses the existing `filteredTeamList` holding all the teams.
 ** Cons: Another List to handle in `ModelManager` which increases the amount of code.
 
-Due to the overwhelming benefits and conveniences that a new `SortedList` of teams would bring in the development of Alfred's `leaderboard` and `getTop K` commands, we decided to rely on "Alternative 2" with regards to this dilemma.
+Due to the overwhelming benefits and conveniences that a new `SortedList` of teams would bring in the development of Alfred's `leaderboard` and `getTop K` commands, particularly with the convenience of sorting it allows through its API, we decided to rely on "Alternative 2" with regards to this dilemma.
 
 *Aspect:* Designing Leaderboard's Command Classes
 
