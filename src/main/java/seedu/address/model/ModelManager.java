@@ -62,12 +62,9 @@ public class ModelManager implements Model {
     protected SortedList<Team> sortedTeam;
     protected SortedList<Team> topKTeams;
 
-    // TODO: Remove the null values which are a placeholder due to the multiple
-    // constructors.
-    // Also will have to change the relevant attributes to final.
-    private AlfredStorage storage = null;
-    private ModelHistory history = null;
-    private CommandHistory commandHistory = null;
+    private AlfredStorage storage;
+    private ModelHistory history;
+    private CommandHistory commandHistory;
     private final UserPrefs userPrefs;
 
     // This constructor is only used for ModelManagerStub
@@ -487,7 +484,7 @@ public class ModelManager implements Model {
             boolean isSuccessful = targetTeam.addParticipant(participant);
             if (!isSuccessful) {
                 logger.severe("Participant is already present in team");
-                throw new AlfredModelException("Participant is already present in team");
+                throw new AlfredModelException("Participant is already present in the team");
             }
             this.saveList(PrefixType.T);
         } catch (Exception e) {
@@ -571,6 +568,7 @@ public class ModelManager implements Model {
             logger.severe("Team does not have this Mentor");
             throw new AlfredModelException("Team does not have this Mentorr");
         }
+
         this.saveList(PrefixType.T);
     }
 
@@ -684,6 +682,7 @@ public class ModelManager implements Model {
      */
     private void saveList(PrefixType type) {
         try {
+
             switch (type) {
             case T:
                 this.storage.saveTeamList(this.teamList);
@@ -791,7 +790,6 @@ public class ModelManager implements Model {
     /**
      * Filters out the {@code sortedTeam} list so that it only contains teams with a specific
      * subject {@code subject} if the {@code subject} is specified - therefore is not null.
-     *
      */
     private void filterSortedList(SubjectName subject) {
         ObservableList<Team> teams = FXCollections.observableArrayList(this.teamList.getSpecificTypedList());
@@ -808,7 +806,6 @@ public class ModelManager implements Model {
      * then arranges it to sort the current teams stored in Alfred in descending order of their score. Implements
      * additional Comparators {@code comparators} for tie-breaking if specified by the user. Additionally this also
      * filters out teams working on a specific subject if specified by the user.
-     *
      */
     public final void setSimpleLeaderboard(ArrayList<Comparator<Team>> comparators, SubjectName subject) {
         filterSortedList(subject);
