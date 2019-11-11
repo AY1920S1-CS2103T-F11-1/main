@@ -3,49 +3,77 @@
 <link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-3</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level4">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Alfred</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/AY1920S1-CS2103T-F11-1/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Abhiman Yadav - Project Portfolio</h1></div><div id="content"><div class="sect1">
 <h2 id="project-alfred-the-hackathon-butler"><a class="link" href="#project-alfred-the-hackathon-butler">PROJECT: Alfred - The Hackathon Butler</a></h2>
 <div class="sectionbody">
-<hr>
+
 </div>
 </div>
 <div class="sect1">
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For our software engineering project, my team of five software engineering students, including myself, were tasked with either improving an existing addressbook application&#8217;s codebase, or completely modifying it into a new application. We decided to opt for the latter of the two options and morph the addressbook codebase into a command-line based hackathon organizing tool which we named "<strong>Alfred</strong>". Alfred is a desktop application targeted towards hackathon organizers and intends to aid them with several organizational and logistical needs, such as tracking the participants, teams and mentors involved in the hackathon; managing the relations between different these entities; and judging and determining winners within the hackathon. All of this intends to package the various complex tools required to organise a hackathon into a single application.</p>
+<p>For our software engineering project, my team of five software engineering students, including myself, were tasked with either improving an existing addressbook application&#8217;s codebase, or completely modifying it into a new application. We opted to morph the addressbook codebase into a command-line based hackathon organizing tool which we named "<strong>Alfred</strong>". Alfred is a desktop application targeted towards hackathon organizers and intends to aid them with several organizational and logistical needs, such as tracking the participants, teams and mentors involved in the hackathon; managing the relations between different these entities; and judging and determining winners within the hackathon. All of this intends to package the various complex tools required to organise a hackathon into a single desktop application, resembling the image below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Ui.png" alt="Ui">
+</div>
+<div class="title">Figure 1. Alfred&#8217;s UI</div>
+</div>
+<div class="paragraph">
+<p>My main role in this project was to design and write code for the judging and leaderboard functions we intended to equip our application with. Judging and leaderboard are essential components of a hackathon as every competition is bound to have winners based on their scores. The following sections of this document highlight in more detail the features I implemented and the enhancements I added to this project. Additionally, it also explores the relevant documentation I added to our application user guide and developer guide with regards to the enhancements I made.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p><strong>Major enhancement</strong>: added <strong>the ability to assign scores to teams</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major enhancement</strong>: added <strong>the ability to undo/redo previous commands</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.</p>
+<p><strong>What it does</strong>: allows the user to manage teams' scores by providing functionalities to add, subtract, set and reset the scores of the teams present within the hackathon.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.</p>
+<p><strong>Justification</strong>: Scoring is one of the core processes which take place within a hackathon in order to determine winners. This feature allows the user to conveniently change a team&#8217;s score depending on their needs.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.</p>
-</li>
-<li>
-<p>Credits: <em>{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}</em></p>
+<p><strong>Highlights</strong>: This feature is equipped with appropriate feedback messages and error detection capabilities to ensure that the user uses it correctly to the fullest of its capabilities without leading to errors. The implementation was challenging as there were several edge cases and exceptional cases which needed to be considered. Thorough attention also had to be paid to make the best use of abstraction and polymorphism while implementing this feature to minimise the amount of duplicate code and ensure adherence to ideal software engineering practices.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong>Major enhancement</strong>: implemented <strong>the ability to view the leaderboard and top teams within the hackathon</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>What it does</strong>: allows the user to see the hackathon&#8217;s leaderboard or any number of top teams within the hackathon to determine winners for the competition. Additionally, it provides tiebreaking capabilities to allow the user to break ties between teams with equal scores, based on certain metrics. Lastly, it allows the user to determine winners by categories by allowing the user to filter the leaderboard or top teams by the category they belong in.</p>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: added a history command that allows the user to navigate to previous commands using up/down keys.</p>
+<p><strong>Justification</strong>: At the end of a hackathon, the organizers need to determine the winners of the hackathon. This feature allows them to easily do so easily by running simple single line commands, rather than having to scroll and squint at different teams in the hackathon.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Highlights</strong>: This enhancement was particularly difficult to implement as it had several sub-parts to it, especially in handling cases when teams are ties. This required me to devise and code few complicated algorithms to ensure that the multiple edge cases, such as when teams are still tied after applying tiebreak methods, are appropriately handled in order to display the correct results to the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Code Contributed</strong>: Please see the following links to see view the code I implemented for this project:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=abhiman&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=Abhiman2211&amp;tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D">Functional Code</a>: the functional lines of code contributed towards the project.</p>
 </li>
 <li>
+<p><a href="https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=abhiman&amp;sort=groupTitle&amp;sortWithin=title&amp;since=2019-09-06&amp;timeframe=commit&amp;mergegroup=false&amp;groupSelect=groupByRepos&amp;breakdown=false&amp;tabOpen=true&amp;tabType=authorship&amp;tabAuthor=Abhiman2211&amp;tabRepo=AY1920S1-CS2103T-F11-1%2Fmain%5Bmaster%5D">Test Code</a>: the code written to test the code within the project.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p><strong>Other contributions</strong>:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -53,7 +81,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Managed releases <code>v1.3</code> - <code>v1.5rc</code> (3 releases) on GitHub</p>
+<p>Managed our team repository&#8217;s Issue Tracker and Milestones Tracker.</p>
 </li>
 </ul>
 </div>
@@ -63,10 +91,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Updated the GUI color scheme (Pull requests <a href="https://github.com">#33</a>, <a href="https://github.com">#34</a>)</p>
+<p>I refactored the addressbook application&#8217;s original parser classes to better suit the needs of our application.</p>
 </li>
 <li>
-<p>Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+<p>Wrote tests for the Parser classes to ensure they functioned correctly. (Pull requests <a href="https://github.com">#36</a>, <a href="https://github.com">#38</a>)</p>
+</li>
+<li>
+<p>I abstracted several common bits of code into single methods which were then used by my teammates.</p>
 </li>
 </ul>
 </div>
@@ -76,7 +107,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Did cosmetic tweaks to existing contents of the User Guide: <a href="https://github.com">#14</a></p>
+<p>Wrote the Score, Leaderboard and Top Teams command sections of the user guide.</p>
+</li>
+<li>
+<p>Explained the implementation of the Score, Leaderboard and Top Teams Command in the developer guide.</p>
+</li>
+<li>
+<p>Made cosmetic tweaks to the contents of the User Guide: <a href="https://github.com">#14</a></p>
+</li>
+<li>
+<p>Made cosmetic changes to the contents of the Developer Guide to suit our application.</p>
 </li>
 </ul>
 </div>
@@ -88,77 +128,459 @@
 <li>
 <p>PRs reviewed (with non-trivial review comments): <a href="https://github.com">#12</a>, <a href="https://github.com">#32</a>, <a href="https://github.com">#19</a>, <a href="https://github.com">#42</a></p>
 </li>
-<li>
-<p>Contributed to forum discussions (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>, <a href="https://github.com">4</a>)</p>
-</li>
-<li>
-<p>Reported bugs and suggestions for other teams in the class (examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
-</li>
-<li>
-<p>Some parts of the history feature I added was adopted by several other class mates (<a href="https://github.com">1</a>, <a href="https://github.com">2</a>)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Tools:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Integrated a third party library (Natty) to the project (<a href="https://github.com">#42</a>)</p>
-</li>
-<li>
-<p>Integrated a new Github plugin (CircleCI) to the team repo</p>
-</li>
 </ul>
 </div>
 </li>
 </ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><em>{you can add/remove categories in the list above}</em></p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>Alfred&#8217;s user guide is a thorough and intuitive guide which explains to the its users how to properly use each of its features. My extensive contributions to it showcase my ability to write documentation targeting the end-users. This section contains an excerpt from my additions to the user guide with regards to my Leaderboard and Get Top Teams feature which explains how to use the <code>leaderboard</code> and <code>getTop K</code> commands. You may also view the full version of my contributions in Alfred&#8217;s User Guide found <em><a href="https://ay1920s1-cs2103t-f11-1.github.io/main/UserGuide.html">here</a></em>.</p>
+</div>
+<div class="sect2">
+<h3 id="team-rankings-code-leaderboard-code-and-code-gettop-k-code"><a class="link" href="#team-rankings-code-leaderboard-code-and-code-gettop-k-code">Team Rankings: <code>leaderboard</code> and <code>getTop k</code></a></h3>
+<div class="paragraph">
+<p>In addition to assigning scores to teams, Alfred also facilitates viewing the leaderboard and fetching the top teams in the hackathon with ease. The following subsections explain how to do so within Alfred.</p>
+</div>
+<div class="sect3">
+<h4 id="view-leaderboard-code-leaderboard-code"><a class="link" href="#view-leaderboard-code-leaderboard-code">View Leaderboard: <code>leaderboard</code></a></h4>
+<div class="paragraph">
+<p>Displays the ranking of all the teams in the hackathon in descending order of their points.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Once you run this command, Alfred&#8217;s UI will display a list of all the teams stored within Alfred sorted in descending order of their points.</p>
+</li>
+<li>
+<p>By default Alfred sorts teams with equal points in the order they were added into Alfred, based on their ID.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>leaderboard</code></p>
+</div>
+<div class="paragraph">
+<p>Running <code>leaderboard</code> will show the following on the GUI:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LeaderboardExample.png" alt="LeaderboardExample" width="600" height="420">
+</div>
+<div class="title">Figure 2. GUI Display for Command "leaderboard"</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="get-the-top-k-teams-code-gettop-k-code"><a class="link" href="#get-the-top-k-teams-code-gettop-k-code">Get the top k teams: <code>getTop K</code></a></h4>
+<div class="paragraph">
+<p>Lists the top k teams in the leaderboard, where k is a valid positive integer which you specify.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This command will show you a cropped version of the leaderboard.</p>
+</li>
+<li>
+<p>Alfred&#8217;s UI will display a list of top "k" teams based on their current score.</p>
+</li>
+<li>
+<p>Do note that this command does not discriminate between teams of the same score - Teams with equal scores will be
+counted as one. Due to this, the command "getTop 1" (for example) may show more than 1 team if there are more than 1 teams with the
+same high score.</p>
+</li>
+<li>
+<p>If you input <code>K</code> as a number more than the number of teams in the hackathon, Alfred will simply display all the teams in the Hackathon, in descending order of their points.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Format: <code>getTop K</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>getTop 2</code> will display the top 2 teams with the highest points in the hackathon as shown below:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/TopTeamExample.png" alt="TopTeamExample" width="600" height="420">
+</div>
+<div class="title">Figure 3. GUI Display for Command "getTop 2"</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>getTop 4</code> will display the top 4 teams with the highest points in the hackathon as shown below:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/GetTop4.png" alt="GetTop4" width="600" height="420">
+</div>
+<div class="title">Figure 4. GUI Display for Command "getTop 4"</div>
+</div>
+<div class="paragraph">
+<p>Note that due to the tie between the fourth and fifth teams, more than 4 teams are shown.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="extensions-to-code-leaderboard-code-and-code-gettop-k-code-command"><a class="link" href="#extensions-to-code-leaderboard-code-and-code-gettop-k-code-command">Extensions to <code>leaderboard</code> and <code>getTop K</code> Command</a></h4>
+<div class="paragraph">
+<p>To provide additional functionalities to the <code>leaderboard</code> and <code>getTop k</code> commands, there are few extensions that can be added to these two commands to allow you to customize them to your needs. These extensions are explored below.</p>
+</div>
+<div class="sect4">
+<h5 id="tie-break"><a class="link" href="#tie-break">Tie-Break</a></h5>
+<div class="paragraph">
+<p>By default Alfred <code>leaderboard</code> and <code>getTop k</code> commands fetch and display teams in descending order of their score, and by the order they were added into Alfred in case of tied scores.</p>
+</div>
+<div class="paragraph">
+<p>Alfred&#8217;s tiebreak feature provides an extension to the <code>leaderboard</code> and <code>getTop k</code> commands allowing you to choose how you want to break the tie between the teams when calling these commands. To break a tie, follow the following format:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>leaderboard tb/METHOD_1 METHOD_2 METHOD_3</code> in the case of a <code>leaderboard</code> command</p>
+</li>
+<li>
+<p><code>getTop NUMBER tb/METHOD_1 METHOD_2 METHOD_3</code> in the case of a <code>getTop NUMBER</code> command</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>where <code>METHOD_N</code> is one of the following currently available tie-break methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>moreParticipants</code>: teams with more participants are win the tie.</p>
+</li>
+<li>
+<p><code>lessParticipants</code>: teams with lesser participants are win the tie.</p>
+</li>
+<li>
+<p><code>higherId</code>: teams registered more recently (hence the highest ID) win the tie.</p>
+</li>
+<li>
+<p><code>lowerId</code>: teams registered earlier (hence the lowest ID) win the tie.</p>
+</li>
+<li>
+<p><code>random</code>: in case all methods used yield no distinct winner, <code>random</code> can be used as a method of last resort to break a tie in favour of a randomly chosen team.</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>You may choose one or more methods from the above list to break the tie. You need to precede the tie-break methods with the prefix <code>tb/</code> and separate each method with a single space for Alfred to properly understand them.</p>
+</li>
+<li>
+<p>Use the prefix "tb/" with discretion as Alfred will only select tiebreak methods followed by the last "tb/" prefix if more than one such prefix is specfied in the command.</p>
+</li>
+<li>
+<p>Do note that the tie-break methods will be applied in the order in which you state them. That is, first METHOD_1 will be applied to break the ties, and only then will METHOD_2 be applied to break any remaining ties, if the command <code>leaderboard tb/METHOD_1 METHOD_2</code> is called.</p>
+</li>
+<li>
+<p>The <code>getTop NUMBER</code> command may still display teams more than the value of <code>NUMBER</code> if Alfred was still unsuccessful in breaking certain ties despite applying the tie-break methods you stated.</p>
+</li>
+<li>
+<p>When using the <code>random</code> method, it must be the last stated tie-break method if it is being used alongside other tie-break methods.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>leaderboard tb/moreParticipants lowerId</code> will display the leaderboard on the UI with Alfred breaking the tie between teams with equals scores based on which team has more participants, and if the number of participants is equal then by which team has the lower ID.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LeaderboardSimple.png" alt="LeaderboardSimple" width="600" height="420">
+</div>
+<div class="title">Figure 5. GUI Display for Command "leaderboard tb/moreParticipants lowerId"</div>
+</div>
+<div class="paragraph">
+<p>Note that in the above team "BroBro" comes above team "Bro" despite having the same number of points as "BroBro" has more participants. Secondly, "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, since "Amazon Warriors" has a lower ID.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>getTop 3 tb/lessParticipants random</code> will display the top 3 teams on the UI with Alfred breaking the tie between teams with equals scores based on which team has fewer participants, and if the number of participants is equal then Alfred will randomly pick the winners for the tie.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RandomGetTop.png" alt="RandomGetTop" width="600" height="420">
+</div>
+<div class="title">Figure 6. GUI Display for Command "getTop 3 tb/lessParticipants random"</div>
+</div>
+<div class="paragraph">
+<p>Note that in the above "Amazon Warriors" comes first before "Teen Titans" despite having the same score and number of participants, due to the random tiebreak. Repeating the above command would change the outcome due to the random nature of the tiebreak.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="project-powerpointlabs"><a class="link" href="#project-powerpointlabs">PROJECT: PowerPointLabs</a></h2>
-<div class="sectionbody">
-<hr>
 <div class="paragraph">
-<p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
+<p>Alfred&#8217;s developer guide provides an in-depth look into the architecture of how Alfred and its various features were implemented. My extensive contributions to this document exhibit my ability to write technical documentation and showcase the technical depth of my contribution to the project. This section contains an excerpt from the developer guide which shows the contribution I made with regards to my Leaderboard feature. It explains to the reader how the <code>leaderboard</code> command has been implemented and design considerations which were made when implementing it. You may also view the full version of my contributions in Alfred&#8217;s Developer Guide found <em><a href="https://github.com/AY1920S1-CS2103T-F11-1/main/blob/master/docs/DeveloperGuide.adoc">here</a></em>.</p>
+</div>
+<div class="sect2">
+<h3 id="leaderboard-and-get-top-teams"><a class="link" href="#leaderboard-and-get-top-teams">Leaderboard and Get Top Teams</a></h3>
+<div class="paragraph">
+<p>The <code>leaderboard</code> and <code>getTop K</code> commands are two very important features of Alfred as they allow the user to automatically sort the teams by their scores, fetch any number of top teams in the competition and identify and break ties between teams conveniently. The execution of either of these commands displays the resultant teams on the UI in their correct sorted order. The following subsections explore the implementation of each of these commands and provide an insight into the design consideration made when developing them.</p>
+</div>
+<div class="sect3">
+<h4 id="implementation-overview"><a class="link" href="#implementation-overview">Implementation Overview</a></h4>
+<div class="paragraph">
+<p>The implementation of these two commands is very similar in nature. They both:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>rely on updating a <code>SortedList</code> of teams present within the <code>ModelManager</code> class, which will be referred to as <code>sortedTeamList</code> in subsequent sections. This list is used to display the command&#8217;s results on the UI.</p>
+</li>
+<li>
+<p>use an ArrayList of <code>Comparator&lt;Team&gt;</code> objects to contain additional comparators. These are used to break ties between teams on a basis other than score.</p>
+</li>
+<li>
+<p>use a <code>SubjectName</code> object to filter the leaderboard or top teams by a certain category, if specified by the user.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The class diagram below provides a high level representation of the Object-Oriented solution devised to implement the <code>leaderboard</code> and <code>getTop K</code> commands.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LeaderBoardClassDiagram.png" alt="LeaderBoardClassDiagram">
+</div>
+<div class="title">Figure 7. Leaderboard and Get Top Teams Implementation Overview</div>
+</div>
+<div class="paragraph">
+<p>From the above class diagram, there are two important matters to note regarding the implementation of these features:</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1. The <code>LeaderboardCommand</code> and <code>GetTopTeamsCommand</code> are implemented as abstract classes which extend the <code>Command</code> abstract class. Any command to do with leaderboards or getting the top teams extends either one of these abstract classes depending on which command it is.</p>
+</li>
+<li>
+<p>2. The <code>ModelManager</code> class uses another class <code>LeaderboardUtil</code> which provides utility methods for the Leaderboard and Get Top Teams commands, such as fetching an appropriate number of teams for the <code>getTop K</code> command and breaking ties between teams for both commands.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With the class structure covered, the following sub-sections explain how the different classes in Alfred interact to produce a result for the user, and finally the design considerations that were made for each command.</p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 11:53:36 UTC</div></div></div></body></html>
+<div class="sect3">
+<h4 id="leaderboard-command-implementation"><a class="link" href="#leaderboard-command-implementation">Leaderboard Command Implementation</a></h4>
+<div class="paragraph">
+<p>The <code>leaderboard</code> command fetches a leaderboard consisting of all the teams registered for the hackathon, in descending order of their score. Moreover, if the user specifies a <code>SubjectName</code> then the leaderboard will only consist of teams with that particular subject.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, if tiebreak methods are specified, ties between the teams will be broken in one of two ways (or a combination of both):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Comparison-based tiebreakers:</strong> wherein the user picks certain tiebreak methods which rely on comparing certain properties of teams, such as the number of participants they have.</p>
+</li>
+<li>
+<p><strong>Non-Comparison-based tiebreakers:</strong> wherein the user breaks ties on non-comparison based methods (currently only the "random" method) in addition to any Comparison-based tiebreakers.</p>
+</li>
+</ul>
+</div>
+<div id="SimpleLeaderboard-Explanation" class="paragraph">
+<p>Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command <code>leaderboard tb/moreParticipants s/Social</code>. For your reference, here the prefix "tb/" is used to precede a tie-break method, "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "Social" is a <code>SubjectName</code> within Alfred. Essentially this demonstrates the flow for a "Comparison-based tiebreak".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SimpleLeaderboardSequenceDiagram.png" alt="SimpleLeaderboardSequenceDiagram">
+</div>
+<div class="title">Figure 8. Interactions within Logic Component for SimpleLeaderboardCommand</div>
+</div>
+<div class="paragraph">
+<p>The observations of the above diagram can be put into the following steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 1: <code>LogicManager</code> starts executing the user&#8217;s command and calls the <code>AlfredParser</code> to parse it.</p>
+</li>
+<li>
+<p>Step 2: <code>AlfredParser</code> find the appropriate <code>Parser</code> to parse the command and creates a new <code>LeaderboardCommandParser</code> to parse the arguments of the leaderboard command, essentially "tb/moreParticipants s/Social".</p>
+</li>
+<li>
+<p>Step 3: The <code>LeaderboardCommandParser</code> then parses the arguments and is responsible for:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Checking whether the user has specified a subject. If so it sets the value of a local variable "subjectName" of type "SubjectName" to the appropriate subject, otherwise it stays as null.</p>
+</li>
+<li>
+<p>Checking whether any tiebreak methods are present.</p>
+</li>
+<li>
+<p>Parsing the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Step 4: <code>LeaderboardCommandParser</code> then creates a new <code>SimpleLeaderboardCommand</code> object with the above list of comparators and subject as input parameters. This is then returned all the way to <code>LogicManager</code></p>
+</li>
+<li>
+<p>Step 5: <code>LogicManager</code> then executes the <code>SimpleLeaderboardCommand</code> object upon which the <code>SimpleLeaderboardCommand</code> object calls <code>Model</code> 's <code>setSimpleLeaderboard(comparators, subjectName)</code> where comparators is the ArrayList of comparators and subjectName is the <code>SubjectName</code> used to create the <code>SimpleLeaderboardCommand</code>.</p>
+</li>
+<li>
+<p>Step 6: <code>Model</code> 's <code>setSimpleLeaderboard(comparators, subjectName)</code> method updates the <code>sortedTeamList</code> within <code>Model</code> itself, by applying the comparators to it and filtering the list by the subjectName specfied.</p>
+</li>
+<li>
+<p>Step 7: Upon doing so, the <code>SimpleLeaderboardCommand</code> object creates a new <code>CommandResult</code> object which is returned to the UI component (not shown in the diagram) to display a feedback message to the user and signals the UI to display the teams from the <code>sortedTeamList</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This flow of events, albeit a few differences, is the same for every variation of the <code>leaderboard</code> and <code>getTop K</code> commands explored subsequently.</p>
+</div>
+<div class="paragraph">
+<p>Do note that if the user&#8217;s input did not specify any tie-break methods, hence just being <code>leaderboard s/Social</code> then the <code>SimpleLeaderboardCommand</code> object would be created with an empty ArrayList of comparators. If the user&#8217;s input did not specify any subject, hence just being <code>leaderboard</code>, then the <code>SimpleLeaderboardCommand</code> object would be created with the <code>SubjectName</code> variable "subjectName" being null, in which case no filtering of <code>sortedTeamList</code> takes place. The flow of events for this particular scenario would be unchanged from the above illustration.</p>
+</div>
+<div class="paragraph">
+<p>The <code>leaderboard</code> command with the tiebreak method <code>random</code> follows a slightly different sequence. Given below is the sequence diagram illustrating the flow of events when the user types the command "leaderboard tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "random" is another non-comparison based tie-break method.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/RandomLeaderboardSequenceDiagram.png" alt="RandomLeaderboardSequenceDiagram">
+</div>
+<div class="title">Figure 9. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
+</div>
+<div class="paragraph">
+<p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above.</p>
+</div>
+<div class="paragraph">
+<p>However, in this case the <code>LeaderboardWithRandomCommand</code> class calls the <code>setTopK(teamListSize, comparators, subjectName)</code> method of <code>Model</code> which essentially filters out the teams with subject "subjectName", breaks any remaining ties after applying the tie-break methods between teams on a random basis, and fetches a number of teams equal to <code>teamListSize</code> which is the size of the <code>sortedTeamList</code>, thereby reflecting the total number of teams in the hackathon.</p>
+</div>
+<div class="paragraph">
+<p>Secondly, <code>Model</code> calls its own method <code>setSimpleLeaderboard(comparators, subjectName)</code> which was used for the <code>leaderboard</code> command without random tiebreak. This method abstracts the process of clearing <code>sortedTeamList</code> of any sorting, filters it by <code>SubjectName</code> if required, and then applies the new comparators to it. It is used to fetch and appropriately sort the appropriate teams in <code>sortedTeamList</code> before the algorithm for random winners can be applied to the <code>sortedTeamList</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Leaderboard-DesignConsideration"><a class="link" href="#Leaderboard-DesignConsideration">Leaderboard Design Considerations</a></h4>
+<div class="paragraph">
+<p>There were several questions we asked ourselves over the course of developing the leaderboard feature. The following contains certain aspects we had to consider during the development stage and details how and why we decided to use a certain methodologies over others.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> How to store the sorted list of participants</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use the existing List in <code>ModelManager</code> storing the teams.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as lesser extra code involved, as most getters and setters have already been coded.</p>
+</li>
+<li>
+<p>Cons: Sorting will be more complicated and potentially slower with large number of teams as the other lists are <code>FilteredList</code> objects, whose API doesn&#8217;t allow direct sorting.</p>
+</li>
+<li>
+<p>Cons: An existing List is likely to be used by other commands to display data on the UI, so with any sorting will have to undone each time after use; a process which is prone to careless errors.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Use a new <code>SortedList</code> object from the JavaFX Library</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy and quick to sort contents with the <code>SortedList</code> API.</p>
+</li>
+<li>
+<p>Pros: A new list means the sorting will not interfere with any other feature&#8217;s operations, such as the <code>list</code> command which uses the existing <code>filteredTeamList</code> holding all the teams.</p>
+</li>
+<li>
+<p>Cons: Another List to handle in <code>ModelManager</code> which increases the amount of code.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Due to the overwhelming benefits and conveniences that a new <code>SortedList</code> of teams would bring in the development of Alfred&#8217;s <code>leaderboard</code> and <code>getTop K</code> commands, particularly with the convenience of sorting it allows through its API, we decided to rely on "Alternative 2" with regards to this dilemma.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Designing Leaderboard&#8217;s Command Classes</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use a single <code>LeaderboardCommand</code> class</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Lesser duplicate code as both ("random" and "non-random") tiebreak methods can be handled within a single class.</p>
+</li>
+<li>
+<p>Cons: Introduces control coupling as the <code>LeaderboardCommandParser</code> will have to send a flag to <code>LeaderboardCommand</code> to indicate whether "random" should be applied or not as a means of tie-break.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Use an Abstract <code>LeaderboardCommand</code> class inheriting from <code>Command</code> which any <code>leaderboard</code> related commands will themselves extend.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Single Responsibility Principle will be better respected as any change in logic for one type of <code>leaderboard</code> command will only affect its respective class. Secondly, no longer a need for a flag as the parser can directly call the appropriate command class.</p>
+</li>
+<li>
+<p>Cons: Introduces slight duplication in code as each class will contain a similar segments of code for checking the status of the teams in <code>Model</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We decided to follow "Alternative 2". Firstly, if a single class were being used, it would be difficult to distinguish which type of <code>leaderboard</code> command should be called - whether a leaderboard with or without "random" as tiebreak should be used. This would require the <code>LeaderboardCommandParser</code> to pass a flag signalling whether the "random" version should be called or not, which introduces control coupling. Although with a single distinct method (ie "random") this seems manageable, as the scale of Alfred increases with more non-comparison based methods such as "random" being introduced, passing a flag from <code>LeaderboardCommandParser</code> to the <code>Leaderboard</code> command class would become less and less manageable. Secondly, we wanted to avoid coupling the <code>Parser</code> and <code>Command</code> classes in a way which <code>Parser</code> influences the behaviour of the <code>Command</code> as it introduces leeway for errors.</p>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:14:05 UTC</div></div></div></body></html>

@@ -117,17 +117,10 @@ the SOLID principles. This section serves to give a description of the major com
 of Alfred. Subsequent sections will provide a lot more information on the inner workings of individual components
 and how different components interact with each other for Alfred&#8217;s various features.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Image here to the updated in the later milestones.
-</td>
-</tr>
-</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/Ui.png" alt="Ui">
+</div>
 </div>
 <div class="sect2">
 <h3 id="Design-Architecture"><a class="link" href="#Design-Architecture">3.1. Architecture</a></h3>
@@ -2130,10 +2123,13 @@ execution will the text in the Command input Box disappear, so this feature is n
 <li>
 <p>use an ArrayList of <code>Comparator&lt;Team&gt;</code> objects to contain additional comparators. These are used to break ties between teams on a basis other than score.</p>
 </li>
+<li>
+<p>use a <code>SubjectName</code> object to filter the leaderboard or top teams by a certain category, if specified by the user.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The class diagram below provides a high level representation of the Object-Oriented solution devised to implement the aforementioned features.</p>
+<p>The class diagram below provides a high level representation of the Object-Oriented solution devised to implement the <code>leaderboard</code> and <code>getTop K</code> commands.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2155,13 +2151,16 @@ execution will the text in the Command input Box disappear, so this feature is n
 </ul>
 </div>
 <div class="paragraph">
-<p>With the class structure covered, the following sub-sections seek to explain how the different classes in Alfred interact to produce a result for the user, and finally the design considerations that were made for each command.</p>
+<p>With the class structure covered, the following sub-sections explain how the different classes in Alfred interact to produce a result for the user, and finally the design considerations that were made for each command.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="leaderboard-command-implementation"><a class="link" href="#leaderboard-command-implementation">4.10.2. Leaderboard Command Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>leaderboard</code> command fetches a leaderboard consisting of all the teams registered for the hackathon, in descending order of their score. Additionally, if tiebreak methods are specified, ties between the teams are typically broken in one of two ways:</p>
+<p>The <code>leaderboard</code> command fetches a leaderboard consisting of all the teams registered for the hackathon, in descending order of their score. Moreover, if the user specifies a <code>SubjectName</code> then the leaderboard will only consist of teams with that particular subject.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, if tiebreak methods are specified, ties between the teams will be broken in one of two ways (or a combination of both):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2174,7 +2173,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 </ul>
 </div>
 <div id="SimpleLeaderboard-Explanation" class="paragraph">
-<p>Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command <code>leaderboard tb/moreParticipants</code>. For your reference, here the prefix "tb/" is used to precede a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants. Essentially this demonstrates the flow for a "Comparison-based tiebreak".</p>
+<p>Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command <code>leaderboard tb/moreParticipants s/Social</code>. For your reference, here the prefix "tb/" is used to precede a tie-break method, "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "Social" is a <code>SubjectName</code> within Alfred. Essentially this demonstrates the flow for a "Comparison-based tiebreak".</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2183,25 +2182,54 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="title">Figure 41. Interactions within Logic Component for SimpleLeaderboardCommand</div>
 </div>
 <div class="paragraph">
-<p>In the above, the <code>LeaderboardCommandParser</code> class parses the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods. A new <code>SimpleLeaderboardCommand</code> object is then created with this array list as its parameter and returned.</p>
+<p>The observations of the above diagram can be put into the following steps:</p>
 </div>
-<div class="paragraph">
-<p>When the <code>SimpleLeaderboardCommand</code> is then executed, it calls <code>Model</code> 's <code>setSimpleLeaderboard(comparators)</code> method with the input parameter being the <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> passed as parameter for the former&#8217;s creation.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 1: <code>LogicManager</code> starts executing the user&#8217;s command and calls the <code>AlfredParser</code> to parse it.</p>
+</li>
+<li>
+<p>Step 2: <code>AlfredParser</code> find the appropriate <code>Parser</code> to parse the command and creates a new <code>LeaderboardCommandParser</code> to parse the arguments of the leaderboard command, essentially "tb/moreParticipants s/Social".</p>
+</li>
+<li>
+<p>Step 3: The <code>LeaderboardCommandParser</code> then parses the arguments and is responsible for:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Checking whether the user has specified a subject. If so it sets the value of a local variable "subjectName" of type "SubjectName" to the appropriate subject, otherwise it stays as null.</p>
+</li>
+<li>
+<p>Checking whether any tiebreak methods are present.</p>
+</li>
+<li>
+<p>Parsing the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p><code>Model</code> 's <code>setSimpleLeaderboard(comparators)</code> method updates the <code>SortedList</code> of teams within <code>Model</code> itself, which is then displayed on the UI when the new <code>CommandResult</code> object is created and returned.</p>
+</li>
+<li>
+<p>Step 4: <code>LeaderboardCommandParser</code> then creates a new <code>SimpleLeaderboardCommand</code> object with the above list of comparators and subject as input parameters. This is then returned all the way to <code>LogicManager</code></p>
+</li>
+<li>
+<p>Step 5: <code>LogicManager</code> then executes the <code>SimpleLeaderboardCommand</code> object upon which the <code>SimpleLeaderboardCommand</code> object calls <code>Model</code> 's <code>setSimpleLeaderboard(comparators, subjectName)</code> where comparators is the ArrayList of comparators and subjectName is the <code>SubjectName</code> used to create the <code>SimpleLeaderboardCommand</code>.</p>
+</li>
+<li>
+<p>Step 6: <code>Model</code> 's <code>setSimpleLeaderboard(comparators, subjectName)</code> method updates the <code>sortedTeamList</code> within <code>Model</code> itself, by applying the comparators to it and filtering the list by the subjectName specfied.</p>
+</li>
+<li>
+<p>Step 7: Upon doing so, the <code>SimpleLeaderboardCommand</code> object creates a new <code>CommandResult</code> object which is returned to the UI component (not shown in the diagram) to display a feedback message to the user and signals the UI to display the teams from the <code>sortedTeamList</code>.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>This flow of events, albeit a few differences, is the same for every variation of the <code>leaderboard</code> and <code>getTop K</code> commands explored subsequently.</p>
 </div>
 <div class="paragraph">
-<p>Do note that if the user&#8217;s input did not specify any tie-break methods, hence just being <code>leaderboard</code> then the <code>SimpleLeaderboardCommand</code> object would be created with an empty ArrayList of comparators. The flow of events for this particular scenario would be unchanged from the above illustration.</p>
+<p>Do note that if the user&#8217;s input did not specify any tie-break methods, hence just being <code>leaderboard s/Social</code> then the <code>SimpleLeaderboardCommand</code> object would be created with an empty ArrayList of comparators. If the user&#8217;s input did not specify any subject, hence just being <code>leaderboard</code>, then the <code>SimpleLeaderboardCommand</code> object would be created with the <code>SubjectName</code> variable "subjectName" being null, in which case no filtering of <code>sortedTeamList</code> takes place. The flow of events for this particular scenario would be unchanged from the above illustration.</p>
 </div>
 <div class="paragraph">
-<p>However, it often occurs that even tiebreak methods cannot separate two teams in a hackathon, for which organizers randomly select a winner from the tied teams, basing it purely on fair luck. The <code>leaderboard</code> command with the tiebreak method <code>random</code> is used to provide this functionality.</p>
-</div>
-<div class="paragraph">
-<p>Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "leaderboard tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "random" is another non-comparison based tie-break method.</p>
+<p>The <code>leaderboard</code> command with the tiebreak method <code>random</code> follows a slightly different sequence. Given below is the sequence diagram illustrating the flow of events when the user types the command "leaderboard tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants, and "random" is another non-comparison based tie-break method.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2210,13 +2238,13 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="title">Figure 42. Interactions within Logic Component for LeaderboardCommand with Random Winners</div>
 </div>
 <div class="paragraph">
-<p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above (See <a href="#SimpleLeaderboard-Explanation">[SimpleLeaderboard-Explanation]</a>).</p>
+<p>The above sequence follows the exact same logic as that for the Simple Leaderboard as explained above.</p>
 </div>
 <div class="paragraph">
-<p>However, in this case the <code>LeaderWithRandomClass</code> calls the <code>setTopK(teamListSize, comparators)</code> method of <code>Model</code> which essentially breaks any remaining ties after applying the tie-break methods between teams on a random basis, and fetches a number of teams equal to <code>teamListSize</code> which is the size of the <code>sortedTeamList</code> reflecting the total number of teams in the hackathon.</p>
+<p>However, in this case the <code>LeaderboardWithRandomCommand</code> class calls the <code>setTopK(teamListSize, comparators, subjectName)</code> method of <code>Model</code> which essentially filters out the teams with subject "subjectName", breaks any remaining ties after applying the tie-break methods between teams on a random basis, and fetches a number of teams equal to <code>teamListSize</code> which is the size of the <code>sortedTeamList</code>, thereby reflecting the total number of teams in the hackathon.</p>
 </div>
 <div class="paragraph">
-<p>Secondly, <code>Model</code> calls its own method <code>setSimpleLeaderboard(comparators)</code>, which essentially resets the <code>sortedTeamList</code> of teams clearing it of any sorting, and then applies the new comparators to it, before the algorithm for random winners can be applied to the <code>sortedTeamList</code>.</p>
+<p>Secondly, <code>Model</code> calls its own method <code>setSimpleLeaderboard(comparators, subjectName)</code> which was used for the <code>leaderboard</code> command without random tiebreak. This method abstracts the process of clearing <code>sortedTeamList</code> of any sorting, filters it by <code>SubjectName</code> if required, and then applies the new comparators to it. It is used to fetch and appropriately sort the appropriate teams in <code>sortedTeamList</code> before the algorithm for random winners can be applied to the <code>sortedTeamList</code>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2264,7 +2292,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 </ul>
 </div>
 <div class="paragraph">
-<p>Due to the overwhelming benefits and conveniences that a new <code>SortedList</code> of teams would bring in the development of Alfred&#8217;s <code>leaderboard</code> and <code>getTop K</code> commands, we decided to rely on "Alternative 2" with regards to this dilemma.</p>
+<p>Due to the overwhelming benefits and conveniences that a new <code>SortedList</code> of teams would bring in the development of Alfred&#8217;s <code>leaderboard</code> and <code>getTop K</code> commands, particularly with the convenience of sorting it allows through its API, we decided to rely on "Alternative 2" with regards to this dilemma.</p>
 </div>
 <div class="paragraph">
 <p><strong>Aspect:</strong> Designing Leaderboard&#8217;s Command Classes</p>
@@ -2303,7 +2331,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <p>We decided to follow "Alternative 2". Firstly, if a single class were being used, it would be difficult to distinguish which type of <code>leaderboard</code> command should be called - whether a leaderboard with or without "random" as tiebreak should be used. This would require the <code>LeaderboardCommandParser</code> to pass a flag signalling whether the "random" version should be called or not, which introduces control coupling. Although with a single distinct method (ie "random") this seems manageable, as the scale of Alfred increases with more non-comparison based methods such as "random" being introduced, passing a flag from <code>LeaderboardCommandParser</code> to the <code>Leaderboard</code> command class would become less and less manageable. Secondly, we wanted to avoid coupling the <code>Parser</code> and <code>Command</code> classes in a way which <code>Parser</code> influences the behaviour of the <code>Command</code> as it introduces leeway for errors.</p>
 </div>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Where to Write Algorithms used by <code>leaderboard</code> (and <code>getTop NUMBER</code>) Command</p>
+<p><strong>Aspect:</strong> Where to Write Algorithms used by <code>leaderboard</code> (and <code>getTop K</code>) Command</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2342,7 +2370,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="sect3">
 <h4 id="get-top-teams-implementation"><a class="link" href="#get-top-teams-implementation">4.10.4. Get Top Teams Implementation</a></h4>
 <div class="paragraph">
-<p>The <code>getTop K</code> command fetches the top "K" number teams sorted in descending order of their points, where K is a positive integer inputted by the user. The <code>getTop K</code> command follows a similar pattern as the <code>leaderboard</code> command in the sense that ties between teams are broken in one of two ways:</p>
+<p>The <code>getTop K</code> command fetches the top "K" number teams sorted in descending order of their points, where K is a positive integer inputted by the user. The <code>getTop K</code> command follows a similar pattern as the <code>leaderboard</code> command in the sense that ties between teams are broken in one of two ways (or a combination of both):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2361,16 +2389,54 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/SimpleTopKSequenceDiagram.png" alt="SimpleTopKSequenceDiagram">
 </div>
-<div class="title">Figure 43. Interactions within Logic Component for getTop NUMBER Command</div>
+<div class="title">Figure 43. Interactions within Logic Component for getTop K Command</div>
 </div>
 <div class="paragraph">
-<p>The above diagram follows a logic very similar to the <code>leaderboard</code> command&#8217;s logic. However, in this case a <code>TopTeamsCommandParser</code> object is created to parse the arguments "3 tb/moreParticipants" which returns a <code>SimpleTopKCommand</code> object.</p>
+<p>The above diagram follows a logic very similar to the <code>leaderboard</code> command&#8217;s logic, and can be broken down into the following steps</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Step 1: <code>LogicManager</code> starts executing the user&#8217;s command and calls the <code>AlfredParser</code> to parse it.</p>
+</li>
+<li>
+<p>Step 2: <code>AlfredParser</code> find the appropriate <code>Parser</code> to parse the command and creates a new <code>TopTeamCommandParser</code> to parse the arguments of the leaderboard command, essentially "tb/moreParticipants".</p>
+</li>
+<li>
+<p>Step 3: The <code>LeaderboardCommandParser</code> then parses the arguments and is responsible for:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Checking whether the value of "K" (3 in this case) the user inputted is valid.</p>
+</li>
+<li>
+<p>Checking whether the user has specified a subject. If so it sets the value of a local variable "subjectName" of type "SubjectName" to the appropriate subject, otherwise it stays as null.</p>
+</li>
+<li>
+<p>Checking whether any tiebreak methods are present.</p>
+</li>
+<li>
+<p>Parsing the tie-break part of the command, particularly "tb/moreParticipants". Based on this input, it creates a new <code>ArrayList&lt;Comparator&lt;Team&gt;&gt;</code> object and appends the appropriate comparators to it based on the specified tiebreak methods.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Step 4: <code>TopTeamCommandParser</code> then creates a new <code>SimpleTopTeamsCommand</code> object with the above value of "K", list of comparators and subject as input parameters. This is then returned all the way to <code>LogicManager</code></p>
+</li>
+<li>
+<p>Step 5: <code>LogicManager</code> then executes the <code>SimpleTopTeamsCommand</code> object upon which the <code>SimpleTopTeamsCommand</code> object calls <code>Model</code> 's <code>setTopK(3, comparators, subjectName)</code> where comparators is the ArrayList of comparators and subjectName is the <code>SubjectName</code> used to create the <code>SimpleLeaderboardCommand</code> and 3 is the value of "K" the user supplied.</p>
+</li>
+<li>
+<p>Step 6: <code>Model</code> 's <code>setSimpleLeaderboard(comparators, subjectName)</code> method updates the <code>sortedTeamList</code> within <code>Model</code> itself, by applying the comparators to it and filtering the list by the subjectName specfied. Once this is done, the algorithm to get the top teams is applied the <code>sortedTeamList</code> contains the final list of teams.</p>
+</li>
+<li>
+<p>Step 7: Upon doing so, the <code>SimpleLeaderboardCommand</code> object creates a new <code>CommandResult</code> object which is returned to the UI component (not shown in the diagram) to display a feedback message to the user and signals the UI to display the teams from the <code>sortedTeamList</code>.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Moreover, the <code>SimpleTopCommand</code> object calls <code>Model</code> 's <code>setTopK(3, comparators)</code> method which essentially modifies the <code>sortedTeamList</code> within <code>Model</code> to only show the top three teams as per their scores and the relevant tiebreakers as per the list of comparators <code>comparators</code>.</p>
-</div>
-<div class="paragraph">
-<p>It is also noteworthy that <code>Model</code> calls its own method <code>setSimpleLeaderboard(comparators)</code> which was associated with the <code>leaderboard</code> command. This is however a simple reuse of code to set the reset <code>Model</code> 's <code>sortedTeamList</code> and apply the relevant comparators to it, before the algorithm for fetching the top three (or any number) teams can be applied.</p>
+<p>It is noteworthy that <code>Model</code> calls its own method <code>setSimpleLeaderboard(comparators)</code> which was associated with the <code>leaderboard</code> command. This is however a simple reuse of code to set the reset <code>Model</code> 's <code>sortedTeamList</code>, filter it by the subject if needed and apply the relevant comparators to it, before the algorithm for fetching the top three (or any number) teams can be applied.</p>
 </div>
 <div class="paragraph">
 <p>When it comes to the <code>getTop K</code> command being used with the "random" method of tiebreak, the flow of events is resembles the above very closely. Given below is the sequence diagram illustrating the flow of events which generates a result for the user when he types the command "getTop 3 tb/moreParticipants random". For your reference, here the prefix "tb/" is used to denote a tie-break method and "moreParticipants" is a tie-break method which gives a higher position to teams with more participants whereas "random" represents the "random" method of tiebreak.</p>
@@ -2379,13 +2445,13 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="content">
 <img src="images/TopKRandomCommand.png" alt="TopKRandomCommand">
 </div>
-<div class="title">Figure 44. Interactions within Logic Component for getTop NUMBER with Random Winners</div>
+<div class="title">Figure 44. Interactions within Logic Component for getTop K with Random Winners</div>
 </div>
 <div class="paragraph">
 <p>From the above diagram it can be inferred that the implementation of random winners does not deviate far from the implementation without random winners.</p>
 </div>
 <div class="paragraph">
-<p>The first difference is that the <code>TopTeamsCommandParser</code> object now returns a <code>topKRandomCommand</code> object. Secondly, the <code>topKRandomCommand</code> object calls the <code>setTopKRandom(3, comparators)</code> method of <code>Mode</code>, which essentially modifies the <code>sortedTeamList</code> within <code>Model</code> to only show the top three teams as per their scores and the relevant tiebreakers as per the list of comparators <code>comparators</code>, and breaks any remaining ties based on the random method.</p>
+<p>The first difference is that the <code>TopTeamsCommandParser</code> object now returns a <code>topKRandomCommand</code> object. Secondly, the <code>topKRandomCommand</code> object calls the <code>setTopKRandom(3, comparators, subjectName)</code> method of <code>Model</code>. It essentially modifies the <code>sortedTeamList</code> within <code>Model</code> to only show the top three teams (within a certain subject category if specified) as per their scores and the relevant tiebreakers as per the list of comparators <code>comparators</code>, and breaks any remaining ties based on the random method.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2394,7 +2460,7 @@ execution will the text in the Command input Box disappear, so this feature is n
 <p>Since the implementation of the <code>getTop K</code> command is almost identical to that of the <code>leaderboard</code> command, the design considerations made for the <code>leaderboard</code> command apply to the implementation of this feature as well (See <a href="#Leaderboard-DesignConsideration">Section 4.10.3, &#8220;Leaderboard Design Considerations&#8221;</a>). However, there were some unique aspects we had to consider with regards to the <code>getTop K</code> command, all of which is detailed below.</p>
 </div>
 <div class="paragraph">
-<p><strong>Aspect:</strong> Where to Store the Top NUMBER Teams</p>
+<p><strong>Aspect:</strong> Where to Store the Top K Teams</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2505,10 +2571,16 @@ execution will the text in the Command input Box disappear, so this feature is n
 <div class="sect3">
 <h4 id="tiebreaking-and-filtering-by-subject"><a class="link" href="#tiebreaking-and-filtering-by-subject">4.10.6. Tiebreaking and Filtering by Subject</a></h4>
 <div class="paragraph">
-<p>In the above sections, the UML diagrams gloss over how tiebreaking and filtering by subjects is parsed and understood by Alfred. The basic of tie-breaking revolves around using <code>Comparator</code> s to sort the teams in a particular order. Each tiebreak method available in Alfred has a <code>Comparator</code> associated to it and all these can be found in the <code>Comparators</code> class.</p>
+<p>In the above sections, the UML diagrams gloss over how tiebreaking and filtering by subjects is parsed and understood by Alfred. This process is better explored in this section as per the explanations below.</p>
 </div>
 <div class="paragraph">
-<p>The activity diagram below illustrates the internal workings within the <code>LeaderboardCommandParser</code> and <code>TopTeamsCommandParser</code> when parsing tiebreak methods. Do note that in the below diagram the term <code>Parser</code> encapsulates both of these <code>Parser</code> s as they operate in almost identical ways.</p>
+<p>The basic of tie-breaking revolves around using <code>Comparator</code> s to sort the teams in a particular order. Each tiebreak method available in Alfred has a <code>Comparator</code> associated to it and all these can be found in the <code>Comparators</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The basic of filtering by subject revolves around the <code>SubjectName</code> input parameter to the <code>LeaderboardCommand</code> and <code>GetTopTeamsCommand</code> classes. The user&#8217;s specified subject is parsed and used as an input parameter in the aforementioned classes' constructors, which they then use for filtering the <code>sortedTeamList</code> in <code>Model</code>.</p>
+</div>
+<div class="paragraph">
+<p>The activity diagram below illustrates the internal workings within the <code>LeaderboardCommandParser</code> and <code>TopTeamsCommandParser</code> when parsing tiebreak methods and the subject. Do note that in the below diagram the term <code>Parser</code> encapsulates both of these <code>Parser</code> s as they operate in almost identical ways.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2523,13 +2595,98 @@ execution will the text in the Command input Box disappear, so this feature is n
 <p>Additionally, before <code>comparators</code> can be passed as an argument to the commands, it is reversed. This is done intentionally so the comparators related to each tiebreak method are applied in an order such that they preserve the oder the user wants the tiebreak methods to be applied.</p>
 </div>
 <div class="paragraph">
-<p>Secondly, do note that the diagram above assumes there are no syntax errors made by the user when typing out the command. In case of any errors in the command, a <code>ParseException</code> would be thrown warning the user of such a situation. These have been excluded from the above diagram to prevent overcrowding and a deviation from the basic logic.</p>
+<p>Secondly, if no subject is specified by the user, then the default value of the <code>subjectName</code> variable (of type <code>SubjectName</code>) is null. This signals to methods in <code>Model</code> (when the command is executed thereby calling <code>Model</code> 's methods) that no filtering of the <code>sortedTeamList</code> is required.</p>
+</div>
+<div class="paragraph">
+<p>Note that the diagram above assumes there are no syntax errors made by the user when typing out the command. In case of any errors in the command, a <code>ParseException</code> would be thrown warning the user of such a situation. These have been excluded from the above diagram to prevent overcrowding and a deviation from the basic logic.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-for-tiebreaking"><a class="link" href="#design-considerations-for-tiebreaking">4.10.7. Design Considerations for Tiebreaking</a></h4>
 <div class="paragraph">
 <p>Though this was a relatively straightforward subset of our <code>leaderboard</code> and <code>getTop K</code> command, there were still a few, small design considerations made.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Signaling No Subject Filtering</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Use Java&#8217;s Optional class with the optional variable being empty.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Less prone to misuse which can cause exceptions.</p>
+</li>
+<li>
+<p>Cons: Leads to unnecessary wrapping and unwrapping of the variable simply to check whether a value is present.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a variable of type <code>SubjectName</code> set to null.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement. No boxing and unboxing required.</p>
+</li>
+<li>
+<p>Cons: Can lead to unexpected exceptions if not handled carefully.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Use overloaded constructors for <code>LeaderboardCommand</code> and <code>GetTopTeamsCommand</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reduces the potential of mishandling null values which can lead to unwanted exceptions arising in the code.</p>
+</li>
+<li>
+<p>Cons: Introduces extra logic in form of "if-else" statements to determine which constructors must be called. This would make the code slightly less readable and more complicated.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the end "Alternative 2" was favoured over the other two alternatives. Although the misuse of null can lead to unwanted exceptions, it has been carefully used to ensure that at no point is null value used other than to check once whether the variable&#8217;s value is null or not. This careful implementation ensures that the variable is used selectively at only once place thereby making sure that no possibility `NullPointerException" occurs at any other part of the code. Although "Alternative 3" is a standard solution to null input parameters, in this case it would not serve its purpose too well as calling the overloaded constructor would require additional logic to check whether or not the subject is mentioned and then depending on this result which command needs to be created and returned. Java&#8217;s Optional class provides a good alternative, however it was not selected as it leads to needless wrapping and unwrapping of the variable.</p>
+</div>
+<div class="paragraph">
+<p><strong>Aspect:</strong> Where to create comparators</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Create comparators when parsing each tiebreak method</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement as it does not require additional classes.</p>
+</li>
+<li>
+<p>Cons: Can overcrowd a single method or class especially as more comparison methods are added. This is also a poor use of abstraction and would not respect Single Responsibility Principle.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2 (Current Choice):</strong> Create a separate <code>Comparators</code> class where relevant comparators are created beforehand and can be invoke using static methods.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Better use of abstraction and maintains Single Responsibility Principle as the parser class can focus on solely parsing the user commands.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the end, "Alternative 2" was selected as it follows better software engineering practices by making better use of abstraction. Despite requiring slightly more code and classes, it would still be better than "Alternative 1" which breaks the Single Responsibility Principle as the parser class would have to be changed for changes in tiebreak methods in addition to changes in methods of parsing.</p>
 </div>
 <div class="paragraph">
 <p><strong>Aspect:</strong> How to separate tiebreak methods</p>
@@ -2566,39 +2723,6 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 <div class="paragraph">
 <p>To better consider the user&#8217;s needs and convenience, "Alternative 2" was selected. So as to not confuse users, this implementation has been made abundantly clear in the User Guide as well. From a developer&#8217;s perspective, this implementation is also more customizable to better respond to changes in user&#8217;s preferences as the separation character can easily be changes.</p>
-</div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Where to create comparators</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1:</strong> Create comparators when parsing each tiebreak method</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easier to implement as it does not require additional classes.</p>
-</li>
-<li>
-<p>Cons: Can overcrowd a single method or class especially as more comparison methods are added. This is also a poor use of abstraction and would not respect Single Responsibility Principle.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2 (Current Choice):</strong> Create a separate <code>Comparators</code> class where relevant comparators are created beforehand and can be invoke using static methods.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Better use of abstraction and maintains Single Responsibility Principle as the parser class can focus on solely parsing the user commands.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In the end, "Alternative 2" was selected as it follows better software engineering practices by making better use of abstraction. Despite requiring slightly more code and classes, it would still be better than "Alternative 1" which breaks the Single Responsibility Principle as the parser class would have to be changed for changes in tiebreak methods in addition to changes in methods of parsing.</p>
 </div>
 </div>
 </div>
@@ -4037,4 +4161,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 11:53:36 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:14:04 UTC</div></div></div></body></html>
