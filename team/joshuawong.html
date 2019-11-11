@@ -11,15 +11,15 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>As part of our software engineering project, my team of five, including me, were tasked with either improving
-the existing <strong>AddressBook3</strong> application codebase, or morphing it into any application, as long as
-it maintained a command line interface and had a Graphical Display. We opted for the latter and morphed the
-<strong>AddressBook3</strong> codebase into a Hackathon manager, named <strong>Alfred</strong> that is targeted at Hackathon HR managers to aid them in
-the organization of hackathons, including the logistics and administration. <strong>Alfred</strong> packages multiple
+the existing AddressBook3 application codebase, or morphing it into any application, as long as
+it maintained a command line interface and had a graphical display. We opted for the latter and morphed the
+AddressBook3 codebase into a Hackathon manager, named Alfred. Alfred is targeted at Hackathon HR managers to aid them in
+the organization of hackathons, including the logistics and administration. Alfred packages multiple
 features into a single application, such as but not including judging, data validation, find, undo/redo, a
 whole new UI and more!</p>
 </div>
 <div class="paragraph">
-<p>For <strong>Alfred</strong>, I was mainly in charge of the Model backend, the find command and the enhancement of existing commands.</p>
+<p>For Alfred, I was mainly in charge of the Model backend, the find command and the enhancement of existing commands.</p>
 </div>
 </div>
 </div>
@@ -29,7 +29,7 @@ whole new UI and more!</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Major Enhancement</strong>: Added <strong>the command to perform advanced finding functions on the stored data</strong></p>
+<p><strong>Major Enhancement</strong>: Added <strong>the <code>find</code> command to perform advanced search on the stored data</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -41,22 +41,22 @@ and complements the preexisting <code>view</code> command, which only gets a sin
 the hackathon has hundreds of participants. It also can return multiple users that match the given search
 parameters in a single command, which makes it more efficient than the more specialized <code>view</code> command and
 removes the need for the hackathon organizer to remember randomly generated <code>ID</code> numbers. This functionality
-makes <strong>Alfred</strong> a viable alternative to existing software like Excel.</p>
+makes Alfred a viable alternative to existing software like Excel.</p>
 </li>
 <li>
-<p>Highlights: Like existing query langages, the find command supports a powerful search, allowing users
+<p>Highlights: Like existing query languages, the <code>find</code> command supports a powerful search, allowing users
 to search by intersection, union across multiple fields and to perform a negative search on selected fields.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Major Enhancement</strong>: Refactored and Implemented the new <code>Model</code> for <strong>Alfred</strong></p>
+<p><strong>Major Enhancement</strong>: Refactored and implemented the new <code>Model</code> for Alfred</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: The preexisting <strong>AddressBook3</strong> codebase only has the relevant objects for the address book
-application. However, <strong>Alfred</strong> required new objects such as <code>Score</code>, <code>Participant</code> and <code>Team</code>, and to create
+<p>What it does: The preexisting AddressBook3 codebase only has the relevant objects for the address book
+application. However, Alfred required new objects such as <code>Score</code>, <code>Participant</code> and <code>Team</code>, and
 new methods for the other parts of the codebase to interact with this in-memory data. It is also the only component
 of the codebase that interacts with <code>Storage</code>.</p>
 </li>
@@ -67,11 +67,15 @@ parts of the object can interact with the in-memory data.
 Thus, <code>Model</code> serves as a single source of truth for the application in order to ensure that the
 hackathon information managed by the application is accurate.</p>
 </li>
+<li>
+<p>Highlights: It abstracts all the details and validation away. Other objects which call <code>Model</code> can be assured that
+their input will be validated and stored correctly.</p>
+</li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Minor enhancement</strong>: Updated the help command UI to reflect the new commands in <strong>Alfred</strong></p>
+<p><strong>Minor enhancement</strong>: Updated the <code>help</code> command UI to reflect the new commands in Alfred.</p>
 </li>
 <li>
 <p><strong>Code contributed</strong>:</p>
@@ -101,7 +105,9 @@ hackathon information managed by the application is accurate.</p>
 <p>Set up the repository and continous deployment of documentation</p>
 </li>
 <li>
-<p>Deprecated old <strong>AddressBook3</strong> code (#160, #169, #316)</p>
+<p>Deprecated old AddressBook3 code (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/160">#160</a>,
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/169">#169</a>,
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/316">#316</a>)</p>
 </li>
 </ul>
 </div>
@@ -111,7 +117,8 @@ hackathon information managed by the application is accurate.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Wrote tests that helped to raise the coverage of the codebase by 8% (#187, #316)</p>
+<p>Wrote tests that helped to raise the coverage of the codebase by 8% (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/187">#187</a>,
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/316">#316</a>)</p>
 </li>
 </ul>
 </div>
@@ -121,7 +128,9 @@ hackathon information managed by the application is accurate.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Updated User Guide and Developer Guides to reflect features implemented (#145, #200)</p>
+<p>Updated User Guide and Developer Guide to reflect features implemented (
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/145">#145</a>,
+<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/200">#200</a>)</p>
 </li>
 </ul>
 </div>
@@ -184,7 +193,7 @@ was broken</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide.
 They showcase my ability to write documentation targeting end-users.</em>
-The sections I added mainly pertained to the guide for the find feature.</p></td>
+The sections I added mainly pertained to the guide for the <code>find</code> feature.</p></td>
 </tr>
 </tbody>
 </table>
@@ -236,7 +245,7 @@ or have "FutureHackathonWinner" in their name.</p>
 <p>For team, <code>n/TEAMNAME pn/PROJECTNAME</code> are also all options to search for.</p>
 </div>
 <div class="paragraph">
-<p>For mentor, <code>n/NAME, e/EMAIL, p/PHONE o/ORGANIZATION</code> are all available</p>
+<p>For mentor, <code>n/NAME, e/EMAIL, p/PHONE o/ORGANIZATION</code> are all available.</p>
 </div>
 <div class="paragraph">
 <p>Example for multiple fields:</p>
@@ -245,7 +254,7 @@ or have "FutureHackathonWinner" in their name.</p>
 <ul>
 <li>
 <p><code>find participant n/Damith e/damith.com</code> finds all participants
-whose name contains the string "Damith" and whose emails contain "damith.com"</p>
+whose name contains the string "Damith" and whose email contains "damith.com"</p>
 </li>
 </ul>
 </div>
@@ -253,7 +262,7 @@ whose name contains the string "Damith" and whose emails contain "damith.com"</p
 <div class="sect2">
 <h3 id="advanced-finding-of-a-specific-entity-by-union-or-negative-code-find-and-or-mentor-team-participant-n-name-otherparameters-exclude-otherparameters-code"><a class="link" href="#advanced-finding-of-a-specific-entity-by-union-or-negative-code-find-and-or-mentor-team-participant-n-name-otherparameters-exclude-otherparameters-code">Advanced Finding of a Specific Entity by Union or Negative: <code>find [AND/OR] {mentor/team/participant} n/NAME otherParameters [EXCLUDE] otherParameters</code></a></h3>
 <div class="paragraph">
-<p>The default find command for single and multiple fields works via a find by intersection. That is, entities
+<p>The default <code>find</code> command for single and multiple fields works via a find by intersection. That is, entities
 must be true for all the predicates for it to be displayed. However, Alfred also supports finding by union.</p>
 </div>
 <div class="paragraph">
@@ -327,7 +336,7 @@ name has a "boss" in it or whose email does not contain "boss.com"</p>
 <p>The logic used in find obeys normal boolean, probabilistic logic.</p>
 </li>
 <li>
-<p>Hence commands like <code>find participant n/Ki EXCLUDE n/Ki</code> will return an empty list</p>
+<p>Hence commands like <code>find participant n/Ki EXCLUDE n/Ki</code> will return an empty list.</p>
 </li>
 <li>
 <p>Likewise, commands like <code>find participant OR n/Ki EXCLUDE n/Ki</code> will return the full list.</p>
@@ -366,7 +375,7 @@ the default find does a search by intersection.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide.
 They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em>
-Apart from the excerpts provided below, I also contributed to the Model Section of the developer guide.</p></td>
+The following showcases my contributions to the Model and Find Command portions of the developer guide.</p></td>
 </tr>
 </tbody>
 </table>
@@ -392,22 +401,22 @@ Apart from the excerpts provided below, I also contributed to the Model Section 
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores other things like <code>Storage</code>, <code>CommandHistory</code> that also depend on Model</p>
+<p>stores other things like <code>Storage</code>, <code>CommandHistory</code> that also depend on <code>Model</code>.</p>
 </li>
 <li>
 <p>stores the lists of our various entities.</p>
 </li>
 <li>
-<p>Model is the bridge between Logic and Storage and provides an abstraction of how the data is stored in memory.</p>
+<p>Model is the bridge between <code>Logic</code> and <code>Storage</code> and provides an abstraction of how the data is stored in memory.</p>
 </li>
 <li>
-<p>It exposes multiple <code>ReadableEntityList</code> which only has the list method to remind Logic that the data given should not be modified.</p>
+<p>It exposes multiple <code>ReadableEntityList</code> which only has the list method to remind <code>Logic</code> that the data given should not be modified.</p>
 </li>
 <li>
 <p>The UI can be bound to these lists so that it automatically updates when the contents of the list change.</p>
 </li>
 <li>
-<p>At the heart of the model are observable lists which allow for the dynamic updating of the UI.</p>
+<p>At the heart of the <code>Model</code> are observable lists which allow for the dynamic updating of the UI.</p>
 </li>
 <li>
 <p>The <code>Model</code> interface also serves as an API through which controller can edit the data stored in memory.</p>
@@ -420,7 +429,7 @@ Apart from the excerpts provided below, I also contributed to the Model Section 
 <div class="ulist">
 <ul>
 <li>
-<p>ModelManager implements all the methods exposed by the Model Interface. The 3 most important aspects for its in-memory
+<p><code>ModelManager</code> implements all the methods exposed by the <code>Model</code> interface. The 3 most important aspects for its in-memory
 storage and UI are the <code>FilteredList</code>, <code>EntityList</code> and <code>UserPrefs</code> objects. As mentioned above, <code>ModelManager</code> also
 consists of other components, but these are not reflected in the diagrams for brevity and clarity.</p>
 </li>
@@ -444,7 +453,7 @@ You can see the diagrams for the aforementioned 3 objects in our developer guide
 <div class="paragraph">
 <p>When the ModelManager object is first created upon starting the application, the existing data is loaded from
 the disc via methods on the <code>Storage</code> object. However, if there are any bugs in the process, perhaps due
-corrupted data, a new <code>EntityList</code> is instantiated rather than run the risk of working with outdated data.</p>
+to corrupted data, a new <code>EntityList</code> is instantiated rather than run the risk of working with outdated data.</p>
 </div>
 <div class="paragraph">
 <p>Due to its role as the API of the application, all calls which require access to the <code>Entity</code> objects will be done
@@ -454,12 +463,12 @@ through <code>Model</code> and not via the lists directly. These operations are 
 <p>For operations which would entail mutating the data within the
 <code>EntityList</code> objects in any form, <code>Model</code> automatically communicates with the <code>Storage</code> object to save the data.
 The saving logic can be found within the <code>Storage</code> object and thus <code>Model</code> only needs to pass it <code>EntityList</code> objects
-on its end. The same applies for the other attributes in <code>Model</code>, such as <code>CommandHistory</code>; <code>Model</code> will
+on its end. The same applies for the other attributes in <code>Model</code>, such as <code>CommandHistory</code>; <code>ModelManager</code> will
 automatically communicate with it for you.</p>
 </div>
 <div class="paragraph">
 <p>If there are any errors along the way, it will be logged but the error would be handled within <code>Model</code> itself.
-Moreover, if there is an during a model operation, it will not be saved.</p>
+Moreover, if there is an error during a <code>Model</code> operation, the data will not be saved to disc.</p>
 </div>
 </div>
 <div class="sect3">
@@ -474,7 +483,7 @@ Moreover, if there is an during a model operation, it will not be saved.</p>
 <p>The role of <code>ModelManager</code> is to ensure that the data is in sync with each other across all 3 <code>EntityList</code>
 objects. The reason behind this is because for example, the <code>Participant</code> object in <code>ParticipantList</code> is a separate
 object from the one inside <code>Team</code>. It was not possible due to make the <code>Participant</code> object hold a reference
-to team due to serialization issues on <code>Storage</code>.</p>
+to <code>Team</code> due to serialization issues on <code>Storage</code>.</p>
 </li>
 <li>
 <p>As such, for each CRUD operation, <code>ModelManager</code> has to perform validation to ensure that the data modified/added
@@ -482,8 +491,8 @@ is sync across all 3 <code>EntityList</code> objects.</p>
 </li>
 <li>
 <p>This was also the reason why <code>Storage</code> was moved into the <code>Model</code> object, as in the current implementation of
-Alfred, only <code>ModelManager</code> needs to be aware of <code>Storage</code> to ensure that only it can save/read data. This would
-hence help to synchronize data better.</p>
+Alfred, only <code>ModelManager</code> needs to communicate with <code>Storage</code>. This would
+hence help to better ensure data integrity.</p>
 </li>
 </ul>
 </div>
@@ -495,10 +504,11 @@ hence help to synchronize data better.</p>
 <li>
 <p>Each class in <code>Model</code> is only responsible for a single task. For example, <code>TeamList</code> is only concerned
 with managing the <code>Team</code> entities stored in it. This would help to improve testability and code quality, especially
-since the size of the <code>Model</code> codebase is substantial</p>
+since the size of the <code>Model</code> codebase is substantial.</p>
 </li>
 <li>
-<p>Inheritance was used to show links between related objects. For <code>Model</code>, the two related objects are
+<p>Inheritance was used to show links between related objects. For <code>Model</code>, the two objects whose subclasses
+are related are
 <code>EntityList</code> and <code>Entity</code>. Inheritance was used to show this relationship and to reduce the need for code
 duplication.</p>
 </li>
@@ -560,8 +570,7 @@ Alfred to do significant validation</p>
 <div class="paragraph">
 <p>We decided to opt for Alternative 1 as there was no easy solution to solve the issues <code>Storage</code> had with
 bidirectional associations. Also, the validation code for Alternative 1 was implemented early and employed
-many defensive programming practices, reducing the likelihood of bugs occurring due to similar objects having
-data that is out of sync.</p>
+many defensive programming practices, reducing the likelihood of bugs affecting data integrity.</p>
 </div>
 </div>
 <div class="sect3">
@@ -592,7 +601,7 @@ that has been inspired by the power of Excel Macros.
 <code>find</code> offers a search by a single field and multiple fields. The list of fields that can be searched for
 for each entity can be found in the
 <a href="https://ay1920s1-cs2103t-f11-1.github.io/main/UserGuide.html#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">user guide</a>, or by
-simply typing in an incorrect command in the application.</p>
+simply typing in an incorrect <code>find</code> command in the application.</p>
 </div>
 <div class="paragraph">
 <p>The find command also offers an option to do a negative search of the fields in the list. This can be
@@ -642,7 +651,7 @@ is invalid and does not follow the specified format, an error will be thrown. Li
 is called and no parameters are provided, an error will also be thrown. During the parsing, the parser splits
 the input string given into two separate strings, one for normal parameters and the other for parameters
 that will undergo negated search. Two separate <code>ArgumentMultimap</code> objects are generated using the two
-strings. These <code>ArgumentMultimap</code> objects are the same as the ones found in AB3 and thus behave in a similar manner
+strings. These <code>ArgumentMultimap</code> objects are the same as the ones found in AddressBook3 and thus behave in a similar manner
 and have the same constraints.</p>
 </li>
 <li>
@@ -679,7 +688,7 @@ the generated predicate.
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="paragraph">
-<p>The following are some design considerations for the Find Command Feature</p>
+<p>The following are some design considerations for the <code>find</code> Command Feature</p>
 </div>
 <div class="sect4">
 <h5 id="aspect-format-of-the-input-string"><a class="link" href="#aspect-format-of-the-input-string">Aspect: Format of the input string</a></h5>
@@ -706,7 +715,7 @@ the generated predicate.
 <p>Pros: Maintains consistency within the application</p>
 </li>
 <li>
-<p>Cons: It is not as clear as SQL style syntax.</p>
+<p>Cons: It is not as clear as SQL style syntax</p>
 </li>
 </ul>
 </div>
@@ -736,7 +745,7 @@ velocity.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1</strong>: Store the Predicates in a central file (current)</p>
+<p><strong>Alternative 1</strong>: Store the predicates in a central file (current)</p>
 <div class="ulist">
 <ul>
 <li>
@@ -783,4 +792,4 @@ refactoring out into smaller submodules.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:01:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:10:01 UTC</div></div></div></body></html>

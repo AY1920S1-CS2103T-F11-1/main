@@ -442,22 +442,22 @@ The lifeline for <code>DeleteParticipantCommandParser</code> and <code>DeleteCom
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores other things like <code>Storage</code>, <code>CommandHistory</code> that also depend on Model</p>
+<p>stores other things like <code>Storage</code>, <code>CommandHistory</code> that also depend on <code>Model</code></p>
 </li>
 <li>
 <p>stores the lists of our various entities.</p>
 </li>
 <li>
-<p>Model is the bridge between Logic and Storage and provides an abstraction of how the data is stored in memory.</p>
+<p><code>Model</code> is the bridge between <code>Logic</code> and <code>Storage</code> and provides an abstraction of how the data is stored in memory.</p>
 </li>
 <li>
-<p>It exposes multiple <code>ReadableEntityList</code> which only has the list method to remind Logic that the data given should not be modified.</p>
+<p>It exposes multiple <code>ReadableEntityList</code> which only has the list method to remind <code>Logic</code> that the data given should not be modified.</p>
 </li>
 <li>
 <p>The UI can be bound to these lists so that it automatically updates when the contents of the list change.</p>
 </li>
 <li>
-<p>At the heart of the model are observable lists which allow for the dynamic updating of the UI.</p>
+<p>At the heart of the <code>Model</code> are observable lists which allow for the dynamic updating of the UI.</p>
 </li>
 <li>
 <p>The <code>Model</code> interface also serves as an API through which controller can edit the data stored in memory.</p>
@@ -470,7 +470,7 @@ The lifeline for <code>DeleteParticipantCommandParser</code> and <code>DeleteCom
 <div class="ulist">
 <ul>
 <li>
-<p>ModelManager implements all the methods exposed by the Model Interface. The 3 most important aspects for its in-memory
+<p><code>ModelManager</code> implements all the methods exposed by the <code>Model</code> interface. The 3 most important aspects for its in-memory
 storage and UI are the <code>FilteredList</code>, <code>EntityList</code> and <code>UserPrefs</code> objects. As mentioned above, <code>ModelManager</code> also
 consists of other components, but these are not reflected in the diagrams for brevity and clarity.</p>
 </li>
@@ -517,7 +517,7 @@ the structure of these <code>Entity</code> objects within each list. These <code
 <div class="paragraph">
 <p>When the ModelManager object is first created upon starting the application, the existing data is loaded from
 the disc via methods on the <code>Storage</code> object. However, if there are any bugs in the process, perhaps due
-corrupted data, a new <code>EntityList</code> is instantiated rather than run the risk of working with outdated data.</p>
+to corrupted data, a new <code>EntityList</code> is instantiated rather than run the risk of working with outdated data.</p>
 </div>
 <div class="paragraph">
 <p>Due to its role as the API of the application, all calls which require access to the <code>Entity</code> objects will be done
@@ -527,12 +527,12 @@ through <code>Model</code> and not via the lists directly. These operations are 
 <p>For operations which would entail mutating the data within the
 <code>EntityList</code> objects in any form, <code>Model</code> automatically communicates with the <code>Storage</code> object to save the data.
 The saving logic can be found within the <code>Storage</code> object and thus <code>Model</code> only needs to pass it <code>EntityList</code> objects
-on its end. The same applies for the other attributes in <code>Model</code>, such as <code>CommandHistory</code>; <code>Model</code> will
+on its end. The same applies for the other attributes in <code>Model</code>, such as <code>CommandHistory</code>; <code>ModelManager</code> will
 automatically communicate with it for you.</p>
 </div>
 <div class="paragraph">
 <p>If there are any errors along the way, it will be logged but the error would be handled within <code>Model</code> itself.
-Moreover, if there is an during a model operation, it will not be saved.</p>
+Moreover, if there is an error during a <code>Model</code> operation, the data will not be saved to disc.</p>
 </div>
 </div>
 <div class="sect3">
@@ -548,7 +548,7 @@ Moreover, if there is an during a model operation, it will not be saved.</p>
 <p>The role of <code>ModelManager</code> is to ensure that the data is in sync with each other across all 3 <code>EntityList</code>
 objects. The reason behind this is because for example, the <code>Participant</code> object in <code>ParticipantList</code> is a separate
 object from the one inside <code>Team</code>. It was not possible due to make the <code>Participant</code> object hold a reference
-to team due to serialization issues on <code>Storage</code>.</p>
+to <code>Team</code> due to serialization issues on <code>Storage</code>.</p>
 </li>
 <li>
 <p>As such, for each CRUD operation, <code>ModelManager</code> has to perform validation to ensure that the data modified/added
@@ -556,8 +556,8 @@ is sync across all 3 <code>EntityList</code> objects.</p>
 </li>
 <li>
 <p>This was also the reason why <code>Storage</code> was moved into the <code>Model</code> object, as in the current implementation of
-Alfred, only <code>ModelManager</code> needs to be aware of <code>Storage</code> to ensure that only it can save/read data. This would
-hence help to synchronize data better.</p>
+Alfred, only <code>ModelManager</code> needs to communicate with <code>Storage</code>. This would
+hence help to better ensure data integrity.</p>
 </li>
 </ul>
 </div>
@@ -569,10 +569,11 @@ hence help to synchronize data better.</p>
 <li>
 <p>Each class in <code>Model</code> is only responsible for a single task. For example, <code>TeamList</code> is only concerned
 with managing the <code>Team</code> entities stored in it. This would help to improve testability and code quality, especially
-since the size of the <code>Model</code> codebase is substantial</p>
+since the size of the <code>Model</code> codebase is substantial.</p>
 </li>
 <li>
-<p>Inheritance was used to show links between related objects. For <code>Model</code>, the two related objects are
+<p>Inheritance was used to show links between related objects. For <code>Model</code>, the two objects whose subclasses are related
+are
 <code>EntityList</code> and <code>Entity</code>. Inheritance was used to show this relationship and to reduce the need for code
 duplication.</p>
 </li>
@@ -631,8 +632,7 @@ Alfred to do significant validation</p>
 <div class="paragraph">
 <p>We decided to opt for Alternative 1 as there was no easy solution to solve the issues <code>Storage</code> had with
 bidirectional associations. Also, the validation code for Alternative 1 was implemented early and employed
-many defensive programming practices, reducing the likelihood of bugs occurring due to similar objects having
-data that is out of sync.</p>
+many defensive programming practices, reducing the likelihood of bugs affecting data integrity.</p>
 </div>
 </div>
 </div>
@@ -2886,7 +2886,7 @@ that has been inspired by the power of Excel Macros.
 <code>find</code> offers a search by a single field and multiple fields. The list of fields that can be searched for
 for each entity can be found in the
 <a href="UserGuide.html#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code">user guide</a>, or by
-simply typing in an incorrect command in the application.</p>
+simply typing in an incorrect <code>find</code> command in the application.</p>
 </div>
 <div class="paragraph">
 <p>The find command also offers an option to do a negative search of the fields in the list. This can be
@@ -2937,7 +2937,7 @@ is invalid and does not follow the specified format, an error will be thrown. Li
 is called and no parameters are provided, an error will also be thrown. During the parsing, the parser splits
 the input string given into two separate strings, one for normal parameters and the other for parameters
 that will undergo negated search. Two separate <code>ArgumentMultimap</code> objects are generated using the two
-strings. These <code>ArgumentMultimap</code> objects are the same as the ones found in AB3 and thus behave in a similar manner
+strings. These <code>ArgumentMultimap</code> objects are the same as the ones found in AddressBook3 and thus behave in a similar manner
 and have the same constraints.</p>
 </li>
 <li>
@@ -2974,7 +2974,7 @@ the generated predicate.
 <div class="sect3">
 <h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">4.11.2. Design Considerations</a></h4>
 <div class="paragraph">
-<p>The following are some design considerations for the Find Command Feature</p>
+<p>The following are some design considerations for the <code>find</code> Command Feature</p>
 </div>
 <div class="sect4">
 <h5 id="aspect-format-of-the-input-string"><a class="link" href="#aspect-format-of-the-input-string">Aspect: Format of the input string</a></h5>
@@ -3001,7 +3001,7 @@ the generated predicate.
 <p>Pros: Maintains consistency within the application</p>
 </li>
 <li>
-<p>Cons: It is not as clear as SQL style syntax.</p>
+<p>Cons: It is not as clear as SQL style syntax</p>
 </li>
 </ul>
 </div>
@@ -3032,7 +3032,7 @@ velocity.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1</strong>: Store the Predicates in a central file (current)</p>
+<p><strong>Alternative 1</strong>: Store the predicates in a central file (current)</p>
 <div class="ulist">
 <ul>
 <li>
@@ -4308,4 +4308,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:01:18 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 13:10:01 UTC</div></div></div></body></html>
