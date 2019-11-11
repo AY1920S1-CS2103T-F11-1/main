@@ -67,8 +67,8 @@ on terminal in the jar file's directory to open and start the app. The GUI shoul
 .Layout of the application
 image::UiAnnotated.png[]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Type the command in the command box and press the enter key to execute it. +
+e.g. typing *`help`* and pressing the enter key will open the help window.
 .  Here are some sample commands you can experiment with:
 
 * *`list teams`* : lists teams in the hackathon
@@ -148,7 +148,7 @@ Restrictions of the number of teams per table will be coming in v2.0.
 * Words in [brackets] indicate values that are optional for the command.
 ** For example, in the case of `export [CSV_FILE_PATH]`, you can choose to leave out the file path.
 * Whenever you need to specify an ID, the ID will be prefixed with an alphabet indicating the type of the Entity (e.g. M for Mentors, P for Participants, T for Teams).
-* Type your commands in the textbox displayed on the Alfred UI. After you are done typing the command, press kbd:[Enter] on your keyboard to execute the command.
+* Type your commands in the textbox displayed on the Alfred UI. After you are done typing the command, press enter key on your keyboard to execute the command.
 
 Also, please refer to <<Parameter Constraints and Additional Information>> for more information on the different restrictions for each parameter.
 
@@ -404,11 +404,13 @@ Examples:
 
 * `assign mentor M-18 T-2` will assign a Mentor with ID M-18 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:
 
-image::AssignCommandExample1.png[height="200", width="550"]
+.Assign Mentor Command Example 1
+image::AssignCommandExample1.png[height="200", width="500"]
 
 * `assign participant P-100 T-2` will assign Participant with ID P-100 to Team with ID T-2. Running the command will show you the following output in the 'Team' section of the GUI:
 
-image::AssignCommandExample2.png[height="200", width="550"]
+.Assign Participant Command Example 2
+image::AssignCommandExample2.png[height="200", width="500"]
 //end::assign[]
 
 //tag::remove[]
@@ -426,11 +428,13 @@ Examples:
 
 * `remove mentor M-18 T-8` will remove Mentor with ID M-18 to Team with ID T-8. Running the command will show you the text 'Mentor not assigned' in the respective team. The following will be shown in the 'Team' section of the GUI:
 
-image::RemoveCommandExample1.png[height="200", width="550"]
+.Remove Mentor Command Example 1
+image::RemoveCommandExample1.png[height="200", width="500"]
 
 * `remove participant P-100 T-2` will remove Participant with ID P-100 from Team with ID T-2.Running the command will show you the following output in the 'Team' section of the GUI
 
-image::RemoveCommandExample2.png[height="200", width="550"]
+.Remove Participant Command Example 1
+image::RemoveCommandExample2.png[height="200", width="500"]
 //end::remove[]
 
 // tag::history1[]
@@ -966,17 +970,17 @@ As you type: +
 .Step 1 of command suggestion box
 image::CommandSuggestionStep1.png[width="600", height="10"]
 
-2.	Press the kbd:[up arrow] or kbd:[down arrow] arrow keys to navigate up and down the popup box.
+2.	Press the up arrow or down arrow arrow keys to navigate up and down the popup box.
 
 .Step 2 of command suggestion box
 image::CommandSuggestionStep2.png[width="600", height="10"]
 
-3.	Press kbd:[Enter] to choose the command of your choice. The command will then appear on the user input box.
+3.	Press Enter to choose the command of your choice. The command will then appear on the user input box.
 
 .Step 3 of command suggestion box
 image::CommandSuggestionStep3.png[width="600", height="10"]
 
-4.	Press kbd:[left arrow] or kbd:[right arrow] keys to navigate the cursor and fill in the respective fields. Press kbd:[Enter] to execute the command.
+4.	Press left arrow] or right arrow keys to navigate the cursor and fill in the respective fields. Press the enter key to execute the command.
 
 .Step 4 of command suggestion box
 image::CommandSuggestionStep4.png[width="600", height="10"]
