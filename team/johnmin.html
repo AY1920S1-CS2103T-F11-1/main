@@ -8,10 +8,10 @@
 <div class="sect3">
 <h4 id="overview"><a class="link" href="#overview">Overview</a></h4>
 <div class="paragraph">
-<p><span class="small">Alfred is a desktop application used for organizing hackathons. This project was morphed from <code>SE-EDU Addressbook - Level 3</code>, which you can find the link <a href="https://se-education.org/addressbook-level3/">here</a>. This application allows the user to easily manage the relationships between teams and participants/mentors taking part in an hackathon event along with providing a simple mechanism for judging and scoring of teams. It is written in Java with more than 25 kLoC.</span></p>
+<p>Alfred is a desktop application used for organizing hackathons. This project was morphed from <code>SE-EDU Addressbook - Level 3</code>, which you can find the link <a href="https://se-education.org/addressbook-level3/">here</a>. This application allows the user to easily manage the relationships between teams and participants/mentors taking part in an hackathon event along with providing a simple mechanism for judging and scoring of teams. It is written in Java with more than 25 kLoC.</p>
 </div>
 <div class="paragraph">
-<p><span class="small">This is what our project looks like:</span></p>
+<p>This is what our project looks like:</p>
 </div>
 <div class="imageblock" style="text-align: center">
 <div class="content">
@@ -20,10 +20,10 @@
 <div class="title">Figure 1. The GUI for <strong>Alfred</strong></div>
 </div>
 <div class="paragraph">
-<p><span class="small">I implemented the <code>import</code> and <code>export</code> features for <strong>Alfred</strong>. The following sections will delve deeper into the enhancements I have made along with the relevant documentations I have added to the user and developer guides.</span></p>
+<p>I implemented the <code>import</code> and <code>export</code> features for <strong>Alfred</strong>. The following sections will delve deeper into the enhancements I have made along with the relevant documentations I have added to the user and developer guides.</p>
 </div>
 <div class="paragraph">
-<p><span class="small">Note the following format used in this document:</span></p>
+<p>Note the following format used in this document:</p>
 </div>
 <table class="tableblock frame-none grid-none spread">
 <colgroup>
@@ -32,26 +32,26 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small"><code>Words</code> in red</span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">[small]#Indicates that this word is either associated with written code, parameters for commands, or Java classes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Words</code> in red</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates that this word is either associated with written code, parameters for commands, or Java classes.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small">Words in <code>UPPER_CASE</code></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small">Indicates a parameter that you need to supply for a command.</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Words in <code>UPPER_CASE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates a parameter that you need to supply for a command.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small">Words in <code>{braces}</code></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small">Indicates parameters for a command that you can select from.<br>
-i.e. {A/B/C} indicates that you may either choose A, B, or C.</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Words in <code>{braces}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates parameters for a command that you can select from.<br>
+i.e. {A/B/C} indicates that you may either choose A, B, or C.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small">Words in <code>[brackets]</code></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small">Indicate parameters that are optional for the command.<br>
-i.e. <code>add [param]</code> indicates that both <code>add</code> and <code>add param</code> commands will work.</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Words in <code>[brackets]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicate parameters that are optional for the command.<br>
+i.e. <code>add [param]</code> indicates that both <code>add</code> and <code>add param</code> commands will work.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small"><code>Entity</code></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="small">Refers to a collective set of Participants, Mentors, and Teams.</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Entity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Refers to a collective set of Participants, Mentors, and Teams.</p></td>
 </tr>
 </tbody>
 </table>
@@ -64,13 +64,13 @@ i.e. <code>add [param]</code> indicates that both <code>add</code> and <code>add
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small"><strong>What it does:</strong> Allows the user to add multiple entities into <strong>Alfred</strong> at once instead of one command at a time.</span></p>
+<p><strong>What it does:</strong> Allows the user to add multiple entities into <strong>Alfred</strong> at once instead of one command at a time.</p>
 </li>
 <li>
-<p><span class="small"><strong>Justification:</strong> This feature improves the product significantly as it allows the user to keep track of registered entities in CSV files and mass import it after registration period.</span></p>
+<p><strong>Justification:</strong> This feature improves the product significantly as it allows the user to keep track of registered entities in CSV files and mass import it after registration period.</p>
 </li>
 <li>
-<p><span class="small"><strong>Highlights:</strong> This enhancement requires the user to keep a correctly formatted CSV file for this command to work properly. Rules for formatting is included in our <a href="../UserGuide.html#ParameterConstraints">user guide</a>.</span></p>
+<p><strong>Highlights:</strong> This enhancement requires the user to keep a correctly formatted CSV file for this command to work properly. Rules for formatting is included in our <a href="../UserGuide.html#ParameterConstraints">user guide</a>.</p>
 </li>
 </ul>
 </div>
@@ -80,13 +80,13 @@ i.e. <code>add [param]</code> indicates that both <code>add</code> and <code>add
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small"><strong>What it does:</strong> Allows the user to keep a record of past hackathon events via a one-line command.</span></p>
+<p><strong>What it does:</strong> Allows the user to keep a record of past hackathon events via a one-line command.</p>
 </li>
 <li>
-<p><span class="small"><strong>Justification:</strong> For big events such as hackathons, it will be important to keep a record of each hackathon event. This documentation can be used for many purposes, including sharing aggregate data with other organizations and analyzing past events to predict necessary investments for future events.</span></p>
+<p><strong>Justification:</strong> For big events such as hackathons, it will be important to keep a record of each hackathon event. This documentation can be used for many purposes, including sharing aggregate data with other organizations and analyzing past events to predict necessary investments for future events.</p>
 </li>
 <li>
-<p><span class="small"><strong>Highlights:</strong> The user can choose to export data regarding a certain entity type by specifying it in the command. This may be useful if the user wants to run statistical analysis regarding a specific entity type.</span></p>
+<p><strong>Highlights:</strong> The user can choose to export data regarding a certain entity type by specifying it in the command. This may be useful if the user wants to run statistical analysis regarding a specific entity type.</p>
 </li>
 </ul>
 </div>
@@ -96,7 +96,7 @@ i.e. <code>add [param]</code> indicates that both <code>add</code> and <code>add
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small"><strong>Highlights:</strong> Although this is included as a minor enhancement, it required creation of 12 new Java classes along with syncing of new methods exposed by our new manager class.</span></p>
+<p><strong>Highlights:</strong> Although this is included as a minor enhancement, it required creation of 12 new Java classes along with syncing of new methods exposed by our new manager class.</p>
 </li>
 </ul>
 </div>
@@ -109,60 +109,60 @@ i.e. <code>add [param]</code> indicates that both <code>add</code> and <code>add
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small">Project Management:</span></p>
+<p>Project Management:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small">Managed README.adoc, AboutUs.adoc, ContactUs.adoc, and our team profile pictures for our <a href="https://nus-cs2103-ay1920s1.github.io/website/admin/projectList.html#cs2103t-f11">team showcase</a> (Pull requests: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/29">#29</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/36">#36</a>)</span></p>
+<p>Managed README.adoc, AboutUs.adoc, ContactUs.adoc, and our team profile pictures for our <a href="https://nus-cs2103-ay1920s1.github.io/website/admin/projectList.html#cs2103t-f11">team showcase</a> (Pull requests: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/29">#29</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/36">#36</a>)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><span class="small">Enhancements to existing features:</span></p>
+<p>Enhancements to existing features:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small">Updated existing utility classes to abstract commonly used methods (Pull requests: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/14">#14</a> <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/116">#116</a>)</span></p>
+<p>Updated existing utility classes to abstract commonly used methods (Pull requests: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/14">#14</a> <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/116">#116</a>)</p>
 </li>
 <li>
-<p><span class="small">Morphed existing commands to fit with our project&#8217;s structure (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/2">#2</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/4">#4</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/14">#14</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/63">#63</a>)</span></p>
+<p>Morphed existing commands to fit with our project&#8217;s structure (Pull requests <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/2">#2</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/4">#4</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/14">#14</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/63">#63</a>)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><span class="small">Documentation:</span></p>
+<p>Documentation:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small">Added <code>ImportCommand</code> and <code>ExportCommand</code> sections in our user guide and developer guide: (Pull request: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/349">#349</a>)</span></p>
+<p>Added <code>ImportCommand</code> and <code>ExportCommand</code> sections in our user guide and developer guide: (Pull request: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/349">#349</a>)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><span class="small">Community:</span></p>
+<p>Community:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small">PRs reviewed with non-trivial review comments: (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/7">#7</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/13">#13</a> &#8230;&#8203; <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#159</a> &#8230;&#8203;)</span></p>
+<p>PRs reviewed with non-trivial review comments: (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/7">#7</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/13">#13</a> &#8230;&#8203; <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/pull/159">#159</a> &#8230;&#8203;)</p>
 </li>
 <li>
-<p><span class="small">Reported bugs and suggestions for our team (Issues: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/324">#324</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/325">#325</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/326">#326</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</span></p>
+<p>Reported bugs and suggestions for our team (Issues: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/324">#324</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/325">#325</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/326">#326</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
 </li>
 <li>
-<p><span class="small">Fixed bugs raised by my teammate and people from other teams (Issues: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/270">#270</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/272">#272</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/322">#322</a>)</span></p>
+<p>Fixed bugs raised by my teammate and people from other teams (Issues: <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/270">#270</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/272">#272</a>, <a href="https://github.com/AY1920S1-CS2103T-F11-1/main/issues/322">#322</a>)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><span class="small">Tools:</span></p>
+<p>Tools:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="small">Integrated a third party library (Netlify) to the project (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/commit/96ead6d1d344e580e2a4df56ecb9adb7f6a2ed99#diff-7bd4a925c695c2eb0eced3872b9b965f">README.adoc commit</a>)</span></p>
+<p>Integrated a third party library (Netlify) to the project (<a href="https://github.com/AY1920S1-CS2103T-F11-1/main/commit/96ead6d1d344e580e2a4df56ecb9adb7f6a2ed99#diff-7bd4a925c695c2eb0eced3872b9b965f">README.adoc commit</a>)</p>
 </li>
 </ul>
 </div>
@@ -706,4 +706,4 @@ On Mac, right-click the file, hold down <code>OPTION</code> key, then click <cod
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 08:11:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 09:58:36 UTC</div></div></div></body></html>
