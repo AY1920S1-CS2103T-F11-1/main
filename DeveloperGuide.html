@@ -256,10 +256,11 @@ The UI component,
 </div>
 <div class="sect3">
 <h4 id="design-considerations"><a class="link" href="#design-considerations">3.2.1. Design Considerations</a></h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Ways to update different entity list</p>
+<div class="paragraph">
+<p>These are some design considerations for the UI component.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-ways-to-update-different-entity-list"><a class="link" href="#aspect-ways-to-update-different-entity-list">Aspect: Ways to update different entity list</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -296,16 +297,12 @@ The UI component,
 </li>
 </ul>
 </div>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>Decision: We have decided to go with alternative  2 because low dependency will ensure testability and maintainability of the system.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>How to generate EntityCard and ListPanel to display different entities</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-generate-entitycard-and-listpanel-to-display-different-entities"><a class="link" href="#aspect-how-to-generate-entitycard-and-listpanel-to-display-different-entities">Aspect: How to generate EntityCard and ListPanel to display different entities</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -342,11 +339,9 @@ The UI component,
 </li>
 </ul>
 </div>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>Decision: We have decided to proceed with alternative 2 because this alternative employs that theory of abstraction in programming, and it there is less redundant code in this implementation.</p>
+</div>
 </div>
 </div>
 </div>
@@ -542,10 +537,11 @@ Moreover, if there is an during a model operation, it will not be saved.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4.3. Design Considerations</a></h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Synchronization of data</p>
+<div class="paragraph">
+<p>These are some design considerations for Model.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-synchronization-of-data"><a class="link" href="#aspect-synchronization-of-data">Aspect: Synchronization of data</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -565,9 +561,9 @@ hence help to synchronize data better.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Single Responsibility Principle and Inheritance</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-single-responsibility-principle-and-inheritance"><a class="link" href="#aspect-single-responsibility-principle-and-inheritance">Aspect: Single Responsibility Principle and Inheritance</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -582,9 +578,9 @@ duplication.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Open Closed Principle</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-open-closed-principle"><a class="link" href="#aspect-open-closed-principle">Aspect: Open Closed Principle</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -595,9 +591,9 @@ future modifications do not need to edit existing code, reducing the likelihood 
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Design of the <code>Entity</code> objects</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-design-of-the-code-entity-code-objects"><a class="link" href="#aspect-design-of-the-code-entity-code-objects">Aspect: Design of the <code>Entity</code> objects</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -632,14 +628,12 @@ Alfred to do significant validation</p>
 </li>
 </ul>
 </div>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>We decided to opt for Alternative 1 as there was no easy solution to solve the issues <code>Storage</code> had with
 bidirectional associations. Also, the validation code for Alternative 1 was implemented early and employed
 many defensive programming practices, reducing the likelihood of bugs occurring due to similar objects having
 data that is out of sync.</p>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -796,10 +790,11 @@ the ParticipantList to a List of <code>JsonAdaptedParticipant</code>.</p>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.5.3. Design Considerations</a></h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Data Integrity</p>
+<div class="paragraph">
+<p>The following are some design considerations for the Storage component.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-data-integrity"><a class="link" href="#aspect-data-integrity">Aspect: Data Integrity</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -817,9 +812,9 @@ opportunities for tampering with the data.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Single Responsibility Principle</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-single-responsibility-principle"><a class="link" href="#aspect-single-responsibility-principle">Aspect: Single Responsibility Principle</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -843,9 +838,9 @@ opportunities for tampering with the data.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Interface Segregation</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-interface-segregation"><a class="link" href="#aspect-interface-segregation">Aspect: Interface Segregation</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -857,9 +852,9 @@ required by Model.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Dependency Inversion</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-dependency-inversion"><a class="link" href="#aspect-dependency-inversion">Aspect: Dependency Inversion</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -868,8 +863,6 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 </li>
 </ul>
 </div>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -1010,7 +1003,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <p>When designing this feature, different aspects - list below - were considered.</p>
 </div>
 <div class="sect4">
-<h5 id="aspect-1-storing-of-file-path"><a class="link" href="#aspect-1-storing-of-file-path">Aspect 1: Storing of File Path</a></h5>
+<h5 id="aspect-storing-of-file-path"><a class="link" href="#aspect-storing-of-file-path">Aspect: Storing of File Path</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1040,7 +1033,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-2-representation-of-an-invalid-line-in-csv-file"><a class="link" href="#aspect-2-representation-of-an-invalid-line-in-csv-file">Aspect 2: Representation of an Invalid Line in CSV File</a></h5>
+<h5 id="aspect-representation-of-an-invalid-line-in-csv-file"><a class="link" href="#aspect-representation-of-an-invalid-line-in-csv-file">Aspect: Representation of an Invalid Line in CSV File</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1085,7 +1078,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-3-display-of-errors"><a class="link" href="#aspect-3-display-of-errors">Aspect 3: Display of Errors</a></h5>
+<h5 id="aspect-display-of-errors"><a class="link" href="#aspect-display-of-errors">Aspect: Display of Errors</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1127,7 +1120,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-4-assigning-of-participants-and-or-mentor-to-teams-through-code-importcommand-code"><a class="link" href="#aspect-4-assigning-of-participants-and-or-mentor-to-teams-through-code-importcommand-code">Aspect 4: Assigning of Participants and/or Mentor to Teams through <code>ImportCommand</code></a></h5>
+<h5 id="aspect-assigning-of-participants-and-or-mentor-to-teams-through-code-importcommand-code"><a class="link" href="#aspect-assigning-of-participants-and-or-mentor-to-teams-through-code-importcommand-code">Aspect: Assigning of Participants and/or Mentor to Teams through <code>ImportCommand</code></a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1226,7 +1219,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 <div class="sect3">
 <h4 id="design-consideration"><a class="link" href="#design-consideration">4.2.4. Design Consideration</a></h4>
 <div class="sect4">
-<h5 id="aspect-1-selective-exporting-of-data"><a class="link" href="#aspect-1-selective-exporting-of-data">Aspect 1: Selective Exporting of Data</a></h5>
+<h5 id="aspect-selective-exporting-of-data"><a class="link" href="#aspect-selective-exporting-of-data">Aspect: Selective Exporting of Data</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1278,7 +1271,7 @@ Hence, all functionality provided are first stipulated in the AlfredStorage inte
 </div>
 </div>
 <div class="sect4">
-<h5 id="aspect-2-type-of-files-to-support"><a class="link" href="#aspect-2-type-of-files-to-support">Aspect 2: Type of Files to Support</a></h5>
+<h5 id="aspect-type-of-files-to-support"><a class="link" href="#aspect-type-of-files-to-support">Aspect: Type of Files to Support</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1832,10 +1825,11 @@ execution will the text in the Command input Box disappear, so this feature is n
 </div>
 <div class="sect3">
 <h4 id="design-considerations-7"><a class="link" href="#design-considerations-7">4.6.1. Design Considerations</a></h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Finding the distribution of Teams and Mentors by subjects</p>
+<div class="paragraph">
+<p>The following are some design considerations for the <code>home</code> command.</p>
+</div>
+<div class="sect4">
+<h5 id="aspect-finding-the-distribution-of-teams-and-mentors-by-subjects"><a class="link" href="#aspect-finding-the-distribution-of-teams-and-mentors-by-subjects">Aspect: Finding the distribution of Teams and Mentors by subjects</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1878,11 +1872,9 @@ execution will the text in the Command input Box disappear, so this feature is n
 </li>
 </ul>
 </div>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>Decision: We decided to proceed with this alternative 2 because it makes use of existing methods under Model and provides greater flexibility on how I can find the distribution number by subject from the TeamList or ParticipantList.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2194,21 +2186,20 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="paragraph">
 <p>To develop the <code>score</code> feature a few considerations and decisions had to be made with regards to how to implement the feature at various steps. This section focuses on some of the aspects wherein we faced dilemmas and how we addressed them.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> How to implement the Score Commands</p>
-</div>
+<div class="sect4">
+<h5 id="aspect-how-to-implement-the-score-commands"><a class="link" href="#aspect-how-to-implement-the-score-commands">Aspect: How to implement the Score Commands</a></h5>
 <div class="paragraph">
 <p>Currently, Alfred&#8217;s score commands all inherit from a single <code>ScoreCommand</code> abstract class rather than each command class inheriting directly from the command class. This was done in order to provide a concrete base for the score commands, but more importantly also to make better use of polymorphism within our codebase. This use of polymorphism allows the Alfred codebase to avoid several code repetitions, for example by facilitating the use of a single parser class to parse the <code>score</code> commands as it can then simply return a <code>ScoreCommand</code> object regardless of which specific <code>score</code> command is called. Thanks to this, we avoid having to make a parser for every single <code>score</code> command.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> How to implement <code>score sub</code> (Subtract Score Command)</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-how-to-implement-code-score-sub-code-subtract-score-command"><a class="link" href="#aspect-how-to-implement-code-score-sub-code-subtract-score-command">Aspect: How to implement <code>score sub</code> (Subtract Score Command)</a></h5>
 <div class="paragraph">
 <p>While traditionally a subtract command would be implemented using an add command only with negated values, this is not quite possible in Alfred&#8217;s case. Within Alfred <code>Score</code> objects have a strict restriction that they cannot be created with negative values as a team&#8217;s score can never be negative. This restriction cannot be relaxed as it ensures that any data being imported into Alfred does not violate this property either. Due to this the <code>score sub</code> command could be implemented by reusing the <code>AddScoreCommand</code> and hence why it has its own command class <code>SubtractScoreCommand</code>.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of <code>score reset</code> command</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-code-score-reset-code-command"><a class="link" href="#aspect-implementation-of-code-score-reset-code-command">Aspect: Implementation of <code>score reset</code> command</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2241,6 +2232,7 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 <div class="paragraph">
 <p>Upon close inspection it was observed that the removal of duplicate code would far outweigh the convenience and orderliness of having a separate class for the command, especially considering that a <code>ResetScoreCommand</code> would have far more duplicate code than unique code as compared to the <code>SetScoreCommand</code>. Bearing this in mind, we ultimately decided to choose "Alternative 2" as it would allow for better reuse of existing code and follow better software engineering practices.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2387,13 +2379,12 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 </div>
 <div class="sect3">
-<h4 id="Leaderboard-DesignConsideration"><a class="link" href="#Leaderboard-DesignConsideration">4.10.3. Leaderboard Design Considerations</a></h4>
+<h4 id="Leaderboard-DesignConsideration"><a class="link" href="#Leaderboard-DesignConsideration">4.10.3. Design Considerations</a></h4>
 <div class="paragraph">
 <p>There were several questions we asked ourselves over the course of developing the leaderboard feature. The following contains certain aspects we had to consider during the development stage and details how and why we decided to use a certain methodologies over others.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> How to store the sorted list of participants</p>
-</div>
+<div class="sect4">
+<h5 id="aspect-how-to-store-the-sorted-list-of-participants"><a class="link" href="#aspect-how-to-store-the-sorted-list-of-participants">Aspect: How to store the sorted list of participants</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2433,9 +2424,9 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="paragraph">
 <p>Due to the overwhelming benefits and conveniences that a new <code>SortedList</code> of teams would bring in the development of Alfred&#8217;s <code>leaderboard</code> and <code>getTop K</code> commands, particularly with the convenience of sorting it allows through its API, we decided to rely on "Alternative 2" with regards to this dilemma.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Designing Leaderboard&#8217;s Command Classes</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-designing-leaderboard-s-command-classes"><a class="link" href="#aspect-designing-leaderboard-s-command-classes">Aspect: Designing Leaderboard&#8217;s Command Classes</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2469,9 +2460,9 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="paragraph">
 <p>We decided to follow "Alternative 2". Firstly, if a single class were being used, it would be difficult to distinguish which type of <code>leaderboard</code> command should be called - whether a leaderboard with or without "random" as tiebreak should be used. This would require the <code>LeaderboardCommandParser</code> to pass a flag signalling whether the "random" version should be called or not, which introduces control coupling. Although with a single distinct method (ie "random") this seems manageable, as the scale of Alfred increases with more non-comparison based methods such as "random" being introduced, passing a flag from <code>LeaderboardCommandParser</code> to the <code>Leaderboard</code> command class would become less and less manageable. Secondly, we wanted to avoid coupling the <code>Parser</code> and <code>Command</code> classes in a way which <code>Parser</code> influences the behaviour of the <code>Command</code> as it introduces leeway for errors.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Where to Write Algorithms used by <code>leaderboard</code> (and <code>getTop K</code>) Command</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-where-to-write-algorithms-used-by-code-leaderboard-code-and-code-gettop-k-code-command"><a class="link" href="#aspect-where-to-write-algorithms-used-by-code-leaderboard-code-and-code-gettop-k-code-command">Aspect: Where to Write Algorithms used by <code>leaderboard</code> (and <code>getTop K</code>) Command</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2504,6 +2495,7 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 <div class="paragraph">
 <p>"Alternative 2" was eventually selected as it follows better Object-Oriented Programming practices. By abstracting away the methods used to sort and tie-break teams and keeping them in another class, the overall readability of the code is enhanced and would be easier for any future programmers working on this project to understand and work on.</p>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2594,13 +2586,12 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration-for-get-top-teams"><a class="link" href="#design-consideration-for-get-top-teams">4.10.5. Design Consideration for Get Top Teams</a></h4>
+<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.10.5. Design Considerations</a></h4>
 <div class="paragraph">
-<p>Since the implementation of the <code>getTop K</code> command is almost identical to that of the <code>leaderboard</code> command, the design considerations made for the <code>leaderboard</code> command apply to the implementation of this feature as well (See <a href="#Leaderboard-DesignConsideration">Section 4.10.3, &#8220;Leaderboard Design Considerations&#8221;</a>). However, there were some unique aspects we had to consider with regards to the <code>getTop K</code> command, all of which is detailed below.</p>
+<p>Since the implementation of the <code>getTop K</code> command is almost identical to that of the <code>leaderboard</code> command, the design considerations made for the <code>leaderboard</code> command apply to the implementation of this feature as well (See <a href="#Leaderboard-DesignConsideration">Section 4.10.3, &#8220;Design Considerations&#8221;</a>). However, there were some unique aspects we had to consider with regards to the <code>getTop K</code> command, all of which is detailed below.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Where to Store the Top K Teams</p>
-</div>
+<div class="sect4">
+<h5 id="aspect-where-to-store-the-top-k-teams"><a class="link" href="#aspect-where-to-store-the-top-k-teams">Aspect: Where to Store the Top K Teams</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2634,9 +2625,9 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="paragraph">
 <p>After careful consideration, "Alternative 1" was chosen as it would make fewer modification to <code>ModelManager</code> and the <code>UI</code> component, particularly with regards to adding duplicate code to handle the two different lists. Moreover, since the calls to <code>ModelManager</code> 's methods reset the <code>SortedList</code> storing the sorted teams, there is likely to be lesser confusion and room for error when handling a single list for the two different commands.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Handling Situation when <code>K</code> is greater than the number of teams</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-handling-situation-when-code-k-code-is-greater-than-the-number-of-teams"><a class="link" href="#aspect-handling-situation-when-code-k-code-is-greater-than-the-number-of-teams">Aspect: Handling Situation when <code>K</code> is greater than the number of teams</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2670,9 +2661,9 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="paragraph">
 <p>We decided to prioritise user convenience in this situation and rather than displaying an error every time he inputs a value too large for <code>K</code> in the <code>getTop K</code> command, we decided to show all the teams. This aspect of the feature has been made abundantly clear in the User Guide and seeks to minimise user frustration especially since we do not want the user to worry too much about remembering how many teams have signed up.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Implementation of Leaderboard</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-implementation-of-leaderboard"><a class="link" href="#aspect-implementation-of-leaderboard">Aspect: Implementation of Leaderboard</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2705,6 +2696,7 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 <div class="paragraph">
 <p>The reason "Alternative 2" was selected was because <code>ModelManager</code> 's <code>setSimpleLeaderboard(ArrayList&lt;Comparator&lt;Team&gt;&gt; comparators)</code> method resets the <code>SortedList</code> of teams within <code>ModelManager</code> and applies the relevant comparators to it to sort it as desired. Hence, it is abstracting away this process into a single method so a better re-usage of code can take place in other methods. This method is reused by <code>ModelManager</code> 's <code>setTopK()</code> method when using the <code>getTop K</code> command, whereas the <code>setSimpleLeaderboard(ArrayList&lt;Comparator&lt;Team&gt;&gt; comparators)</code> method is sufficient to sort <strong>all</strong> the teams in the desired order. So instead of calling it again within another method, the <code>setSimpleLeaderboard(ArrayList&lt;Comparator&lt;Team&gt;&gt; comparators)</code> method which was meant to abstract away some processes is itself used to handle the <code>leaderboard</code> command. So indeed in the end, "Alternative 2" does not introduce duplication of code, but rather introduces better use of abstraction.</p>
+</div>
 </div>
 </div>
 <div class="sect3">
@@ -2741,13 +2733,12 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-for-tiebreaking"><a class="link" href="#design-considerations-for-tiebreaking">4.10.7. Design Considerations for Tiebreaking</a></h4>
+<h4 id="design-considerations-11"><a class="link" href="#design-considerations-11">4.10.7. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Though this was a relatively straightforward subset of our <code>leaderboard</code> and <code>getTop K</code> command, there were still a few, small design considerations made.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Signaling No Subject Filtering</p>
-</div>
+<div class="sect4">
+<h5 id="aspect-signaling-no-subject-filtering"><a class="link" href="#aspect-signaling-no-subject-filtering">Aspect: Signaling No Subject Filtering</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2794,9 +2785,9 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="paragraph">
 <p>In the end "Alternative 2" was favoured over the other two alternatives. Although the misuse of null can lead to unwanted exceptions, it has been carefully used to ensure that at no point is null value used other than to check once whether the variable&#8217;s value is null or not. This careful implementation ensures that the variable is used selectively at only once place thereby making sure that no possibility `NullPointerException" occurs at any other part of the code. Although "Alternative 3" is a standard solution to null input parameters, in this case it would not serve its purpose too well as calling the overloaded constructor would require additional logic to check whether or not the subject is mentioned and then depending on this result which command needs to be created and returned. Java&#8217;s Optional class provides a good alternative, however it was not selected as it leads to needless wrapping and unwrapping of the variable.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> Where to create comparators</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-where-to-create-comparators"><a class="link" href="#aspect-where-to-create-comparators">Aspect: Where to create comparators</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2827,9 +2818,9 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 <div class="paragraph">
 <p>In the end, "Alternative 2" was selected as it follows better software engineering practices by making better use of abstraction. Despite requiring slightly more code and classes, it would still be better than "Alternative 1" which breaks the Single Responsibility Principle as the parser class would have to be changed for changes in tiebreak methods in addition to changes in methods of parsing.</p>
 </div>
-<div class="paragraph">
-<p><strong>Aspect:</strong> How to separate tiebreak methods</p>
 </div>
+<div class="sect4">
+<h5 id="aspect-how-to-separate-tiebreak-methods"><a class="link" href="#aspect-how-to-separate-tiebreak-methods">Aspect: How to separate tiebreak methods</a></h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2862,6 +2853,7 @@ Additionally, pressing <code><code>enter</code></code> will filter out different
 </div>
 <div class="paragraph">
 <p>To better consider the user&#8217;s needs and convenience, "Alternative 2" was selected. So as to not confuse users, this implementation has been made abundantly clear in the User Guide as well. From a developer&#8217;s perspective, this implementation is also more customizable to better respond to changes in user&#8217;s preferences as the separation character can easily be changes.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2964,7 +2956,7 @@ the generated predicate.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-10"><a class="link" href="#design-considerations-10">4.11.2. Design Considerations</a></h4>
+<h4 id="design-considerations-12"><a class="link" href="#design-considerations-12">4.11.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>The following are some design considerations for the Find Command Feature</p>
 </div>
@@ -4300,4 +4292,4 @@ are corrupted and hence it defaults to using empty lists.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:36:48 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-11-11 12:52:16 UTC</div></div></div></body></html>
