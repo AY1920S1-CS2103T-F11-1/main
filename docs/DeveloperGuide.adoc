@@ -1128,22 +1128,79 @@ provided. If the entity name is incorrect, then an error will be thrown and exec
 is invalid and does not follow the specified format, an error will be thrown. Likewise, if the find command
 is called and no parameters are provided, an error will also be thrown. During the parsing, the parser splits
 the input string given into two separate strings, one for normal parameters and the other for parameters
-that will undergo negated search.
+that will undergo negated search. Two separate `ArgumentMultimap` objects are generated using the two
+strings. These `ArgumentMultimap` objects are the same as the ones found in AB3 and thus behave in a similar manner
+and have the same constraints.
 
 3. If there are no errors, the `FindParticipantCommandParser` then creates
 a `FindParticipantCommand` which in turn generates the predicate it would use
-to filter the relevant `EntityList` by. These predicates are stored as static variables on a central `Predicates`
+to filter the relevant `EntityList` by. These predicates are stored as static variables in a central `Predicates`
 file. `FindParticipantCommand` selects the predicates based on which fields are provided in the original
 input string.
 
-4. With this predicate, it then calls the `findParticipant` method on the model with the generated predicate.
+4. With these predicates, it then calls the `findParticipant` method on the model with the generated predicate.
 
 5. A list of `Participant` objects is then returned, and is also printed onto the console for the user's
-reference.
+reference. Then, at `FindParticipantCommand`, a `CommandResult` is returned after the smooth execution
+of this `find` operation.
 
-[NOTE]
+[NOTE]xw
 The find command does not mutate the list in any way. It only changes the `Entity` objects displayed using
 the generated predicate.
+
+==== Design Considerations
+
+The following are some design considerations for the Find Command Feature
+
+===== Aspect: Format of the input string
+
+* *Alternative 1*: Use a SQL style query string
+    - Pros: SQL syntax is universally used to communicate with databases and is clean
+    - Cons: Users may not be familiar with SQL
+
+* *Alternative 2*: Use the current format of `n/NAME e/EMAIL ...` (current)
+    -  Pros: Maintains consistency within the application
+    -  Cons: It is not as clear as SQL style syntax.
+
+
+Alternative 1 would take the form
+    of `find where name="John" and phone like "123" and not email="gmail.com"`. This would also have the added
+benefit of better on-boarding SQL users. However,
+while SQL-style syntax  is relatively clean and understandable, we decided not to implement this
+for the following reasons.
+The first reason was that SQL queries are meant to be used for large databases with thousands of columns,
+hence, the structure of the query must be clean to reduce the number of bugs made in the query. On the
+other hand, each `Entity` in Alfred only has a small number of fields (less than 6) and thus the current
+query format would still be understandable. Secondly, as mentioned above, users may not be familiar with SQL.
+
+Hence, Alternative 2 was chosen as it would be more
+user friendly for users to the existing command format instead of memorizing a new format.
+Furthermore, implementing a new format would take more time as
+the new query format would have to be written and tested thoroughly, thus negatively impacting development
+velocity.
+
+===== Aspect: Storing of the predicates
+* *Alternative 1*: Store the Predicates in a central file (current)
+    - Pros: Makes the predicates accessible to the whole application
+hence reducing code duplication
+    - Cons: A large conditional statement would be needed in each Command class.
+
+* *Alternative 2*: Store the Predicates within each `FindCommand` class
+    - Pros: Each predicate is only used by one class, so this would have resulted in a better separation
+of concerns
+    - Cons: A large conditional statement or hash map would still be needed to decide which predicates to
+use
+
+Ultimately, we decided to use Alternative 1. Although most of the predicates are only used once, they are
+all unmodifiable functions that return a predicate in the form of a closure. Thus, the risks associated
+with unrestricted access and modification of an object are greatly reduced. Furthermore, predicates are
+also used in other parts of the codebase. Hence, it is a good idea to consolidate them in a single location.
+Thus, if another class in the codebase needed to implement another predicate, all it had to do would be to check
+this central file to see if a similar one was already written, as opposed to trawling though the entire codebase.
+
+The large conditional statement was also not a major issue. This is because although it is large, the
+code within was understandable and this would have facilitated its extension, as compared to prematurely
+refactoring out into smaller submodules.
 
 === Logging
 
