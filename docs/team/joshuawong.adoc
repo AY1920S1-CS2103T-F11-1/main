@@ -56,11 +56,16 @@ their input will be validated and stored correctly.
 ** Project management:
 *** Managed release `v1.1`
 *** Set up the repository and continous deployment of documentation
-*** Deprecated old AddressBook3 code (#160, #169, #316)
+*** Deprecated old AddressBook3 code (https://github.com/AY1920S1-CS2103T-F11-1/main/pull/160[#160],
+https://github.com/AY1920S1-CS2103T-F11-1/main/pull/169[#169],
+https://github.com/AY1920S1-CS2103T-F11-1/main/pull/316[#316])
 ** Tests:
-*** Wrote tests that helped to raise the coverage of the codebase by 8% (#187, #316)
+*** Wrote tests that helped to raise the coverage of the codebase by 8% (https://github.com/AY1920S1-CS2103T-F11-1/main/pull/187[#187],
+https://github.com/AY1920S1-CS2103T-F11-1/main/pull/316[#316])
 ** Documentation:
-*** Updated User Guide and Developer Guides to reflect features implemented (#145, #200)
+*** Updated User Guide and Developer Guide to reflect features implemented (
+https://github.com/AY1920S1-CS2103T-F11-1/main/pull/145[#145],
+https://github.com/AY1920S1-CS2103T-F11-1/main/pull/200[#200])
 ** Community:
 *** Maintained the develop branch on Github in the initial stages when the master branch
 was broken
