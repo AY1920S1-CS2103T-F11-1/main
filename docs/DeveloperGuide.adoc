@@ -1083,6 +1083,41 @@ To better consider the user's needs and convenience, "Alternative 2" was selecte
 
 In the end, "Alternative 2" was selected as it follows better software engineering practices by making better use of abstraction. Despite requiring slightly more code and classes, it would still be better than "Alternative 1" which breaks the Single Responsibility Principle as the parser class would have to be changed for changes in tiebreak methods in addition to changes in methods of parsing.
 
+=== Find Command
+Currently, Alfred allows users to view specific entities by their `ID` using the `view ENTITY ID`.
+However, it may not be convenient for users to remember the `ID` of specific users, especially since
+`ID` objects are randomly generated.
+
+To help Alfred become a viable alternative to Excel, Alfred also offers an improved `find` function
+that has been inspired by the power of Excel Macros.
+`find` offers a search by a single field and multiple fields. The list of fields that can be searched for
+for each entity can be found in the
+<<UserGuide.adoc#finding-a-specific-entity-code-find-mentor-team-participant-n-name-code, user guide>>, or by
+simply typing in an incorrect command in the application.
+
+The find command also offers an option to do a negative search of the fields in the list. This can be
+done via the `EXCLUDE` keyword. All the parameters that come after the keyword will undergo a negative
+search. Figure 41 shows an example of this. `find participant EXCLUDE n/uc` will look for all participants
+whose name that does not contain "uc".
+
+.Find Command User Interface
+image::FindScreenshot.png[]
+
+By default, Alfred does a search by intersection for the given entity. However, Alfred also allows
+the user to do a search by union. This can be done by inserting an `OR` keyword before all the parameters.
+Further examples of the usage of `find` can be found in the
+<<UserGuide.adoc#advanced-finding-of-a-specific-entity-by-union-or-negative-code-find-and-or-mentor-team-participant-n-name-exclude-code, user guide>>
+.
+
+==== Find Command Implementation Overview
+
+The following sequence diagram shows the sequence of method calls used to display the filtered list
+on the application, from `Logic` to `ModelManager` upon the execution of a `FindParticipantCommand`.
+
+.Find Participant Command Sequence Diagram
+image::FindCommandSequenceDiagram.png[]
+
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
